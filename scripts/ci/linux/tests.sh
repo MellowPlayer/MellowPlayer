@@ -2,4 +2,4 @@
 
 cd build
 
-ctest --output-on-failure
+xvfb-run ctest --output-on-failure

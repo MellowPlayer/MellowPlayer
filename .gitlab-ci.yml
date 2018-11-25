@@ -1,7 +1,7 @@
 stages:
-- build
-- tests
-- deploy
+    - build
+    - tests
+    - deploy
 
 .linux:
     image: ubuntu:rolling
@@ -13,6 +13,7 @@ stages:
         - linux
     before_script:
         - ./scripts/ci/linux/env-setup.sh
+
 
 build:linux:
     extends: .linux
@@ -32,6 +33,14 @@ tests:linux:
         - build:linux
     script:
         - ./scripts/ci/linux/tests.sh
+
+
+tests:coverage:
+    extends: .linux
+    stage: tests
+    script:
+        - ./scripts/ci/linux/coverage.sh
+
 
 deploy:linux:
     extends: .linux

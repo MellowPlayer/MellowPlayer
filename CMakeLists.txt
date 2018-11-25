@@ -18,10 +18,6 @@ project(MellowPlayer VERSION "${VERSION_MAJOR}.${VERSION_MINOR}.${VERSION_PATCH}
 set(SOURCE_DIR ${CMAKE_SOURCE_DIR})
 
 include(cmake/Macros.cmake)
-include(cmake/Config.cmake)
-include(cmake/Dependencies.cmake)
-include(cmake/InstallDirs.cmake)
-include(cmake/Tests.cmake)
 
 # Options
 if(NOT CMAKE_BUILD_TYPE)
@@ -37,6 +33,14 @@ set_option(CHECK_QML_SYNTAX ON BOOL "Whether to check for QML/Javascript syntax 
 if (UNIX)
     set_option(USE_LD_GOLD ON BOOL "Use GNU gold linker")
 endif()
+
+if (ENABLE_COVERAGE)
+    include(cmake/CodeCoverage.cmake)
+endif()
+include(cmake/Config.cmake)
+include(cmake/Dependencies.cmake)
+include(cmake/InstallDirs.cmake)
+include(cmake/Tests.cmake)
 
 include_directories(src/3rdparty)
 
