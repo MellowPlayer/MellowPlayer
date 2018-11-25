@@ -9,7 +9,7 @@ GNU/Linux
 
 We provide an AppImage so that you can try MellowPlayer on any distribution.
 
-Download MellowPlayer-x86_64.AppImage from a `github release`_, make it executable (chmod +x MellowPlayer-x86_64.AppImage) and run it, that's all.
+Download MellowPlayer-x86_64.AppImage from a `gitlab release`_, make it executable (chmod +x MellowPlayer-x86_64.AppImage) and run it, that's all.
 
 Please note that there are some limitations with the AppImage, it does not include proprietary codecs for licensing reasons.
 
@@ -45,7 +45,7 @@ Services such as Deezer and Tidal require flash to work. You can install it from
     sudo dnf install flash-player-ppapi
 
 Widevine
-*********
+********
 
 Spotify requires the widevine ppapi plugin to work, you can install it by running the below commands:
 
@@ -156,7 +156,7 @@ Other distributions
 
 You will have to compile from source. See the `README`_ for build instructions.
 
-.. _README: https://github.com/ColinDuquesnoy/MellowPlayer/blob/qbs/README.md#compilation
+.. _README: https://gitlab.com/ColinDuquesnoy/MellowPlayer/blob/master/README.md#compilation
 
 OS X
 ----
@@ -173,8 +173,7 @@ Just grab the windows installer from the `official website`_ (click on the **Win
 Please note the Windows Installer we provide is built with a version of QtWebEngine built without proprietary codecs support (for licensing reasons). If your favorite service require proprietary codecs to work, you'll need to build QtWebEngine with the flag ``use_proprietary_codecs`` and build MellowPlayer using that QtWebEngine version.
 
 
-.. _README: https://github.com/ColinDuquesnoy/MellowPlayer/blob/master/README.md
 .. _official website: http://colinduquesnoy.github.io/MellowPlayer
-.. _github release: https://github.com/ColinDuquesnoy/MellowPlayer/releases
+.. _gitlab release: https://gitlab.com/ColinDuquesnoy/MellowPlayer/tags
 .. _openSUSE build service: https://software.opensuse.org//download.html?project=home%3AColinDuquesnoy&package=MellowPlayer
 .. _RPMFusion repositories: https://rpmfusion.org/Configuration

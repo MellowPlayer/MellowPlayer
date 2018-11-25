@@ -1,4 +1,4 @@
 Project structure
 =================
 
-See the architecture wiki page for more information: https://github.com/ColinDuquesnoy/MellowPlayer/wiki/Architecture
+See the architecture wiki page for more information: https://gitlab.com/ColinDuquesnoy/MellowPlayer/wikis/architecture

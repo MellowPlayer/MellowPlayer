@@ -16,4 +16,4 @@ To run this tool, you need to install the following packages:
 **Please, run this script before submitting a pull request!**
 
 
-See the coding guidelines wiki page for more information: https://github.com/ColinDuquesnoy/MellowPlayer/wiki/Coding-guidelines
+See the coding guidelines wiki page for more information: https://gitlab.com/ColinDuquesnoy/MellowPlayer/wikis/coding-guidelines

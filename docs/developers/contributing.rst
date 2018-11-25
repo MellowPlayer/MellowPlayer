@@ -36,7 +36,7 @@ Here are the steps you need to follow to start working on MellowPlayer
 and submit your work for evaluation or integration into the main
 project:
 
-1. Fork the Repo on github.
+1. Fork the Repo on gitlab.
 2. Create a feature or a bugfix branch before you start coding.
 3. Add your name to AUTHORS.md
 4. Format the code using ``scripts/beautify.py`` (run it from the root
@@ -73,9 +73,9 @@ MellowPlayer translations are hosted on `transifex`_
 -  To actually start translating, go to the project’s home page on
    transifex and click on the tr
 
-.. _issue tracker: https://github.com/ColinDuquesnoy/MellowPlayer/issues
-.. _wiki: https://github.com/ColinDuquesnoy/MellowPlayer/wiki
-.. _architecture: https://github.com/ColinDuquesnoy/MellowPlayer/wiki/Architecture
-.. _coding guidelines: https://github.com/ColinDuquesnoy/MellowPlayer/wiki/Coding-guidelines
+.. _issue tracker: https://gitlab.com/ColinDuquesnoy/MellowPlayer/issues
+.. _wiki: https://gitlab.com/ColinDuquesnoy/MellowPlayer/wikis/%5BTutorial%5D-Setting-up-a-development-environment
+.. _architecture: https://gitlab.com/ColinDuquesnoy/MellowPlayer/wikis/architecture
+.. _coding guidelines: https://gitlab.com/ColinDuquesnoy/MellowPlayer/wikis/coding-guidelines
 .. _transifex: https://www.transifex.com/colinduquesnoy/mellowplayer
  

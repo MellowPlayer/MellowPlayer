@@ -4,7 +4,7 @@ Contributing to MellowPlayer
 Reporting bugs or Wishes
 ------------------------
 
-Report any bugs you encountered or any wishes on our [issue tracker](https://github.com/ColinDuquesnoy/MellowPlayer/issues).
+Report any bugs you encountered or any wishes on our [issue tracker](https://gitlab.com/ColinDuquesnoy/MellowPlayer/issues).
 
 If you're reporting a bug, **make sure to provide the following information**:
 
@@ -19,9 +19,9 @@ If you're reporting a bug, **make sure to provide the following information**:
 Setting up a development environment
 ------------------------------------
 
-Read the how to setup page of the [wiki](https://github.com/ColinDuquesnoy/MellowPlayer/wiki)
+Read the how to setup page of the [wiki](https://gitlab.com/ColinDuquesnoy/MellowPlayer/wikis/%5BTutorial%5D-Setting-up-a-development-environment)
 
-We also recommend you read the [architecture](https://github.com/ColinDuquesnoy/MellowPlayer/wiki/Architecture) and the [coding guidelines](https://github.com/ColinDuquesnoy/MellowPlayer/wiki/Coding-guidelines) pages before hacking on MellowPlayer.
+We also recommend you read the [architecture](https://gitlab.com/ColinDuquesnoy/MellowPlayer/wikis/architecture) and the [coding guidelines](https://gitlab.com/ColinDuquesnoy/MellowPlayer/wikis/coding-guidelines) pages before hacking on MellowPlayer.
 
 Submitting a pull request
 -------------------------
@@ -29,11 +29,11 @@ Submitting a pull request
 Here are the steps you need to follow to start working on MellowPlayer and submit your work
 for evaluation or integration into the main project:
 
-1. Fork the Repo on github.
+1. Fork the Repo on gitlab.
 2. Create a feature or a bugfix branch before you start coding.
 3. Add your name to AUTHORS.md
 4. Format the code using ``scripts/beautify.py`` (run it from the root source directory).  
-5. Push to your fork and submit a pull request to **the develop branch**.
+5. Push to your fork and submit a pull request to **the master branch**.
 
 
 Adding support for a new service
