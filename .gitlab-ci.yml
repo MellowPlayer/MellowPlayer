@@ -31,4 +31,16 @@ tests:linux:
     dependencies:
         - build:linux
     script:
-        - ./scripts/gitlab-ci/linux/run-tests.sh
+        - ./scripts/ci/linux/tests.sh
+
+deploy:linux:
+    extends: .linux
+    stage: tests
+    dependencies:
+        - build:linux
+    script:
+        - ./scripts/ci/linux/deploy.sh
+    artifacts:
+        name: "AppImage"
+        paths:
+            - MellowPlayer-x86_64.AppImage
