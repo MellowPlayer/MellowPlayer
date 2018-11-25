@@ -49,7 +49,7 @@ notifications and more).
 
 - [Official website](https://colinduquesnoy.github.io/MellowPlayer/)
 - [Documentation](http://mellowplayer.readthedocs.org/en/latest/)
-- [Wiki on Github](https://github.com/ColinDuquesnoy/MellowPlayer/wiki)
+- [Wiki on Github](https://gitlab.com/ColinDuquesnoy/MellowPlayer/wikis/home)
 
 # License
 
@@ -57,7 +57,7 @@ MellowPlayer is licensed under the GPL license.
 
 # Download
 
-- [Github release page](https://github.com/ColinDuquesnoy/MellowPlayer/releases)
+- [Gitlab release page](https://gitlab.com/ColinDuquesnoy/MellowPlayer/tags)
 
 ## GNU/Linux Packages
 
@@ -71,7 +71,7 @@ MellowPlayer is licensed under the GPL license.
 
 ## Build dependencies
 
-- qbs >= 1.10
+- CMake >= 3.10
 - a c++17 compiler (gcc6, msvc 2015 or clang)
 - Qt5 (>= 5.9.0, QtWebEngine and QtQuickControls2 needed)
 - Libnotify (optional, GNU/Linux only)
