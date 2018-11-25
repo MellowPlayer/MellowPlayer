@@ -4,7 +4,7 @@ stages:
     - deploy
 
 .linux:
-    image: ubuntu:rolling
+    image: ubuntu:latest
     variables:
         DISPLAY: ':99.0'
         QT_QPA_PLATFORM: 'offscreen'
