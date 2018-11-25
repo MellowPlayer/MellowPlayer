@@ -1,5 +1,7 @@
 #!/usr/bin/env bash
 
+set -e
+
 cd build
 
-xvfb-run ctest --output-on-failure
+xvfb-run ctest --verbose

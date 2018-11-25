@@ -9,6 +9,7 @@ stages:
         QT_QPA_PLATFORM: 'offscreen'
         PYTEST_ADDOPTS: '--color=yes'
         DISPLAY: ":99.0"
+        TERM: 'linux'
     tags:
         - linux
     before_script:
