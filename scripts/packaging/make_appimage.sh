@@ -36,7 +36,7 @@ popd
 ldd appdir/usr/bin/MellowPlayer
 
 # create appdir
-./linuxdeployqt*.AppImage ./appdir/usr/share/applications/*.desktop -exclude-libs="libnss3.so,libnssutil3.so" -bundle-non-qt-libs -qmldir=src/lib/presentation/imports -verbose=2
+./linuxdeployqt*.AppImage ./appdir/usr/share/applications/*.desktop -exclude-libs="libnss3.so,libnssutil3.so" -bundle-non-qt-libs -qmldir=src/lib/presentation/imports/MellowPlayer -verbose=2
 
 # copy missing qml files
 echo "Copying missing files..."
@@ -44,6 +44,7 @@ ls ${QT_DIR}/plugins/imageformats/
 cp ${QT_DIR}/plugins/imageformats/libqsvg.so ./appdir/usr/plugins/imageformats/
 ls ${QT_DIR}/qml/QtQuick/Controls
 cp -R ${QT_DIR}/qml/QtQuick/Controls ./appdir/usr/qml/QtQuick/
+cp -R ${QT_DIR}/qml/QtQuick/Controls.2 ./appdir/usr/qml/QtQuick/
 ls -R ./appdir
 
 # create appimage

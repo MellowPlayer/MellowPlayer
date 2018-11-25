@@ -47,7 +47,7 @@ notifications and more).
 
 # Resources
 
-- [Official website](https://colinduquesnoy.github.io/MellowPlayer/)
+- [Official website](https://colinduquesnoy.gitlab.io/MellowPlayer)
 - [Documentation](http://mellowplayer.readthedocs.org/en/latest/)
 - [Wiki on Github](https://gitlab.com/ColinDuquesnoy/MellowPlayer/wikis/home)
 
