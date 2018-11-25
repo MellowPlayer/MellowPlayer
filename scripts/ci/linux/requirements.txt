@@ -33,3 +33,4 @@ qml-module-qt-labs-folderlistmodel
 lcov
 xvfb
 wget
+fuse
