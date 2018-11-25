@@ -32,3 +32,4 @@ qml-module-qt-labs-settings
 qml-module-qt-labs-folderlistmodel
 lcov
 xvfb
+wget
