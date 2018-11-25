@@ -88,6 +88,8 @@ public:
     m_display = QX11Info::display();
 #else
     QPlatformNativeInterface *native = qApp->platformNativeInterface();
+    if (native == nullptr)
+      return;
     void *display = native->nativeResourceForScreen(
         QByteArray("display"), QGuiApplication::primaryScreen());
     m_display = reinterpret_cast<Display *>(display);
@@ -200,6 +202,9 @@ QxtGlobalShortcutPrivate::nativeModifiers(Qt::KeyboardModifiers modifiers) {
 }
 
 quint32 QxtGlobalShortcutPrivate::nativeKeycode(Qt::Key key) {
+  if (qgetenv("QT_QPA_PLATFORM") == QByteArray("offscreen"))
+    return 0;
+
   QxtX11Data x11;
   if (!x11.isValid())
     return 0;
@@ -214,6 +219,10 @@ quint32 QxtGlobalShortcutPrivate::nativeKeycode(Qt::Key key) {
 
 bool QxtGlobalShortcutPrivate::registerShortcut(quint32 nativeKey,
                                                 quint32 nativeMods) {
+
+  if (qgetenv("QT_QPA_PLATFORM") == QByteArray("offscreen"))
+    return false;
+
   QxtX11Data x11;
   return x11.isValid() && x11.grabKey(nativeKey, nativeMods, x11.rootWindow());
 }

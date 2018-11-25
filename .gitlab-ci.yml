@@ -6,8 +6,9 @@ stages:
 .linux:
     image: ubuntu:rolling
     variables:
-        DISPLAY: ":99.0"
-        TERM: 'linux'
+        DISPLAY: ':99.0'
+        QT_QPA_PLATFORM: 'offscreen'
+        TERM: 'xterm-256color'
     tags:
         - linux
     before_script:

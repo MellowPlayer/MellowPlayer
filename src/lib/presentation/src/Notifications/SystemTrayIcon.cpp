@@ -32,7 +32,7 @@ SystemTrayIcon::SystemTrayIcon(IPlayer& player,
 void SystemTrayIcon::show()
 {
     LOG_DEBUG(logger_, "show");
-    if (showTrayIconSetting_.value().toBool())
+    if (showTrayIconSetting_.value().toBool() && qgetenv("QT_QPA_PLATFORM") != QByteArray("offscreen"))
         qSystemTrayIcon_.show();
 }
 
