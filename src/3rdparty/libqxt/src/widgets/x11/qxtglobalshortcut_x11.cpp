@@ -89,10 +89,13 @@ public:
 #else
     QPlatformNativeInterface *native = qApp->platformNativeInterface();
     if (native == nullptr)
-      return;
-    void *display = native->nativeResourceForScreen(
-        QByteArray("display"), QGuiApplication::primaryScreen());
-    m_display = reinterpret_cast<Display *>(display);
+      m_display = nullptr;
+    else
+    {
+      void *display = native->nativeResourceForScreen(
+              QByteArray("display"), QGuiApplication::primaryScreen());
+      m_display = reinterpret_cast<Display *>(display);
+    }
 #endif
   }
 

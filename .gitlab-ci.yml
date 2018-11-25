@@ -53,3 +53,14 @@ deploy:linux:
         name: "AppImage"
         paths:
             - MellowPlayer-x86_64.AppImage
+
+pages:
+    image: alpine:latest
+    stage: deploy
+    script:
+        - echo 'Nothing to do...'
+    artifacts:
+        paths:
+            - public
+    only:
+        - master
