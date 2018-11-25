@@ -93,77 +93,29 @@ MellowPlayer is licensed under the GPL license.
 
 # Compilation
 
-Building MellowPlayer requires [Qbs](http://doc.qt.io/qbs/) >= 1.10 and a **C++17** compiler (GCC >= 6.x or Clang >= 3.5 or MSVC 2015 Update 2).
-
-Qbs is a new build system from the Qt Company that is much easier to use compared to CMake, especially for Qt based projects.
-
-If you want to learn more, please read the [Qbs manual](http://doc.qt.io/qbs/index.html),
-especially the [setup guide](http://doc.qt.io/qbs/configuring.html) and how to install artifacts
-from the [installation guide](http://doc.qt.io/qbs/installing-files.html).
+Building MellowPlayer requires [CMake](https://cmake.org/) >= 3.10 and a **C++17** compiler (GCC >= 6.x or Clang >= 3.5 or MSVC 2015 Update 2).
 
 ## From QtCreator
 
-Open up `mellowplayer.qbs` with QtCreator, hit build and run.
+Open up `CMakeLists.txt` with QtCreator, hit build and run.
 
 ## From Command Line
 
-Before you can build, you have to [setup qbs](http://doc.qt.io/qbs/configuring.html). This step must be done the first time you're building MellowPlayer and everytime you update your Qt version or toolchain.
-
-### Setting up qbs
-
 ```bash
-qbs-setup-toolchains --detect
-qbs-setup-qt $(which qmake) qt5  # make sure that qmake is in PATH
-qbs-config defaultProfile qt5
+mkdir build && cd build
+cmake -DCMAKE_BUILD_TYPE=Release ..
+make
+sudo make install
 ```
-### Building MellowPlayer
-
-```bash
-qbs build release
-```
-
-*Note: If you're using qbs >= 1.11, replace ``release`` by ``config:release``*
 
 #### Build options
 
-You can append the following command line options when building MellowPlayer:
+You can append the following command line options when running cmake:
 
-- ``projects.MellowPlayer.defaultTheme``:``<string>``: the name of the default theme. Can be set to any theme appearing in the theme combo box. Default value: "Adaptive".
-- ``projects.MellowPlayer.buildTests``:``<bool>``: true to build mellowplayer test suite. Default value: false.
-- ``projects.MellowPlayer.enableCoverage``:``<bool>``: true to enable code coverage build. Require a debug build config and a gcc compiler. Default value: false;
+- ``-DBUILD_TESTS``: Set this option to ON to build tests. Default is OFF.
+- ``-DDEFAULT_THEME``: Set this option to specify the default theme. Default is Adaptive.
+- ``-DUSE_LD_GOLD``: Set this option to ON to use GNU Gold Linker. Default is ON.
 
-### Running MellowPlayer from build directory
-
-```bash
-qbs run config:release -p MellowPlayer
-```
-
-### Installing MellowPlayer on your system
-
-```bash
-sudo qbs install --install-root /usr/ config:release
-```
-
-# Running the test suite
-
-Make sure you've built MellowPlayer with ``projects.MellowPlayer.buildTests:true``
-
-```bash
-qbs resolve debug projects.MellowPlayer.buildTests:true
-qbs build debug projects.MellowPlayer.buildTests:true
-```
-
-To run the tests, just build one of the below products (either from QtCreator or from command line):
-
-- ``tests``: run all tests (unit and integration tests)
-- ``unit-tests``: run unit tests only
-- ``integration-tests``: run integration tests only
-
-Example from command line:
-
-```bash
-qbs build -p tests debug
-```
 
 # Contributing
 
