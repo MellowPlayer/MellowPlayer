@@ -22,25 +22,30 @@ echo "downloading linuxdeployqt"
 wget -c "https://github.com/probonopd/linuxdeployqt/releases/download/continuous/linuxdeployqt-continuous-x86_64.AppImage"
 chmod a+x linuxdeployqt*.AppImage
 
+# Build MellowPlayer and link statically git libstdc++
 mkdir -p build
 mkdir -p appdir
 pushd build
-qbs resolve -f ../ release projects.MellowPlayer.staticLibCpp:true qbs.installRoot:../appdir/usr
-qbs build -f ../ release projects.MellowPlayer.staticLibCpp:true qbs.installRoot:../appdir/usr
-qbs --clean-install-root release
+cmake -DCMAKE_INSTALL_PREFIX=/usr -DCMAKE_BUILD_TYPE=Release -DBUILD_TESTS=FALSE -DSTATIC_LIBSTDCPP=TRUE ..
+make -j$(nproc)
+make DESTDIR=../appdir install
+VERSION="$(cat CMakeCache.txt | grep MCMAKE_PROJECT_VERSION:STATIC= | cut -d "=" -f2)"
 popd
 
+# debug
 ldd appdir/usr/bin/MellowPlayer
 
-./linuxdeployqt*.AppImage ./appdir/usr/share/applications/*.desktop -exclude-libs="libnss3.so,libnssutil3.so" -bundle-non-qt-libs -qmldir=../
+# create appdir
+./linuxdeployqt*.AppImage ./appdir/usr/share/applications/*.desktop -exclude-libs="libnss3.so,libnssutil3.so" -bundle-non-qt-libs -qmldir=src/lib/presentation/imports -verbose=3
+
+# copy missing qml files
 echo "Copying missing files..."
 ls ${QT_DIR}/plugins/imageformats/
 cp ${QT_DIR}/plugins/imageformats/libqsvg.so ./appdir/usr/plugins/imageformats/
 ls ${QT_DIR}/qml/QtQuick/Controls
 cp -R ${QT_DIR}/qml/QtQuick/Controls ./appdir/usr/qml/QtQuick/
 ls -R ./appdir
-./linuxdeployqt*.AppImage ./appdir/usr/share/applications/*.desktop -exclude-libs="libnss3.so,libnssutil3.so" -appimage
 
+# create appimage
+./linuxdeployqt*.AppImage ./appdir/usr/share/applications/*.desktop -exclude-libs="libnss3.so,libnssutil3.so" -appimage
 chmod +x MellowPlayer-x86_64.AppImage
-mkdir -p dist
-mv MellowPlayer-x86_64.AppImage dist

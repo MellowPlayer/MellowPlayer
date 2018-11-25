@@ -35,7 +35,7 @@ tests:linux:
 
 deploy:linux:
     extends: .linux
-    stage: tests
+    stage: deploy
     dependencies:
         - build:linux
     script:
