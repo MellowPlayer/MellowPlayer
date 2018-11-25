@@ -45,6 +45,7 @@ cp ${QT_DIR}/plugins/imageformats/libqsvg.so ./appdir/usr/plugins/imageformats/
 ls ${QT_DIR}/qml/QtQuick/Controls
 cp -R ${QT_DIR}/qml/QtQuick/Controls ./appdir/usr/qml/QtQuick/
 cp -R ${QT_DIR}/qml/QtQuick/Controls.2 ./appdir/usr/qml/QtQuick/
+cp -R /usr/share/qt5 ./appdir/usr
 ls -R ./appdir
 
 # create appimage
