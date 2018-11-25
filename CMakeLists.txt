@@ -1,0 +1,47 @@
+cmake_minimum_required(VERSION 3.10)
+
+project(MellowPlayer)
+
+set(BUILD_NUMBER $ENV{CI_PIPELINE_IID})
+if (NOT BUILD_NUMBER)
+    # use zero for local builds.
+    set(BUILD_NUMBER 0)
+endif()
+
+set(PROJECT_VERSION_BASE 3.4.90)
+set(VERSION_MAJOR 3)
+set(VERSION_MINOR 4)
+set(VERSION_PATCH 90)
+set(VERSION_TWEAK ${BUILD_NUMBER})
+
+set(PROJECT_VERSION "${VERSION_MAJOR}.${VERSION_MINOR}.${VERSION_PATCH}.${BUILD_NUMBER}")
+set(SOURCE_DIR ${CMAKE_SOURCE_DIR})
+
+include(cmake/Macros.cmake)
+include(cmake/Config.cmake)
+include(cmake/Dependencies.cmake)
+include(cmake/InstallDirs.cmake)
+include(cmake/Tests.cmake)
+
+# Options
+if(NOT CMAKE_BUILD_TYPE)
+    set(CMAKE_BUILD_TYPE "Release" CACHE STRING "Choose the type of build, options are: Debug Release RelWithDebInfo MinSizeRel." FORCE)
+endif(NOT CMAKE_BUILD_TYPE)
+set_option(BUILD_TESTS OFF BOOL "TRUE to build the tests, FALSE to ignore them.")
+set_option(ENABLE_COVERAGE OFF BOOL "True to build code coverage targerts")
+set_option(ENABLE_LCOV_REPORT OFF BOOL "True to enable lcov coverage report. Default is False.")
+set_option(STATIC_LIBSTDCPP OFF BOOL "True to link statically with libstdc++ and libgcc")
+set_option(UPDATE_TRANSLATIONS OFF BOOL "True to update translations")
+set_option(DEFAULT_THEME "Adaptive" STRING "The default theme (available: Default, Midna, MidnaDark, Breeze, BreezeDark, Deezer, Spotify,...)")
+set_option(CHECK_QML_SYNTAX ON BOOL "Whether to check for QML/Javascript syntax errors. Default is ON")
+if (UNIX)
+    set_option(USE_LD_GOLD ON BOOL "Use GNU gold linker")
+endif()
+
+include_directories(src/3rdparty)
+
+add_subdirectory(src/lib)
+add_subdirectory(src/main)
+if(BUILD_TESTS)
+    add_subdirectory(src/tests)
+endif()

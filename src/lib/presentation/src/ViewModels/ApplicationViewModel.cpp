@@ -91,11 +91,12 @@ void ApplicationViewModel::setupTranslations()
 {
     if (!translator_.load(QLocale(), "MellowPlayer", "_", ":/MellowPlayer/Translations")) {
         qWarning() << "failed to load translation: " << QLocale::system().name();
-        qInfo() << "available translations: ";
-        QDirIterator it(":/MellowPlayer/Translations", QStringList() << "*.qm", QDir::Files, QDirIterator::Subdirectories);
-        while (it.hasNext()) qInfo() << "  - " << it.next();
     } else
         qInfo() << "translation successfully loaded: " << QLocale::system().name();
+
+    qInfo() << "available translations: ";
+    QDirIterator it(":/MellowPlayer/Translations", QStringList() << "*.qm", QDir::Files, QDirIterator::Subdirectories);
+    while (it.hasNext()) qInfo() << "  - " << it.next();
 
     qtApplication_.installTranslator(&translator_);
 }
