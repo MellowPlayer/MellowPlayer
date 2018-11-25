@@ -42,6 +42,7 @@ include_directories(src/3rdparty)
 
 add_subdirectory(src/lib)
 add_subdirectory(src/main)
+add_subdirectory(src/plugins)
 if(BUILD_TESTS)
     add_subdirectory(src/tests)
 endif()
