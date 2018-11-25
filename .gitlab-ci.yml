@@ -12,13 +12,13 @@ stages:
     tags:
         - linux
     before_script:
-        - ./scripts/gitlab-ci/linux/env-setup.sh
+        - ./scripts/ci/linux/env-setup.sh
 
 build:linux:
     extends: .linux
     stage: build
     script:
-        - ./scripts/gitlab-ci/linux/build.sh
+        - ./scripts/ci/linux/build.sh
     artifacts:
         name: "build"
         paths:
