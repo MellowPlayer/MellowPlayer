@@ -2,4 +2,4 @@
 
 cd build
 
-make AllTests
+ctest --output-on-failure

@@ -7,7 +7,6 @@ add_definitions(-DTEST_SUITE=1)
 set(CMAKE_CXX_FLAGS ${TESTS_CMAKE_CXX_FLAGS})
 set(CMAKE_AUTOMOC OFF)
 
-enable_testing()
 add_subdirectory(lib)
 
 add_unit_test(Domain)
