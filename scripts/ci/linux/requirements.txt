@@ -35,3 +35,4 @@ lcov
 xvfb
 wget
 fuse
+qtchooser

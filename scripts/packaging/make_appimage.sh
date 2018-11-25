@@ -39,9 +39,12 @@ echo "Copying missing files..."
 cp ${QT_DIR}/plugins/imageformats/libqsvg.so ./appdir/usr/plugins/imageformats/
 mkdir -p ./appdir/usr/qml
 cp -R ${QT_DIR}/qml ./appdir/usr/qml
-cp -R /usr/share/qt5 ./appdir/usr
+echo "ls ./appdir/usr/qml"
+ls ./appdir/usr/qml
 echo "ls /usr/share/qt5/resources"
 ls /usr/share/qt5/resources
+cp -R /usr/share/qt5 ./appdir/usr
+echo "ls ./appdir/usr/resources"
 ls ./appdir/usr/resources
 
 # create appimage
