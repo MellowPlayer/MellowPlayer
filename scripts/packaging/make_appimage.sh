@@ -29,24 +29,17 @@ pushd build
 cmake -DCMAKE_INSTALL_PREFIX=/usr -DCMAKE_BUILD_TYPE=Release -DBUILD_TESTS=FALSE -DSTATIC_LIBSTDCPP=TRUE ..
 make -j$(nproc)
 make DESTDIR=../appdir install
-VERSION="$(cat CMakeCache.txt | grep MCMAKE_PROJECT_VERSION:STATIC= | cut -d "=" -f2)"
 popd
-
-# debug
-ldd appdir/usr/bin/MellowPlayer
 
 # create appdir
 ./linuxdeployqt*.AppImage ./appdir/usr/share/applications/*.desktop -exclude-libs="libnss3.so,libnssutil3.so" -bundle-non-qt-libs -qmldir=src/lib/presentation/imports/MellowPlayer -verbose=2
 
 # copy missing qml files
 echo "Copying missing files..."
-ls ${QT_DIR}/plugins/imageformats/
 cp ${QT_DIR}/plugins/imageformats/libqsvg.so ./appdir/usr/plugins/imageformats/
-ls ${QT_DIR}/qml/QtQuick/Controls
 cp -R ${QT_DIR}/qml/QtQuick/Controls ./appdir/usr/qml/QtQuick/
 cp -R ${QT_DIR}/qml/QtQuick/Controls.2 ./appdir/usr/qml/QtQuick/
 cp -R /usr/share/qt5 ./appdir/usr
-ls -R ./appdir
 
 # create appimage
 ./linuxdeployqt*.AppImage ./appdir/usr/share/applications/*.desktop -exclude-libs="libnss3.so,libnssutil3.so" -appimage
