@@ -36,7 +36,7 @@ popd
 ldd appdir/usr/bin/MellowPlayer
 
 # create appdir
-./linuxdeployqt*.AppImage ./appdir/usr/share/applications/*.desktop -exclude-libs="libnss3.so,libnssutil3.so" -bundle-non-qt-libs -qmldir=src/lib/presentation/imports -verbose=3
+./linuxdeployqt*.AppImage ./appdir/usr/share/applications/*.desktop -exclude-libs="libnss3.so,libnssutil3.so" -bundle-non-qt-libs -qmldir=src/lib/presentation/imports -verbose=2
 
 # copy missing qml files
 echo "Copying missing files..."
