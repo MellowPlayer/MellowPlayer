@@ -37,9 +37,12 @@ popd
 # copy missing qml files
 echo "Copying missing files..."
 cp ${QT_DIR}/plugins/imageformats/libqsvg.so ./appdir/usr/plugins/imageformats/
-cp -R ${QT_DIR}/qml/QtQuick/Controls ./appdir/usr/qml/QtQuick/
-cp -R ${QT_DIR}/qml/QtQuick/Controls.2 ./appdir/usr/qml/QtQuick/
+mkdir -p ./appdir/usr/qml
+cp -R ${QT_DIR}/qml ./appdir/usr/qml
 cp -R /usr/share/qt5 ./appdir/usr
+echo "ls /usr/share/qt5/resources"
+ls /usr/share/qt5/resources
+ls ./appdir/usr/resources
 
 # create appimage
 ./linuxdeployqt*.AppImage ./appdir/usr/share/applications/*.desktop -exclude-libs="libnss3.so,libnssutil3.so" -appimage

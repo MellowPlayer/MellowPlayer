@@ -5,6 +5,7 @@ qtbase5-dev
 qtdeclarative5-dev
 qtdeclarative5-private-dev
 qtwebengine5-dev
+libqt5webengine-data
 qtquickcontrols2-5-dev
 qtpositioning5-dev
 qtbase5-private-dev
