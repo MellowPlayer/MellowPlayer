@@ -15,38 +15,36 @@ stages:
         - ./scripts/ci/linux/env-setup.sh
 
 
-build:linux:
-    extends: .linux
-    stage: build
-    script:
-        - ./scripts/ci/linux/build.sh
-    artifacts:
-        name: "build"
-        paths:
-        - build
+#build:linux:
+#    extends: .linux
+#    stage: build
+#    script:
+#        - ./scripts/ci/linux/build.sh
+#    artifacts:
+#        name: "build"
+#        paths:
+#        - build
 
 
-tests:linux:
-    extends: .linux
-    stage: tests
-    dependencies:
-        - build:linux
-    script:
-        - ./scripts/ci/linux/tests.sh
-
-
-tests:coverage:
-    extends: .linux
-    stage: tests
-    script:
-        - ./scripts/ci/linux/coverage.sh
+#tests:linux:
+#    extends: .linux
+#    stage: tests
+#    dependencies:
+#        - build:linux
+#    script:
+#        - ./scripts/ci/linux/tests.sh
+#
+#
+#tests:coverage:
+#    extends: .linux
+#    stage: tests
+#    script:
+#        - ./scripts/ci/linux/coverage.sh
 
 
 deploy:linux:
     extends: .linux
     stage: deploy
-    dependencies:
-        - build:linux
     script:
         - ./scripts/ci/linux/deploy.sh
     artifacts:
