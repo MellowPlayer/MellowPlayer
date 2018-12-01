@@ -242,7 +242,7 @@ Popup {
 
                                         Link {
                                             name: '@ZeroDot1'
-                                            url: "http://basic1.moy.su/"
+                                            url: "https://gitlab.com/ZeroDot1"
                                         }
 
                                         Link {
