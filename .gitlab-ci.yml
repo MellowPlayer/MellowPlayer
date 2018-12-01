@@ -8,8 +8,6 @@ stages:
     image: registry.gitlab.com/colinduquesnoy/mellowplayer/build-images/linux:latest
     variables:
         DISPLAY: ':99.0'
-        QT_QPA_PLATFORM: 'offscreen'
-        TERM: 'xterm-256color'
         CMAKE_PREFIX_PATH: '/opt/qt/5.11.2/gcc_64'
     tags:
         - linux
