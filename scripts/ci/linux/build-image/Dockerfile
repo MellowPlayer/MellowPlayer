@@ -11,3 +11,6 @@ COPY install-qt.sh /
 RUN chmod +x /install-qt.sh
 RUN chmod +x /extract-qt-installer
 RUN /install-qt.sh
+RUN yum -y install https://dl.fedoraproject.org/pub/epel/epel-release-latest-7.noarch.rpm
+RUN yum -y install cmake3
+RUN ln -s /usr/bin/cmake3 /usr/bin/cmake
