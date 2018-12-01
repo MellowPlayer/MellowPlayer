@@ -161,9 +161,7 @@ You will have to compile from source. See the `README`_ for build instructions.
 OS X
 ----
 
-Just grab the dmg image from the `official website`_ (click on the **OS X folder**), drag and drop the MellowPlayer application in your **Applications** folder.
-
-Please note the dmg we provide is built with a version of QtWebEngine built without proprietary codecs support (for licensing reasons). If your favorite service require proprietary codecs to work, you'll need to build QtWebEngine with the flag ``use_proprietary_codecs`` and build MellowPlayer using that QtWebEngine version.
+OSX is not officially supported. You may try to build and run MellowPlayer from sources.
 
 Windows
 -------
@@ -173,7 +171,7 @@ Just grab the windows installer from the `official website`_ (click on the **Win
 Please note the Windows Installer we provide is built with a version of QtWebEngine built without proprietary codecs support (for licensing reasons). If your favorite service require proprietary codecs to work, you'll need to build QtWebEngine with the flag ``use_proprietary_codecs`` and build MellowPlayer using that QtWebEngine version.
 
 
-.. _official website: http://colinduquesnoy.github.io/MellowPlayer
+.. _official website: https://colinduquesnoy.gitlab.io/MellowPlayer
 .. _gitlab release: https://gitlab.com/ColinDuquesnoy/MellowPlayer/tags
 .. _openSUSE build service: https://software.opensuse.org//download.html?project=home%3AColinDuquesnoy&package=MellowPlayer
 .. _RPMFusion repositories: https://rpmfusion.org/Configuration
