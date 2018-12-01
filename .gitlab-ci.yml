@@ -5,15 +5,14 @@ stages:
     - metrics
 
 .linux:
-    image: ubuntu:latest
+    image: registry.gitlab.com/colinduquesnoy/mellowplayer/build-images/linux:latest
     variables:
         DISPLAY: ':99.0'
         QT_QPA_PLATFORM: 'offscreen'
         TERM: 'xterm-256color'
+        CMAKE_PREFIX_PATH: '/opt/qt/5.11.2/gcc_64'
     tags:
         - linux
-    before_script:
-        - ./scripts/ci/linux/env-setup.sh
 
 
 build:linux:
@@ -43,15 +42,15 @@ coverage:
         - ./scripts/ci/linux/coverage.sh
 
 
-#deploy:linux:
-#    extends: .linux
-#    stage: deploy
-#    script:
-#        - ./scripts/ci/linux/deploy.sh
-#    artifacts:
-#        name: "AppImage"
-#        paths:
-#            - MellowPlayer-x86_64.AppImage
+deploy:linux:
+    extends: .linux
+    stage: deploy
+    script:
+        - ./scripts/ci/linux/deploy.sh
+    artifacts:
+        name: "AppImage"
+        paths:
+            - MellowPlayer-x86_64.AppImage
 
 pages:
     image: alpine:latest
