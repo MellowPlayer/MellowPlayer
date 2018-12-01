@@ -2,7 +2,6 @@ stages:
     - build
     - tests
     - deploy
-    - metrics
 
 .linux:
     image: registry.gitlab.com/colinduquesnoy/mellowplayer/build-images/linux:latest
@@ -34,14 +33,14 @@ tests:linux:
         - ./scripts/ci/linux/tests.sh
 
 
-coverage:
+tests:coverage:
     extends: .linux
-    stage: metrics
+    stage: tests
     script:
         - ./scripts/ci/linux/coverage.sh
 
 
-appimage:
+AppImage:
     extends: .linux
     stage: deploy
     script:
