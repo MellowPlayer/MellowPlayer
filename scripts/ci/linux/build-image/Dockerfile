@@ -14,3 +14,9 @@ RUN /install-qt.sh
 RUN yum -y install https://dl.fedoraproject.org/pub/epel/epel-release-latest-7.noarch.rpm
 RUN yum -y install cmake3
 RUN ln -s /usr/bin/cmake3 /usr/bin/cmake
+RUN yum -y install libnotify-devel
+RUN yum -y install centos-release-scl
+RUN yum -y install devtoolset-7-gcc-c++
+RUN ls /opt/rh/devtoolset-7/root/bin
+RUN ln -s /opt/rh/devtoolset-7/root/bin/gcc /usr/bin/gcc --force
+RUN ln -s /opt/rh/devtoolset-7/root/bin/g++ /usr/bin/g++ --force
