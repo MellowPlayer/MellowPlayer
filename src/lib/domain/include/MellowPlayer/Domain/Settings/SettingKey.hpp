@@ -21,6 +21,7 @@ namespace MellowPlayer::Domain
             MAIN_CHECK_FOR_UPDATES,
             MAIN_CLOSE_TO_TRAY,
             MAIN_CONFIRM_EXIT,
+            MAIN_PLAYBACK_REQUIRES_USER_GESTURE,
             MAIN_SHOW_TRAY_ICON,
             MAIN_UPDATE_CHANNEL,
             NOTIFICATIONS_ENABLED,
@@ -69,6 +70,7 @@ namespace MellowPlayer::Domain
             enumToString << "main/check-for-updates";
             enumToString << "main/close-to-tray";
             enumToString << "main/confirm-exit";
+            enumToString << "main/playback-requires-user-gesture";
             enumToString << "main/show-tray-icon";
             enumToString << "main/update-channel";
             enumToString << "notifications/enabled";
