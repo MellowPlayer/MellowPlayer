@@ -7,6 +7,7 @@ stages:
 .linux:
     image: registry.gitlab.com/colinduquesnoy/mellowplayer/build-images/linux:latest
     variables:
+        QT_QPA_PLATFORM: 'offscreen'
         CMAKE_PREFIX_PATH: '/opt/qt/5.11.2/gcc_64'
     tags:
         - linux
