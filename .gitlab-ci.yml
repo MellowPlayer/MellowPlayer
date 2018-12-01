@@ -19,7 +19,7 @@ build:linux:
     script:
         - ./scripts/ci/linux/build.sh
     artifacts:
-        name: "build"
+        name: "build-linux"
         paths:
             - build
             - appdir
@@ -41,7 +41,7 @@ coverage:
         - ./scripts/ci/linux/coverage.sh
 
 
-deploy:linux:
+appimage:
     extends: .linux
     stage: deploy
     script:

@@ -2,7 +2,7 @@ FROM centos:7
 
 # Setup base system
 RUN yum -y update
-RUN yum -y install yum-utils wget fontconfig freetype freetype-devel fontconfig-devel libstdc++ libX11 mesa-libGL-devel fuse fuse-devel rpm-build libXcomposite libXcursor libXrender libX11-xcb libXi libXtst libXrandr libnotify-devel alsa-lib mesa-libEGL xorg-x11-drv-dummy
+RUN yum -y install yum-utils wget fontconfig freetype freetype-devel fontconfig-devel libstdc++ libX11 mesa-libGL-devel fuse fuse-devel rpm-build libXcomposite libXcursor libXrender libX11-xcb libXi libXtst libXrandr libnotify-devel alsa-lib mesa-libEGL xorg-x11-drv-dummy libxkbcommon cups-libs mariadb-libs postgresql-libs dpkg-devel dpkg-dev lcov
 RUN yum -y groupinstall development
 
 # Setup CMake
@@ -34,5 +34,3 @@ RUN /install-qt.sh
 # Setup DBus
 RUN dbus-uuidgen > /etc/machine-id
 RUN dbus-uuidgen --ensure=/etc/machine-id
-
-RUN yum -y install libxkbcommon cups-libs
