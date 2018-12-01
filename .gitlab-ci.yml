@@ -36,22 +36,22 @@ tests:linux:
         - ./scripts/ci/linux/tests.sh
 
 
-metrics:coverage:
+coverage:
     extends: .linux
     stage: metrics
     script:
         - ./scripts/ci/linux/coverage.sh
 
 
-deploy:linux:
-    extends: .linux
-    stage: deploy
-    script:
-        - ./scripts/ci/linux/deploy.sh
-    artifacts:
-        name: "AppImage"
-        paths:
-            - MellowPlayer-x86_64.AppImage
+#deploy:linux:
+#    extends: .linux
+#    stage: deploy
+#    script:
+#        - ./scripts/ci/linux/deploy.sh
+#    artifacts:
+#        name: "AppImage"
+#        paths:
+#            - MellowPlayer-x86_64.AppImage
 
 pages:
     image: alpine:latest
