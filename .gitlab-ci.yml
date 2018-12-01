@@ -21,7 +21,8 @@ build:linux:
     artifacts:
         name: "build"
         paths:
-        - build
+            - build
+            - appdir
 
 
 tests:linux:
@@ -45,6 +46,8 @@ deploy:linux:
     stage: deploy
     script:
         - ./scripts/ci/linux/deploy.sh
+    dependencies:
+        - build:linux
     artifacts:
         name: "AppImage"
         paths:

@@ -34,3 +34,5 @@ RUN /install-qt.sh
 # Setup DBus
 RUN dbus-uuidgen > /etc/machine-id
 RUN dbus-uuidgen --ensure=/etc/machine-id
+
+RUN yum -y install libxkbcommon cups-libs
