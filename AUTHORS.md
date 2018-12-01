@@ -8,7 +8,7 @@ Contributors
 ------------
 
 - [ConorIA](https://github.com/ConorIA)
-- [ZeroDot1](http://basic1.moy.su/)
+- [ZeroDot1](https://gitlab.com/ZeroDot1)
 - [Lukas Kolletzki](https://github.com/kolletzki)
 - [Mahmoud Hossam](https://github.com/mahmoudhossam)
 - [Terin Stock](https://github.com/terinjokes)
