@@ -16,7 +16,13 @@ clone_folder: C:\projects\MellowPlayer
 build_script:
     - cd C:\projects\MellowPlayer\scripts\ci\windows
     - build.bat
+    - cd C:\projects\MellowPlayer\scripts\packaging\windows
+    - make_installer.bat
 
 test_script:
     - cd C:\projects\MellowPlayer\scripts\ci\windows
-    - runtests.bat
+    - tests.bat
+
+artifacts:
+    - path: MellowPlayer_Setup.exe
+      name: WindowsInstaller
