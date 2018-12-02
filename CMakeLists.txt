@@ -15,6 +15,8 @@ set(VERSION_TWEAK ${BUILD_NUMBER})
 
 project(MellowPlayer VERSION "${VERSION_MAJOR}.${VERSION_MINOR}.${VERSION_PATCH}.${BUILD_NUMBER}")
 
+message(STATUS "Building MellowPlayer version ${PROJECT_VERSION}")
+
 set(SOURCE_DIR ${CMAKE_SOURCE_DIR})
 
 include(cmake/Macros.cmake)

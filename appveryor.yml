@@ -1,0 +1,24 @@
+version: "3.4.0.{build}"
+
+os: Visual Studio 2017
+
+platform:
+    - x64
+
+environment:
+    - QTDIR=C:\Qt\5.11
+    - PATH=%QTDIR%\bin;%QTDIR%\lib;%PATH%
+    - CMAKE_PREFIX_PATH=%QTDIR%
+
+configuration:
+    - Release
+
+clone_folder: C:\projects\MellowPlayer
+
+build_script:
+    - cd C:\projects\MellowPlayer\scripts\ci\windows
+    - build.bat
+
+test_script:
+    - cd C:\projects\MellowPlayer\scripts\ci\windows
+    - runtests.bat
