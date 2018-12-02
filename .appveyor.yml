@@ -31,7 +31,7 @@ deploy:
       subject: colinduquesnoy
       repo: MellowPlayer
       package: WindowsInstaller
-      version: version
+      version: "{version}"
       publish: true
       override: true
       explode: true
