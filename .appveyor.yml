@@ -1,4 +1,4 @@
-version: "3.4.0.{build}"
+version: "3.4.90.{build}"
 
 os: Visual Studio 2017
 
@@ -6,7 +6,7 @@ platform:
     - x64
 
 environment:
-    QTDIR: C:\Qt\5.11\msvc2015
+    QTDIR: C:\Qt\5.11\msvc2017_64
 
 configuration:
     - Release
