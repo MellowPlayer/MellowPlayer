@@ -1,4 +1,5 @@
 cd ..\..\..
+echo "QTDIR=%QTDIR%"
 set PATH=%QTDIR%\bin;%QTDIR%\lib;%PATH%
 set CMAKE_PREFIX_PATH=%QTDIR%
 mkdir build
