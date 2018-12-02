@@ -22,10 +22,10 @@ AppUpdatesURL={#MyAppURL}
 DefaultDirName={pf}\{#MyAppName}
 DefaultGroupName={#MyAppName}
 AllowNoIcons=yes
-LicenseFile=..\..\..\LICENSE
+LicenseFile=..\LICENSE
 OutputDir=dist
 OutputBaseFilename=MellowPlayer_Setup
-SetupIconFile=..\..\..\src\main\mellowplayer.ico
+SetupIconFile=..\src\main\mellowplayer.ico
 Compression=lzma
 SolidCompression=yes
 ChangesAssociations=yes
@@ -45,11 +45,11 @@ Name: flash; Description: "Flash Player PPAPI";  Types: full; Flags: disablenoun
 Name: vcredist; Description: "MSVC 2017 Redist";  Types: full; Flags: disablenouninstallwarning;
 
 [Files]
-Source: "..\..\..\build\release\install-root\bin\*"; DestDir: "{app}"; Flags: recursesubdirs createallsubdirs; Components: app
-Source: "libeay32.dll"; DestDir: "{app}"; Components: app
-Source: "ssleay32.dll"; DestDir: "{app}"; Components: app
-Source: "vc_redist.x64.exe"; DestDir: "{tmp}"; Components: vcredist
-Source: "flashplayer30pp_xa_install.exe"; DestDir: "{tmp}"; Components: flash
+Source: "bin\*"; DestDir: "{app}"; Flags: recursesubdirs createallsubdirs; Components: app
+Source: "..\scripts\packaging\windows\libeay32.dll"; DestDir: "{app}"; Components: app
+Source: "..\scripts\packaging\windows\ssleay32.dll"; DestDir: "{app}"; Components: app
+Source: "..\scripts\packaging\windows\vc_redist.x64.exe"; DestDir: "{tmp}"; Components: vcredist
+Source: "..\scripts\packaging\windows\install_flash_player_ppapi.exe"; DestDir: "{tmp}"; Components: flash
 
 [Tasks]
 Name: "desktopicon"; Description: "{cm:CreateDesktopIcon}"; GroupDescription: "{cm:AdditionalIcons}"; Flags: unchecked; Components: app;
@@ -63,5 +63,5 @@ Name: "{userappdata}\Microsoft\Internet Explorer\Quick Launch\{#MyAppName}"; Fil
 
 [Run]
 Filename: "{tmp}\vc_redist.x64.exe"; Components: vcredist;
-Filename: "{tmp}\flashplayer28pp_xa_install.exe"; Components: flash;
+Filename: "{tmp}\install_flash_player_ppapi.exe"; Components: flash;
 Filename: "{app}\{#MyAppExeName}"; Description: "{cm:LaunchProgram,{#StringChange(MyAppName, '&', '&&')}}"; Flags: nowait postinstall skipifsilent; Components: app;

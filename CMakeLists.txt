@@ -4,8 +4,11 @@ project(MellowPlayer)
 
 set(BUILD_NUMBER $ENV{CI_PIPELINE_IID})
 if (NOT BUILD_NUMBER)
-    # use zero for local builds.
-    set(BUILD_NUMBER 0)
+    set(BUILD_NUMBER $ENV{APPVEYOR_BUILD_NUMBER})
+    if (NOT BUILD_NUMBER)
+        # use zero for local builds.
+        set(BUILD_NUMBER 0)
+    endif()
 endif()
 
 set(VERSION_MAJOR 3)
