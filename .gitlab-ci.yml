@@ -65,6 +65,8 @@ deploy:continuous:
         - appimage
     script:
         - apk add --no-cache curl
+        - pwd
+        - ls
         - curl -T ./MellowPlayer-x86_64.appimage -ucolinduquesnoy:${BINTRAY_API_KEY} "https://api.bintray.com/content/colinduquesnoy/MellowPlayer/Continuous/${FULL_VERSION}/continuous/${FULL_VERSION}/MellowPlayer-x86_64.AppImage?publish=1&override=1&explode=0"
 
 deploy:stable:
