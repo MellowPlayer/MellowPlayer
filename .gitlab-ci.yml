@@ -11,9 +11,6 @@ stages:
     tags:
         - linux
 
-.windows:
-    image: windows/servercore:ltsc2016
-
 
 build:linux:
     extends: .linux
@@ -26,11 +23,6 @@ build:linux:
             - build
             - appdir
 
-build:windows:
-    extends: .windows
-    stage: build
-    script:
-        - dir
 
 tests:linux:
     extends: .linux
