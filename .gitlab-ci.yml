@@ -5,7 +5,7 @@ stages:
     - deploy
 
 variables:
-    FULL_VERSION: '3.4.90.${CI_PIPELINE_IID}'
+    FULL_VERSION: '3.4.91.${CI_PIPELINE_IID}'
 
 .linux:
     image: registry.gitlab.com/colinduquesnoy/mellowplayer/build-images/linux:latest
