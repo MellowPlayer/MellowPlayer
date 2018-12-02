@@ -12,9 +12,7 @@ stages:
         - linux
 
 .windows:
-    image: windows/servercore:ltsc201
-    tags:
-        - windows
+    image: windows/servercore:ltsc2016
 
 
 build:linux:
