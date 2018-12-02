@@ -31,7 +31,6 @@ deploy:
       subject: colinduquesnoy
       repo: MellowPlayer
       package: WindowsInstaller
-      version: 3.4.90.{build}
       publish: true
       override: true
       explode: true
