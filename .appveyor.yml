@@ -28,7 +28,7 @@ test_script:
 
 deploy_script:
     - cd C:\projects\MellowPlayer\scripts\ci\windows
-    - if defined APPVEYOR_REPO_TAG_NAME (upload-stable.bat) else (upload-continous.bat)
+    - if defined APPVEYOR_REPO_TAG_NAME (upload-stable.bat) else (upload-continuous.bat)
 
 artifacts:
     - path: MellowPlayer_Setup.exe
