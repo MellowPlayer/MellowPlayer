@@ -49,7 +49,7 @@ def update_gitlab():
     file_name = '.gitlab-ci.yml'
     with open(file_name, 'r') as f:
         content = f.read()
-    content = re.sub("VERSION: .*", "VERSION: '%s.${CI_PIPELINE_IID}'" % new_version, content)
+    content = re.sub("FULL_VERSION: .*", "FULL_VERSION: '%s.${CI_PIPELINE_IID}'" % new_version, content)
     with open(file_name, 'w') as f:
         f.write(content)
 
