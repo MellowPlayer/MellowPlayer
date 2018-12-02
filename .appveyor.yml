@@ -30,10 +30,25 @@ deploy:
           secure: 5JxFMiIEPLEzENmBD2AV6eOfA7+9kTfh276P91CoijHfboWrdgvpvci9vuiOxXRa
       subject: colinduquesnoy
       repo: MellowPlayer
-      package: WindowsInstaller
+      package: Continuous
       publish: true
       override: true
       explode: true
+      on:
+          branch: master
+
+    - provider: BinTray
+      username: colinduquesnoy
+      api_key:
+          secure: 5JxFMiIEPLEzENmBD2AV6eOfA7+9kTfh276P91CoijHfboWrdgvpvci9vuiOxXRa
+      subject: colinduquesnoy
+      repo: MellowPlayer
+      package: Stable
+      publish: true
+      override: true
+      explode: true
+      on:
+        APPVEYOR_REPO_TAG: true
 
 artifacts:
     - path: MellowPlayer_Setup.exe

@@ -49,8 +49,7 @@ def update_gitlab():
     file_name = '.gitlab-ci.yml'
     with open(file_name, 'r') as f:
         content = f.read()
-    content = re.sub('curl -T MellowPlayer-x86_64.AppImage -ucolinduquesnoy:\${BINTRAY_API_KEY} https://api.bintray.com/content/colinduquesnoy/MellowPlayer/AppImage/.*\${CI_PIPELINE_IID}/MellowPlayer-x86_64.AppImage',
-                     "curl -T MellowPlayer-x86_64.AppImage -ucolinduquesnoy:${BINTRAY_API_KEY} https://api.bintray.com/content/colinduquesnoy/MellowPlayer/AppImage/%s.${CI_PIPELINE_IID}/MellowPlayer-x86_64.AppImage" % new_version, content)
+    content = re.sub("VERSION: .*", "VERSION: '%s.${CI_PIPELINE_IID}'" % new_version, content)
     with open(file_name, 'w') as f:
         f.write(content)
 

@@ -9,6 +9,7 @@ stages:
     variables:
         QT_QPA_PLATFORM: 'offscreen'
         CMAKE_PREFIX_PATH: '/opt/qt/5.11.2/gcc_64'
+        VERSION: '3.4.90.${CI_PIPELINE_IID}'
     tags:
         - linux
 
@@ -53,14 +54,27 @@ appimage:
         paths:
             - MellowPlayer-x86_64.AppImage
 
-deploy:linux:
+deploy:continuous:
     image: alpine:latest
     stage: deploy
+    only:
+        - master@ColinDuquesnoy/MellowPlayer
     dependencies:
         - appimage
     script:
         - apk add --no-cache curl
-        - curl -T MellowPlayer-x86_64.AppImage -ucolinduquesnoy:${BINTRAY_API_KEY} https://api.bintray.com/content/colinduquesnoy/MellowPlayer/AppImage/3.4.90.${CI_PIPELINE_IID}/MellowPlayer-x86_64.AppImage
+        - curl -T MellowPlayer-x86_64.AppImage -ucolinduquesnoy:${BINTRAY_API_KEY} https://api.bintray.com/content/colinduquesnoy/MellowPlayer/Continuous/${VERSION}/MellowPlayer-x86_64.AppImage
+
+deploy:stable:
+    image: alpine:latest
+    stage: deploy
+    only:
+        - tags
+    dependencies:
+        - appimage
+    script:
+        - apk add --no-cache curl
+        - curl -T MellowPlayer-x86_64.AppImage -ucolinduquesnoy:${BINTRAY_API_KEY} https://api.bintray.com/content/colinduquesnoy/MellowPlayer/Stable/${VERSION}/MellowPlayer-x86_64.AppImage
 
 pages:
     image: alpine:latest
