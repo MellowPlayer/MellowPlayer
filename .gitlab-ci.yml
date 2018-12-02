@@ -4,12 +4,14 @@ stages:
     - package
     - deploy
 
+variables:
+    VERSION: '3.4.90.${CI_PIPELINE_IID}'
+
 .linux:
     image: registry.gitlab.com/colinduquesnoy/mellowplayer/build-images/linux:latest
     variables:
         QT_QPA_PLATFORM: 'offscreen'
         CMAKE_PREFIX_PATH: '/opt/qt/5.11.2/gcc_64'
-        VERSION: '3.4.90.${CI_PIPELINE_IID}'
     tags:
         - linux
 
