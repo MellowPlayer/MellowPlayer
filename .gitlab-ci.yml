@@ -28,20 +28,20 @@ build:linux:
             - appdir
 
 
-#tests:linux:
-#    extends: .linux
-#    stage: tests
-#    dependencies:
-#        - build:linux
-#    script:
-#        - ./scripts/ci/linux/tests.sh
+tests:linux:
+    extends: .linux
+    stage: tests
+    dependencies:
+        - build:linux
+    script:
+        - ./scripts/ci/linux/tests.sh
 
 
-#tests:coverage:
-#    extends: .linux
-#    stage: tests
-#    script:
-#        - ./scripts/ci/linux/coverage.sh
+tests:coverage:
+    extends: .linux
+    stage: tests
+    script:
+        - ./scripts/ci/linux/coverage.sh
 
 
 appimage:
