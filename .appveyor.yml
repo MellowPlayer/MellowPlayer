@@ -23,6 +23,19 @@ test_script:
     - cd C:\projects\MellowPlayer\scripts\ci\windows
     - tests.bat
 
+deploy:
+    - provider: BinTray
+      username: colinduquesnoy
+      api_key:
+          secure: 5JxFMiIEPLEzENmBD2AV6eOfA7+9kTfh276P91CoijHfboWrdgvpvci9vuiOxXRa
+      subject: colinduquesnoy
+      repo: MellowPlayer
+      package: WindowsInstaller
+      version: version
+      publish: true
+      override: true
+      explode: true
+
 artifacts:
     - path: MellowPlayer_Setup.exe
       name: WindowsInstaller
