@@ -2,6 +2,7 @@
 ; SEE THE DOCUMENTATION FOR DETAILS ON CREATING INNO SETUP SCRIPT FILES!
 
 #define MyAppName "MellowPlayer"
+#define MyAppVersion "@MellowPlayer_VERSION@"
 #define MyAppPublisher "Colin Duquesnoy"
 #define MyAppURL "https://github.com/ColinDuquesnoy/MellowPlayer"
 #define MyAppExeName "MellowPlayer.exe"

@@ -1,11 +1,16 @@
 cd ..\..\..
 
-set QTDIR=C:\Qt\5.11.1\msvc2017_64
-set PATH=%QTDIR%\bin;%QTDIR%\lib;%PATH%
-set INSTALL_DIR=build\release\install-root\
+set PATH=%QTDIR%\bin;%QTDIR%\lib;%PATH%;
+set BUILD_DIR=build
 
-%QTDIR%\bin\windeployqt %INSTALL_DIR%\bin\MellowPlayer.exe -qmldir=src
+mkdir %BUILD_DIR%\bin
+mkdir %BUILD_DIR%\bin\plugins
+xcopy /S /C /Y %BUILD_DIR%\src\main\Release\MellowPlayer.exe %BUILD_DIR%\bin
+xcopy /S /E /D /C /Y plugins %BUILD_DIR%\bin\plugins
 
-cd build
-qbs build -f ../ -p MellowPlayer_Setup config:release projects.MellowPlayer.buildTests:true
+%QTDIR%\bin\windeployqt %BUILD_DIR%\bin\MellowPlayer.exe -qmldir=src
+
+"C:\Program Files (x86)\Inno Setup 5\iscc" /Q %BUILD_DIR%/setup.iss
+
+xcopy /S /C /Y %BUILD_DIR%\dist\MellowPlayer_Setup.exe .
 
