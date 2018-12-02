@@ -6,9 +6,9 @@ platform:
     - x64
 
 environment:
-    - QTDIR=C:\Qt\5.11
-    - PATH=%QTDIR%\bin;%QTDIR%\lib;%PATH%
-    - CMAKE_PREFIX_PATH=%QTDIR%
+    QTDIR: C:\Qt\5.11
+    PATH: %QTDIR%\bin;%QTDIR%\lib;%PATH%
+    CMAKE_PREFIX_PATH: %QTDIR%
 
 configuration:
     - Release
