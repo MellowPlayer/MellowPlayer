@@ -41,6 +41,7 @@ def update_appveyor():
     with open(file_name, 'r') as f:
         content = f.read()
     content = re.sub('version: .*', "version: %s.{build}" % new_version, content)
+    content = re.sub('\s*APP_VERSION: .*', "\n    APP_VERSION: %s" % new_version, content)
     with open(file_name, 'w') as f:
         f.write(content)
 
@@ -49,7 +50,7 @@ def update_gitlab():
     file_name = '.gitlab-ci.yml'
     with open(file_name, 'r') as f:
         content = f.read()
-    content = re.sub("FULL_VERSION: .*", "FULL_VERSION: '%s.${CI_PIPELINE_IID}'" % new_version, content)
+    content = re.sub("APP_VERSION: .*", "APP_VERSION: '%s'" % new_version, content)
     with open(file_name, 'w') as f:
         f.write(content)
 

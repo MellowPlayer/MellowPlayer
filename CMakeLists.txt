@@ -2,21 +2,12 @@ cmake_minimum_required(VERSION 3.10)
 
 project(MellowPlayer)
 
-set(BUILD_NUMBER $ENV{CI_PIPELINE_IID})
-if (NOT BUILD_NUMBER)
-    set(BUILD_NUMBER $ENV{APPVEYOR_BUILD_NUMBER})
-    if (NOT BUILD_NUMBER)
-        # use zero for local builds.
-        set(BUILD_NUMBER 0)
-    endif()
-endif()
-
 set(VERSION_MAJOR 3)
 set(VERSION_MINOR 4)
-set(VERSION_PATCH 91)
-set(VERSION_TWEAK ${BUILD_NUMBER})
+set(VERSION_PATCH 90)
+set(VERSION_TWEAK 0)
 
-project(MellowPlayer VERSION "${VERSION_MAJOR}.${VERSION_MINOR}.${VERSION_PATCH}.${BUILD_NUMBER}")
+project(MellowPlayer VERSION "${VERSION_MAJOR}.${VERSION_MINOR}.${VERSION_PATCH}")
 
 message(STATUS "Building MellowPlayer version ${PROJECT_VERSION}")
 
