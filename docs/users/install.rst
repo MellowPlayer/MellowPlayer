@@ -7,13 +7,11 @@ supported operating systems.
 GNU/Linux
 ---------
 
-We provide an AppImage so that you can try MellowPlayer on any distribution.
+We provide both an AppImage that should run on most linux distributions, we also provide distribution specific packages can be download from `openSUSE build service`_.
 
-Download MellowPlayer-x86_64.AppImage from a `gitlab release`_, make it executable (chmod +x MellowPlayer-x86_64.AppImage) and run it, that's all.
+To use the AppImage, just grab the AppImage from the `official website`_ , make it executable (chmod +x MellowPlayer-x86_64.AppImage) and run it.
 
-Please note that there are some limitations with the AppImage, it does not include proprietary codecs for licensing reasons.
-
-Distribution specific packages can be download from `openSUSE build service`_ (Ubuntu and openSUSE Tumbleweed are currently supported)
+Please note that there are some limitations with the AppImage: e.g. it does not include proprietary codecs for licensing reasons. For that reason, it is always preferable to use a native package.
 
 Fedora
 ++++++
@@ -34,7 +32,7 @@ Most services require proprietary audio codecs to work. You can install them fro
     sudo dnf install qt5-qtwebengine-freeworld
 
 Flash 
-****** 
+*****
 
 Services such as Deezer and Tidal require flash to work. You can install it from the adobe repositories:
 
@@ -82,6 +80,7 @@ Install procedure:
     sudo apt-key add - < Release.key
     sudo apt update
     sudo apt install mellowplayer
+
     
 Ubuntu 18.10
 ++++++++++++
@@ -115,7 +114,7 @@ MellowPlayer is available from the `AUR`_, install it with your favorite AUR too
 
 .. _AUR: https://aur.archlinux.org/packages/mellowplayer
 
-openSuse Leap 15
+openSUSE Leap 15
 ++++++++++++++++
 
 Use the `openSUSE build service`_ web interface or install manually:
@@ -127,7 +126,7 @@ Use the `openSUSE build service`_ web interface or install manually:
     zypper install MellowPlayer
 
 
-openSuse Tumbleweed
+openSUSE Tumbleweed
 +++++++++++++++++++
 
 Use the `openSUSE build service`_ web interface or install manually:
@@ -154,14 +153,11 @@ MellowPlayer is available from `KaOSx/apps`_ repository, just run:
 Other distributions
 +++++++++++++++++++
 
-You will have to compile from source. See the `README`_ for build instructions.
+You will have to compile from source or use the AppImage.
+
+See the `README`_ for build instructions.
 
 .. _README: https://gitlab.com/ColinDuquesnoy/MellowPlayer/blob/master/README.md#compilation
-
-OS X
-----
-
-OSX is not officially supported. You may try to build and run MellowPlayer from sources.
 
 Windows
 -------
@@ -172,6 +168,10 @@ Please note the Windows Installer we provide is built with a version of QtWebEng
 
 
 .. _official website: https://colinduquesnoy.gitlab.io/MellowPlayer
-.. _gitlab release: https://gitlab.com/ColinDuquesnoy/MellowPlayer/tags
 .. _openSUSE build service: https://software.opensuse.org//download.html?project=home%3AColinDuquesnoy&package=MellowPlayer
 .. _RPMFusion repositories: https://rpmfusion.org/Configuration
+
+OS X
+----
+
+OSX is not officially supported anymore. You may try to build and run MellowPlayer from sources.

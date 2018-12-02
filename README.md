@@ -1,6 +1,6 @@
 ![MellowPlayer banner](docs/_static/banner.png)
 
-
+[ ![Download](https://api.bintray.com/packages/colinduquesnoy/MellowPlayer/Stable/images/download.svg) ](https://bintray.com/colinduquesnoy/MellowPlayer/Stable/_latestVersion)
 [![pipeline status](https://gitlab.com/ColinDuquesnoy/MellowPlayer/badges/master/pipeline.svg)](https://gitlab.com/ColinDuquesnoy/MellowPlayer/commits/master)
 [![coverage report](https://gitlab.com/ColinDuquesnoy/MellowPlayer/badges/master/coverage.svg)](https://gitlab.com/ColinDuquesnoy/MellowPlayer/commits/master)
 [![Join the chat at https://gitter.im/ColinDuquesnoy-MellowPlayer/Lobby](https://badges.gitter.im/ColinDuquesnoy-MellowPlayer/Lobby.svg)](https://gitter.im/ColinDuquesnoy-MellowPlayer/Lobby?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
@@ -57,7 +57,12 @@ MellowPlayer is licensed under the GPL license.
 
 # Download
 
-- [Gitlab release page](https://gitlab.com/ColinDuquesnoy/MellowPlayer/tags)
+You can download official binaries from [BinTray](https://bintray.com/colinduquesnoy/MellowPlayer)
+
+- [Stable](https://bintray.com/colinduquesnoy/MellowPlayer/Stable/_latestVersion)
+- [Continuous](https://bintray.com/colinduquesnoy/MellowPlayer/Continuous/_latestVersion)
+
+
 
 ## GNU/Linux Packages
 
