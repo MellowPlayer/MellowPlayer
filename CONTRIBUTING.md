@@ -6,13 +6,14 @@ Reporting bugs or Wishes
 
 Report any bugs you encountered or any wishes on our [issue tracker](https://gitlab.com/ColinDuquesnoy/MellowPlayer/issues).
 
-If you're reporting a bug, **make sure to provide the following information**:
+If you're reporting a bug, make sure that the bug has not already been reported (search in the issue tracker for similar issue) and that the answer to your issue is not already in the [FAQ section of the user documentation](https://mellowplayer.readthedocs.io/en/latest/users/faq.html)
 
-- Information about your **Operating system** (e.g. Windows 8.1, Mac OSX Yosemite,...). If you're on Linux, you'll need to specify the
-  name of the distribution and the desktop environment you're using and whether you're using a native package or the AppImage.
-- The **music streaming service** that you were using when you encountered the bug if related to a specific streaming service.
+If you haven't found an answer to your issue, feel free to report the bug on our issue tracker. If you do so, make sure to include the following information:
+
+- Information about your **Operating system**. If you're on Linux, you'll need to specify the name of the distribution and the desktop environment you're using and whether you're using a native package or the AppImage.
+- The **music streaming service** that you were using when you encountered the bug if it is related to a specific streaming service.
 - A **clear description** of the bug with **steps to reproduce**.
-- You should use **English** to describe your issue. French is also accepted.
+- You should use **English** to describe your issue.
 - Paste the application log between triple backquotes ```(About > Show Logs)```.
 
 
