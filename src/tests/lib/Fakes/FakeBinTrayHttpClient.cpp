@@ -66,7 +66,7 @@ QString FakeBinTrayHttpClient::expectedVersion(UpdateChannel channel)
     return channel == UpdateChannel::Stable ? "3.4.0" : "3.4.90";
 }
 
-QDate FakeBinTrayHttpClient::expectedDate(MellowPlayer::Infrastructure::UpdateChannel channel)
+QDate FakeBinTrayHttpClient::expectedDate(UpdateChannel channel)
 {
     return channel == UpdateChannel ::Stable ? QDate::fromString("2018-07-02", Qt::ISODate) : QDate::fromString("2018-12-02", Qt::ISODate);
 }
