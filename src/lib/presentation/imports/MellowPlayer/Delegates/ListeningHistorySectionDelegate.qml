@@ -28,7 +28,8 @@ Pane {
            anchors.leftMargin: parent.leftPadding
            anchors.rightMargin: parent.rightPadding
            anchors.topMargin: parent.topPadding
-           anchors.bottomMargin: parent.bottomPadding
+           anchors.bottomMargin: 0
+           spacing: 0
 
            RowLayout {
                Layout.fillWidth: true
