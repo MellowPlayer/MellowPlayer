@@ -23,12 +23,12 @@ QString Asset::url() const
 
 bool Asset::isAppImage() const
 {
-    return name_.endsWith(".AppImage");
+    return name_.toLower().endsWith(".appimage");
 }
 
 bool Asset::isWindowsInstaller() const
 {
-    return name_.endsWith("_Setup.exe");
+    return name_.toLower().endsWith("_setup.exe");
 }
 
 bool Asset::isDmg() const

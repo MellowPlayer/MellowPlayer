@@ -97,7 +97,6 @@ void UpdaterViewModel::onUpdateAvailable()
     setRestartEnabled(false);
     setProgress(-1);
     setVisible(true);
-    ;
 }
 
 void UpdaterViewModel::onNoUpdateAvailable()

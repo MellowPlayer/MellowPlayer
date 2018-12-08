@@ -91,6 +91,8 @@ ApplicationWindow {
         id: mainToolBar
     }
 
+    footer: UpdateToolBar { }
+
     StackView {
        id: stack
 

@@ -17,7 +17,7 @@ QString UpdateChannelSettingViewModel::value() const
 
 QStringList UpdateChannelSettingViewModel::values() const
 {
-    return QStringList() << stringer_.toString(UpdateChannel::Stable) << stringer_.toString(UpdateChannel::Beta)
+    return QStringList() << stringer_.toString(UpdateChannel::Stable)
                          << stringer_.toString(UpdateChannel::Continuous);
 }
 

@@ -61,9 +61,9 @@ SCENARIO("check for updates")
         }
     }
 
-    GIVEN("current version is 3.0 from August 2017")
+    GIVEN("current version is 3.5.0 from August 2019")
     {
-        Release currentRelease("3.0", QDate::fromString("2017-08-12", Qt::ISODate));
+        Release currentRelease("3.5.0", QDate::fromString("2019-08-12", Qt::ISODate));
         updater.setCurrentRelease(&currentRelease);
 
         REQUIRE(!viewModel.busy());

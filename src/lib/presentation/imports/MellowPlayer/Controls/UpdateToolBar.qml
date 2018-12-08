@@ -54,7 +54,7 @@ ToolBar {
             ToolButton {
                 highlighted: true
                 text: qsTr("See release notes")
-                onClicked: Qt.openUrlExternally(_updater.url)
+                onClicked: Qt.openUrlExternally(_updater.url + "/view/release#release")
             }
 
             ToolButton {
@@ -84,11 +84,12 @@ ToolBar {
         }
 
         ProgressBar {
-            anchors{ bottom: parent.bottom; left: parent.left; right: parent.right }
             indeterminate: _updater.progress === -1
             from: 0; to: 100
             value: _updater.progress
             visible: _updater.busy
+
+            Layout.fillWidth: true
         }
     }
 

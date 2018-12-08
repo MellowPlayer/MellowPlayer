@@ -17,9 +17,9 @@
 #include <MellowPlayer/Domain/StreamingServices/IStreamingServiceLoader.hpp>
 #include <MellowPlayer/Domain/StreamingServices/IStreamingServiceWatcher.hpp>
 #include <MellowPlayer/Domain/StreamingServices/StreamingServices.hpp>
-#include <MellowPlayer/Infrastructure/Updater/Github/LatestGithubReleaseQuerier.hpp>
+#include <MellowPlayer/Infrastructure/Updater/BinTray/LatestBinTrayRelease.hpp>
 #include <MellowPlayer/Infrastructure/Network/IHttpClient.hpp>
-#include <MellowPlayer/Infrastructure/Updater/ILatestReleaseQuerier.hpp>
+#include <MellowPlayer/Infrastructure/Updater/ILatestRelease.hpp>
 #include <MellowPlayer/Infrastructure/Updater/Updater.hpp>
 #include <MellowPlayer/Domain/UserScripts/IUserScriptFactory.hpp>
 #include <MellowPlayer/Domain/UserScripts/IUserScript.hpp>
@@ -149,7 +149,7 @@ auto defaultInjector = [](di::extension::detail::scoped& scope) {
         di::bind<ISettingsSchemaLoader>().to<SettingsSchemaLoader>().in(scope),
         di::bind<IStreamingServiceCreator>().to<StreamingServiceCreator>().in(scope),
         di::bind<IThemeLoader>().to<ThemeLoader>().in(scope),
-        di::bind<ILatestReleaseQuerier>().to<LatestGithubReleaseQuerier>().in(scope),
+        di::bind<ILatestRelease>().to<LatestBinTrayRelease>().in(scope),
         di::bind<IHttpClient>().to<HttpClient>().in(scope),
         di::bind<IFileDownloader>().to<FileDownloader>().in(scope),
         di::bind<IUserScriptFactory>().to<UserScriptFactory>().in(scope),

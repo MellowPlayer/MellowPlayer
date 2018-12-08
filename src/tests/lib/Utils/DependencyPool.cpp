@@ -5,7 +5,6 @@
 #include <MellowPlayer/Domain/Player/Players.hpp>
 #include <MellowPlayer/Domain/Settings/Settings.hpp>
 #include <MellowPlayer/Domain/StreamingServices/StreamingServices.hpp>
-#include <MellowPlayer/Infrastructure/Updater/Github/LatestGithubReleaseQuerier.hpp>
 #include <MellowPlayer/Infrastructure/Updater/Updater.hpp>
 #include <MellowPlayer/Presentation/Notifications/Presenters/INotificationPresenter.hpp>
 #include <MellowPlayer/Domain/Settings/ISettingsStore.hpp>
@@ -14,6 +13,7 @@
 #include <MellowPlayer/Domain/UserScripts/IUserScriptFactory.hpp>
 
 #include <MellowPlayer/Infrastructure/AlbumArt/LocalAlbumArt.hpp>
+#include <MellowPlayer/Infrastructure/Updater/BinTray/LatestBinTrayRelease.hpp>
 #include <MellowPlayer/Infrastructure/Settings/SettingsSchemaLoader.hpp>
 #include <MellowPlayer/Infrastructure/CommandLineArguments/ICommandLineArguments.hpp>
 
@@ -38,6 +38,7 @@
 #include <Mocks/ThemeLoaderMock.hpp>
 #include <UnitTests/Domain/UserScripts/FakeUserScript.hpp>
 #include <Mocks/FakeCommnandLineArguments.hpp>
+#include <Fakes/FakeBinTrayHttpClient.hpp>
 
 using namespace std;
 using namespace fakeit;
@@ -164,10 +165,10 @@ UpdaterViewModel& DependencyPool::getUpdaterViewModel()
 
 Updater& DependencyPool::getUpdater()
 {
-    static FakeHttpClient httpClient;
-    static LatestGithubReleaseQuerier querier(httpClient);
+    static FakeBinTrayHttpClient httpClient;
+    static LatestBinTrayRelease latestBinTrayRelease(httpClient);
     if (pUpdater == nullptr)
-        pUpdater = make_unique<Updater>(querier, getSettings(), getPlatformUpdater());
+        pUpdater = make_unique<Updater>(latestBinTrayRelease, getSettings(), getPlatformUpdater());
     return *pUpdater;
 }
 

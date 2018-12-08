@@ -7,7 +7,6 @@ namespace MellowPlayer::Infrastructure
     enum class UpdateChannel
     {
         Stable,
-        Beta,
         Continuous,
     };
 }
@@ -24,6 +23,7 @@ public:
     {
         return tr("Beta");
     }
+
     QString continuous() const
     {
         return tr("Continuous");
@@ -36,9 +36,6 @@ public:
         switch (channelType) {
             case MellowPlayer::Infrastructure::UpdateChannel::Stable:
                 string = stable();
-                break;
-            case MellowPlayer::Infrastructure::UpdateChannel::Beta:
-                string = beta();
                 break;
             case MellowPlayer::Infrastructure::UpdateChannel::Continuous:
                 string = continuous();
@@ -54,8 +51,6 @@ public:
 
         if (channelName == continuous())
             channel = MellowPlayer::Infrastructure::UpdateChannel::Continuous;
-        else if (channelName == beta())
-            channel = MellowPlayer::Infrastructure::UpdateChannel::Beta;
         else
             channel = MellowPlayer::Infrastructure::UpdateChannel::Stable;
 

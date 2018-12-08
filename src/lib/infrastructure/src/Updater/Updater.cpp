@@ -1,6 +1,6 @@
 #include <MellowPlayer/Infrastructure/Updater/Updater.hpp>
 #include <MellowPlayer/Infrastructure/Updater/AbstractPlatformUpdater.hpp>
-#include <MellowPlayer/Infrastructure/Updater/ILatestReleaseQuerier.hpp>
+#include <MellowPlayer/Infrastructure/Updater/ILatestRelease.hpp>
 #include <MellowPlayer/Infrastructure/Updater/Release.hpp>
 #include <MellowPlayer/Domain/Logging/ILogger.hpp>
 #include <MellowPlayer/Domain/Logging/Loggers.hpp>
@@ -12,7 +12,7 @@
 using namespace MellowPlayer::Domain;
 using namespace MellowPlayer::Infrastructure;
 
-Updater::Updater(ILatestReleaseQuerier& releaseQuerier, Settings& settings, AbstractPlatformUpdater& platformUpdater)
+Updater::Updater(ILatestRelease& releaseQuerier, Settings& settings, AbstractPlatformUpdater& platformUpdater)
         : logger_(Loggers::logger("Updater")),
           releaseQuerier_(releaseQuerier),
           platformUpdater_(platformUpdater),
@@ -21,7 +21,7 @@ Updater::Updater(ILatestReleaseQuerier& releaseQuerier, Settings& settings, Abst
           currentRelease_(&Release::current())
 {
     releaseQuerier.setChannel(getChannel());
-    connect(&releaseQuerier, &ILatestReleaseQuerier::latestReceived, this, &Updater::onLatestReleaseReceived);
+    connect(&releaseQuerier, &ILatestRelease::received, this, &Updater::onLatestReleaseReceived);
     connect(&updateChannelSetting_, &Setting::valueChanged, this, &Updater::check);
     connect(&platformUpdater, &AbstractPlatformUpdater::progressUpdated, this, &Updater::progressUpdated);
     connect(&platformUpdater, &AbstractPlatformUpdater::downloadFinished, this, &Updater::onDownloadFinished);
@@ -33,7 +33,7 @@ void Updater::check()
     LOG_INFO(logger_, "Checking for update");
     setStatus(Status::Checking);
     releaseQuerier_.setChannel(getChannel());
-    releaseQuerier_.query();
+    releaseQuerier_.get();
 }
 
 UpdateChannel Updater::getChannel() const

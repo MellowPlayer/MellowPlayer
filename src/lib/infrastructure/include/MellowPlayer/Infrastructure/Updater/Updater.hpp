@@ -13,7 +13,7 @@ namespace MellowPlayer::Domain
 namespace MellowPlayer::Infrastructure
 {
     class AbstractPlatformUpdater;
-    class ILatestReleaseQuerier;
+    class ILatestRelease;
     class Release;
 
     class Updater : public QObject
@@ -21,7 +21,7 @@ namespace MellowPlayer::Infrastructure
         Q_OBJECT
         Q_ENUMS(Status)
     public:
-        Updater(ILatestReleaseQuerier& releaseQuerier, Domain::Settings& settings, AbstractPlatformUpdater& platformUpdater);
+        Updater(ILatestRelease& releaseQuerier, Domain::Settings& settings, AbstractPlatformUpdater& platformUpdater);
 
         enum class Status
         {
@@ -63,7 +63,7 @@ namespace MellowPlayer::Infrastructure
         UpdateChannel getChannel() const;
 
         Domain::ILogger& logger_;
-        ILatestReleaseQuerier& releaseQuerier_;
+        ILatestRelease& releaseQuerier_;
         AbstractPlatformUpdater& platformUpdater_;
         Domain::Setting& autoCheckEnabledSetting_;
         Domain::Setting& updateChannelSetting_;

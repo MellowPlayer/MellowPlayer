@@ -7,16 +7,16 @@ namespace MellowPlayer::Infrastructure
 {
     class Release;
 
-    class ILatestReleaseQuerier : public QObject
+    class ILatestRelease : public QObject
     {
         Q_OBJECT
     public:
-        virtual ~ILatestReleaseQuerier() = default;
+        virtual ~ILatestRelease() = default;
 
         virtual void setChannel(UpdateChannel channel) = 0;
-        virtual void query() = 0;
+        virtual void get() = 0;
 
     signals:
-        void latestReceived(const Release* release);
+        void received(const Release *release);
     };
 }
