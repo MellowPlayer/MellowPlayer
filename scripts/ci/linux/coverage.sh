@@ -1,8 +1,9 @@
 #!/usr/bin/env bash
-
 set -e
 
-mkdir -p build && cd build
-cmake -DBUILD_TESTS=ON -DENABLE_COVERAGE=ON -DENABLE_LCOV_REPORT=ON -DCMAKE_BUILD_TYPE=Debug ..
-cmake --build . --config DEBUG -- -j$(nproc)
-cmake --build . --config DEBUG --target coverage
+cd build
+
+ctest --output-on-failure
+lcov --directory . --capture --output-file coverage.info
+lcov --remove coverage.info '*tests/*' '*.local/*' '*QQmlObjectListModel*' '*Qt5*/*' '*I*.hpp' '*Qt/5.*' '*3rdparty/*' '*qrc_*' '*moc_*' '/usr/*' '/opt/*' --output-file coverage.info.cleaned
+lcov --list coverage.info.cleaned

@@ -7,6 +7,7 @@ stages:
 variables:
     APP_VERSION: '3.4.90'
 
+
 .linux:
     image: registry.gitlab.com/colinduquesnoy/mellowplayer/build-images/linux:latest
     variables:
@@ -16,36 +17,47 @@ variables:
         - linux
 
 
-build:linux:
+build:release:
     extends: .linux
     stage: build
     script:
-        - ./scripts/ci/linux/build.sh
+        - ./scripts/ci/linux/build-release.sh
     artifacts:
-        name: "build-linux"
+        name: "build-release"
         paths:
             - build
             - appdir
 
+build:debug:
+    extends: .linux
+    stage: build
+    script:
+        - ./scripts/ci/linux/build-debug.sh
+    artifacts:
+        name: "build-debug"
+        paths:
+            - build
 
-tests:linux:
+
+tests:
     extends: .linux
     stage: tests
     dependencies:
-        - build:linux
+        - build:release
     script:
         - ./scripts/ci/linux/tests.sh
 
 
-tests:coverage:
+coverage:
     extends: .linux
     stage: tests
+    dependencies:
+        - build:debug
     script:
         - ./scripts/ci/linux/coverage.sh
     after_script:
         - yum -y install curl
         - bash <(curl -s https://codecov.io/bash) -t "${CODECOV_TOKEN}" -f build/coverage.info.cleaned
-
 
 
 appimage:
@@ -54,7 +66,7 @@ appimage:
     script:
         - ./scripts/ci/linux/package.sh
     dependencies:
-        - build:linux
+        - build:release
     artifacts:
         name: "AppImage"
         paths:
