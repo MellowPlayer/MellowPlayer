@@ -1,6 +1,7 @@
 #include <QtCore/QDate>
 #include "FakeBinTrayHttpClient.hpp"
 
+using namespace MellowPlayer::Infrastructure;
 using namespace MellowPlayer::Infrastructure::Tests;
 
 void FakeBinTrayHttpClient::get(const QString &url)
