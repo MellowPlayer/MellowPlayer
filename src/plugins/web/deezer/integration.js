@@ -17,12 +17,7 @@
 //
 //-----------------------------------------------------------------------------
 function getLoveButton() {
-    var buttons = document.querySelectorAll("#player.player div#player-cover.player-cover div.player-actions.clearfix span.action button.icon-stack.icon-stack-circle.icon-32");
-    for (var i = 0; i < buttons.length; i++) {
-        if (buttons[i].children[0].className.baseVal.includes("love"))
-            return buttons[i];
-    }
-    return undefined
+    return document.querySelector("#page_player > div > div.player-track > div > div.track-heading > div.track-actions > ul > li:nth-child(3) > button");
 }
 
 function update() {
