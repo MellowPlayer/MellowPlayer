@@ -1,5 +1,4 @@
-<!DOCTYPE RCC>
-<RCC version="1.0">
+<RCC>
     <qresource prefix="/MellowPlayer/imports">
         <file>MellowPlayer/qmldir</file>
         <file>MellowPlayer/ApplicationRoot.qml</file>
@@ -62,5 +61,6 @@
         <file>MellowPlayer/DateCategoryTranslator.js</file>
         <file>MellowPlayer/Dialogs.js</file>
         <file>MellowPlayer/SettingsTranslator.js</file>
+        <file>MellowPlayer/Dialogs/ReportIssueDialog.qml</file>
     </qresource>
 </RCC>

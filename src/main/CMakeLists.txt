@@ -2,13 +2,6 @@ add_definitions(-DBUILD_QXT_CORE -DBUILD_QXT_GUI -DQXT_STATIC)
 
 # Translation files
 file(GLOB_RECURSE TS_FILES languages/*.ts)
-# set_source_files_properties(${TS_FILES} PROPERTIES OUTPUT_LOCATION ${CMAKE_CURRENT_BINARY_DIR}/languages)
-if (UPDATE_TRANSLATIONS)
-    message(STATUS "Update translations")
-    # update source only, pushing to transifex will update all other languages
-    set(TRANSLATION_DIRS ${CMAKE_SOURCE_DIR}/src/lib)
-    qt5_create_translation(QM_FILES ${TRANSLATION_DIRS} ${CMAKE_CURRENT_SOURCE_DIR}/languages/MellowPlayer_en.ts OPTIONS -noobsolete)
-endif()
 qt5_add_translation(QM_FILES ${TS_FILES})
 add_custom_target(translations DEPENDS ${QM_FILES} ${TS_FILES})
 

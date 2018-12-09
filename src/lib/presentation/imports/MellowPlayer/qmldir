@@ -61,3 +61,4 @@ AutomaticSettingsPage 3.0 SettingsPages/AutomaticSettingsPage.qml
 CacheSettingsPage 3.0 SettingsPages/CacheSettingsPage.qml
 ServiceSettingsPage 3.0 SettingsPages/ServiceSettingsPage.qml
 SettingsTranslator 3.0 SettingsTranslator.js
+ReportIssueDialog 3.0 Dialogs/ReportIssueDialog.qml

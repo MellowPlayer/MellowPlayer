@@ -218,6 +218,10 @@ ApplicationWindow {
         visible: false
     }
 
+    ReportIssueDialog {
+        id: reportIssueDialog
+    }
+
     Connections {
         target: _window;
 

@@ -33,5 +33,6 @@
         <file>themes/Midna.json</file>
         <file>themes/MidnaDark.json</file>
         <file>themes/Ambiance.json</file>
+        <file>icons/gitlab.svg</file>
     </qresource>
 </RCC>

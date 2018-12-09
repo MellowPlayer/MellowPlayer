@@ -200,7 +200,7 @@ ToolBar {
 
                 sequence: _settings.get(SettingKey.SHORTCUTS_REPORT_ISSUE).value
 
-                onActivated: Qt.openUrlExternally("https://github.com/ColinDuquesnoy/MellowPlayer/issues/new")
+                onActivated: reportIssueDialog.open()
             }
 
 
@@ -261,7 +261,7 @@ ToolBar {
                     shortcut: shortcutReportIssue.sequence
                     text: qsTr("Report issue")
 
-                    onClicked: Qt.openUrlExternally("https://github.com/ColinDuquesnoy/MellowPlayer/issues/new")
+                    onClicked: reportIssueDialog.open()
                 }
 
                 MenuSeparator { }
