@@ -414,7 +414,7 @@ listened to will appear here...</source>
 <context>
     <name>ListeningHistorySectionDelegate</name>
     <message>
-        <location filename="../../lib/presentation/imports/MellowPlayer/Delegates/ListeningHistorySectionDelegate.qml" line="77"/>
+        <location filename="../../lib/presentation/imports/MellowPlayer/Delegates/ListeningHistorySectionDelegate.qml" line="78"/>
         <source>Confirm remove</source>
         <translation>Confirmez la suppression</translation>
     </message>
@@ -558,22 +558,22 @@ listened to will appear here...</source>
 <context>
     <name>MainWindow</name>
     <message>
-        <location filename="../../lib/presentation/imports/MellowPlayer/MainWindow.qml" line="172"/>
+        <location filename="../../lib/presentation/imports/MellowPlayer/MainWindow.qml" line="174"/>
         <source>Are you sure you want to quit MellowPlayer?</source>
         <translation>Etes-vous sûr de vouloir quitter MellowPlayer?</translation>
     </message>
     <message>
-        <location filename="../../lib/presentation/imports/MellowPlayer/MainWindow.qml" line="173"/>
+        <location filename="../../lib/presentation/imports/MellowPlayer/MainWindow.qml" line="175"/>
         <source>Confirm quit</source>
         <translation>Confirmer la sortie de l&apos;application</translation>
     </message>
     <message>
-        <location filename="../../lib/presentation/imports/MellowPlayer/MainWindow.qml" line="181"/>
+        <location filename="../../lib/presentation/imports/MellowPlayer/MainWindow.qml" line="183"/>
         <source>Closing to system tray</source>
         <translation>Réduction dans la barre des tâches</translation>
     </message>
     <message>
-        <location filename="../../lib/presentation/imports/MellowPlayer/MainWindow.qml" line="182"/>
+        <location filename="../../lib/presentation/imports/MellowPlayer/MainWindow.qml" line="184"/>
         <source>&lt;p&gt;MellowPlayer will continue to run in background.&lt;br&gt;You can quit the application or restore the main window via the system tray icon menu.&lt;/p&gt;</source>
         <translation>&lt;p&gt;MellowPlayer va continuer de fonctionner en arrière plan.&lt;br&gt;Vous pouvez quitter l&apos;application ou restaurer la fenêtre via le menu de l&apos;icône de la barre des tâches.&lt;/p&gt;</translation>
     </message>
@@ -729,6 +729,45 @@ listened to will appear here...</source>
         <location filename="../../lib/presentation/imports/MellowPlayer/Dialogs/Reload.qml" line="21"/>
         <source>Don&apos;t reload</source>
         <translation>Ne pas recharger</translation>
+    </message>
+</context>
+<context>
+    <name>ReportIssueDialog</name>
+    <message>
+        <location filename="../../lib/presentation/imports/MellowPlayer/Dialogs/ReportIssueDialog.qml" line="44"/>
+        <source>Report the issue on gitlab</source>
+        <translation>Reporter le problème sur gitlab</translation>
+    </message>
+    <message>
+        <location filename="../../lib/presentation/imports/MellowPlayer/Dialogs/ReportIssueDialog.qml" line="51"/>
+        <source>Requires a gitlab account</source>
+        <translation>Requiert un compte gitlab</translation>
+    </message>
+    <message>
+        <location filename="../../lib/presentation/imports/MellowPlayer/Dialogs/ReportIssueDialog.qml" line="70"/>
+        <location filename="../../lib/presentation/imports/MellowPlayer/Dialogs/ReportIssueDialog.qml" line="131"/>
+        <source>Report issue</source>
+        <translation>Reporter le problème</translation>
+    </message>
+    <message>
+        <location filename="../../lib/presentation/imports/MellowPlayer/Dialogs/ReportIssueDialog.qml" line="103"/>
+        <source>Report the issue via e-mail</source>
+        <translation>Reporter le problème via e-mail</translation>
+    </message>
+    <message>
+        <location filename="../../lib/presentation/imports/MellowPlayer/Dialogs/ReportIssueDialog.qml" line="146"/>
+        <source>Please, read the contributing guidelines before submitting your bug report!</source>
+        <translation>Veuillez lire les guidelines de contribution avant de reporter le problème!</translation>
+    </message>
+    <message>
+        <location filename="../../lib/presentation/imports/MellowPlayer/Dialogs/ReportIssueDialog.qml" line="162"/>
+        <source>Thank you for taking the time to report your issue!</source>
+        <translation>Merci d&apos;avoir pris le temps de reporter votre problème!</translation>
+    </message>
+    <message>
+        <location filename="../../lib/presentation/imports/MellowPlayer/Dialogs/ReportIssueDialog.qml" line="185"/>
+        <source>Close</source>
+        <translation>Fermer</translation>
     </message>
 </context>
 <context>
@@ -1406,12 +1445,12 @@ listened to will appear here...</source>
 <context>
     <name>UpdateChannelStringer</name>
     <message>
-        <location filename="../../lib/infrastructure/include/MellowPlayer/Infrastructure/Updater/UpdateChannel.hpp" line="21"/>
+        <location filename="../../lib/infrastructure/include/MellowPlayer/Infrastructure/Updater/UpdateChannel.hpp" line="20"/>
         <source>Stable</source>
         <translation>Stable</translation>
     </message>
     <message>
-        <location filename="../../lib/infrastructure/include/MellowPlayer/Infrastructure/Updater/UpdateChannel.hpp" line="25"/>
+        <location filename="../../lib/infrastructure/include/MellowPlayer/Infrastructure/Updater/UpdateChannel.hpp" line="24"/>
         <source>Beta</source>
         <translation>Beta</translation>
     </message>

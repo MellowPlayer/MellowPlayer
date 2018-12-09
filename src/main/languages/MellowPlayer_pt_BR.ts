@@ -415,7 +415,7 @@ ouvir aparecerão aqui...</translation>
 <context>
     <name>ListeningHistorySectionDelegate</name>
     <message>
-        <location filename="../../lib/presentation/imports/MellowPlayer/Delegates/ListeningHistorySectionDelegate.qml" line="77"/>
+        <location filename="../../lib/presentation/imports/MellowPlayer/Delegates/ListeningHistorySectionDelegate.qml" line="78"/>
         <source>Confirm remove</source>
         <translation>Confirme a remoção</translation>
     </message>
@@ -559,22 +559,22 @@ ouvir aparecerão aqui...</translation>
 <context>
     <name>MainWindow</name>
     <message>
-        <location filename="../../lib/presentation/imports/MellowPlayer/MainWindow.qml" line="172"/>
+        <location filename="../../lib/presentation/imports/MellowPlayer/MainWindow.qml" line="174"/>
         <source>Are you sure you want to quit MellowPlayer?</source>
         <translation>Deseja realmente sair do MellowPlayer?</translation>
     </message>
     <message>
-        <location filename="../../lib/presentation/imports/MellowPlayer/MainWindow.qml" line="173"/>
+        <location filename="../../lib/presentation/imports/MellowPlayer/MainWindow.qml" line="175"/>
         <source>Confirm quit</source>
         <translation>Confirmar saída</translation>
     </message>
     <message>
-        <location filename="../../lib/presentation/imports/MellowPlayer/MainWindow.qml" line="181"/>
+        <location filename="../../lib/presentation/imports/MellowPlayer/MainWindow.qml" line="183"/>
         <source>Closing to system tray</source>
         <translation>Fechando para área de notificações</translation>
     </message>
     <message>
-        <location filename="../../lib/presentation/imports/MellowPlayer/MainWindow.qml" line="182"/>
+        <location filename="../../lib/presentation/imports/MellowPlayer/MainWindow.qml" line="184"/>
         <source>&lt;p&gt;MellowPlayer will continue to run in background.&lt;br&gt;You can quit the application or restore the main window via the system tray icon menu.&lt;/p&gt;</source>
         <translation>&lt;p&gt;O MellowPlayer continuará em execução em segundo plano. &lt;br&gt;Você pode sair da aplicação ou restaurar a janela principal através do menu do ícone na área de notificações.&lt;/p&gt;</translation>
     </message>
@@ -733,6 +733,45 @@ ouvir aparecerão aqui...</translation>
     </message>
 </context>
 <context>
+    <name>ReportIssueDialog</name>
+    <message>
+        <location filename="../../lib/presentation/imports/MellowPlayer/Dialogs/ReportIssueDialog.qml" line="44"/>
+        <source>Report the issue on gitlab</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <location filename="../../lib/presentation/imports/MellowPlayer/Dialogs/ReportIssueDialog.qml" line="51"/>
+        <source>Requires a gitlab account</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <location filename="../../lib/presentation/imports/MellowPlayer/Dialogs/ReportIssueDialog.qml" line="70"/>
+        <location filename="../../lib/presentation/imports/MellowPlayer/Dialogs/ReportIssueDialog.qml" line="131"/>
+        <source>Report issue</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <location filename="../../lib/presentation/imports/MellowPlayer/Dialogs/ReportIssueDialog.qml" line="103"/>
+        <source>Report the issue via e-mail</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <location filename="../../lib/presentation/imports/MellowPlayer/Dialogs/ReportIssueDialog.qml" line="146"/>
+        <source>Please, read the contributing guidelines before submitting your bug report!</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <location filename="../../lib/presentation/imports/MellowPlayer/Dialogs/ReportIssueDialog.qml" line="162"/>
+        <source>Thank you for taking the time to report your issue!</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <location filename="../../lib/presentation/imports/MellowPlayer/Dialogs/ReportIssueDialog.qml" line="185"/>
+        <source>Close</source>
+        <translation type="unfinished"/>
+    </message>
+</context>
+<context>
     <name>ServiceSettingsPage</name>
     <message>
         <location filename="../../lib/presentation/imports/MellowPlayer/SettingsPages/ServiceSettingsPage.qml" line="74"/>
@@ -816,7 +855,7 @@ ouvir aparecerão aqui...</translation>
     <message>
         <location filename="../../lib/presentation/imports/MellowPlayer/SettingsTranslator.js" line="8"/>
         <source>Playback requires user gesture</source>
-        <translation type="unfinished"/>
+        <translation>A reprodução requer um sinal do usuário</translation>
     </message>
     <message>
         <location filename="../../lib/presentation/imports/MellowPlayer/SettingsTranslator.js" line="9"/>
@@ -987,7 +1026,7 @@ ouvir aparecerão aqui...</translation>
     <message>
         <location filename="../../lib/presentation/imports/MellowPlayer/SettingsTranslator.js" line="56"/>
         <source>Inhibits playback of media content until the user interacts with the page.</source>
-        <translation type="unfinished"/>
+        <translation>Inibe a reprodução da mídia até que o usuário interaja com a página.</translation>
     </message>
     <message>
         <location filename="../../lib/presentation/imports/MellowPlayer/SettingsTranslator.js" line="88"/>
@@ -1406,12 +1445,12 @@ ouvir aparecerão aqui...</translation>
 <context>
     <name>UpdateChannelStringer</name>
     <message>
-        <location filename="../../lib/infrastructure/include/MellowPlayer/Infrastructure/Updater/UpdateChannel.hpp" line="21"/>
+        <location filename="../../lib/infrastructure/include/MellowPlayer/Infrastructure/Updater/UpdateChannel.hpp" line="20"/>
         <source>Stable</source>
         <translation>Estável</translation>
     </message>
     <message>
-        <location filename="../../lib/infrastructure/include/MellowPlayer/Infrastructure/Updater/UpdateChannel.hpp" line="25"/>
+        <location filename="../../lib/infrastructure/include/MellowPlayer/Infrastructure/Updater/UpdateChannel.hpp" line="24"/>
         <source>Beta</source>
         <translation>Beta</translation>
     </message>
