@@ -22,5 +22,6 @@ Window {
         settings.javascriptEnabled: true
 
         onWindowCloseRequested: window.close();
+        onNewViewRequested: mainWindow.openWebPopup(request, profile)
     }
 }
