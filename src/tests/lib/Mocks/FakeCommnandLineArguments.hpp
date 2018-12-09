@@ -75,6 +75,11 @@ namespace MellowPlayer::Infrastructure::Tests
             return Domain::LogLevel::Error;
         }
 
+        bool startMinimized() const override
+        {
+            return false;
+        }
+
         bool parsed = false;
 
     private:

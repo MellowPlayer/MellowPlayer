@@ -15,7 +15,8 @@ CommandLineArguments::CommandLineArguments()
           previousOption_(QStringList() << "b" << "previous", "Skip to the previous song"),
           toggleFavoriteOption_(QStringList() << "t" << "toggle-favorite-song",
                                 "Add or remove the current song to/from your favorites"),
-          autoQuitDelayOption_(QStringList() << "d" << "auto-quit-delay", "Auto quit delay [ms]", "autoQuitDelay")
+          autoQuitDelayOption_(QStringList() << "d" << "auto-quit-delay", "Auto quit delay [ms]", "autoQuitDelay"),
+          startMinimizedOption_(QStringList() << "m" << "start-minimized", "Starts the application in minimized state")
 {
 }
 
@@ -31,6 +32,7 @@ void CommandLineArguments::parse()
     parser_.addOption(previousOption_);
     parser_.addOption(toggleFavoriteOption_);
     parser_.addOption(autoQuitDelayOption_);
+    parser_.addOption(startMinimizedOption_);
 
     QStringList webEngineOptions = QStringList() << "--remote-debugging-port"
                                                  << "--ppapi-flash-path"
@@ -64,6 +66,7 @@ void CommandLineArguments::parse()
     previousRequested_ = parser_.isSet(previousOption_);
     nextRequested_ = parser_.isSet(nextOption_);
     toggleFavoriteRequested_ = parser_.isSet(toggleFavoriteOption_);
+    startMinimized_ = parser_.isSet(startMinimizedOption_);
 }
 
 QString CommandLineArguments::service() const
@@ -98,4 +101,9 @@ LogLevel CommandLineArguments::logLevel() const
 bool CommandLineArguments::toggleFavoriteRequested() const
 {
     return toggleFavoriteRequested_;
+}
+
+bool CommandLineArguments::startMinimized() const
+{
+    return startMinimized_;
 }

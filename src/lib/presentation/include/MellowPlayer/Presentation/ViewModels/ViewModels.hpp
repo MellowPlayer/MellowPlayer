@@ -12,6 +12,11 @@
 #include "CookiesViewModel.hpp"
 #include "CacheViewModel.hpp"
 
+namespace MellowPlayer::Infrastructure
+{
+    class ICommandLineArguments;
+}
+
 namespace MellowPlayer::Presentation
 {
     class IViewModels
@@ -32,7 +37,8 @@ namespace MellowPlayer::Presentation
                    UpdaterViewModel& updater,
                    ListeningHistoryViewModel& listeningHistory,
                    StreamingServicesViewModel& streamingServices,
-                   IContextProperties& contextProperties);
+                   IContextProperties& contextProperties,
+                   Infrastructure::ICommandLineArguments& commandLineOptions);
 
         void initialize() override;
         void cleanup() override;
@@ -46,5 +52,6 @@ namespace MellowPlayer::Presentation
         CookiesViewModel cookies_;
         ClipBoardViewModel clipboard_;
         DevToolsWindowViewModel devToolsWindow_;
+        Infrastructure::ICommandLineArguments& commandLineArguments_;
     };
 }

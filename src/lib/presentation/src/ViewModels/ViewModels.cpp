@@ -1,7 +1,8 @@
 #include <QtCore/QThread>
 #include <MellowPlayer/Presentation/ViewModels/ViewModels.hpp>
+#include <MellowPlayer/Infrastructure/CommandLineArguments/ICommandLineArguments.hpp>
 
-
+using namespace MellowPlayer::Infrastructure;
 using namespace MellowPlayer::Presentation;
 
 ViewModels::ViewModels(ApplicationViewModel&,
@@ -11,7 +12,8 @@ ViewModels::ViewModels(ApplicationViewModel&,
                        UpdaterViewModel& updater,
                        ListeningHistoryViewModel& listeningHistory,
                        StreamingServicesViewModel& streamingServices,
-                       IContextProperties& contextProperties)
+                       IContextProperties& contextProperties,
+                       ICommandLineArguments& commandLineOptions)
         : mainWindow_(mainWindow),
           updater_(updater),
           listeningHistory_(listeningHistory),
@@ -19,7 +21,8 @@ ViewModels::ViewModels(ApplicationViewModel&,
           cache_(contextProperties),
           cookies_(contextProperties),
           clipboard_(contextProperties),
-          devToolsWindow_(contextProperties)
+          devToolsWindow_(contextProperties),
+          commandLineArguments_(commandLineOptions)
 {
 
 }
@@ -30,7 +33,10 @@ void ViewModels::initialize()
     streamingServices_.initialize();
     listeningHistory_.initialize();
     mainWindow_.load();
-    mainWindow_.show();
+    if (!commandLineArguments_.startMinimized())
+        mainWindow_.show();
+    else
+        mainWindow_.hide();
     updater_.check();
 }
 

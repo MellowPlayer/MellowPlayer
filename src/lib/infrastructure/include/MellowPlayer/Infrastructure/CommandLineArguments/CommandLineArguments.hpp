@@ -26,6 +26,8 @@ namespace MellowPlayer::Infrastructure
         bool toggleFavoriteRequested() const override;
         Domain::LogLevel logLevel() const override;
 
+        bool startMinimized() const override;
+
     private:
         QCommandLineParser parser_;
         QCommandLineOption serviceOption_;
@@ -35,6 +37,7 @@ namespace MellowPlayer::Infrastructure
         QCommandLineOption previousOption_;
         QCommandLineOption toggleFavoriteOption_;
         QCommandLineOption autoQuitDelayOption_;
+        QCommandLineOption startMinimizedOption_;
 
         QString service_;
         Domain::LogLevel logLevel_;
@@ -43,5 +46,6 @@ namespace MellowPlayer::Infrastructure
         bool previousRequested_ = false;
         bool toggleFavoriteRequested_ = false;
         int autoQuitDelay_ = 0;
+        bool startMinimized_ = false;
     };
 }

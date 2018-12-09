@@ -18,6 +18,8 @@ WebEngineView {
     property var userAgentSetting: _settings.get(SettingKey.PRIVACY_USER_AGENT)
 
     function updateImage() {
+        if (!mainWindow.visible)
+            return;
         root.grabToImage(function(result) {
             service.previewImageUrl = result.url;
             image = result;
