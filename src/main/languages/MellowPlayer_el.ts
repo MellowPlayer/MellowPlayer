@@ -1029,6 +1029,11 @@ listened to will appear here...</source>
         <translation type="unfinished"/>
     </message>
     <message>
+        <location filename="../../lib/presentation/imports/MellowPlayer/SettingsTranslator.js" line="82"/>
+        <source>Report an issue</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
         <location filename="../../lib/presentation/imports/MellowPlayer/SettingsTranslator.js" line="88"/>
         <source>Specifies the user agent string used by web views</source>
         <translation>Καθορισμός της συμβολοσειράς παράγοντα χρήστη </translation>
@@ -1182,11 +1187,6 @@ listened to will appear here...</source>
         <location filename="../../lib/presentation/imports/MellowPlayer/SettingsTranslator.js" line="81"/>
         <source>Show the plugin creation wizard</source>
         <translation>Εμφάνιση τού οδηγού δημιουργίας plugin</translation>
-    </message>
-    <message>
-        <location filename="../../lib/presentation/imports/MellowPlayer/SettingsTranslator.js" line="82"/>
-        <source>Create an issue on github</source>
-        <translation>Δημιουργία θέματος στο github</translation>
     </message>
     <message>
         <location filename="../../lib/presentation/imports/MellowPlayer/SettingsTranslator.js" line="84"/>

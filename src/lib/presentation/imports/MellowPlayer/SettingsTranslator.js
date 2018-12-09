@@ -79,7 +79,7 @@ function translateToolTip(toolTip) {
         'Show or hide listening history': qsTr('Show or hide listening history'),
         'Show settings page': qsTr('Show settings page'),
         'Show the plugin creation wizard': qsTr('Show the plugin creation wizard'),
-        'Create an issue on github': qsTr('Create an issue on github'),
+        'Report an issue': qsTr('Report an issue'),
         'Check for update': qsTr('Check for update'),
         'Show about page.': qsTr('Show about page.'),
         'Quit the application.': qsTr('Quit the application.'),

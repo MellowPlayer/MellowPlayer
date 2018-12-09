@@ -4,7 +4,7 @@
 #define MyAppName "MellowPlayer"
 #define MyAppVersion "@MellowPlayer_VERSION@"
 #define MyAppPublisher "Colin Duquesnoy"
-#define MyAppURL "https://github.com/ColinDuquesnoy/MellowPlayer"
+#define MyAppURL "https://gitlab.com/ColinDuquesnoy/MellowPlayer"
 #define MyAppExeName "MellowPlayer.exe"
 
 [Setup]

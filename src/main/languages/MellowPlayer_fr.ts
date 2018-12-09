@@ -1028,6 +1028,11 @@ listened to will appear here...</source>
         <translation>Empêche la lecture du contenu jusqu&apos;à ce que l&apos;utilisateur interagisse avec la page.</translation>
     </message>
     <message>
+        <location filename="../../lib/presentation/imports/MellowPlayer/SettingsTranslator.js" line="82"/>
+        <source>Report an issue</source>
+        <translation>Reporter un problème</translation>
+    </message>
+    <message>
         <location filename="../../lib/presentation/imports/MellowPlayer/SettingsTranslator.js" line="88"/>
         <source>Specifies the user agent string used by web views</source>
         <translation>Spécifie l&apos;agent utilisateur utilisé dans les requêtes http</translation>
@@ -1181,11 +1186,6 @@ listened to will appear here...</source>
         <location filename="../../lib/presentation/imports/MellowPlayer/SettingsTranslator.js" line="81"/>
         <source>Show the plugin creation wizard</source>
         <translation>Affiche le wizard de création de plugin</translation>
-    </message>
-    <message>
-        <location filename="../../lib/presentation/imports/MellowPlayer/SettingsTranslator.js" line="82"/>
-        <source>Create an issue on github</source>
-        <translation>Ouvre une nouvelle issue sur Github</translation>
     </message>
     <message>
         <location filename="../../lib/presentation/imports/MellowPlayer/SettingsTranslator.js" line="84"/>

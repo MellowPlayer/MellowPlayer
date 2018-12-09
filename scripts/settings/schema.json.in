@@ -258,7 +258,7 @@
 				},
                 {
                   "name": "Report Issue",
-                  "tooltip": "Create an issue on github",
+                  "tooltip": "Report an issue",
                   "type": "shortcut",
                   "default": "F4",
                   "key": "report-issue"

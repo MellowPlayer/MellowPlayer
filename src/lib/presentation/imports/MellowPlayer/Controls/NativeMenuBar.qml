@@ -116,7 +116,7 @@ Platform.MenuBar {
         Platform.MenuItem {
             text: qsTr("Report issue")
 
-            onTriggered: Qt.openUrlExternally("https://github.com/ColinDuquesnoy/MellowPlayer/issues/new")
+            onTriggered: reportIssueDialog.open()
             role: Platform.MenuItem.ApplicationSpecificRole
         }
     }

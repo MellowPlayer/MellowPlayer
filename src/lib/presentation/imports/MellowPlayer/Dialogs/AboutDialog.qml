@@ -66,7 +66,7 @@ Popup {
 
                 Link {
                     name: qsTr('Website')
-                    url: 'https://colinduquesnoy.github.io/MellowPlayer'
+                    url: 'https://colinduquesnoy.gitlab.io/MellowPlayer/'
 
                     Layout.alignment: Qt.AlignCenter
                 }
@@ -185,7 +185,7 @@ Popup {
 
                                         Link {
                                             name: '@ColinDuquesnoy'
-                                            url: "https://github.com/ColinDuquesnoy"
+                                            url: "https://gitlab.com/ColinDuquesnoy"
 
                                             Layout.alignment: Qt.AlignHCenter
                                         }

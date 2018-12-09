@@ -1029,6 +1029,11 @@ escuchado aparecerán aquí...</translation>
         <translation type="unfinished"/>
     </message>
     <message>
+        <location filename="../../lib/presentation/imports/MellowPlayer/SettingsTranslator.js" line="82"/>
+        <source>Report an issue</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
         <location filename="../../lib/presentation/imports/MellowPlayer/SettingsTranslator.js" line="88"/>
         <source>Specifies the user agent string used by web views</source>
         <translation>Especifica la cadena de agente de usuario utilizada por vistas web</translation>
@@ -1182,11 +1187,6 @@ escuchado aparecerán aquí...</translation>
         <location filename="../../lib/presentation/imports/MellowPlayer/SettingsTranslator.js" line="81"/>
         <source>Show the plugin creation wizard</source>
         <translation>Mostrar el asistente de creación de complementos</translation>
-    </message>
-    <message>
-        <location filename="../../lib/presentation/imports/MellowPlayer/SettingsTranslator.js" line="82"/>
-        <source>Create an issue on github</source>
-        <translation>Crear un problema en github</translation>
     </message>
     <message>
         <location filename="../../lib/presentation/imports/MellowPlayer/SettingsTranslator.js" line="84"/>
