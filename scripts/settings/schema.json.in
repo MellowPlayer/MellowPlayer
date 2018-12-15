@@ -57,6 +57,13 @@
 			"icon": "\ue40a",
 			"key": "appearance",
 			"settings": [
+                {
+                    "name": "Show main tool bar",
+                    "tooltip": "Show/Hide main toolbar",
+                    "type": "bool",
+                    "default": true,
+                    "key": "toolbar-visible"
+                },
 				{
 					"name": "Theme",
                     "tooltip": "Application theme",
@@ -241,6 +248,13 @@
                     "type": "shortcut",
                     "default": "F10",
                     "key": "listening-history"
+                },
+                {
+                    "name": "Toggle ToolBar",
+                    "tooltip": "Show or hide main tool bar",
+                    "type": "shortcut",
+                    "default": "Ctrl+T",
+                    "key": "show-toolbar"
                 },
 				{
 					"name": "Settings",

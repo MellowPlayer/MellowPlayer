@@ -262,7 +262,7 @@ ToolBar {
                         spacing: 0
 
                         Label {
-                            text: "Zoom"
+                            text: qsTr("Zoom")
 
                             Layout.leftMargin: 16
                         }

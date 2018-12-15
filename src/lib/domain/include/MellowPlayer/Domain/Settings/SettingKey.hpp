@@ -18,6 +18,7 @@ namespace MellowPlayer::Domain
             APPEARANCE_SECONDARY_BACKGROUND,
             APPEARANCE_SECONDARY_FOREGROUND,
             APPEARANCE_THEME,
+            APPEARANCE_TOOLBAR_VISIBLE,
             MAIN_CHECK_FOR_UPDATES,
             MAIN_CLOSE_TO_TRAY,
             MAIN_CONFIRM_EXIT,
@@ -51,7 +52,8 @@ namespace MellowPlayer::Domain
             SHORTCUTS_SELECT_NEXT_SERVICE,
             SHORTCUTS_SELECT_PREVIOUS_SERVICE,
             SHORTCUTS_SELECT_SERVICE,
-            SHORTCUTS_SETTINGS
+            SHORTCUTS_SETTINGS,
+            SHORTCUTS_SHOW_TOOLBAR
         };
         Q_ENUM(Keys)
 
@@ -67,6 +69,7 @@ namespace MellowPlayer::Domain
             enumToString << "appearance/secondary-background";
             enumToString << "appearance/secondary-foreground";
             enumToString << "appearance/theme";
+            enumToString << "appearance/toolbar-visible";
             enumToString << "main/check-for-updates";
             enumToString << "main/close-to-tray";
             enumToString << "main/confirm-exit";
@@ -101,6 +104,7 @@ namespace MellowPlayer::Domain
             enumToString << "shortcuts/select-previous-service";
             enumToString << "shortcuts/select-service";
             enumToString << "shortcuts/settings";
+            enumToString << "shortcuts/show-toolbar";
 
             return enumToString[static_cast<int>(key)];
         }

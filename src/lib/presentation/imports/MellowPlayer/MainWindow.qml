@@ -89,6 +89,8 @@ ApplicationWindow {
 
     header: MainToolBar {
         id: mainToolBar
+
+        visible: _settings.get(SettingKey.APPEARANCE_TOOLBAR_VISIBLE).value
     }
 
     footer: UpdateToolBar { }
@@ -242,6 +244,11 @@ ApplicationWindow {
             stack.slideTransitions = false;
             toggleActivePage();
         }
+    }
+
+    Shortcut {
+        sequence: _settings.get(SettingKey.SHORTCUTS_SHOW_TOOLBAR).value
+        onActivated: _settings.get(SettingKey.APPEARANCE_TOOLBAR_VISIBLE).value = !_settings.get(SettingKey.APPEARANCE_TOOLBAR_VISIBLE).value
     }
 
     QtObject {
