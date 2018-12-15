@@ -11,6 +11,7 @@
 #include "Settings/SettingsViewModel.hpp"
 #include "CookiesViewModel.hpp"
 #include "CacheViewModel.hpp"
+#include "ZoomViewModel.hpp"
 
 namespace MellowPlayer::Infrastructure
 {
@@ -38,6 +39,7 @@ namespace MellowPlayer::Presentation
                    ListeningHistoryViewModel& listeningHistory,
                    StreamingServicesViewModel& streamingServices,
                    IContextProperties& contextProperties,
+                   ZoomViewModel& zoomViewModel,
                    Infrastructure::ICommandLineArguments& commandLineOptions);
 
         void initialize() override;
@@ -52,6 +54,7 @@ namespace MellowPlayer::Presentation
         CookiesViewModel cookies_;
         ClipBoardViewModel clipboard_;
         DevToolsWindowViewModel devToolsWindow_;
+        ZoomViewModel& zoomViewModel_;
         Infrastructure::ICommandLineArguments& commandLineArguments_;
     };
 }

@@ -232,7 +232,8 @@ ToolBar {
             Menu {
                 id: menu
                 y: parent.implicitHeight
-                width: 300
+                width: zoomMenuItem.width
+                spacing: 0
 
                 IconMenuItem {
                     id: menuItemSettings
@@ -242,6 +243,65 @@ ToolBar {
                     text: qsTr("Settings")
 
                     onClicked: settingsDrawer.open()
+                }
+
+                MenuItem {
+                    id: zoomMenuItem
+                    hoverEnabled: true
+                    padding: 0
+                    spacing: 0
+
+
+                    background: ColumnLayout {
+                        MenuSeparator { Layout.fillWidth: true }
+                        Item { Layout.fillHeight: true }
+                        MenuSeparator { Layout.fillWidth: true }
+                    }
+
+                    contentItem: RowLayout {
+                        spacing: 0
+
+                        Label {
+                            text: "Zoom"
+
+                            Layout.leftMargin: 16
+                        }
+
+                        ToolSeparator { Layout.fillHeight: true }
+
+                        SpinBox {
+                            id: zoomSpinBox
+
+                            padding: 0
+
+                            from: 50
+                            to: 300
+                            stepSize: 25
+                            value: _zoom.value * 100
+
+                            onValueChanged: _zoom.value = value / 100.0
+
+                            textFromValue:  function(value, locale) {
+                                return Number(value).toLocaleString(locale, 'f', 0) + "%";
+                            }
+                        }
+
+                        ToolSeparator { Layout.fillHeight: true }
+
+                        Button {
+                            id: zoomResetButton
+
+                            text: MaterialIcons.icon_fullscreen
+                            font.family: MaterialIcons.family
+                            font.pixelSize: 22
+                            implicitWidth: 48
+                            flat: true
+
+                            onClicked: _zoom.reset()
+
+                            Layout.rightMargin: 16
+                        }
+                    }
                 }
 
                 IconMenuItem {
@@ -264,8 +324,6 @@ ToolBar {
                     onClicked: reportIssueDialog.open()
                 }
 
-                MenuSeparator { }
-
                 IconMenuItem {
                     iconChar: MaterialIcons.icon_update
                     text: qsTr("Check for update")
@@ -282,6 +340,7 @@ ToolBar {
                         visible: _updater.busy
                     }
                 }
+                MenuSeparator { }
 
                 IconMenuItem {
                     id: menuItemAbout

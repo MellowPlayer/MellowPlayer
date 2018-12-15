@@ -13,6 +13,7 @@ ViewModels::ViewModels(ApplicationViewModel&,
                        ListeningHistoryViewModel& listeningHistory,
                        StreamingServicesViewModel& streamingServices,
                        IContextProperties& contextProperties,
+                       ZoomViewModel& zoomViewModel,
                        ICommandLineArguments& commandLineOptions)
         : mainWindow_(mainWindow),
           updater_(updater),
@@ -22,6 +23,7 @@ ViewModels::ViewModels(ApplicationViewModel&,
           cookies_(contextProperties),
           clipboard_(contextProperties),
           devToolsWindow_(contextProperties),
+          zoomViewModel_(zoomViewModel),
           commandLineArguments_(commandLineOptions)
 {
 
