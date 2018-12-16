@@ -149,18 +149,18 @@ bool StreamingServiceLoader::checkServiceDirectory(const QString& directory) con
 
 QString StreamingServiceLoader::userDirectory()
 {
-    return QFileInfo(QStandardPaths::standardLocations(QStandardPaths::AppLocalDataLocation)[0], "plugins/web").absoluteFilePath();
+    return QFileInfo(QStandardPaths::standardLocations(QStandardPaths::AppLocalDataLocation)[0], "plugins").absoluteFilePath();
 }
 
 QStringList StreamingServiceLoader::searchPaths() const
 {
     QStringList paths;
 
-    paths.append(BuildConfig::getSourceDir() + QDir::separator() + "src/plugins/web");
-    paths.append(QFileInfo(QDir::currentPath(), "plugins/web").absoluteFilePath());
-    // appimage path is in /$mountpoint/usr/bin/../share/mellowplayer/plugins/web
-    paths.append(QFileInfo(qApp->applicationDirPath(), "../share/mellowplayer/plugins/web").absoluteFilePath());
-    paths.append(QFileInfo(qApp->applicationDirPath(), "plugins/web").absoluteFilePath());
+    paths.append(BuildConfig::getSourceDir() + QDir::separator() + "src/plugins");
+    paths.append(QFileInfo(QDir::currentPath(), "plugins").absoluteFilePath());
+    // appimage path is in /$mountpoint/usr/bin/../share/mellowplayer/plugins
+    paths.append(QFileInfo(qApp->applicationDirPath(), "../share/mellowplayer/plugins").absoluteFilePath());
+    paths.append(QFileInfo(qApp->applicationDirPath(), "plugins").absoluteFilePath());
     paths.append(userDirectory());
 
 #ifdef Q_OS_MAC
@@ -168,13 +168,12 @@ QStringList StreamingServiceLoader::searchPaths() const
     pluginsDir.cdUp();
     pluginsDir.cd("PlugIns");
     pluginsDir.cd("services");
-    pluginsDir.cd("web");
     paths.append(pluginsDir.path());
 #endif
 
 #if defined(Q_OS_LINUX) || defined(Q_OS_FREEBSD)
-    paths.append("/usr/share/mellowplayer/plugins/web");
-    paths.append("/usr/local/share/mellowplayer/plugins/web");
+    paths.append("/usr/share/mellowplayer/plugins");
+    paths.append("/usr/local/share/mellowplayer/plugins");
 #endif
 
     paths.removeDuplicates();
