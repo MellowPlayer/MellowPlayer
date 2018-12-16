@@ -20,6 +20,7 @@ namespace MellowPlayer::Domain
             APPEARANCE_PRIMARY_FOREGROUND,
             APPEARANCE_SECONDARY_BACKGROUND,
             APPEARANCE_SECONDARY_FOREGROUND,
+            APPEARANCE_SHOW_SCROLLBARS,
             APPEARANCE_THEME,
             APPEARANCE_TOOLBAR_VISIBLE,
             APPEARANCE_WEBPAGE_CONTROLS_VISIBLE,
@@ -75,6 +76,7 @@ namespace MellowPlayer::Domain
             enumToString << "appearance/primary-foreground";
             enumToString << "appearance/secondary-background";
             enumToString << "appearance/secondary-foreground";
+            enumToString << "appearance/show-scrollbars";
             enumToString << "appearance/theme";
             enumToString << "appearance/toolbar-visible";
             enumToString << "appearance/webpage-controls-visible";

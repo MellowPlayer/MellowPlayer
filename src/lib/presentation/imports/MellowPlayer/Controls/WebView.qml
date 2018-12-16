@@ -122,7 +122,10 @@ WebEngineView {
     onFullScreenRequested: mainWindow.toggleFullScreen(request)
     onNewViewRequested: mainWindow.openWebPopup(request, profile)
 
-    Component.onCompleted: d.updatePlaybackRequiresUserGesture()
+    Component.onCompleted: {
+        d.updatePlaybackRequiresUserGesture()
+        d.updateShowScrollBars()
+    }
 
     ValidationMessage {
         id: validationMessage
@@ -213,6 +216,11 @@ WebEngineView {
         onValueChanged: d.updatePlaybackRequiresUserGesture()
     }
 
+    Connections {
+        target: _settings.get(SettingKey.APPEARANCE_SHOW_SCROLLBARS)
+        onValueChanged: d.updateShowScrollBars()
+    }
+
     QtObject {
         id: d
 
@@ -223,6 +231,15 @@ WebEngineView {
                 console.log("playbackRequiresUserGesture: " + root.settings.playbackRequiresUserGesture)
             } catch(e) {
                 console.log("playbackRequiresUserGesture setting not supported with this version of Qt.")
+            }
+        }
+
+        function updateShowScrollBars() {
+            try {
+                root.settings.showScrollBars = _settings.get(SettingKey.APPEARANCE_SHOW_SCROLLBARS).value
+                console.log("showScrollBars: " + root.settings.showScrollBars)
+            } catch(e) {
+                console.log("showScrollBars setting not supported with this version of Qt.")
             }
         }
 

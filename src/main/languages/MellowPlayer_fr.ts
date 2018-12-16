@@ -863,442 +863,452 @@ listened to will appear here...</source>
     </message>
     <message>
         <location filename="../../lib/presentation/imports/MellowPlayer/SettingsTranslator.js" line="9"/>
+        <source>Show web page scrollbars</source>
+        <translation>Afficher les barres de défilement de la page web</translation>
+    </message>
+    <message>
+        <location filename="../../lib/presentation/imports/MellowPlayer/SettingsTranslator.js" line="10"/>
         <source>Automatic HiDPI scaling</source>
         <translation>Mise à l&apos;echelle automatique pour les écrans à haute résolution</translation>
     </message>
     <message>
-        <location filename="../../lib/presentation/imports/MellowPlayer/SettingsTranslator.js" line="10"/>
+        <location filename="../../lib/presentation/imports/MellowPlayer/SettingsTranslator.js" line="11"/>
         <source>HiDPI scaling factor</source>
         <translation>Facteur de mise à l&apos;échelle pour les écrans à haute résolution</translation>
     </message>
     <message>
-        <location filename="../../lib/presentation/imports/MellowPlayer/SettingsTranslator.js" line="11"/>
+        <location filename="../../lib/presentation/imports/MellowPlayer/SettingsTranslator.js" line="12"/>
         <source>Show main tool bar</source>
         <translation>Afficher la barre d&apos;outils principale</translation>
     </message>
     <message>
-        <location filename="../../lib/presentation/imports/MellowPlayer/SettingsTranslator.js" line="12"/>
+        <location filename="../../lib/presentation/imports/MellowPlayer/SettingsTranslator.js" line="13"/>
         <source>	Show web page controls in main tool bar</source>
         <translation>Afficher les contrôles de la page web dans la barre d&apos;outils</translation>
     </message>
     <message>
-        <location filename="../../lib/presentation/imports/MellowPlayer/SettingsTranslator.js" line="13"/>
+        <location filename="../../lib/presentation/imports/MellowPlayer/SettingsTranslator.js" line="14"/>
         <source>	Show player controls in main tool bar</source>
         <translation>Afficher les contrôles du lecteur dans la barre d&apos;outils</translation>
     </message>
     <message>
-        <location filename="../../lib/presentation/imports/MellowPlayer/SettingsTranslator.js" line="14"/>
+        <location filename="../../lib/presentation/imports/MellowPlayer/SettingsTranslator.js" line="15"/>
         <source>Theme</source>
         <translation>Thème</translation>
     </message>
     <message>
-        <location filename="../../lib/presentation/imports/MellowPlayer/SettingsTranslator.js" line="15"/>
+        <location filename="../../lib/presentation/imports/MellowPlayer/SettingsTranslator.js" line="16"/>
         <source>Accent</source>
         <translation>Accent</translation>
     </message>
     <message>
-        <location filename="../../lib/presentation/imports/MellowPlayer/SettingsTranslator.js" line="16"/>
+        <location filename="../../lib/presentation/imports/MellowPlayer/SettingsTranslator.js" line="17"/>
         <source>Background</source>
         <translation>Couleur d&apos;arrière plan</translation>
     </message>
     <message>
-        <location filename="../../lib/presentation/imports/MellowPlayer/SettingsTranslator.js" line="17"/>
+        <location filename="../../lib/presentation/imports/MellowPlayer/SettingsTranslator.js" line="18"/>
         <source>Foreground</source>
         <translation>Couleur de premier plan</translation>
     </message>
     <message>
-        <location filename="../../lib/presentation/imports/MellowPlayer/SettingsTranslator.js" line="18"/>
+        <location filename="../../lib/presentation/imports/MellowPlayer/SettingsTranslator.js" line="19"/>
         <source>Primary Background</source>
         <translation>Couleur primaire d&apos;arrière plan</translation>
     </message>
     <message>
-        <location filename="../../lib/presentation/imports/MellowPlayer/SettingsTranslator.js" line="19"/>
+        <location filename="../../lib/presentation/imports/MellowPlayer/SettingsTranslator.js" line="20"/>
         <source>Primary Foreground</source>
         <translation>Couleur primaire de premier plan</translation>
     </message>
     <message>
-        <location filename="../../lib/presentation/imports/MellowPlayer/SettingsTranslator.js" line="20"/>
+        <location filename="../../lib/presentation/imports/MellowPlayer/SettingsTranslator.js" line="21"/>
         <source>Secondary Background</source>
         <translation>Couleur secondaire d&apos;arrière plan</translation>
     </message>
     <message>
-        <location filename="../../lib/presentation/imports/MellowPlayer/SettingsTranslator.js" line="21"/>
+        <location filename="../../lib/presentation/imports/MellowPlayer/SettingsTranslator.js" line="22"/>
         <source>Secondary Foreground</source>
         <translation>Couleur secondaire de premier plan</translation>
     </message>
     <message>
-        <location filename="../../lib/presentation/imports/MellowPlayer/SettingsTranslator.js" line="22"/>
+        <location filename="../../lib/presentation/imports/MellowPlayer/SettingsTranslator.js" line="23"/>
         <source>Enable notifications</source>
         <translation>Activer les notifications</translation>
     </message>
     <message>
-        <location filename="../../lib/presentation/imports/MellowPlayer/SettingsTranslator.js" line="23"/>
+        <location filename="../../lib/presentation/imports/MellowPlayer/SettingsTranslator.js" line="24"/>
         <source>Display a notification when a new song starts playing</source>
         <translation>Afficher une notification quand une nouvelle piste commence</translation>
     </message>
     <message>
-        <location filename="../../lib/presentation/imports/MellowPlayer/SettingsTranslator.js" line="24"/>
+        <location filename="../../lib/presentation/imports/MellowPlayer/SettingsTranslator.js" line="25"/>
         <source>Display a notification when player has paused</source>
         <translation>Afficher une notification quand le lecteur passe est mis en pause</translation>
     </message>
     <message>
-        <location filename="../../lib/presentation/imports/MellowPlayer/SettingsTranslator.js" line="25"/>
+        <location filename="../../lib/presentation/imports/MellowPlayer/SettingsTranslator.js" line="26"/>
         <source>Display a notification when player has resumed</source>
         <translation>Afficher une notification quand la piste recommence à être jouée</translation>
     </message>
     <message>
-        <location filename="../../lib/presentation/imports/MellowPlayer/SettingsTranslator.js" line="26"/>
+        <location filename="../../lib/presentation/imports/MellowPlayer/SettingsTranslator.js" line="27"/>
         <source>Play / Pause</source>
         <translation>Jouer / Mettre en pause</translation>
     </message>
     <message>
-        <location filename="../../lib/presentation/imports/MellowPlayer/SettingsTranslator.js" line="27"/>
+        <location filename="../../lib/presentation/imports/MellowPlayer/SettingsTranslator.js" line="28"/>
         <source>Next</source>
         <translation>Piste suivante</translation>
     </message>
     <message>
-        <location filename="../../lib/presentation/imports/MellowPlayer/SettingsTranslator.js" line="28"/>
+        <location filename="../../lib/presentation/imports/MellowPlayer/SettingsTranslator.js" line="29"/>
         <source>Previous</source>
         <translation>Piste précédente</translation>
     </message>
     <message>
-        <location filename="../../lib/presentation/imports/MellowPlayer/SettingsTranslator.js" line="29"/>
+        <location filename="../../lib/presentation/imports/MellowPlayer/SettingsTranslator.js" line="30"/>
         <source>Add to favorites</source>
         <translation>Ajouter aux favoris</translation>
     </message>
     <message>
-        <location filename="../../lib/presentation/imports/MellowPlayer/SettingsTranslator.js" line="30"/>
+        <location filename="../../lib/presentation/imports/MellowPlayer/SettingsTranslator.js" line="31"/>
         <source>Restore window</source>
         <translation>Restaurer la fenêtre</translation>
     </message>
     <message>
-        <location filename="../../lib/presentation/imports/MellowPlayer/SettingsTranslator.js" line="31"/>
+        <location filename="../../lib/presentation/imports/MellowPlayer/SettingsTranslator.js" line="32"/>
         <source>Reload page</source>
         <translation>Recharger la page</translation>
     </message>
     <message>
-        <location filename="../../lib/presentation/imports/MellowPlayer/SettingsTranslator.js" line="32"/>
+        <location filename="../../lib/presentation/imports/MellowPlayer/SettingsTranslator.js" line="33"/>
         <source>Select service</source>
         <translation>Choisir un service</translation>
     </message>
     <message>
-        <location filename="../../lib/presentation/imports/MellowPlayer/SettingsTranslator.js" line="33"/>
+        <location filename="../../lib/presentation/imports/MellowPlayer/SettingsTranslator.js" line="34"/>
         <source>Next service</source>
         <translation>Service suivant</translation>
     </message>
     <message>
-        <location filename="../../lib/presentation/imports/MellowPlayer/SettingsTranslator.js" line="34"/>
+        <location filename="../../lib/presentation/imports/MellowPlayer/SettingsTranslator.js" line="35"/>
         <source>Previous service</source>
         <translation>Service précédent</translation>
     </message>
     <message>
-        <location filename="../../lib/presentation/imports/MellowPlayer/SettingsTranslator.js" line="35"/>
+        <location filename="../../lib/presentation/imports/MellowPlayer/SettingsTranslator.js" line="36"/>
         <source>Toggle notifications</source>
         <translation>Activer ou désactiver les notifications</translation>
     </message>
     <message>
-        <location filename="../../lib/presentation/imports/MellowPlayer/SettingsTranslator.js" line="36"/>
+        <location filename="../../lib/presentation/imports/MellowPlayer/SettingsTranslator.js" line="37"/>
         <source>Listening history</source>
         <translation>Ouvrir l&apos;historique d&apos;écoutes</translation>
     </message>
     <message>
-        <location filename="../../lib/presentation/imports/MellowPlayer/SettingsTranslator.js" line="37"/>
+        <location filename="../../lib/presentation/imports/MellowPlayer/SettingsTranslator.js" line="38"/>
         <source>Toggle ToolBar</source>
         <translation>Afficher/Cacher la barre d&apos;outils</translation>
     </message>
     <message>
-        <location filename="../../lib/presentation/imports/MellowPlayer/SettingsTranslator.js" line="38"/>
+        <location filename="../../lib/presentation/imports/MellowPlayer/SettingsTranslator.js" line="39"/>
         <source>Settings</source>
         <translation>Ouvrir la page des paramètres</translation>
     </message>
     <message>
-        <location filename="../../lib/presentation/imports/MellowPlayer/SettingsTranslator.js" line="39"/>
+        <location filename="../../lib/presentation/imports/MellowPlayer/SettingsTranslator.js" line="40"/>
         <source>Create Plugin</source>
         <translation>Créer un plugin</translation>
     </message>
     <message>
-        <location filename="../../lib/presentation/imports/MellowPlayer/SettingsTranslator.js" line="40"/>
+        <location filename="../../lib/presentation/imports/MellowPlayer/SettingsTranslator.js" line="41"/>
         <source>Report Issue</source>
         <translation>Rapporter un problème</translation>
     </message>
     <message>
-        <location filename="../../lib/presentation/imports/MellowPlayer/SettingsTranslator.js" line="41"/>
-        <location filename="../../lib/presentation/imports/MellowPlayer/SettingsTranslator.js" line="95"/>
+        <location filename="../../lib/presentation/imports/MellowPlayer/SettingsTranslator.js" line="42"/>
+        <location filename="../../lib/presentation/imports/MellowPlayer/SettingsTranslator.js" line="97"/>
         <source>Check for update</source>
         <translation>Vérifier les mises à jour</translation>
     </message>
     <message>
-        <location filename="../../lib/presentation/imports/MellowPlayer/SettingsTranslator.js" line="42"/>
+        <location filename="../../lib/presentation/imports/MellowPlayer/SettingsTranslator.js" line="43"/>
         <source>About</source>
         <translation>A propos</translation>
     </message>
     <message>
-        <location filename="../../lib/presentation/imports/MellowPlayer/SettingsTranslator.js" line="43"/>
+        <location filename="../../lib/presentation/imports/MellowPlayer/SettingsTranslator.js" line="44"/>
         <source>Quit</source>
         <translation>Quitter</translation>
     </message>
     <message>
-        <location filename="../../lib/presentation/imports/MellowPlayer/SettingsTranslator.js" line="44"/>
+        <location filename="../../lib/presentation/imports/MellowPlayer/SettingsTranslator.js" line="45"/>
         <source>Enable listening history</source>
         <translation>Activer l&apos;historique d&apos;écoutes</translation>
     </message>
     <message>
-        <location filename="../../lib/presentation/imports/MellowPlayer/SettingsTranslator.js" line="45"/>
+        <location filename="../../lib/presentation/imports/MellowPlayer/SettingsTranslator.js" line="46"/>
         <source>Listening history limit</source>
         <translation>Limite de l&apos;historique d&apos;écoutes</translation>
     </message>
     <message>
-        <location filename="../../lib/presentation/imports/MellowPlayer/SettingsTranslator.js" line="46"/>
+        <location filename="../../lib/presentation/imports/MellowPlayer/SettingsTranslator.js" line="47"/>
         <source>User agent</source>
         <translation>Agent utilisateur</translation>
     </message>
     <message>
-        <location filename="../../lib/presentation/imports/MellowPlayer/SettingsTranslator.js" line="60"/>
+        <location filename="../../lib/presentation/imports/MellowPlayer/SettingsTranslator.js" line="61"/>
         <source>Automatically check for updates</source>
         <translation>Vérifier automatiquement les mises à jour au démarrage de l&apos;application</translation>
     </message>
     <message>
-        <location filename="../../lib/presentation/imports/MellowPlayer/SettingsTranslator.js" line="62"/>
+        <location filename="../../lib/presentation/imports/MellowPlayer/SettingsTranslator.js" line="63"/>
         <source>Inhibits playback of media content until the user interacts with the page.</source>
         <translation>Empêche la lecture du contenu jusqu&apos;à ce que l&apos;utilisateur interagisse avec la page.</translation>
     </message>
     <message>
-        <location filename="../../lib/presentation/imports/MellowPlayer/SettingsTranslator.js" line="63"/>
+        <location filename="../../lib/presentation/imports/MellowPlayer/SettingsTranslator.js" line="64"/>
+        <source>Show/Hide web page scrollbars</source>
+        <translation>Afficher/Cacher les barres de défilement de la page web</translation>
+    </message>
+    <message>
+        <location filename="../../lib/presentation/imports/MellowPlayer/SettingsTranslator.js" line="65"/>
         <source>Automatic HiDPI scaling. Require a restart of the application.</source>
         <translation>Mise à l&apos;echelle automatique pour les écrans à haute résolution. Requiert un redémarrage de l&apos;application.</translation>
     </message>
     <message>
-        <location filename="../../lib/presentation/imports/MellowPlayer/SettingsTranslator.js" line="64"/>
+        <location filename="../../lib/presentation/imports/MellowPlayer/SettingsTranslator.js" line="66"/>
         <source>HiDPI scaling factor. Require a restart of the application.</source>
         <translation>Facteur de mise à l&apos;échelle pour les écrans à haute résolution.  Requiert un redémarrage de l&apos;application.</translation>
     </message>
     <message>
-        <location filename="../../lib/presentation/imports/MellowPlayer/SettingsTranslator.js" line="65"/>
+        <location filename="../../lib/presentation/imports/MellowPlayer/SettingsTranslator.js" line="67"/>
         <source>Show/Hide main toolbar</source>
         <translation>Afficher ou cacher la barre d&apos;outils principale</translation>
     </message>
     <message>
-        <location filename="../../lib/presentation/imports/MellowPlayer/SettingsTranslator.js" line="66"/>
+        <location filename="../../lib/presentation/imports/MellowPlayer/SettingsTranslator.js" line="68"/>
         <source>Show/Hide web page controls in main toolbar</source>
         <translation>Afficher/Cacher les contrôles de la page web dans la barre d&apos;outils</translation>
     </message>
     <message>
-        <location filename="../../lib/presentation/imports/MellowPlayer/SettingsTranslator.js" line="67"/>
+        <location filename="../../lib/presentation/imports/MellowPlayer/SettingsTranslator.js" line="69"/>
         <source>Show/Hide player controls in main toolbar</source>
         <translation>Afficher/Cacher les contrôles du lecteur dans la barre d&apos;outils</translation>
     </message>
     <message>
-        <location filename="../../lib/presentation/imports/MellowPlayer/SettingsTranslator.js" line="91"/>
+        <location filename="../../lib/presentation/imports/MellowPlayer/SettingsTranslator.js" line="93"/>
         <source>Show or hide main tool bar</source>
         <translation>Afficher la barre d&apos;outils principale</translation>
     </message>
     <message>
-        <location filename="../../lib/presentation/imports/MellowPlayer/SettingsTranslator.js" line="94"/>
+        <location filename="../../lib/presentation/imports/MellowPlayer/SettingsTranslator.js" line="96"/>
         <source>Report an issue</source>
         <translation>Reporter un problème</translation>
     </message>
     <message>
-        <location filename="../../lib/presentation/imports/MellowPlayer/SettingsTranslator.js" line="100"/>
+        <location filename="../../lib/presentation/imports/MellowPlayer/SettingsTranslator.js" line="102"/>
         <source>Specifies the user agent string used by web views</source>
         <translation>Spécifie l&apos;agent utilisateur utilisé dans les requêtes http</translation>
     </message>
     <message>
-        <location filename="../../lib/presentation/imports/MellowPlayer/SettingsTranslator.js" line="112"/>
+        <location filename="../../lib/presentation/imports/MellowPlayer/SettingsTranslator.js" line="114"/>
         <source>Streaming Services</source>
         <translation>Services de streaming</translation>
     </message>
     <message>
-        <location filename="../../lib/presentation/imports/MellowPlayer/SettingsTranslator.js" line="57"/>
+        <location filename="../../lib/presentation/imports/MellowPlayer/SettingsTranslator.js" line="58"/>
         <source>Enable this option to get a confirmation message when you leave MellowPlayer.</source>
         <translation>Activez cette option pour avoir une demande de confirmation lorsque vous quittez MellowPlayer.</translation>
     </message>
     <message>
-        <location filename="../../lib/presentation/imports/MellowPlayer/SettingsTranslator.js" line="58"/>
+        <location filename="../../lib/presentation/imports/MellowPlayer/SettingsTranslator.js" line="59"/>
         <source>Enable this option to close the application in the system tray and continue listening to your musing in background.</source>
         <translation>Activez cette option pour réduire l&apos;application dans la barre des tâches et continuer à jouer la musique en arrière plan au lieu de fermer l&apos;application.</translation>
     </message>
     <message>
-        <location filename="../../lib/presentation/imports/MellowPlayer/SettingsTranslator.js" line="59"/>
+        <location filename="../../lib/presentation/imports/MellowPlayer/SettingsTranslator.js" line="60"/>
         <source>Disable this option to hide the system tray icon</source>
         <translation>Désactivez cette option pour cacher l&apos;icône de la barre des tâches</translation>
     </message>
     <message>
-        <location filename="../../lib/presentation/imports/MellowPlayer/SettingsTranslator.js" line="61"/>
+        <location filename="../../lib/presentation/imports/MellowPlayer/SettingsTranslator.js" line="62"/>
         <source>Choose which update channel to use</source>
         <translation>Choisissez le canal de mises à jour</translation>
     </message>
     <message>
-        <location filename="../../lib/presentation/imports/MellowPlayer/SettingsTranslator.js" line="68"/>
+        <location filename="../../lib/presentation/imports/MellowPlayer/SettingsTranslator.js" line="70"/>
         <source>Application theme</source>
         <translation>Thème de l&apos;application</translation>
     </message>
     <message>
-        <location filename="../../lib/presentation/imports/MellowPlayer/SettingsTranslator.js" line="69"/>
+        <location filename="../../lib/presentation/imports/MellowPlayer/SettingsTranslator.js" line="71"/>
         <source>Change material accent color</source>
         <translation>Changer la couleur d&apos;accentuation</translation>
     </message>
     <message>
-        <location filename="../../lib/presentation/imports/MellowPlayer/SettingsTranslator.js" line="70"/>
+        <location filename="../../lib/presentation/imports/MellowPlayer/SettingsTranslator.js" line="72"/>
         <source>Change material background color</source>
         <translation>Changez la couleur d&apos;arrière plan de l&apos;application.</translation>
     </message>
     <message>
-        <location filename="../../lib/presentation/imports/MellowPlayer/SettingsTranslator.js" line="71"/>
+        <location filename="../../lib/presentation/imports/MellowPlayer/SettingsTranslator.js" line="73"/>
         <source>Change material foreground color</source>
         <translation>Changez la couleur de premier plan de l&apos;application, il s&apos;agit principalement de la couleur du texte et des icônes.</translation>
     </message>
     <message>
-        <location filename="../../lib/presentation/imports/MellowPlayer/SettingsTranslator.js" line="72"/>
+        <location filename="../../lib/presentation/imports/MellowPlayer/SettingsTranslator.js" line="74"/>
         <source>Change material primary background color</source>
         <translation>Changez la couleur d&apos;arrière plan primaire de l&apos;application, il s&apos;agit principalement de la couleur de fond de la barre d&apos;outils.</translation>
     </message>
     <message>
-        <location filename="../../lib/presentation/imports/MellowPlayer/SettingsTranslator.js" line="73"/>
+        <location filename="../../lib/presentation/imports/MellowPlayer/SettingsTranslator.js" line="75"/>
         <source>Change material primary foreground color</source>
         <translation>Changez la couleur de premier plan primaire de l&apos;application, il s&apos;agit principalement de la couleur des icônes et du texte de la barre d&apos;outils.</translation>
     </message>
     <message>
-        <location filename="../../lib/presentation/imports/MellowPlayer/SettingsTranslator.js" line="74"/>
+        <location filename="../../lib/presentation/imports/MellowPlayer/SettingsTranslator.js" line="76"/>
         <source>Change material secondary background color</source>
         <translation>Changez la couleur d&apos;arrière plan secondaire de l&apos;application, il s&apos;agit principalement de la couleur de fond du menu de la fenêtre des paramètres de l&apos;application.</translation>
     </message>
     <message>
-        <location filename="../../lib/presentation/imports/MellowPlayer/SettingsTranslator.js" line="75"/>
+        <location filename="../../lib/presentation/imports/MellowPlayer/SettingsTranslator.js" line="77"/>
         <source>Change material secondary foreground color</source>
         <translation>Changez la couleur de premier plan secondaire de l&apos;application, il s&apos;agit principalement de la couleur du texte du menu de la fenêtre des paramètres de l&apos;application.</translation>
     </message>
     <message>
-        <location filename="../../lib/presentation/imports/MellowPlayer/SettingsTranslator.js" line="76"/>
+        <location filename="../../lib/presentation/imports/MellowPlayer/SettingsTranslator.js" line="78"/>
         <source>Enable or disable notifications</source>
         <translation>Activez ou désactivez les notifications</translation>
     </message>
     <message>
-        <location filename="../../lib/presentation/imports/MellowPlayer/SettingsTranslator.js" line="77"/>
+        <location filename="../../lib/presentation/imports/MellowPlayer/SettingsTranslator.js" line="79"/>
         <source>Enabled/Disable displaying a notification when a new song starts playing</source>
         <translation>Activez ou désactivez les notifications affichées lorsqu&apos;une nouvelle piste commence</translation>
     </message>
     <message>
-        <location filename="../../lib/presentation/imports/MellowPlayer/SettingsTranslator.js" line="78"/>
+        <location filename="../../lib/presentation/imports/MellowPlayer/SettingsTranslator.js" line="80"/>
         <source>Enabled/Disable displaying a notification when the player has paused</source>
         <translation>Activez ou désactivez les notifications affichées lorsque le lecteur est mis en pause</translation>
     </message>
     <message>
-        <location filename="../../lib/presentation/imports/MellowPlayer/SettingsTranslator.js" line="79"/>
+        <location filename="../../lib/presentation/imports/MellowPlayer/SettingsTranslator.js" line="81"/>
         <source>Enabled/Disable displaying a notification when the player has resumed</source>
         <translation>Activez ou désactives les notifications affichées lorsque la piste recommence à être jouée</translation>
     </message>
     <message>
-        <location filename="../../lib/presentation/imports/MellowPlayer/SettingsTranslator.js" line="80"/>
+        <location filename="../../lib/presentation/imports/MellowPlayer/SettingsTranslator.js" line="82"/>
         <source>Global hotkey that plays or pauses the current player.</source>
         <translation>Raccourci global qui permet de mettre en pause ou de démarrer le lecteur.</translation>
     </message>
     <message>
-        <location filename="../../lib/presentation/imports/MellowPlayer/SettingsTranslator.js" line="81"/>
+        <location filename="../../lib/presentation/imports/MellowPlayer/SettingsTranslator.js" line="83"/>
         <source>Global hotkey that skips to the next song.</source>
         <translation>Raccourci global qui permet de passer à la piste suivante.</translation>
     </message>
     <message>
-        <location filename="../../lib/presentation/imports/MellowPlayer/SettingsTranslator.js" line="82"/>
+        <location filename="../../lib/presentation/imports/MellowPlayer/SettingsTranslator.js" line="84"/>
         <source>Global hotkey that skips to the previous song.</source>
         <translation>Raccourci global qui permet de passer à la piste précédente.</translation>
     </message>
     <message>
-        <location filename="../../lib/presentation/imports/MellowPlayer/SettingsTranslator.js" line="83"/>
+        <location filename="../../lib/presentation/imports/MellowPlayer/SettingsTranslator.js" line="85"/>
         <source>Global hotkey that adds or removes the current song to or from your favorites.</source>
         <translation>Raccourci global qui permet d&apos;ajouter ou de retirer la piste courante des favoris</translation>
     </message>
     <message>
-        <location filename="../../lib/presentation/imports/MellowPlayer/SettingsTranslator.js" line="84"/>
+        <location filename="../../lib/presentation/imports/MellowPlayer/SettingsTranslator.js" line="86"/>
         <source>Global hotkey that restore the main window.</source>
         <translation>Raccourci global qui permet de restaurer la fenêtre.</translation>
     </message>
     <message>
-        <location filename="../../lib/presentation/imports/MellowPlayer/SettingsTranslator.js" line="85"/>
+        <location filename="../../lib/presentation/imports/MellowPlayer/SettingsTranslator.js" line="87"/>
         <source>Reload current web page.</source>
         <translation>Recharge la page web</translation>
     </message>
     <message>
-        <location filename="../../lib/presentation/imports/MellowPlayer/SettingsTranslator.js" line="86"/>
+        <location filename="../../lib/presentation/imports/MellowPlayer/SettingsTranslator.js" line="88"/>
         <source>Show service selection page.</source>
         <translation>Affiche la page de sélection des services</translation>
     </message>
     <message>
-        <location filename="../../lib/presentation/imports/MellowPlayer/SettingsTranslator.js" line="87"/>
+        <location filename="../../lib/presentation/imports/MellowPlayer/SettingsTranslator.js" line="89"/>
         <source>Switch to the next open service.</source>
         <translation>Passe au service suivant</translation>
     </message>
     <message>
-        <location filename="../../lib/presentation/imports/MellowPlayer/SettingsTranslator.js" line="88"/>
+        <location filename="../../lib/presentation/imports/MellowPlayer/SettingsTranslator.js" line="90"/>
         <source>Switch to the previous open service.</source>
         <translation>Passe au service précédent</translation>
     </message>
     <message>
-        <location filename="../../lib/presentation/imports/MellowPlayer/SettingsTranslator.js" line="89"/>
+        <location filename="../../lib/presentation/imports/MellowPlayer/SettingsTranslator.js" line="91"/>
         <source>Quickly enable or disable notifications</source>
         <translation>Activez ou désactives rapidement les notifications</translation>
     </message>
     <message>
-        <location filename="../../lib/presentation/imports/MellowPlayer/SettingsTranslator.js" line="90"/>
+        <location filename="../../lib/presentation/imports/MellowPlayer/SettingsTranslator.js" line="92"/>
         <source>Show or hide listening history</source>
         <translation>Affiche l&apos;historique d&apos;écoutes</translation>
     </message>
     <message>
-        <location filename="../../lib/presentation/imports/MellowPlayer/SettingsTranslator.js" line="92"/>
+        <location filename="../../lib/presentation/imports/MellowPlayer/SettingsTranslator.js" line="94"/>
         <source>Show settings page</source>
         <translation>Affiche la page des paramètres de l&apos;application</translation>
     </message>
     <message>
-        <location filename="../../lib/presentation/imports/MellowPlayer/SettingsTranslator.js" line="93"/>
+        <location filename="../../lib/presentation/imports/MellowPlayer/SettingsTranslator.js" line="95"/>
         <source>Show the plugin creation wizard</source>
         <translation>Affiche le wizard de création de plugin</translation>
     </message>
     <message>
-        <location filename="../../lib/presentation/imports/MellowPlayer/SettingsTranslator.js" line="96"/>
+        <location filename="../../lib/presentation/imports/MellowPlayer/SettingsTranslator.js" line="98"/>
         <source>Show about page.</source>
         <translation>Affiche la page d&apos;informations à propos de l&apos;application</translation>
     </message>
     <message>
-        <location filename="../../lib/presentation/imports/MellowPlayer/SettingsTranslator.js" line="97"/>
+        <location filename="../../lib/presentation/imports/MellowPlayer/SettingsTranslator.js" line="99"/>
         <source>Quit the application.</source>
         <translation>Quitte l&apos;application</translation>
     </message>
     <message>
-        <location filename="../../lib/presentation/imports/MellowPlayer/SettingsTranslator.js" line="98"/>
+        <location filename="../../lib/presentation/imports/MellowPlayer/SettingsTranslator.js" line="100"/>
         <source>Enable listening history to keep track of the songs you listened to.</source>
         <translation>Activez l&apos;historique d&apos;écoutes pour garder une trace des pistes que vous avez écoutées.</translation>
     </message>
     <message>
-        <location filename="../../lib/presentation/imports/MellowPlayer/SettingsTranslator.js" line="99"/>
+        <location filename="../../lib/presentation/imports/MellowPlayer/SettingsTranslator.js" line="101"/>
         <source>Specifies the limit of the listening history</source>
         <translation>Spécifie la limite de l&apos;historique d&apos;écoute, les pistes écoutées avant la limite seront automatiquement supprimées de l&apos;historique</translation>
     </message>
     <message>
-        <location filename="../../lib/presentation/imports/MellowPlayer/SettingsTranslator.js" line="113"/>
+        <location filename="../../lib/presentation/imports/MellowPlayer/SettingsTranslator.js" line="115"/>
         <source>Cache</source>
         <translation>Cache</translation>
     </message>
     <message>
-        <location filename="../../lib/presentation/imports/MellowPlayer/SettingsTranslator.js" line="114"/>
+        <location filename="../../lib/presentation/imports/MellowPlayer/SettingsTranslator.js" line="116"/>
         <source>General</source>
         <translation>Général</translation>
     </message>
     <message>
-        <location filename="../../lib/presentation/imports/MellowPlayer/SettingsTranslator.js" line="115"/>
+        <location filename="../../lib/presentation/imports/MellowPlayer/SettingsTranslator.js" line="117"/>
         <source>Appearance</source>
         <translation>Apparance</translation>
     </message>
     <message>
-        <location filename="../../lib/presentation/imports/MellowPlayer/SettingsTranslator.js" line="116"/>
+        <location filename="../../lib/presentation/imports/MellowPlayer/SettingsTranslator.js" line="118"/>
         <source>Notifications</source>
         <translation>Notifications</translation>
     </message>
     <message>
-        <location filename="../../lib/presentation/imports/MellowPlayer/SettingsTranslator.js" line="117"/>
+        <location filename="../../lib/presentation/imports/MellowPlayer/SettingsTranslator.js" line="119"/>
         <source>Shortcuts</source>
         <translation>Raccourcis clavier</translation>
     </message>
     <message>
-        <location filename="../../lib/presentation/imports/MellowPlayer/SettingsTranslator.js" line="118"/>
+        <location filename="../../lib/presentation/imports/MellowPlayer/SettingsTranslator.js" line="120"/>
         <source>Privacy</source>
         <translation>Vie privée</translation>
     </message>

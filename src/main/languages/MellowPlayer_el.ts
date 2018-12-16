@@ -864,442 +864,452 @@ listened to will appear here...</source>
     </message>
     <message>
         <location filename="../../lib/presentation/imports/MellowPlayer/SettingsTranslator.js" line="9"/>
-        <source>Automatic HiDPI scaling</source>
+        <source>Show web page scrollbars</source>
         <translation type="unfinished"/>
     </message>
     <message>
         <location filename="../../lib/presentation/imports/MellowPlayer/SettingsTranslator.js" line="10"/>
-        <source>HiDPI scaling factor</source>
+        <source>Automatic HiDPI scaling</source>
         <translation type="unfinished"/>
     </message>
     <message>
         <location filename="../../lib/presentation/imports/MellowPlayer/SettingsTranslator.js" line="11"/>
-        <source>Show main tool bar</source>
+        <source>HiDPI scaling factor</source>
         <translation type="unfinished"/>
     </message>
     <message>
         <location filename="../../lib/presentation/imports/MellowPlayer/SettingsTranslator.js" line="12"/>
-        <source>	Show web page controls in main tool bar</source>
+        <source>Show main tool bar</source>
         <translation type="unfinished"/>
     </message>
     <message>
         <location filename="../../lib/presentation/imports/MellowPlayer/SettingsTranslator.js" line="13"/>
-        <source>	Show player controls in main tool bar</source>
+        <source>	Show web page controls in main tool bar</source>
         <translation type="unfinished"/>
     </message>
     <message>
         <location filename="../../lib/presentation/imports/MellowPlayer/SettingsTranslator.js" line="14"/>
+        <source>	Show player controls in main tool bar</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <location filename="../../lib/presentation/imports/MellowPlayer/SettingsTranslator.js" line="15"/>
         <source>Theme</source>
         <translation>Θέμα</translation>
     </message>
     <message>
-        <location filename="../../lib/presentation/imports/MellowPlayer/SettingsTranslator.js" line="15"/>
+        <location filename="../../lib/presentation/imports/MellowPlayer/SettingsTranslator.js" line="16"/>
         <source>Accent</source>
         <translation>Εμφαση</translation>
     </message>
     <message>
-        <location filename="../../lib/presentation/imports/MellowPlayer/SettingsTranslator.js" line="16"/>
+        <location filename="../../lib/presentation/imports/MellowPlayer/SettingsTranslator.js" line="17"/>
         <source>Background</source>
         <translation>Φόντος</translation>
     </message>
     <message>
-        <location filename="../../lib/presentation/imports/MellowPlayer/SettingsTranslator.js" line="17"/>
+        <location filename="../../lib/presentation/imports/MellowPlayer/SettingsTranslator.js" line="18"/>
         <source>Foreground</source>
         <translation>Προσκήνιο</translation>
     </message>
     <message>
-        <location filename="../../lib/presentation/imports/MellowPlayer/SettingsTranslator.js" line="18"/>
+        <location filename="../../lib/presentation/imports/MellowPlayer/SettingsTranslator.js" line="19"/>
         <source>Primary Background</source>
         <translation>Κύριος φόντος</translation>
     </message>
     <message>
-        <location filename="../../lib/presentation/imports/MellowPlayer/SettingsTranslator.js" line="19"/>
+        <location filename="../../lib/presentation/imports/MellowPlayer/SettingsTranslator.js" line="20"/>
         <source>Primary Foreground</source>
         <translation>Κύριο προσκήνιο</translation>
     </message>
     <message>
-        <location filename="../../lib/presentation/imports/MellowPlayer/SettingsTranslator.js" line="20"/>
+        <location filename="../../lib/presentation/imports/MellowPlayer/SettingsTranslator.js" line="21"/>
         <source>Secondary Background</source>
         <translation>Δευτερεύον φόντος</translation>
     </message>
     <message>
-        <location filename="../../lib/presentation/imports/MellowPlayer/SettingsTranslator.js" line="21"/>
+        <location filename="../../lib/presentation/imports/MellowPlayer/SettingsTranslator.js" line="22"/>
         <source>Secondary Foreground</source>
         <translation>Δευτερεύον προσκήνιο</translation>
     </message>
     <message>
-        <location filename="../../lib/presentation/imports/MellowPlayer/SettingsTranslator.js" line="22"/>
+        <location filename="../../lib/presentation/imports/MellowPlayer/SettingsTranslator.js" line="23"/>
         <source>Enable notifications</source>
         <translation>Ενεργοποίηση ειδοποιήσεων</translation>
     </message>
     <message>
-        <location filename="../../lib/presentation/imports/MellowPlayer/SettingsTranslator.js" line="23"/>
+        <location filename="../../lib/presentation/imports/MellowPlayer/SettingsTranslator.js" line="24"/>
         <source>Display a notification when a new song starts playing</source>
         <translation>Εμφάνιση ειδοποίησης κατά την αναπαραγωγή ενός νέου τραγουδιού</translation>
     </message>
     <message>
-        <location filename="../../lib/presentation/imports/MellowPlayer/SettingsTranslator.js" line="24"/>
+        <location filename="../../lib/presentation/imports/MellowPlayer/SettingsTranslator.js" line="25"/>
         <source>Display a notification when player has paused</source>
         <translation>Εμφάνιση ειδοποίησης κατά την πάυση τού αναπαραγωγέα</translation>
     </message>
     <message>
-        <location filename="../../lib/presentation/imports/MellowPlayer/SettingsTranslator.js" line="25"/>
+        <location filename="../../lib/presentation/imports/MellowPlayer/SettingsTranslator.js" line="26"/>
         <source>Display a notification when player has resumed</source>
         <translation>Εμφάνιση ειδοποίησης κατά την συνέχιση τού αναπαραγωγέα</translation>
     </message>
     <message>
-        <location filename="../../lib/presentation/imports/MellowPlayer/SettingsTranslator.js" line="26"/>
+        <location filename="../../lib/presentation/imports/MellowPlayer/SettingsTranslator.js" line="27"/>
         <source>Play / Pause</source>
         <translation>Αναπαραγωγή / Πάυση</translation>
     </message>
     <message>
-        <location filename="../../lib/presentation/imports/MellowPlayer/SettingsTranslator.js" line="27"/>
+        <location filename="../../lib/presentation/imports/MellowPlayer/SettingsTranslator.js" line="28"/>
         <source>Next</source>
         <translation>Επόμενο</translation>
     </message>
     <message>
-        <location filename="../../lib/presentation/imports/MellowPlayer/SettingsTranslator.js" line="28"/>
+        <location filename="../../lib/presentation/imports/MellowPlayer/SettingsTranslator.js" line="29"/>
         <source>Previous</source>
         <translation>Προηγούμενο</translation>
     </message>
     <message>
-        <location filename="../../lib/presentation/imports/MellowPlayer/SettingsTranslator.js" line="29"/>
+        <location filename="../../lib/presentation/imports/MellowPlayer/SettingsTranslator.js" line="30"/>
         <source>Add to favorites</source>
         <translation>Προσθήκη στα αγαπημένα </translation>
     </message>
     <message>
-        <location filename="../../lib/presentation/imports/MellowPlayer/SettingsTranslator.js" line="30"/>
+        <location filename="../../lib/presentation/imports/MellowPlayer/SettingsTranslator.js" line="31"/>
         <source>Restore window</source>
         <translation>Επαναφορά παραθύρου</translation>
     </message>
     <message>
-        <location filename="../../lib/presentation/imports/MellowPlayer/SettingsTranslator.js" line="31"/>
+        <location filename="../../lib/presentation/imports/MellowPlayer/SettingsTranslator.js" line="32"/>
         <source>Reload page</source>
         <translation>Επαναφορά σελίδας</translation>
     </message>
     <message>
-        <location filename="../../lib/presentation/imports/MellowPlayer/SettingsTranslator.js" line="32"/>
+        <location filename="../../lib/presentation/imports/MellowPlayer/SettingsTranslator.js" line="33"/>
         <source>Select service</source>
         <translation>Επιλογή υπηρεσίας</translation>
     </message>
     <message>
-        <location filename="../../lib/presentation/imports/MellowPlayer/SettingsTranslator.js" line="33"/>
+        <location filename="../../lib/presentation/imports/MellowPlayer/SettingsTranslator.js" line="34"/>
         <source>Next service</source>
         <translation>Επόμενη υπηρεσία</translation>
     </message>
     <message>
-        <location filename="../../lib/presentation/imports/MellowPlayer/SettingsTranslator.js" line="34"/>
+        <location filename="../../lib/presentation/imports/MellowPlayer/SettingsTranslator.js" line="35"/>
         <source>Previous service</source>
         <translation>Προηγούμενη υπηρεσία</translation>
     </message>
     <message>
-        <location filename="../../lib/presentation/imports/MellowPlayer/SettingsTranslator.js" line="35"/>
+        <location filename="../../lib/presentation/imports/MellowPlayer/SettingsTranslator.js" line="36"/>
         <source>Toggle notifications</source>
         <translation>Εναλλαγή ειδοποιήσεων</translation>
     </message>
     <message>
-        <location filename="../../lib/presentation/imports/MellowPlayer/SettingsTranslator.js" line="36"/>
+        <location filename="../../lib/presentation/imports/MellowPlayer/SettingsTranslator.js" line="37"/>
         <source>Listening history</source>
         <translation>Ιστορικό τραγουδιών</translation>
     </message>
     <message>
-        <location filename="../../lib/presentation/imports/MellowPlayer/SettingsTranslator.js" line="37"/>
+        <location filename="../../lib/presentation/imports/MellowPlayer/SettingsTranslator.js" line="38"/>
         <source>Toggle ToolBar</source>
         <translation type="unfinished"/>
     </message>
     <message>
-        <location filename="../../lib/presentation/imports/MellowPlayer/SettingsTranslator.js" line="38"/>
+        <location filename="../../lib/presentation/imports/MellowPlayer/SettingsTranslator.js" line="39"/>
         <source>Settings</source>
         <translation>Ρυθμίσεις</translation>
     </message>
     <message>
-        <location filename="../../lib/presentation/imports/MellowPlayer/SettingsTranslator.js" line="39"/>
+        <location filename="../../lib/presentation/imports/MellowPlayer/SettingsTranslator.js" line="40"/>
         <source>Create Plugin</source>
         <translation>Δημιουργία plugin</translation>
     </message>
     <message>
-        <location filename="../../lib/presentation/imports/MellowPlayer/SettingsTranslator.js" line="40"/>
+        <location filename="../../lib/presentation/imports/MellowPlayer/SettingsTranslator.js" line="41"/>
         <source>Report Issue</source>
         <translation>Αναφορά θέματος</translation>
     </message>
     <message>
-        <location filename="../../lib/presentation/imports/MellowPlayer/SettingsTranslator.js" line="41"/>
-        <location filename="../../lib/presentation/imports/MellowPlayer/SettingsTranslator.js" line="95"/>
+        <location filename="../../lib/presentation/imports/MellowPlayer/SettingsTranslator.js" line="42"/>
+        <location filename="../../lib/presentation/imports/MellowPlayer/SettingsTranslator.js" line="97"/>
         <source>Check for update</source>
         <translation>Ελεγχός για ενημερώσεις</translation>
     </message>
     <message>
-        <location filename="../../lib/presentation/imports/MellowPlayer/SettingsTranslator.js" line="42"/>
+        <location filename="../../lib/presentation/imports/MellowPlayer/SettingsTranslator.js" line="43"/>
         <source>About</source>
         <translation>Σχετικά με</translation>
     </message>
     <message>
-        <location filename="../../lib/presentation/imports/MellowPlayer/SettingsTranslator.js" line="43"/>
+        <location filename="../../lib/presentation/imports/MellowPlayer/SettingsTranslator.js" line="44"/>
         <source>Quit</source>
         <translation>Τερματισμός</translation>
     </message>
     <message>
-        <location filename="../../lib/presentation/imports/MellowPlayer/SettingsTranslator.js" line="44"/>
+        <location filename="../../lib/presentation/imports/MellowPlayer/SettingsTranslator.js" line="45"/>
         <source>Enable listening history</source>
         <translation>Ενεργοποίηση ιστορικού τραγουδιών</translation>
     </message>
     <message>
-        <location filename="../../lib/presentation/imports/MellowPlayer/SettingsTranslator.js" line="45"/>
+        <location filename="../../lib/presentation/imports/MellowPlayer/SettingsTranslator.js" line="46"/>
         <source>Listening history limit</source>
         <translation>Οριο ιστορικού τραγουδιών</translation>
     </message>
     <message>
-        <location filename="../../lib/presentation/imports/MellowPlayer/SettingsTranslator.js" line="46"/>
+        <location filename="../../lib/presentation/imports/MellowPlayer/SettingsTranslator.js" line="47"/>
         <source>User agent</source>
         <translation>User agent</translation>
     </message>
     <message>
-        <location filename="../../lib/presentation/imports/MellowPlayer/SettingsTranslator.js" line="60"/>
+        <location filename="../../lib/presentation/imports/MellowPlayer/SettingsTranslator.js" line="61"/>
         <source>Automatically check for updates</source>
         <translation>Αυτόματος έλεγχος για ενημερώσεις</translation>
     </message>
     <message>
-        <location filename="../../lib/presentation/imports/MellowPlayer/SettingsTranslator.js" line="62"/>
+        <location filename="../../lib/presentation/imports/MellowPlayer/SettingsTranslator.js" line="63"/>
         <source>Inhibits playback of media content until the user interacts with the page.</source>
         <translation type="unfinished"/>
     </message>
     <message>
-        <location filename="../../lib/presentation/imports/MellowPlayer/SettingsTranslator.js" line="63"/>
-        <source>Automatic HiDPI scaling. Require a restart of the application.</source>
-        <translation type="unfinished"/>
-    </message>
-    <message>
         <location filename="../../lib/presentation/imports/MellowPlayer/SettingsTranslator.js" line="64"/>
-        <source>HiDPI scaling factor. Require a restart of the application.</source>
+        <source>Show/Hide web page scrollbars</source>
         <translation type="unfinished"/>
     </message>
     <message>
         <location filename="../../lib/presentation/imports/MellowPlayer/SettingsTranslator.js" line="65"/>
-        <source>Show/Hide main toolbar</source>
+        <source>Automatic HiDPI scaling. Require a restart of the application.</source>
         <translation type="unfinished"/>
     </message>
     <message>
         <location filename="../../lib/presentation/imports/MellowPlayer/SettingsTranslator.js" line="66"/>
-        <source>Show/Hide web page controls in main toolbar</source>
+        <source>HiDPI scaling factor. Require a restart of the application.</source>
         <translation type="unfinished"/>
     </message>
     <message>
         <location filename="../../lib/presentation/imports/MellowPlayer/SettingsTranslator.js" line="67"/>
+        <source>Show/Hide main toolbar</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <location filename="../../lib/presentation/imports/MellowPlayer/SettingsTranslator.js" line="68"/>
+        <source>Show/Hide web page controls in main toolbar</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <location filename="../../lib/presentation/imports/MellowPlayer/SettingsTranslator.js" line="69"/>
         <source>Show/Hide player controls in main toolbar</source>
         <translation type="unfinished"/>
     </message>
     <message>
-        <location filename="../../lib/presentation/imports/MellowPlayer/SettingsTranslator.js" line="91"/>
+        <location filename="../../lib/presentation/imports/MellowPlayer/SettingsTranslator.js" line="93"/>
         <source>Show or hide main tool bar</source>
         <translation type="unfinished"/>
     </message>
     <message>
-        <location filename="../../lib/presentation/imports/MellowPlayer/SettingsTranslator.js" line="94"/>
+        <location filename="../../lib/presentation/imports/MellowPlayer/SettingsTranslator.js" line="96"/>
         <source>Report an issue</source>
         <translation type="unfinished"/>
     </message>
     <message>
-        <location filename="../../lib/presentation/imports/MellowPlayer/SettingsTranslator.js" line="100"/>
+        <location filename="../../lib/presentation/imports/MellowPlayer/SettingsTranslator.js" line="102"/>
         <source>Specifies the user agent string used by web views</source>
         <translation>Καθορισμός της συμβολοσειράς παράγοντα χρήστη </translation>
     </message>
     <message>
-        <location filename="../../lib/presentation/imports/MellowPlayer/SettingsTranslator.js" line="112"/>
+        <location filename="../../lib/presentation/imports/MellowPlayer/SettingsTranslator.js" line="114"/>
         <source>Streaming Services</source>
         <translation>Υπηρεσίες Streaming</translation>
     </message>
     <message>
-        <location filename="../../lib/presentation/imports/MellowPlayer/SettingsTranslator.js" line="57"/>
+        <location filename="../../lib/presentation/imports/MellowPlayer/SettingsTranslator.js" line="58"/>
         <source>Enable this option to get a confirmation message when you leave MellowPlayer.</source>
         <translation>Ενεργοποιήστε αυτή την επιλογή για να λάβετε ένα μήνυμα επιβεβαίωσης, όταν φεύγετε από το MellowPlayer.</translation>
     </message>
     <message>
-        <location filename="../../lib/presentation/imports/MellowPlayer/SettingsTranslator.js" line="58"/>
+        <location filename="../../lib/presentation/imports/MellowPlayer/SettingsTranslator.js" line="59"/>
         <source>Enable this option to close the application in the system tray and continue listening to your musing in background.</source>
         <translation>Ενεργοποιήστε αυτή την επιλογή για να κλείσετε την εφαρμογή στην μπάρα συστήματος και να συνεχίσετε να ακούτε τραγούδια στο παρασκήνιο.</translation>
     </message>
     <message>
-        <location filename="../../lib/presentation/imports/MellowPlayer/SettingsTranslator.js" line="59"/>
+        <location filename="../../lib/presentation/imports/MellowPlayer/SettingsTranslator.js" line="60"/>
         <source>Disable this option to hide the system tray icon</source>
         <translation>Απενεργοποιήστε αυτή την επιλογή για να αποκρύψετε το εικονίδιο του δίσκου συστήματος</translation>
     </message>
     <message>
-        <location filename="../../lib/presentation/imports/MellowPlayer/SettingsTranslator.js" line="61"/>
+        <location filename="../../lib/presentation/imports/MellowPlayer/SettingsTranslator.js" line="62"/>
         <source>Choose which update channel to use</source>
         <translation>Επιλέξτε τον δίαυλο ενημερώσεων πού θέλετε να χρησιμοποιήσετε</translation>
     </message>
     <message>
-        <location filename="../../lib/presentation/imports/MellowPlayer/SettingsTranslator.js" line="68"/>
+        <location filename="../../lib/presentation/imports/MellowPlayer/SettingsTranslator.js" line="70"/>
         <source>Application theme</source>
         <translation>Θέμα εφαρμογής</translation>
     </message>
     <message>
-        <location filename="../../lib/presentation/imports/MellowPlayer/SettingsTranslator.js" line="69"/>
+        <location filename="../../lib/presentation/imports/MellowPlayer/SettingsTranslator.js" line="71"/>
         <source>Change material accent color</source>
         <translation>Αλλαγή χρώματος έμφασης υλικού</translation>
     </message>
     <message>
-        <location filename="../../lib/presentation/imports/MellowPlayer/SettingsTranslator.js" line="70"/>
+        <location filename="../../lib/presentation/imports/MellowPlayer/SettingsTranslator.js" line="72"/>
         <source>Change material background color</source>
         <translation>Αλλαγή χρώματος φόντου</translation>
     </message>
     <message>
-        <location filename="../../lib/presentation/imports/MellowPlayer/SettingsTranslator.js" line="71"/>
+        <location filename="../../lib/presentation/imports/MellowPlayer/SettingsTranslator.js" line="73"/>
         <source>Change material foreground color</source>
         <translation>Αλλαγή χρώματος προσκηνίου</translation>
     </message>
     <message>
-        <location filename="../../lib/presentation/imports/MellowPlayer/SettingsTranslator.js" line="72"/>
+        <location filename="../../lib/presentation/imports/MellowPlayer/SettingsTranslator.js" line="74"/>
         <source>Change material primary background color</source>
         <translation>Αλλαγή χρώματος κύριου φόντου</translation>
     </message>
     <message>
-        <location filename="../../lib/presentation/imports/MellowPlayer/SettingsTranslator.js" line="73"/>
+        <location filename="../../lib/presentation/imports/MellowPlayer/SettingsTranslator.js" line="75"/>
         <source>Change material primary foreground color</source>
         <translation>Αλλαγή χρώματος κύριου προσκηνίου</translation>
     </message>
     <message>
-        <location filename="../../lib/presentation/imports/MellowPlayer/SettingsTranslator.js" line="74"/>
+        <location filename="../../lib/presentation/imports/MellowPlayer/SettingsTranslator.js" line="76"/>
         <source>Change material secondary background color</source>
         <translation>Αλλαγή χρώματος δευτερεύοντος φόντου</translation>
     </message>
     <message>
-        <location filename="../../lib/presentation/imports/MellowPlayer/SettingsTranslator.js" line="75"/>
+        <location filename="../../lib/presentation/imports/MellowPlayer/SettingsTranslator.js" line="77"/>
         <source>Change material secondary foreground color</source>
         <translation>Αλλαγή χρώματος δευτερεύοντος προσκηνίου</translation>
     </message>
     <message>
-        <location filename="../../lib/presentation/imports/MellowPlayer/SettingsTranslator.js" line="76"/>
+        <location filename="../../lib/presentation/imports/MellowPlayer/SettingsTranslator.js" line="78"/>
         <source>Enable or disable notifications</source>
         <translation>Ενεργοποίηση η απενεργοποίηση ειδοποιήσεων</translation>
     </message>
     <message>
-        <location filename="../../lib/presentation/imports/MellowPlayer/SettingsTranslator.js" line="77"/>
+        <location filename="../../lib/presentation/imports/MellowPlayer/SettingsTranslator.js" line="79"/>
         <source>Enabled/Disable displaying a notification when a new song starts playing</source>
         <translation>Ενεργοποίηση/Απενεργοποίηση ειδοποίησεων κατά την αναπαραγωγή ενός νέου τραγουδιού</translation>
     </message>
     <message>
-        <location filename="../../lib/presentation/imports/MellowPlayer/SettingsTranslator.js" line="78"/>
+        <location filename="../../lib/presentation/imports/MellowPlayer/SettingsTranslator.js" line="80"/>
         <source>Enabled/Disable displaying a notification when the player has paused</source>
         <translation>Ενεργοποίηση/Απενεργοποίηση ειδοποίησης κατά την πάυση τού αναπαραγωγέα</translation>
     </message>
     <message>
-        <location filename="../../lib/presentation/imports/MellowPlayer/SettingsTranslator.js" line="79"/>
+        <location filename="../../lib/presentation/imports/MellowPlayer/SettingsTranslator.js" line="81"/>
         <source>Enabled/Disable displaying a notification when the player has resumed</source>
         <translation>Ενεργοποίηση/Απενεργοποίηση ειδοποίησης κατά την συνέχιση τού αναπαραγωγέα</translation>
     </message>
     <message>
-        <location filename="../../lib/presentation/imports/MellowPlayer/SettingsTranslator.js" line="80"/>
+        <location filename="../../lib/presentation/imports/MellowPlayer/SettingsTranslator.js" line="82"/>
         <source>Global hotkey that plays or pauses the current player.</source>
         <translation>Δράση hotkey που πραγματοποιεί αναπαραγωγή ή παύση της τρέχουσας αναπαραγωγής.</translation>
     </message>
     <message>
-        <location filename="../../lib/presentation/imports/MellowPlayer/SettingsTranslator.js" line="81"/>
+        <location filename="../../lib/presentation/imports/MellowPlayer/SettingsTranslator.js" line="83"/>
         <source>Global hotkey that skips to the next song.</source>
         <translation>Δράση hotkey για μετάβαση στο επόμενο τραγούδι.</translation>
     </message>
     <message>
-        <location filename="../../lib/presentation/imports/MellowPlayer/SettingsTranslator.js" line="82"/>
+        <location filename="../../lib/presentation/imports/MellowPlayer/SettingsTranslator.js" line="84"/>
         <source>Global hotkey that skips to the previous song.</source>
         <translation>Δράση hotkey για μετάβαση στο προηγούμενο τραγούδι.</translation>
     </message>
     <message>
-        <location filename="../../lib/presentation/imports/MellowPlayer/SettingsTranslator.js" line="83"/>
+        <location filename="../../lib/presentation/imports/MellowPlayer/SettingsTranslator.js" line="85"/>
         <source>Global hotkey that adds or removes the current song to or from your favorites.</source>
         <translation>Δράση hotkey που προσθέτει η αφαιρεί το τρέχον τραγούδι από τα αγαπημένα σας.</translation>
     </message>
     <message>
-        <location filename="../../lib/presentation/imports/MellowPlayer/SettingsTranslator.js" line="84"/>
+        <location filename="../../lib/presentation/imports/MellowPlayer/SettingsTranslator.js" line="86"/>
         <source>Global hotkey that restore the main window.</source>
         <translation>Δράση hotkey για αποκατάσταση τού κύριου παραθύρου.</translation>
     </message>
     <message>
-        <location filename="../../lib/presentation/imports/MellowPlayer/SettingsTranslator.js" line="85"/>
+        <location filename="../../lib/presentation/imports/MellowPlayer/SettingsTranslator.js" line="87"/>
         <source>Reload current web page.</source>
         <translation>Επαναφορά τρέχουσας ιστοσελίδας.</translation>
     </message>
     <message>
-        <location filename="../../lib/presentation/imports/MellowPlayer/SettingsTranslator.js" line="86"/>
+        <location filename="../../lib/presentation/imports/MellowPlayer/SettingsTranslator.js" line="88"/>
         <source>Show service selection page.</source>
         <translation>Εμφάνιση της σελίδας επιλογής υπηρεσίας.</translation>
     </message>
     <message>
-        <location filename="../../lib/presentation/imports/MellowPlayer/SettingsTranslator.js" line="87"/>
+        <location filename="../../lib/presentation/imports/MellowPlayer/SettingsTranslator.js" line="89"/>
         <source>Switch to the next open service.</source>
         <translation>Μετάβαση στην επόμενη ανοιχτή υπηρεσία.</translation>
     </message>
     <message>
-        <location filename="../../lib/presentation/imports/MellowPlayer/SettingsTranslator.js" line="88"/>
+        <location filename="../../lib/presentation/imports/MellowPlayer/SettingsTranslator.js" line="90"/>
         <source>Switch to the previous open service.</source>
         <translation>Μετάβαση στην προηγούμενη ανοιχτή υπηρεσία.</translation>
     </message>
     <message>
-        <location filename="../../lib/presentation/imports/MellowPlayer/SettingsTranslator.js" line="89"/>
+        <location filename="../../lib/presentation/imports/MellowPlayer/SettingsTranslator.js" line="91"/>
         <source>Quickly enable or disable notifications</source>
         <translation>Γρήγορη ενεργοποίηση η απενεργοποίηση ειδοποιήσεων</translation>
     </message>
     <message>
-        <location filename="../../lib/presentation/imports/MellowPlayer/SettingsTranslator.js" line="90"/>
+        <location filename="../../lib/presentation/imports/MellowPlayer/SettingsTranslator.js" line="92"/>
         <source>Show or hide listening history</source>
         <translation>Εμφάνιση η απόκρυψη τού ιστορικού τραγουδιών</translation>
     </message>
     <message>
-        <location filename="../../lib/presentation/imports/MellowPlayer/SettingsTranslator.js" line="92"/>
+        <location filename="../../lib/presentation/imports/MellowPlayer/SettingsTranslator.js" line="94"/>
         <source>Show settings page</source>
         <translation>Εμφάνιση της σελίδας ρυθμίσεων</translation>
     </message>
     <message>
-        <location filename="../../lib/presentation/imports/MellowPlayer/SettingsTranslator.js" line="93"/>
+        <location filename="../../lib/presentation/imports/MellowPlayer/SettingsTranslator.js" line="95"/>
         <source>Show the plugin creation wizard</source>
         <translation>Εμφάνιση τού οδηγού δημιουργίας plugin</translation>
     </message>
     <message>
-        <location filename="../../lib/presentation/imports/MellowPlayer/SettingsTranslator.js" line="96"/>
+        <location filename="../../lib/presentation/imports/MellowPlayer/SettingsTranslator.js" line="98"/>
         <source>Show about page.</source>
         <translation>Εμφάνιση της σελίδας &quot;Σχετικά με&quot;.</translation>
     </message>
     <message>
-        <location filename="../../lib/presentation/imports/MellowPlayer/SettingsTranslator.js" line="97"/>
+        <location filename="../../lib/presentation/imports/MellowPlayer/SettingsTranslator.js" line="99"/>
         <source>Quit the application.</source>
         <translation>Τερματισμός της εφαρμογής.</translation>
     </message>
     <message>
-        <location filename="../../lib/presentation/imports/MellowPlayer/SettingsTranslator.js" line="98"/>
+        <location filename="../../lib/presentation/imports/MellowPlayer/SettingsTranslator.js" line="100"/>
         <source>Enable listening history to keep track of the songs you listened to.</source>
         <translation>Ενεργοποίηση τού ιστορικού τραγουδιών, για παρακολούθηση των αναπαραγώμενων τραγουδιών. </translation>
     </message>
     <message>
-        <location filename="../../lib/presentation/imports/MellowPlayer/SettingsTranslator.js" line="99"/>
+        <location filename="../../lib/presentation/imports/MellowPlayer/SettingsTranslator.js" line="101"/>
         <source>Specifies the limit of the listening history</source>
         <translation>Καθορισμός ορίου τού ιστορικού τραγουδιών</translation>
     </message>
     <message>
-        <location filename="../../lib/presentation/imports/MellowPlayer/SettingsTranslator.js" line="113"/>
+        <location filename="../../lib/presentation/imports/MellowPlayer/SettingsTranslator.js" line="115"/>
         <source>Cache</source>
         <translation>Μνήμη</translation>
     </message>
     <message>
-        <location filename="../../lib/presentation/imports/MellowPlayer/SettingsTranslator.js" line="114"/>
+        <location filename="../../lib/presentation/imports/MellowPlayer/SettingsTranslator.js" line="116"/>
         <source>General</source>
         <translation>Γενικά</translation>
     </message>
     <message>
-        <location filename="../../lib/presentation/imports/MellowPlayer/SettingsTranslator.js" line="115"/>
+        <location filename="../../lib/presentation/imports/MellowPlayer/SettingsTranslator.js" line="117"/>
         <source>Appearance</source>
         <translation>Εμφάνιση</translation>
     </message>
     <message>
-        <location filename="../../lib/presentation/imports/MellowPlayer/SettingsTranslator.js" line="116"/>
+        <location filename="../../lib/presentation/imports/MellowPlayer/SettingsTranslator.js" line="118"/>
         <source>Notifications</source>
         <translation>Ειδοποιήσεις</translation>
     </message>
     <message>
-        <location filename="../../lib/presentation/imports/MellowPlayer/SettingsTranslator.js" line="117"/>
+        <location filename="../../lib/presentation/imports/MellowPlayer/SettingsTranslator.js" line="119"/>
         <source>Shortcuts</source>
         <translation>Συντομεύσεις</translation>
     </message>
     <message>
-        <location filename="../../lib/presentation/imports/MellowPlayer/SettingsTranslator.js" line="118"/>
+        <location filename="../../lib/presentation/imports/MellowPlayer/SettingsTranslator.js" line="120"/>
         <source>Privacy</source>
         <translation>Απόρρητο</translation>
     </message>

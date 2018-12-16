@@ -57,6 +57,14 @@
 			"icon": "\ue40a",
 			"key": "appearance",
 			"settings": [
+    			 {
+                    "name": "Show web page scrollbars",
+                    "tooltip": "Show/Hide web page scrollbars",
+                    "type": "bool",
+                    "default": true,
+                    "key": "show-scrollbars",
+                    "enabled": "qtVersion >= 5.10"
+                },
 			    {
                     "name": "Automatic HiDPI scaling",
                     "tooltip": "Automatic HiDPI scaling. Require a restart of the application.",

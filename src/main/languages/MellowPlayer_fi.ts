@@ -854,442 +854,452 @@ listened to will appear here...</source>
     </message>
     <message>
         <location filename="../../lib/presentation/imports/MellowPlayer/SettingsTranslator.js" line="9"/>
-        <source>Automatic HiDPI scaling</source>
+        <source>Show web page scrollbars</source>
         <translation type="unfinished"/>
     </message>
     <message>
         <location filename="../../lib/presentation/imports/MellowPlayer/SettingsTranslator.js" line="10"/>
-        <source>HiDPI scaling factor</source>
+        <source>Automatic HiDPI scaling</source>
         <translation type="unfinished"/>
     </message>
     <message>
         <location filename="../../lib/presentation/imports/MellowPlayer/SettingsTranslator.js" line="11"/>
-        <source>Show main tool bar</source>
+        <source>HiDPI scaling factor</source>
         <translation type="unfinished"/>
     </message>
     <message>
         <location filename="../../lib/presentation/imports/MellowPlayer/SettingsTranslator.js" line="12"/>
-        <source>	Show web page controls in main tool bar</source>
+        <source>Show main tool bar</source>
         <translation type="unfinished"/>
     </message>
     <message>
         <location filename="../../lib/presentation/imports/MellowPlayer/SettingsTranslator.js" line="13"/>
-        <source>	Show player controls in main tool bar</source>
+        <source>	Show web page controls in main tool bar</source>
         <translation type="unfinished"/>
     </message>
     <message>
         <location filename="../../lib/presentation/imports/MellowPlayer/SettingsTranslator.js" line="14"/>
+        <source>	Show player controls in main tool bar</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <location filename="../../lib/presentation/imports/MellowPlayer/SettingsTranslator.js" line="15"/>
         <source>Theme</source>
         <translation>Teema</translation>
     </message>
     <message>
-        <location filename="../../lib/presentation/imports/MellowPlayer/SettingsTranslator.js" line="15"/>
+        <location filename="../../lib/presentation/imports/MellowPlayer/SettingsTranslator.js" line="16"/>
         <source>Accent</source>
         <translation type="unfinished"/>
     </message>
     <message>
-        <location filename="../../lib/presentation/imports/MellowPlayer/SettingsTranslator.js" line="16"/>
+        <location filename="../../lib/presentation/imports/MellowPlayer/SettingsTranslator.js" line="17"/>
         <source>Background</source>
         <translation>Tausta</translation>
     </message>
     <message>
-        <location filename="../../lib/presentation/imports/MellowPlayer/SettingsTranslator.js" line="17"/>
+        <location filename="../../lib/presentation/imports/MellowPlayer/SettingsTranslator.js" line="18"/>
         <source>Foreground</source>
         <translation>Edusta</translation>
     </message>
     <message>
-        <location filename="../../lib/presentation/imports/MellowPlayer/SettingsTranslator.js" line="18"/>
+        <location filename="../../lib/presentation/imports/MellowPlayer/SettingsTranslator.js" line="19"/>
         <source>Primary Background</source>
         <translation type="unfinished"/>
     </message>
     <message>
-        <location filename="../../lib/presentation/imports/MellowPlayer/SettingsTranslator.js" line="19"/>
+        <location filename="../../lib/presentation/imports/MellowPlayer/SettingsTranslator.js" line="20"/>
         <source>Primary Foreground</source>
         <translation type="unfinished"/>
     </message>
     <message>
-        <location filename="../../lib/presentation/imports/MellowPlayer/SettingsTranslator.js" line="20"/>
+        <location filename="../../lib/presentation/imports/MellowPlayer/SettingsTranslator.js" line="21"/>
         <source>Secondary Background</source>
         <translation type="unfinished"/>
     </message>
     <message>
-        <location filename="../../lib/presentation/imports/MellowPlayer/SettingsTranslator.js" line="21"/>
+        <location filename="../../lib/presentation/imports/MellowPlayer/SettingsTranslator.js" line="22"/>
         <source>Secondary Foreground</source>
         <translation type="unfinished"/>
     </message>
     <message>
-        <location filename="../../lib/presentation/imports/MellowPlayer/SettingsTranslator.js" line="22"/>
+        <location filename="../../lib/presentation/imports/MellowPlayer/SettingsTranslator.js" line="23"/>
         <source>Enable notifications</source>
         <translation>Käytä ilmoituksia</translation>
     </message>
     <message>
-        <location filename="../../lib/presentation/imports/MellowPlayer/SettingsTranslator.js" line="23"/>
+        <location filename="../../lib/presentation/imports/MellowPlayer/SettingsTranslator.js" line="24"/>
         <source>Display a notification when a new song starts playing</source>
         <translation>Näytä ilmoitus kun uusi kappale alkaa</translation>
     </message>
     <message>
-        <location filename="../../lib/presentation/imports/MellowPlayer/SettingsTranslator.js" line="24"/>
+        <location filename="../../lib/presentation/imports/MellowPlayer/SettingsTranslator.js" line="25"/>
         <source>Display a notification when player has paused</source>
         <translation>Näytä ilmoitus kun soitin on keskeytetty</translation>
     </message>
     <message>
-        <location filename="../../lib/presentation/imports/MellowPlayer/SettingsTranslator.js" line="25"/>
+        <location filename="../../lib/presentation/imports/MellowPlayer/SettingsTranslator.js" line="26"/>
         <source>Display a notification when player has resumed</source>
         <translation>Näytä ilmoitus kun soitin on palautettu</translation>
     </message>
     <message>
-        <location filename="../../lib/presentation/imports/MellowPlayer/SettingsTranslator.js" line="26"/>
+        <location filename="../../lib/presentation/imports/MellowPlayer/SettingsTranslator.js" line="27"/>
         <source>Play / Pause</source>
         <translation>Toista/keskeytä</translation>
     </message>
     <message>
-        <location filename="../../lib/presentation/imports/MellowPlayer/SettingsTranslator.js" line="27"/>
+        <location filename="../../lib/presentation/imports/MellowPlayer/SettingsTranslator.js" line="28"/>
         <source>Next</source>
         <translation>Seuraava</translation>
     </message>
     <message>
-        <location filename="../../lib/presentation/imports/MellowPlayer/SettingsTranslator.js" line="28"/>
+        <location filename="../../lib/presentation/imports/MellowPlayer/SettingsTranslator.js" line="29"/>
         <source>Previous</source>
         <translation>Edellinen</translation>
     </message>
     <message>
-        <location filename="../../lib/presentation/imports/MellowPlayer/SettingsTranslator.js" line="29"/>
+        <location filename="../../lib/presentation/imports/MellowPlayer/SettingsTranslator.js" line="30"/>
         <source>Add to favorites</source>
         <translation>Lisää suosikkeihin</translation>
     </message>
     <message>
-        <location filename="../../lib/presentation/imports/MellowPlayer/SettingsTranslator.js" line="30"/>
+        <location filename="../../lib/presentation/imports/MellowPlayer/SettingsTranslator.js" line="31"/>
         <source>Restore window</source>
         <translation>Palauta ikkuna</translation>
     </message>
     <message>
-        <location filename="../../lib/presentation/imports/MellowPlayer/SettingsTranslator.js" line="31"/>
+        <location filename="../../lib/presentation/imports/MellowPlayer/SettingsTranslator.js" line="32"/>
         <source>Reload page</source>
         <translation>Lataa sivu uudelleen</translation>
     </message>
     <message>
-        <location filename="../../lib/presentation/imports/MellowPlayer/SettingsTranslator.js" line="32"/>
+        <location filename="../../lib/presentation/imports/MellowPlayer/SettingsTranslator.js" line="33"/>
         <source>Select service</source>
         <translation>Valitse palvelu</translation>
     </message>
     <message>
-        <location filename="../../lib/presentation/imports/MellowPlayer/SettingsTranslator.js" line="33"/>
+        <location filename="../../lib/presentation/imports/MellowPlayer/SettingsTranslator.js" line="34"/>
         <source>Next service</source>
         <translation>Seuraava palvelu</translation>
     </message>
     <message>
-        <location filename="../../lib/presentation/imports/MellowPlayer/SettingsTranslator.js" line="34"/>
+        <location filename="../../lib/presentation/imports/MellowPlayer/SettingsTranslator.js" line="35"/>
         <source>Previous service</source>
         <translation>Edellinen palvelu</translation>
     </message>
     <message>
-        <location filename="../../lib/presentation/imports/MellowPlayer/SettingsTranslator.js" line="35"/>
+        <location filename="../../lib/presentation/imports/MellowPlayer/SettingsTranslator.js" line="36"/>
         <source>Toggle notifications</source>
         <translation>Ilmoitukset päälle/pois</translation>
     </message>
     <message>
-        <location filename="../../lib/presentation/imports/MellowPlayer/SettingsTranslator.js" line="36"/>
+        <location filename="../../lib/presentation/imports/MellowPlayer/SettingsTranslator.js" line="37"/>
         <source>Listening history</source>
         <translation>Kuunteluhistoria</translation>
     </message>
     <message>
-        <location filename="../../lib/presentation/imports/MellowPlayer/SettingsTranslator.js" line="37"/>
+        <location filename="../../lib/presentation/imports/MellowPlayer/SettingsTranslator.js" line="38"/>
         <source>Toggle ToolBar</source>
         <translation type="unfinished"/>
     </message>
     <message>
-        <location filename="../../lib/presentation/imports/MellowPlayer/SettingsTranslator.js" line="38"/>
+        <location filename="../../lib/presentation/imports/MellowPlayer/SettingsTranslator.js" line="39"/>
         <source>Settings</source>
         <translation>Asetukset</translation>
     </message>
     <message>
-        <location filename="../../lib/presentation/imports/MellowPlayer/SettingsTranslator.js" line="39"/>
+        <location filename="../../lib/presentation/imports/MellowPlayer/SettingsTranslator.js" line="40"/>
         <source>Create Plugin</source>
         <translation>Luo liitännäinen</translation>
     </message>
     <message>
-        <location filename="../../lib/presentation/imports/MellowPlayer/SettingsTranslator.js" line="40"/>
+        <location filename="../../lib/presentation/imports/MellowPlayer/SettingsTranslator.js" line="41"/>
         <source>Report Issue</source>
         <translation>Ilmoita ongelmasta</translation>
     </message>
     <message>
-        <location filename="../../lib/presentation/imports/MellowPlayer/SettingsTranslator.js" line="41"/>
-        <location filename="../../lib/presentation/imports/MellowPlayer/SettingsTranslator.js" line="95"/>
+        <location filename="../../lib/presentation/imports/MellowPlayer/SettingsTranslator.js" line="42"/>
+        <location filename="../../lib/presentation/imports/MellowPlayer/SettingsTranslator.js" line="97"/>
         <source>Check for update</source>
         <translation>Tarkista päivitykset</translation>
     </message>
     <message>
-        <location filename="../../lib/presentation/imports/MellowPlayer/SettingsTranslator.js" line="42"/>
+        <location filename="../../lib/presentation/imports/MellowPlayer/SettingsTranslator.js" line="43"/>
         <source>About</source>
         <translation>Tietoja</translation>
     </message>
     <message>
-        <location filename="../../lib/presentation/imports/MellowPlayer/SettingsTranslator.js" line="43"/>
+        <location filename="../../lib/presentation/imports/MellowPlayer/SettingsTranslator.js" line="44"/>
         <source>Quit</source>
         <translation>Lopeta</translation>
     </message>
     <message>
-        <location filename="../../lib/presentation/imports/MellowPlayer/SettingsTranslator.js" line="44"/>
+        <location filename="../../lib/presentation/imports/MellowPlayer/SettingsTranslator.js" line="45"/>
         <source>Enable listening history</source>
         <translation>Ota kuunteluhistoria käyttöön</translation>
     </message>
     <message>
-        <location filename="../../lib/presentation/imports/MellowPlayer/SettingsTranslator.js" line="45"/>
+        <location filename="../../lib/presentation/imports/MellowPlayer/SettingsTranslator.js" line="46"/>
         <source>Listening history limit</source>
         <translation>Kuunteluhistorian raja</translation>
     </message>
     <message>
-        <location filename="../../lib/presentation/imports/MellowPlayer/SettingsTranslator.js" line="46"/>
+        <location filename="../../lib/presentation/imports/MellowPlayer/SettingsTranslator.js" line="47"/>
         <source>User agent</source>
         <translation>Käyttäjätunniste (user agent)</translation>
     </message>
     <message>
-        <location filename="../../lib/presentation/imports/MellowPlayer/SettingsTranslator.js" line="60"/>
+        <location filename="../../lib/presentation/imports/MellowPlayer/SettingsTranslator.js" line="61"/>
         <source>Automatically check for updates</source>
         <translation>Tarkista päivitykset automaattisesti</translation>
     </message>
     <message>
-        <location filename="../../lib/presentation/imports/MellowPlayer/SettingsTranslator.js" line="62"/>
+        <location filename="../../lib/presentation/imports/MellowPlayer/SettingsTranslator.js" line="63"/>
         <source>Inhibits playback of media content until the user interacts with the page.</source>
         <translation type="unfinished"/>
     </message>
     <message>
-        <location filename="../../lib/presentation/imports/MellowPlayer/SettingsTranslator.js" line="63"/>
-        <source>Automatic HiDPI scaling. Require a restart of the application.</source>
-        <translation type="unfinished"/>
-    </message>
-    <message>
         <location filename="../../lib/presentation/imports/MellowPlayer/SettingsTranslator.js" line="64"/>
-        <source>HiDPI scaling factor. Require a restart of the application.</source>
+        <source>Show/Hide web page scrollbars</source>
         <translation type="unfinished"/>
     </message>
     <message>
         <location filename="../../lib/presentation/imports/MellowPlayer/SettingsTranslator.js" line="65"/>
-        <source>Show/Hide main toolbar</source>
+        <source>Automatic HiDPI scaling. Require a restart of the application.</source>
         <translation type="unfinished"/>
     </message>
     <message>
         <location filename="../../lib/presentation/imports/MellowPlayer/SettingsTranslator.js" line="66"/>
-        <source>Show/Hide web page controls in main toolbar</source>
+        <source>HiDPI scaling factor. Require a restart of the application.</source>
         <translation type="unfinished"/>
     </message>
     <message>
         <location filename="../../lib/presentation/imports/MellowPlayer/SettingsTranslator.js" line="67"/>
+        <source>Show/Hide main toolbar</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <location filename="../../lib/presentation/imports/MellowPlayer/SettingsTranslator.js" line="68"/>
+        <source>Show/Hide web page controls in main toolbar</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <location filename="../../lib/presentation/imports/MellowPlayer/SettingsTranslator.js" line="69"/>
         <source>Show/Hide player controls in main toolbar</source>
         <translation type="unfinished"/>
     </message>
     <message>
-        <location filename="../../lib/presentation/imports/MellowPlayer/SettingsTranslator.js" line="91"/>
+        <location filename="../../lib/presentation/imports/MellowPlayer/SettingsTranslator.js" line="93"/>
         <source>Show or hide main tool bar</source>
         <translation type="unfinished"/>
     </message>
     <message>
-        <location filename="../../lib/presentation/imports/MellowPlayer/SettingsTranslator.js" line="94"/>
+        <location filename="../../lib/presentation/imports/MellowPlayer/SettingsTranslator.js" line="96"/>
         <source>Report an issue</source>
         <translation type="unfinished"/>
     </message>
     <message>
-        <location filename="../../lib/presentation/imports/MellowPlayer/SettingsTranslator.js" line="100"/>
+        <location filename="../../lib/presentation/imports/MellowPlayer/SettingsTranslator.js" line="102"/>
         <source>Specifies the user agent string used by web views</source>
         <translation type="unfinished"/>
     </message>
     <message>
-        <location filename="../../lib/presentation/imports/MellowPlayer/SettingsTranslator.js" line="112"/>
+        <location filename="../../lib/presentation/imports/MellowPlayer/SettingsTranslator.js" line="114"/>
         <source>Streaming Services</source>
         <translation>Suoratoistopalvelut</translation>
     </message>
     <message>
-        <location filename="../../lib/presentation/imports/MellowPlayer/SettingsTranslator.js" line="57"/>
+        <location filename="../../lib/presentation/imports/MellowPlayer/SettingsTranslator.js" line="58"/>
         <source>Enable this option to get a confirmation message when you leave MellowPlayer.</source>
         <translation type="unfinished"/>
     </message>
     <message>
-        <location filename="../../lib/presentation/imports/MellowPlayer/SettingsTranslator.js" line="58"/>
+        <location filename="../../lib/presentation/imports/MellowPlayer/SettingsTranslator.js" line="59"/>
         <source>Enable this option to close the application in the system tray and continue listening to your musing in background.</source>
         <translation type="unfinished"/>
     </message>
     <message>
-        <location filename="../../lib/presentation/imports/MellowPlayer/SettingsTranslator.js" line="59"/>
+        <location filename="../../lib/presentation/imports/MellowPlayer/SettingsTranslator.js" line="60"/>
         <source>Disable this option to hide the system tray icon</source>
         <translation type="unfinished"/>
     </message>
     <message>
-        <location filename="../../lib/presentation/imports/MellowPlayer/SettingsTranslator.js" line="61"/>
+        <location filename="../../lib/presentation/imports/MellowPlayer/SettingsTranslator.js" line="62"/>
         <source>Choose which update channel to use</source>
         <translation>Valitse käytettävä päivityskanava</translation>
     </message>
     <message>
-        <location filename="../../lib/presentation/imports/MellowPlayer/SettingsTranslator.js" line="68"/>
+        <location filename="../../lib/presentation/imports/MellowPlayer/SettingsTranslator.js" line="70"/>
         <source>Application theme</source>
         <translation>Sovelluksen teema</translation>
     </message>
     <message>
-        <location filename="../../lib/presentation/imports/MellowPlayer/SettingsTranslator.js" line="69"/>
+        <location filename="../../lib/presentation/imports/MellowPlayer/SettingsTranslator.js" line="71"/>
         <source>Change material accent color</source>
         <translation type="unfinished"/>
     </message>
     <message>
-        <location filename="../../lib/presentation/imports/MellowPlayer/SettingsTranslator.js" line="70"/>
+        <location filename="../../lib/presentation/imports/MellowPlayer/SettingsTranslator.js" line="72"/>
         <source>Change material background color</source>
         <translation type="unfinished"/>
     </message>
     <message>
-        <location filename="../../lib/presentation/imports/MellowPlayer/SettingsTranslator.js" line="71"/>
+        <location filename="../../lib/presentation/imports/MellowPlayer/SettingsTranslator.js" line="73"/>
         <source>Change material foreground color</source>
         <translation type="unfinished"/>
     </message>
     <message>
-        <location filename="../../lib/presentation/imports/MellowPlayer/SettingsTranslator.js" line="72"/>
+        <location filename="../../lib/presentation/imports/MellowPlayer/SettingsTranslator.js" line="74"/>
         <source>Change material primary background color</source>
         <translation type="unfinished"/>
     </message>
     <message>
-        <location filename="../../lib/presentation/imports/MellowPlayer/SettingsTranslator.js" line="73"/>
+        <location filename="../../lib/presentation/imports/MellowPlayer/SettingsTranslator.js" line="75"/>
         <source>Change material primary foreground color</source>
         <translation type="unfinished"/>
     </message>
     <message>
-        <location filename="../../lib/presentation/imports/MellowPlayer/SettingsTranslator.js" line="74"/>
+        <location filename="../../lib/presentation/imports/MellowPlayer/SettingsTranslator.js" line="76"/>
         <source>Change material secondary background color</source>
         <translation type="unfinished"/>
     </message>
     <message>
-        <location filename="../../lib/presentation/imports/MellowPlayer/SettingsTranslator.js" line="75"/>
+        <location filename="../../lib/presentation/imports/MellowPlayer/SettingsTranslator.js" line="77"/>
         <source>Change material secondary foreground color</source>
         <translation type="unfinished"/>
     </message>
     <message>
-        <location filename="../../lib/presentation/imports/MellowPlayer/SettingsTranslator.js" line="76"/>
+        <location filename="../../lib/presentation/imports/MellowPlayer/SettingsTranslator.js" line="78"/>
         <source>Enable or disable notifications</source>
         <translation type="unfinished"/>
     </message>
     <message>
-        <location filename="../../lib/presentation/imports/MellowPlayer/SettingsTranslator.js" line="77"/>
+        <location filename="../../lib/presentation/imports/MellowPlayer/SettingsTranslator.js" line="79"/>
         <source>Enabled/Disable displaying a notification when a new song starts playing</source>
         <translation type="unfinished"/>
     </message>
     <message>
-        <location filename="../../lib/presentation/imports/MellowPlayer/SettingsTranslator.js" line="78"/>
+        <location filename="../../lib/presentation/imports/MellowPlayer/SettingsTranslator.js" line="80"/>
         <source>Enabled/Disable displaying a notification when the player has paused</source>
         <translation type="unfinished"/>
     </message>
     <message>
-        <location filename="../../lib/presentation/imports/MellowPlayer/SettingsTranslator.js" line="79"/>
+        <location filename="../../lib/presentation/imports/MellowPlayer/SettingsTranslator.js" line="81"/>
         <source>Enabled/Disable displaying a notification when the player has resumed</source>
         <translation type="unfinished"/>
     </message>
     <message>
-        <location filename="../../lib/presentation/imports/MellowPlayer/SettingsTranslator.js" line="80"/>
+        <location filename="../../lib/presentation/imports/MellowPlayer/SettingsTranslator.js" line="82"/>
         <source>Global hotkey that plays or pauses the current player.</source>
         <translation type="unfinished"/>
     </message>
     <message>
-        <location filename="../../lib/presentation/imports/MellowPlayer/SettingsTranslator.js" line="81"/>
+        <location filename="../../lib/presentation/imports/MellowPlayer/SettingsTranslator.js" line="83"/>
         <source>Global hotkey that skips to the next song.</source>
         <translation type="unfinished"/>
     </message>
     <message>
-        <location filename="../../lib/presentation/imports/MellowPlayer/SettingsTranslator.js" line="82"/>
+        <location filename="../../lib/presentation/imports/MellowPlayer/SettingsTranslator.js" line="84"/>
         <source>Global hotkey that skips to the previous song.</source>
         <translation type="unfinished"/>
     </message>
     <message>
-        <location filename="../../lib/presentation/imports/MellowPlayer/SettingsTranslator.js" line="83"/>
+        <location filename="../../lib/presentation/imports/MellowPlayer/SettingsTranslator.js" line="85"/>
         <source>Global hotkey that adds or removes the current song to or from your favorites.</source>
         <translation type="unfinished"/>
     </message>
     <message>
-        <location filename="../../lib/presentation/imports/MellowPlayer/SettingsTranslator.js" line="84"/>
+        <location filename="../../lib/presentation/imports/MellowPlayer/SettingsTranslator.js" line="86"/>
         <source>Global hotkey that restore the main window.</source>
         <translation type="unfinished"/>
     </message>
     <message>
-        <location filename="../../lib/presentation/imports/MellowPlayer/SettingsTranslator.js" line="85"/>
+        <location filename="../../lib/presentation/imports/MellowPlayer/SettingsTranslator.js" line="87"/>
         <source>Reload current web page.</source>
         <translation>Lataa nykyinen sivu uudelleen.</translation>
     </message>
     <message>
-        <location filename="../../lib/presentation/imports/MellowPlayer/SettingsTranslator.js" line="86"/>
+        <location filename="../../lib/presentation/imports/MellowPlayer/SettingsTranslator.js" line="88"/>
         <source>Show service selection page.</source>
         <translation>Näytä palvelun valintasivu.</translation>
     </message>
     <message>
-        <location filename="../../lib/presentation/imports/MellowPlayer/SettingsTranslator.js" line="87"/>
+        <location filename="../../lib/presentation/imports/MellowPlayer/SettingsTranslator.js" line="89"/>
         <source>Switch to the next open service.</source>
         <translation type="unfinished"/>
     </message>
     <message>
-        <location filename="../../lib/presentation/imports/MellowPlayer/SettingsTranslator.js" line="88"/>
+        <location filename="../../lib/presentation/imports/MellowPlayer/SettingsTranslator.js" line="90"/>
         <source>Switch to the previous open service.</source>
         <translation type="unfinished"/>
     </message>
     <message>
-        <location filename="../../lib/presentation/imports/MellowPlayer/SettingsTranslator.js" line="89"/>
+        <location filename="../../lib/presentation/imports/MellowPlayer/SettingsTranslator.js" line="91"/>
         <source>Quickly enable or disable notifications</source>
         <translation type="unfinished"/>
     </message>
     <message>
-        <location filename="../../lib/presentation/imports/MellowPlayer/SettingsTranslator.js" line="90"/>
+        <location filename="../../lib/presentation/imports/MellowPlayer/SettingsTranslator.js" line="92"/>
         <source>Show or hide listening history</source>
         <translation>Näytä tai piilota kuunteluhistoria</translation>
     </message>
     <message>
-        <location filename="../../lib/presentation/imports/MellowPlayer/SettingsTranslator.js" line="92"/>
+        <location filename="../../lib/presentation/imports/MellowPlayer/SettingsTranslator.js" line="94"/>
         <source>Show settings page</source>
         <translation>Näyttää asetussivun</translation>
     </message>
     <message>
-        <location filename="../../lib/presentation/imports/MellowPlayer/SettingsTranslator.js" line="93"/>
+        <location filename="../../lib/presentation/imports/MellowPlayer/SettingsTranslator.js" line="95"/>
         <source>Show the plugin creation wizard</source>
         <translation type="unfinished"/>
     </message>
     <message>
-        <location filename="../../lib/presentation/imports/MellowPlayer/SettingsTranslator.js" line="96"/>
+        <location filename="../../lib/presentation/imports/MellowPlayer/SettingsTranslator.js" line="98"/>
         <source>Show about page.</source>
         <translation>Näytä tietosivu.</translation>
     </message>
     <message>
-        <location filename="../../lib/presentation/imports/MellowPlayer/SettingsTranslator.js" line="97"/>
+        <location filename="../../lib/presentation/imports/MellowPlayer/SettingsTranslator.js" line="99"/>
         <source>Quit the application.</source>
         <translation>Lopeta sovellus.</translation>
     </message>
     <message>
-        <location filename="../../lib/presentation/imports/MellowPlayer/SettingsTranslator.js" line="98"/>
+        <location filename="../../lib/presentation/imports/MellowPlayer/SettingsTranslator.js" line="100"/>
         <source>Enable listening history to keep track of the songs you listened to.</source>
         <translation type="unfinished"/>
     </message>
     <message>
-        <location filename="../../lib/presentation/imports/MellowPlayer/SettingsTranslator.js" line="99"/>
+        <location filename="../../lib/presentation/imports/MellowPlayer/SettingsTranslator.js" line="101"/>
         <source>Specifies the limit of the listening history</source>
         <translation type="unfinished"/>
     </message>
     <message>
-        <location filename="../../lib/presentation/imports/MellowPlayer/SettingsTranslator.js" line="113"/>
+        <location filename="../../lib/presentation/imports/MellowPlayer/SettingsTranslator.js" line="115"/>
         <source>Cache</source>
         <translation>Välimuisti</translation>
     </message>
     <message>
-        <location filename="../../lib/presentation/imports/MellowPlayer/SettingsTranslator.js" line="114"/>
+        <location filename="../../lib/presentation/imports/MellowPlayer/SettingsTranslator.js" line="116"/>
         <source>General</source>
         <translation>Yleiset</translation>
     </message>
     <message>
-        <location filename="../../lib/presentation/imports/MellowPlayer/SettingsTranslator.js" line="115"/>
+        <location filename="../../lib/presentation/imports/MellowPlayer/SettingsTranslator.js" line="117"/>
         <source>Appearance</source>
         <translation>Ulkoasu</translation>
     </message>
     <message>
-        <location filename="../../lib/presentation/imports/MellowPlayer/SettingsTranslator.js" line="116"/>
+        <location filename="../../lib/presentation/imports/MellowPlayer/SettingsTranslator.js" line="118"/>
         <source>Notifications</source>
         <translation>Ilmoitukset</translation>
     </message>
     <message>
-        <location filename="../../lib/presentation/imports/MellowPlayer/SettingsTranslator.js" line="117"/>
+        <location filename="../../lib/presentation/imports/MellowPlayer/SettingsTranslator.js" line="119"/>
         <source>Shortcuts</source>
         <translation>Pikanäppäimet</translation>
     </message>
     <message>
-        <location filename="../../lib/presentation/imports/MellowPlayer/SettingsTranslator.js" line="118"/>
+        <location filename="../../lib/presentation/imports/MellowPlayer/SettingsTranslator.js" line="120"/>
         <source>Privacy</source>
         <translation>Yksityisyys</translation>
     </message>
