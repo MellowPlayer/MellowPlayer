@@ -64,6 +64,22 @@
                     "default": true,
                     "key": "toolbar-visible"
                 },
+                {
+                    "name": "\tShow web page controls in main tool bar",
+                    "tooltip": "Show/Hide web page controls in main toolbar",
+                    "type": "bool",
+                    "default": true,
+                    "key": "webpage-controls-visible",
+                    "enabled": "appearance/toolbar-visible"
+                },
+                {
+                    "name": "\tShow player controls in main tool bar",
+                    "tooltip": "Show/Hide player controls in main toolbar",
+                    "type": "bool",
+                    "default": true,
+                    "key": "player-controls-visible",
+                    "enabled": "appearance/toolbar-visible"
+                },
 				{
 					"name": "Theme",
                     "tooltip": "Application theme",

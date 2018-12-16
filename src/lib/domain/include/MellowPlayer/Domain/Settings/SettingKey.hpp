@@ -13,12 +13,14 @@ namespace MellowPlayer::Domain
             APPEARANCE_ACCENT,
             APPEARANCE_BACKGROUND,
             APPEARANCE_FOREGROUND,
+            APPEARANCE_PLAYER_CONTROLS_VISIBLE,
             APPEARANCE_PRIMARY_BACKGROUND,
             APPEARANCE_PRIMARY_FOREGROUND,
             APPEARANCE_SECONDARY_BACKGROUND,
             APPEARANCE_SECONDARY_FOREGROUND,
             APPEARANCE_THEME,
             APPEARANCE_TOOLBAR_VISIBLE,
+            APPEARANCE_WEBPAGE_CONTROLS_VISIBLE,
             MAIN_CHECK_FOR_UPDATES,
             MAIN_CLOSE_TO_TRAY,
             MAIN_CONFIRM_EXIT,
@@ -64,12 +66,14 @@ namespace MellowPlayer::Domain
             enumToString << "appearance/accent";
             enumToString << "appearance/background";
             enumToString << "appearance/foreground";
+            enumToString << "appearance/player-controls-visible";
             enumToString << "appearance/primary-background";
             enumToString << "appearance/primary-foreground";
             enumToString << "appearance/secondary-background";
             enumToString << "appearance/secondary-foreground";
             enumToString << "appearance/theme";
             enumToString << "appearance/toolbar-visible";
+            enumToString << "appearance/webpage-controls-visible";
             enumToString << "main/check-for-updates";
             enumToString << "main/close-to-tray";
             enumToString << "main/confirm-exit";
