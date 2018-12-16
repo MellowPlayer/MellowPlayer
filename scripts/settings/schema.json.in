@@ -57,6 +57,21 @@
 			"icon": "\ue40a",
 			"key": "appearance",
 			"settings": [
+			    {
+                    "name": "Automatic HiDPI scaling",
+                    "tooltip": "Automatic HiDPI scaling. Require a restart of the application.",
+                    "type": "bool",
+                    "default": true,
+                    "key": "auto-hidpi-scaling"
+                },
+                {
+                    "name": "HiDPI scaling factor",
+                    "tooltip": "HiDPI scaling factor. Require a restart of the application.",
+                    "type": "scaling-factor",
+                    "default": "100",
+                    "key": "hidpi-scaling-factor",
+                    "enabled": "!appearance/auto-hidpi-scaling"
+                },
                 {
                     "name": "Show main tool bar",
                     "tooltip": "Show/Hide main toolbar",

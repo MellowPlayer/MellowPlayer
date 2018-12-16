@@ -8,6 +8,7 @@
 #include <MellowPlayer/Infrastructure/BuildConfig.hpp>
 #include <QtQuickControls2/QQuickStyle>
 #include <QtWebEngine>
+#include <MellowPlayer/Presentation/HiDPISupport.h>
 
 namespace di = boost::di;
 using namespace std;
@@ -81,6 +82,10 @@ int Program::main(int argc, char** argv)
                                       defaultInjector(scope),
                                       platformInjector(scope),
                                       notificationPresenterInjector(scope));
+
+    auto& hiDPISupport = injector.create<HiDPISupport&>();
+    hiDPISupport.configure();
+
     auto& program = injector.create<Program&>();
     return program.run();
 }

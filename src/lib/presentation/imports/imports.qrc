@@ -25,6 +25,7 @@
         <file>MellowPlayer/Controls/WebView.qml</file>
         <file>MellowPlayer/Controls/WebViewContextMenu.qml</file>
         <file>MellowPlayer/Delegates/BoolSettingDelegate.qml</file>
+        <file>MellowPlayer/Delegates/IntSettingDelegate.qml</file>
         <file>MellowPlayer/Delegates/ColorSettingDelegate.qml</file>
         <file>MellowPlayer/Delegates/EnumSettingDelegate.qml</file>
         <file>MellowPlayer/Delegates/ListeningHistoryEntryDelegate.qml</file>

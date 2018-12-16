@@ -27,6 +27,7 @@ WebView 3.0 Controls/WebView.qml
 WebViewContextMenu 3.0 Controls/WebViewContextMenu.qml
 DateCategoryTranslator 3.0 DateCategoryTranslator.js
 BoolSettingDelegate 3.0 Delegates/BoolSettingDelegate.qml
+IntSettingDelegate 3.0 Delegates/IntSettingDelegate.qml
 ColorSettingDelegate 3.0 Delegates/ColorSettingDelegate.qml
 EnumSettingDelegate 3.0 Delegates/EnumSettingDelegate.qml
 ListeningHistoryEntryDelegate 3.0 Delegates/ListeningHistoryEntryDelegate.qml

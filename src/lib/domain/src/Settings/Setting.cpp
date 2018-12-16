@@ -92,6 +92,8 @@ bool Setting::isEnabled() const
         return parentValue.trimmed().toLower() == value;
     } else {
         bool parentValue = parentSetting_->value().toBool();
+        if (cond.startsWith("!"))
+            return !parentValue;
         return parentValue;
     }
 }

@@ -11,8 +11,10 @@ namespace MellowPlayer::Domain
         enum Keys
         {
             APPEARANCE_ACCENT,
+            APPEARANCE_AUTO_HIDPI_SCALING,
             APPEARANCE_BACKGROUND,
             APPEARANCE_FOREGROUND,
+            APPEARANCE_HIDPI_SCALING_FACTOR,
             APPEARANCE_PLAYER_CONTROLS_VISIBLE,
             APPEARANCE_PRIMARY_BACKGROUND,
             APPEARANCE_PRIMARY_FOREGROUND,
@@ -64,8 +66,10 @@ namespace MellowPlayer::Domain
             QStringList enumToString;
 
             enumToString << "appearance/accent";
+            enumToString << "appearance/auto-hidpi-scaling";
             enumToString << "appearance/background";
             enumToString << "appearance/foreground";
+            enumToString << "appearance/hidpi-scaling-factor";
             enumToString << "appearance/player-controls-visible";
             enumToString << "appearance/primary-background";
             enumToString << "appearance/primary-foreground";
