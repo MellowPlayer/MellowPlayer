@@ -13,6 +13,7 @@ namespace MellowPlayer::Domain
             APPEARANCE_ACCENT,
             APPEARANCE_AUTO_HIDPI_SCALING,
             APPEARANCE_BACKGROUND,
+            APPEARANCE_CUSTOM_TRAY_ICON,
             APPEARANCE_FOREGROUND,
             APPEARANCE_HIDPI_SCALING_FACTOR,
             APPEARANCE_PLAYER_CONTROLS_VISIBLE,
@@ -21,6 +22,7 @@ namespace MellowPlayer::Domain
             APPEARANCE_SECONDARY_BACKGROUND,
             APPEARANCE_SECONDARY_FOREGROUND,
             APPEARANCE_SHOW_SCROLLBARS,
+            APPEARANCE_SHOW_TRAY_ICON,
             APPEARANCE_THEME,
             APPEARANCE_TOOLBAR_VISIBLE,
             APPEARANCE_WEBPAGE_CONTROLS_VISIBLE,
@@ -28,7 +30,6 @@ namespace MellowPlayer::Domain
             MAIN_CLOSE_TO_TRAY,
             MAIN_CONFIRM_EXIT,
             MAIN_PLAYBACK_REQUIRES_USER_GESTURE,
-            MAIN_SHOW_TRAY_ICON,
             MAIN_UPDATE_CHANNEL,
             NOTIFICATIONS_ENABLED,
             NOTIFICATIONS_NEW_SONG,
@@ -69,6 +70,7 @@ namespace MellowPlayer::Domain
             enumToString << "appearance/accent";
             enumToString << "appearance/auto-hidpi-scaling";
             enumToString << "appearance/background";
+            enumToString << "appearance/custom-tray-icon";
             enumToString << "appearance/foreground";
             enumToString << "appearance/hidpi-scaling-factor";
             enumToString << "appearance/player-controls-visible";
@@ -77,6 +79,7 @@ namespace MellowPlayer::Domain
             enumToString << "appearance/secondary-background";
             enumToString << "appearance/secondary-foreground";
             enumToString << "appearance/show-scrollbars";
+            enumToString << "appearance/show-tray-icon";
             enumToString << "appearance/theme";
             enumToString << "appearance/toolbar-visible";
             enumToString << "appearance/webpage-controls-visible";
@@ -84,7 +87,6 @@ namespace MellowPlayer::Domain
             enumToString << "main/close-to-tray";
             enumToString << "main/confirm-exit";
             enumToString << "main/playback-requires-user-gesture";
-            enumToString << "main/show-tray-icon";
             enumToString << "main/update-channel";
             enumToString << "notifications/enabled";
             enumToString << "notifications/new-song";

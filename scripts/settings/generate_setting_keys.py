@@ -1,9 +1,9 @@
 #!/usr/bin/env python3
 """
-This script generates ApplicationSettingKeys.hpp which contains all the settings keys found schema.json and an utility
+This script generates ApplicationSettingKeys.hpp which contains all the settings keys found settings-schema.json and an utility
 function to retrieve the key string value from a member of the enum.
 
-Run this script every time you modify schema.json.
+Run this script every time you modify settings-schema.json.
 """
 import os
 import json
@@ -20,7 +20,7 @@ def get_translator_template():
 
 
 def get_schema():
-    with open('scripts/settings/schema.json.in') as f:
+    with open('scripts/settings/settings-schema.json') as f:
         return f.read()
 
 

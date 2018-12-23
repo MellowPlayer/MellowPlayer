@@ -18,6 +18,7 @@ TEST_CASE("SettingsTests")
     DependencyPool pool;
     Settings& settings = pool.getSettings();
     SettingsCategory* mainCategory = &settings.category("main");
+    SettingsCategory* appearanceCategory = &settings.category("appearance");
 
     SECTION("ConfigSchemaTests")
     {
@@ -39,7 +40,7 @@ TEST_CASE("SettingsTests")
 
         SECTION("restoreDefaults")
         {
-            Setting& setting1 = settings.get(SettingKey::MAIN_SHOW_TRAY_ICON);
+            Setting& setting1 = settings.get(SettingKey::APPEARANCE_SHOW_TRAY_ICON);
             setting1.setValue(!setting1.defaultValue().toBool());
             Setting& setting2 = settings.get(SettingKey::APPEARANCE_THEME);
             setting2.setValue("Other");
@@ -70,17 +71,18 @@ TEST_CASE("SettingsTests")
 
         SECTION("restoreDefaults")
         {
-            Setting& setting1 = settings.get(SettingKey::MAIN_SHOW_TRAY_ICON);
+            Setting& setting1 = settings.get(SettingKey::APPEARANCE_SHOW_TRAY_ICON);
             setting1.setValue(!setting1.defaultValue().toBool());
             Setting& setting2 = settings.get(SettingKey::MAIN_CLOSE_TO_TRAY);
-            setting2.setValue(!setting1.defaultValue().toBool());
-            Setting& fromOtherCategory = settings.get(SettingKey::APPEARANCE_THEME);
+            setting2.setValue(!setting2.defaultValue().toBool());
+            Setting& fromOtherCategory = settings.get(SettingKey::PRIVACY_ENABLE_LISTENING_HISTORY);
             fromOtherCategory.setValue("Other");
             REQUIRE(setting1.value() != setting1.defaultValue());
-            REQUIRE(setting2.value() != setting2.defaultValue());
+            REQUIRE(setting2.value().toBool() != setting2.defaultValue().toBool());
             REQUIRE(fromOtherCategory.value() != fromOtherCategory.defaultValue());
 
             mainCategory->restoreDefaults();
+            appearanceCategory->restoreDefaults();
             REQUIRE(setting1.value() == setting1.defaultValue());
             REQUIRE(setting2.value() == setting2.defaultValue());
             REQUIRE(fromOtherCategory.value() != fromOtherCategory.defaultValue());

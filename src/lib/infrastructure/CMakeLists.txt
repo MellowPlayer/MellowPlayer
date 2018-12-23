@@ -3,7 +3,7 @@ set(LIB_NAME "${PROJECT_NAME}.Infrastructure")
 file(GLOB_RECURSE SOURCE_FILES *.cpp)
 file(GLOB_RECURSE HEADER_FILES *.hpp)
 
-configure_file(${CMAKE_SOURCE_DIR}/scripts/settings/schema.json.in ${CMAKE_CURRENT_BINARY_DIR}/resources/Settings/schema.json )
+configure_file(${CMAKE_SOURCE_DIR}/scripts/settings/settings-schema.json ${CMAKE_CURRENT_BINARY_DIR}/resources/Settings/settings-schema.json )
 configure_file(resources/infrastructure.qrc ${CMAKE_CURRENT_BINARY_DIR}/resources/infrastructure.qrc)
 configure_file(resources/PluginTemplate/integration.js ${CMAKE_CURRENT_BINARY_DIR}/resources/PluginTemplate/integration.js)
 configure_file(resources/PluginTemplate/metadata.ini ${CMAKE_CURRENT_BINARY_DIR}/resources/PluginTemplate/metadata.ini)

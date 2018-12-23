@@ -10,6 +10,7 @@
 #include <MellowPlayer/Presentation/ViewModels/Settings/Types/UpdateChannelSettingViewModel.hpp>
 #include <MellowPlayer/Presentation/ViewModels/Settings/Types/UserAgentStringSettingViewModel.hpp>
 #include <MellowPlayer/Presentation/ViewModels/Settings/Types/ScalingFactorSettingViewModel.hpp>
+#include <MellowPlayer/Presentation/ViewModels/Settings/Types/IconSettingViewModel.hpp>
 
 using namespace MellowPlayer::Presentation;
 using namespace MellowPlayer::Domain;
@@ -39,5 +40,7 @@ SettingViewModel* SettingViewModelFactory::create(Setting& setting, QObject* par
         return new UserAgentStringSettingViewModel(setting, parent);
     else if (type.startsWith("scaling-factor"))
         return new ScalingFactorSettingViewModel(setting, parent);
+    else if (type.startsWith("icon"))
+        return new IconSettingViewModel(setting, parent);
     return new StringSettingViewModel(setting, parent);
 }

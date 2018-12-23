@@ -30,6 +30,7 @@ BoolSettingDelegate 3.0 Delegates/BoolSettingDelegate.qml
 IntSettingDelegate 3.0 Delegates/IntSettingDelegate.qml
 ColorSettingDelegate 3.0 Delegates/ColorSettingDelegate.qml
 EnumSettingDelegate 3.0 Delegates/EnumSettingDelegate.qml
+IconSettingDelegate 3.0 Delegates/IconSettingDelegate.qml
 ListeningHistoryEntryDelegate 3.0 Delegates/ListeningHistoryEntryDelegate.qml
 ListeningHistorySectionDelegate 3.0 Delegates/ListeningHistorySectionDelegate.qml
 ServiceOverviewDelegate 3.0 Delegates/ServiceOverviewDelegate.qml

@@ -52,6 +52,7 @@ namespace MellowPlayer::Presentation
 
     private slots:
         void onShowTrayIconSettingValueChanged();
+        void updateIcon();
 
     private:
         void setUpMenu();
@@ -61,6 +62,7 @@ namespace MellowPlayer::Presentation
         IMainWindow& mainWindow_;
         Domain::Settings& settings_;
         Domain::Setting& showTrayIconSetting_;
+        Domain::Setting& customTrayIconSetting_;
 
         QSystemTrayIcon qSystemTrayIcon_;
         QMenu menu_;

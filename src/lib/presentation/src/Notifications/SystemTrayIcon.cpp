@@ -21,12 +21,24 @@ SystemTrayIcon::SystemTrayIcon(IPlayer& player,
           player_(player),
           mainWindow_(mainWindow),
           settings_(settings),
-          showTrayIconSetting_(settings.get(SettingKey::MAIN_SHOW_TRAY_ICON)),
+          showTrayIconSetting_(settings.get(SettingKey::APPEARANCE_SHOW_TRAY_ICON)),
+          customTrayIconSetting_(settings.get(SettingKey::APPEARANCE_CUSTOM_TRAY_ICON)),
           qSystemTrayIcon_(IconProvider::trayIcon())
 {
     connect(&qSystemTrayIcon_, &QSystemTrayIcon::activated, this, &SystemTrayIcon::onActivated);
     connect(&showTrayIconSetting_, &Setting::valueChanged, this, &SystemTrayIcon::onShowTrayIconSettingValueChanged);
+    connect(&customTrayIconSetting_, &Setting::valueChanged, this, &SystemTrayIcon::updateIcon);
     setUpMenu();
+    updateIcon();
+}
+
+void SystemTrayIcon::updateIcon()
+{
+    qSystemTrayIcon_.setIcon(
+        customTrayIconSetting_.value().toString() == "" ?
+        IconProvider::trayIcon() :
+        QIcon(customTrayIconSetting_.value().toString())
+    );
 }
 
 void SystemTrayIcon::show()
