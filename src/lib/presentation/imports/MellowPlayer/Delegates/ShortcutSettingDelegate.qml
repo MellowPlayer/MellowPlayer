@@ -38,6 +38,13 @@ ItemDelegate {
             text: model.qtObject.value
 
             Keys.onPressed: {
+                if (event.key === Qt.Key_Backspace|| event.key === Qt.Key_Delete) {
+                    timerRecording.stop();
+                    placeholderText = ""
+                    text = "";
+                    return
+                }
+
                 nbKeyPressed += 1
 
                 if (nbKeyPressed > 3) {
