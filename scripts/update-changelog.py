@@ -121,18 +121,14 @@ def merged_merge_requests(merge_requests):
 
 
 def format_issue(issue):
-    formatted = f"- {issue.title} [\\#{issue.iid}](https://gitlab.com/ColinDuquesnoy/MellowPlayer/issues/{issue.iid})"
-    author = issue.author['username']
-    if author != "ColinDuquesnoy":
-        formatted += f" ([{author}](https://github.com/{author}))"
-    return formatted
+    return f"- {issue.title} [\\#{issue.iid}](https://gitlab.com/ColinDuquesnoy/MellowPlayer/issues/{issue.iid})"
 
 
 def format_merge_request(mr):
     formatted = f"- {mr.title} [\\#{mr.iid}](https://gitlab.com/ColinDuquesnoy/MellowPlayer/merge_requests/{mr.iid})"
     author = mr.author['username']
     if author != "ColinDuquesnoy":
-        formatted += f" ([{author}](https://github.com/{author}))"
+        formatted += f" ([{author}](https://gitlab.com/{author}))"
     return formatted
 
 
