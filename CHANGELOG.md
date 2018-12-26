@@ -1,4 +1,39 @@
-# Change Log
+# Change log
+
+## [3.5.0](https://gitlab.com/ColinDuquesnoy/MellowPlayer/tree/3.5.0) (2018-12-26)
+[Full Changelog](https://gitlab.com/ColinDuquesnoy/MellowPlayer/compare/3.4.0...3.5.0)
+
+**Implemented enhancements:**
+
+- Add option to disable shortcuts [\#310](https://gitlab.com/ColinDuquesnoy/MellowPlayer/issues/310) ([gombosg](https://github.com/gombosg))
+- Make use of the gitlab service desk feature [\#304](https://gitlab.com/ColinDuquesnoy/MellowPlayer/issues/304)
+- Customize main toolbar content [\#302](https://gitlab.com/ColinDuquesnoy/MellowPlayer/issues/302)
+- Add shortcut to hide player bar [\#298](https://gitlab.com/ColinDuquesnoy/MellowPlayer/issues/298)
+- Option to hide scrollbar. [\#285](https://gitlab.com/ColinDuquesnoy/MellowPlayer/issues/285) ([Ixoos](https://github.com/Ixoos))
+- Add a start-minimized option [\#283](https://gitlab.com/ColinDuquesnoy/MellowPlayer/issues/283)
+- Show zoom widget in main menu [\#281](https://gitlab.com/ColinDuquesnoy/MellowPlayer/issues/281)
+- HiDPI scaling [\#271](https://gitlab.com/ColinDuquesnoy/MellowPlayer/issues/271)
+- Possibility to redefine tray icon [\#234](https://gitlab.com/ColinDuquesnoy/MellowPlayer/issues/234)
+
+**Fixed bugs:**
+
+- Listening history section line separator is misplaced with Qt > 5.9.3 [\#305](https://gitlab.com/ColinDuquesnoy/MellowPlayer/issues/305)
+- MPRIS doesn't work with Spotify on Plasma [\#297](https://gitlab.com/ColinDuquesnoy/MellowPlayer/issues/297)
+- Unable to login to Yandex Music with Google account [\#287](https://gitlab.com/ColinDuquesnoy/MellowPlayer/issues/287)
+
+
+**Closed issues:**
+
+- Use bintray rest API for the auto-update mechanism [\#303](https://gitlab.com/ColinDuquesnoy/MellowPlayer/issues/303)
+- QBS is deprecated: swich back to CMake [\#291](https://gitlab.com/ColinDuquesnoy/MellowPlayer/issues/291)
+
+
+**Merged merge requests:**
+
+- Fix Spotify integration: update query selectors [\#292](https://gitlab.com/ColinDuquesnoy/MellowPlayer/merge_requests/292)
+- Fixing TIDAL and Listening History [\#289](https://gitlab.com/ColinDuquesnoy/MellowPlayer/merge_requests/289) ([t-bond](https://github.com/t-bond))
+- Netflix addon [\#270](https://gitlab.com/ColinDuquesnoy/MellowPlayer/merge_requests/270) ([NicolasGuilloux](https://github.com/NicolasGuilloux))
+- YouTube Music Addon [\#268](https://gitlab.com/ColinDuquesnoy/MellowPlayer/merge_requests/268) ([NicolasGuilloux](https://github.com/NicolasGuilloux))
 
 ## [3.4.0](https://github.com/ColinDuquesnoy/MellowPlayer/tree/3.4.0) (2018-07-08)
 [Full Changelog](https://github.com/ColinDuquesnoy/MellowPlayer/compare/3.3.5...3.4.0)
