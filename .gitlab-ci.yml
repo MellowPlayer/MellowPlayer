@@ -5,7 +5,7 @@ stages:
     - deploy
 
 variables:
-    APP_VERSION: '3.5.0'
+    APP_VERSION: '3.5.90'
 
 
 .linux:
