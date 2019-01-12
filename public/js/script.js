@@ -46,7 +46,7 @@ $(document).ready(function() {
         }
     }
 
-    function handleMenuItemClick(thisElement, itemName) {
+    function handleMenuItemClick(thisElement, itemName, event) {
         enableDirectionWaypoints(false);
         event.preventDefault();        
         $(".menu a").removeClass('active');        
@@ -59,7 +59,7 @@ $(document).ready(function() {
 
     //Using Waypoints
     $(".menu a:contains('services')").on('click', function(event) {
-        handleMenuItemClick(this, 'services');
+        handleMenuItemClick(this, 'services', event);
     });
 
     //On scroll current section get his respective menu link activated
@@ -81,7 +81,7 @@ $(document).ready(function() {
    
     
     $(".menu a:contains('features')").on('click', function(event) {
-        handleMenuItemClick(this, 'features');
+        handleMenuItemClick(this, 'features', event);
     });
     //On scroll current section get his respective menu link activated
     // $('.features').waypoint(function() {
@@ -106,7 +106,7 @@ $(document).ready(function() {
     
 
     $(".menu a:contains('downloads')").on('click', function(event) {
-        handleMenuItemClick(this, 'downloads');
+        handleMenuItemClick(this, 'downloads', event);
     });
 
     // On scroll current section get his respective menu link activated
@@ -130,7 +130,7 @@ $(document).ready(function() {
     
 
     $(".menu a:contains('contributing')").on('click', function(event) {
-        handleMenuItemClick(this, 'contribution');
+        handleMenuItemClick(this, 'contribution', event);
     });
 
     directionWaypoints.push(new Waypoint({
