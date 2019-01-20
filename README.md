@@ -58,7 +58,14 @@ You can download official binaries from [BinTray](https://bintray.com/colinduque
 
 - CMake >= 3.10
 - a c++17 compiler (gcc6, msvc 2015 or clang)
-- Qt5 (>= 5.9.0, QtWebEngine and QtQuickControls2 needed)
+- Qt5 >= 5.9.0:
+  - QtConcurrent
+  - QtDBus
+  - QtLinguisticTools
+  - QtQuickControls2
+  - QtSql
+  - QtSvg
+  - QtWebEngine compiled with Widget support
 - Libnotify (optional, GNU/Linux only)
 
 ## Bundled 3rd-parties
