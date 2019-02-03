@@ -9,6 +9,8 @@ Item {
         id: mainWindow_
 
         visible: true
+
+        Component.onCompleted: _devTools.showDevTools()
     }
 
     property Component devToolsWindowComponent: DevToolsWindow {

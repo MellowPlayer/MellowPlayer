@@ -105,8 +105,12 @@ function getDuration() {
 }
 
 function getVolume() {
-    var volumeStr = document.querySelector(`${nowPlayingBar} > div.now-playing-bar__right > div > div > div > div > div > div.progress-bar__fg`).style.width.replace("%", "");
-    return parseFloat(volumeStr) / 100.0;
+    try {
+        var value = parseFloat(document.querySelector(`${nowPlayingBar} > div.now-playing-bar__right > div > div > div > div > div > div > div.progress-bar__fg`).style.transform.replace("translateX(", "").replace("%)", ""))
+        return (100.0 + value) / 100.0;
+    } catch (e) {
+        return 1;
+    }
 }
 
 function getArtUrl() {
