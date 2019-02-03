@@ -129,7 +129,7 @@ ToolBar {
         IconToolButton {
             enabled: _player.canGoNext && d.isPlayerActive()
             iconChar: MaterialIcons.icon_fast_forward
-            tooltip: qsTr("Skip to next song") && _settings.get(SettingKey.APPEARANCE_PLAYER_CONTROLS_VISIBLE).value
+            tooltip: qsTr("Skip to next song")
             visible: mainWindow.isOnRunningServicesPage && _settings.get(SettingKey.APPEARANCE_PLAYER_CONTROLS_VISIBLE).value
             shortcut: _settings.get(SettingKey.SHORTCUTS_NEXT).value
 
