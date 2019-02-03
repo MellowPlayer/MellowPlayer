@@ -64,6 +64,9 @@ int Program::main(int argc, char** argv)
     qputenv("QTWEBENGINE_DIALOG_SET", "QtQuickControls2");
     qputenv("QTWEBENGINE_REMOTE_DEBUGGING", "4242");
 
+    HiDPISupport hiDPISupport;
+    hiDPISupport.configure();
+
     QApplication qApplication(argc, argv);
     qApplication.setApplicationName("MellowPlayer");
     qApplication.setApplicationDisplayName("MellowPlayer");
@@ -82,9 +85,6 @@ int Program::main(int argc, char** argv)
                                       defaultInjector(scope),
                                       platformInjector(scope),
                                       notificationPresenterInjector(scope));
-
-    auto& hiDPISupport = injector.create<HiDPISupport&>();
-    hiDPISupport.configure();
 
     auto& program = injector.create<Program&>();
     return program.run();

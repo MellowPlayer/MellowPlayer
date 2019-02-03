@@ -4,15 +4,16 @@
 #include <MellowPlayer/Domain/Settings/Setting.hpp>
 #include <MellowPlayer/Domain/Settings/Settings.hpp>
 #include <MellowPlayer/Domain/Settings/SettingKey.hpp>
+#include <QSettings>
 
 using namespace MellowPlayer::Domain;
 using namespace MellowPlayer::Presentation;
 
 SCENARIO("HiDPI Support")
 {
-    MellowPlayer::Tests::DependencyPool pool;
-    Settings& settings = pool.getSettings();
-    HiDPISupport hiDPISupport(settings);
+    QString orgName = "MellowPlayer.Tests";
+    QSettings settings(orgName, "3");
+    HiDPISupport hiDPISupport(orgName);
 
 
     GIVEN("No scaling environment variable is set and automatic scaling is ON and scaling factor is set to 2.5")
@@ -20,8 +21,8 @@ SCENARIO("HiDPI Support")
         qputenv("QT_AUTO_SCREEN_SCALE_FACTOR", "");
         qputenv("QT_SCALE_FACTOR", "");
 
-        settings.get(SettingKey::APPEARANCE_AUTO_HIDPI_SCALING).setValue(true);
-        settings.get(SettingKey::APPEARANCE_HIDPI_SCALING_FACTOR).setValue(250);
+        settings.setValue(SettingKey::toString(SettingKey::APPEARANCE_AUTO_HIDPI_SCALING), true);
+        settings.setValue(SettingKey::toString(SettingKey::APPEARANCE_HIDPI_SCALING_FACTOR), 250);
 
         WHEN("configure is called")
         {
@@ -44,8 +45,8 @@ SCENARIO("HiDPI Support")
         qputenv("QT_AUTO_SCREEN_SCALE_FACTOR", "");
         qputenv("QT_SCALE_FACTOR", "");
 
-        settings.get(SettingKey::APPEARANCE_AUTO_HIDPI_SCALING).setValue(false);
-        settings.get(SettingKey::APPEARANCE_HIDPI_SCALING_FACTOR).setValue(250);
+        settings.setValue(SettingKey::toString(SettingKey::APPEARANCE_AUTO_HIDPI_SCALING), false);
+        settings.setValue(SettingKey::toString(SettingKey::APPEARANCE_HIDPI_SCALING_FACTOR), 250);
 
         WHEN("configure is called")
         {
@@ -70,8 +71,8 @@ SCENARIO("HiDPI Support")
         qputenv("QT_AUTO_SCREEN_SCALE_FACTOR", initialAutoScaling);
         qputenv("QT_SCALE_FACTOR", initialScalingFactor);
 
-        settings.get(SettingKey::APPEARANCE_AUTO_HIDPI_SCALING).setValue(false);
-        settings.get(SettingKey::APPEARANCE_HIDPI_SCALING_FACTOR).setValue(250);
+        settings.setValue(SettingKey::toString(SettingKey::APPEARANCE_AUTO_HIDPI_SCALING), false);
+        settings.setValue(SettingKey::toString(SettingKey::APPEARANCE_HIDPI_SCALING_FACTOR), 250);
 
         WHEN("configure is called")
         {
