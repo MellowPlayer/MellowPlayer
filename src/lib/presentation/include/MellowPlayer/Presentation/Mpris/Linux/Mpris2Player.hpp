@@ -33,9 +33,9 @@ namespace MellowPlayer::Presentation
         Q_PROPERTY(qlonglong Position READ position)
         Q_PROPERTY(int MinimuRate READ minimumRate)
         Q_PROPERTY(int MaximuRate READ maximumRate)
-        Q_PROPERTY(int Rate READ rate WRITE setRate)
+        Q_PROPERTY(double Rate READ rate WRITE setRate)
         Q_PROPERTY(double Volume READ volume WRITE setVolume)
-        Q_PROPERTY(int Shuffle READ shuffle WRITE setShuffle)
+        Q_PROPERTY(bool Shuffle READ shuffle WRITE setShuffle)
         Q_PROPERTY(QString LoopStatus READ loopStatus WRITE setLoopStatus)
         Q_PROPERTY(QString PlaybackStatus READ playbackStatus)
 
