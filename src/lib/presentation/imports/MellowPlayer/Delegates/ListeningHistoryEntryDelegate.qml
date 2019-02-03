@@ -56,6 +56,9 @@ Frame {
 
     Pane {
         anchors.fill: parent
+        padding: 0
+        leftPadding: 12
+        rightPadding: 12
 
         RowLayout {
             anchors.fill: parent
@@ -119,6 +122,7 @@ Frame {
         anchors.bottom: parent.bottom
         opacity: 0.9
         visible: false
+        padding: 0
 
         RowLayout {
             anchors.top: parent.top
