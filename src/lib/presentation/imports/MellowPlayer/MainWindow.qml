@@ -33,11 +33,16 @@ ApplicationWindow {
 
     function toggleFullScreen(request) {
         if (request.toggleOn) {
+            d.previousVisibility = mainWindow.visibility
             mainWindow.showFullScreen();
             fullScreenNotification.visible = true;
         }
-        else
-            mainWindow.visibility = d.previousVisibility;
+        else {
+            mainWindow.visibility = d.previousVisibility
+            mainWindow.showNormal()
+            if (d.previousVisibility === ApplicationWindow.Maximized)
+                mainWindow.showMaximized()
+        }
         mainToolBar.visible = !request.toggleOn;
         request.accept();
     }
@@ -234,8 +239,10 @@ ApplicationWindow {
 
     Shortcut {
         sequence: "Escape";
+        context: "ApplicationShortcut"
 
         onActivated: d.handleEscapeKey()
+        onActivatedAmbiguously: d.handleEscapeKey()
     }
 
     Shortcut {
@@ -265,9 +272,14 @@ ApplicationWindow {
 
         function handleEscapeKey() {
             if (mainWindow.visibility === ApplicationWindow.FullScreen) {
-                mainWindow.visibility = d.previousVisibility;
                 runningServices.exitFullScreen();
+                mainWindow.visibility = d.previousVisibility;
+                runningServicesPage.currentWebView.forceActiveFocus()
             }
+            else if (settingsDrawer.visible)
+                settingsDrawer.close()
+            else if (aboutDialog.visible)
+                aboutDialog.close()
             else if (!mainWindow.isOnRunningServicesPage) {
                 stack.slideTransitions = false;
                 mainWindow.toggleActivePage()

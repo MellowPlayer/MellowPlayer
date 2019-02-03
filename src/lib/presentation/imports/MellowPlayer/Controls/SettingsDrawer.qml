@@ -9,11 +9,6 @@ Drawer {
     edge: Qt.RightEdge
     interactive: false
 
-    Shortcut {
-        sequence: "Escape"
-        onActivated: close()
-    }
-
     SettingsPage {
         anchors.fill: parent
         onCloseRequested: close()
