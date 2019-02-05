@@ -1,5 +1,21 @@
 # Change log
 
+## [3.5.1](https://gitlab.com/ColinDuquesnoy/MellowPlayer/tree/3.5.1) (2019-2-5)
+[Full Changelog](https://gitlab.com/ColinDuquesnoy/MellowPlayer/compare/3.5.0...3.5.1)
+
+
+**Fixed bugs:**
+
+- MPRIS: Invalid types used for Rate & Shuffle properties [\#320](https://gitlab.com/ColinDuquesnoy/MellowPlayer/issues/320)
+- Broken Spotify integration plugin [\#319](https://gitlab.com/ColinDuquesnoy/MellowPlayer/issues/319)
+- Window is not maximized anymore after exit from full-screen [\#318](https://gitlab.com/ColinDuquesnoy/MellowPlayer/issues/318)
+- Tooltip for "Next song" button is "true" [\#312](https://gitlab.com/ColinDuquesnoy/MellowPlayer/issues/312)
+- HiDPI scaling [\#271](https://gitlab.com/ColinDuquesnoy/MellowPlayer/issues/271)
+
+**Merged merge requests:**
+
+- Add amazon music player [\#296](https://gitlab.com/ColinDuquesnoy/MellowPlayer/merge_requests/296) ([tibocat](https://gitlab.com/tibocat))
+
 ## [3.5.0](https://gitlab.com/ColinDuquesnoy/MellowPlayer/tree/3.5.0) (2018-12-26)
 [Full Changelog](https://gitlab.com/ColinDuquesnoy/MellowPlayer/compare/3.4.0...3.5.0)
 

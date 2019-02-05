@@ -1,3 +1,15 @@
+"""
+Update changelog.
+
+Requirements:
+
+- python-gitlab
+
+Usage:
+
+python scripts/update-changelog.py 3.5.0 3.5.1
+
+"""
 import datetime
 import os
 import sys
