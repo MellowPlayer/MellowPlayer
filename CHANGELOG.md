@@ -1,5 +1,13 @@
 # Change log
 
+## [3.5.2](https://gitlab.com/ColinDuquesnoy/MellowPlayer/tree/3.5.2) (2019-2-10)
+[Full Changelog](https://gitlab.com/ColinDuquesnoy/MellowPlayer/compare/3.5.1...3.5.2)
+
+**Closed issues:**
+
+- compilation fails with GCC 9: redundant move in return statement [-Werror=redundant-move] [\#321](https://gitlab.com/ColinDuquesnoy/MellowPlayer/issues/321)
+
+
 ## [3.5.1](https://gitlab.com/ColinDuquesnoy/MellowPlayer/tree/3.5.1) (2019-2-5)
 [Full Changelog](https://gitlab.com/ColinDuquesnoy/MellowPlayer/compare/3.5.0...3.5.1)
 
