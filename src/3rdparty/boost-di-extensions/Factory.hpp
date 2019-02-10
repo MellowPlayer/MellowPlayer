@@ -42,7 +42,7 @@ struct factory_impl<TInjector, T, IFactory<I, TArgs...>> : IFactory<I, TArgs...>
 
         auto object = injector.template create<std::unique_ptr<T>>();
         injector_ = std::move(injector);
-        return std::move(object);
+        return object;
     }
 
 private:
