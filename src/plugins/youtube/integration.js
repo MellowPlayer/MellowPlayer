@@ -44,21 +44,28 @@ function update() {
     player = document.getElementById("movie_player");
 
     // An ad is currently played
-    var adContainer = document.getElementsByClassName('videoAdUiSkipContainer')[0];
+    var adContainer = document.getElementsByClassName('ytp-ad-skip-button-container')[0];
     if( adContainer ) {
 
         // If the ad can't be skipped, the sound is muted
-        if( adContainer.style.display == "none" ) {
+        if (adContainer.style.display == "none") {
             if (pluginSettings.muteAds)
                 player.mute();
 
         // If the ad can be skipped, the sound is unmuted and the ad skipped
-        } else if( document.getElementsByClassName('videoAdUiSkipButton')[0] ) {
+        } else if (document.getElementsByClassName('ytp-ad-skip-button')[0]) {
             if (pluginSettings.skipAds)
-                document.getElementsByClassName('videoAdUiSkipButton')[0].click();
+                document.getElementsByClassName('ytp-ad-skip-button')[0].click();
             if (pluginSettings.muteAds)
                 player.unMute();
         }
+    }
+
+    // Popup ads
+    if (pluginSettings.closePopupAds) {
+        var popupAdCloseButton = document.getElementsByClassName('ytp-ad-overlay-close-button')[0];
+        if (popupAdCloseButton)
+            popupAdCloseButton.click();
     }
 
     // Playback status
@@ -80,11 +87,16 @@ function update() {
     }
 
     // Song title
-    var songTitle = document.getElementsByTagName('h1')[0].innerText;
+    var songTitle = '';
+    if (document.getElementsByTagName('h1')[0]) {
+        var songTitle = document.getElementsByTagName('h1')[0].innerText;
+    }
 
     // Artist name
-    var artistName = document.getElementById('owner-container').innerText;
-
+    var artistName = '';
+    if (document.getElementById('owner-container')) {
+        var artistName = document.getElementById('owner-container').innerText;
+    }
     // Art URL
     var artUrl = "https://img.youtube.com/vi/"+ player.getVideoData().video_id + "/hqdefault.jpg"
 
