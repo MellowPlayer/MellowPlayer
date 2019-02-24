@@ -69,3 +69,8 @@ qt\.zip
 *.dmg
 *.qm
 languages.qrc
+
+/_build/
+/.flatpak-builder/
+/repo/
+*.flatpak
