@@ -1,0 +1,16 @@
+Index: com.gitlab.ColinDuquesnoy.MellowPlayer.yml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- com.gitlab.ColinDuquesnoy.MellowPlayer.yml	(revision ee364462ffe8982de48800a4c852686e34d8248f)
++++ com.gitlab.ColinDuquesnoy.MellowPlayer.yml	(date 1551013958000)
+@@ -29,6 +29,5 @@
+   - name: MellowPlayer
+     buildsystem: cmake
+     sources:
+-      - type: archive
+-        url: https://gitlab.com/ColinDuquesnoy/MellowPlayer/-/archive/3.5.2/MellowPlayer-3.5.2.tar.gz
+-        sha256: 56d9957667ff9b30d35a37620e9de6357d26c460cfb4fc637c1cfdaae04a8969
++      - type: dir
++        path: .
