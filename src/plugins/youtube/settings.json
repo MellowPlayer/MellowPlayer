@@ -12,5 +12,12 @@
         "type": "bool",
         "default": false,
         "key": "skipAds"
+    },
+    {
+        "name": "Automatically close the bottom banner ads",
+        "tooltip": "Automatically close the ads at the bottom of the video",
+        "type": "bool",
+        "default": false,
+        "key": "closePopupAds"
     }
 ]

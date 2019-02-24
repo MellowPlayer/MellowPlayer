@@ -45,8 +45,8 @@ function update() {
     }
 
     // An ad is currently played
-    var adContainer = document.getElementsByClassName('videoAdUiSkipContainer')[0];
-    if( adContainer ) {
+    var adContainer = document.getElementsByClassName('ytp-ad-skip-button-container')[0];
+    if (adContainer) {
 
         // If the ad can't be skipped, the sound is muted
         if( adContainer.style.display == "none" ) {
@@ -54,16 +54,23 @@ function update() {
                 player.mute();
 
         // If the ad can be skipped, the sound is unmuted and the ad skipped
-        } else if( document.getElementsByClassName('videoAdUiSkipButton')[0] ) {
+        } else if( document.getElementsByClassName('ytp-ad-skip-button')[0] ) {
             if (pluginSettings.skipAds)
-                document.getElementsByClassName('videoAdUiSkipButton')[0].click();
+                document.getElementsByClassName('ytp-ad-skip-button')[0].click();
             if (pluginSettings.muteAds)
                 player.unMute();
         }
     }
 
+    // Popup ads
+    if (pluginSettings.closePopupAds) {
+        var popupAdCloseButton = document.getElementsByClassName('ytp-ad-overlay-close-button')[0];
+        if (popupAdCloseButton)
+            popupAdCloseButton.click();
+    }
+
     // Playback status
-    if( player.paused ) {
+    if (player.paused) {
         var playbackStatus = mellowplayer.PlaybackStatus.PAUSED;
     } else {
         var playbackStatus = mellowplayer.PlaybackStatus.PLAYING;
