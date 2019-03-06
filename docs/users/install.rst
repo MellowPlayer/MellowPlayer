@@ -7,11 +7,18 @@ supported operating systems.
 GNU/Linux
 ---------
 
-We provide both an AppImage that should run on most linux distributions, we also provide distribution specific packages can be download from `openSUSE build service`_.
+We provide several ways to install a pre-compiled version of MellowPlayer on GNU/Linux:
 
-To use the AppImage, just grab the AppImage from the `official website`_ , make it executable (chmod +x MellowPlayer-x86_64.AppImage) and run it.
+1. Native package (only for Ubuntu, Fedora, ArchLinux & openSUSE)
+2. Flatpak
+3. AppImage
 
-Please note that there are some limitations with the AppImage: e.g. it does not include proprietary codecs for licensing reasons. For that reason, it is always preferable to use a native package.
+To choose which kind of installer you should use, follow those simple rules:
+
+- Always prefer the native package to any other format if that is available for your distribution.
+Native package will always integrate better with your desktop and, in most cases, it will pick up proprietary codecs (ffmpeg) from your system if installed.
+- Prefer flatpak over AppImage, especially if the service you want to use require proprietary audio codecs.
+- Use the AppImage if flatpak is not available on your distribution (very unlikely) and you don't need proprietary codecs.
 
 Fedora
 ++++++
@@ -59,6 +66,8 @@ Spotify requires the widevine ppapi plugin to work, you can install it by runnin
     sudo cp ./usr/lib/chromium/libwidevinecdmadapter.so /usr/lib/chromium
     sudo chmod 644 /usr/lib/chromium/libwidevinecdm.so
     sudo chmod 644 /usr/lib/chromium/libwidevinecdmadapter.so
+
+.. note:: You might need to adapt this script to download a version of chromium and widevine that match the version used by your Qt installation.
 
 
 Ubuntu 18.04
@@ -150,10 +159,27 @@ MellowPlayer is available from `KaOSx/apps`_ repository, just run:
 .. _KaOSx/apps: http://kaosx.tk/packages/index.php?subdir=apps&sortby=name
 
 
-Other distributions
-+++++++++++++++++++
+Flatpak
++++++++
 
-You will have to compile from source or use the AppImage.
+MellowPlayer's flatpak is not yet available on flathub but you can download and install a single file bundle:
+
+1. Download the flatpak from our `bintray repository`_
+2. Install the flatpak: ``flatpak install ./MellowPlayer.flatpak``
+3. Run the flatpak from your application menu or from command line: ``flatpak run com.gitlab.ColinDuquesnoy.MellowPlayer``
+
+
+AppImage
+++++++++
+
+1. Download the AppImage from our `bintray repository`_
+2. Make it executable: ``chmod +x ./MellowPlayer.AppImage``
+3. Run it: ``./MellowPlayer.AppImage``
+
+.. _bintray repository: https://bintray.com/colinduquesnoy/MellowPlayer/Stable
+
+Compiling from source
++++++++++++++++++++++
 
 See the `README`_ for build instructions.
 
@@ -164,7 +190,8 @@ Windows
 
 Just grab the windows installer from the `official website`_ (click on the **Windows folder**) and follow the instructions.
 
-Please note the Windows Installer we provide is built with a version of QtWebEngine built without proprietary codecs support (for licensing reasons). If your favorite service require proprietary codecs to work, you'll need to build QtWebEngine with the flag ``use_proprietary_codecs`` and build MellowPlayer using that QtWebEngine version.
+Please note the Windows Installer we provide is built with a version of QtWebEngine built without proprietary codecs support (for licensing reasons).
+If your favorite service require proprietary codecs to work, you'll need to build QtWebEngine with the flag ``use_proprietary_codecs`` and build MellowPlayer using that QtWebEngine version.
 
 
 .. _official website: https://colinduquesnoy.gitlab.io/MellowPlayer
