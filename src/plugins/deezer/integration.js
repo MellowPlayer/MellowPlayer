@@ -16,10 +16,6 @@
 // along with MellowPlayer.  If not, see <http://www.gnu.org/licenses/>.
 //
 //-----------------------------------------------------------------------------
-function getLoveButton() {
-    return document.querySelector("#page_player > div > div.player-track > div > div.track-heading > div.track-actions > ul > li:nth-child(3) > button");
-}
-
 function update() {
     var playbackStatus = mellowplayer.PlaybackStatus.STOPPED;
     if (dzPlayer.isPlaying())
@@ -47,9 +43,17 @@ function update() {
     }
 }
 
+function getLoveButton() {
+    return document.getElementsByClassName("svg-icon-love-outline")[0].parentElement;
+}
+
+function getLoveButtonSvg() {
+    return getLoveButton().children[0];
+}
+
 function isFavorite() {
     try {
-        return getLoveButton().children[0].className.baseVal.indexOf("is-active") !== -1
+        return getLoveButtonSvg().className.baseVal.indexOf("is-active") !== -1
     }
     catch (e) {
         return false;
