@@ -15,8 +15,7 @@ We provide several ways to install a pre-compiled version of MellowPlayer on GNU
 
 To choose which kind of installer you should use, follow those simple rules:
 
-- Always prefer the native package to any other format if that is available for your distribution.
-Native package will always integrate better with your desktop and, in most cases, it will pick up proprietary codecs (ffmpeg) from your system if installed.
+- Always prefer the native package to any other format if that is available for your distribution. Native package will always integrate better with your desktop and, in most cases, it will pick up proprietary codecs (ffmpeg) from your system if installed.
 - Prefer flatpak over AppImage, especially if the service you want to use require proprietary audio codecs.
 - Use the AppImage if flatpak is not available on your distribution (very unlikely) and you don't need proprietary codecs.
 
