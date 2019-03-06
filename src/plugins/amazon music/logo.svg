@@ -22,7 +22,7 @@
    inkscape:version="0.92.3 (2405546, 2018-03-11)"><metadata
    id="metadata17"><rdf:RDF><cc:Work
        rdf:about=""><dc:format>image/svg+xml</dc:format><dc:type
-         rdf:resource="http://purl.org/dc/dcmitype/StillImage" /><dc:title></dc:title></cc:Work></rdf:RDF></metadata><defs
+         rdf:resource="http://purl.org/dc/dcmitype/StillImage" /><dc:title /></cc:Work></rdf:RDF></metadata><defs
    id="defs15" /><sodipodi:namedview
    pagecolor="#ffffff"
    bordercolor="#666666"
@@ -36,22 +36,22 @@
    inkscape:window-height="1051"
    id="namedview13"
    showgrid="false"
-   inkscape:zoom="0.76623377"
-   inkscape:cx="154"
-   inkscape:cy="154"
+   inkscape:zoom="1.0836182"
+   inkscape:cx="15.94219"
+   inkscape:cy="15.407301"
    inkscape:window-x="1976"
    inkscape:window-y="0"
    inkscape:window-maximized="1"
    inkscape:current-layer="Layer_1" />
 <circle
-   fill="#7F7F7F"
    cx="153.999"
    cy="154.945"
    r="154.08"
-   id="circle2" />
+   id="circle2"
+   fill="#7F7F7F" />
 
 <g
-   transform="matrix(2.3341727,0,0,2.5309648,49.516203,45.900264)"
+   transform="matrix(2.7095578,0,0,2.9379983,31.954475,25.673081)"
    id="g92"
    style="fill:#ffffff;fill-rule:nonzero"><linearGradient
      id="SVGID_1_"
