@@ -30,6 +30,7 @@ echo "Copying missing files..."
 cp ${QT_DIR}/plugins/imageformats/libqsvg.so ./appdir/usr/plugins/imageformats/
 
 # create appimage
-./linuxdeployqt*.AppImage ./appdir/usr/share/applications/*.desktop -exclude-libs="libnss3.so,libnssutil3.so" -appimage
+./linuxdeployqt*.AppImage ./appdir/usr/share/applications/*.desktop -exclude-libs="libnss3.so,libnssutil3.so" -appimage -verbose=2
+ls -al
 mv MellowPlayer-*-x86_64.AppImage MellowPlayer-x86_64.AppImage
 chmod +x MellowPlayer-x86_64.AppImage
