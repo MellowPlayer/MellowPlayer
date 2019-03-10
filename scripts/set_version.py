@@ -55,17 +55,18 @@ def update_gitlab():
 
 
 def update_flatpak():
-    file_name = "com.gitlab.ColinDuquesnoy.MellowPlayer.yml"
-    with open(file_name, 'r') as f:
-        content = f.read()
-    matches = re.findall(r'https://gitlab.com/ColinDuquesnoy/MellowPlayer/-/archive/(\d.\d.\d)/.*', content)
-    current_version = matches[0]
-    url = 'https://gitlab.com/ColinDuquesnoy/MellowPlayer/-/archive/%s/MellowPlayer-%s.tar.gz'
-    old_url = url % (current_version, current_version)
-    new_url = url % (new_version, new_version)
-    content = content.replace(old_url, new_url)
-    with open(file_name, 'w') as f:
-        f.write(content)
+    file_names = ["com.gitlab.ColinDuquesnoy.MellowPlayer.yml", "scripts/ci/linux/flatpak-build-local-sources.patch"]
+    for file_name in file_names:
+        with open(file_name, 'r') as f:
+            content = f.read()
+        matches = re.findall(r'https://gitlab.com/ColinDuquesnoy/MellowPlayer/-/archive/(\d.\d.\d)/.*', content)
+        current_version = matches[0]
+        url = 'https://gitlab.com/ColinDuquesnoy/MellowPlayer/-/archive/%s/MellowPlayer-%s.tar.gz'
+        old_url = url % (current_version, current_version)
+        new_url = url % (new_version, new_version)
+        content = content.replace(old_url, new_url)
+        with open(file_name, 'w') as f:
+            f.write(content)
 
 
 update_conf_py_version()
