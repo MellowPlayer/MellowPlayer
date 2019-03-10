@@ -19,7 +19,7 @@ qmake -v
 
 # download linuxdployqt
 echo "downloading linuxdeployqt"
-wget -c "https://github.com/probonopd/linuxdeployqt/releases/download/continuous/linuxdeployqt-continuous-x86_64.AppImage"
+wget -c "https://github.com/probonopd/linuxdeployqt/releases/download/6/linuxdeployqt-6-x86_64.AppImage"
 chmod a+x linuxdeployqt*.AppImage
 
 # create appdir
@@ -31,6 +31,5 @@ cp ${QT_DIR}/plugins/imageformats/libqsvg.so ./appdir/usr/plugins/imageformats/
 
 # create appimage
 ./linuxdeployqt*.AppImage ./appdir/usr/share/applications/*.desktop -exclude-libs="libnss3.so,libnssutil3.so" -appimage -verbose=2
-ls -al
 mv MellowPlayer-*-x86_64.AppImage MellowPlayer-x86_64.AppImage
 chmod +x MellowPlayer-x86_64.AppImage
