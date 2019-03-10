@@ -1,5 +1,25 @@
 # Change log
 
+## [3.5.3](https://gitlab.com/ColinDuquesnoy/MellowPlayer/tree/3.5.3) (2019-3-10)
+[Full Changelog](https://gitlab.com/ColinDuquesnoy/MellowPlayer/compare/3.5.2...3.5.3)
+
+
+**Fixed bugs:**
+
+- [Deezer] Love button does not always work [\#326](https://gitlab.com/ColinDuquesnoy/MellowPlayer/issues/326)
+- [Youtube Music] Mute and skip ads options don't work [\#322](https://gitlab.com/ColinDuquesnoy/MellowPlayer/issues/322)
+
+
+**Closed issues:**
+
+- [Amazon Music] Wrong icon format [\#324](https://gitlab.com/ColinDuquesnoy/MellowPlayer/issues/324)
+
+
+**Merged merge requests:**
+
+- [Youtube] fix ads mute/skip and add popup auto close [\#302](https://gitlab.com/ColinDuquesnoy/MellowPlayer/merge_requests/302) ([NicolasGuilloux](https://gitlab.com/NicolasGuilloux))
+- Add flatpak manifest [\#301](https://gitlab.com/ColinDuquesnoy/MellowPlayer/merge_requests/301) ([Cogitri](https://gitlab.com/Cogitri))
+
 ## [3.5.2](https://gitlab.com/ColinDuquesnoy/MellowPlayer/tree/3.5.2) (2019-2-10)
 [Full Changelog](https://gitlab.com/ColinDuquesnoy/MellowPlayer/compare/3.5.1...3.5.2)
 

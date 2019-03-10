@@ -6,7 +6,6 @@ Usage:
 python scripts/set_version.py 3.4.90
 """
 import re
-
 import sys
 
 new_version = sys.argv[1]
@@ -28,9 +27,9 @@ def update_cmake():
     file_name = 'CMakeLists.txt'
     with open(file_name, 'r') as f:
         content = f.read()
-    content = re.sub("set\(VERSION_MAJOR .*\)", "set(VERSION_MAJOR %s)" % version_major, content)
-    content = re.sub("set\(VERSION_MINOR .*\)", "set(VERSION_MINOR %s)" % version_minor, content)
-    content = re.sub("set\(VERSION_PATCH .*\)", "set(VERSION_PATCH %s)" % version_patch, content)
+    content = re.sub(r"set\(VERSION_MAJOR .*\)", "set(VERSION_MAJOR %s)" % version_major, content)
+    content = re.sub(r"set\(VERSION_MINOR .*\)", "set(VERSION_MINOR %s)" % version_minor, content)
+    content = re.sub(r"set\(VERSION_PATCH .*\)", "set(VERSION_PATCH %s)" % version_patch, content)
 
     with open(file_name, 'w') as f:
         f.write(content)
@@ -40,8 +39,8 @@ def update_appveyor():
     file_name = '.appveyor.yml'
     with open(file_name, 'r') as f:
         content = f.read()
-    content = re.sub('version: .*', "version: %s.{build}" % new_version, content)
-    content = re.sub('\s*APP_VERSION: .*', "\n    APP_VERSION: %s" % new_version, content)
+    content = re.sub(r'version: .*', "version: %s.{build}" % new_version, content)
+    content = re.sub(r'\s*APP_VERSION: .*', "\n    APP_VERSION: %s" % new_version, content)
     with open(file_name, 'w') as f:
         f.write(content)
 
@@ -50,7 +49,21 @@ def update_gitlab():
     file_name = '.gitlab-ci.yml'
     with open(file_name, 'r') as f:
         content = f.read()
-    content = re.sub("APP_VERSION: .*", "APP_VERSION: '%s'" % new_version, content)
+    content = re.sub(r"APP_VERSION: .*", "APP_VERSION: '%s'" % new_version, content)
+    with open(file_name, 'w') as f:
+        f.write(content)
+
+
+def update_flatpak():
+    file_name = "com.gitlab.ColinDuquesnoy.MellowPlayer.yml"
+    with open(file_name, 'r') as f:
+        content = f.read()
+    matches = re.findall(r'https://gitlab.com/ColinDuquesnoy/MellowPlayer/-/archive/(\d.\d.\d)/.*', content)
+    current_version = matches[0]
+    url = 'https://gitlab.com/ColinDuquesnoy/MellowPlayer/-/archive/%s/MellowPlayer-%s.tar.gz'
+    old_url = url % (current_version, current_version)
+    new_url = url % (new_version, new_version)
+    content = content.replace(old_url, new_url)
     with open(file_name, 'w') as f:
         f.write(content)
 
@@ -59,3 +72,4 @@ update_conf_py_version()
 update_cmake()
 update_appveyor()
 update_gitlab()
+update_flatpak()
