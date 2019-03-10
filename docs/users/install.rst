@@ -13,6 +13,7 @@ We provide several ways to install a pre-compiled version of MellowPlayer on GNU
 2. Flatpak
 3. AppImage
 
+
 To choose which kind of installer you should use, follow those simple rules:
 
 - Always prefer the native package to any other format if that is available for your distribution. Native package will always integrate better with your desktop and, in most cases, it will pick up proprietary codecs (ffmpeg) from your system if installed.
@@ -51,7 +52,7 @@ Services such as Deezer and Tidal require flash to work. You can install it from
 Widevine
 ********
 
-Spotify requires the widevine ppapi plugin to work, you can install it by running the below commands:
+Some services such as Spotify and Amazon Music requires the widevine ppapi plugin to work, you can install it by running the below commands:
 
 .. code-block:: bash
 
