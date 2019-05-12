@@ -17,12 +17,10 @@
 //
 //-----------------------------------------------------------------------------
 
-const nowPlayingBar = "#main > div > div.Root__now-playing-bar > footer > div.now-playing-bar";
-
 function getButtons() {
     function getPlayPauseButton() {
-        var playButton = document.querySelector(`${nowPlayingBar} > div.now-playing-bar__center > div > div.player-controls__buttons > button.control-button.spoticon-play-16.control-button--circled`);
-        var pauseButton = document.querySelector(`${nowPlayingBar} > div.now-playing-bar__center > div > div.player-controls__buttons > button.control-button.spoticon-pause-16.control-button--circled`);
+        var playButton = document.querySelector('button[title=Play]');
+        var pauseButton = document.querySelector('button[title=Pause]');
 
         if (playButton === null)
             return pauseButton;
@@ -31,15 +29,15 @@ function getButtons() {
     }
 
     function getSkipPreviousSongButton() {
-        return document.querySelector(`${nowPlayingBar} > div.now-playing-bar__center > div > div.player-controls__buttons > button.control-button.spoticon-skip-back-16`);
+        return document.querySelector('button[title=Previous]');
     }
 
     function getSkipNextSongButton() {
-        return document.querySelector(`${nowPlayingBar} > div.now-playing-bar__center > div > div.player-controls__buttons > button.control-button.spoticon-skip-forward-16`);
+        return document.querySelector('button[title=Next]');
     }
 
     function getAddRemoveToMusicButton() {
-        return document.querySelector(`${nowPlayingBar} > div.now-playing-bar__left > div > button`);
+        return document.querySelector('.now-playing > button');
     }
 
     return {
@@ -61,7 +59,7 @@ function getPlaybackStatus() {
 
 function getArtist() {
     try {
-        return document.querySelector(`${nowPlayingBar} > div.now-playing-bar__left > div > div > div.track-info__artists`).children[0].children[0].children[0].innerText;
+        return document.querySelector('.now-playing .track-info__artists').innerText;
     } catch (e) {
         return ""
     }
@@ -69,7 +67,7 @@ function getArtist() {
 
 function getSongTitle() {
     try {
-        return document.querySelector(`${nowPlayingBar} > div.now-playing-bar__left > div > div > div.track-info__name > div`).children[0].innerText;
+        return document.querySelector('.now-playing .track-info__name').innerText;
     } catch (e) {
         return ""
     }
@@ -97,16 +95,16 @@ function readTime(timeString) {
 }
 
 function getPosition() {
-    return readTime(document.querySelector(`${nowPlayingBar} > div.now-playing-bar__center > div > div.playback-bar > div:nth-child(1)`).innerText);
+    return readTime(document.querySelector('.playback-bar__progress-time:first-child').innerText);
 }
 
 function getDuration() {
-    return readTime(document.querySelector(`${nowPlayingBar} > div.now-playing-bar__center > div > div.playback-bar > div:nth-child(3)`).innerText);
+    return readTime(document.querySelector('.playback-bar__progress-time:last-child').innerText);
 }
 
 function getVolume() {
     try {
-        var value = parseFloat(document.querySelector(`${nowPlayingBar} > div.now-playing-bar__right > div > div > div > div > div > div > div.progress-bar__fg`).style.transform.replace("translateX(", "").replace("%)", ""))
+        var value = parseFloat(document.querySelector('.volume-bar .progress-bar__fg').style.transform.replace("translateX(", "").replace("%)", ""))
         return (100.0 + value) / 100.0;
     } catch (e) {
         return 1;
@@ -114,12 +112,12 @@ function getVolume() {
 }
 
 function getArtUrl() {
-    var artUrlDiv = document.querySelector(`${nowPlayingBar} > div.now-playing-bar__left > div > span > a > div > div > div > div.cover-art-image.cover-art-image-loaded`);
+    var artUrlDiv = document.querySelector('.now-playing .cover-art-image.cover-art-image');
     if (artUrlDiv === null) {
         return "";
     }
     var artUrl = artUrlDiv.style.backgroundImage;
-    return artUrl.replace('url("', "").replace('")', "");
+    return artUrl.replace('url("', '').replace('")', '');
 }
 
 function isFavorite() {
