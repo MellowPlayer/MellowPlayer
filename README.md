@@ -29,7 +29,7 @@ See the [list of supported services](https://gitlab.com/ColinDuquesnoy/MellowPla
 
 - [Official website](https://colinduquesnoy.gitlab.io/MellowPlayer)
 - [Documentation](http://mellowplayer.readthedocs.org/en/latest/)
-- [Wiki on Github](https://gitlab.com/ColinDuquesnoy/MellowPlayer/wikis/home)
+- [Wiki on GitLab](https://gitlab.com/ColinDuquesnoy/MellowPlayer/wikis/home)
 
 # License
 
