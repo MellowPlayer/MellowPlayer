@@ -71,4 +71,4 @@ if (USE_LD_GOLD AND GCC_COMPILER)
 endif()
 
 set(CMAKE_CXX_FLAGS_DEBUG "${CMAKE_CXX_FLAGS_DEBUG} -DQT_QML_DEBUG ")
-set(QML_IMPORT_PATH ${CMAKE_SOURCE_DIR}/src/lib/presentation/imports CACHE string "" FORCE)
+set(QML_IMPORT_PATH ${CMAKE_SOURCE_DIR}/src/lib/presentation/imports CACHE STRING "" FORCE)
