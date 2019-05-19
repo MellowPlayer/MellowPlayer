@@ -69,9 +69,11 @@ Some services such as Spotify and Amazon Music requires the widevine ppapi plugi
 
 .. note:: You might need to adapt this script to download a version of chromium and widevine that match the version used by your Qt installation.
 
+Ubuntu
+++++++
 
-Ubuntu 18.04
-++++++++++++
+18.04
+*****
 
 Before installing MellowPlayer, **make sure the universe repository is enabled**:
 
@@ -90,9 +92,30 @@ Install procedure:
     sudo apt update
     sudo apt install mellowplayer
 
+
+19.04
+*****
+
+Before installing MellowPlayer, **make sure the universe repository is enabled**:
+
+.. code-block:: bash
+
+    sudo add-apt-repository universe
+
+
+Install procedure:
+
+.. code-block:: bash
+
+    sudo sh -c "echo 'deb http://download.opensuse.org/repositories/home:/ColinDuquesnoy/xUbuntu_19.04/ /' > /etc/apt/sources.list.d/mellowplayer.list"
+    wget -nv https://download.opensuse.org/repositories/home:ColinDuquesnoy/xUbuntu_19.04/Release.key -O Release.key
+    sudo apt-key add - < Release.key
+    sudo apt update
+    sudo apt install mellowplayer
+
     
-Ubuntu 18.10
-++++++++++++
+18.10
+*****
 
 Before installing MellowPlayer, **make sure the universe repository is enabled**:
 
@@ -107,6 +130,36 @@ Install procedure:
 
     sudo sh -c "echo 'deb http://download.opensuse.org/repositories/home:/ColinDuquesnoy/xUbuntu_18.10/ /' > /etc/apt/sources.list.d/mellowplayer.list"
     wget -nv https://download.opensuse.org/repositories/home:ColinDuquesnoy/xUbuntu_18.10/Release.key -O Release.key
+    sudo apt-key add - < Release.key
+    sudo apt update
+    sudo apt install mellowplayer
+
+Debian
+++++++
+
+Stable
+******
+
+Debian 9 is not supported because their version of Qt is too outdated (5.7, we require 5.9).
+
+Testing
+*******
+
+.. code-block:: bash
+
+    sudo sh -c "echo 'deb https://download.opensuse.org/repositories/home:/ColinDuquesnoy/Debian_Testing/ /' > /etc/apt/sources.list.d/mellowplayer.list"
+    wget -nv https://download.opensuse.org/repositories/home:/ColinDuquesnoy/Debian_Testing/Release.key -O Release.key
+    sudo apt-key add - < Release.key
+    sudo apt update
+    sudo apt install mellowplayer
+
+Unstable
+********
+
+.. code-block:: bash
+
+    sudo sh -c "echo 'deb https://download.opensuse.org/repositories/home:/ColinDuquesnoy/Debian_Unstable/ /' > /etc/apt/sources.list.d/mellowplayer.list"
+    wget -nv https://download.opensuse.org/repositories/home:/ColinDuquesnoy/Debian_Unstable/Release.key -O Release.key
     sudo apt-key add - < Release.key
     sudo apt update
     sudo apt install mellowplayer
