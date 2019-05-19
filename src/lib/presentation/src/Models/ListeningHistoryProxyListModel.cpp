@@ -1,8 +1,9 @@
+#include <MellowPlayer/Presentation/Models/ListeningHistoryListModel.hpp>
 #include <MellowPlayer/Presentation/Models/ListeningHistoryProxyListModel.hpp>
 
 using namespace MellowPlayer::Presentation;
 
-ListeningHistoryProxyListModel::ListeningHistoryProxyListModel(QQmlObjectListModel<ListeningHistoryEntryViewModel>* sourceModel)
+ListeningHistoryProxyListModel::ListeningHistoryProxyListModel(ListeningHistoryListModel * sourceModel)
         : sourceModel_(sourceModel)
 {
     setSourceModel(sourceModel);

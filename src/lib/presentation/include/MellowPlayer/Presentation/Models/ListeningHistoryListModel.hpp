@@ -5,5 +5,5 @@
 
 namespace MellowPlayer::Presentation
 {
-    using ListeningHistoryListModel = QQmlObjectListModel<ListeningHistoryEntryViewModel>;
+    using ListeningHistoryListModel = ProgressiveQQmlObjectListModel<ListeningHistoryEntryViewModel>;
 }

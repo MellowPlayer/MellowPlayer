@@ -494,4 +494,32 @@ private: // data members
     QHash<QString, ItemType*> m_indexByUid;
 };
 
+template <class ItemType>
+class ProgressiveQQmlObjectListModel : public QQmlObjectListModel<ItemType>
+{
+public:
+    using QQmlObjectListModel<ItemType>::QQmlObjectListModel;
+
+    void setItems(const QList<ItemType*>& items)
+    {
+        remainingItems_ = items;
+    }
+
+    bool canFetchMore(const QModelIndex& = QModelIndex()) const override
+    {
+        return remainingItems_.count() > 0;
+    }
+
+    void fetchMore(const QModelIndex& = QModelIndex()) override
+    {
+        for (int i = 0; i < 100 && remainingItems_.count() > 0; ++i) {
+            QQmlObjectListModel<ItemType>::append(remainingItems_.front());
+            remainingItems_.pop_front();
+        }
+    }
+
+private:
+    QList<ItemType*> remainingItems_;
+};
+
 #endif // QQMLOBJECTLISTMODEL_H

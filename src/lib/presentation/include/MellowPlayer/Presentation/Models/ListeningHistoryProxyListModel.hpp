@@ -12,6 +12,7 @@ namespace MellowPlayer::Presentation
     public:
         explicit ListeningHistoryProxyListModel(ListeningHistoryListModel* sourceModel);
 
+
         void disableService(const QString& serviceName, bool disable);
         void setSearchFilter(const QString& newSearchFilter);
 
@@ -19,7 +20,7 @@ namespace MellowPlayer::Presentation
         bool filterAcceptsRow(int sourceRow, const QModelIndex& sourceParent) const override;
 
     private:
-        QQmlObjectListModel<ListeningHistoryEntryViewModel>* sourceModel_;
+        ListeningHistoryListModel* sourceModel_;
         QList<QString> disabledServices_;
         QString searchFilter_;
     };

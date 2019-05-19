@@ -1,5 +1,5 @@
-#include <MellowPlayer/Presentation/ViewModels/ListeningHistory/ListeningHistoryViewModel.hpp>
 #include <MellowPlayer/Domain/ListeningHistory/ListeningHistory.hpp>
+#include <MellowPlayer/Presentation/ViewModels/ListeningHistory/ListeningHistoryViewModel.hpp>
 
 using namespace MellowPlayer::Domain;
 using namespace MellowPlayer::Domain;
@@ -9,7 +9,7 @@ ListeningHistoryViewModel::ListeningHistoryViewModel(IListeningHistory &listenin
                                                      IContextProperties& contextProperties)
         : ContextProperty("_listeningHistory", this, contextProperties),
           listeningHistoryService_(listeningHistory),
-          sourceModel_(new QQmlObjectListModel<ListeningHistoryEntryViewModel>(this, "title", "entryId")),
+          sourceModel_(new ListeningHistoryListModel(this, "title", "entryId")),
           proxyModel_(sourceModel_)
 {
     proxyModel_.setSourceModel(sourceModel_);
@@ -35,8 +35,11 @@ void ListeningHistoryViewModel::initialize()
     connect(&listeningHistoryService_, &ListeningHistory::entryAdded, this, &ListeningHistoryViewModel::onEntryAdded);
     connect(&listeningHistoryService_, &ListeningHistory::entryRemoved, this, &ListeningHistoryViewModel::onEntryRemoved);
     listeningHistoryService_.initialize();
-    for (auto entry : listeningHistoryService_.toList())
-        onEntryAdded(entry);
+    QList<ListeningHistoryEntryViewModel*> items;
+    for (const auto& entry : listeningHistoryService_.toList()) {
+        items.prepend(new ListeningHistoryEntryViewModel(entry, this));
+    }
+    sourceModel_->setItems(items);
 }
 
 void ListeningHistoryViewModel::disableService(const QString& serviceName, bool disable)
