@@ -38,7 +38,7 @@ include(cmake/Dependencies.cmake)
 include(cmake/InstallDirs.cmake)
 include(cmake/Tests.cmake)
 
-include_directories(src/3rdparty)
+include_directories(SYSTEM src/3rdparty)
 
 add_subdirectory(src/lib)
 add_subdirectory(src/main)
