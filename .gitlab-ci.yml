@@ -74,7 +74,6 @@ flatpak:
         - linux
     before_script:
         - ./scripts/ci/linux/fedora-flatpak-env-setup.sh
-        - patch com.gitlab.ColinDuquesnoy.MellowPlayer.yml scripts/ci/linux/flatpak-build-local-sources.patch
     script:
         - ./scripts/packaging/make-flatpak.sh
     artifacts:
