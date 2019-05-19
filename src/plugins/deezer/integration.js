@@ -44,7 +44,9 @@ function update() {
 }
 
 function getLoveButton() {
-    return document.getElementsByClassName("svg-icon-love-outline")[0].parentElement;
+    var buttons = document.getElementsByClassName("svg-icon-love-outline");
+    // current track love button is now always the last love button on the page.
+    return buttons[buttons.length - 1].parentElement;
 }
 
 function getLoveButtonSvg() {
