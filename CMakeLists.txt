@@ -4,7 +4,7 @@ project(MellowPlayer)
 
 set(VERSION_MAJOR 3)
 set(VERSION_MINOR 5)
-set(VERSION_PATCH 4)
+set(VERSION_PATCH 90)
 set(VERSION_TWEAK 0)
 
 project(MellowPlayer VERSION "${VERSION_MAJOR}.${VERSION_MINOR}.${VERSION_PATCH}")

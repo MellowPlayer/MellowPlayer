@@ -31,5 +31,5 @@ modules:
     buildsystem: cmake
     sources:
       - type: archive
-        url: https://gitlab.com/ColinDuquesnoy/MellowPlayer/-/archive/3.5.4/MellowPlayer-3.5.4.tar.gz
-        sha256: 56d9957667ff9b30d35a37620e9de6357d26c460cfb4fc637c1cfdaae04a8969
+        url: https://gitlab.com/ColinDuquesnoy/MellowPlayer/-/archive/3.5.90/MellowPlayer-3.5.4.tar.gz
+        sha256: 4d483b095ce8087ece5f2b409c5197c748e0ffa308855763c09d35f6e91b4621
