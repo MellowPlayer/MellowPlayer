@@ -152,13 +152,17 @@ void ListeningHistory::clearOutdatedEntries()
         return;
 
     LOG_INFO(logger_, "Cleaning history ");
+    QString previousId;
     QList<int> items;
     for (auto entry : entries_) {
         TimeLimits entryLimit = dateToTimeLimit(entry.dateTime());
-        if (entryLimit > limit) {
+        // previous id is checked because we changed our appending rules, this is a workaround to
+        // automatically clean listening history db that could contains many duplicate songs.
+        if (entryLimit > limit  || previousId == entry.songUniqueId) {
             items.append(entry.id);
             LOG_DEBUG(logger_, "Removing entry " << entry.songTitle);
         }
+        previousId = entry.songUniqueId;
     }
     database_.removeMany(items);
     updateRemovedEntries();

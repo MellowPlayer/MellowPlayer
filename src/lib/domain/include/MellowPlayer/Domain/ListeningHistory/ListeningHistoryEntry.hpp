@@ -28,8 +28,7 @@ namespace MellowPlayer::Domain
 
         bool equals(const ListeningHistoryEntry& other) const
         {
-            return other.serviceName == serviceName && other.songUniqueId == songUniqueId && other.songTitle == songTitle && other.artist == artist
-            && other.album == album && other.artUrl == artUrl;
+            return other.songUniqueId == songUniqueId;
         }
 
         bool operator==(const ListeningHistoryEntry& other) const
