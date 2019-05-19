@@ -1,5 +1,22 @@
 # Change log
 
+## [3.5.4](https://gitlab.com/ColinDuquesnoy/MellowPlayer/tree/3.5.4) (2019-5-19)
+[Full Changelog](https://gitlab.com/ColinDuquesnoy/MellowPlayer/compare/3.5.3...3.5.4)
+
+**Implemented enhancements:**
+
+- Update deezer theme to match their new UI design [\#305](https://gitlab.com/ColinDuquesnoy/MellowPlayer/merge_requests/305)
+
+**Fixed bugs:**
+
+- Deezer: love button does not work as expected when in a playlist, artist or album page [\#343](https://gitlab.com/ColinDuquesnoy/MellowPlayer/issues/343)
+- Listening History: Application is very slow to start when the history contains a lots of tracks. [\#342](https://gitlab.com/ColinDuquesnoy/MellowPlayer/issues/342)
+- Listening History: the same song keeps being added to the history [\#341](https://gitlab.com/ColinDuquesnoy/MellowPlayer/issues/341)
+
+**Merged merge requests:**
+
+- fix(spotify): update UI element selectors [\#303](https://gitlab.com/ColinDuquesnoy/MellowPlayer/merge_requests/303) ([b0o](https://gitlab.com/b0o))
+
 ## [3.5.3](https://gitlab.com/ColinDuquesnoy/MellowPlayer/tree/3.5.3) (2019-3-10)
 [Full Changelog](https://gitlab.com/ColinDuquesnoy/MellowPlayer/compare/3.5.2...3.5.3)
 

@@ -10,7 +10,7 @@ Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
      buildsystem: cmake
      sources:
 -      - type: archive
--        url: https://gitlab.com/ColinDuquesnoy/MellowPlayer/-/archive/3.5.3/MellowPlayer-3.5.3.tar.gz
+-        url: https://gitlab.com/ColinDuquesnoy/MellowPlayer/-/archive/3.5.4/MellowPlayer-3.5.4.tar.gz
 -        sha256: 56d9957667ff9b30d35a37620e9de6357d26c460cfb4fc637c1cfdaae04a8969
 +      - type: dir
 +        path: .
