@@ -24,7 +24,8 @@ Program::Program(IApplication& application,
                  IViewModels& viewModels,
                  ISystemTrayIcon& systemTrayIcon,
                  INotifications& notifications,
-                 IHotkeys& hotkeys)
+                 IHotkeys& hotkeys,
+                 Infrastructure::ApplicationStatusFile& applicationStatusFile)
         : application_(application),
           applicationNetworkProxy_(applicationNetworkProxy),
           contextProperties_(contextProperties),
@@ -32,7 +33,8 @@ Program::Program(IApplication& application,
           viewModels_(viewModels),
           systemTrayIcon_(systemTrayIcon),
           notifications_(notifications),
-          hotkeys_(hotkeys)
+          hotkeys_(hotkeys),
+          applicationStatusFile_(applicationStatusFile)
 {
     connect(&application, &IApplication::initialized, this, &Program::initialize);
     connect(&application, &IApplication::finished, this, &Program::finished);
@@ -46,6 +48,7 @@ int Program::run()
 
 void Program::initialize()
 {
+    applicationStatusFile_.create();
     mprisService_.start();
     hotkeys_.initialize();
     contextProperties_.initialize();
@@ -56,6 +59,7 @@ void Program::initialize()
 
 void Program::finished()
 {
+    applicationStatusFile_.remove();
     viewModels_.cleanup();
 }
 

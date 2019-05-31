@@ -1,14 +1,15 @@
 #pragma once
 
-#include <QtCore/QObject>
+#include <MellowPlayer/Infrastructure/Application/ApplicationStatusFile.hpp>
 #include <MellowPlayer/Infrastructure/Application/IApplication.hpp>
 #include <MellowPlayer/Infrastructure/Network/ApplicationNetworkProxy.hpp>
-#include <MellowPlayer/Presentation/Qml/IContextProperties.hpp>
+#include <MellowPlayer/Presentation/Hotkeys/IHotkeys.hpp>
 #include <MellowPlayer/Presentation/Mpris/IMprisService.hpp>
-#include <MellowPlayer/Presentation/ViewModels/ViewModels.hpp>
 #include <MellowPlayer/Presentation/Notifications/ISystemTrayIcon.hpp>
 #include <MellowPlayer/Presentation/Notifications/Notifications.hpp>
-#include <MellowPlayer/Presentation/Hotkeys/IHotkeys.hpp>
+#include <MellowPlayer/Presentation/Qml/IContextProperties.hpp>
+#include <MellowPlayer/Presentation/ViewModels/ViewModels.hpp>
+#include <QtCore/QObject>
 
 namespace MellowPlayer::Main
 {
@@ -25,7 +26,8 @@ namespace MellowPlayer::Main
                 Presentation::IViewModels& viewModels,
                 Presentation::ISystemTrayIcon& systemTrayIcon,
                 Presentation::INotifications& notifications,
-                Presentation::IHotkeys& hotkeys);
+                Presentation::IHotkeys& hotkeys,
+                Infrastructure::ApplicationStatusFile& applicationStatusFile);
         int run();
 
     private slots:
@@ -41,5 +43,6 @@ namespace MellowPlayer::Main
         Presentation::ISystemTrayIcon& systemTrayIcon_;
         Presentation::INotifications& notifications_;
         Presentation::IHotkeys& hotkeys_;
+        Infrastructure::ApplicationStatusFile& applicationStatusFile_;
     };
 }
