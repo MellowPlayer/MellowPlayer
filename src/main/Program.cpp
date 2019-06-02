@@ -25,7 +25,7 @@ Program::Program(IApplication& application,
                  ISystemTrayIcon& systemTrayIcon,
                  INotifications& notifications,
                  IHotkeys& hotkeys,
-                 Infrastructure::ApplicationStatusFile& applicationStatusFile)
+                 ApplicationStatusFile& applicationStatusFile)
         : application_(application),
           applicationNetworkProxy_(applicationNetworkProxy),
           contextProperties_(contextProperties),
