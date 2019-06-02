@@ -12,12 +12,11 @@
 using namespace MellowPlayer::Infrastructure;
 using namespace MellowPlayer::Domain;
 
-ApplicationStatusFile::ApplicationStatusFile(IPlayer& currentPlayer, ILocalAlbumArt& localAlbumArt)
-        : currentPlayer(currentPlayer), localAlbumArt(localAlbumArt), logger(Loggers::logger("ApplicationStatusFile"))
+ApplicationStatusFile::ApplicationStatusFile(IPlayer& currentPlayer)
+        : currentPlayer(currentPlayer), logger(Loggers::logger("ApplicationStatusFile"))
 {
     connect(&currentPlayer, &IPlayer::currentSongChanged, this, &ApplicationStatusFile::OnCurrentPlayerUpdated);
     connect(&currentPlayer, &IPlayer::playbackStatusChanged, this, &ApplicationStatusFile::OnCurrentPlayerUpdated);
-    connect(&localAlbumArt, &ILocalAlbumArt::urlChanged, this, &ApplicationStatusFile::OnCurrentPlayerUpdated);
 }
 
 void ApplicationStatusFile::create()
@@ -60,10 +59,24 @@ QJsonObject ApplicationStatusFile::serializeCurrentSong() const
     QJsonObject jsonSong;
     auto* currentSong = currentPlayer.currentSong();
 
-    jsonSong["artist"] = currentSong->artist();
-    jsonSong["title"] = currentSong->title();
-    jsonSong["album"] = currentSong->album();
-    jsonSong["artUrl"] = localAlbumArt.isReady(*currentSong) ? localAlbumArt.url() : "";
+    if (currentSong)
+    {
+        connect(currentSong, &Song::isFavoriteChanged, this, &ApplicationStatusFile::OnCurrentPlayerUpdated, Qt::UniqueConnection);
+
+        jsonSong["artist"] = currentSong->artist();
+        jsonSong["title"] = currentSong->title();
+        jsonSong["album"] = currentSong->album();
+        jsonSong["artUrl"] = currentSong->artUrl();
+        jsonSong["isFavorite"] = currentSong->isFavorite();
+    }
+    else
+    {
+        jsonSong["artist"] = "";
+        jsonSong["title"] = "";
+        jsonSong["album"] = "";
+        jsonSong["artUrl"] = "";
+        jsonSong["isFavorite"] = false;
+    }
 
     return jsonSong;
 }

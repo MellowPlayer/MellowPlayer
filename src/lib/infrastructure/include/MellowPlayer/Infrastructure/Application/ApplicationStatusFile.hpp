@@ -16,7 +16,7 @@ namespace MellowPlayer::Infrastructure
     {
         Q_OBJECT
     public:
-        ApplicationStatusFile(Domain::IPlayer& currentPlayer, Domain::ILocalAlbumArt& localAlbumArt);
+        ApplicationStatusFile(Domain::IPlayer& currentPlayer);
 
         void create();
         void remove();
@@ -31,7 +31,6 @@ namespace MellowPlayer::Infrastructure
         void writeFile(const QString& fileName, const QByteArray& data) const;
 
         Domain::IPlayer& currentPlayer;
-        Domain::ILocalAlbumArt& localAlbumArt;
         Domain::ILogger& logger;
         QJsonObject previousPlayerStatus;
     };
