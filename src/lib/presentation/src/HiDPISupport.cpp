@@ -28,8 +28,5 @@ void HiDPISupport::configure()
         auto factor = settings.value(SettingKey::toString(SettingKey::APPEARANCE_HIDPI_SCALING_FACTOR), 100).toInt() / 100.0;
         qputenv("QT_SCALE_FACTOR", QString::number(factor).toLocal8Bit());
     }
-
-    qDebug() << "QT_AUTO_SCREEN_SCALE_FACTOR=" << qgetenv("QT_AUTO_SCREEN_SCALE_FACTOR");
-    qDebug() << "QT_SCALE_FACTOR=" << qgetenv("QT_SCALE_FACTOR");
 }
 
