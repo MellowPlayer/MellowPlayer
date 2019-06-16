@@ -2,7 +2,7 @@ var previousID = -1;
 
 function getItemByTestID(buttonName, parent) {
     parent = parent || document;
-    return parent.querySelectorAll("[data-test-id=\""+buttonName+"\"]")[0];
+    return parent.querySelectorAll("[data-test=\""+buttonName+"\"]")[0];
 }
 
 function isPaused() {
@@ -81,7 +81,8 @@ function update() {
         results.songId = getHashCode(getItemByTestID("footer-track-title", infoDiv).children[0].href);
         
         results.playbackStatus = isPaused() ? mellowplayer.PlaybackStatus.PAUSED : mellowplayer.PlaybackStatus.PLAYING;
-        if(window.getComputedStyle(getItemByTestID("loading-indicator", infoDiv)).getPropertyValue("display") !== "none") {
+        // Check if the loading svg is present
+        if(infoDiv.getElementsByClassName("isLoading--3-Tok")[0]) {
             results.playbackStatus = mellowplayer.PlaybackStatus.BUFFERING;
             previousID = results.songId;
         }
