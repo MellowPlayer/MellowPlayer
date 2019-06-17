@@ -1,4 +1,5 @@
 var previousID = -1;
+var previousState = -100
 
 function getItemByTestID(buttonName, parent) {
     parent = parent || document;
@@ -77,6 +78,10 @@ function update() {
     // If player is loaded
     if(getItemByTestID("footer-player")) {
         var infoDiv = getItemByTestID("footer-player");
+        // Get the progres bar indicator to check if the song change occured
+        var progressIndicator = infoDiv.getElementsByClassName("indicator--24FOg")[0];
+        progressState = progressIndicator ? parseFloat(progressIndicator.style.transform.split("(")[1].split("%")[0]) : -100;
+
         results.songTitle = getItemByTestID("footer-track-title", infoDiv).children[0].innerHTML;
         results.songId = getHashCode(getItemByTestID("footer-track-title", infoDiv).children[0].href);
         
@@ -99,6 +104,13 @@ function update() {
         if(results.artUrl.indexOf("defaultAlbumImage.78c633.svg") !== -1)
             results.artUrl = "";
 
+        // If the player is playing but the song has changed, check the progress
+        // bar, because if it is running but the state is lower than before we
+        // have missed the buffering event
+        if(results.songId != previousID && progressState < previousState && progressState > -100) {
+            previousID = results.songId;
+        }
+
         // also don't allow to load the art if we still hasn't started buffering.
         // We drop the status about the song until we find the art, so it won't create multiple item in the listening history
         if(results.songId != previousID || results.playbackStatus == mellowplayer.PlaybackStatus.BUFFERING) {
@@ -120,6 +132,9 @@ function update() {
         results.albumTitle = getAlbumTitle();
         results.canSeek = true;
         results.canAddToFavorites = true;
+
+        // Save the progress state in the end
+        previousState = progressState;
     }
     
     return results;
