@@ -76,7 +76,7 @@ function update() {
     };
 
     // If player is loaded
-    if(getItemByTestID("footer-player")) {
+    if(getItemByTestID("progress-bar")) {
         var infoDiv = getItemByTestID("footer-player");
         // Get the progres bar indicator to check if the song change occured
         var progressIndicator = infoDiv.getElementsByClassName("indicator--24FOg")[0];
