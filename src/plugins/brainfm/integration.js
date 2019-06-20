@@ -34,7 +34,7 @@ function update() {
         songTitle: "",
         artistName: "Brain.fm",
         albumTitle: "",
-        artUrl: '',
+        artUrl: "",
         isFavorite: false,
     };
 
@@ -48,10 +48,10 @@ function update() {
         res.duration = player.props.totalDuration / 1000;
         res.position = player.props.totalPosition / 1000;
         if (player.props.station)
-            res.songId = player.props.station.id;
-        if (player.props.song) {
-            res.songTitle = player.props.song.name;
             res.albumTitle = player.props.station.name;
+        if (player.props.song) {
+            res.songId = player.props.song.token;
+            res.songTitle = player.props.song.name;
         }
     }
 
