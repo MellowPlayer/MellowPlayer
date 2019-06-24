@@ -205,5 +205,7 @@ bool CurrentPlayer::isStopped() const
 
 QString CurrentPlayer::serviceLogo() const
 {
-    return currentPlayer_->serviceLogo();
+    if (currentPlayer_)
+        return currentPlayer_->serviceLogo();
+    return "";
 }
