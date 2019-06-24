@@ -1,9 +1,9 @@
 {
-  "accent": "#ffc107",
+  "accent": "#757099",
   "background": "#ffffff",
-  "foreground": "#505050",
-  "primary": "#5f81d4",
-  "primaryForeground": "#ffffff",
-  "secondary": "#5f81d4",
-  "secondaryForeground": "#ffffff"
+  "foreground": "#707070",
+  "primary": "#ffffff",
+  "primaryForeground": "#707070",
+  "secondary": "#ffffff",
+  "secondaryForeground": "#707070"
 }
