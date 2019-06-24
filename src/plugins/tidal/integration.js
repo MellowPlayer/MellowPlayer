@@ -1,8 +1,9 @@
 var previousID = -1;
+var previousState = -100
 
 function getItemByTestID(buttonName, parent) {
     parent = parent || document;
-    return parent.querySelectorAll("[data-test-id=\""+buttonName+"\"]")[0];
+    return parent.querySelectorAll("[data-test=\""+buttonName+"\"]")[0];
 }
 
 function isPaused() {
@@ -75,13 +76,18 @@ function update() {
     };
 
     // If player is loaded
-    if(getItemByTestID("footer-player")) {
+    if(getItemByTestID("progress-bar")) {
         var infoDiv = getItemByTestID("footer-player");
+        // Get the progres bar indicator to check if the song change occured
+        var progressIndicator = infoDiv.getElementsByClassName("indicator--24FOg")[0];
+        progressState = progressIndicator ? parseFloat(progressIndicator.style.transform.split("(")[1].split("%")[0]) : -100;
+
         results.songTitle = getItemByTestID("footer-track-title", infoDiv).children[0].innerHTML;
         results.songId = getHashCode(getItemByTestID("footer-track-title", infoDiv).children[0].href);
         
         results.playbackStatus = isPaused() ? mellowplayer.PlaybackStatus.PAUSED : mellowplayer.PlaybackStatus.PLAYING;
-        if(window.getComputedStyle(getItemByTestID("loading-indicator", infoDiv)).getPropertyValue("display") !== "none") {
+        // Check if the loading svg is present
+        if(infoDiv.getElementsByClassName("isLoading--3-Tok")[0]) {
             results.playbackStatus = mellowplayer.PlaybackStatus.BUFFERING;
             previousID = results.songId;
         }
@@ -97,6 +103,13 @@ function update() {
         // be a album on MPRIS as it will be cached for the first loaded song, also it doesn't show up as it is svg
         if(results.artUrl.indexOf("defaultAlbumImage.78c633.svg") !== -1)
             results.artUrl = "";
+
+        // If the player is playing but the song has changed, check the progress
+        // bar, because if it is running but the state is lower than before we
+        // have missed the buffering event
+        if(results.songId != previousID && progressState < previousState && progressState > -100) {
+            previousID = results.songId;
+        }
 
         // also don't allow to load the art if we still hasn't started buffering.
         // We drop the status about the song until we find the art, so it won't create multiple item in the listening history
@@ -119,6 +132,9 @@ function update() {
         results.albumTitle = getAlbumTitle();
         results.canSeek = true;
         results.canAddToFavorites = true;
+
+        // Save the progress state in the end
+        previousState = progressState;
     }
     
     return results;
