@@ -38,6 +38,7 @@ namespace MellowPlayer::Domain
         bool canAddToFavorites() const override;
         double volume() const override;
         QString serviceName() const override;
+        QString serviceLogo() const override;
         bool isPlaying() const override;
         bool isStopped() const override;
 

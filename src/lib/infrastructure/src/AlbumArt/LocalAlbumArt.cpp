@@ -70,7 +70,7 @@ bool LocalAlbumArt::isReady(const Song& song)
 
 QString LocalAlbumArt::fallbackUrl() const
 {
-    return "mellowplayer";
+    return _player.serviceLogo();
 }
 
 void LocalAlbumArt::onArtUrlChanged()

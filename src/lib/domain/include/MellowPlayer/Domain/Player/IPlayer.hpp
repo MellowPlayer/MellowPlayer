@@ -53,6 +53,7 @@ namespace MellowPlayer::Domain
         virtual bool canAddToFavorites() const = 0;
         virtual double volume() const = 0;
         virtual QString serviceName() const = 0;
+        virtual QString serviceLogo() const = 0;
         virtual bool isPlaying() const = 0;
         virtual bool isStopped() const = 0;
 

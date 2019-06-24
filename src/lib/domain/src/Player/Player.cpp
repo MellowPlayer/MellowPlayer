@@ -249,3 +249,8 @@ bool Player::isStopped() const
 {
     return playbackStatus_ == PlaybackStatus::Stopped;
 }
+
+QString Player::serviceLogo() const
+{
+    return streamingService_.logo();
+}

@@ -299,7 +299,11 @@ QMap<QString, QVariant> Mpris2Player::toXesam(const Song& song)
             map["mpris:length"] = 1;
         QString trackId = QString("/org/mpris/MediaPlayer2/Track/%1").arg(song.uniqueId());
         map["mpris:trackid"] = QVariant(QDBusObjectPath(trackId).path());
-        map["mpris:artUrl"] = "file://" + localAlbumArt_.url();
+        auto url = localAlbumArt_.url();
+        if (url.startsWith("file://"))
+            map["mpris:artUrl"] = url;
+        else
+            map["mpris:artUrl"] = "file://" + localAlbumArt_.url();
     } else {
         QStringList artist;
         artist.append("");
