@@ -226,7 +226,14 @@ void Mpris2Player::onSongChanged(Song* song)
             signalPlayerUpdate(map);
         lastMetadata_ = map;
         connect(song, &Song::durationChanged, this, &Mpris2Player::onDurationChanged, Qt::UniqueConnection);
+        connect(song, &Song::isFavoriteChanged, this, &Mpris2Player::onFavoriteChanged, Qt::UniqueConnection);
     }
+}
+
+void Mpris2Player::onFavoriteChanged()
+{
+    LOG_TRACE(logger_, "onFavoriteChanged()");
+    onSongChanged(player_.currentSong());
 }
 
 void Mpris2Player::onArtUrlChanged()
@@ -314,6 +321,7 @@ QMap<QString, QVariant> Mpris2Player::toXesam(const Song& song)
         map["mpris:length"] = 0;
         map["mpris:trackid"] = QVariant(QDBusObjectPath("/org/mpris/MediaPlayer2/NoTrack").path());
         map["mpris:artUrl"] = "";
+        map["xesam:userRating"] = 0;
     }
     LOG_TRACE(logger_, "metadata: {" + qMapToString(map) + "\n}");
     return map;
@@ -353,7 +361,6 @@ void Mpris2Player::signalUpdate(const QVariantMap& map, const QString& interface
         QDBusConnection::sessionBus().send(signal);
     }
 }
-
 QString Mpris2Player::qMapToString(const QMap<QString, QVariant>& map)
 {
     QString output;
@@ -363,4 +370,3 @@ QString Mpris2Player::qMapToString(const QMap<QString, QVariant>& map)
     }
     return output;
 }
-

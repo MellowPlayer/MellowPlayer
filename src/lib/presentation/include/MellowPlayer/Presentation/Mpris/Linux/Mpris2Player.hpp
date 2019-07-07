@@ -76,6 +76,7 @@ namespace MellowPlayer::Presentation
     private slots:
         void onPlaybackStatusChanged();
         void onSongChanged(Domain::Song* song);
+        void onFavoriteChanged();
         void onArtUrlChanged();
         void onPositionChanged();
         void onDurationChanged();
