@@ -68,12 +68,10 @@ appimage:
             - MellowPlayer-x86_64.AppImage
 
 flatpak:
-    image: fedora:latest
+    image: registry.gitlab.com/colinduquesnoy/mellowplayer/build-images/flatpak:latest
     stage: package
     tags:
         - linux
-    before_script:
-        - ./scripts/ci/linux/fedora-flatpak-env-setup.sh
     script:
         - ./scripts/packaging/make-flatpak.sh
     artifacts:
