@@ -4,5 +4,5 @@
 using namespace std;
 
 string LibnotifyStrings::open() const {
-    return QObject::trUtf8("Open").toStdString().c_str();
+    return QObject::tr("Open").toStdString().c_str();
 }
