@@ -61,6 +61,7 @@ bool LibnotifyPresenter::display(const Notification& notification)
     if (actionsSupported_)
         notify_notification_add_action(n, "open", strings.open().c_str(),
                                        (NotifyActionCallback)notify_action_callback, nullptr, nullptr);
+    notify_notification_set_hint(n, "desktop-entry", g_variant_new_string ("mellowplayer"));
 
     _workDispatcher.invoke([=]() {
         notify_notification_show(n, 0);
