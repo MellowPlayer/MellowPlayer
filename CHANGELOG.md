@@ -1,5 +1,20 @@
 # Change log
 
+## [3.5.5](https://gitlab.com/ColinDuquesnoy/MellowPlayer/tree/3.5.5) (2019-7-12)
+[Full Changelog](https://gitlab.com/ColinDuquesnoy/MellowPlayer/compare/3.5.4...3.5.5)
+
+**Fixed bugs:**
+
+- Mpris: user rating is not updated when user toggle favorite song [\#352](https://gitlab.com/ColinDuquesnoy/MellowPlayer/issues/352)
+- Build failure with Qt 5.13 [\#351](https://gitlab.com/ColinDuquesnoy/MellowPlayer/issues/351)
+- Typo in French translation [\#350](https://gitlab.com/ColinDuquesnoy/MellowPlayer/issues/350)
+- Libnotify: unable to filter MellowPlayer notifications on KDE Plasma [\#345](https://gitlab.com/ColinDuquesnoy/MellowPlayer/issues/345)
+
+**Merged merge requests:**
+
+- Update Tidal plugin [\#307](https://gitlab.com/ColinDuquesnoy/MellowPlayer/merge_requests/307) ([lapinskim](https://gitlab.com/lapinskim))
+- Add Brain.fm [\#306](https://gitlab.com/ColinDuquesnoy/MellowPlayer/merge_requests/306) ([Schnouki](https://gitlab.com/Schnouki))
+
 ## [3.5.4](https://gitlab.com/ColinDuquesnoy/MellowPlayer/tree/3.5.4) (2019-5-19)
 [Full Changelog](https://gitlab.com/ColinDuquesnoy/MellowPlayer/compare/3.5.3...3.5.4)
 
