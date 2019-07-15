@@ -16,3 +16,4 @@ Contributors
 - [DmMlhch](https://github.com/DmMlhch)
 - [Rustam Zhumagambetov](https://github.com/rustamzh)
 - [Nagy Tamás (T-bond)](https://github.com/T-bond)
+- [Eric Le Lay](https://gitlab.com/elelay)
