@@ -12,13 +12,13 @@ UpdateChannelSettingViewModel::UpdateChannelSettingViewModel(Setting& setting, Q
 QString UpdateChannelSettingViewModel::value() const
 {
     UpdateChannel channel = static_cast<UpdateChannel>(setting_.value().toInt());
-    return stringer_.toString(channel);
+    return stringer_.toTranslatedString(channel);
 }
 
 QStringList UpdateChannelSettingViewModel::values() const
 {
-    return QStringList() << stringer_.toString(UpdateChannel::Stable)
-                         << stringer_.toString(UpdateChannel::Continuous);
+    return QStringList() << stringer_.toTranslatedString(UpdateChannel::Stable)
+                         << stringer_.toTranslatedString(UpdateChannel::Continuous);
 }
 
 QString UpdateChannelSettingViewModel::qmlComponent()

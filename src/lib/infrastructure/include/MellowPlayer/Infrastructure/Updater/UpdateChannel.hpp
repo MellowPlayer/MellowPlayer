@@ -31,6 +31,17 @@ public:
 
     QString toString(MellowPlayer::Infrastructure::UpdateChannel channelType) const
     {
+        switch (channelType) {
+            case MellowPlayer::Infrastructure::UpdateChannel::Continuous:
+                return "Continuous";
+            case MellowPlayer::Infrastructure::UpdateChannel::Stable:
+            default:
+                return "Stable";
+        }
+    }
+
+    QString toTranslatedString(MellowPlayer::Infrastructure::UpdateChannel channelType) const
+    {
         QString string;
 
         switch (channelType) {
