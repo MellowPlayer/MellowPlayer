@@ -9,6 +9,7 @@
 #include <MellowPlayer/Infrastructure/Network/LocalSocket.hpp>
 #include <QtCore/QDir>
 #include <QtCore/QTimer>
+#include <QtCore/QStandardPaths>
 
 using namespace std;
 using namespace MellowPlayer::Domain;
@@ -33,7 +34,7 @@ SingleInstance::SingleInstance(const std::shared_ptr<IApplication>& application,
           commandLineArguments_(commandLineArguments),
           localServerFactory_(localServerFactory),
           localSocketFactory_(localSocketFactory),
-          lockFilePath_(QDir::tempPath() + QDir::separator() + qApp->applicationName() + ".lock"),
+          lockFilePath_(QStandardPaths::standardLocations(QStandardPaths::AppDataLocation).first() + QDir::separator() + "single-instance.lock"),
           lockFile_(lockFilePath_),
           isPrimary_(false)
 {

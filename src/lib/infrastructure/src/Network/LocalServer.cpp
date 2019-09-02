@@ -8,6 +8,7 @@ LocalServer::LocalServer(IFactory<ILocalSocket>& localSocketFactory, const QStri
         : localSocketFactory_(localSocketFactory), serverName_(serverName)
 {
     QLocalServer::removeServer(serverName);
+    qLocalServer_.setSocketOptions(QLocalServer::UserAccessOption);
     connect(&qLocalServer_, &QLocalServer::newConnection, this, &ILocalServer::newConnection);
 }
 
