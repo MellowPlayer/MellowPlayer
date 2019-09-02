@@ -17,7 +17,12 @@ void messageHandler(QtMsgType type, const QMessageLogContext& context, const QSt
                                           {QtWarningMsg, LogLevel::Warning},
                                           {QtCriticalMsg, LogLevel::Error},
                                           {QtFatalMsg, LogLevel::Critical}};
-    logger.log(message.toStdString(), toLogLevel[type], context.file, context.line);
+    auto logLevel = toLogLevel[type];
+
+    if (category == "js")
+        logLevel = LogLevel::Debug;
+
+    logger.log(message.toStdString(), logLevel, context.file, context.line);
 }
 
 unique_ptr<Loggers> Loggers::instance_ = nullptr;

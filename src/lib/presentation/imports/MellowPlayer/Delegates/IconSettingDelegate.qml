@@ -43,7 +43,7 @@ ItemDelegate {
         }
 
         Image {
-            source: "file://" + pathField.text
+            source: pathField.text !== "" ? "file://" + pathField.text : ""
             sourceSize.height: 32
             sourceSize.width: 32
             width: 32

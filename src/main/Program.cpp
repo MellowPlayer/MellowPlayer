@@ -75,6 +75,8 @@ int Program::main(int argc, char** argv)
     qApplication.setApplicationName("MellowPlayer");
     qApplication.setApplicationDisplayName("MellowPlayer");
     qApplication.setApplicationVersion(BuildConfig::getVersion());
+    qApplication.setOrganizationDomain("com.gitlab.ColinDuquesnoy");
+    qApplication.setOrganizationName("MellowPlayer");
 
     QQuickStyle::setStyle("Material");
     QtWebEngine::initialize();
