@@ -93,31 +93,31 @@ void SystemTrayIcon::setUpMenu()
 
 void SystemTrayIcon::togglePlayPause()
 {
-    LOG_TRACE(logger_, "togglePlayPause");
+    LOG_DEBUG(logger_, "togglePlayPause");
     player_.togglePlayPause();
 }
 
 void SystemTrayIcon::next()
 {
-    LOG_TRACE(logger_, "next");
+    LOG_DEBUG(logger_, "next");
     player_.next();
 }
 
 void SystemTrayIcon::previous()
 {
-    LOG_TRACE(logger_, "previous");
+    LOG_DEBUG(logger_, "previous");
     player_.previous();
 }
 
 void SystemTrayIcon::restoreWindow()
 {
-    LOG_TRACE(logger_, "restore window");
+    LOG_DEBUG(logger_, "restore window");
     mainWindow_.show();
 }
 
 void SystemTrayIcon::quit()
 {
-    LOG_TRACE(logger_, "quit");
+    LOG_DEBUG(logger_, "quit");
     mainWindow_.requestQuit();
 }
 

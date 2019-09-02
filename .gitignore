@@ -73,3 +73,5 @@ languages.qrc
 /.flatpak-builder/
 /repo/
 *.flatpak
+
+cmake-build-debug
