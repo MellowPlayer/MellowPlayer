@@ -528,7 +528,7 @@ escuchado aparecerán aquí...</translation>
     <message>
         <location filename="../../lib/presentation/imports/MellowPlayer/Controls/MainToolBar.qml" line="265"/>
         <source>Zoom</source>
-        <translation type="unfinished"/>
+        <translation>Enfocar</translation>
     </message>
     <message>
         <location filename="../../lib/presentation/imports/MellowPlayer/Controls/MainToolBar.qml" line="312"/>
@@ -742,38 +742,38 @@ escuchado aparecerán aquí...</translation>
     <message>
         <location filename="../../lib/presentation/imports/MellowPlayer/Dialogs/ReportIssueDialog.qml" line="44"/>
         <source>Report the issue on gitlab</source>
-        <translation type="unfinished"/>
+        <translation>Reportar este problema en gitlab</translation>
     </message>
     <message>
         <location filename="../../lib/presentation/imports/MellowPlayer/Dialogs/ReportIssueDialog.qml" line="51"/>
         <source>Requires a gitlab account</source>
-        <translation type="unfinished"/>
+        <translation>Requiere una cuenta de gitlab</translation>
     </message>
     <message>
         <location filename="../../lib/presentation/imports/MellowPlayer/Dialogs/ReportIssueDialog.qml" line="70"/>
         <location filename="../../lib/presentation/imports/MellowPlayer/Dialogs/ReportIssueDialog.qml" line="131"/>
         <source>Report issue</source>
-        <translation type="unfinished"/>
+        <translation>Reportar problema</translation>
     </message>
     <message>
         <location filename="../../lib/presentation/imports/MellowPlayer/Dialogs/ReportIssueDialog.qml" line="103"/>
         <source>Report the issue via e-mail</source>
-        <translation type="unfinished"/>
+        <translation>Reportar el problema por correo electrónico</translation>
     </message>
     <message>
         <location filename="../../lib/presentation/imports/MellowPlayer/Dialogs/ReportIssueDialog.qml" line="146"/>
         <source>Please, read the contributing guidelines before submitting your bug report!</source>
-        <translation type="unfinished"/>
+        <translation>Por favor, lea los lineamientos de contribución antes de enviar el reporte de fallo</translation>
     </message>
     <message>
         <location filename="../../lib/presentation/imports/MellowPlayer/Dialogs/ReportIssueDialog.qml" line="162"/>
         <source>Thank you for taking the time to report your issue!</source>
-        <translation type="unfinished"/>
+        <translation>Gracias por tomarse el tiempo de reportar este problema</translation>
     </message>
     <message>
         <location filename="../../lib/presentation/imports/MellowPlayer/Dialogs/ReportIssueDialog.qml" line="185"/>
         <source>Close</source>
-        <translation type="unfinished"/>
+        <translation>Cerrar</translation>
     </message>
 </context>
 <context>
@@ -860,42 +860,42 @@ escuchado aparecerán aquí...</translation>
     <message>
         <location filename="../../lib/presentation/imports/MellowPlayer/SettingsTranslator.js" line="7"/>
         <source>Playback requires user gesture</source>
-        <translation type="unfinished"/>
+        <translation>La reproducción requiere interacción manual del usuario</translation>
     </message>
     <message>
         <location filename="../../lib/presentation/imports/MellowPlayer/SettingsTranslator.js" line="9"/>
         <source>Custom tray icon</source>
-        <translation type="unfinished"/>
+        <translation>Personalizar ícono de bandeja</translation>
     </message>
     <message>
         <location filename="../../lib/presentation/imports/MellowPlayer/SettingsTranslator.js" line="10"/>
         <source>Show web page scrollbars</source>
-        <translation type="unfinished"/>
+        <translation>Mostrar barras de desplazamiento de página web</translation>
     </message>
     <message>
         <location filename="../../lib/presentation/imports/MellowPlayer/SettingsTranslator.js" line="11"/>
         <source>Automatic HiDPI scaling</source>
-        <translation type="unfinished"/>
+        <translation>Ajuste automático HiDPI</translation>
     </message>
     <message>
         <location filename="../../lib/presentation/imports/MellowPlayer/SettingsTranslator.js" line="12"/>
         <source>HiDPI scaling factor</source>
-        <translation type="unfinished"/>
+        <translation>Factor de ajuste HiDPI</translation>
     </message>
     <message>
         <location filename="../../lib/presentation/imports/MellowPlayer/SettingsTranslator.js" line="13"/>
         <source>Show main tool bar</source>
-        <translation type="unfinished"/>
+        <translation>Mostrar barra de herramientas principal</translation>
     </message>
     <message>
         <location filename="../../lib/presentation/imports/MellowPlayer/SettingsTranslator.js" line="14"/>
         <source>	Show web page controls in main tool bar</source>
-        <translation type="unfinished"/>
+        <translation>Mostrar controles del sitio web en la barra de herramientas principal</translation>
     </message>
     <message>
         <location filename="../../lib/presentation/imports/MellowPlayer/SettingsTranslator.js" line="15"/>
         <source>	Show player controls in main tool bar</source>
-        <translation type="unfinished"/>
+        <translation>Mostrar controles del reproductor en la barra de herramientas principal</translation>
     </message>
     <message>
         <location filename="../../lib/presentation/imports/MellowPlayer/SettingsTranslator.js" line="16"/>
@@ -1015,7 +1015,7 @@ escuchado aparecerán aquí...</translation>
     <message>
         <location filename="../../lib/presentation/imports/MellowPlayer/SettingsTranslator.js" line="39"/>
         <source>Toggle ToolBar</source>
-        <translation type="unfinished"/>
+        <translation>Cambiar barra de herramientas</translation>
     </message>
     <message>
         <location filename="../../lib/presentation/imports/MellowPlayer/SettingsTranslator.js" line="40"/>
@@ -1071,52 +1071,52 @@ escuchado aparecerán aquí...</translation>
     <message>
         <location filename="../../lib/presentation/imports/MellowPlayer/SettingsTranslator.js" line="63"/>
         <source>Inhibits playback of media content until the user interacts with the page.</source>
-        <translation type="unfinished"/>
+        <translation>Inhibe la reproducción de contenido hasta que el usuario interactúe con la página</translation>
     </message>
     <message>
         <location filename="../../lib/presentation/imports/MellowPlayer/SettingsTranslator.js" line="65"/>
         <source>Use a custom icon for the system tray</source>
-        <translation type="unfinished"/>
+        <translation>Usar ícono personalizado en la bandeja de sistema</translation>
     </message>
     <message>
         <location filename="../../lib/presentation/imports/MellowPlayer/SettingsTranslator.js" line="66"/>
         <source>Show/Hide web page scrollbars</source>
-        <translation type="unfinished"/>
+        <translation>Mostrar/esconder las barras de desplazamiento del sitio web</translation>
     </message>
     <message>
         <location filename="../../lib/presentation/imports/MellowPlayer/SettingsTranslator.js" line="67"/>
         <source>Automatic HiDPI scaling. Require a restart of the application.</source>
-        <translation type="unfinished"/>
+        <translation>Ajuste automático HiDPI. Requiere reiniciar la aplicación.</translation>
     </message>
     <message>
         <location filename="../../lib/presentation/imports/MellowPlayer/SettingsTranslator.js" line="68"/>
         <source>HiDPI scaling factor. Require a restart of the application.</source>
-        <translation type="unfinished"/>
+        <translation>Factor de ajuste HiDPI. Requiere reiniciar la aplicación.</translation>
     </message>
     <message>
         <location filename="../../lib/presentation/imports/MellowPlayer/SettingsTranslator.js" line="69"/>
         <source>Show/Hide main toolbar</source>
-        <translation type="unfinished"/>
+        <translation>Mostrar/esconder la barra de herramientas principal</translation>
     </message>
     <message>
         <location filename="../../lib/presentation/imports/MellowPlayer/SettingsTranslator.js" line="70"/>
         <source>Show/Hide web page controls in main toolbar</source>
-        <translation type="unfinished"/>
+        <translation>Mostrar/esconder los controles del sitio web en la barra de herramientas principal</translation>
     </message>
     <message>
         <location filename="../../lib/presentation/imports/MellowPlayer/SettingsTranslator.js" line="71"/>
         <source>Show/Hide player controls in main toolbar</source>
-        <translation type="unfinished"/>
+        <translation>Mostrar/esconder los controles del reproductor en la barra de herramientas principal</translation>
     </message>
     <message>
         <location filename="../../lib/presentation/imports/MellowPlayer/SettingsTranslator.js" line="95"/>
         <source>Show or hide main tool bar</source>
-        <translation type="unfinished"/>
+        <translation>Mostrar o esconder la barra de herramientas principañ</translation>
     </message>
     <message>
         <location filename="../../lib/presentation/imports/MellowPlayer/SettingsTranslator.js" line="98"/>
         <source>Report an issue</source>
-        <translation type="unfinished"/>
+        <translation>Reportar un problema</translation>
     </message>
     <message>
         <location filename="../../lib/presentation/imports/MellowPlayer/SettingsTranslator.js" line="104"/>

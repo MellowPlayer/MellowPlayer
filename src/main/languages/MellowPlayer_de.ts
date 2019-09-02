@@ -527,7 +527,7 @@ listened to will appear here...</source>
     <message>
         <location filename="../../lib/presentation/imports/MellowPlayer/Controls/MainToolBar.qml" line="265"/>
         <source>Zoom</source>
-        <translation type="unfinished"/>
+        <translation>Zoom</translation>
     </message>
     <message>
         <location filename="../../lib/presentation/imports/MellowPlayer/Controls/MainToolBar.qml" line="312"/>
@@ -741,38 +741,38 @@ listened to will appear here...</source>
     <message>
         <location filename="../../lib/presentation/imports/MellowPlayer/Dialogs/ReportIssueDialog.qml" line="44"/>
         <source>Report the issue on gitlab</source>
-        <translation type="unfinished"/>
+        <translation>Melden Sie das Problem auf gitlab.</translation>
     </message>
     <message>
         <location filename="../../lib/presentation/imports/MellowPlayer/Dialogs/ReportIssueDialog.qml" line="51"/>
         <source>Requires a gitlab account</source>
-        <translation type="unfinished"/>
+        <translation>Erfordert ein gitlab-Konto.</translation>
     </message>
     <message>
         <location filename="../../lib/presentation/imports/MellowPlayer/Dialogs/ReportIssueDialog.qml" line="70"/>
         <location filename="../../lib/presentation/imports/MellowPlayer/Dialogs/ReportIssueDialog.qml" line="131"/>
         <source>Report issue</source>
-        <translation type="unfinished"/>
+        <translation>Fehler melden</translation>
     </message>
     <message>
         <location filename="../../lib/presentation/imports/MellowPlayer/Dialogs/ReportIssueDialog.qml" line="103"/>
         <source>Report the issue via e-mail</source>
-        <translation type="unfinished"/>
+        <translation>Melden Sie das Problem per E-Mail.</translation>
     </message>
     <message>
         <location filename="../../lib/presentation/imports/MellowPlayer/Dialogs/ReportIssueDialog.qml" line="146"/>
         <source>Please, read the contributing guidelines before submitting your bug report!</source>
-        <translation type="unfinished"/>
+        <translation>Bitte lesen Sie die Richtlinien, bevor Sie Ihren Fehlerbericht einreichen!</translation>
     </message>
     <message>
         <location filename="../../lib/presentation/imports/MellowPlayer/Dialogs/ReportIssueDialog.qml" line="162"/>
         <source>Thank you for taking the time to report your issue!</source>
-        <translation type="unfinished"/>
+        <translation>Vielen Dank, dass Sie sich die Zeit nehmen, uns Ihr Problem zu melden!</translation>
     </message>
     <message>
         <location filename="../../lib/presentation/imports/MellowPlayer/Dialogs/ReportIssueDialog.qml" line="185"/>
         <source>Close</source>
-        <translation type="unfinished"/>
+        <translation>Schließen</translation>
     </message>
 </context>
 <context>
@@ -864,17 +864,17 @@ listened to will appear here...</source>
     <message>
         <location filename="../../lib/presentation/imports/MellowPlayer/SettingsTranslator.js" line="9"/>
         <source>Custom tray icon</source>
-        <translation type="unfinished"/>
+        <translation>Benutzerdefiniertes Tray-Symbol</translation>
     </message>
     <message>
         <location filename="../../lib/presentation/imports/MellowPlayer/SettingsTranslator.js" line="10"/>
         <source>Show web page scrollbars</source>
-        <translation type="unfinished"/>
+        <translation>Scrollbars für Webseiten anzeigen</translation>
     </message>
     <message>
         <location filename="../../lib/presentation/imports/MellowPlayer/SettingsTranslator.js" line="11"/>
         <source>Automatic HiDPI scaling</source>
-        <translation type="unfinished"/>
+        <translation>Automatisches Hochauflösendes HiDPI-Skalieren</translation>
     </message>
     <message>
         <location filename="../../lib/presentation/imports/MellowPlayer/SettingsTranslator.js" line="12"/>
