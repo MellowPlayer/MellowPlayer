@@ -304,7 +304,7 @@ QMap<QString, QVariant> Mpris2Player::toXesam(const Song& song)
             map["mpris:length"] = (qlonglong)song.duration() * SEC_TO_MICROSEC;
         else
             map["mpris:length"] = 1;
-        QString trackId = QString("/org/mpris/MediaPlayer2/Track/%1").arg(song.uniqueId());
+        QString trackId = QString("/org/mpris/MediaPlayer2/MellowPlayer/Track/%1").arg(song.uniqueId());
         map["mpris:trackid"] = QVariant(QDBusObjectPath(trackId).path());
         auto url = localAlbumArt_.url();
         if (url.startsWith("file://"))
