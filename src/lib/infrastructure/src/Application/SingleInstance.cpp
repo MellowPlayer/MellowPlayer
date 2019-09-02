@@ -38,6 +38,8 @@ SingleInstance::SingleInstance(const std::shared_ptr<IApplication>& application,
           lockFile_(lockFilePath_),
           isPrimary_(false)
 {
+    auto lockFileDirectory = QFileInfo(lockFilePath_).dir().path();
+    QDir().mkpath(lockFileDirectory);
     lockFile_.setStaleLockTime(0);
 }
 
