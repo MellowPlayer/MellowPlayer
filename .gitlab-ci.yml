@@ -5,7 +5,7 @@ stages:
     - deploy
 
 variables:
-    APP_VERSION: '3.5.5'
+    APP_VERSION: '3.5.6'
 
 .linux:
     image: registry.gitlab.com/colinduquesnoy/mellowplayer/build-images/linux:latest
