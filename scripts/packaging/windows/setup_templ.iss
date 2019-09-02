@@ -41,7 +41,6 @@ Name: custom;  Description: "Custom installation"; Flags: iscustom
 
 [Components]
 Name: app;  Description: "MellowPlayer";  Types: full compact custom; Flags: fixed
-Name: flash; Description: "Flash Player PPAPI";  Types: full; Flags: disablenouninstallwarning;
 Name: vcredist; Description: "MSVC 2017 Redist";  Types: full; Flags: disablenouninstallwarning;
 
 [Files]
@@ -49,7 +48,6 @@ Source: "bin\*"; DestDir: "{app}"; Flags: recursesubdirs createallsubdirs; Compo
 Source: "..\scripts\packaging\windows\libeay32.dll"; DestDir: "{app}"; Components: app
 Source: "..\scripts\packaging\windows\ssleay32.dll"; DestDir: "{app}"; Components: app
 Source: "..\scripts\packaging\windows\vc_redist.x64.exe"; DestDir: "{tmp}"; Components: vcredist
-Source: "..\scripts\packaging\windows\install_flash_player_ppapi.exe"; DestDir: "{tmp}"; Components: flash
 
 [Tasks]
 Name: "desktopicon"; Description: "{cm:CreateDesktopIcon}"; GroupDescription: "{cm:AdditionalIcons}"; Flags: unchecked; Components: app;
@@ -63,5 +61,4 @@ Name: "{userappdata}\Microsoft\Internet Explorer\Quick Launch\{#MyAppName}"; Fil
 
 [Run]
 Filename: "{tmp}\vc_redist.x64.exe"; Components: vcredist;
-Filename: "{tmp}\install_flash_player_ppapi.exe"; Components: flash;
 Filename: "{app}\{#MyAppExeName}"; Description: "{cm:LaunchProgram,{#StringChange(MyAppName, '&', '&&')}}"; Flags: nowait postinstall skipifsilent; Components: app;
