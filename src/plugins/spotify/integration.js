@@ -37,7 +37,7 @@ function getButtons() {
     }
 
     function getAddRemoveToMusicButton() {
-        return document.querySelector('.now-playing > button');
+        return document.querySelector('.now-playing button[title~=Liked]');
     }
 
     return {
