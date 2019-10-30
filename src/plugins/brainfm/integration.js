@@ -14,7 +14,7 @@ function findReact(dom) {
 }
 
 function getPlayer() {
-    const el = document.querySelector("div[class^=modules-music-player-css-index__wrapper]");
+    const el = document.querySelector("div[class*=index__wrapper]");
     if (!el) return null;
     return findReact(el);
 }
