@@ -92,29 +92,8 @@ Install procedure:
     sudo apt update
     sudo apt install mellowplayer
 
-
-19.04
-*****
-
-Before installing MellowPlayer, **make sure the universe repository is enabled**:
-
-.. code-block:: bash
-
-    sudo add-apt-repository universe
-
-
-Install procedure:
-
-.. code-block:: bash
-
-    sudo sh -c "echo 'deb http://download.opensuse.org/repositories/home:/ColinDuquesnoy/xUbuntu_19.04/ /' > /etc/apt/sources.list.d/mellowplayer.list"
-    wget -nv https://download.opensuse.org/repositories/home:ColinDuquesnoy/xUbuntu_19.04/Release.key -O Release.key
-    sudo apt-key add - < Release.key
-    sudo apt update
-    sudo apt install mellowplayer
-
     
-18.10
+19.10
 *****
 
 Before installing MellowPlayer, **make sure the universe repository is enabled**:
@@ -128,8 +107,8 @@ Install procedure:
 
 .. code-block:: bash
 
-    sudo sh -c "echo 'deb http://download.opensuse.org/repositories/home:/ColinDuquesnoy/xUbuntu_18.10/ /' > /etc/apt/sources.list.d/mellowplayer.list"
-    wget -nv https://download.opensuse.org/repositories/home:ColinDuquesnoy/xUbuntu_18.10/Release.key -O Release.key
+    sudo sh -c "echo 'deb http://download.opensuse.org/repositories/home:/ColinDuquesnoy/xUbuntu_19.10/ /' > /etc/apt/sources.list.d/mellowplayer.list"
+    wget -nv https://download.opensuse.org/repositories/home:ColinDuquesnoy/xUbuntu_19.10/Release.key -O Release.key
     sudo apt-key add - < Release.key
     sudo apt update
     sudo apt install mellowplayer
