@@ -116,10 +116,17 @@ Install procedure:
 Debian
 ++++++
 
-Stable
-******
+Stable (Buster)
+***************
 
-Debian 9 is not supported because their version of Qt is too outdated (5.7, we require 5.9).
+.. code-block:: bash
+
+    sudo sh -c "echo 'deb https://download.opensuse.org/repositories/home:/ColinDuquesnoy/Debian_10/ /' > /etc/apt/sources.list.d/mellowplayer.list"
+    wget -nv https://download.opensuse.org/repositories/home:/ColinDuquesnoy/Debian_10/Release.key -O Release.key
+    sudo apt-key add - < Release.key
+    sudo apt update
+    sudo apt install mellowplayer
+
 
 Testing
 *******
