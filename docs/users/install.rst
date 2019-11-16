@@ -169,7 +169,7 @@ Use the `openSUSE build service`_ web interface or install manually:
 
 .. code-block:: bash
 
-    zypper addrepo https://download.opensuse.org/repositories/home:ColinDuquesnoy/openSUSE_Leap_15.0/home:ColinDuquesnoy.repo
+    zypper addrepo https://download.opensuse.org/repositories/home:ColinDuquesnoy/openSUSE_Leap_15.1/home:ColinDuquesnoy.repo
     zypper refresh
     zypper install MellowPlayer
 
