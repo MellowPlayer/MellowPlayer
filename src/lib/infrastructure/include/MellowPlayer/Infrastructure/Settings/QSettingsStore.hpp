@@ -4,6 +4,11 @@
 #include <QSettings>
 #include <MellowPlayer/Domain/Settings/ISettingsStore.hpp>
 
+namespace MellowPlayer::Domain
+{
+    class ILogger;
+}
+
 namespace MellowPlayer::Infrastructure
 {
     class QSettingsStore : public Domain::ISettingsStore
@@ -20,5 +25,6 @@ namespace MellowPlayer::Infrastructure
 
     private:
         std::unique_ptr<QSettings> qSettings_;
+        Domain::ILogger& logger_;
     };
 }

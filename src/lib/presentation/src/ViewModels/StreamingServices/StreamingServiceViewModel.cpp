@@ -1,13 +1,16 @@
-#include <MellowPlayer/Presentation/ViewModels/StreamingServices/StreamingServiceViewModel.hpp>
+#include <MellowPlayer/Domain/Logging/Loggers.hpp>
+#include <MellowPlayer/Domain/Logging/ILogger.hpp>
 #include <MellowPlayer/Domain/Player/Player.hpp>
 #include <MellowPlayer/Domain/Player/Players.hpp>
 #include <MellowPlayer/Domain/Settings/ISettingsStore.hpp>
-#include <MellowPlayer/Domain/StreamingServices/StreamingService.hpp>
-#include <MellowPlayer/Domain/StreamingServices/StreamingServiceScript.hpp>
 #include <MellowPlayer/Domain/Settings/SettingKey.hpp>
 #include <MellowPlayer/Domain/Settings/SettingsCategory.hpp>
-#include <MellowPlayer/Infrastructure/Network/NetworkProxy.hpp>
+#include <MellowPlayer/Domain/StreamingServices/StreamingService.hpp>
+#include <MellowPlayer/Domain/StreamingServices/StreamingServiceScript.hpp>
 #include <MellowPlayer/Infrastructure/Network/NetworkProxies.hpp>
+#include <MellowPlayer/Infrastructure/Network/NetworkProxy.hpp>
+#include <MellowPlayer/Presentation/ViewModels/StreamingServices/StreamingServiceViewModel.hpp>
+#include <MellowPlayer/Domain/Logging/LoggingMacros.hpp>
 #include <qfile.h>
 
 using namespace std;
@@ -34,10 +37,14 @@ StreamingServiceViewModel::StreamingServiceViewModel(StreamingService& streaming
         zoomFactor_(settingsStore_.value(zoomFactorSettingsKey(), 7).toInt()),
         isActive_(false),
         previewImageUrl_("qrc:/MellowPlayer/Presentation/images/home-background.png"),
-        _settingsCategoryViewModel(themeViewModel, streamingService.settings())
+        _settingsCategoryViewModel(themeViewModel, streamingService.settings()),
+        logger_(Loggers::logger("StreamingServiceViewModel-" + name().toStdString()))
 {
     connect(&streamingService_, &StreamingService::scriptChanged, this, &StreamingServiceViewModel::sourceCodeChanged);
     Q_ASSERT(networkProxy_ != nullptr);
+
+    if (isEnabled())
+        LOG_DEBUG(logger_, "sort order: " << sortOrder());
 }
 
 QString StreamingServiceViewModel::logo() const
@@ -98,8 +105,11 @@ int StreamingServiceViewModel::sortOrder() const
 
 void StreamingServiceViewModel::setSortOrder(int newOrder)
 {
-    settingsStore_.setValue(sortOrderSettingsKey(), newOrder);
-    emit sortOrderChanged();
+    if (newOrder != sortOrder()) {
+        settingsStore_.setValue(sortOrderSettingsKey(), newOrder);
+        LOG_DEBUG(logger_, "sort order changed: " << sortOrder());
+        emit sortOrderChanged();
+    }
 }
 
 bool StreamingServiceViewModel::isEnabled() const
@@ -111,6 +121,7 @@ void StreamingServiceViewModel::setEnabled(bool enabled)
 {
     if (enabled != isEnabled()) {
         settingsStore_.setValue(isEnabledSettingsKey(), enabled);
+        LOG_DEBUG(logger_, "enabled changed: " << sortOrder());
         emit isEnabledChanged();
 
         if (!enabled) {

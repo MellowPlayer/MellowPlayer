@@ -14,6 +14,7 @@ namespace MellowPlayer::Domain
     class StreamingService;
     class Player;
     class Players;
+    class ILogger;
 }
 
 namespace MellowPlayer::Infrastructure
@@ -119,5 +120,6 @@ namespace MellowPlayer::Presentation
         bool isActive_;
         QString previewImageUrl_;
         SettingsCategoryViewModel _settingsCategoryViewModel;
+        Domain::ILogger& logger_;
     };
 }

@@ -43,17 +43,17 @@ StreamingServicesViewModel::StreamingServicesViewModel(StreamingServices& stream
         enabledServices_(allServices_),
         _themeViewModel(themeViewModel)
 {
-
-    connect(&streamingServices, &StreamingServices::added, this, &StreamingServicesViewModel::onServiceAdded);
-
-    for (auto& service : streamingServices.toList()) {
-        onServiceAdded(service.get());
-    }
 }
 
 void StreamingServicesViewModel::initialize()
 {
     streamingServices_.load();
+    for (auto& service : streamingServices_.toList()) {
+        onServiceAdded(service.get());
+    }
+
+    connect(&streamingServices_, &StreamingServices::added, this, &StreamingServicesViewModel::onServiceAdded);
+
     auto currentServiceName = currentServiceSetting_.value().toString();
     if (!commandLineArguments_.service().isEmpty())
         currentServiceName = commandLineArguments_.service();
