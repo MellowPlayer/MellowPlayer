@@ -71,6 +71,11 @@ int Program::main(int argc, char** argv)
     HiDPISupport hiDPISupport;
     hiDPISupport.configure();
 
+    LoggerConfig loggerConfig;
+    loggerConfig.createFileLoggers = SingleInstance::checkForPrimary();
+    SpdLoggerFactory loggerFactory;
+    Loggers::initialize(loggerFactory, loggerConfig);
+
     QApplication qApplication(argc, argv);
     qApplication.setApplicationName("MellowPlayer");
     qApplication.setApplicationDisplayName("MellowPlayer");
@@ -78,13 +83,8 @@ int Program::main(int argc, char** argv)
     qApplication.setOrganizationDomain("com.gitlab.ColinDuquesnoy");
     qApplication.setOrganizationName("MellowPlayer");
 
-    QQuickStyle::setStyle("Material");
     QtWebEngine::initialize();
-
-    SpdLoggerFactory loggerFactory;
-    LoggerConfig loggerConfig;
-    loggerConfig.createFileLoggers = SingleInstance::checkForPrimary();
-    Loggers::initialize(loggerFactory, loggerConfig);
+    QQuickStyle::setStyle("Material");
 
     di::extension::detail::scoped scope{};
     auto injector = di::make_injector(di::bind<QApplication>().to(qApplication),

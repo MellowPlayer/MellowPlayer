@@ -1,6 +1,7 @@
 #include <MellowPlayer/Infrastructure/Logging/SpdLogger.hpp>
 #include <MellowPlayer/Infrastructure/Helpers/FileHelper.hpp>
 #include <iostream>
+#include <QDebug>
 
 using namespace std;
 using namespace spdlog;
@@ -15,7 +16,7 @@ shared_ptr<logger> SpdLogger::createLogger(const string& name, const LoggerConfi
     try {
         // configure sinks
         vector<sink_ptr> sinks;
-        if (config.createConsoleLogger) {
+        if (config.createConsoleLogger && details::os::in_terminal(stdout)) {
 #ifdef Q_OS_WIN
             sinks.push_back(make_shared<sinks::stdout_sink_mt>());
 #else
