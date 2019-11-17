@@ -62,7 +62,6 @@ namespace MellowPlayer::Presentation
     private slots:
         void update();
         void onCurrentServiceChanged(Domain::StreamingService* streamingService);
-        void onServiceAdded(Domain::StreamingService* service);
 
     private:
         void setAccent(const QString& value);

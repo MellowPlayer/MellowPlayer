@@ -40,7 +40,6 @@ ThemeViewModel::ThemeViewModel(StreamingServices& streamingServices,
     connect(&primaryForegroundSetting_, &Setting::valueChanged, this, &ThemeViewModel::update);
     connect(&secondaryBackgroundSetting_, &Setting::valueChanged, this, &ThemeViewModel::update);
     connect(&secondaryForegroundSetting_, &Setting::valueChanged, this, &ThemeViewModel::update);
-    connect(&streamingServices, &StreamingServices::added, this, &ThemeViewModel::onServiceAdded);
 
     collectThemes();
     update();
@@ -226,22 +225,13 @@ Theme ThemeViewModel::customTheme() const
 void ThemeViewModel::collectThemes()
 {
     availableThemes_["Adaptive"] = currentTheme_;
-    availableThemes_["Ambiance"] = loader_.load(":/MellowPlayer/Presentation/themes/Ambiance.json");
+    availableThemes_["Ubuntu"] = loader_.load(":/MellowPlayer/Presentation/themes/Ubuntu.json");
     availableThemes_["Breeze"] = loader_.load(":/MellowPlayer/Presentation/themes/Breeze.json");
     availableThemes_["BreezeDark"] = loader_.load(":/MellowPlayer/Presentation/themes/BreezeDark.json");
     availableThemes_["Midna"] = loader_.load(":/MellowPlayer/Presentation/themes/Midna.json");
     availableThemes_["MidnaDark"] = loader_.load(":/MellowPlayer/Presentation/themes/MidnaDark.json");
     availableThemes_["Custom"] = customTheme();
     availableThemes_["Default"] = loader_.load(":/MellowPlayer/Presentation/themes/Default.json");
-
-    for (auto service : streamingServices_.toList()) {
-        availableThemes_[service->name()] = service->theme();
-    }
-}
-
-void ThemeViewModel::onServiceAdded(StreamingService* service)
-{
-    availableThemes_[service->name()] = service->theme();
 }
 
 QStringList ThemeViewModel::availableThemes() const

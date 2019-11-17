@@ -32,7 +32,7 @@
         <file>themes/Default.json</file>
         <file>themes/Midna.json</file>
         <file>themes/MidnaDark.json</file>
-        <file>themes/Ambiance.json</file>
+        <file>themes/Ubuntu.json</file>
         <file>icons/gitlab.svg</file>
     </qresource>
 </RCC>
