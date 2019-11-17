@@ -58,7 +58,7 @@ namespace MellowPlayer::Infrastructure::Tests
             auto nonConstThis = const_cast<FakeLocalSocketFactory*>(this);
             nonConstThis->lastSocketCreated = socket.get();
 
-            return std::move(socket);
+            return socket;
         }
 
         FakeLocalSocket* lastSocketCreated;

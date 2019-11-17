@@ -38,7 +38,7 @@ namespace MellowPlayer::Infrastructure::Tests
         {
             auto socket = std::make_unique<FakeLocalSocket>();
             newConnectionSocket = socket.get();
-            return std::move(socket);
+            return socket;
         }
 
         bool closed = false;
@@ -58,7 +58,7 @@ namespace MellowPlayer::Infrastructure::Tests
             auto nonConstThis = const_cast<FakeLocalServerFactory*>(this);
             nonConstThis->lastServerCreated = localServer.get();
 
-            return std::move(localServer);
+            return localServer;
         }
 
         FakeLocalServer* lastServerCreated;
