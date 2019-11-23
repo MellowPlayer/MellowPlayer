@@ -1,5 +1,6 @@
-#include <MellowPlayer/Domain/Logging/Loggers.hpp>
 #include <MellowPlayer/Domain/Logging/ILogger.hpp>
+#include <MellowPlayer/Domain/Logging/Loggers.hpp>
+#include <MellowPlayer/Domain/Logging/LoggingMacros.hpp>
 #include <MellowPlayer/Domain/Player/Player.hpp>
 #include <MellowPlayer/Domain/Player/Players.hpp>
 #include <MellowPlayer/Domain/Settings/ISettingsStore.hpp>
@@ -10,7 +11,8 @@
 #include <MellowPlayer/Infrastructure/Network/NetworkProxies.hpp>
 #include <MellowPlayer/Infrastructure/Network/NetworkProxy.hpp>
 #include <MellowPlayer/Presentation/ViewModels/StreamingServices/StreamingServiceViewModel.hpp>
-#include <MellowPlayer/Domain/Logging/LoggingMacros.hpp>
+#include <QtCore/QDir>
+#include <QtCore/QStandardPaths>
 #include <qfile.h>
 
 using namespace std;
@@ -236,4 +238,18 @@ QString StreamingServiceViewModel::sourceCode() const
 SettingsCategoryViewModel *StreamingServiceViewModel::settings()
 {
     return &_settingsCategoryViewModel;
+}
+
+QString StreamingServiceViewModel::getPreviewImageUrlForSave()
+{
+    ++_previewCount;
+    if (_previewCount > 10)
+        _previewCount = 1;
+
+    auto cacheDir = QDir(QStandardPaths::standardLocations(QStandardPaths::CacheLocation)[0]);
+    auto dir = QFileInfo(cacheDir, "Preview");
+    auto dirPath = dir.absoluteFilePath();
+    QDir().mkpath(dirPath);
+    auto filePath = QFileInfo(dirPath, QString("%1-%2.jpg").arg(name()).arg(_previewCount)).absoluteFilePath();
+    return filePath;
 }

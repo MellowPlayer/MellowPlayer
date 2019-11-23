@@ -13,7 +13,6 @@ WebEngineView {
 
     property QtObject service
     property QtObject player: service.player
-    property var image: null
     property bool hasProprietaryCodecs: true
     property var userAgentSetting: _settings.get(SettingKey.PRIVACY_USER_AGENT)
 
@@ -21,8 +20,9 @@ WebEngineView {
         if (!mainWindow.visible)
             return;
         root.grabToImage(function(result) {
-            service.previewImageUrl = result.url;
-            image = result;
+            var path = service.getPreviewImageUrlForSave();
+            if (result.saveToFile(path))
+                service.previewImageUrl = "file://" + path;
         }, Qt.size(root.width, root.height));
     }
 

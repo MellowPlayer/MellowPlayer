@@ -94,6 +94,7 @@ namespace MellowPlayer::Presentation
         void setActive(bool isActive);
 
         void setPreviewImageUrl(QString previewImageUrl);
+        QString getPreviewImageUrlForSave();
 
     signals:
         void urlChanged(const QString&);
@@ -121,5 +122,6 @@ namespace MellowPlayer::Presentation
         QString previewImageUrl_;
         SettingsCategoryViewModel _settingsCategoryViewModel;
         Domain::ILogger& logger_;
+        int _previewCount = 0;
     };
 }
