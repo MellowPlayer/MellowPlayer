@@ -50,7 +50,10 @@ Item {
                     model: DelegateModel {
                         id: visualModel
 
-                        model: _streamingServices.enabledServices
+                        Component.onCompleted: {
+                            _streamingServices.enabledServices.update()
+                            model = _streamingServices.enabledServices
+                        }
 
                         delegate: Item {
                             id: delegateRoot
