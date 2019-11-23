@@ -37,19 +37,10 @@ packages=(
   qml-module-qt-labs-settings
   qml-module-qt-labs-folderlistmodel
 
-  # Other dependencies
-  libspdlog-dev
-  libgtest-dev
-
   # Codecs
   libavcodec-extra
 
   # libnotify
   libnotify-dev
-
-  # Backward dependencies
-  libdw-dev
-  libbfd-dev
-  libdwarf-dev
 )
 sudo apt -y install ${packages[@]}

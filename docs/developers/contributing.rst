@@ -26,6 +26,8 @@ Setting up a development environment
 
 Read the how to setup page of the `wiki`_
 
+Some helper scripts to setup your development environment for different GNU/Linux distributions can be found in the `scripts/env-setup`_ folder.
+
 We also recommend you read the `architecture`_ and the `coding
 guidelines`_ pages before hacking on MellowPlayer.
 
@@ -78,4 +80,4 @@ MellowPlayer translations are hosted on `transifex`_
 .. _architecture: https://gitlab.com/ColinDuquesnoy/MellowPlayer/wikis/architecture
 .. _coding guidelines: https://gitlab.com/ColinDuquesnoy/MellowPlayer/wikis/coding-guidelines
 .. _transifex: https://www.transifex.com/colinduquesnoy/mellowplayer
- 
+.. _scripts/env-setup: https://gitlab.com/ColinDuquesnoy/MellowPlayer/tree/master/scripts/env-setup

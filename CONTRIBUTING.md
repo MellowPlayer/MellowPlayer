@@ -22,6 +22,8 @@ Setting up a development environment
 
 Read the how to setup page of the [wiki](https://gitlab.com/ColinDuquesnoy/MellowPlayer/wikis/%5BTutorial%5D-Setting-up-a-development-environment)
 
+Some helper scripts to setup your development environment for different GNU/Linux distributions can be found in the [scripts/env-setup](https://gitlab.com/ColinDuquesnoy/MellowPlayer/tree/master/scripts/env-setup) folder.
+
 We also recommend you read the [architecture](https://gitlab.com/ColinDuquesnoy/MellowPlayer/wikis/architecture) and the [coding guidelines](https://gitlab.com/ColinDuquesnoy/MellowPlayer/wikis/coding-guidelines) pages before hacking on MellowPlayer.
 
 Submitting a pull request
