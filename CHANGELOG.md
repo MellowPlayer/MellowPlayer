@@ -1,5 +1,31 @@
 # Change log
 
+## [3.5.6](https://gitlab.com/ColinDuquesnoy/MellowPlayer/tree/3.5.6) (2019-11-24)
+[Full Changelog](https://gitlab.com/ColinDuquesnoy/MellowPlayer/compare/3.5.5...3.5.6)
+
+**Implemented enhancements:**
+
+- Allow Multi-user single instances [\#333](https://gitlab.com/ColinDuquesnoy/MellowPlayer/issues/333)
+
+**Fixed bugs:**
+
+- Keyboard shortcut not working in Quit dialog [\#377](https://gitlab.com/ColinDuquesnoy/MellowPlayer/issues/377)
+- Restore window does not work in all cases [\#376](https://gitlab.com/ColinDuquesnoy/MellowPlayer/issues/376)
+- TuneIn play/pause buttons in MellowPlayer interface not working [\#363](https://gitlab.com/ColinDuquesnoy/MellowPlayer/issues/363)
+- api url `https://api.bintray.com/packages/colinduquesnoy/MellowPlayer/Стабильный/files` is translated to current language [\#359](https://gitlab.com/ColinDuquesnoy/MellowPlayer/issues/359)
+- MellowPlayer not starting without output stream [\#358](https://gitlab.com/ColinDuquesnoy/MellowPlayer/issues/358)
+- Service order in services list page not saved after drag'n'drop [\#356](https://gitlab.com/ColinDuquesnoy/MellowPlayer/issues/356)
+
+
+**Closed issues:**
+
+- [Windows 10] Google Play Music, Youtube prompts that the browser is not supported [\#360](https://gitlab.com/ColinDuquesnoy/MellowPlayer/issues/360)
+
+
+**Merged merge requests:**
+
+- Add Apple Music [\#315](https://gitlab.com/ColinDuquesnoy/MellowPlayer/merge_requests/315) ([vanyasem](https://gitlab.com/vanyasem))
+
 ## [3.5.5](https://gitlab.com/ColinDuquesnoy/MellowPlayer/tree/3.5.5) (2019-7-12)
 [Full Changelog](https://gitlab.com/ColinDuquesnoy/MellowPlayer/compare/3.5.4...3.5.5)
 
