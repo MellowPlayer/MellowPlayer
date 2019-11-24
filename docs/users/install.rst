@@ -195,7 +195,7 @@ MellowPlayer is available from `KaOSx/apps`_ repository, just run:
     $ sudo pacman -S mellowplayer
 
 
-.. _KaOSx/apps: http://kaosx.tk/packages/index.php?subdir=apps&sortby=name
+.. _KaOSx/apps: https://kaosx.us/packages/packages.php?sortby=name&sortdir=&flagged=&page=&repo=apps&exact=&search=mellowplayer
 
 
 Flatpak
