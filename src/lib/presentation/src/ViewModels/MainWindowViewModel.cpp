@@ -48,3 +48,8 @@ void MainWindowViewModel::requestQuit()
 {
     emit quitRequest();
 }
+
+void MainWindowViewModel::raise()
+{
+    emit raiseRequested();
+}

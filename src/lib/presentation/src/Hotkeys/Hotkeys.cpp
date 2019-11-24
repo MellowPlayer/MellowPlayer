@@ -114,7 +114,7 @@ void Hotkeys::updateFavoriteShortcut() const
 
 void Hotkeys::restoreWindow()
 {
-    mainWindow_.show();
+    mainWindow_.raise();
 }
 
 void Hotkeys::updateRestoreWindowShortcut() const

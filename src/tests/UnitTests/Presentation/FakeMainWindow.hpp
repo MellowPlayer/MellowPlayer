@@ -17,6 +17,11 @@ namespace MellowPlayer::Presentation::Tests
             isShown = true;
         }
 
+        void raise() override
+        {
+            isShown = true;
+        }
+
         void hide() override
         {
             isHidden = true;

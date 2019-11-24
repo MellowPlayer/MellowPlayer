@@ -74,5 +74,5 @@ bool LibnotifyPresenter::display(const Notification& notification)
 
 void LibnotifyPresenter::onActionCallback()
 {
-    instance_->mainWindow_.show();
+    instance_->mainWindow_.raise();
 }

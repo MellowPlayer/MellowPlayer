@@ -232,9 +232,10 @@ ApplicationWindow {
     Connections {
         target: _window;
 
-        onVisibleChanged: _window.visible ? d.restoreWindow() : mainWindow.hide()
+        onVisibleChanged: _window.visible ? d.restoreWindow() : d.hideWindow()
         onQuitRequest: d.quit()
         onForceQuitRequest: { d.forceQuit = true; _app.quit() }
+        onRaiseRequested: d.restoreWindow()
     }
 
     Shortcut {
@@ -265,9 +266,14 @@ ApplicationWindow {
         property QtObject applicationRoot: ApplicationRoot { }
         property bool forceQuit: false;
 
+        function hideWindow() {
+            mainWindow.hide();
+        }
+
         function restoreWindow() {
-            mainWindow.raise();
+            mainWindow.hide();
             mainWindow.show();
+            mainWindow.raise();
         }
 
         function handleEscapeKey() {

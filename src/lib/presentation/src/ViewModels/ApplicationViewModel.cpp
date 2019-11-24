@@ -31,7 +31,7 @@ ApplicationViewModel::ApplicationViewModel(IApplication& application,
     qtApplication_.setWindowIcon(IconProvider::windowIcon());
 
     connect(&application_, &IApplication::commitDataRequest, &mainWindow, &IMainWindow::forceQuitRequest);
-    connect(&application_, &IApplication::restoreWindowRequest, &mainWindow, &IMainWindow::show);
+    connect(&application_, &IApplication::restoreWindowRequest, &mainWindow, &IMainWindow::raise);
     connect(&application_, &IApplication::initialized, [&]() {
         setupFont();
         registerMetaTypes();

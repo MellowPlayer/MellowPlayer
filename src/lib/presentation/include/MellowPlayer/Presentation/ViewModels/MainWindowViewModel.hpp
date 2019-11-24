@@ -19,6 +19,7 @@ namespace MellowPlayer::Presentation
         void load() override;
         void show() override;
         void hide() override;
+        void raise() override;
 
         // Properties for QML
         bool isVisible() const;
@@ -33,6 +34,7 @@ namespace MellowPlayer::Presentation
 
     signals:
         void visibleChanged();
+        void raiseRequested();
 
     private:
         IQmlApplicationEngine& qmlApplicationEngine_;

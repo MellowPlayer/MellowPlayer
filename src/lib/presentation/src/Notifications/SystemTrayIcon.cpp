@@ -63,7 +63,7 @@ void SystemTrayIcon::showMessage(const QString& title, const QString& message)
 void SystemTrayIcon::onActivated(QSystemTrayIcon::ActivationReason)
 {
     LOG_TRACE(logger_, "activated");
-    mainWindow_.show();
+    mainWindow_.raise();
 }
 
 void SystemTrayIcon::setUpMenu()
@@ -112,7 +112,7 @@ void SystemTrayIcon::previous()
 void SystemTrayIcon::restoreWindow()
 {
     LOG_DEBUG(logger_, "restore window");
-    mainWindow_.show();
+    mainWindow_.raise();
 }
 
 void SystemTrayIcon::quit()

@@ -12,7 +12,7 @@ Mpris2Root::Mpris2Root(IMainWindow& mainWindow, QObject* parent)
 
 void Mpris2Root::Raise()
 {
-    mainWindow_.show();
+    mainWindow_.raise();
 }
 
 void Mpris2Root::Quit()
