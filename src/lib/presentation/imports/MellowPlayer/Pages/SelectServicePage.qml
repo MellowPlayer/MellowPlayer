@@ -9,6 +9,15 @@ import MellowPlayer 3.0
 Page {
     id: page
 
+    signal quitRequested()
+
+    Shortcut {
+        sequence: "Escape"
+        enabled: page.visible
+
+        onActivated: page.quitRequested()
+    }
+
     ServicesOverview {
         anchors.fill: parent
     }

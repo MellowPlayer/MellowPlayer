@@ -68,7 +68,11 @@ ApplicationWindow {
         if (page === selectServicePage) {
             if (runningServices !== null && runningServices.currentWebView !== null)
                 runningServices.currentWebView.updateImage();
-            stack.push(selectServicePageComponent);
+            var selectServices = stack.push(selectServicePageComponent);
+            selectServices.quitRequested.connect(function() {
+                stack.slideTransitions = false;
+                mainWindow.toggleActivePage()
+            });
         }
         else if (page === runningServicesPage) {
             if (stack.depth <= 1) {
@@ -181,7 +185,10 @@ ApplicationWindow {
         message: qsTr("Are you sure you want to quit MellowPlayer?")
         title: qsTr("Confirm quit")
 
-        onAccepted: _app.quit()
+        onAccepted: {
+            console.warn("quit")
+            Qt.quit()
+        }
     }
 
     MessageBoxDialog {
@@ -239,14 +246,6 @@ ApplicationWindow {
     }
 
     Shortcut {
-        sequence: "Escape";
-        context: "ApplicationShortcut"
-
-        onActivated: d.handleEscapeKey()
-        onActivatedAmbiguously: d.handleEscapeKey()
-    }
-
-    Shortcut {
         sequence: _settings.get(SettingKey.SHORTCUTS_SELECT_SERVICE).value
         onActivated: {
             stack.slideTransitions = false;
@@ -274,22 +273,6 @@ ApplicationWindow {
             mainWindow.hide();
             mainWindow.show();
             mainWindow.raise();
-        }
-
-        function handleEscapeKey() {
-            if (mainWindow.visibility === ApplicationWindow.FullScreen) {
-                runningServices.exitFullScreen();
-                mainWindow.visibility = d.previousVisibility;
-                runningServicesPage.currentWebView.forceActiveFocus()
-            }
-            else if (settingsDrawer.visible)
-                settingsDrawer.close()
-            else if (aboutDialog.visible)
-                aboutDialog.close()
-            else if (!mainWindow.isOnRunningServicesPage) {
-                stack.slideTransitions = false;
-                mainWindow.toggleActivePage()
-            }
         }
 
         function saveGeometry() {
@@ -320,6 +303,7 @@ ApplicationWindow {
             if (confirmExit) {
                 d.restoreWindow();
                 confirmQuitMsgBox.open();
+                confirmQuitMsgBox.forceActiveFocus();
             }
             else {
                 _app.quit();

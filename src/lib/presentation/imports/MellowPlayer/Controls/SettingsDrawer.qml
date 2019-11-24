@@ -9,6 +9,13 @@ Drawer {
     edge: Qt.RightEdge
     interactive: false
 
+    Shortcut {
+        enabled: root.visible
+        sequence: "Escape"
+
+        onActivatedAmbiguously: root.close()
+    }
+
     SettingsPage {
         anchors.fill: parent
         onCloseRequested: close()
