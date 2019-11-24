@@ -23,12 +23,25 @@ function getHashCode(s) {
     }, 0);
 }
 
-function getPlaybackStatus() {
-    var audio = jp_audio_0;
+function getPlayerButtons() {
+    return {
+        play: document.querySelector('svg[data-testId="player-status-paused"]') || document.querySelector('svg[data-testId="player-status-stopped"]'),
+        pause: document.querySelector('svg[data-testId="player-status-playing"]')
+    };
+}
 
-    if (audio === null)
+function getPlayPauseButton() {
+    var buttons = getPlayerButtons();
+    console.log("buttons: " + buttons);
+    return buttons.pause === null ? buttons.play : buttons.pause;
+}
+
+function getPlaybackStatus() {
+    var buttons = getPlayerButtons();
+
+    if (buttons.play === null && buttons.pause === null)
         return mellowplayer.PlaybackStatus.STOPPED;
-    else if (audio.paused)
+    else if (buttons.play !== null)
         return mellowplayer.PlaybackStatus.PAUSED;
     else
         return mellowplayer.PlaybackStatus.PLAYING;
@@ -83,12 +96,40 @@ function update() {
     };
 }
 
+function triggerMouseEvent(elm, name, x, y) {
+    var rect = elm.getBoundingClientRect();
+    var width = rect.width * (x === undefined ? 0.5 : x);
+    var height = rect.height * (y === undefined ? 0.5 : y);
+    var opts = {
+        view: document.defaultView,
+        bubbles: true,
+        cancelable: true,
+        button: 0,
+        relatedTarget: elm
+    };
+    opts.clientX = rect.left + width;
+    opts.clientY = rect.top + height;
+    opts.screenX = window.screenX + opts.clientX;
+    opts.screenY = window.screenY + opts.clientY;
+    var event = new window.MouseEvent(name, opts);
+    elm.dispatchEvent(event)
+}
+
+
+function clickOnElement(elm, x=0.5, y=0.5) {
+    triggerMouseEvent(elm, 'mouseover', x, y);
+    triggerMouseEvent(elm, 'mousedown', x, y);
+    triggerMouseEvent(elm, 'mouseup', x, y);
+    triggerMouseEvent(elm, 'click', x, y);
+    triggerMouseEvent(elm, 'mouseout', x, y);
+}
+
 function play() {
-    jp_audio_0.play()
+    clickOnElement(getPlayPauseButton())
 }
 
 function pause() {
-    jp_audio_0.pause()
+    clickOnElement(getPlayPauseButton())
 }
 
 function goNext() {
