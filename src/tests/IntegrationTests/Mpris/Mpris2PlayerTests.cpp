@@ -227,8 +227,13 @@ TEST_CASE("Mpris2PlayerTests", "[IntegrationTest]")
     {
         QSignalSpy spy(&currentPlayer, &Player::pause);
         mpris2Player.Play();
+        currentPlayer.setPlaybackStatus(PlaybackStatus::Playing);
         mpris2Player.Stop();
         REQUIRE(spy.count() == 1);
+        spy.clear();
+        currentPlayer.setPlaybackStatus(PlaybackStatus::Stopped);
+        mpris2Player.Stop();
+        REQUIRE(spy.count() == 0);
     }
 
     SECTION("Next")
