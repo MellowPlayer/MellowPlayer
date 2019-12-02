@@ -270,9 +270,9 @@ ApplicationWindow {
         }
 
         function restoreWindow() {
-            mainWindow.hide();
-            mainWindow.show();
+            mainWindow.visible = true;
             mainWindow.raise();
+            mainWindow.requestActivate();
         }
 
         function saveGeometry() {
