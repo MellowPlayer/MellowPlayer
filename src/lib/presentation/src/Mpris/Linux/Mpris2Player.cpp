@@ -178,7 +178,7 @@ void Mpris2Player::Pause()
 void Mpris2Player::Stop()
 {
     LOG_TRACE(logger_, "Stop()");
-    player_.pause();
+    Pause();
 }
 
 void Mpris2Player::Next()
