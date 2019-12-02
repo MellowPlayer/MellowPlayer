@@ -60,10 +60,11 @@ void SystemTrayIcon::showMessage(const QString& title, const QString& message)
     qSystemTrayIcon_.showMessage(title, message);
 }
 
-void SystemTrayIcon::onActivated(QSystemTrayIcon::ActivationReason)
+void SystemTrayIcon::onActivated(QSystemTrayIcon::ActivationReason reason)
 {
-    LOG_TRACE(logger_, "activated");
-    mainWindow_.raise();
+    LOG_WARN(logger_, "activated" << reason);
+    if (reason == QSystemTrayIcon::DoubleClick || reason == QSystemTrayIcon::Trigger)
+        mainWindow_.raise();
 }
 
 void SystemTrayIcon::setUpMenu()
