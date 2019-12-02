@@ -21,9 +21,21 @@ TEST_CASE("SystemTrayIconTests")
     FakeMainWindow mainWindow;
     SystemTrayIcon systemTrayIcon(playerMock.get(), mainWindow, settings);
 
-    SECTION("show window onActivated")
+    SECTION("don't show window onActivated with context menu")
     {
         systemTrayIcon.onActivated(QSystemTrayIcon::Context);
+        REQUIRE(!mainWindow.isShown);
+    }
+
+    SECTION("show window onActivated with double click")
+    {
+        systemTrayIcon.onActivated(QSystemTrayIcon::DoubleClick);
+        REQUIRE(mainWindow.isShown);
+    }
+
+    SECTION("show window onActivated with trigger")
+    {
+        systemTrayIcon.onActivated(QSystemTrayIcon::Trigger);
         REQUIRE(mainWindow.isShown);
     }
 
