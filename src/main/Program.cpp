@@ -77,7 +77,7 @@ int Program::main(int argc, char** argv)
     Loggers::initialize(loggerFactory, loggerConfig);
 
     QApplication qApplication(argc, argv);
-    qApplication.setApplicationName("MellowPlayer");
+    qApplication.setApplicationName("MellowPlayer3");
     qApplication.setApplicationDisplayName("MellowPlayer");
     qApplication.setApplicationVersion(BuildConfig::getVersion());
     qApplication.setOrganizationDomain("com.gitlab.ColinDuquesnoy");
