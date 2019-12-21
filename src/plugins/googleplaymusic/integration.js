@@ -66,6 +66,33 @@ function sendMouseClickToElement(element, relativeX, relativeY) {
     sendMouseEventToElement(element, 'mouseup', relativeX, relativeY);
 }
 
+/**
+ * Given a time in the form HH:MM:SS or MM:SS, return the total number of seconds.
+ * @param time  (String) A time string of the form "HH:MM:SS" or "MM:SS".
+ * @returns     (Int) The converted time in seconds, or 0 if the input is invalid.
+ *
+*/
+function timeToSeconds(time) {
+    var times = time.split(":");
+    var hours = 0;
+    var minutes = 0;
+    var seconds = 0;
+
+    switch (times.length) {
+        case 2:
+            minutes = times[0];
+            seconds = times[1];
+            break;
+        case 3:
+            hours = times[0];
+            minutes = times[1];
+            seconds = times[2];
+            break;
+    }
+
+    return (parseInt(hours, 10) * 3600) + (parseInt(minutes, 10) * 60) + parseInt(seconds, 10);
+}
+
 //-----------------------------------------------------------------------------
 // Much of this was adapted from: https://github.com/tiliado/nuvola-app-google-play-music
 //-----------------------------------------------------------------------------
@@ -116,19 +143,13 @@ function update() {
     var duration = 0;
     try {
         duration = document.querySelector("#material-player-right-wrapper #time_container_duration").innerText;
-        var dtimes = duration.split(":");
-        var dminutes = dtimes[0];
-        var dseconds = dtimes[1];
-        duration = parseInt(dseconds, 10) + (parseInt(dminutes, 10) * 60);
+        duration = timeToSeconds(duration);
     } catch (e) {}
 
     var position = 0;
     try {
         position = document.querySelector("#material-player-right-wrapper #time_container_current").innerText;
-        var ptimes = position.split(":");
-        var pminutes = ptimes[0];
-        var pseconds = ptimes[1];
-        position = parseInt(pseconds, 10) + (parseInt(pminutes, 10) * 60);
+        position = timeToSeconds(position);
     } catch (e) {}
 
     elm = getButtons().skip;
