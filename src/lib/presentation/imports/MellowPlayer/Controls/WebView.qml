@@ -190,7 +190,7 @@ WebEngineView {
 
     Connections {
         target: userAgentSetting
-        onValueChanged: { console.warn("new user agent: " + userAgentSetting.value); reload(); }
+        onValueChanged: { console.log("new user agent: " + userAgentSetting.value); reload(); }
     }
 
     Connections {

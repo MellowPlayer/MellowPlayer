@@ -186,7 +186,7 @@ ApplicationWindow {
         title: qsTr("Confirm quit")
 
         onAccepted: {
-            console.warn("quit")
+            console.info("quit")
             Qt.quit()
         }
     }
