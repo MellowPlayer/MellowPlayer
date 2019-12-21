@@ -12,7 +12,7 @@ namespace MellowPlayer::Infrastructure
      * The wrapper exposes QNetworkProxy properties for use in QML and provides serialization methods from/to a
      * QVariantMap for easy usage with QSettings.
      */
-    class NetworkProxy: public QObject
+    class NetworkProxy : public QObject
     {
         Q_OBJECT
         Q_PROPERTY(bool enabled READ isEnabled WRITE setEnabled NOTIFY enabledChanged)
@@ -27,7 +27,7 @@ namespace MellowPlayer::Infrastructure
          *  - hostName: QString
          *  - port: int
          */
-        NetworkProxy(const QVariantMap& qVariantMap=QVariantMap());
+        NetworkProxy(const QVariantMap& qVariantMap = QVariantMap());
 
         /**
          * Checks if the network proxy is enabled.

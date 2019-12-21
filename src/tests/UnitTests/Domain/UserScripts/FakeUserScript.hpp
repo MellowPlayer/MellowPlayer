@@ -7,7 +7,7 @@
 
 namespace MellowPlayer::Domain::Tests
 {
-    class FakeUserScript: public UserScriptBase
+    class FakeUserScript : public UserScriptBase
     {
     public:
         bool import(const QString& path) override
@@ -22,8 +22,8 @@ namespace MellowPlayer::Domain::Tests
             return true;
         }
 
-        void removeFile() const override {
-
+        void removeFile() const override
+        {
         }
     };
 }

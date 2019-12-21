@@ -1,16 +1,13 @@
-#include <MellowPlayer/Infrastructure/AlbumArt/LocalAlbumArt.hpp>
 #include <MellowPlayer/Domain/AlbumArt/IAlbumArtDownloader.hpp>
 #include <MellowPlayer/Domain/Player/IPlayer.hpp>
 #include <MellowPlayer/Domain/Player/Song.hpp>
+#include <MellowPlayer/Infrastructure/AlbumArt/LocalAlbumArt.hpp>
 
 using namespace MellowPlayer::Domain;
 using namespace MellowPlayer::Domain;
 using namespace MellowPlayer::Infrastructure;
 
-LocalAlbumArt::LocalAlbumArt(IPlayer& player, IAlbumArtDownloader& downloader, int timeout)
-        : _player(player),
-          _downloader(downloader),
-          _timeout(timeout)
+LocalAlbumArt::LocalAlbumArt(IPlayer& player, IAlbumArtDownloader& downloader, int timeout) : _player(player), _downloader(downloader), _timeout(timeout)
 {
     _timer.setInterval(timeout);
     _timer.setSingleShot(true);
@@ -35,12 +32,14 @@ const QString& LocalAlbumArt::url() const
 
 void LocalAlbumArt::onCurrentSongChanged(Song* song)
 {
-    if (song != nullptr && !song->uniqueId().isEmpty()) {
+    if (song != nullptr && !song->uniqueId().isEmpty())
+    {
         _url = "";
         auto artUrl = song->artUrl();
         auto songId = song->uniqueId();
 
-        if (song->artUrl().isEmpty()) {
+        if (song->artUrl().isEmpty())
+        {
             connect(song, &Song::artUrlChanged, this, &LocalAlbumArt::onArtUrlChanged);
             _timer.start();
         }
@@ -52,7 +51,8 @@ void LocalAlbumArt::onCurrentSongChanged(Song* song)
 void LocalAlbumArt::onDownloadFinished(const QString& newUrl)
 {
     _timer.stop();
-    if (newUrl != _url) {
+    if (newUrl != _url)
+    {
         _url = newUrl;
         emit urlChanged();
     }

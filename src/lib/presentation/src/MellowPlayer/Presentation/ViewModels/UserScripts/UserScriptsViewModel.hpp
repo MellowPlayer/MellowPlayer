@@ -1,8 +1,8 @@
 #pragma once
 
-#include <QObject>
 #include <MellowPlayer/Domain/UserScripts/UserScripts.hpp>
 #include <MellowPlayer/Presentation/Models/UserScriptListModel.hpp>
+#include <QObject>
 
 namespace MellowPlayer::Presentation
 {
@@ -15,7 +15,7 @@ namespace MellowPlayer::Presentation
         UserScriptsViewModel(const QString& serviceName,
                              Domain::IUserScriptFactory& userScriptFactory,
                              Domain::ISettingsStore& settingsStore,
-                             QObject* parent= nullptr);
+                             QObject* parent = nullptr);
 
         QAbstractListModel* model();
         bool hasScripts() const;

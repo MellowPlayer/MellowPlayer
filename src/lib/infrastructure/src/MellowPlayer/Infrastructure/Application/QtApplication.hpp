@@ -29,7 +29,7 @@ namespace MellowPlayer::Infrastructure
         void commitDataRequest();
     };
 
-    class QtApplication: public IQtApplication
+    class QtApplication : public IQtApplication
     {
     public:
         QtApplication(QApplication& qApplication);
@@ -49,6 +49,5 @@ namespace MellowPlayer::Infrastructure
 
     private:
         QApplication& qApplication_;
-
     };
 }

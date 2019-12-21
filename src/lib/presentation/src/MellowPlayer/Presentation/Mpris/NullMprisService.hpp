@@ -4,7 +4,7 @@
 
 namespace MellowPlayer::Presentation
 {
-    class NullMprisService: public IMprisService
+    class NullMprisService : public IMprisService
     {
     public:
         virtual bool start();

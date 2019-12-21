@@ -1,16 +1,16 @@
 #pragma once
 
-#include <QtCore/QObject>
 #include <QtCore/QIODevice>
+#include <QtCore/QObject>
 #include <QtNetwork/QLocalSocket>
 
 namespace MellowPlayer::Infrastructure
 {
-    class ILocalSocket: public QObject
+    class ILocalSocket : public QObject
     {
         Q_OBJECT
     public:
-        virtual void connectToServer(const QString &name, QIODevice::OpenMode openMode = QIODevice::ReadWrite) = 0;
+        virtual void connectToServer(const QString& name, QIODevice::OpenMode openMode = QIODevice::ReadWrite) = 0;
         virtual void disconnectFromServer() = 0;
         virtual void write(const QString& data) = 0;
         virtual QString readAll() = 0;
@@ -23,9 +23,10 @@ namespace MellowPlayer::Infrastructure
         void readyRead();
     };
 
-    class LocalSocket: public ILocalSocket
+    class LocalSocket : public ILocalSocket
     {
         Q_OBJECT;
+
     public:
         LocalSocket();
 

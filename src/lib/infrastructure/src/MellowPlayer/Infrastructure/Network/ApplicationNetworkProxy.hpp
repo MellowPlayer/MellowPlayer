@@ -1,7 +1,7 @@
 #pragma once
 
-#include <memory>
 #include <QtNetwork/QNetworkProxy>
+#include <memory>
 
 namespace MellowPlayer::Domain
 {
@@ -20,7 +20,7 @@ namespace MellowPlayer::Infrastructure
      *
      * If the current streaming service's proxy is disabled, the default application proxy is used instead.
      */
-    class ApplicationNetworkProxy: public QObject
+    class ApplicationNetworkProxy : public QObject
     {
     public:
         /**

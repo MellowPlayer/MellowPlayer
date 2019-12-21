@@ -1,20 +1,17 @@
-#include <MellowPlayer/Infrastructure/Updater/Release.hpp>
 #include <MellowPlayer/Infrastructure/BuildConfig.hpp>
+#include <MellowPlayer/Infrastructure/Updater/Release.hpp>
 
 using namespace MellowPlayer::Infrastructure;
 
 Release Release::current_(BuildConfig::getVersion(), QDate::fromString(BuildConfig::getBuildDate(), Qt::ISODate));
 
-Release::Release(const QString& name, const QDate& date, QObject* parent)
-        : QObject(parent), url_(""), name_(name), date_(date), preRelease_(false), assets_()
+Release::Release(const QString& name, const QDate& date, QObject* parent) : QObject(parent), url_(""), name_(name), date_(date), preRelease_(false), assets_()
 {
-
 }
 
 Release::Release(const QString& url, const QString& name, const QDate& date, const AssetList& assets, bool preRelease, QObject* parent)
         : QObject(parent), url_(url), name_(name), date_(date), preRelease_(preRelease), assets_(assets)
 {
-
 }
 
 QString Release::url() const
@@ -81,12 +78,14 @@ bool Release::isValid() const
 {
     bool isValid = !date().isEmpty() && !name().isEmpty();
 
-    if (isValid && !url_.isEmpty()) {
+    if (isValid && !url_.isEmpty())
+    {
         bool haveAppImage = false;
         bool haveWindowsInstaller = false;
         bool haveDmg = false;
 
-        for (auto& asset : assets_) {
+        for (auto& asset : assets_)
+        {
             if (asset.isDmg())
                 haveDmg = true;
             if (asset.isAppImage())

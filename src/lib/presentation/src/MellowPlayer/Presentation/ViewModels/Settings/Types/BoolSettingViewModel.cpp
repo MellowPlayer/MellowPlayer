@@ -1,5 +1,5 @@
-#include <MellowPlayer/Presentation/ViewModels/Settings/Types/BoolSettingViewModel.hpp>
 #include <MellowPlayer/Domain/Settings/Setting.hpp>
+#include <MellowPlayer/Presentation/ViewModels/Settings/Types/BoolSettingViewModel.hpp>
 
 using namespace MellowPlayer::Presentation;
 using namespace MellowPlayer::Domain;

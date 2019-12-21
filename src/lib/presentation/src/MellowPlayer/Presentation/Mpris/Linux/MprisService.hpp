@@ -1,7 +1,7 @@
 #pragma once
 
-#include <QObject>
 #include <MellowPlayer/Presentation/Mpris/IMprisService.hpp>
+#include <QObject>
 #include <memory>
 
 namespace MellowPlayer::Domain
@@ -38,4 +38,3 @@ namespace MellowPlayer::Presentation
         QString serviceName_;
     };
 }
-

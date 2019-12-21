@@ -28,7 +28,6 @@ namespace MellowPlayer::Presentation
     private:
         void checkSupportForActions();
 
-
         Domain::ILogger& logger_;
         IMainWindow& mainWindow_;
         Domain::IWorkDispatcher& _workDispatcher;

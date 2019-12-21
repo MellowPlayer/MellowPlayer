@@ -30,7 +30,8 @@ public:
     void remove(const QString& filterKey, const QString& filterValue)
     {
         QList<MellowPlayer::Domain::ListeningHistoryEntry> toRemove;
-        for (int i = 0; i < entries.count(); ++i) {
+        for (int i = 0; i < entries.count(); ++i)
+        {
             auto& entry = entries.at(i);
             if ((filterKey == "id" && entry.id == filterValue.toInt()) || (filterKey == "serviceName" && entry.serviceName == filterValue))
                 toRemove.append(entry);
@@ -41,7 +42,8 @@ public:
 
     void removeMany(const QList<int>& items)
     {
-        for (int id : items) {
+        for (int id : items)
+        {
             remove("id", QString::number(id));
         }
     }

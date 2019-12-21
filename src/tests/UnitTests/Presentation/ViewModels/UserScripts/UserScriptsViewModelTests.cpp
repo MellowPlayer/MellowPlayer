@@ -1,12 +1,12 @@
-#include <catch/catch.hpp>
-#include <fakeit/fakeit.hpp>
+#include <MellowPlayer/Domain/Settings/ISettingsStore.hpp>
 #include <MellowPlayer/Domain/UserScripts/IUserScript.hpp>
 #include <MellowPlayer/Domain/UserScripts/IUserScriptFactory.hpp>
 #include <MellowPlayer/Domain/UserScripts/UserScripts.hpp>
-#include <MellowPlayer/Domain/Settings/ISettingsStore.hpp>
 #include <MellowPlayer/Presentation/ViewModels/UserScripts/UserScriptsViewModel.hpp>
-#include <UnitTests/Domain/UserScripts/FakeUserScript.hpp>
 #include <UnitTests/Domain/Settings/FakeSettingsStore.hpp>
+#include <UnitTests/Domain/UserScripts/FakeUserScript.hpp>
+#include <catch/catch.hpp>
+#include <fakeit/fakeit.hpp>
 
 using namespace fakeit;
 using namespace MellowPlayer::Domain;
@@ -16,9 +16,7 @@ using namespace MellowPlayer::Presentation;
 SCENARIO("UserScriptsViewModelTests")
 {
     Mock<IUserScriptFactory> factoryMock;
-    When(Method(factoryMock, create)).AlwaysDo([]() -> IUserScript* {
-       return new FakeUserScript;
-    });
+    When(Method(factoryMock, create)).AlwaysDo([]() -> IUserScript* { return new FakeUserScript; });
     QString serviceName = "fakeService";
     FakeSettingsStore settingsStore;
 
@@ -90,7 +88,7 @@ SCENARIO("UserScriptsViewModelTests")
                 REQUIRE(viewModel.isValidName("Statistics"));
             }
         }
-        
+
         WHEN("generating a unique name with DarkTheme")
         {
             auto name = viewModel.generateUniqueName("DarkTheme");
@@ -119,11 +117,13 @@ SCENARIO("UserScriptsViewModelTests")
             {
                 REQUIRE(viewModel.model()->rowCount() == 1);
 
-                AND_THEN("settings paths count is 1") {
+                AND_THEN("settings paths count is 1")
+                {
                     REQUIRE(settingsStore.value("fakeService/userScriptPaths", QVariant()).toStringList().count() == 1);
                 }
 
-                AND_THEN("settings names count is 1") {
+                AND_THEN("settings names count is 1")
+                {
                     REQUIRE(settingsStore.value("fakeService/userScriptNames", QVariant()).toStringList().count() == 1);
                 }
 

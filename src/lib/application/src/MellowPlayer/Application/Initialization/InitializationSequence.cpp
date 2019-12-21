@@ -7,8 +7,7 @@ using namespace std;
 using namespace MellowPlayer::Domain;
 using namespace MellowPlayer::Application;
 
-InitializationSequence::InitializationSequence(const std::vector<std::shared_ptr<IInitializable>>& items)
-        : _logger(Loggers::logger("InitializationSequence"))
+InitializationSequence::InitializationSequence(const std::vector<std::shared_ptr<IInitializable>>& items) : _logger(Loggers::logger("InitializationSequence"))
 {
     for (const auto& item : items)
         append(item);

@@ -1,8 +1,8 @@
 #include <MellowPlayer/Presentation/ViewModels/ClipBoardViewModel.hpp>
 #include <QApplication>
 #include <QClipboard>
-#include <catch/catch.hpp>
 #include <UnitTests/Presentation/Qml/FakeContextProperties.hpp>
+#include <catch/catch.hpp>
 
 using namespace MellowPlayer::Presentation;
 using namespace MellowPlayer::Presentation::Tests;

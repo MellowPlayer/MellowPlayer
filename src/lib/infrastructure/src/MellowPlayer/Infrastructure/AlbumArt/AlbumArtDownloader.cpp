@@ -1,7 +1,7 @@
-#include <MellowPlayer/Infrastructure/AlbumArt/AlbumArtDownloader.hpp>
 #include <MellowPlayer/Domain/Logging/ILogger.hpp>
 #include <MellowPlayer/Domain/Logging/Loggers.hpp>
 #include <MellowPlayer/Domain/Logging/LoggingMacros.hpp>
+#include <MellowPlayer/Infrastructure/AlbumArt/AlbumArtDownloader.hpp>
 #include <QDir>
 #include <QStandardPaths>
 
@@ -10,7 +10,6 @@ using namespace MellowPlayer::Infrastructure;
 
 AlbumArtDownloader::AlbumArtDownloader() : logger_(Loggers::logger("AlbumArtDownloader"))
 {
-
     connect(&fileDownloader_, &FileDownloader::finished, this, &AlbumArtDownloader::onDownloadFinished);
 }
 
@@ -21,7 +20,8 @@ bool AlbumArtDownloader::download(const QString& url, const QString& songId)
 
     localUrl_ = localArtUrl(songId);
 
-    if (localUrl_.exists()) {
+    if (localUrl_.exists())
+    {
         LOG_DEBUG(logger_, "album art already exists locally")
         emit downloadFinished(localUrl_.absoluteFilePath());
         return true;

@@ -15,8 +15,7 @@ namespace MellowPlayer::Infrastructure
         Q_PROPERTY(QString date READ date CONSTANT)
     public:
         Release(const QString& name, const QDate& date, QObject* parent = nullptr);
-        Release(const QString& url, const QString& name, const QDate& date, const AssetList& assets, bool preRelease = false,
-                QObject* parent = nullptr);
+        Release(const QString& url, const QString& name, const QDate& date, const AssetList& assets, bool preRelease = false, QObject* parent = nullptr);
 
         QString url() const;
         QString name() const;

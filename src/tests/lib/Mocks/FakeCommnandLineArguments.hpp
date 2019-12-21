@@ -1,13 +1,13 @@
 #pragma once
 
-#include <MellowPlayer/Infrastructure/CommandLineArguments/ICommandLineArguments.hpp>
 #include <MellowPlayer/Domain/Logging/LoggerConfig.hpp>
+#include <MellowPlayer/Infrastructure/CommandLineArguments/ICommandLineArguments.hpp>
 #include <fakeit/fakeit.hpp>
 #include <memory>
 
 namespace MellowPlayer::Infrastructure::Tests
 {
-    class FakeCommandLineArguments: public ICommandLineArguments
+    class FakeCommandLineArguments : public ICommandLineArguments
     {
     public:
         void parse() override

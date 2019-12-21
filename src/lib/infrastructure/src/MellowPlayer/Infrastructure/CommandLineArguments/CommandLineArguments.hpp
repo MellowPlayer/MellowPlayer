@@ -6,7 +6,7 @@
 
 namespace MellowPlayer::Domain
 {
-    enum class LogLevel;    
+    enum class LogLevel;
 }
 
 namespace MellowPlayer::Infrastructure

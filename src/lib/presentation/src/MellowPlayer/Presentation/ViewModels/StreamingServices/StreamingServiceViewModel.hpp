@@ -1,11 +1,10 @@
 #pragma once
 
+#include <MellowPlayer/Domain/Properties.hpp>
+#include <MellowPlayer/Presentation/ViewModels/Settings/SettingsCategoryViewModel.hpp>
+#include <MellowPlayer/Presentation/ViewModels/UserScripts/UserScriptsViewModel.hpp>
 #include <QtCore/QObject>
 #include <memory>
-#include <MellowPlayer/Domain/Properties.hpp>
-#include <MellowPlayer/Presentation/ViewModels/UserScripts/UserScriptsViewModel.hpp>
-#include <MellowPlayer/Presentation/ViewModels/Settings/SettingsCategoryViewModel.hpp>
-
 
 namespace MellowPlayer::Domain
 {

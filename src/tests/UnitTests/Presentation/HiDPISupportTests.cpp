@@ -1,10 +1,10 @@
-#include <catch.hpp>
-#include <MellowPlayer/Presentation/HiDPISupport.h>
-#include <Utils/DependencyPool.hpp>
 #include <MellowPlayer/Domain/Settings/Setting.hpp>
-#include <MellowPlayer/Domain/Settings/Settings.hpp>
 #include <MellowPlayer/Domain/Settings/SettingKey.hpp>
+#include <MellowPlayer/Domain/Settings/Settings.hpp>
+#include <MellowPlayer/Presentation/HiDPISupport.h>
 #include <QSettings>
+#include <Utils/DependencyPool.hpp>
+#include <catch.hpp>
 
 using namespace MellowPlayer::Domain;
 using namespace MellowPlayer::Presentation;
@@ -14,7 +14,6 @@ SCENARIO("HiDPI Support")
     QString orgName = "MellowPlayer.Tests";
     QSettings settings(orgName, "3");
     HiDPISupport hiDPISupport(orgName);
-
 
     GIVEN("No scaling environment variable is set and automatic scaling is ON and scaling factor is set to 2.5")
     {
@@ -89,6 +88,4 @@ SCENARIO("HiDPI Support")
             }
         }
     }
-
-
 }

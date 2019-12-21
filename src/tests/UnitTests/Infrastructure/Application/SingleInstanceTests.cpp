@@ -1,13 +1,13 @@
 #include <MellowPlayer/Infrastructure/Application/SingleInstance.hpp>
+#include <Mocks/FakeCommnandLineArguments.hpp>
+#include <Mocks/PlayerMock.hpp>
+#include <QtTest/QSignalSpy>
+#include <QtTest/qtestsystem.h>
 #include <UnitTests/Infrastructure/Application/FakeApplication.hpp>
 #include <UnitTests/Infrastructure/Application/FakeQtApplication.hpp>
-#include <catch/catch.hpp>
-#include <QtTest/QSignalSpy>
-#include <Mocks/PlayerMock.hpp>
-#include <UnitTests/Infrastructure/Network/FakeLocalSocket.hpp>
 #include <UnitTests/Infrastructure/Network/FakeLocalServer.hpp>
-#include <Mocks/FakeCommnandLineArguments.hpp>
-#include <QtTest/qtestsystem.h>
+#include <UnitTests/Infrastructure/Network/FakeLocalSocket.hpp>
+#include <catch/catch.hpp>
 
 using namespace std;
 using namespace MellowPlayer::Infrastructure;
@@ -28,21 +28,13 @@ SCENARIO("SingleInstance tests")
     {
         auto primaryDecorated = make_shared<FakeApplication>();
         FakeQtApplication primaryQtApplication;
-        SingleInstance primaryInstance(primaryDecorated,
-                                       primaryQtApplication,
-                                       playerMock.get(),
-                                       commandLineArguments,
-                                       primaryLocalServerFactory,
-                                       primaryLocalSocketFactory);
+        SingleInstance primaryInstance(
+                primaryDecorated, primaryQtApplication, playerMock.get(), commandLineArguments, primaryLocalServerFactory, primaryLocalSocketFactory);
 
         auto secondaryDecorated = make_shared<FakeApplication>();
         FakeQtApplication secondaryQtApplication;
-        SingleInstance secondaryInstance(secondaryDecorated,
-                                         secondaryQtApplication,
-                                         playerMock.get(),
-                                         commandLineArguments,
-                                         secondaryLocalServerFactory,
-                                         secondaryLocalSocketFactory);
+        SingleInstance secondaryInstance(
+                secondaryDecorated, secondaryQtApplication, playerMock.get(), commandLineArguments, secondaryLocalServerFactory, secondaryLocalSocketFactory);
 
         WHEN("I initialize the first application")
         {

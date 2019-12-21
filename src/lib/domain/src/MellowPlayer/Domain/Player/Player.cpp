@@ -1,8 +1,8 @@
+#include <MellowPlayer/Domain/Logging/ILogger.hpp>
+#include <MellowPlayer/Domain/Logging/Loggers.hpp>
+#include <MellowPlayer/Domain/Logging/LoggingMacros.hpp>
 #include <MellowPlayer/Domain/Player/Player.hpp>
 #include <MellowPlayer/Domain/Player/Song.hpp>
-#include <MellowPlayer/Domain/Logging/Loggers.hpp>
-#include <MellowPlayer/Domain/Logging/ILogger.hpp>
-#include <MellowPlayer/Domain/Logging/LoggingMacros.hpp>
 #include <MellowPlayer/Domain/StreamingServices/StreamingService.hpp>
 #include <MellowPlayer/Domain/StreamingServices/StreamingServiceScript.hpp>
 #include <QVariant>
@@ -12,9 +12,7 @@ using namespace MellowPlayer::Domain;
 using namespace std;
 
 Player::Player(StreamingService& streamingService)
-        : logger_(Loggers::logger("Player-" + streamingService.name().toStdString())),
-          currentSong_(nullptr),
-          streamingService_(streamingService)
+        : logger_(Loggers::logger("Player-" + streamingService.name().toStdString())), currentSong_(nullptr), streamingService_(streamingService)
 {
 }
 
@@ -133,7 +131,8 @@ void Player::suspend()
 {
     LOG_DEBUG(logger_, "suspend()");
     suspendedState_ = playbackStatus_;
-    if (playbackStatus_ == PlaybackStatus::Playing) {
+    if (playbackStatus_ == PlaybackStatus::Playing)
+    {
         pause();
         playbackStatus_ = PlaybackStatus::Paused;
     }
@@ -142,7 +141,8 @@ void Player::suspend()
 void Player::resume()
 {
     LOG_DEBUG(logger_, "resume()");
-    if (suspendedState_ == PlaybackStatus::Playing) {
+    if (suspendedState_ == PlaybackStatus::Playing)
+    {
         play();
     }
 }
@@ -150,7 +150,8 @@ void Player::resume()
 void Player::setCurrentSong(unique_ptr<Song>& song)
 {
     LOG_TRACE(logger_, "setCurrentSong()");
-    if (currentSong_ != nullptr && *currentSong_ == *song) {
+    if (currentSong_ != nullptr && *currentSong_ == *song)
+    {
         currentSong_->setDuration(song->duration());
         currentSong_->setFavorite(song->isFavorite());
         currentSong_->setArtUrl(song->artUrl());

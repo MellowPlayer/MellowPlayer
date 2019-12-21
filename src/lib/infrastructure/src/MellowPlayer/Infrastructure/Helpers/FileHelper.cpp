@@ -23,6 +23,7 @@ QString FileHelper::createLogDirectory()
     return directory;
 }
 
-QString FileHelper::userScriptsDirectory() {
+QString FileHelper::userScriptsDirectory()
+{
     return appDataDirectory() + "UserScripts" + QDir::separator();
 }

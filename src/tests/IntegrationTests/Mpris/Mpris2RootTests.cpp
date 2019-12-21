@@ -2,8 +2,8 @@
 #include <catch/catch.hpp>
 #include <fakeit/fakeit.hpp>
 #if defined(Q_OS_LINUX) || defined(Q_OS_FREEBSD)
-#include <MellowPlayer/Presentation/Mpris/Linux/Mpris2Root.hpp>
-#include <UnitTests/Presentation/FakeMainWindow.hpp>
+#    include <MellowPlayer/Presentation/Mpris/Linux/Mpris2Root.hpp>
+#    include <UnitTests/Presentation/FakeMainWindow.hpp>
 
 using namespace MellowPlayer::Domain;
 using namespace MellowPlayer::Presentation;

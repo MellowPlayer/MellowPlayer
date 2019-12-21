@@ -1,7 +1,6 @@
 #include <MellowPlayer/Infrastructure/Network/HttpClient.hpp>
 #include <QtNetwork/QNetworkReply>
 
-
 using namespace MellowPlayer::Infrastructure;
 
 HttpClient::HttpClient()

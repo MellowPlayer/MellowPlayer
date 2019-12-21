@@ -12,8 +12,7 @@
 using namespace MellowPlayer::Infrastructure;
 using namespace MellowPlayer::Domain;
 
-ApplicationStatusFile::ApplicationStatusFile(IPlayer& currentPlayer)
-        : currentPlayer(currentPlayer), logger(Loggers::logger("ApplicationStatusFile"))
+ApplicationStatusFile::ApplicationStatusFile(IPlayer& currentPlayer) : currentPlayer(currentPlayer), logger(Loggers::logger("ApplicationStatusFile"))
 {
     connect(&currentPlayer, &IPlayer::currentSongChanged, this, &ApplicationStatusFile::OnCurrentPlayerUpdated);
     connect(&currentPlayer, &IPlayer::playbackStatusChanged, this, &ApplicationStatusFile::OnCurrentPlayerUpdated);
@@ -37,7 +36,8 @@ QString ApplicationStatusFile::fileName() const
 void ApplicationStatusFile::OnCurrentPlayerUpdated()
 {
     auto playerStatus = serializePlayerStatus();
-    if (playerStatus != previousPlayerStatus) {
+    if (playerStatus != previousPlayerStatus)
+    {
         auto json = QJsonDocument(playerStatus).toJson();
         LOG_TRACE(logger, "Updating player status <" << fileName() << ">: " << json.toStdString());
         writeFile(fileName(), json);
@@ -83,7 +83,8 @@ QJsonObject ApplicationStatusFile::serializeCurrentSong() const
 void ApplicationStatusFile::writeFile(const QString& fileName, const QByteArray& data) const
 {
     QFile file(fileName);
-    if (!file.open(QFile::WriteOnly)) {
+    if (!file.open(QFile::WriteOnly))
+    {
         LOG_WARN(logger, "Failed to write player status to " << fileName);
         return;
     }

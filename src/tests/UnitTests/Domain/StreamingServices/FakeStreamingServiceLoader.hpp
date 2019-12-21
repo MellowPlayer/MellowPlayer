@@ -25,7 +25,8 @@ namespace MellowPlayer::Domain::Tests
             return list;
         }
 
-        static Theme defaultTheme() {
+        static Theme defaultTheme()
+        {
             static Theme defaultTheme = {"#ff00ff", "#00ff00", "#ff0000", "#ffff00", "#faebdc", "#fedcba", "#abcdef"};
             return defaultTheme;
         }

@@ -1,5 +1,5 @@
-#include <MellowPlayer/Infrastructure/UserScripts/UserScriptFactory.hpp>
 #include <MellowPlayer/Infrastructure/UserScripts/UserScript.hpp>
+#include <MellowPlayer/Infrastructure/UserScripts/UserScriptFactory.hpp>
 
 using namespace MellowPlayer::Domain;
 using namespace MellowPlayer::Infrastructure;

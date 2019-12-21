@@ -4,9 +4,10 @@
 
 class QDateTime;
 
-namespace MellowPlayer::Presentation {
-
-    class DateTimeConverter: public QObject {
+namespace MellowPlayer::Presentation
+{
+    class DateTimeConverter : public QObject
+    {
         Q_OBJECT
     public:
         Q_INVOKABLE QString dateToCategory(const QDateTime &dateTime) const;

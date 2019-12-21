@@ -1,22 +1,39 @@
+#include <MellowPlayer/Domain/Logging/LoggerConfig.hpp>
 #include <MellowPlayer/Infrastructure/CommandLineArguments/CommandLineArguments.hpp>
 #include <QDebug>
-#include <MellowPlayer/Domain/Logging/LoggerConfig.hpp>
 
 using namespace MellowPlayer::Domain;
 using namespace MellowPlayer::Infrastructure;
 
 CommandLineArguments::CommandLineArguments()
-        : serviceOption_(QStringList() << "s" << "service", "Select startup service", "service"),
-          logLevelOption_(QStringList() << "l" << "log-level",
+        : serviceOption_(QStringList() << "s"
+                                       << "service",
+                         "Select startup service",
+                         "service"),
+          logLevelOption_(QStringList() << "l"
+                                        << "log-level",
                           "Log level (0=TRACE, 1=DEBUG, 2=INFO, 3=WARNING, 4=ERROR, 5=CRITICAL, 6=OFF)",
-                          "logLevel", "1"),
-          playPauseOption_(QStringList() << "p" << "play-pause", "Play or pause the current song"),
-          nextOption_(QStringList() << "f" << "next", "Skip to the next song"),
-          previousOption_(QStringList() << "b" << "previous", "Skip to the previous song"),
-          toggleFavoriteOption_(QStringList() << "t" << "toggle-favorite-song",
+                          "logLevel",
+                          "1"),
+          playPauseOption_(QStringList() << "p"
+                                         << "play-pause",
+                           "Play or pause the current song"),
+          nextOption_(QStringList() << "f"
+                                    << "next",
+                      "Skip to the next song"),
+          previousOption_(QStringList() << "b"
+                                        << "previous",
+                          "Skip to the previous song"),
+          toggleFavoriteOption_(QStringList() << "t"
+                                              << "toggle-favorite-song",
                                 "Add or remove the current song to/from your favorites"),
-          autoQuitDelayOption_(QStringList() << "d" << "auto-quit-delay", "Auto quit delay [ms]", "autoQuitDelay"),
-          startMinimizedOption_(QStringList() << "m" << "start-minimized", "Starts the application in minimized state")
+          autoQuitDelayOption_(QStringList() << "d"
+                                             << "auto-quit-delay",
+                               "Auto quit delay [ms]",
+                               "autoQuitDelay"),
+          startMinimizedOption_(QStringList() << "m"
+                                              << "start-minimized",
+                                "Starts the application in minimized state")
 {
 }
 
@@ -41,10 +58,13 @@ void CommandLineArguments::parse()
                                                  << "--register-pepper-plugins"
                                                  << "--touch-events";
     QStringList args;
-    for (auto arg : qApp->arguments()) {
+    for (auto arg : qApp->arguments())
+    {
         bool addArg = true;
-        for (auto webEngineOption : webEngineOptions) {
-            if (arg.startsWith(webEngineOption)) {
+        for (auto webEngineOption : webEngineOptions)
+        {
+            if (arg.startsWith(webEngineOption))
+            {
                 addArg = false;
                 break;
             }

@@ -33,8 +33,7 @@ namespace MellowPlayer::Infrastructure
         Domain::StreamingServiceMetadata readMetadata(const QString& filePath) const;
         bool checkServiceDirectory(const QString& directory) const;
         QStringList searchPaths() const;
-        bool containsService(const QList<std::shared_ptr<Domain::StreamingService>>& services,
-                             std::shared_ptr<Domain::StreamingService>& toCheck) const;
+        bool containsService(const QList<std::shared_ptr<Domain::StreamingService>>& services, std::shared_ptr<Domain::StreamingService>& toCheck) const;
 
         Domain::ILogger& logger_;
         Domain::Settings& _settings;

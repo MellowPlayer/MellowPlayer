@@ -15,7 +15,10 @@ namespace MellowPlayer::Domain
         virtual void initialize(const ResultCallback& resultCallback) = 0;
         virtual void cleanUp(){};
 
-        virtual QString errorMessage() const { return "No error"; };
+        virtual QString errorMessage() const
+        {
+            return "No error";
+        };
         virtual QString toString() const = 0;
     };
 }

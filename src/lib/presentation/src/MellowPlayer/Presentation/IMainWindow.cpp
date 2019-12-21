@@ -4,5 +4,4 @@ using namespace MellowPlayer::Presentation;
 
 IMainWindow::~IMainWindow()
 {
-
 }

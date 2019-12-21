@@ -1,16 +1,16 @@
 #pragma once
 
-#include <memory>
 #include <fakeit/fakeit.hpp>
+#include <memory>
 
-#include <MellowPlayer/Infrastructure/CommandLineArguments/ICommandLineArguments.hpp>
-#include <MellowPlayer/Presentation/Notifications/Presenters/INotificationPresenter.hpp>
 #include <MellowPlayer/Domain/Settings/ISettingsStore.hpp>
 #include <MellowPlayer/Domain/StreamingServices/IStreamingServiceCreator.hpp>
 #include <MellowPlayer/Domain/UserScripts/IUserScriptFactory.hpp>
+#include <MellowPlayer/Infrastructure/CommandLineArguments/ICommandLineArguments.hpp>
+#include <MellowPlayer/Presentation/Notifications/Presenters/INotificationPresenter.hpp>
 #include <UnitTests/Domain/Settings/FakeSettingsStore.hpp>
-#include <UnitTests/Presentation/Qml/FakeContextProperties.hpp>
 #include <UnitTests/Infrastructure/Network/FakeNetworkProxies.hpp>
+#include <UnitTests/Presentation/Qml/FakeContextProperties.hpp>
 
 class FakeListeningHistoryDatabase;
 

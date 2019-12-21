@@ -1,6 +1,6 @@
-#include <MellowPlayer/Presentation/Notifications/Presenters/SystemTrayIconPresenter.hpp>
 #include <MellowPlayer/Presentation/Notifications/ISystemTrayIcon.hpp>
 #include <MellowPlayer/Presentation/Notifications/Notification.hpp>
+#include <MellowPlayer/Presentation/Notifications/Presenters/SystemTrayIconPresenter.hpp>
 
 using namespace MellowPlayer::Presentation;
 

@@ -1,16 +1,16 @@
 #include <MellowPlayer/Presentation/Factories/SettingViewModelFactory.hpp>
-#include <MellowPlayer/Presentation/ViewModels/Settings/Types/SettingViewModel.hpp>
 #include <MellowPlayer/Presentation/ViewModels/Settings/Types/BoolSettingViewModel.hpp>
 #include <MellowPlayer/Presentation/ViewModels/Settings/Types/ColorSettingViewModel.hpp>
 #include <MellowPlayer/Presentation/ViewModels/Settings/Types/EnumSettingViewModel.hpp>
+#include <MellowPlayer/Presentation/ViewModels/Settings/Types/IconSettingViewModel.hpp>
+#include <MellowPlayer/Presentation/ViewModels/Settings/Types/ScalingFactorSettingViewModel.hpp>
+#include <MellowPlayer/Presentation/ViewModels/Settings/Types/SettingViewModel.hpp>
 #include <MellowPlayer/Presentation/ViewModels/Settings/Types/ShortcutSettingViewModel.hpp>
 #include <MellowPlayer/Presentation/ViewModels/Settings/Types/StringSettingViewModel.hpp>
 #include <MellowPlayer/Presentation/ViewModels/Settings/Types/ThemeSettingViewModel.hpp>
 #include <MellowPlayer/Presentation/ViewModels/Settings/Types/TimeLimitSettingViewModel.hpp>
 #include <MellowPlayer/Presentation/ViewModels/Settings/Types/UpdateChannelSettingViewModel.hpp>
 #include <MellowPlayer/Presentation/ViewModels/Settings/Types/UserAgentStringSettingViewModel.hpp>
-#include <MellowPlayer/Presentation/ViewModels/Settings/Types/ScalingFactorSettingViewModel.hpp>
-#include <MellowPlayer/Presentation/ViewModels/Settings/Types/IconSettingViewModel.hpp>
 
 using namespace MellowPlayer::Presentation;
 using namespace MellowPlayer::Domain;

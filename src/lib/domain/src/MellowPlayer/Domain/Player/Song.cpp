@@ -8,8 +8,7 @@ Song::Song() : duration_(0), isFavorite_(false)
 {
 }
 
-Song::Song(const QString& uniqueId, const QString& title, const QString& artist, const QString& album, const QString& artUrl, double duration,
-           bool isFavorite)
+Song::Song(const QString& uniqueId, const QString& title, const QString& artist, const QString& album, const QString& artUrl, double duration, bool isFavorite)
         : uniqueId_(uniqueId), title_(title), artist_(artist), album_(album), artUrl_(artUrl), duration_(duration), isFavorite_(isFavorite)
 {
 }
@@ -69,7 +68,8 @@ void Song::setFavorite(bool value)
 
 void Song::setArtUrl(const QString& artUrl)
 {
-    if (artUrl != artUrl_) {
+    if (artUrl != artUrl_)
+    {
         artUrl_ = artUrl;
         emit artUrlChanged();
     }

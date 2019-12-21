@@ -4,7 +4,7 @@
 
 namespace MellowPlayer::Infrastructure
 {
-    class AppImageFilter: public LinuxFilterBase
+    class AppImageFilter : public LinuxFilterBase
     {
     public:
         bool match() const override;

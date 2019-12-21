@@ -24,9 +24,10 @@ SCENARIO("asset validity can be tested")
 
     GIVEN("an asset with an valid asset name and a valid url")
     {
-        Asset asset("MellowPlayer.zip", "https://github.com/ColinDuquesnoy/"
-                                        "MellowPlayer/releases/download/2.95.0/"
-                                        "MellowPlayer.zip");
+        Asset asset("MellowPlayer.zip",
+                    "https://github.com/ColinDuquesnoy/"
+                    "MellowPlayer/releases/download/2.95.0/"
+                    "MellowPlayer.zip");
         WHEN("isValid is called")
         {
             bool isValid = asset.isValid();
@@ -39,8 +40,9 @@ SCENARIO("asset validity can be tested")
 
     GIVEN("an AppImage asset with a valid url")
     {
-        Asset asset("MellowPlayer-x86_64.AppImage", "https://github.com/ColinDuquesnoy/MellowPlayer/releases/"
-                                                    "download/2.95.0/MellowPlayer-x86_64.AppImage");
+        Asset asset("MellowPlayer-x86_64.AppImage",
+                    "https://github.com/ColinDuquesnoy/MellowPlayer/releases/"
+                    "download/2.95.0/MellowPlayer-x86_64.AppImage");
         WHEN("isValid is called")
         {
             bool isValid = asset.isValid();
@@ -53,9 +55,10 @@ SCENARIO("asset validity can be tested")
 
     GIVEN("an dmg asset with a valid url")
     {
-        Asset asset("MellowPlayer.dmg", "https://github.com/ColinDuquesnoy/"
-                                        "MellowPlayer/releases/download/2.95.0/"
-                                        "MellowPlayer.dmg");
+        Asset asset("MellowPlayer.dmg",
+                    "https://github.com/ColinDuquesnoy/"
+                    "MellowPlayer/releases/download/2.95.0/"
+                    "MellowPlayer.dmg");
         WHEN("isValid is called")
         {
             bool isValid = asset.isValid();
@@ -68,9 +71,10 @@ SCENARIO("asset validity can be tested")
 
     GIVEN("an WindowsInstaller asset with a valid url")
     {
-        Asset asset("MellowPlayer_Setup.exe", "https://github.com/ColinDuquesnoy/"
-                                              "MellowPlayer/releases/download/"
-                                              "2.95.0/MellowPlayer_Setup.exe");
+        Asset asset("MellowPlayer_Setup.exe",
+                    "https://github.com/ColinDuquesnoy/"
+                    "MellowPlayer/releases/download/"
+                    "2.95.0/MellowPlayer_Setup.exe");
         WHEN("isValid is called")
         {
             bool isValid = asset.isValid();
@@ -86,15 +90,18 @@ SCENARIO("Asset type is queryable")
 {
     GIVEN("3 different asset types")
     {
-        Asset appImageAsset("MellowPlayer-x86_64.AppImage", "https://github.com/ColinDuquesnoy/MellowPlayer/"
-                                                            "releases/download/2.95.0/"
-                                                            "MellowPlayer-x86_64.AppImage");
-        Asset dmgAsset("MellowPlayer.dmg", "https://github.com/ColinDuquesnoy/"
-                                           "MellowPlayer/releases/download/2.95.0/"
-                                           "MellowPlayer.dmg");
-        Asset windowsInstallerAsset("MellowPlayer_Setup.exe", "https://github.com/ColinDuquesnoy/"
-                                                              "MellowPlayer/releases/download/2.95.0/"
-                                                              "MellowPlayer_Setup.exe");
+        Asset appImageAsset("MellowPlayer-x86_64.AppImage",
+                            "https://github.com/ColinDuquesnoy/MellowPlayer/"
+                            "releases/download/2.95.0/"
+                            "MellowPlayer-x86_64.AppImage");
+        Asset dmgAsset("MellowPlayer.dmg",
+                       "https://github.com/ColinDuquesnoy/"
+                       "MellowPlayer/releases/download/2.95.0/"
+                       "MellowPlayer.dmg");
+        Asset windowsInstallerAsset("MellowPlayer_Setup.exe",
+                                    "https://github.com/ColinDuquesnoy/"
+                                    "MellowPlayer/releases/download/2.95.0/"
+                                    "MellowPlayer_Setup.exe");
 
         WHEN("querying appImage asset type")
         {

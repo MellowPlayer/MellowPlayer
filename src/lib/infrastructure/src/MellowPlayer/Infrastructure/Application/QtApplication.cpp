@@ -3,7 +3,7 @@
 using namespace std;
 using namespace MellowPlayer::Infrastructure;
 
-QtApplication::QtApplication(QApplication& application): qApplication_(application)
+QtApplication::QtApplication(QApplication& application) : qApplication_(application)
 {
     connect(&qApplication_, &QApplication::aboutToQuit, this, &QtApplication::aboutToQuit);
     connect(&qApplication_, &QApplication::commitDataRequest, this, &QtApplication::commitDataRequest);

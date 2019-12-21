@@ -6,7 +6,7 @@
 
 namespace MellowPlayer::Presentation::Tests
 {
-    class FakeContextProperties: public IContextProperties
+    class FakeContextProperties : public IContextProperties
     {
     public:
         void setQmlApplicationEngine(IQmlApplicationEngine* qmlApplicationEngine)
@@ -28,7 +28,7 @@ namespace MellowPlayer::Presentation::Tests
         {
             if (qmlApplicationEngine_)
             {
-                for(auto* contextProperty: _items)
+                for (auto* contextProperty : _items)
                     if (contextProperty)
                         contextProperty->initialize(*qmlApplicationEngine_);
             }

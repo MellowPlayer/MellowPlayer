@@ -1,14 +1,14 @@
 #pragma once
 
 #include <MellowPlayer/Presentation/Qml/IQmlApplicationEngine.hpp>
-#include <QString>
 #include <QObject>
+#include <QString>
 #include <QUrl>
 #include <QtCore/QMap>
 
 namespace MellowPlayer::Presentation::Tests
 {
-    class FakeQmlApplicationEngine: public IQmlApplicationEngine
+    class FakeQmlApplicationEngine : public IQmlApplicationEngine
     {
     public:
         void setContextProperty(const QString& name, QObject* object) override

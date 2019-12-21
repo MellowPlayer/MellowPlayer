@@ -1,8 +1,8 @@
+#include <MellowPlayer/Domain/Theme/Theme.hpp>
 #include <MellowPlayer/Infrastructure/Theme/ThemeLoader.hpp>
 #include <QFileInfo>
 #include <QJsonDocument>
 #include <QJsonObject>
-#include <MellowPlayer/Domain/Theme/Theme.hpp>
 
 using namespace MellowPlayer::Domain;
 using namespace MellowPlayer::Infrastructure;
@@ -11,9 +11,11 @@ Theme ThemeLoader::load(const QString& path) const
 {
     Theme theme;
 
-    if (QFileInfo(path).exists()) {
+    if (QFileInfo(path).exists())
+    {
         QFile file(path);
-        if (file.open(QFile::ReadOnly | QFile::Text)) {
+        if (file.open(QFile::ReadOnly | QFile::Text))
+        {
             QJsonDocument document = QJsonDocument::fromJson(file.readAll().data());
             QJsonObject object = document.object();
             theme.accent = object.value("accent").toString();

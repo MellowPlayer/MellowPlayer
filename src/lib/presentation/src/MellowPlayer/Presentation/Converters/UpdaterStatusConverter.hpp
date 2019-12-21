@@ -1,8 +1,8 @@
 #pragma once
 
+#include <MellowPlayer/Infrastructure/Updater/Updater.hpp>
 #include <QObject>
 #include <QString>
-#include <MellowPlayer/Infrastructure/Updater/Updater.hpp>
 
 class UpdaterStatusStrings : public QObject
 {

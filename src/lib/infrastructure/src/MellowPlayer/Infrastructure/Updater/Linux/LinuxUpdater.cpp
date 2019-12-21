@@ -59,9 +59,12 @@ void LinuxUpdater::setRelease(const Release* release)
 {
     AbstractPlatformUpdater::setRelease(release);
 
-    if (release_ != nullptr) {
-        for (auto& asset : release_->assets()) {
-            if (asset.isAppImage()) {
+    if (release_ != nullptr)
+    {
+        for (auto& asset : release_->assets())
+        {
+            if (asset.isAppImage())
+            {
                 asset_ = asset;
                 break;
             }

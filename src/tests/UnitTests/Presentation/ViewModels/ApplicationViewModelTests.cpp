@@ -1,10 +1,10 @@
 #include <MellowPlayer/Presentation/ViewModels/ApplicationViewModel.hpp>
-#include <UnitTests/Infrastructure/Application/FakeQtApplication.hpp>
+#include <QtTest/QSignalSpy>
 #include <UnitTests/Infrastructure/Application/FakeApplication.hpp>
+#include <UnitTests/Infrastructure/Application/FakeQtApplication.hpp>
+#include <UnitTests/Presentation/FakeMainWindow.hpp>
 #include <UnitTests/Presentation/Qml/FakeContextProperties.hpp>
 #include <catch/catch.hpp>
-#include <QtTest/QSignalSpy>
-#include <UnitTests/Presentation/FakeMainWindow.hpp>
 
 using namespace MellowPlayer::Infrastructure;
 using namespace MellowPlayer::Presentation;

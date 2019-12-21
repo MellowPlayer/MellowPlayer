@@ -2,7 +2,6 @@
 #include <MellowPlayer/Domain/StreamingServices/IStreamingServiceWatcher.hpp>
 #include <memory>
 
-
 namespace MellowPlayer::Domain::Tests
 {
     class FakeStreamingServiceWatcher : public IStreamingServiceWatcher

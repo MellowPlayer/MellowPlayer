@@ -1,10 +1,11 @@
-#include <MellowPlayer/Infrastructure/StreamingServices/StreamingServiceLoader.hpp>
 #include <MellowPlayer/Domain/Logging/ILogger.hpp>
 #include <MellowPlayer/Domain/Logging/Loggers.hpp>
 #include <MellowPlayer/Domain/Logging/LoggingMacros.hpp>
-#include <MellowPlayer/Domain/StreamingServices/StreamingService.hpp>
-#include <MellowPlayer/Domain/Settings/SettingsCategory.hpp>
 #include <MellowPlayer/Domain/Settings/Settings.hpp>
+#include <MellowPlayer/Domain/Settings/SettingsCategory.hpp>
+#include <MellowPlayer/Domain/StreamingServices/StreamingService.hpp>
+#include <MellowPlayer/Infrastructure/BuildConfig.hpp>
+#include <MellowPlayer/Infrastructure/StreamingServices/StreamingServiceLoader.hpp>
 #include <MellowPlayer/Infrastructure/Theme/ThemeLoader.hpp>
 #include <QDebug>
 #include <QtCore/QCoreApplication>
@@ -13,37 +14,41 @@
 #include <QtCore/QSettings>
 #include <QtCore/QStandardPaths>
 #include <QtGui/QIcon>
-#include <MellowPlayer/Infrastructure/BuildConfig.hpp>
 
 using namespace MellowPlayer::Domain;
 using namespace MellowPlayer::Domain;
 using namespace MellowPlayer::Infrastructure;
 using namespace std;
 
-StreamingServiceLoader::StreamingServiceLoader(Settings &settings)
-        : logger_(Loggers::logger("StreamingServiceLoader")),
-          _settings(settings)
+StreamingServiceLoader::StreamingServiceLoader(Settings& settings) : logger_(Loggers::logger("StreamingServiceLoader")), _settings(settings)
 {
 }
 
 QList<shared_ptr<StreamingService>> StreamingServiceLoader::load() const
 {
     QList<shared_ptr<StreamingService>> services;
-    for (const QString& path : searchPaths()) {
-        if (!QDir(path).exists()) {
+    for (const QString& path : searchPaths())
+    {
+        if (!QDir(path).exists())
+        {
             LOG_DEBUG(logger_, "skipping plugin directory: " << path.toStdString().c_str() << " (directory not found)");
             continue;
         }
         LOG_DEBUG(logger_, "looking for services in " << path.toStdString().c_str());
-        for (const QFileInfo& directory : QDir(path).entryInfoList(QDir::Dirs | QDir::NoDotAndDotDot)) {
-            if (checkServiceDirectory(directory.absoluteFilePath())) {
+        for (const QFileInfo& directory : QDir(path).entryInfoList(QDir::Dirs | QDir::NoDotAndDotDot))
+        {
+            if (checkServiceDirectory(directory.absoluteFilePath()))
+            {
                 shared_ptr<StreamingService> service = loadService(directory.absoluteFilePath());
                 if (service == nullptr)
                     continue;
-                if (service->isValid() && !containsService(services, service)) {
+                if (service->isValid() && !containsService(services, service))
+                {
                     LOG_INFO(logger_, service->name() + " streamingService successfully loaded (from \"" + directory.absoluteFilePath() + "\")");
                     services.append(service);
-                } else {
+                }
+                else
+                {
                     LOG_DEBUG(logger_, "skipping streamingService " + service->name() + ", already loaded from another source or invalid");
                 }
             }
@@ -55,7 +60,8 @@ QList<shared_ptr<StreamingService>> StreamingServiceLoader::load() const
 
 QString StreamingServiceLoader::findFile(const QString& directory, const QString& suffix) const
 {
-    foreach (const QFileInfo& fileInfo, QDir(directory).entryInfoList(QDir::Files | QDir::NoDotAndDotDot)) {
+    foreach (const QFileInfo& fileInfo, QDir(directory).entryInfoList(QDir::Files | QDir::NoDotAndDotDot))
+    {
         if (fileInfo.isFile() && fileInfo.absoluteFilePath().endsWith(suffix))
             return fileInfo.absoluteFilePath();
     }
@@ -67,7 +73,8 @@ QString StreamingServiceLoader::readFileContent(const QString& filePath)
     QString retVal;
 
     QFile file(filePath);
-    if (file.open(QIODevice::ReadOnly)) {
+    if (file.open(QIODevice::ReadOnly))
+    {
         QTextStream in(&file);
         retVal = in.readAll();
     }
@@ -75,7 +82,7 @@ QString StreamingServiceLoader::readFileContent(const QString& filePath)
     return retVal;
 }
 
-std::shared_ptr<SettingsCategory> StreamingServiceLoader::readSettings(const QString &name, const QString& filePath) const
+std::shared_ptr<SettingsCategory> StreamingServiceLoader::readSettings(const QString& name, const QString& filePath) const
 {
     if (filePath.isEmpty() || !QFileInfo::exists(filePath))
         return nullptr;
@@ -94,7 +101,8 @@ StreamingServiceMetadata StreamingServiceLoader::readMetadata(const QString& fil
 
     QString supportedPlatforms = meta.value("supported_platforms").toString();
 
-    if (platformFilters_.match(supportedPlatforms)) {
+    if (platformFilters_.match(supportedPlatforms))
+    {
         StreamingServiceMetadata serviceMetadata;
         serviceMetadata.author = meta.value("author").toString();
         serviceMetadata.authorWebsite = meta.value("author_website").toString();
@@ -111,7 +119,6 @@ StreamingServiceMetadata StreamingServiceLoader::readMetadata(const QString& fil
 
 Theme StreamingServiceLoader::readTheme(const QString& filePath)
 {
-
     static ThemeLoader loader;
     return loader.load(filePath);
 }
@@ -124,10 +131,12 @@ unique_ptr<StreamingService> StreamingServiceLoader::loadService(const QString& 
     QString settingsPath = findFile(directory, "settings.json");
     QString locale = QLocale::system().name().split("_")[0];
     StreamingServiceMetadata metadata;
-    try {
-         metadata = readMetadata(metadataPath);
+    try
+    {
+        metadata = readMetadata(metadataPath);
     }
-    catch (std::runtime_error&) {
+    catch (std::runtime_error&)
+    {
         LOG_INFO(logger_, "plugin is not supported on this platform");
         return nullptr;
     }
@@ -183,7 +192,8 @@ QStringList StreamingServiceLoader::searchPaths() const
 
 bool StreamingServiceLoader::containsService(const QList<shared_ptr<StreamingService>>& services, shared_ptr<StreamingService>& toCheck) const
 {
-    for (auto service : services) {
+    for (auto service : services)
+    {
         if (*toCheck == *service)
             return true;
     }

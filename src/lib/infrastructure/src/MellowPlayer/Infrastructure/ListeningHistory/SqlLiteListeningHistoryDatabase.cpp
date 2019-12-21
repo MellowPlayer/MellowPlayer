@@ -1,9 +1,9 @@
-#include <MellowPlayer/Infrastructure/ListeningHistory/SqlLiteListeningHistoryDatabase.hpp>
-#include <MellowPlayer/Infrastructure/Helpers/FileHelper.hpp>
 #include <MellowPlayer/Domain/ListeningHistory/ListeningHistoryEntry.hpp>
 #include <MellowPlayer/Domain/Logging/ILogger.hpp>
 #include <MellowPlayer/Domain/Logging/Loggers.hpp>
 #include <MellowPlayer/Domain/Logging/LoggingMacros.hpp>
+#include <MellowPlayer/Infrastructure/Helpers/FileHelper.hpp>
+#include <MellowPlayer/Infrastructure/ListeningHistory/SqlLiteListeningHistoryDatabase.hpp>
 #include <QtCore/QVariant>
 #include <QtSql/QSqlError>
 #include <QtSql/QSqlQuery>
@@ -27,7 +27,8 @@ bool SqlLiteListeningHistoryDatabase::openDatabase()
     auto path = getDatabasePath();
     LOG_DEBUG(logger_, "opening listening history db: " + path)
     database_.setDatabaseName(path);
-    if (!database_.open()) {
+    if (!database_.open())
+    {
         LOG_WARN(logger_, "connection with database failed: " + path)
         return false;
     }
@@ -49,7 +50,8 @@ int SqlLiteListeningHistoryDatabase::add(const ListeningHistoryEntry& entry)
     query.bindValue(":serviceName", entry.serviceName);
     query.bindValue(":time", entry.time);
 
-    if (!query.exec()) {
+    if (!query.exec())
+    {
         LOG_WARN(logger_, "failed to add listening history entry to db: " + query.lastError().text());
         return -1;
     }
@@ -104,7 +106,8 @@ QList<ListeningHistoryEntry> SqlLiteListeningHistoryDatabase::toList() const
     int idServiceName = query.record().indexOf("serviceName");
     int idTime = query.record().indexOf("time");
 
-    while (query.next()) {
+    while (query.next())
+    {
         ListeningHistoryEntry entry;
         entry.songUniqueId = query.value(idUniqueId).toString();
         entry.songTitle = query.value(idTitle).toString();
@@ -122,13 +125,15 @@ QList<ListeningHistoryEntry> SqlLiteListeningHistoryDatabase::toList() const
 
 bool SqlLiteListeningHistoryDatabase::initDatabase()
 {
-    if (database_.tables().count() == 0) {
+    if (database_.tables().count() == 0)
+    {
         LOG_DEBUG(logger_, "creating database");
         QSqlQuery query;
         query.prepare("CREATE TABLE song(id INTEGER PRIMARY KEY, songUniqueId "
                       "TEXT, songTitle TEXT, artist TEXT, album TEXT, "
                       "artUrl TEXT, serviceName TEXT, time TEXT);");
-        if (!query.exec()) {
+        if (!query.exec())
+        {
             return false;
             LOG_WARN(logger_, "failed to create song table: " + query.lastError().text());
         }

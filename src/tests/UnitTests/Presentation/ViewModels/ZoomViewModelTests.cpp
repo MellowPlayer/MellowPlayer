@@ -8,7 +8,6 @@ using namespace MellowPlayer::Domain::Tests;
 using namespace MellowPlayer::Presentation;
 using namespace MellowPlayer::Presentation::Tests;
 
-
 SCENARIO("ZoomViewModel tests")
 {
     auto contextProperties = std::make_shared<FakeContextProperties>();
@@ -36,7 +35,7 @@ SCENARIO("ZoomViewModel tests")
 
             AND_THEN("new value is stored in settings store")
             {
-                REQUIRE(settingsStore.value("zoom")  == newValue);
+                REQUIRE(settingsStore.value("zoom") == newValue);
             }
         }
 
@@ -49,7 +48,7 @@ SCENARIO("ZoomViewModel tests")
 
                 AND_THEN("default value is stored in settings store")
                 {
-                    REQUIRE(settingsStore.value("zoom")  == defaultValue);
+                    REQUIRE(settingsStore.value("zoom") == defaultValue);
                 }
             }
         }
@@ -66,7 +65,7 @@ SCENARIO("ZoomViewModel tests")
 
             AND_THEN("new value is stored in settings store")
             {
-                REQUIRE(settingsStore.value("zoom")  == sut.value());
+                REQUIRE(settingsStore.value("zoom") == sut.value());
             }
         }
     }
@@ -82,9 +81,8 @@ SCENARIO("ZoomViewModel tests")
 
             AND_THEN("new value is stored in settings store")
             {
-                REQUIRE(settingsStore.value("zoom")  == sut.value());
+                REQUIRE(settingsStore.value("zoom") == sut.value());
             }
         }
     }
-
 }

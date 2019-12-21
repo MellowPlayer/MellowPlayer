@@ -1,12 +1,12 @@
-#include <catch/catch.hpp>
 #include <MellowPlayer/Domain/Settings/Setting.hpp>
 #include <MellowPlayer/Domain/Settings/Settings.hpp>
 #include <MellowPlayer/Presentation/ViewModels/Settings/SettingsViewModel.hpp>
 #include <MellowPlayer/Presentation/ViewModels/Settings/Types/BoolSettingViewModel.hpp>
 #include <MellowPlayer/Presentation/ViewModels/Settings/Types/StringSettingViewModel.hpp>
-#include <Utils/DependencyPool.hpp>
 #include <UnitTests/Presentation/FakeMainWindow.hpp>
 #include <UnitTests/Presentation/Qml/FakeContextProperties.hpp>
+#include <Utils/DependencyPool.hpp>
+#include <catch/catch.hpp>
 
 using namespace MellowPlayer::Domain;
 using namespace MellowPlayer::Presentation;

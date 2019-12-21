@@ -19,7 +19,7 @@ void LocalServer::close()
 
 bool LocalServer::listen()
 {
-   return qLocalServer_.listen(serverName_);
+    return qLocalServer_.listen(serverName_);
 }
 
 bool LocalServer::isListening() const

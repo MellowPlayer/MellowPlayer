@@ -1,8 +1,8 @@
 #include <MellowPlayer/Infrastructure/Application/Application.hpp>
-#include <MellowPlayer/Infrastructure/BuildConfig.hpp>
 #include <MellowPlayer/Infrastructure/Application/QtApplication.hpp>
-#include <QtCore/QProcess>
+#include <MellowPlayer/Infrastructure/BuildConfig.hpp>
 #include <QtCore/QDebug>
+#include <QtCore/QProcess>
 
 using namespace std;
 using namespace MellowPlayer::Infrastructure;
@@ -24,7 +24,8 @@ int Application::run()
     auto returnCode = _qtApp.run();
     emit finished();
 
-    if (_restartRequested) {
+    if (_restartRequested)
+    {
         qWarning() << "restarting application...";
         QProcess::startDetached(qApp->arguments()[0], qApp->arguments());
     }

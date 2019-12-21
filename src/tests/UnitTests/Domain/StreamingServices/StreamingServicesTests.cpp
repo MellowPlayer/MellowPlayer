@@ -1,8 +1,8 @@
 #include <MellowPlayer/Domain/StreamingServices/StreamingService.hpp>
 #include <MellowPlayer/Domain/StreamingServices/StreamingServices.hpp>
+#include <QtTest/QSignalSpy>
 #include <UnitTests/Domain/StreamingServices/FakeStreamingServiceLoader.hpp>
 #include <UnitTests/Domain/StreamingServices/FakeStreamingServiceWatcher.hpp>
-#include <QtTest/QSignalSpy>
 #include <catch/catch.hpp>
 
 using namespace std;

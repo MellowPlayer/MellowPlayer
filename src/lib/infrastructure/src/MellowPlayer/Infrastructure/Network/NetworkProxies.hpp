@@ -1,8 +1,8 @@
 #pragma once
 
+#include <QMap>
 #include <QObject>
 #include <QString>
-#include <QMap>
 #include <memory>
 
 namespace MellowPlayer::Domain
@@ -37,11 +37,10 @@ namespace MellowPlayer::Infrastructure
     /**
      * Implements INetworkProxies and manages persistency of network proxy settings.
      */
-    class NetworkProxies: public QObject, public INetworkProxies
+    class NetworkProxies : public QObject, public INetworkProxies
     {
     public:
-        NetworkProxies(Domain::ISettingsStore& settingsStore,
-                       Domain::StreamingServices& streamingServices);
+        NetworkProxies(Domain::ISettingsStore& settingsStore, Domain::StreamingServices& streamingServices);
 
         /**
          * Gets the network proxy of the specified service.

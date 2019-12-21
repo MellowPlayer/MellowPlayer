@@ -1,15 +1,14 @@
-#include <MellowPlayer/Presentation/ViewModels/UpdaterViewModel.hpp>
-#include <MellowPlayer/Presentation/Converters/UpdaterStatusConverter.hpp>
 #include <MellowPlayer/Infrastructure/Updater/Release.hpp>
 #include <MellowPlayer/Infrastructure/Updater/Updater.hpp>
+#include <MellowPlayer/Presentation/Converters/UpdaterStatusConverter.hpp>
+#include <MellowPlayer/Presentation/ViewModels/UpdaterViewModel.hpp>
 
 using namespace MellowPlayer::Domain;
 using namespace MellowPlayer::Infrastructure;
 using namespace MellowPlayer::Presentation;
 
 UpdaterViewModel::UpdaterViewModel(Updater& updater, std::shared_ptr<IContextProperties> contextProperties)
-        : ContextProperty("_updater", this, contextProperties),
-          updater_(updater)
+        : ContextProperty("_updater", this, contextProperties), updater_(updater)
 {
     connect(&updater, &Updater::updateAvailable, this, &UpdaterViewModel::onUpdateAvailable);
     connect(&updater, &Updater::noUpdateAvailable, this, &UpdaterViewModel::onNoUpdateAvailable);
@@ -122,8 +121,8 @@ QString UpdaterViewModel::status() const
 
 bool UpdaterViewModel::busy() const
 {
-    return updater_.status() == Updater::Status::Checking || updater_.status() == Updater::Status::Downloading
-    || updater_.status() == Updater::Status::Installing;
+    return updater_.status() == Updater::Status::Checking || updater_.status() == Updater::Status::Downloading ||
+           updater_.status() == Updater::Status::Installing;
 }
 
 void UpdaterViewModel::onProgressUpdated(double progress)
@@ -136,7 +135,8 @@ bool UpdaterViewModel::restartEnabled() const
 }
 void UpdaterViewModel::setRestartEnabled(bool enabled)
 {
-    if (restartEnabled_ != enabled) {
+    if (restartEnabled_ != enabled)
+    {
         restartEnabled_ = enabled;
         emit restartEnabledChanged();
     }

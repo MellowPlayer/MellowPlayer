@@ -1,6 +1,6 @@
-#include <catch/catch.hpp>
 #include <MellowPlayer/Infrastructure/PlatformFilters/TokenizedFilters.hpp>
 #include <QtCore/QList>
+#include <catch/catch.hpp>
 
 using namespace MellowPlayer::Infrastructure;
 
@@ -14,7 +14,7 @@ SCENARIO("TokenizedFilterTests")
         WHEN("iterating on the filters")
         {
             QList<Filter> filters;
-            for(auto filter: tokenizedFilters)
+            for (auto filter : tokenizedFilters)
                 filters.append(filter);
 
             THEN("filters count is 3")
@@ -24,11 +24,7 @@ SCENARIO("TokenizedFilterTests")
 
             THEN("filters are in the correct order")
             {
-                QList<Filter> expectedFilters = {
-                        Filter::Windows,
-                        Filter::Linux,
-                        Filter::OSX
-                };
+                QList<Filter> expectedFilters = {Filter::Windows, Filter::Linux, Filter::OSX};
 
                 REQUIRE(filters == expectedFilters);
             }

@@ -7,7 +7,7 @@ namespace MellowPlayer::Domain::Tests
     class FakeSettingsStore : public ISettingsStore
     {
     public:
-        QVariant value(const QString& key, const QVariant& defaultValue=QVariant()) const override
+        QVariant value(const QString& key, const QVariant& defaultValue = QVariant()) const override
         {
             if (values_.contains(key))
                 return values_[key];

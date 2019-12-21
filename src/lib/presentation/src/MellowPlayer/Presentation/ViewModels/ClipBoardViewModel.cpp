@@ -4,8 +4,7 @@
 
 using namespace MellowPlayer::Presentation;
 
-ClipBoardViewModel::ClipBoardViewModel(std::shared_ptr<IContextProperties> contextProperties)
-        : ContextProperty("_clipboard", this, contextProperties)
+ClipBoardViewModel::ClipBoardViewModel(std::shared_ptr<IContextProperties> contextProperties) : ContextProperty("_clipboard", this, contextProperties)
 {
 }
 

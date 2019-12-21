@@ -47,7 +47,8 @@ namespace MellowPlayer::Domain
             entry.id = 0;
             QDateTime now = QDateTime::currentDateTime();
 
-            if (song != nullptr && song->isValid()) {
+            if (song != nullptr && song->isValid())
+            {
                 entry.songUniqueId = song->uniqueId();
                 entry.songTitle = song->title();
                 entry.artist = song->artist();

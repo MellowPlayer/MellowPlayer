@@ -1,16 +1,13 @@
+#include <MellowPlayer/Domain/Player/IPlayer.hpp>
 #include <MellowPlayer/Domain/StreamingServices/StreamingService.hpp>
 #include <MellowPlayer/Domain/StreamingServices/StreamingServiceScript.hpp>
-#include <MellowPlayer/Domain/Player/IPlayer.hpp>
 #include <QtGui/QIcon>
 
 using namespace MellowPlayer::Domain;
 using namespace std;
 
-StreamingService::StreamingService(const StreamingServiceMetadata& metadata, const Theme& theme, const std::shared_ptr<SettingsCategory> &settings)
-        : metadata_(metadata),
-          theme_(theme),
-          _settings(settings),
-          script_(make_unique<StreamingServiceScript>(metadata.script, metadata.scriptPath))
+StreamingService::StreamingService(const StreamingServiceMetadata& metadata, const Theme& theme, const std::shared_ptr<SettingsCategory>& settings)
+        : metadata_(metadata), theme_(theme), _settings(settings), script_(make_unique<StreamingServiceScript>(metadata.script, metadata.scriptPath))
 {
 }
 

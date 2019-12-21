@@ -16,5 +16,4 @@ LoggerConfig::LoggerConfig(LogLevel level)
 
 LoggerConfig::LoggerConfig() : LoggerConfig(LogLevel::Debug)
 {
-
 }

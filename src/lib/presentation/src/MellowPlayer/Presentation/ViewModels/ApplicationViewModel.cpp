@@ -1,18 +1,18 @@
-#include <MellowPlayer/Presentation/ViewModels/ApplicationViewModel.hpp>
 #include "MellowPlayer/Presentation/IconProvider.hpp"
-#include <MellowPlayer/Infrastructure/BuildConfig.hpp>
-#include <MellowPlayer/Domain/Player/Song.hpp>
-#include <MellowPlayer/Domain/StreamingServices/StreamingService.hpp>
 #include <MellowPlayer/Domain/ListeningHistory/ListeningHistoryEntry.hpp>
 #include <MellowPlayer/Domain/Player/Player.hpp>
+#include <MellowPlayer/Domain/Player/Song.hpp>
+#include <MellowPlayer/Domain/StreamingServices/StreamingService.hpp>
+#include <MellowPlayer/Infrastructure/BuildConfig.hpp>
 #include <MellowPlayer/Infrastructure/Helpers/FileHelper.hpp>
 #include <MellowPlayer/Presentation/IMainWindow.hpp>
+#include <MellowPlayer/Presentation/ViewModels/ApplicationViewModel.hpp>
 #include <MellowPlayer/Presentation/ViewModels/Settings/Types/SettingViewModel.hpp>
+#include <QDesktopServices>
+#include <QtCore/QDebug>
 #include <QtCore/QDirIterator>
 #include <QtGui/QFontDatabase>
 #include <QtWebEngineWidgets/QWebEngineProfile>
-#include <QDesktopServices>
-#include <QtCore/QDebug>
 
 using namespace MellowPlayer::Domain;
 using namespace MellowPlayer::Presentation;
@@ -36,7 +36,6 @@ ApplicationViewModel::ApplicationViewModel(IApplication& application,
     registerMetaTypes();
     setupTranslations();
 }
-
 
 void ApplicationViewModel::quit()
 {
@@ -87,14 +86,17 @@ void ApplicationViewModel::registerMetaTypes()
 
 void ApplicationViewModel::setupTranslations()
 {
-    if (!translator_.load(QLocale(), "MellowPlayer", "_", ":/MellowPlayer/Translations")) {
+    if (!translator_.load(QLocale(), "MellowPlayer", "_", ":/MellowPlayer/Translations"))
+    {
         qWarning() << "failed to load translation: " << QLocale::system().name();
-    } else
+    }
+    else
         qInfo() << "translation successfully loaded: " << QLocale::system().name();
 
     qInfo() << "available translations: ";
     QDirIterator it(":/MellowPlayer/Translations", QStringList() << "*.qm", QDir::Files, QDirIterator::Subdirectories);
-    while (it.hasNext()) qInfo() << "  - " << it.next();
+    while (it.hasNext())
+        qInfo() << "  - " << it.next();
 
     qtApplication_.installTranslator(&translator_);
 }

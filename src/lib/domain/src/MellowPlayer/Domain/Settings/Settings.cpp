@@ -1,10 +1,9 @@
-#include <MellowPlayer/Domain/Settings/Settings.hpp>
-#include <MellowPlayer/Domain/Settings/ISettingsStore.hpp>
 #include <MellowPlayer/Domain/Settings/ISettingsSchemaLoader.hpp>
+#include <MellowPlayer/Domain/Settings/ISettingsStore.hpp>
+#include <MellowPlayer/Domain/Settings/Settings.hpp>
 #include <MellowPlayer/Domain/Settings/SettingsCategory.hpp>
 #include <QtCore/QJsonDocument>
 #include <QtCore/QJsonObject>
-
 
 using namespace std;
 using namespace MellowPlayer::Domain;
@@ -15,7 +14,8 @@ Settings::Settings(ISettingsSchemaLoader& configurationLoader, ISettingsStore& s
     QJsonObject rootObject = jsonDocument.object();
     QJsonArray categoriesArray = rootObject.value("categories").toArray();
 
-    for (int i = 0; i < categoriesArray.count(); ++i) {
+    for (int i = 0; i < categoriesArray.count(); ++i)
+    {
         QJsonObject categoryObject = categoriesArray.at(i).toObject();
         SettingsCategory::Data data;
         data.name = categoryObject.value("name").toString();

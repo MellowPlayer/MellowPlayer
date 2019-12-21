@@ -27,7 +27,10 @@ namespace MellowPlayer::Application
         void cleanUp() override;
 
         QString errorMessage() const override;
-        QString toString() const override { return "InitializationSequence"; };
+        QString toString() const override
+        {
+            return "InitializationSequence";
+        };
 
     private:
         void onFinished(bool result);

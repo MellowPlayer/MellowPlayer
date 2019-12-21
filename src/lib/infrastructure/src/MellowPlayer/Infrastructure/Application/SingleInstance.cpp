@@ -1,15 +1,15 @@
-#include <MellowPlayer/Infrastructure/Application/SingleInstance.hpp>
-#include <MellowPlayer/Infrastructure/Application/QtApplication.hpp>
+#include <MellowPlayer/Domain/Logging/ILogger.hpp>
 #include <MellowPlayer/Domain/Logging/Loggers.hpp>
 #include <MellowPlayer/Domain/Logging/LoggingMacros.hpp>
-#include <MellowPlayer/Domain/Logging/ILogger.hpp>
 #include <MellowPlayer/Domain/Player/IPlayer.hpp>
+#include <MellowPlayer/Infrastructure/Application/QtApplication.hpp>
+#include <MellowPlayer/Infrastructure/Application/SingleInstance.hpp>
 #include <MellowPlayer/Infrastructure/CommandLineArguments/ICommandLineArguments.hpp>
 #include <MellowPlayer/Infrastructure/Network/LocalServer.hpp>
 #include <MellowPlayer/Infrastructure/Network/LocalSocket.hpp>
 #include <QtCore/QDir>
-#include <QtCore/QTimer>
 #include <QtCore/QStandardPaths>
+#include <QtCore/QTimer>
 
 using namespace std;
 using namespace MellowPlayer::Domain;
@@ -48,7 +48,8 @@ SingleInstance::~SingleInstance() = default;
 void SingleInstance::initialize()
 {
     LOG_INFO(logger_, "lock file: " << lockFilePath_)
-    if (lockFile_.tryLock(100)) {
+    if (lockFile_.tryLock(100))
+    {
         LOG_DEBUG(logger_, "Initializing primary application");
         isPrimary_ = true;
         ApplicationDecorator::initialize();
@@ -69,7 +70,6 @@ int SingleInstance::runPrimaryApplication()
 {
     LOG_DEBUG(logger_, "Running primary application");
 
-
     localServer_ = localServerFactory_.create(qApp->applicationName());
     connect(localServer_.get(), &ILocalServer::newConnection, this, &SingleInstance::onSecondaryApplicationConnected);
     localServer_->listen();
@@ -87,7 +87,7 @@ int SingleInstance::runPrimaryApplication()
 void SingleInstance::onSecondaryApplicationConnected()
 {
     LOG_INFO(logger_, "Another application was started, showing this one instead");
-    localSocket_ = localServer_->nextPendingConnection();    
+    localSocket_ = localServer_->nextPendingConnection();
     connect(localSocket_.get(), &ILocalSocket::readyRead, this, &SingleInstance::onSecondaryApplicationActionRequest);
 }
 
@@ -111,7 +111,7 @@ void SingleInstance::onSecondaryApplicationActionRequest()
 int SingleInstance::runSecondaryApplication()
 {
     LOG_DEBUG(logger_, "Running secondary application");
-    
+
     localSocket_ = localSocketFactory_.create();
     connect(localSocket_.get(), &ILocalSocket::connected, this, &SingleInstance::onConnectedToPrimaryApplication);
     connect(localSocket_.get(), &ILocalSocket::error, this, &SingleInstance::onConnectionErrorWithPrimaryApplication);
@@ -130,13 +130,13 @@ void SingleInstance::onConnectedToPrimaryApplication()
     QString action = requestedAcion();
     LOG_DEBUG(logger_, "sending action: " << action);
     localSocket_->write(action + "\n");
-    QTimer::singleShot(1, [&](){ qtApplication_.exit(1); } );
+    QTimer::singleShot(1, [&]() { qtApplication_.exit(1); });
 }
 
 void SingleInstance::onConnectionErrorWithPrimaryApplication()
 {
     LOG_WARN(logger_, "could not connect to the primary application, quitting...");
-    QTimer::singleShot(1, [&](){ qtApplication_.exit(2); } );
+    QTimer::singleShot(1, [&]() { qtApplication_.exit(2); });
 }
 
 QString SingleInstance::requestedAcion() const
@@ -155,20 +155,22 @@ QString SingleInstance::requestedAcion() const
 void SingleInstance::pollState()
 {
     QFileInfo lockFile(lockFilePath_);
-    if (!lockFile.exists()) {
+    if (!lockFile.exists())
+    {
         LOG_WARN(logger_, "lock file disappeared, trying to restore lock");
         if (lockFile_.tryLock(100))
             LOG_INFO(logger_, "lock restored");
     }
 
     QFileInfo serverFile(localServer_->serverSocketFilePath());
-    if (!serverFile.exists()) {
+    if (!serverFile.exists())
+    {
         LOG_WARN(logger_, "server file diseappeared, trying to restore local server");
         localServer_->close();
         if (localServer_->listen())
-        LOG_INFO(logger_, "local server restored");;
+            LOG_INFO(logger_, "local server restored");
+        ;
     }
-
 }
 
 bool SingleInstance::checkForPrimary()
@@ -176,7 +178,8 @@ bool SingleInstance::checkForPrimary()
     QLockFile lockFile(QDir::tempPath() + QDir::separator() + qApp->applicationName() + ".lock");
     lockFile.setStaleLockTime(0);
     bool primary = false;
-    if (lockFile.tryLock(100)) {
+    if (lockFile.tryLock(100))
+    {
         primary = true;
         lockFile.unlock();
     }

@@ -1,21 +1,20 @@
 #include <QtCore>
 #if defined(Q_OS_LINUX) || defined(Q_OS_FREEBSD)
-#include <MellowPlayer/Domain/Player/CurrentPlayer.hpp>
-#include <MellowPlayer/Domain/Player/Player.hpp>
-#include <MellowPlayer/Domain/Player/Players.hpp>
-#include <MellowPlayer/Presentation/Mpris/Linux/Mpris2Player.hpp>
-#include <MellowPlayer/Infrastructure/AlbumArt/LocalAlbumArt.hpp>
-#include <Mocks/AlbumArtDownloaderMock.hpp>
-#include <UnitTests/Domain/StreamingServices/FakeStreamingServiceLoader.hpp>
-#include <UnitTests/Domain/StreamingServices/FakeStreamingServiceWatcher.hpp>
-#include <QtTest/QSignalSpy>
-#include <MellowPlayer/Domain/StreamingServices/StreamingServices.hpp>
+#    include <MellowPlayer/Domain/Player/CurrentPlayer.hpp>
+#    include <MellowPlayer/Domain/Player/Player.hpp>
+#    include <MellowPlayer/Domain/Player/Players.hpp>
+#    include <MellowPlayer/Domain/StreamingServices/StreamingServices.hpp>
+#    include <MellowPlayer/Infrastructure/AlbumArt/LocalAlbumArt.hpp>
+#    include <MellowPlayer/Presentation/Mpris/Linux/Mpris2Player.hpp>
+#    include <Mocks/AlbumArtDownloaderMock.hpp>
+#    include <QtTest/QSignalSpy>
+#    include <UnitTests/Domain/StreamingServices/FakeStreamingServiceLoader.hpp>
+#    include <UnitTests/Domain/StreamingServices/FakeStreamingServiceWatcher.hpp>
 
 using namespace MellowPlayer::Domain;
 using namespace MellowPlayer::Domain::Tests;
 using namespace MellowPlayer::Infrastructure;
 using namespace MellowPlayer::Presentation;
-
 
 TEST_CASE("Mpris2PlayerTests", "[IntegrationTest]")
 {
@@ -39,7 +38,6 @@ TEST_CASE("Mpris2PlayerTests", "[IntegrationTest]")
     QSignalSpy canGoPreviousChanged(&player, SIGNAL(canGoPreviousChanged()));
     QSignalSpy canAddToFavoritesChanged(&player, SIGNAL(canAddToFavoritesChanged()));
     QSignalSpy volumeChanged(&player, SIGNAL(volumeChanged()));
-    
 
     SECTION("PlaybackStatus")
     {

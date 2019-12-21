@@ -1,9 +1,9 @@
 #pragma once
 
 #include "ApplicationDecorator.hpp"
+#include <QTimer>
 #include <QtCore/QLockFile>
 #include <boost-di-extensions/Factory.hpp>
-#include <QTimer>
 
 namespace MellowPlayer::Domain
 {
@@ -18,7 +18,7 @@ namespace MellowPlayer::Infrastructure
     class ILocalSocket;
     class ICommandLineArguments;
 
-    class SingleInstance: public ApplicationDecorator
+    class SingleInstance : public ApplicationDecorator
     {
         Q_OBJECT
     public:

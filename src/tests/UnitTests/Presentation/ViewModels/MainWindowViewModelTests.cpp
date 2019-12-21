@@ -1,8 +1,8 @@
 #include <MellowPlayer/Presentation/ViewModels/MainWindowViewModel.hpp>
-#include <catch/catch.hpp>
+#include <QtTest/QSignalSpy>
 #include <UnitTests/Presentation/Qml/FakeContextProperties.hpp>
 #include <UnitTests/Presentation/Qml/FakeQmlApplicationEngine.hpp>
-#include <QtTest/QSignalSpy>
+#include <catch/catch.hpp>
 
 using namespace MellowPlayer::Presentation;
 using namespace MellowPlayer::Presentation::Tests;
@@ -87,4 +87,3 @@ SCENARIO("MainWindowViewModelTests")
         }
     }
 }
-

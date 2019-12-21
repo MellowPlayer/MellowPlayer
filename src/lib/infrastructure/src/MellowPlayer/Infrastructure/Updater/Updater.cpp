@@ -1,13 +1,13 @@
-#include <MellowPlayer/Infrastructure/Updater/Updater.hpp>
-#include <MellowPlayer/Infrastructure/Updater/AbstractPlatformUpdater.hpp>
-#include <MellowPlayer/Infrastructure/Updater/ILatestRelease.hpp>
-#include <MellowPlayer/Infrastructure/Updater/Release.hpp>
 #include <MellowPlayer/Domain/Logging/ILogger.hpp>
 #include <MellowPlayer/Domain/Logging/Loggers.hpp>
 #include <MellowPlayer/Domain/Logging/LoggingMacros.hpp>
 #include <MellowPlayer/Domain/Settings/Setting.hpp>
-#include <MellowPlayer/Domain/Settings/Settings.hpp>
 #include <MellowPlayer/Domain/Settings/SettingKey.hpp>
+#include <MellowPlayer/Domain/Settings/Settings.hpp>
+#include <MellowPlayer/Infrastructure/Updater/AbstractPlatformUpdater.hpp>
+#include <MellowPlayer/Infrastructure/Updater/ILatestRelease.hpp>
+#include <MellowPlayer/Infrastructure/Updater/Release.hpp>
+#include <MellowPlayer/Infrastructure/Updater/Updater.hpp>
 
 using namespace MellowPlayer::Domain;
 using namespace MellowPlayer::Infrastructure;
@@ -65,14 +65,17 @@ const Release* Updater::latestRelease() const
 
 void Updater::onLatestReleaseReceived(const Release* release)
 {
-    if (release != nullptr && *release > *currentRelease_) {
+    if (release != nullptr && *release > *currentRelease_)
+    {
         LOG_INFO(logger_, QString("Latest release is an update (%1 < %2)").arg(currentRelease_->name()).arg(release->name()));
         setStatus(Status::UpdateAvailable);
         latestRelease_ = release;
         platformUpdater_.setRelease(latestRelease_);
         isUpdateAvailable_ = true;
         emit updateAvailable();
-    } else {
+    }
+    else
+    {
         LOG_INFO(logger_, QString("Current release is up to date..."));
         setStatus(Status::None);
         latestRelease_ = nullptr;
@@ -93,7 +96,8 @@ Updater::Status Updater::status() const
 
 void Updater::setStatus(Updater::Status status)
 {
-    if (status_ != status) {
+    if (status_ != status)
+    {
         status_ = status;
         emit statusChanged();
     }
@@ -101,22 +105,28 @@ void Updater::setStatus(Updater::Status status)
 
 void Updater::onDownloadFinished(bool succes)
 {
-    if (succes) {
+    if (succes)
+    {
         LOG_INFO(logger_, "download finished, installing...")
         setStatus(Status::Installing);
         platformUpdater_.install();
-    } else {
+    }
+    else
+    {
         LOG_ERROR(logger_, "download failed")
         setStatus(Status::Failure);
     }
 }
 void Updater::onInstallFinished(bool succes)
 {
-    if (succes) {
+    if (succes)
+    {
         LOG_INFO(logger_, "install finished, you can now restart the application");
         setStatus(Status::Installed);
         emit installed();
-    } else {
+    }
+    else
+    {
         LOG_ERROR(logger_, "install failed");
         setStatus(Status::Failure);
     }

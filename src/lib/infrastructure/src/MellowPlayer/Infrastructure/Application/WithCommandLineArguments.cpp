@@ -4,11 +4,9 @@
 
 using namespace MellowPlayer::Infrastructure;
 
-WithCommandLineArguments::WithCommandLineArguments(const std::shared_ptr<IApplication>& application,
-                                                   ICommandLineArguments& commandLineArguments)
+WithCommandLineArguments::WithCommandLineArguments(const std::shared_ptr<IApplication>& application, ICommandLineArguments& commandLineArguments)
         : ApplicationDecorator(application), commandLineArguments_(commandLineArguments)
 {
-
 }
 
 void WithCommandLineArguments::initialize()
@@ -16,7 +14,7 @@ void WithCommandLineArguments::initialize()
     commandLineArguments_.parse();
 
     if (commandLineArguments_.autoQuitDelay() != 0)
-        QTimer::singleShot(commandLineArguments_.autoQuitDelay(), [&]() { application_->quit(); } );
+        QTimer::singleShot(commandLineArguments_.autoQuitDelay(), [&]() { application_->quit(); });
 
     ApplicationDecorator::initialize();
 }

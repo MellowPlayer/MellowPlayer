@@ -15,7 +15,7 @@ namespace MellowPlayer::Presentation
     /**
      * Implements IContextProperties interface
      */
-    class ContextProperties: public IContextProperties
+    class ContextProperties : public IContextProperties
     {
     public:
         /**

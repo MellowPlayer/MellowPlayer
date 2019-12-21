@@ -12,7 +12,6 @@ using namespace std;
 CurrentPlayer::CurrentPlayer(Players& players, StreamingServices& streamingServices)
         : players_(players), streamingServices_(streamingServices), currentPlayer_(nullptr)
 {
-
     connect(&streamingServices, &StreamingServices::currentChanged, this, &CurrentPlayer::onCurrentServiceChanged);
 
     if (streamingServices.current() != nullptr)
@@ -140,8 +139,10 @@ void CurrentPlayer::onCurrentServiceChanged(StreamingService* streamingService)
     if (streamingService == nullptr)
         return;
     auto player = players_.get(streamingService->name());
-    if (player != currentPlayer_) {
-        if (currentPlayer_ != nullptr) {
+    if (player != currentPlayer_)
+    {
+        if (currentPlayer_ != nullptr)
+        {
             disconnect(currentPlayer_.get(), &Player::currentSongChanged, this, &CurrentPlayer::currentSongChanged);
             disconnect(currentPlayer_.get(), &Player::positionChanged, this, &CurrentPlayer::positionChanged);
             disconnect(currentPlayer_.get(), &Player::playbackStatusChanged, this, &CurrentPlayer::playbackStatusChanged);

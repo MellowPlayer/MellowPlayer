@@ -1,10 +1,10 @@
 #pragma once
 
 #include <MellowPlayer/Infrastructure/Application/IApplication.hpp>
+#include <MellowPlayer/Infrastructure/Application/QtApplication.hpp>
 #include <MellowPlayer/Presentation/Qml/ContextProperty.hpp>
 #include <QApplication>
 #include <QTranslator>
-#include <MellowPlayer/Infrastructure/Application/QtApplication.hpp>
 
 namespace MellowPlayer::Presentation
 {
@@ -38,4 +38,3 @@ namespace MellowPlayer::Presentation
         bool restartRequested_;
     };
 }
-

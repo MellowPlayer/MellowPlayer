@@ -1,16 +1,16 @@
 #include <QtCore>
 #include <catch/catch.hpp>
 #if defined(Q_OS_LINUX) || defined(Q_OS_FREEBSD)
-#include <MellowPlayer/Domain/Player/CurrentPlayer.hpp>
-#include <MellowPlayer/Domain/Player/Players.hpp>
-#include <MellowPlayer/Presentation/Mpris/Linux/MprisService.hpp>
-#include <MellowPlayer/Infrastructure/AlbumArt/LocalAlbumArt.hpp>
-#include <Mocks/AlbumArtDownloaderMock.hpp>
-#include <UnitTests/Domain/StreamingServices/FakeStreamingServiceLoader.hpp>
-#include <UnitTests/Domain/StreamingServices/FakeStreamingServiceWatcher.hpp>
-#include <QtDBus/QDBusConnection>
-#include <MellowPlayer/Domain/StreamingServices/StreamingServices.hpp>
-#include <UnitTests/Presentation/FakeMainWindow.hpp>
+#    include <MellowPlayer/Domain/Player/CurrentPlayer.hpp>
+#    include <MellowPlayer/Domain/Player/Players.hpp>
+#    include <MellowPlayer/Domain/StreamingServices/StreamingServices.hpp>
+#    include <MellowPlayer/Infrastructure/AlbumArt/LocalAlbumArt.hpp>
+#    include <MellowPlayer/Presentation/Mpris/Linux/MprisService.hpp>
+#    include <Mocks/AlbumArtDownloaderMock.hpp>
+#    include <QtDBus/QDBusConnection>
+#    include <UnitTests/Domain/StreamingServices/FakeStreamingServiceLoader.hpp>
+#    include <UnitTests/Domain/StreamingServices/FakeStreamingServiceWatcher.hpp>
+#    include <UnitTests/Presentation/FakeMainWindow.hpp>
 
 using namespace MellowPlayer::Domain;
 using namespace MellowPlayer::Domain::Tests;
@@ -32,7 +32,8 @@ TEST_CASE("MprisServiceTests", "[IntegrationTest]")
     MprisService mprisService(player, localAlbumArt, mainWindow);
     SECTION("start should succeed the first time")
     {
-        if (QDBusConnection::sessionBus().isConnected()) {
+        if (QDBusConnection::sessionBus().isConnected())
+        {
             bool success = false;
             mprisService.initialize([&](bool initializedWithSuccess) { success = initializedWithSuccess; });
             REQUIRE(success);

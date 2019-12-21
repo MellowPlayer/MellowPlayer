@@ -1,9 +1,9 @@
+#include "FakeMainWindow.hpp"
 #include <MellowPlayer/Presentation/Hotkeys/Hotkeys.hpp>
 #include <Mocks/PlayerMock.hpp>
 #include <Utils/DependencyPool.hpp>
 #include <catch/catch.hpp>
 #include <fakeit/fakeit.hpp>
-#include "FakeMainWindow.hpp"
 
 using namespace MellowPlayer::Tests;
 using namespace MellowPlayer::Domain;
@@ -18,7 +18,7 @@ TEST_CASE("HotkeysServiceTests", "[UnitTest]")
     DependencyPool pool;
     Settings& settings = pool.getSettings();
     Hotkeys hotkeys(playerMock.get(), settings, mainWindow);
-    hotkeys.initialize([=](bool){});
+    hotkeys.initialize([=](bool) {});
 
     SECTION("togglePlayPause")
     {

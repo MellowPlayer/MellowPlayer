@@ -1,10 +1,10 @@
 #ifdef USE_LIBNOTIFY
 
-#include <MellowPlayer/Presentation/Notifications/Notification.hpp>
-#include <MellowPlayer/Presentation/Notifications/Presenters/Linux/LibnotifyPresenter.hpp>
-#include <catch/catch.hpp>
-#include <UnitTests/Presentation/FakeMainWindow.hpp>
-#include <Mocks/FakeWorkDispatcher.hpp>
+#    include <MellowPlayer/Presentation/Notifications/Notification.hpp>
+#    include <MellowPlayer/Presentation/Notifications/Presenters/Linux/LibnotifyPresenter.hpp>
+#    include <Mocks/FakeWorkDispatcher.hpp>
+#    include <UnitTests/Presentation/FakeMainWindow.hpp>
+#    include <catch/catch.hpp>
 
 using namespace MellowPlayer::Domain;
 using namespace MellowPlayer::Domain;

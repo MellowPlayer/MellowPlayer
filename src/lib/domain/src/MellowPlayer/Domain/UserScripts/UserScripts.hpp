@@ -12,9 +12,7 @@ namespace MellowPlayer::Domain
     class UserScripts
     {
     public:
-        UserScripts(const QString& serviceName,
-                    IUserScriptFactory& userScriptFactory,
-                    ISettingsStore& settingsStore);
+        UserScripts(const QString& serviceName, IUserScriptFactory& userScriptFactory, ISettingsStore& settingsStore);
         ~UserScripts();
 
         int count() const;

@@ -1,10 +1,10 @@
-#include <MellowPlayer/Presentation/ViewModels/ThemeViewModel.hpp>
 #include <MellowPlayer/Domain/Settings/Setting.hpp>
 #include <MellowPlayer/Domain/Settings/Settings.hpp>
 #include <MellowPlayer/Domain/StreamingServices/StreamingService.hpp>
 #include <MellowPlayer/Domain/StreamingServices/StreamingServices.hpp>
 #include <MellowPlayer/Domain/Theme/IThemeLoader.hpp>
 #include <MellowPlayer/Infrastructure/BuildConfig.hpp>
+#include <MellowPlayer/Presentation/ViewModels/ThemeViewModel.hpp>
 
 #include <QDebug>
 
@@ -89,11 +89,13 @@ void ThemeViewModel::update()
 {
     StreamingService* currentService = streamingServices_.current();
     QString current = themeSetting_.value().toString();
-    if (currentService != nullptr && isAdaptiveTheme() && !currentService->theme().isEmpty()) {
+    if (currentService != nullptr && isAdaptiveTheme() && !currentService->theme().isEmpty())
+    {
         Theme theme = currentService->theme();
         availableThemes_["Adaptive"] = theme;
         fromTheme(theme);
-    } else if (isAdaptiveTheme())
+    }
+    else if (isAdaptiveTheme())
         fromTheme(availableThemes_["Default"]);
     else if (current == "Custom")
         fromTheme(customTheme());
@@ -216,9 +218,12 @@ bool ThemeViewModel::isDark(const QString& color) const
 
 Theme ThemeViewModel::customTheme() const
 {
-    return Theme{accentColorSetting_.value().toString(),        backgroundSetting_.value().toString(),
-                 foregroundSetting_.value().toString(),         primaryBackgroundSetting_.value().toString(),
-                 primaryForegroundSetting_.value().toString(),  secondaryBackgroundSetting_.value().toString(),
+    return Theme{accentColorSetting_.value().toString(),
+                 backgroundSetting_.value().toString(),
+                 foregroundSetting_.value().toString(),
+                 primaryBackgroundSetting_.value().toString(),
+                 primaryForegroundSetting_.value().toString(),
+                 secondaryBackgroundSetting_.value().toString(),
                  secondaryForegroundSetting_.value().toString()};
 }
 

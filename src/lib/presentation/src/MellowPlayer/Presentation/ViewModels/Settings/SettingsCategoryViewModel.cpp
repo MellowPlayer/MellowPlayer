@@ -1,14 +1,11 @@
-#include <MellowPlayer/Presentation/ViewModels/Settings/SettingsCategoryViewModel.hpp>
 #include <MellowPlayer/Domain/Settings/SettingsCategory.hpp>
+#include <MellowPlayer/Presentation/ViewModels/Settings/SettingsCategoryViewModel.hpp>
 
 using namespace MellowPlayer::Domain;
 using namespace MellowPlayer::Presentation;
 
 SettingsCategoryViewModel::SettingsCategoryViewModel(ThemeViewModel& themeViewModel, SettingsCategory* settingsCategory, QObject* parent)
-        : QObject(parent),
-          settingsCategory_(settingsCategory),
-          settingsListModel_(new SettingListModel(this, "name")),
-          settingViewModelFactory_(themeViewModel)
+        : QObject(parent), settingsCategory_(settingsCategory), settingsListModel_(new SettingListModel(this, "name")), settingViewModelFactory_(themeViewModel)
 {
     if (settingsCategory != nullptr)
         for (Setting* setting : settingsCategory->toList())
@@ -40,8 +37,11 @@ void SettingsCategoryViewModel::restoreDefaults()
     settingsCategory_->restoreDefaults();
 }
 
-CustomSettingsCategoryViewModel::CustomSettingsCategoryViewModel(const QString& name, const QString& icon, const QString& qmlComponent,
-                                                                 ThemeViewModel& themeViewModel, QObject* parent)
+CustomSettingsCategoryViewModel::CustomSettingsCategoryViewModel(const QString& name,
+                                                                 const QString& icon,
+                                                                 const QString& qmlComponent,
+                                                                 ThemeViewModel& themeViewModel,
+                                                                 QObject* parent)
         : SettingsCategoryViewModel(themeViewModel, nullptr, parent), name_(name), icon_(icon), qmlComponent_(qmlComponent)
 {
 }

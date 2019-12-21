@@ -2,8 +2,8 @@
 
 #include <MellowPlayer/Presentation/Models/StreamingServiceListModel.hpp>
 #include <MellowPlayer/Presentation/Models/StreamingServiceProxyListModel.hpp>
-#include <QObject>
 #include <MellowPlayer/Presentation/Qml/ContextProperty.hpp>
+#include <QObject>
 
 class QQmlApplicationEngine;
 
@@ -56,11 +56,17 @@ namespace MellowPlayer::Presentation
 
         Q_INVOKABLE void next();
         Q_INVOKABLE void previous();
-        Q_INVOKABLE void createService(const QString& serviceName, const QString& serviceUrl, const QString& authorName,
-                                       const QString& authorWebsite, bool allPlatforms, bool linuxPlatform, bool appImagePlatform,
-                                       bool osxPlatform, bool windowsPlatform);
+        Q_INVOKABLE void createService(const QString& serviceName,
+                                       const QString& serviceUrl,
+                                       const QString& authorName,
+                                       const QString& authorWebsite,
+                                       bool allPlatforms,
+                                       bool linuxPlatform,
+                                       bool appImagePlatform,
+                                       bool osxPlatform,
+                                       bool windowsPlatform);
 
-        void initialize(IQmlApplicationEngine &qmlApplicationEngine) override;
+        void initialize(IQmlApplicationEngine& qmlApplicationEngine) override;
 
     public slots:
         void setCurrentService(QObject* value);

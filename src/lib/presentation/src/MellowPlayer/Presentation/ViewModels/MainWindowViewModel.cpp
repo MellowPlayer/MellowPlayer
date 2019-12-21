@@ -1,17 +1,13 @@
-#include <MellowPlayer/Presentation/ViewModels/MainWindowViewModel.hpp>
 #include <MellowPlayer/Infrastructure/BuildConfig.hpp>
 #include <MellowPlayer/Presentation/Qml/IQmlApplicationEngine.hpp>
+#include <MellowPlayer/Presentation/ViewModels/MainWindowViewModel.hpp>
 
 using namespace MellowPlayer::Infrastructure;
 using namespace MellowPlayer::Presentation;
 
-MainWindowViewModel::MainWindowViewModel(std::shared_ptr<IContextProperties> contextProperties,
-                                         IQmlApplicationEngine& qmlApplicationEngine)
-        : ContextProperty("_window", this, contextProperties),
-          qmlApplicationEngine_(qmlApplicationEngine),
-          visible_(false)
+MainWindowViewModel::MainWindowViewModel(std::shared_ptr<IContextProperties> contextProperties, IQmlApplicationEngine& qmlApplicationEngine)
+        : ContextProperty("_window", this, contextProperties), qmlApplicationEngine_(qmlApplicationEngine), visible_(false)
 {
-
 }
 
 void MainWindowViewModel::show()

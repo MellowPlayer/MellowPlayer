@@ -4,7 +4,7 @@
 
 namespace MellowPlayer::Presentation
 {
-    class IMainWindow: public QObject
+    class IMainWindow : public QObject
     {
         Q_OBJECT
     public:

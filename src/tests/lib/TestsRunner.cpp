@@ -1,15 +1,15 @@
 #include "TestsRunner.hpp"
 #define CATCH_CONFIG_RUNNER
-#include <catch/catch.hpp>
 #include <MellowPlayer/Domain/Logging/ILogger.hpp>
 #include <MellowPlayer/Domain/Logging/Loggers.hpp>
 #include <MellowPlayer/Domain/Logging/LoggingMacros.hpp>
-#include <MellowPlayer/Infrastructure/Logging/SpdLoggerFactory.hpp>
-#include <QtCore/QSettings>
-#include <QDebug>
 #include <MellowPlayer/Infrastructure/Application/QtApplication.hpp>
 #include <MellowPlayer/Infrastructure/BuildConfig.hpp>
+#include <MellowPlayer/Infrastructure/Logging/SpdLoggerFactory.hpp>
+#include <QDebug>
+#include <QtCore/QSettings>
 #include <QtWebEngine/qtwebengineglobal.h>
+#include <catch/catch.hpp>
 
 using namespace MellowPlayer::Domain;
 using namespace MellowPlayer::Infrastructure;
@@ -32,12 +32,13 @@ int TestsRunner::runTests(int argc, char** argv)
     LoggerConfig loggerConfig;
     loggerConfig.createFileLoggers = false;
 
-    try {
+    try
+    {
         Loggers::instance();
         assert(false);
     }
-    catch (const logic_error&) {
-
+    catch (const logic_error&)
+    {
     }
     Loggers& loggingManager = Loggers::initialize(loggerFactory, loggerConfig);
     loggingManager.setDefaultLogLevel(LogLevel::Error);
@@ -53,4 +54,3 @@ int TestsRunner::runTests(int argc, char** argv)
 
     return retCode;
 }
-

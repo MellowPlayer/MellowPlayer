@@ -1,8 +1,8 @@
 #pragma once
 
-#include <QString>
-#include <QList>
 #include "Filter.hpp"
+#include <QList>
+#include <QString>
 
 namespace MellowPlayer::Infrastructure
 {

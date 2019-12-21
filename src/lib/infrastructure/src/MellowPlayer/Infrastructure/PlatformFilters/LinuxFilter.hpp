@@ -4,7 +4,7 @@
 
 namespace MellowPlayer::Infrastructure
 {
-    class LinuxFilter: public LinuxFilterBase
+    class LinuxFilter : public LinuxFilterBase
     {
     public:
         bool match() const override;

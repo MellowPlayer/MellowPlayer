@@ -31,12 +31,13 @@ public:
 
     QString toString(MellowPlayer::Infrastructure::UpdateChannel channelType) const
     {
-        switch (channelType) {
-            case MellowPlayer::Infrastructure::UpdateChannel::Continuous:
-                return "Continuous";
-            case MellowPlayer::Infrastructure::UpdateChannel::Stable:
-            default:
-                return "Stable";
+        switch (channelType)
+        {
+        case MellowPlayer::Infrastructure::UpdateChannel::Continuous:
+            return "Continuous";
+        case MellowPlayer::Infrastructure::UpdateChannel::Stable:
+        default:
+            return "Stable";
         }
     }
 
@@ -44,13 +45,14 @@ public:
     {
         QString string;
 
-        switch (channelType) {
-            case MellowPlayer::Infrastructure::UpdateChannel::Stable:
-                string = stable();
-                break;
-            case MellowPlayer::Infrastructure::UpdateChannel::Continuous:
-                string = continuous();
-                break;
+        switch (channelType)
+        {
+        case MellowPlayer::Infrastructure::UpdateChannel::Stable:
+            string = stable();
+            break;
+        case MellowPlayer::Infrastructure::UpdateChannel::Continuous:
+            string = continuous();
+            break;
         }
 
         return string;

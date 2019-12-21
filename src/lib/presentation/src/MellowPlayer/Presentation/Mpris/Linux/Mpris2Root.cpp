@@ -1,12 +1,11 @@
-#include <MellowPlayer/Presentation/Mpris/Linux/Mpris2Root.hpp>
 #include <MellowPlayer/Domain/Logging/Loggers.hpp>
 #include <MellowPlayer/Presentation/IMainWindow.hpp>
+#include <MellowPlayer/Presentation/Mpris/Linux/Mpris2Root.hpp>
 
 using namespace MellowPlayer::Domain;
 using namespace MellowPlayer::Presentation;
 
-Mpris2Root::Mpris2Root(IMainWindow& mainWindow, QObject* parent)
-        : QDBusAbstractAdaptor(parent), logger_(Loggers::logger("Mpris2Root")), mainWindow_(mainWindow)
+Mpris2Root::Mpris2Root(IMainWindow& mainWindow, QObject* parent) : QDBusAbstractAdaptor(parent), logger_(Loggers::logger("Mpris2Root")), mainWindow_(mainWindow)
 {
 }
 
@@ -69,4 +68,3 @@ QStringList Mpris2Root::supportedMimeTypes()
 {
     return QStringList();
 }
-

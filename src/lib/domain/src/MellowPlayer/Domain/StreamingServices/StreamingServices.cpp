@@ -1,10 +1,10 @@
-#include <MellowPlayer/Domain/StreamingServices/StreamingServices.hpp>
-#include <MellowPlayer/Domain/StreamingServices/IStreamingServiceLoader.hpp>
-#include <MellowPlayer/Domain/StreamingServices/IStreamingServiceWatcher.hpp>
 #include <MellowPlayer/Domain/Logging/ILogger.hpp>
 #include <MellowPlayer/Domain/Logging/Loggers.hpp>
 #include <MellowPlayer/Domain/Logging/LoggingMacros.hpp>
+#include <MellowPlayer/Domain/StreamingServices/IStreamingServiceLoader.hpp>
+#include <MellowPlayer/Domain/StreamingServices/IStreamingServiceWatcher.hpp>
 #include <MellowPlayer/Domain/StreamingServices/StreamingService.hpp>
+#include <MellowPlayer/Domain/StreamingServices/StreamingServices.hpp>
 
 using namespace MellowPlayer::Domain;
 using namespace MellowPlayer::Domain;
@@ -19,15 +19,19 @@ void StreamingServices::load()
 {
     auto newServices = loader_.load();
 
-    for (auto newService : newServices) {
+    for (auto newService : newServices)
+    {
         bool found = false;
-        for (auto service : services_) {
-            if (*service == *newService) {
+        for (auto service : services_)
+        {
+            if (*service == *newService)
+            {
                 found = true;
                 break;
             }
         }
-        if (!found) {
+        if (!found)
+        {
             LOG_DEBUG(logger_, "service added: " + newService->name());
             services_.append(newService);
             if (!newService->pluginDirectory().startsWith("/usr/") && !newService->pluginDirectory().startsWith("/tmp/"))

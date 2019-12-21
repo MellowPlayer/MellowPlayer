@@ -3,7 +3,7 @@
 using namespace std;
 using namespace MellowPlayer::Infrastructure;
 
-ApplicationDecorator::ApplicationDecorator(const shared_ptr<IApplication>& application): application_(application)
+ApplicationDecorator::ApplicationDecorator(const shared_ptr<IApplication>& application) : application_(application)
 {
     connect(application_.get(), &IApplication::started, this, &IApplication::started);
     connect(application_.get(), &IApplication::initialized, this, &IApplication::initialized);

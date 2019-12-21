@@ -82,7 +82,7 @@ void SingleInstanceCheck::initializePrimaryApplication()
 
 void SingleInstanceCheck::onSecondaryApplicationConnected()
 {
-    auto nextConnection =  _localServer->nextPendingConnection();
+    auto nextConnection = _localServer->nextPendingConnection();
     if (nextConnection)
     {
         if (_localSocket)
@@ -166,17 +166,20 @@ void SingleInstanceCheck::cleanUp()
 void SingleInstanceCheck::pollState()
 {
     QFileInfo lockFile(_lockFilePath);
-    if (!lockFile.exists()) {
+    if (!lockFile.exists())
+    {
         LOG_WARN(_logger, "lock file disappeared, trying to restore lock");
         if (_lockFile.tryLock(100))
-        LOG_INFO(_logger, "lock restored");
+            LOG_INFO(_logger, "lock restored");
     }
 
     QFileInfo serverFile(_localServer->serverSocketFilePath());
-    if (!serverFile.exists()) {
+    if (!serverFile.exists())
+    {
         LOG_WARN(_logger, "server file diseappeared, trying to restore local server");
         _localServer->close();
         if (_localServer->listen())
-            LOG_INFO(_logger, "local server restored");;
+            LOG_INFO(_logger, "local server restored");
+        ;
     }
 }

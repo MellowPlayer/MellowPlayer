@@ -1,6 +1,6 @@
-#include <MellowPlayer/Presentation/Qml/ContextProperties.hpp>
-#include "FakeQmlApplicationEngine.hpp"
 #include "FakeContextProperty.hpp"
+#include "FakeQmlApplicationEngine.hpp"
+#include <MellowPlayer/Presentation/Qml/ContextProperties.hpp>
 #include <Mocks/PlayerMock.hpp>
 #include <catch/catch.hpp>
 
@@ -21,7 +21,7 @@ SCENARIO("ContextPropertiesTests")
 
         WHEN("I call initialize")
         {
-            contextProperties.initialize([=](bool){});
+            contextProperties.initialize([=](bool) {});
 
             THEN("player name exists in qmlApplicationEngine")
             {

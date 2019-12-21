@@ -1,6 +1,6 @@
+#include "Fakes/FakeBinTrayHttpClient.hpp"
 #include <MellowPlayer/Infrastructure/Updater/BinTray/LatestBinTrayRelease.hpp>
 #include <MellowPlayer/Infrastructure/Updater/Release.hpp>
-#include "Fakes/FakeBinTrayHttpClient.hpp"
 #include <catch.hpp>
 
 using namespace MellowPlayer::Infrastructure;
@@ -11,11 +11,9 @@ SCENARIO("Get latest release")
     FakeBinTrayHttpClient httpClient;
     LatestBinTrayRelease sut(httpClient);
     const Release* latestRelease;
-    QObject::connect(&sut, &ILatestRelease::received, [&](const Release* release) {
-        latestRelease = release;
-    });
+    QObject::connect(&sut, &ILatestRelease::received, [&](const Release* release) { latestRelease = release; });
 
-    QList<UpdateChannel> updateChannels = { UpdateChannel::Stable, UpdateChannel::Continuous };
+    QList<UpdateChannel> updateChannels = {UpdateChannel::Stable, UpdateChannel::Continuous};
 
     WHEN("We get the latest stable release")
     {

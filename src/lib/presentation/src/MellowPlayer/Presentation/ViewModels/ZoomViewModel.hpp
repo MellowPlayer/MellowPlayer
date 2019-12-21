@@ -1,7 +1,7 @@
 #pragma once
 
-#include <QObject>
 #include <MellowPlayer/Presentation/Qml/ContextProperty.hpp>
+#include <QObject>
 
 namespace MellowPlayer::Domain
 {
@@ -10,7 +10,7 @@ namespace MellowPlayer::Domain
 
 namespace MellowPlayer::Presentation
 {
-    class ZoomViewModel: public QObject, public ContextProperty
+    class ZoomViewModel : public QObject, public ContextProperty
     {
         Q_OBJECT
         Q_PROPERTY(double value READ value WRITE setValue NOTIFY valueChanged)

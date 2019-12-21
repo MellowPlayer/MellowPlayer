@@ -1,6 +1,6 @@
-#include <MellowPlayer/Presentation/Qml/ContextProperty.hpp>
-#include "FakeQmlApplicationEngine.hpp"
 #include "FakeContextProperties.hpp"
+#include "FakeQmlApplicationEngine.hpp"
+#include <MellowPlayer/Presentation/Qml/ContextProperty.hpp>
 #include <catch/catch.hpp>
 
 using namespace MellowPlayer::Presentation;
@@ -26,14 +26,13 @@ SCENARIO("ContextPropertyTests")
 
             AND_WHEN("I call initialize on contextProperties")
             {
-                contextProperties->initialize([=](bool){});
+                contextProperties->initialize([=](bool) {});
 
                 THEN("context property was added to the qmlApplicationEngine")
                 {
                     REQUIRE(qmlApplicationEngine.contextProperty("ContextPropertyName") == &propertyObject);
                 }
             }
-
         }
     }
 }

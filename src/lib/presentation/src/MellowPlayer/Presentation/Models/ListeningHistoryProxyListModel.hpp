@@ -12,7 +12,6 @@ namespace MellowPlayer::Presentation
     public:
         explicit ListeningHistoryProxyListModel(ListeningHistoryListModel* sourceModel);
 
-
         void disableService(const QString& serviceName, bool disable);
         void setSearchFilter(const QString& newSearchFilter);
 

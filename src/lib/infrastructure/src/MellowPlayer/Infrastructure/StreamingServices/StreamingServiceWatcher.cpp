@@ -1,10 +1,10 @@
-#include <MellowPlayer/Infrastructure/StreamingServices/StreamingServiceWatcher.hpp>
-#include <MellowPlayer/Infrastructure/StreamingServices/StreamingServiceLoader.hpp>
-#include <QtCore/QDir>
 #include <MellowPlayer/Domain/Logging/ILogger.hpp>
 #include <MellowPlayer/Domain/Logging/Loggers.hpp>
 #include <MellowPlayer/Domain/Logging/LoggingMacros.hpp>
 #include <MellowPlayer/Domain/StreamingServices/StreamingService.hpp>
+#include <MellowPlayer/Infrastructure/StreamingServices/StreamingServiceLoader.hpp>
+#include <MellowPlayer/Infrastructure/StreamingServices/StreamingServiceWatcher.hpp>
+#include <QtCore/QDir>
 
 using namespace std;
 using namespace MellowPlayer::Domain;
@@ -41,9 +41,12 @@ void StreamingServiceWatcher::onFileChanged(const QString& path)
     const QString name = fileInfo.baseName();
     StreamingService& service = pluginInfo_[pluginDir]->service_;
 
-    if (name == "integration") {
+    if (name == "integration")
+    {
         service.updateScript(StreamingServiceLoader::readFileContent(path));
-    } else {
+    }
+    else
+    {
         Theme theme = StreamingServiceLoader::readTheme(path);
         service.updateTheme(theme);
     }
@@ -52,8 +55,7 @@ void StreamingServiceWatcher::onFileChanged(const QString& path)
     fileSystemWatcher_.addPath(path);
 }
 
-StreamingServiceWatcher::PluginInfo::PluginInfo(StreamingService &service, QString scriptPath, QString themePath,
-                                                QObject *parent)
+StreamingServiceWatcher::PluginInfo::PluginInfo(StreamingService& service, QString scriptPath, QString themePath, QObject* parent)
         : QObject(parent), service_(service), scriptPath_(scriptPath), themePath_(themePath)
 {
 }

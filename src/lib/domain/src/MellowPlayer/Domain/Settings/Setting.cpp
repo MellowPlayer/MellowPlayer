@@ -1,5 +1,5 @@
-#include <MellowPlayer/Domain/Settings/Setting.hpp>
 #include <MellowPlayer/Domain/Settings/ISettingsStore.hpp>
+#include <MellowPlayer/Domain/Settings/Setting.hpp>
 #include <MellowPlayer/Domain/Settings/Settings.hpp>
 #include <MellowPlayer/Domain/Settings/SettingsCategory.hpp>
 #include <QVersionNumber>
@@ -21,10 +21,13 @@ void Setting::resolveDependency()
     if (key.isEmpty())
         return;
 
-    try {
+    try
+    {
         parentSetting_ = &settings_.get(key);
         connect(parentSetting_, &Setting::valueChanged, this, &Setting::onParentValueChanged);
-    } catch (const runtime_error&) {
+    }
+    catch (const runtime_error&)
+    {
         return;
     }
 }
@@ -66,7 +69,8 @@ QVariant Setting::value() const
 
 void Setting::setValue(const QVariant& newValue)
 {
-    if (newValue != value()) {
+    if (newValue != value())
+    {
         settingsStore_.setValue(getFullKey(), newValue);
         emit valueChanged();
     }
@@ -86,11 +90,14 @@ bool Setting::isEnabled() const
     if (parentSetting_ == nullptr)
         return true;
 
-    if (cond.contains("==")) {
+    if (cond.contains("=="))
+    {
         QString value = cond.split("==")[1].trimmed().toLower();
         QString parentValue = parentSetting_->value().toString();
         return parentValue.trimmed().toLower() == value;
-    } else {
+    }
+    else
+    {
         bool parentValue = parentSetting_->value().toBool();
         if (cond.startsWith("!"))
             return !parentValue;

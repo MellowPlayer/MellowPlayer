@@ -5,10 +5,12 @@
 
 namespace MellowPlayer::Domain::Tests
 {
-    class FakeLogger: public ILogger
+    class FakeLogger : public ILogger
     {
     public:
-        FakeLogger() : name_("fakeLogger") { }
+        FakeLogger() : name_("fakeLogger")
+        {
+        }
 
         void log(const std::string&, LogLevel, const char*, int) override
         {
@@ -21,7 +23,6 @@ namespace MellowPlayer::Domain::Tests
 
         void setLogLevel(LogLevel) override
         {
-
         }
 
     private:

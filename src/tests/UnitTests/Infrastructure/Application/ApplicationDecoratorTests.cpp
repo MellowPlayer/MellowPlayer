@@ -1,7 +1,7 @@
-#include <MellowPlayer/Infrastructure/Application/ApplicationDecorator.hpp>
-#include <catch/catch.hpp>
-#include <QtTest/QSignalSpy>
 #include "FakeApplication.hpp"
+#include <MellowPlayer/Infrastructure/Application/ApplicationDecorator.hpp>
+#include <QtTest/QSignalSpy>
+#include <catch/catch.hpp>
 
 using namespace std;
 using namespace MellowPlayer::Infrastructure;

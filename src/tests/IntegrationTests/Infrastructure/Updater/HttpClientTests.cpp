@@ -1,7 +1,7 @@
 #include <MellowPlayer/Infrastructure/Network/HttpClient.hpp>
+#include <QSignalSpy>
 #include <QtTest/qtestsystem.h>
 #include <catch/catch.hpp>
-#include <QSignalSpy>
 
 using namespace MellowPlayer::Infrastructure;
 
@@ -19,7 +19,8 @@ SCENARIO("HttpClient get github API response", "[!mayfail]")
 
             THEN("it receives a non empty response")
             {
-                if (spy.wait(5000)) {
+                if (spy.wait(5000))
+                {
                     REQUIRE(spy.count() == 1);
                     QList<QVariant> args = spy.takeFirst();
                     REQUIRE(!args.at(0).toByteArray().isEmpty());

@@ -1,24 +1,27 @@
 #pragma once
-#include <fakeit/fakeit.hpp>
-#include <memory>
-#include <QColor>
 #include <MellowPlayer/Domain/Theme/IThemeLoader.hpp>
 #include <MellowPlayer/Domain/Theme/Theme.hpp>
+#include <QColor>
 #include <cmath>
+#include <fakeit/fakeit.hpp>
+#include <memory>
 
 using namespace MellowPlayer::Domain;
 using namespace fakeit;
 
-class ThemeLoaderMock {
+class ThemeLoaderMock
+{
 public:
-    static Mock<IThemeLoader> get() {
+    static Mock<IThemeLoader> get()
+    {
         Mock<IThemeLoader> mock;
-        When(Method(mock, load)).AlwaysDo([](const QString&){
+        When(Method(mock, load)).AlwaysDo([](const QString&) {
             auto randomColors = [](int count) {
                 QVector<QColor> colors;
                 float currentHue = 0.0;
-                for (int i = 0; i < count; i++){
-                    colors.push_back( QColor::fromHslF(currentHue, 1.0, 0.5) );
+                for (int i = 0; i < count; i++)
+                {
+                    colors.push_back(QColor::fromHslF(currentHue, 1.0, 0.5));
                     currentHue += 0.618033988749895f;
                     currentHue = std::fmod(currentHue, 1.0f);
                 }
@@ -37,9 +40,7 @@ public:
             theme.secondaryForeground = colors[6].name();
 
             return theme;
-
         });
         return mock;
     }
 };
-

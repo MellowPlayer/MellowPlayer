@@ -3,11 +3,11 @@
 #include <MellowPlayer/Domain/StreamingServices/StreamingServices.hpp>
 #include <MellowPlayer/Infrastructure/AlbumArt/LocalAlbumArt.hpp>
 #include <Mocks/AlbumArtDownloaderMock.hpp>
+#include <QTest>
+#include <QtTest/QSignalSpy>
 #include <UnitTests/Domain/StreamingServices/FakeStreamingServiceLoader.hpp>
 #include <UnitTests/Domain/StreamingServices/FakeStreamingServiceWatcher.hpp>
-#include <QtTest/QSignalSpy>
 #include <catch/catch.hpp>
-#include <QTest>
 
 using namespace MellowPlayer::Domain;
 using namespace MellowPlayer::Domain::Tests;
@@ -70,14 +70,12 @@ SCENARIO("LocalAlbumArt download current song art url when it changed")
             THEN("localAlbumArt use MellowPlayer's svg logo")
             {
                 REQUIRE(localAlbumArt.url().toStdString() == localAlbumArt.fallbackUrl().toStdString());
-
             }
         }
 
         AND_WHEN("a new url is set")
         {
             song.setArtUrl("https://deezer.com/arUrl-123.png");
-
 
             THEN("AlbumArtDownloader is called with the song artUrl")
             {

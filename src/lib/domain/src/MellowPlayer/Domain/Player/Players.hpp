@@ -1,9 +1,9 @@
 #pragma once
 
-#include <memory>
+#include <QMap>
 #include <QObject>
 #include <QString>
-#include <QMap>
+#include <memory>
 
 namespace MellowPlayer::Domain
 {

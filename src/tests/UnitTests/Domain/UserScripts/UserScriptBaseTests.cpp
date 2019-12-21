@@ -1,6 +1,6 @@
-#include <catch/catch.hpp>
-#include <MellowPlayer/Domain/UserScripts/UserScriptBase.hpp>
 #include "FakeUserScript.hpp"
+#include <MellowPlayer/Domain/UserScripts/UserScriptBase.hpp>
+#include <catch/catch.hpp>
 
 using namespace MellowPlayer::Domain;
 using namespace MellowPlayer::Domain::Tests;

@@ -4,7 +4,7 @@
 
 namespace MellowPlayer::Presentation::Tests
 {
-    class FakeMainWindow: public IMainWindow
+    class FakeMainWindow : public IMainWindow
     {
     public:
         void load() override
@@ -31,7 +31,7 @@ namespace MellowPlayer::Presentation::Tests
         {
             quitRequested = true;
         }
-        
+
         bool isLoaded = false;
         bool isShown = false;
         bool isHidden = false;

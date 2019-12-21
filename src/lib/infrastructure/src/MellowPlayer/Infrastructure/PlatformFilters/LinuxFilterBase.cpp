@@ -2,8 +2,7 @@
 
 using namespace MellowPlayer::Infrastructure;
 
-LinuxFilterBase::LinuxFilterBase():
-    isAppImage_(false)
+LinuxFilterBase::LinuxFilterBase() : isAppImage_(false)
 {
     QString appImagePath = qgetenv("APPIMAGE");
     if (!appImagePath.isEmpty())

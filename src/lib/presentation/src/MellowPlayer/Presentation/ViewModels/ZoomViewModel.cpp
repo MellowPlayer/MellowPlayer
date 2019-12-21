@@ -1,13 +1,12 @@
-#include <MellowPlayer/Presentation/ViewModels/ZoomViewModel.hpp>
 #include <MellowPlayer/Domain/Settings/ISettingsStore.hpp>
+#include <MellowPlayer/Presentation/ViewModels/ZoomViewModel.hpp>
 #include <functional>
 
 using namespace MellowPlayer::Domain;
 using namespace MellowPlayer::Presentation;
 
 ZoomViewModel::ZoomViewModel(std::shared_ptr<IContextProperties> contextProperties, ISettingsStore& settingsStore)
-        : ContextProperty("_zoom", this, contextProperties),
-          _settingsStore(settingsStore)
+        : ContextProperty("_zoom", this, contextProperties), _settingsStore(settingsStore)
 {
     setValue(settingsStore.value("zoom", 1.0).toDouble());
 }

@@ -3,19 +3,19 @@
 #include <MellowPlayer/Domain/ListeningHistory/ListeningHistory.hpp>
 #include <MellowPlayer/Domain/Player/CurrentPlayer.hpp>
 #include <MellowPlayer/Domain/Player/Players.hpp>
+#include <MellowPlayer/Domain/Settings/ISettingsStore.hpp>
 #include <MellowPlayer/Domain/Settings/Settings.hpp>
+#include <MellowPlayer/Domain/StreamingServices/IStreamingServiceCreator.hpp>
 #include <MellowPlayer/Domain/StreamingServices/StreamingServices.hpp>
+#include <MellowPlayer/Domain/UserScripts/IUserScriptFactory.hpp>
+#include <MellowPlayer/Infrastructure/Updater/AbstractPlatformUpdater.hpp>
 #include <MellowPlayer/Infrastructure/Updater/Updater.hpp>
 #include <MellowPlayer/Presentation/Notifications/Presenters/INotificationPresenter.hpp>
-#include <MellowPlayer/Domain/Settings/ISettingsStore.hpp>
-#include <MellowPlayer/Domain/StreamingServices/IStreamingServiceCreator.hpp>
-#include <MellowPlayer/Infrastructure/Updater/AbstractPlatformUpdater.hpp>
-#include <MellowPlayer/Domain/UserScripts/IUserScriptFactory.hpp>
 
 #include <MellowPlayer/Infrastructure/AlbumArt/LocalAlbumArt.hpp>
-#include <MellowPlayer/Infrastructure/Updater/BinTray/LatestBinTrayRelease.hpp>
-#include <MellowPlayer/Infrastructure/Settings/SettingsSchemaLoader.hpp>
 #include <MellowPlayer/Infrastructure/CommandLineArguments/ICommandLineArguments.hpp>
+#include <MellowPlayer/Infrastructure/Settings/SettingsSchemaLoader.hpp>
+#include <MellowPlayer/Infrastructure/Updater/BinTray/LatestBinTrayRelease.hpp>
 
 #include <MellowPlayer/Presentation/Notifications/Notifications.hpp>
 #include <MellowPlayer/Presentation/ViewModels/ListeningHistory/ListeningHistoryViewModel.hpp>
@@ -23,22 +23,21 @@
 #include <MellowPlayer/Presentation/ViewModels/ThemeViewModel.hpp>
 #include <MellowPlayer/Presentation/ViewModels/UpdaterViewModel.hpp>
 
+#include <Fakes/FakeBinTrayHttpClient.hpp>
 #include <Mocks/AlbumArtDownloaderMock.hpp>
 #include <Mocks/FakeCommnandLineArguments.hpp>
 #include <Mocks/FakeFileDownloader.hpp>
 #include <Mocks/FakeHttpClient.hpp>
+#include <Mocks/FakeListeningHistoryDatabase.hpp>
 #include <Mocks/FakePlatformUpdater.hpp>
 #include <Mocks/FakeWorkDispatcher.hpp>
-#include <Mocks/FakeListeningHistoryDatabase.hpp>
 #include <Mocks/NotificationPresenterMock.hpp>
-#include <UnitTests/Domain/Settings/FakeSettingsStore.hpp>
 #include <Mocks/StreamingServiceCreatorMock.hpp>
+#include <Mocks/ThemeLoaderMock.hpp>
+#include <UnitTests/Domain/Settings/FakeSettingsStore.hpp>
 #include <UnitTests/Domain/StreamingServices/FakeStreamingServiceLoader.hpp>
 #include <UnitTests/Domain/StreamingServices/FakeStreamingServiceWatcher.hpp>
-#include <Mocks/ThemeLoaderMock.hpp>
 #include <UnitTests/Domain/UserScripts/FakeUserScript.hpp>
-#include <Mocks/FakeCommnandLineArguments.hpp>
-#include <Fakes/FakeBinTrayHttpClient.hpp>
 
 using namespace std;
 using namespace fakeit;
@@ -57,9 +56,7 @@ DependencyPool::DependencyPool()
           dataProvider(make_unique<FakeListeningHistoryDatabase>()),
           contextProperties_(std::make_shared<FakeContextProperties>())
 {
-    When(Method(mUserScriptsFactoryMock, create)).AlwaysDo([]() -> IUserScript* {
-        return new FakeUserScript;
-    });
+    When(Method(mUserScriptsFactoryMock, create)).AlwaysDo([]() -> IUserScript* { return new FakeUserScript; });
 }
 
 DependencyPool::~DependencyPool() = default;
@@ -68,7 +65,8 @@ StreamingServices& DependencyPool::getStreamingServices()
 {
     static FakeStreamingServiceLoader streamingServiceLoader;
     static FakeStreamingServiceWatcher streamingServiceWatcher;
-    if (pStreamingServicesController == nullptr) {
+    if (pStreamingServicesController == nullptr)
+    {
         pStreamingServicesController = make_unique<StreamingServices>(streamingServiceLoader, streamingServiceWatcher);
         pStreamingServicesController->load();
     }
@@ -78,17 +76,16 @@ StreamingServices& DependencyPool::getStreamingServices()
 StreamingServicesViewModel& DependencyPool::getStreamingServicesViewModel()
 {
     if (pStreamingServicesControllerViewModel == nullptr)
-        pStreamingServicesControllerViewModel = make_unique<StreamingServicesViewModel>(
-                getStreamingServices(),
-        getPlayers(),
-        getSettings(),
-        getWorkDispatcher(),
-        getStreamingServicesCreator(),
-        getCommandLineArguments(),
-        getUserScriptFactory(),
-        contextProperties_,
-        networkProxies_,
-        getThemeViewModel());
+        pStreamingServicesControllerViewModel = make_unique<StreamingServicesViewModel>(getStreamingServices(),
+                                                                                        getPlayers(),
+                                                                                        getSettings(),
+                                                                                        getWorkDispatcher(),
+                                                                                        getStreamingServicesCreator(),
+                                                                                        getCommandLineArguments(),
+                                                                                        getUserScriptFactory(),
+                                                                                        contextProperties_,
+                                                                                        networkProxies_,
+                                                                                        getThemeViewModel());
     return *pStreamingServicesControllerViewModel;
 }
 
@@ -153,8 +150,7 @@ ThemeViewModel& DependencyPool::getThemeViewModel()
 {
     static auto mock = ThemeLoaderMock::get();
     if (pThemeViewModel == nullptr)
-        pThemeViewModel = make_unique<ThemeViewModel>(getStreamingServices(), getSettings(), mock.get(),
-                                                      contextProperties_);
+        pThemeViewModel = make_unique<ThemeViewModel>(getStreamingServices(), getSettings(), mock.get(), contextProperties_);
     return *pThemeViewModel;
 }
 
@@ -177,9 +173,7 @@ Updater& DependencyPool::getUpdater()
 Notifications& DependencyPool::getNotifier()
 {
     if (pNotifier == nullptr)
-        pNotifier =
-        make_unique<Notifications>(getCurrentPlayer(), getLocalAlbumArt(), getNotificationPresenter(),
-                                   getStreamingServices(), getSettings());
+        pNotifier = make_unique<Notifications>(getCurrentPlayer(), getLocalAlbumArt(), getNotificationPresenter(), getStreamingServices(), getSettings());
     return *pNotifier;
 }
 
@@ -220,7 +214,7 @@ std::shared_ptr<IContextProperties> DependencyPool::getContextProperties()
     return contextProperties_;
 }
 
-INetworkProxies &DependencyPool::getNetworkProxies()
+INetworkProxies& DependencyPool::getNetworkProxies()
 {
     return networkProxies_;
 }

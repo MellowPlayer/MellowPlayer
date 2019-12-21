@@ -1,9 +1,9 @@
-#include <MellowPlayer/Infrastructure/Network/FileDownloader.hpp>
-#include <QtNetwork/QNetworkRequest>
-#include <QtNetwork/QNetworkReply>
 #include <MellowPlayer/Domain/Logging/ILogger.hpp>
 #include <MellowPlayer/Domain/Logging/Loggers.hpp>
 #include <MellowPlayer/Domain/Logging/LoggingMacros.hpp>
+#include <MellowPlayer/Infrastructure/Network/FileDownloader.hpp>
+#include <QtNetwork/QNetworkReply>
+#include <QtNetwork/QNetworkRequest>
 
 using namespace MellowPlayer::Domain;
 using namespace MellowPlayer::Infrastructure;
@@ -15,7 +15,8 @@ FileDownloader::FileDownloader() : logger_(Loggers::logger("FileDownloader"))
 
 void FileDownloader::download(const QString& urlToDownload, const QString& filePath)
 {
-    if (!isDownloading()) {
+    if (!isDownloading())
+    {
         LOG_DEBUG(logger_, "downloading " << urlToDownload << " to " << filePath);
         progress_ = 0;
         destinationPath_ = QFileInfo(filePath);
@@ -40,10 +41,12 @@ void FileDownloader::onDownloadFinished(QNetworkReply* reply)
 
     currentReply_ = nullptr;
 
-    if (reply->error() == QNetworkReply::NoError) {
+    if (reply->error() == QNetworkReply::NoError)
+    {
         QString redirectUrl = reply->attribute(QNetworkRequest::RedirectionTargetAttribute).toString();
 
-        if (!redirectUrl.isEmpty()) {
+        if (!redirectUrl.isEmpty())
+        {
             LOG_DEBUG(logger_, "redirected to: " << redirectUrl);
             download(redirectUrl, destinationPath_.absoluteFilePath());
             return;
@@ -51,14 +54,17 @@ void FileDownloader::onDownloadFinished(QNetworkReply* reply)
 
         QByteArray replyData = reply->readAll();
         QFile file(destinationPath_.absoluteFilePath());
-        if (file.open(QIODevice::WriteOnly)) {
+        if (file.open(QIODevice::WriteOnly))
+        {
             file.write(replyData);
 
             LOG_DEBUG(logger_, "file downloaded with success: " << destinationPath_.absoluteFilePath());
             success = true;
-        } else
+        }
+        else
             LOG_DEBUG(logger_, "failed to write file: " << destinationPath_.absoluteFilePath() << " - Error: " << file.errorString());
-    } else
+    }
+    else
         LOG_DEBUG(logger_, "download failed: " << reply->errorString());
 
     emit finished(success);
@@ -66,13 +72,13 @@ void FileDownloader::onDownloadFinished(QNetworkReply* reply)
 
 void FileDownloader::onDownloadProgress(qint64 bytesReceived, qint64 bytesTotal)
 {
-
     double ratio = 0;
     if (bytesTotal > bytesReceived)
         ratio = static_cast<double>(bytesReceived) / bytesTotal;
     double progress = (ratio * 100);
 
-    if (progress_ != progress) {
+    if (progress_ != progress)
+    {
         LOG_DEBUG(logger_, "download progress: " << progress);
         progress_ = progress;
         emit progressChanged(progress_);

@@ -1,6 +1,6 @@
-#include <MellowPlayer/Domain/Settings/SettingsCategory.hpp>
 #include <MellowPlayer/Domain/Settings/Setting.hpp>
 #include <MellowPlayer/Domain/Settings/Settings.hpp>
+#include <MellowPlayer/Domain/Settings/SettingsCategory.hpp>
 #include <QtCore/QJsonDocument>
 #include <QtCore/QJsonObject>
 
@@ -9,7 +9,8 @@ using namespace MellowPlayer::Domain;
 
 SettingsCategory::SettingsCategory(const SettingsCategory::Data& categoryData, Settings* appSettings) : QObject(appSettings), data_(categoryData)
 {
-    for (int i = 0; i < data_.parameters.count(); ++i) {
+    for (int i = 0; i < data_.parameters.count(); ++i)
+    {
         QJsonObject parameterObj = data_.parameters.at(i).toObject();
         Setting::Data settingData;
         settingData.name = parameterObj.value("name").toString();
@@ -60,7 +61,8 @@ QString SettingsCategory::toJavascriptObject()
 {
     QJsonDocument document;
     QJsonObject jsonObject;
-    for (auto* setting: toList()) {
+    for (auto* setting : toList())
+    {
         QString type = setting->type().toLower();
         if (type == "bool")
             jsonObject[setting->key()] = setting->value().toBool();

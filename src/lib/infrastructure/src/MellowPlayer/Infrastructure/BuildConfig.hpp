@@ -1,9 +1,9 @@
 #pragma once
 
-#include <QString>
 #include <QObject>
+#include <QString>
 
-class BuildConfigStrings: public QObject
+class BuildConfigStrings : public QObject
 {
     Q_OBJECT
 public:
@@ -27,6 +27,5 @@ namespace MellowPlayer::Infrastructure
         static QString getBuildDate();
         static QString getSourceDir();
         static QString buildInfo();
-
     };
 }

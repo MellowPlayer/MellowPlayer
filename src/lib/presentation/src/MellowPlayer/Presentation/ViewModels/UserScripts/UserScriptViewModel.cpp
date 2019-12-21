@@ -1,13 +1,11 @@
-#include <MellowPlayer/Presentation/ViewModels/UserScripts/UserScriptViewModel.hpp>
 #include <MellowPlayer/Domain/UserScripts/IUserScript.hpp>
+#include <MellowPlayer/Presentation/ViewModels/UserScripts/UserScriptViewModel.hpp>
 
 using namespace MellowPlayer::Domain;
 using namespace MellowPlayer::Presentation;
 
-UserScriptViewModel::UserScriptViewModel(IUserScript& model, QObject* parent):
-    QObject(parent), model_(model)
+UserScriptViewModel::UserScriptViewModel(IUserScript& model, QObject* parent) : QObject(parent), model_(model)
 {
-
 }
 
 QString UserScriptViewModel::name() const
@@ -18,7 +16,8 @@ QString UserScriptViewModel::name() const
 void UserScriptViewModel::setName(const QString& name)
 {
     Q_UNUSED(name);
-    if (name != model_.name()) {
+    if (name != model_.name())
+    {
         model_.setName(name);
         emit nameChanged();
     }

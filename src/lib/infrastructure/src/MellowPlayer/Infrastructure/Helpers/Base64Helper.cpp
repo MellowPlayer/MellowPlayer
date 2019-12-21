@@ -1,7 +1,7 @@
-#include <MellowPlayer/Infrastructure/Helpers/Base64Helper.hpp>
 #include <MellowPlayer/Domain/Logging/ILogger.hpp>
 #include <MellowPlayer/Domain/Logging/Loggers.hpp>
 #include <MellowPlayer/Domain/Logging/LoggingMacros.hpp>
+#include <MellowPlayer/Infrastructure/Helpers/Base64Helper.hpp>
 
 using namespace MellowPlayer::Domain;
 using namespace MellowPlayer::Infrastructure;
@@ -23,7 +23,8 @@ QImage Base64Helper::getImage(const QString& uri)
     QRegExp re("data:(image\\/.*);base64,(.*)");
 
     int pos = re.indexIn(uri);
-    if (pos == -1) {
+    if (pos == -1)
+    {
         LOG_WARN(logger_, "failed to decode base 64 image, not a valid data URI scheme...");
         return image;
     }
@@ -45,7 +46,8 @@ bool Base64Helper::saveToFile(const QString& uri, const QString& path)
 {
     QImage image = getImage(uri);
 
-    if (!image.save(path, "PNG")) {
+    if (!image.save(path, "PNG"))
+    {
         LOG_WARN(logger_, "failed to save decoded image");
         return false;
     }

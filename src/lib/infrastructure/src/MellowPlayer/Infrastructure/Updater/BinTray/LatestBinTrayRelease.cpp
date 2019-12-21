@@ -1,15 +1,14 @@
-#include <MellowPlayer/Infrastructure/Updater/BinTray/LatestBinTrayRelease.hpp>
 #include <MellowPlayer/Infrastructure/Network/IHttpClient.hpp>
-#include <QtCore/QJsonDocument>
-#include <QtCore/QJsonArray>
-#include <QtCore/QJsonObject>
+#include <MellowPlayer/Infrastructure/Updater/BinTray/LatestBinTrayRelease.hpp>
 #include <MellowPlayer/Infrastructure/Updater/Release.hpp>
+#include <QtCore/QJsonArray>
+#include <QtCore/QJsonDocument>
+#include <QtCore/QJsonObject>
 #include <QtCore/QVersionNumber>
 
 using namespace MellowPlayer::Infrastructure;
 
-LatestBinTrayRelease::LatestBinTrayRelease(IHttpClient& httpClient)
-        : _httpClient(httpClient)
+LatestBinTrayRelease::LatestBinTrayRelease(IHttpClient& httpClient) : _httpClient(httpClient)
 {
     connect(&httpClient, &IHttpClient::replyReceived, this, &LatestBinTrayRelease::onReplyReceived);
 }
@@ -34,11 +33,12 @@ void LatestBinTrayRelease::onReplyReceived(const QByteArray& replyData)
     emit received(parse(replyData));
 }
 
-QString LatestBinTrayRelease::makeUrl(QString path) {
+QString LatestBinTrayRelease::makeUrl(QString path)
+{
     return QString("https://dl.bintray.com/colinduquesnoy/MellowPlayer/%1").arg(path);
 }
 
-Release *LatestBinTrayRelease::parse(const QByteArray &replyData)
+Release* LatestBinTrayRelease::parse(const QByteArray& replyData)
 {
     QJsonDocument jsonDocument = QJsonDocument::fromJson(replyData);
     if (!jsonDocument.isArray())
@@ -48,7 +48,8 @@ Release *LatestBinTrayRelease::parse(const QByteArray &replyData)
     auto array = jsonDocument.array();
     QString version = findLatestVersion(array);
     QDate releaseDate;
-    for (int i = 0; i < array.count(); ++i) {
+    for (int i = 0; i < array.count(); ++i)
+    {
         auto file = array.at(i).toObject();
 
         if (file.value("version").toString() == version)
@@ -72,7 +73,8 @@ QString LatestBinTrayRelease::findLatestVersion(const QJsonArray& files)
 {
     QVersionNumber highestVersion(0, 0, 0);
 
-    for (int i = 0; i < files.count(); ++i) {
+    for (int i = 0; i < files.count(); ++i)
+    {
         auto file = files.at(i).toObject();
         auto version = QVersionNumber::fromString(file.value("version").toString());
         if (version > highestVersion)

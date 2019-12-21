@@ -1,5 +1,5 @@
-#include <MellowPlayer/Presentation/ViewModels/Settings/Types/ColorSettingViewModel.hpp>
 #include <MellowPlayer/Domain/Settings/Setting.hpp>
+#include <MellowPlayer/Presentation/ViewModels/Settings/Types/ColorSettingViewModel.hpp>
 
 using namespace MellowPlayer::Presentation;
 using namespace MellowPlayer::Domain;

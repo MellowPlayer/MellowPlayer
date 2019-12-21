@@ -1,8 +1,8 @@
-#include <catch/catch.hpp>
-#include <Utils/DependencyPool.hpp>
-#include <MellowPlayer/Presentation/ViewModels/UpdaterViewModel.hpp>
-#include <MellowPlayer/Infrastructure/Updater/Updater.hpp>
 #include <MellowPlayer/Infrastructure/Updater/Release.hpp>
+#include <MellowPlayer/Infrastructure/Updater/Updater.hpp>
+#include <MellowPlayer/Presentation/ViewModels/UpdaterViewModel.hpp>
+#include <Utils/DependencyPool.hpp>
+#include <catch/catch.hpp>
 
 using namespace MellowPlayer::Infrastructure;
 using namespace MellowPlayer::Presentation;

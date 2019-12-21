@@ -1,4 +1,3 @@
-#include <catch/catch.hpp>
 #include <MellowPlayer/Domain/ListeningHistory/ListeningHistory.hpp>
 #include <MellowPlayer/Domain/Player/Player.hpp>
 #include <MellowPlayer/Domain/Player/Players.hpp>
@@ -8,6 +7,7 @@
 #include <MellowPlayer/Domain/StreamingServices/StreamingServices.hpp>
 #include <Utils/DependencyPool.hpp>
 #include <Utils/Helpers.hpp>
+#include <catch/catch.hpp>
 
 using namespace MellowPlayer;
 using namespace MellowPlayer::Domain;

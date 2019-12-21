@@ -1,7 +1,7 @@
+#include "FakeApplication.hpp"
 #include <MellowPlayer/Infrastructure/Application/WithLogging.hpp>
 #include <Mocks/FakeCommnandLineArguments.hpp>
 #include <TestMacros.hpp>
-#include "FakeApplication.hpp"
 #include <UnitTests/Domain/Logging/FakeLoggerFactory.hpp>
 #include <memory>
 

@@ -1,8 +1,8 @@
-#include <QtCore/QDir>
-#include <QtCore/QUuid>
-#include <QDebug>
 #include <MellowPlayer/Infrastructure/Helpers/FileHelper.hpp>
 #include <MellowPlayer/Infrastructure/UserScripts/UserScript.hpp>
+#include <QDebug>
+#include <QtCore/QDir>
+#include <QtCore/QUuid>
 
 using namespace MellowPlayer::Domain;
 using namespace MellowPlayer::Infrastructure;
@@ -16,11 +16,13 @@ bool UserScriptDirectory::create() const
     return true;
 }
 
-QString UserScriptDirectory::generateFileName() const {
+QString UserScriptDirectory::generateFileName() const
+{
     return path() + QDir::separator() + QUuid::createUuid().toString() + ".js";
 }
 
-QString UserScriptDirectory::path() const {
+QString UserScriptDirectory::path() const
+{
     return FileHelper::userScriptsDirectory();
 }
 
@@ -48,7 +50,8 @@ bool UserScript::load(const QString& path)
     path_ = path;
 
     QFile file(path);
-    if (file.open(QFile::ReadOnly)) {
+    if (file.open(QFile::ReadOnly))
+    {
         auto content = file.readAll();
         code_ = QString::fromUtf8(content);
         return true;

@@ -1,6 +1,6 @@
-#include <MellowPlayer/Domain/Logging/Loggers.hpp>
 #include <MellowPlayer/Domain/Logging/ILogger.hpp>
 #include <MellowPlayer/Domain/Logging/ILoggerFactory.hpp>
+#include <MellowPlayer/Domain/Logging/Loggers.hpp>
 #include <QtCore/QLoggingCategory>
 
 using namespace MellowPlayer::Domain;
@@ -91,7 +91,8 @@ void Loggers::setDefaultLogLevel(LogLevel logLevel)
 {
     defaultLoggerConfig_.logLevel = logLevel;
 
-    for(auto logger: loggersMap_) {
+    for (auto logger : loggersMap_)
+    {
         logger->setLogLevel(logLevel);
     }
 }

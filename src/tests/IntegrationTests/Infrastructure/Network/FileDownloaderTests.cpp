@@ -1,8 +1,8 @@
 #include <MellowPlayer/Infrastructure/Network/FileDownloader.hpp>
+#include <QSignalSpy>
 #include <QtCore/QTemporaryDir>
 #include <QtTest/qtestsystem.h>
 #include <catch/catch.hpp>
-#include <QSignalSpy>
 
 using namespace MellowPlayer::Infrastructure;
 
@@ -19,7 +19,8 @@ SCENARIO("FileDownloader can download a release source archive", "[!mayfail]")
 
     WHEN("downloading MellowPlayer.zip from github")
     {
-        downloader.download("https://github.com/ColinDuquesnoy/MellowPlayer/raw/develop/src/lib/presentation/resources/fonts/Roboto/Roboto-Black.ttf", destination);
+        downloader.download("https://github.com/ColinDuquesnoy/MellowPlayer/raw/develop/src/lib/presentation/resources/fonts/Roboto/Roboto-Black.ttf",
+                            destination);
 
         if (finishedSpy.wait())
         {

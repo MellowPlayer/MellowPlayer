@@ -5,7 +5,7 @@
 
 namespace MellowPlayer::Infrastructure::Tests
 {
-    class FakeLocalSocket: public ILocalSocket
+    class FakeLocalSocket : public ILocalSocket
     {
     public:
         virtual ~FakeLocalSocket()
@@ -48,7 +48,7 @@ namespace MellowPlayer::Infrastructure::Tests
         }
     };
 
-    class FakeLocalSocketFactory: public IFactory<ILocalSocket>
+    class FakeLocalSocketFactory : public IFactory<ILocalSocket>
     {
     public:
         std::unique_ptr<ILocalSocket> create() const override

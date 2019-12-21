@@ -1,10 +1,10 @@
-#include <MellowPlayer/Presentation/Notifications/Presenters/Linux/LibnotifyPresenter.hpp>
-#include <MellowPlayer/Presentation/Notifications/Presenters/Linux/LibnotifyStrings.hpp>
 #include <MellowPlayer/Domain/Logging/ILogger.hpp>
 #include <MellowPlayer/Domain/Logging/Loggers.hpp>
 #include <MellowPlayer/Domain/Logging/LoggingMacros.hpp>
-#include <MellowPlayer/Presentation/Notifications/Notification.hpp>
 #include <MellowPlayer/Presentation/IMainWindow.hpp>
+#include <MellowPlayer/Presentation/Notifications/Notification.hpp>
+#include <MellowPlayer/Presentation/Notifications/Presenters/Linux/LibnotifyPresenter.hpp>
+#include <MellowPlayer/Presentation/Notifications/Presenters/Linux/LibnotifyStrings.hpp>
 #undef Q_SIGNALS
 #include <libnotify/notify.h>
 
@@ -21,10 +21,7 @@ void notify_action_callback(NotifyNotification*, char*, gpointer)
 }
 
 LibnotifyPresenter::LibnotifyPresenter(IMainWindow& mainWindow, IWorkDispatcher& workDispatcher)
-        : logger_(Loggers::logger("LibnotifyPresenter")),
-          mainWindow_(mainWindow),
-          _workDispatcher(workDispatcher),
-          previousNotification_(nullptr)
+        : logger_(Loggers::logger("LibnotifyPresenter")), mainWindow_(mainWindow), _workDispatcher(workDispatcher), previousNotification_(nullptr)
 {
     instance_ = this;
 }
@@ -36,7 +33,8 @@ void LibnotifyPresenter::initialize()
     LOG_DEBUG(logger_, "service started")
 }
 
-void LibnotifyPresenter::checkSupportForActions() {
+void LibnotifyPresenter::checkSupportForActions()
+{
     GList* caps = notify_get_server_caps();
     if (g_list_find_custom(caps, "actions", (GCompareFunc) g_strcmp0) == NULL)
         actionsSupported_ = false;
@@ -52,20 +50,15 @@ bool LibnotifyPresenter::display(const Notification& notification)
         notify_notification_close(previousNotification_, 0);
 
     QString title = "MellowPlayer - " + notification.title;
-    NotifyNotification* n = notify_notification_new(
-            title.toStdString().c_str(),
-            notification.description.toStdString().c_str(),
-            notification.icon.toStdString().c_str());
+    NotifyNotification* n =
+            notify_notification_new(title.toStdString().c_str(), notification.description.toStdString().c_str(), notification.icon.toStdString().c_str());
     notify_notification_set_timeout(n, 5000);
     string openStr = strings.open();
     if (actionsSupported_)
-        notify_notification_add_action(n, "open", strings.open().c_str(),
-                                       (NotifyActionCallback)notify_action_callback, nullptr, nullptr);
-    notify_notification_set_hint(n, "desktop-entry", g_variant_new_string ("mellowplayer"));
+        notify_notification_add_action(n, "open", strings.open().c_str(), (NotifyActionCallback) notify_action_callback, nullptr, nullptr);
+    notify_notification_set_hint(n, "desktop-entry", g_variant_new_string("mellowplayer"));
 
-    _workDispatcher.invoke([=]() {
-        notify_notification_show(n, 0);
-    });
+    _workDispatcher.invoke([=]() { notify_notification_show(n, 0); });
 
     previousNotification_ = n;
 

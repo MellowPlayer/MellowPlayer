@@ -5,8 +5,7 @@ using namespace MellowPlayer::Domain;
 using namespace MellowPlayer::Domain;
 using namespace MellowPlayer::Presentation;
 
-ListeningHistoryViewModel::ListeningHistoryViewModel(IListeningHistory &listeningHistory,
-                                                     std::shared_ptr<IContextProperties> contextProperties)
+ListeningHistoryViewModel::ListeningHistoryViewModel(IListeningHistory& listeningHistory, std::shared_ptr<IContextProperties> contextProperties)
         : ContextProperty("_listeningHistory", this, contextProperties),
           listeningHistoryService_(listeningHistory),
           sourceModel_(new ListeningHistoryListModel(this, "title", "entryId")),
@@ -36,7 +35,8 @@ void ListeningHistoryViewModel::initialize()
     connect(&listeningHistoryService_, &ListeningHistory::entryRemoved, this, &ListeningHistoryViewModel::onEntryRemoved);
     listeningHistoryService_.initialize();
     QList<ListeningHistoryEntryViewModel*> items;
-    for (const auto& entry : listeningHistoryService_.toList()) {
+    for (const auto& entry : listeningHistoryService_.toList())
+    {
         items.prepend(new ListeningHistoryEntryViewModel(entry, this));
     }
     sourceModel_->setItems(items);
@@ -60,7 +60,8 @@ void ListeningHistoryViewModel::removeById(int id)
 void ListeningHistoryViewModel::removeByDateCategory(const QString& dateCategory)
 {
     QList<int> toRemove;
-    for (int i = 0; i < sourceModel_->count(); ++i) {
+    for (int i = 0; i < sourceModel_->count(); ++i)
+    {
         ListeningHistoryEntryViewModel* entry = sourceModel_->at(i);
         if (entry->dateCategory() == dateCategory)
             toRemove.append(entry->entryId());

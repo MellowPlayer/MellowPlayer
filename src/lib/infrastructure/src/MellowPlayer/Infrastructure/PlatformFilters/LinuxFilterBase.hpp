@@ -4,7 +4,7 @@
 
 namespace MellowPlayer::Infrastructure
 {
-    class LinuxFilterBase: public IPlatformFilter
+    class LinuxFilterBase : public IPlatformFilter
     {
     public:
         LinuxFilterBase();

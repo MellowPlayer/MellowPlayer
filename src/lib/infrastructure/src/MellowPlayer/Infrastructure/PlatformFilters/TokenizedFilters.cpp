@@ -1,5 +1,5 @@
-#include <MellowPlayer/Infrastructure/PlatformFilters/TokenizedFilters.hpp>
 #include <MellowPlayer/Infrastructure/PlatformFilters/FilterConverter.hpp>
+#include <MellowPlayer/Infrastructure/PlatformFilters/TokenizedFilters.hpp>
 
 using namespace MellowPlayer::Infrastructure;
 
@@ -10,13 +10,12 @@ TokenizedFilters::TokenizedFilters(const QString& filters)
     QStringList tokens = filters.toLower().split(PLATFORM_FILTER_SEPARATOR);
     FilterConverter converter;
 
-    for (auto token: tokens)
+    for (auto token : tokens)
         filters_.append(converter.fromString(token));
 }
 
-TokenizedFilters::TokenizedFilters(const QList<Filter>& filters): filters_(filters)
+TokenizedFilters::TokenizedFilters(const QList<Filter>& filters) : filters_(filters)
 {
-
 }
 
 QString TokenizedFilters::join() const
@@ -24,7 +23,8 @@ QString TokenizedFilters::join() const
     QStringList strings;
     FilterConverter converter;
 
-    for(auto filter: filters_) {
+    for (auto filter : filters_)
+    {
         strings.append(converter.toString(filter));
     }
 

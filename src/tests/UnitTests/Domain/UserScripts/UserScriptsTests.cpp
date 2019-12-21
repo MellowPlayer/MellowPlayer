@@ -1,10 +1,10 @@
-#include <catch/catch.hpp>
-#include <fakeit/fakeit.hpp>
+#include <MellowPlayer/Domain/Settings/ISettingsStore.hpp>
 #include <MellowPlayer/Domain/UserScripts/IUserScript.hpp>
 #include <MellowPlayer/Domain/UserScripts/IUserScriptFactory.hpp>
 #include <MellowPlayer/Domain/UserScripts/UserScripts.hpp>
-#include <MellowPlayer/Domain/Settings/ISettingsStore.hpp>
 #include <UnitTests/Domain/Settings/FakeSettingsStore.hpp>
+#include <catch/catch.hpp>
+#include <fakeit/fakeit.hpp>
 
 using namespace fakeit;
 using namespace MellowPlayer::Domain;
@@ -30,7 +30,6 @@ SCENARIO("UserScriptsTests")
     QString serviceName = "fakeService";
     FakeSettingsStore settingsStore;
     settingsStore.clear();
-
 
     GIVEN("empty settings")
     {
@@ -87,11 +86,13 @@ SCENARIO("UserScriptsTests")
                 {
                     REQUIRE(userScripts.count() == 0);
 
-                    AND_THEN("settings paths count is 0") {
+                    AND_THEN("settings paths count is 0")
+                    {
                         REQUIRE(settingsStore.value("fakeService/userScriptPaths", QVariant()).toStringList().count() == 0);
                     }
 
-                    AND_THEN("settings names count is 0") {
+                    AND_THEN("settings names count is 0")
+                    {
                         REQUIRE(settingsStore.value("fakeService/userScriptNames", QVariant()).toStringList().count() == 0);
                     }
                 }
@@ -135,7 +136,6 @@ SCENARIO("UserScriptsTests")
                 }
             }
         }
-
     }
 }
 #endif

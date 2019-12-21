@@ -1,13 +1,11 @@
-#include <MellowPlayer/Presentation/ViewModels/Settings/Types/ScalingFactorSettingViewModel.hpp>
 #include <MellowPlayer/Domain/Settings/Setting.hpp>
+#include <MellowPlayer/Presentation/ViewModels/Settings/Types/ScalingFactorSettingViewModel.hpp>
 
 using namespace MellowPlayer::Domain;
 using namespace MellowPlayer::Presentation;
 
-ScalingFactorSettingViewModel::ScalingFactorSettingViewModel(Setting &setting, QObject *parent)
-        : SettingViewModel(setting, parent)
+ScalingFactorSettingViewModel::ScalingFactorSettingViewModel(Setting &setting, QObject *parent) : SettingViewModel(setting, parent)
 {
-
 }
 
 int ScalingFactorSettingViewModel::getValue() const
@@ -50,4 +48,3 @@ QString ScalingFactorSettingViewModel::suffix() const
 {
     return "%";
 }
-

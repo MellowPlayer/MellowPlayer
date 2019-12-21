@@ -42,8 +42,7 @@ void Program::initialize() const
 {
     LOG_DEBUG(_logger, "Initializing application");
 
-    _initializationSequence.initialize([=](bool success)
-    {
+    _initializationSequence.initialize([=](bool success) {
         if (success)
         {
             LOG_DEBUG(_logger, "Initialization finished with success");
@@ -51,7 +50,7 @@ void Program::initialize() const
         else
         {
             LOG_ERROR(_logger, "Initialization finished with failure: " << _initializationSequence.errorMessage());
-            QTimer::singleShot(1, [=](){ _application.quit(-1); });
+            QTimer::singleShot(1, [=]() { _application.quit(-1); });
         }
     });
 }
@@ -114,7 +113,6 @@ void configureQt(QApplication& qApplication)
     QtWebEngine::initialize();
     QQuickStyle::setStyle("Material");
 }
-
 
 int Program::main(int argc, char** argv)
 {

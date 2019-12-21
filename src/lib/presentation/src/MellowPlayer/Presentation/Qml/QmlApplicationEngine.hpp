@@ -1,14 +1,14 @@
 #pragma once
 
-#include <QtQml/QQmlApplicationEngine>
 #include "IQmlApplicationEngine.hpp"
+#include <QtQml/QQmlApplicationEngine>
 
 namespace MellowPlayer::Presentation
 {
     /**
      * Implements IQmlApplicationEngine interface
      */
-    class QmlApplicationEngine: public IQmlApplicationEngine
+    class QmlApplicationEngine : public IQmlApplicationEngine
     {
     public:
         QmlApplicationEngine() = default;
@@ -19,6 +19,5 @@ namespace MellowPlayer::Presentation
 
     private:
         QQmlApplicationEngine engine_;
-
     };
 }

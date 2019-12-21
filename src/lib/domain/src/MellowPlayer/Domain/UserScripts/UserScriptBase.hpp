@@ -5,7 +5,7 @@
 
 namespace MellowPlayer::Domain
 {
-    class UserScriptBase: public QObject, public IUserScript
+    class UserScriptBase : public QObject, public IUserScript
     {
     public:
         QString path() const override;

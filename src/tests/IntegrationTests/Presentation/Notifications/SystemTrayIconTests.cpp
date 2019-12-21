@@ -13,7 +13,6 @@ using namespace MellowPlayer::Infrastructure;
 
 TEST_CASE("SystemTrayIconTests")
 {
-
     auto playerMock = PlayerMock::get();
     FakeSettingsStore settingsStore;
     SettingsSchemaLoader loader;

@@ -1,5 +1,5 @@
-#include <MellowPlayer/Infrastructure/Updater/AbstractPlatformUpdater.hpp>
 #include <MellowPlayer/Infrastructure/Network/IFileDownloader.hpp>
+#include <MellowPlayer/Infrastructure/Updater/AbstractPlatformUpdater.hpp>
 #include <QTemporaryDir>
 
 using namespace MellowPlayer::Infrastructure;
@@ -17,7 +17,8 @@ void AbstractPlatformUpdater::setRelease(const Release* release)
 
 void AbstractPlatformUpdater::download()
 {
-    if (release_) {
+    if (release_)
+    {
         assetFilePath_ = makeDestinationPath();
         fileDownloader_.download(assetUrl(), assetFilePath_);
     }

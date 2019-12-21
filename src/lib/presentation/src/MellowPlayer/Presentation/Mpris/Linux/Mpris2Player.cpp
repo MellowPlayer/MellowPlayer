@@ -1,10 +1,10 @@
-#include <MellowPlayer/Presentation/Mpris/Linux/Mpris2Player.hpp>
 #include <MellowPlayer/Domain/AlbumArt/ILocalAlbumArt.hpp>
 #include <MellowPlayer/Domain/Logging/ILogger.hpp>
 #include <MellowPlayer/Domain/Logging/Loggers.hpp>
 #include <MellowPlayer/Domain/Logging/LoggingMacros.hpp>
 #include <MellowPlayer/Domain/Player/IPlayer.hpp>
 #include <MellowPlayer/Domain/Player/Song.hpp>
+#include <MellowPlayer/Presentation/Mpris/Linux/Mpris2Player.hpp>
 
 using namespace MellowPlayer::Domain;
 using namespace MellowPlayer::Domain;
@@ -14,11 +14,7 @@ const qlonglong Mpris2Player::SEC_TO_MICROSEC = 1000000;
 const qlonglong Mpris2Player::SEEK_DELTA_LIMIT = Mpris2Player::SEC_TO_MICROSEC * 2;
 
 Mpris2Player::Mpris2Player(IPlayer& player, ILocalAlbumArt& localAlbumArt, QObject* parent)
-        : QDBusAbstractAdaptor(parent),
-          previousPosition_(0),
-          logger_(Loggers::logger("Mpris2Player")),
-          player_(player),
-          localAlbumArt_(localAlbumArt)
+        : QDBusAbstractAdaptor(parent), previousPosition_(0), logger_(Loggers::logger("Mpris2Player")), player_(player), localAlbumArt_(localAlbumArt)
 {
     connect(&player, &IPlayer::playbackStatusChanged, this, &Mpris2Player::onPlaybackStatusChanged);
     connect(&player, &IPlayer::currentSongChanged, this, &Mpris2Player::onSongChanged);
@@ -197,14 +193,14 @@ void Mpris2Player::Seek(qlonglong position)
 {
     LOG_TRACE(logger_, "Seek(" << position << ")");
     qlonglong newPosition = this->position() + position;
-    previousPosition_ = 0; // force emit seeked
+    previousPosition_ = 0;  // force emit seeked
     player_.seekToPosition(newPosition / SEC_TO_MICROSEC);
 }
 
 void Mpris2Player::SetPosition(const QDBusObjectPath&, qlonglong position)
 {
     LOG_TRACE(logger_, "SetPosition(" << position << ")");
-    previousPosition_ = 0; // force emit seeked
+    previousPosition_ = 0;  // force emit seeked
     player_.seekToPosition(position / SEC_TO_MICROSEC);
 }
 
@@ -219,7 +215,8 @@ void Mpris2Player::onPlaybackStatusChanged()
 void Mpris2Player::onSongChanged(Song* song)
 {
     LOG_TRACE(logger_, "onSongChanged()");
-    if (song != nullptr) {
+    if (song != nullptr)
+    {
         QVariantMap map;
         map["Metadata"] = toXesam(*song);
         if (map != lastMetadata_)
@@ -292,7 +289,8 @@ QMap<QString, QVariant> Mpris2Player::toXesam(const Song& song)
 {
     LOG_TRACE(logger_, "toXesam('" + song.toString() + "')");
     QMap<QString, QVariant> map;
-    if (song.isValid()) {
+    if (song.isValid())
+    {
         QStringList artist;
         artist.append(song.artist());
         map["xesam:url"] = song.title();
@@ -301,7 +299,7 @@ QMap<QString, QVariant> Mpris2Player::toXesam(const Song& song)
         map["xesam:title"] = song.title();
         map["xesam:userRating"] = song.isFavorite() ? 1 : 0;
         if (song.duration())
-            map["mpris:length"] = (qlonglong)song.duration() * SEC_TO_MICROSEC;
+            map["mpris:length"] = (qlonglong) song.duration() * SEC_TO_MICROSEC;
         else
             map["mpris:length"] = 1;
         QString trackId = QString("/org/mpris/MediaPlayer2/MellowPlayer/Track/%1").arg(song.uniqueId());
@@ -311,7 +309,9 @@ QMap<QString, QVariant> Mpris2Player::toXesam(const Song& song)
             map["mpris:artUrl"] = url;
         else
             map["mpris:artUrl"] = "file://" + localAlbumArt_.url();
-    } else {
+    }
+    else
+    {
         QStringList artist;
         artist.append("");
         map["xesam:url"] = "";
@@ -333,13 +333,14 @@ QString Mpris2Player::statusToString(PlaybackStatus status)
     // the player disappear on Plasma 5.
     if (status == PlaybackStatus::Buffering)
         status = PlaybackStatus::Paused;
-    switch (status) {
-        case PlaybackStatus::Playing:
-            return "Playing";
-        case PlaybackStatus::Paused:
-            return "Paused";
-        default:
-            return "Stopped";
+    switch (status)
+    {
+    case PlaybackStatus::Playing:
+        return "Playing";
+    case PlaybackStatus::Paused:
+        return "Paused";
+    default:
+        return "Stopped";
     }
 }
 
@@ -352,7 +353,8 @@ void Mpris2Player::signalPlayerUpdate(const QVariantMap& map)
 void Mpris2Player::signalUpdate(const QVariantMap& map, const QString& interfaceName)
 {
     LOG_TRACE(logger_, "signalUpdate");
-    if (!map.isEmpty()) {
+    if (!map.isEmpty())
+    {
         QDBusMessage signal = QDBusMessage::createSignal("/org/mpris/MediaPlayer2", "org.freedesktop.DBus.Properties", "PropertiesChanged");
         QVariantList args = QVariantList() << interfaceName << map << QStringList();
         signal.setArguments(args);
@@ -364,7 +366,8 @@ void Mpris2Player::signalUpdate(const QVariantMap& map, const QString& interface
 QString Mpris2Player::qMapToString(const QMap<QString, QVariant>& map)
 {
     QString output;
-    for (auto it = map.begin(); it != map.end(); ++it) {
+    for (auto it = map.begin(); it != map.end(); ++it)
+    {
         // Format output here.
         output += QString("\n\t%1=%2,").arg(it.key()).arg(it.value().toString());
     }

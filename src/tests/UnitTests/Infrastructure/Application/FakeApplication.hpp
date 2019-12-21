@@ -4,7 +4,7 @@
 
 namespace MellowPlayer::Infrastructure::Tests
 {
-    class FakeApplication: public IApplication
+    class FakeApplication : public IApplication
     {
     public:
         void initialize() override

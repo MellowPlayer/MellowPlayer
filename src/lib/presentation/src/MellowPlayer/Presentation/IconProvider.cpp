@@ -20,26 +20,30 @@ QIcon IconProvider::restoreWindow()
 
 QIcon IconProvider::play()
 {
-    return QIcon::fromTheme("media-playback-start", QIcon("://MellowPlayer/Presentation/icons/"
-                                                          "media-playback-start.png"));
+    return QIcon::fromTheme("media-playback-start",
+                            QIcon("://MellowPlayer/Presentation/icons/"
+                                  "media-playback-start.png"));
 }
 
 QIcon IconProvider::pause()
 {
-    return QIcon::fromTheme("media-playback-start", QIcon("://MellowPlayer/Presentation/icons/"
-                                                          "media-playback-pause.png"));
+    return QIcon::fromTheme("media-playback-start",
+                            QIcon("://MellowPlayer/Presentation/icons/"
+                                  "media-playback-pause.png"));
 }
 
 QIcon IconProvider::next()
 {
-    return QIcon::fromTheme("media-seek-forward", QIcon("://MellowPlayer/Presentation/icons/"
-                                                        "media-seek-forward.png"));
+    return QIcon::fromTheme("media-seek-forward",
+                            QIcon("://MellowPlayer/Presentation/icons/"
+                                  "media-seek-forward.png"));
 }
 
 QIcon IconProvider::previous()
 {
-    return QIcon::fromTheme("media-seek-backward", QIcon("://MellowPlayer/Presentation/icons/"
-                                                         "media-seek-backward.png"));
+    return QIcon::fromTheme("media-seek-backward",
+                            QIcon("://MellowPlayer/Presentation/icons/"
+                                  "media-seek-backward.png"));
 }
 
 QIcon IconProvider::quit()

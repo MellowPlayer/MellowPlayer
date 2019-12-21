@@ -18,7 +18,12 @@ namespace MellowPlayer::Domain
 
     public:
         Song();
-        Song(const QString& uniqueId, const QString& title, const QString& artist, const QString& album, const QString& artUrl, double duration,
+        Song(const QString& uniqueId,
+             const QString& title,
+             const QString& artist,
+             const QString& album,
+             const QString& artUrl,
+             double duration,
              bool isFavorite);
 
         QString uniqueId() const;
@@ -71,7 +76,7 @@ namespace MellowPlayer::Domain
         QString artist_;
         QString album_;
         QString artUrl_;
-        double duration_; // in seconds
+        double duration_;  // in seconds
         bool isFavorite_;
     };
 }

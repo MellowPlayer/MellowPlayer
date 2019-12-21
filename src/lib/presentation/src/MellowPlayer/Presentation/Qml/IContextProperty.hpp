@@ -1,7 +1,7 @@
 #pragma once
 
-#include <QString>
 #include "IQmlApplicationEngine.hpp"
+#include <QString>
 
 class QObject;
 

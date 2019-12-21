@@ -6,14 +6,13 @@
 
 namespace MellowPlayer::Infrastructure
 {
-    class DelayedListeningHistory: public Domain::ListeningHistory
+    class DelayedListeningHistory : public Domain::ListeningHistory
     {
     public:
-        DelayedListeningHistory(Domain::IListeningHistoryDatabase& model, Domain::IPlayer& player_, Domain::Settings& settings,
-                                std::unique_ptr<ITimer> timer);
+        DelayedListeningHistory(Domain::IListeningHistoryDatabase& model, Domain::IPlayer& player_, Domain::Settings& settings, std::unique_ptr<ITimer> timer);
 
     public slots:
-        void addSong(Domain::Song *song);
+        void addSong(Domain::Song* song);
 
     private:
         std::unique_ptr<ITimer> _timer;

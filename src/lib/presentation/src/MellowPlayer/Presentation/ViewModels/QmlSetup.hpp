@@ -1,6 +1,7 @@
 #pragma once
 
 #include <MellowPlayer/Domain/IInitializable.hpp>
+#include <MellowPlayer/Infrastructure/Application/QtApplication.hpp>
 #include <MellowPlayer/Infrastructure/CommandLineArguments/ICommandLineArguments.hpp>
 #include <MellowPlayer/Presentation/IMainWindow.hpp>
 #include <MellowPlayer/Presentation/Qml/IContextProperties.hpp>
@@ -16,7 +17,6 @@
 #include <MellowPlayer/Presentation/ViewModels/ThemeViewModel.hpp>
 #include <MellowPlayer/Presentation/ViewModels/UpdaterViewModel.hpp>
 #include <MellowPlayer/Presentation/ViewModels/ZoomViewModel.hpp>
-#include <MellowPlayer/Infrastructure/Application/QtApplication.hpp>
 
 namespace MellowPlayer::Presentation
 {

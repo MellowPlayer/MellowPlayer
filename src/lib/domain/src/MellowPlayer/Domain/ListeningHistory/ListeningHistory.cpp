@@ -1,20 +1,20 @@
-#include <QDateTime>
-#include <QSet>
-#include <QVariant>
-#include <QTimer>
-#include <algorithm>
-#include <MellowPlayer/Domain/ListeningHistory/ListeningHistory.hpp>
-#include <MellowPlayer/Domain/ListeningHistory/IListeningHistoryDatabase.hpp>
-#include <MellowPlayer/Domain/Player/IPlayer.hpp>
-#include <MellowPlayer/Domain/Settings/Setting.hpp>
-#include <MellowPlayer/Domain/Settings/Settings.hpp>
-#include <MellowPlayer/Domain/ListeningHistory/TimeLimits.hpp>
 #include <MellowPlayer/Domain/IWorkDispatcher.hpp>
+#include <MellowPlayer/Domain/ListeningHistory/IListeningHistoryDatabase.hpp>
+#include <MellowPlayer/Domain/ListeningHistory/ListeningHistory.hpp>
+#include <MellowPlayer/Domain/ListeningHistory/TimeLimits.hpp>
 #include <MellowPlayer/Domain/Logging/ILogger.hpp>
 #include <MellowPlayer/Domain/Logging/Loggers.hpp>
 #include <MellowPlayer/Domain/Logging/LoggingMacros.hpp>
+#include <MellowPlayer/Domain/Player/IPlayer.hpp>
 #include <MellowPlayer/Domain/Player/Song.hpp>
+#include <MellowPlayer/Domain/Settings/Setting.hpp>
 #include <MellowPlayer/Domain/Settings/SettingKey.hpp>
+#include <MellowPlayer/Domain/Settings/Settings.hpp>
+#include <QDateTime>
+#include <QSet>
+#include <QTimer>
+#include <QVariant>
+#include <algorithm>
 
 using namespace MellowPlayer::Domain;
 
@@ -36,7 +36,7 @@ void ListeningHistory::onPlaybackStatusChanged()
     addSong(player_.currentSong());
 }
 
-void ListeningHistory::onSongChanged(Song *song)
+void ListeningHistory::onSongChanged(Song* song)
 {
     addSong(song);
 }
@@ -108,7 +108,8 @@ void ListeningHistory::addSong(const Song* song, ListeningHistoryEntry& newEntry
 void ListeningHistory::updateRemovedEntries()
 {
     auto removedEntries = entries_.toSet().subtract(database_.toList().toSet()).toList();
-    for (auto entry : removedEntries) {
+    for (auto entry : removedEntries)
+    {
         int index = entries_.indexOf(entry);
         entries_.removeAt(index);
         emit entryRemoved(entry.id);
@@ -154,11 +155,13 @@ void ListeningHistory::clearOutdatedEntries()
     LOG_INFO(logger_, "Cleaning history ");
     QString previousId;
     QList<int> items;
-    for (auto entry : entries_) {
+    for (auto entry : entries_)
+    {
         TimeLimits entryLimit = dateToTimeLimit(entry.dateTime());
         // previous id is checked because we changed our appending rules, this is a workaround to
         // automatically clean listening history db that could contains many duplicate songs.
-        if (entryLimit > limit  || previousId == entry.songUniqueId) {
+        if (entryLimit > limit || previousId == entry.songUniqueId)
+        {
             items.append(entry.id);
             LOG_DEBUG(logger_, "Removing entry " << entry.songTitle);
         }

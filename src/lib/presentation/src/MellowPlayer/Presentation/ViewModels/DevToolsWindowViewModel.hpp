@@ -1,11 +1,11 @@
 #pragma once
 
-#include <QObject>
 #include <MellowPlayer/Presentation/Qml/ContextProperty.hpp>
+#include <QObject>
 
 namespace MellowPlayer::Presentation
 {
-    class DevToolsWindowViewModel: public QObject, public ContextProperty
+    class DevToolsWindowViewModel : public QObject, public ContextProperty
     {
         Q_OBJECT
     public:

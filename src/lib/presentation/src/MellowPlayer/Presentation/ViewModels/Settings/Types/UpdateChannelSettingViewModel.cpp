@@ -1,5 +1,5 @@
-#include <MellowPlayer/Presentation/ViewModels/Settings/Types/UpdateChannelSettingViewModel.hpp>
 #include <MellowPlayer/Domain/Settings/Setting.hpp>
+#include <MellowPlayer/Presentation/ViewModels/Settings/Types/UpdateChannelSettingViewModel.hpp>
 
 using namespace MellowPlayer::Domain;
 using namespace MellowPlayer::Infrastructure;
@@ -17,8 +17,7 @@ QString UpdateChannelSettingViewModel::value() const
 
 QStringList UpdateChannelSettingViewModel::values() const
 {
-    return QStringList() << stringer_.toTranslatedString(UpdateChannel::Stable)
-                         << stringer_.toTranslatedString(UpdateChannel::Continuous);
+    return QStringList() << stringer_.toTranslatedString(UpdateChannel::Stable) << stringer_.toTranslatedString(UpdateChannel::Continuous);
 }
 
 QString UpdateChannelSettingViewModel::qmlComponent()

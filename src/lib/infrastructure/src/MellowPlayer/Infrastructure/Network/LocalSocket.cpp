@@ -2,7 +2,7 @@
 
 using namespace MellowPlayer::Infrastructure;
 
-LocalSocket::LocalSocket(): qLocalSocket_(new QLocalSocket(this))
+LocalSocket::LocalSocket() : qLocalSocket_(new QLocalSocket(this))
 {
     initSignals();
 }
@@ -40,10 +40,10 @@ QString LocalSocket::readAll()
     return qLocalSocket_->readAll();
 }
 
-void LocalSocket::initSignals() {
+void LocalSocket::initSignals()
+{
     connect(qLocalSocket_, &QLocalSocket::connected, this, &LocalSocket::connected);
     connect(qLocalSocket_, &QLocalSocket::disconnected, this, &LocalSocket::disconnected);
     connect(qLocalSocket_, &QLocalSocket::readyRead, this, &LocalSocket::readyRead);
-    connect(qLocalSocket_, QNonConstOverload<QLocalSocket::LocalSocketError>::of(&QLocalSocket::error),
-            [=](QLocalSocket::LocalSocketError) { emit error(); });
+    connect(qLocalSocket_, QNonConstOverload<QLocalSocket::LocalSocketError>::of(&QLocalSocket::error), [=](QLocalSocket::LocalSocketError) { emit error(); });
 }

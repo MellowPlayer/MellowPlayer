@@ -1,5 +1,5 @@
-#include <MellowPlayer/Infrastructure/Logging/SpdLoggerFactory.hpp>
 #include <MellowPlayer/Infrastructure/Logging/SpdLogger.hpp>
+#include <MellowPlayer/Infrastructure/Logging/SpdLoggerFactory.hpp>
 
 using namespace MellowPlayer::Domain;
 using namespace MellowPlayer::Infrastructure;

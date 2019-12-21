@@ -1,9 +1,9 @@
 #pragma once
 
 #include <MellowPlayer/Domain/Theme/Theme.hpp>
+#include <MellowPlayer/Presentation/Qml/ContextProperty.hpp>
 #include <QMap>
 #include <QObject>
-#include <MellowPlayer/Presentation/Qml/ContextProperty.hpp>
 
 namespace MellowPlayer::Domain
 {

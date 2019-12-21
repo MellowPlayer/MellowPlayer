@@ -4,7 +4,7 @@
 
 namespace MellowPlayer::Infrastructure
 {
-    class AllFilter: public IPlatformFilter
+    class AllFilter : public IPlatformFilter
     {
     public:
         bool match() const override;

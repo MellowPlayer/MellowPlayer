@@ -1,15 +1,15 @@
 #pragma once
 
 #include <QtCore/QObject>
-#include <memory>
 #include <QtNetwork/QLocalServer>
 #include <boost-di-extensions/Factory.hpp>
+#include <memory>
 
 namespace MellowPlayer::Infrastructure
 {
     class ILocalSocket;
 
-    class ILocalServer: public QObject
+    class ILocalServer : public QObject
     {
         Q_OBJECT
     public:
@@ -23,7 +23,7 @@ namespace MellowPlayer::Infrastructure
         void newConnection();
     };
 
-    class LocalServer: public ILocalServer
+    class LocalServer : public ILocalServer
     {
     public:
         LocalServer(IFactory<ILocalSocket>& localSocketFactory, const QString& serverName);

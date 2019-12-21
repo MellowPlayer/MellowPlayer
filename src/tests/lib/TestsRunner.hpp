@@ -1,8 +1,7 @@
 #pragma once
 
-class TestsRunner {
+class TestsRunner
+{
 public:
     int runTests(int argc, char* argv[]);
-
 };
-

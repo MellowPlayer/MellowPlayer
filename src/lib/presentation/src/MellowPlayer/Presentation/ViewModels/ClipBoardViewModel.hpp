@@ -1,7 +1,7 @@
 #pragma once
 
-#include <QObject>
 #include <MellowPlayer/Presentation/Qml/ContextProperty.hpp>
+#include <QObject>
 
 namespace MellowPlayer::Presentation
 {

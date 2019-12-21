@@ -1,11 +1,11 @@
 #pragma once
 
-#include <QtCore/QObject>
 #include <MellowPlayer/Presentation/Qml/ContextProperty.hpp>
+#include <QtCore/QObject>
 
 namespace MellowPlayer::Presentation
 {
-    class CookiesViewModel: public QObject, public ContextProperty
+    class CookiesViewModel : public QObject, public ContextProperty
     {
         Q_OBJECT
     public:

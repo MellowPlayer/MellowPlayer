@@ -1,7 +1,7 @@
 #include "Utils/DependencyPool.hpp"
-#include <MellowPlayer/Presentation/ViewModels/MainWindowViewModel.hpp>
-#include <MellowPlayer/Presentation/Qml/QmlApplicationEngine.hpp>
 #include <MellowPlayer/Presentation/Qml/ContextProperties.hpp>
+#include <MellowPlayer/Presentation/Qml/QmlApplicationEngine.hpp>
+#include <MellowPlayer/Presentation/ViewModels/MainWindowViewModel.hpp>
 #include <Mocks/PlayerMock.hpp>
 
 using namespace MellowPlayer;
@@ -14,7 +14,7 @@ TEST_CASE("LoadQmlTests")
     auto playerMock = PlayerMock::get();
     auto contextProperties = std::make_shared<ContextProperties>(qmlApplicationEngine, playerMock.get());
     MainWindowViewModel mainWindow(contextProperties, qmlApplicationEngine);
-    contextProperties->initialize([=](bool){});
+    contextProperties->initialize([=](bool) {});
 
     REQUIRE_NOTHROW(mainWindow.load());
 }

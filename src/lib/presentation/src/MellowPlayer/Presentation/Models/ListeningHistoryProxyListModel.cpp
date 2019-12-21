@@ -3,8 +3,7 @@
 
 using namespace MellowPlayer::Presentation;
 
-ListeningHistoryProxyListModel::ListeningHistoryProxyListModel(ListeningHistoryListModel * sourceModel)
-        : sourceModel_(sourceModel)
+ListeningHistoryProxyListModel::ListeningHistoryProxyListModel(ListeningHistoryListModel* sourceModel) : sourceModel_(sourceModel)
 {
     setSourceModel(sourceModel);
     setDynamicSortFilter(true);
@@ -32,7 +31,8 @@ bool ListeningHistoryProxyListModel::filterAcceptsRow(int sourceRow, const QMode
         return false;
     if (searchFilter_.isEmpty())
         return true;
-    else {
+    else
+    {
         bool titleContainsFilter = entry->title().toLower().contains(searchFilter_.toLower());
         bool artistContainsFilter = entry->artist().toLower().contains(searchFilter_.toLower());
         return titleContainsFilter || artistContainsFilter;

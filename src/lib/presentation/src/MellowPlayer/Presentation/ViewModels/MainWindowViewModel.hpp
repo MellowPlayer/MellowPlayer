@@ -8,7 +8,7 @@ namespace MellowPlayer::Presentation
 {
     class IQmlApplicationEngine;
 
-    class MainWindowViewModel: public IMainWindow, public ContextProperty
+    class MainWindowViewModel : public IMainWindow, public ContextProperty
     {
         Q_OBJECT
         Q_PROPERTY(bool visible READ isVisible WRITE setVisible NOTIFY visibleChanged)

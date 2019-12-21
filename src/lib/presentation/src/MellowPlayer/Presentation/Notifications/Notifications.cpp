@@ -1,16 +1,16 @@
-#include <MellowPlayer/Presentation/Notifications/Notifications.hpp>
 #include <MellowPlayer/Domain/AlbumArt/ILocalAlbumArt.hpp>
 #include <MellowPlayer/Domain/Logging/ILogger.hpp>
 #include <MellowPlayer/Domain/Logging/Loggers.hpp>
 #include <MellowPlayer/Domain/Logging/LoggingMacros.hpp>
-#include <MellowPlayer/Presentation/Notifications/Presenters/INotificationPresenter.hpp>
 #include <MellowPlayer/Domain/Player/IPlayer.hpp>
 #include <MellowPlayer/Domain/Player/Song.hpp>
+#include <MellowPlayer/Domain/Settings/ISettingsStore.hpp>
 #include <MellowPlayer/Domain/Settings/Setting.hpp>
 #include <MellowPlayer/Domain/Settings/Settings.hpp>
 #include <MellowPlayer/Domain/StreamingServices/StreamingService.hpp>
 #include <MellowPlayer/Domain/StreamingServices/StreamingServices.hpp>
-#include <MellowPlayer/Domain/Settings/ISettingsStore.hpp>
+#include <MellowPlayer/Presentation/Notifications/Notifications.hpp>
+#include <MellowPlayer/Presentation/Notifications/Presenters/INotificationPresenter.hpp>
 
 using namespace MellowPlayer::Domain;
 using namespace MellowPlayer::Presentation;
@@ -32,7 +32,8 @@ Notifications::Notifications(IPlayer& player,
 bool Notifications::display(const Notification& notification)
 {
     LOG_TRACE(logger_, "display");
-    if (!isNotificationTypeEnabled(notification.type) || previousNotif_ == notification) {
+    if (!isNotificationTypeEnabled(notification.type) || previousNotif_ == notification)
+    {
         LOG_DEBUG(logger_, "notification disabled: " + notification.toString());
         return false;
     }
@@ -50,15 +51,16 @@ void Notifications::onCurrentSongChanged(Song* song)
 void Notifications::onPlaybackStatusChanged()
 {
     LOG_TRACE(logger_, "onPlaybackStatusChanged");
-    switch (player_.playbackStatus()) {
-        case PlaybackStatus::Paused:
-            display(notificationFactory_.createPausedNotification(currentServiceName(), currentServiceLogo()));
-            break;
-        case PlaybackStatus::Playing:
-            showSongNotification(player_.currentSong(), localAlbumArt_.url());
-            break;
-        default:
-            break;
+    switch (player_.playbackStatus())
+    {
+    case PlaybackStatus::Paused:
+        display(notificationFactory_.createPausedNotification(currentServiceName(), currentServiceLogo()));
+        break;
+    case PlaybackStatus::Playing:
+        showSongNotification(player_.currentSong(), localAlbumArt_.url());
+        break;
+    default:
+        break;
     }
 }
 
@@ -78,7 +80,8 @@ void Notifications::showSongNotification(Song* song, const QString& localAlbumAr
     isReady &= localAlbumArt_.isReady(*song);
     isReady &= isPlaying();
     isReady &= localAlbumArt_.isReady(*song);
-    if (isReady) {
+    if (isReady)
+    {
         bool resume = song->uniqueId() == previousSongId_;
         previousSongId_ = song->uniqueId();
         display(notificationFactory_.createSongNotification(currentServiceName(), song, localAlbumArtUrl, resume));
@@ -111,22 +114,23 @@ bool Notifications::isNotificationTypeEnabled(NotificationType type) const
     auto settingKey = player_.serviceName() + "/notificationsEnabled";
     auto serviceNotificationsEnabled = settings_.store().value(settingKey, true).toBool();
 
-    switch (type) {
-        case NotificationType::Paused: {
-            const Setting& setting = settings_.get(SettingKey::NOTIFICATIONS_PAUSED);
-            isEnabled = check(setting) && serviceNotificationsEnabled;
-            break;
-        }
-        case NotificationType::NewSong: {
-            const Setting& setting = settings_.get(SettingKey::NOTIFICATIONS_NEW_SONG);
-            isEnabled = check(setting)  && serviceNotificationsEnabled;
-            break;
-        }
-        case NotificationType::Resumed: {
-            const Setting& setting = settings_.get(SettingKey::NOTIFICATIONS_RESUMED);
-            isEnabled = check(setting)  && serviceNotificationsEnabled;
-            break;
-        }
+    switch (type)
+    {
+    case NotificationType::Paused: {
+        const Setting& setting = settings_.get(SettingKey::NOTIFICATIONS_PAUSED);
+        isEnabled = check(setting) && serviceNotificationsEnabled;
+        break;
+    }
+    case NotificationType::NewSong: {
+        const Setting& setting = settings_.get(SettingKey::NOTIFICATIONS_NEW_SONG);
+        isEnabled = check(setting) && serviceNotificationsEnabled;
+        break;
+    }
+    case NotificationType::Resumed: {
+        const Setting& setting = settings_.get(SettingKey::NOTIFICATIONS_RESUMED);
+        isEnabled = check(setting) && serviceNotificationsEnabled;
+        break;
+    }
     }
 
     return isEnabled;

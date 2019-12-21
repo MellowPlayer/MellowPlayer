@@ -1,12 +1,12 @@
 #include <MellowPlayer/Infrastructure/Network/LocalServer.hpp>
 #include <MellowPlayer/Infrastructure/Network/LocalSocket.hpp>
-#include <catch/catch.hpp>
 #include <QtTest/qtestsystem.h>
+#include <catch/catch.hpp>
 
 using namespace std;
 using namespace MellowPlayer::Infrastructure;
 
-class LocalSocketFactory: public IFactory<ILocalSocket>
+class LocalSocketFactory : public IFactory<ILocalSocket>
 {
 public:
     std::unique_ptr<ILocalSocket> create() const override
@@ -29,9 +29,7 @@ SCENARIO("LocalServer and LocalSocket integration tests")
 
         LocalSocket socket;
         unique_ptr<ILocalSocket> newConnection = nullptr;
-        QObject::connect(&server, &ILocalServer::newConnection, [&]() {
-            newConnection = server.nextPendingConnection();
-        });
+        QObject::connect(&server, &ILocalServer::newConnection, [&]() { newConnection = server.nextPendingConnection(); });
 
         WHEN("I connect the socket to the server")
         {
@@ -48,22 +46,20 @@ SCENARIO("LocalServer and LocalSocket integration tests")
             {
                 QString receivedData;
 
-                QObject::connect(newConnection.get(), &ILocalSocket::readyRead, [&]() {
-                    receivedData = newConnection->readAll();
-                });
+                QObject::connect(newConnection.get(), &ILocalSocket::readyRead, [&]() { receivedData = newConnection->readAll(); });
                 socket.write("foo\n");
 
                 QTest::qWait(1000);
 
                 THEN("data is received on the server")
                 {
-                   REQUIRE(receivedData == "foo\n");
+                    REQUIRE(receivedData == "foo\n");
                 }
 
                 AND_WHEN("I disconnect the socket from server")
                 {
                     socket.disconnectFromServer();
-                    
+
                     THEN("I cannot write to the socket")
                     {
                         REQUIRE_THROWS(socket.write("data"));

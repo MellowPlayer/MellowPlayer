@@ -1,6 +1,6 @@
+#include <MellowPlayer/Infrastructure/Helpers/FileHelper.hpp>
 #include <MellowPlayer/Infrastructure/StreamingServices/StreamingServiceCreator.hpp>
 #include <MellowPlayer/Infrastructure/StreamingServices/StreamingServiceLoader.hpp>
-#include <MellowPlayer/Infrastructure/Helpers/FileHelper.hpp>
 #include <QDebug>
 #include <QtCore/QDir>
 
@@ -14,8 +14,11 @@ const QString StreamingServiceCreator::LOGO_FILE_NAME = "logo.svg";
 const QString StreamingServiceCreator::METADATA_FILE_NAME = "metadata.ini";
 const QString StreamingServiceCreator::THEME_FILE_NAME = "theme.json";
 
-QString StreamingServiceCreator::create(const QString& serviceName, const QString& serviceUrl, const QString& authorName,
-                                        const QString& authorWebsite, const QString& supportedPlatforms) const
+QString StreamingServiceCreator::create(const QString& serviceName,
+                                        const QString& serviceUrl,
+                                        const QString& authorName,
+                                        const QString& authorWebsite,
+                                        const QString& supportedPlatforms) const
 {
     auto dir = pluginDir(serviceName);
     QDir().mkpath(dir);
@@ -43,11 +46,15 @@ void StreamingServiceCreator::createTheme(const QString& pluginDir) const
     createPluginFile(pluginDir, THEME_FILE_NAME);
 }
 
-void StreamingServiceCreator::createMetadata(const QString& serviceName, const QString& serviceUrl, const QString& authorName,
-                                             const QString& authorWebsite, const QString& supportedPlatforms, const QString& pluginDir) const
+void StreamingServiceCreator::createMetadata(const QString& serviceName,
+                                             const QString& serviceUrl,
+                                             const QString& authorName,
+                                             const QString& authorWebsite,
+                                             const QString& supportedPlatforms,
+                                             const QString& pluginDir) const
 {
-    createPluginFile(pluginDir, METADATA_FILE_NAME, [&](QString string) {
-        return string.arg(authorName, authorWebsite, serviceName, supportedPlatforms, serviceUrl); });
+    createPluginFile(
+            pluginDir, METADATA_FILE_NAME, [&](QString string) { return string.arg(authorName, authorWebsite, serviceName, supportedPlatforms, serviceUrl); });
 }
 
 QString StreamingServiceCreator::pluginDir(const QString& serviceName) const
@@ -70,7 +77,8 @@ void StreamingServiceCreator::write(const QString& path, const QString& content)
 {
     QFile file(path);
 
-    if (file.open(QIODevice::WriteOnly | QIODevice::Text)) {
+    if (file.open(QIODevice::WriteOnly | QIODevice::Text))
+    {
         QTextStream out(&file);
         out << content;
     }

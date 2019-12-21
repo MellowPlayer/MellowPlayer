@@ -1,11 +1,11 @@
 #pragma once
 
-#include <MellowPlayer/Infrastructure/Network/LocalServer.hpp>
 #include "FakeLocalSocket.hpp"
+#include <MellowPlayer/Infrastructure/Network/LocalServer.hpp>
 
 namespace MellowPlayer::Infrastructure::Tests
 {
-    class FakeLocalServer: public ILocalServer
+    class FakeLocalServer : public ILocalServer
     {
     public:
         virtual ~FakeLocalServer()
@@ -48,7 +48,7 @@ namespace MellowPlayer::Infrastructure::Tests
         bool isListening_ = false;
     };
 
-    class FakeLocalServerFactory: public IFactory<ILocalServer, QString>
+    class FakeLocalServerFactory : public IFactory<ILocalServer, QString>
     {
     public:
         std::unique_ptr<ILocalServer> create(QString&&) const override

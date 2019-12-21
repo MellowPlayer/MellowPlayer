@@ -1,7 +1,7 @@
-#include <catch/catch.hpp>
+#include <MellowPlayer/Infrastructure/Helpers/FileHelper.hpp>
 #include <MellowPlayer/Infrastructure/UserScripts/UserScript.hpp>
 #include <QtCore/QDir>
-#include <MellowPlayer/Infrastructure/Helpers/FileHelper.hpp>
+#include <catch/catch.hpp>
 
 using namespace MellowPlayer::Infrastructure;
 
@@ -43,7 +43,6 @@ SCENARIO("UserScriptDirectoryTests")
             {
                 REQUIRE(fileName1 != fileName2);
             }
-
         }
     }
 }

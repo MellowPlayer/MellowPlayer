@@ -11,7 +11,7 @@ namespace MellowPlayer::Presentation
      * All context properties should inherit from this intermediary base class in order to be added automatically
      * to the application's QML context.
      */
-    class ContextProperty: public IContextProperty
+    class ContextProperty : public IContextProperty
     {
     public:
         /**

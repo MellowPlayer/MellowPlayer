@@ -61,6 +61,6 @@ TEST_CASE("ListeningHistoryEntryTests")
 
     SECTION("implicit cast to int return id")
     {
-        REQUIRE((int)entry1Deezer == entry1Deezer.id);
+        REQUIRE((int) entry1Deezer == entry1Deezer.id);
     }
 }

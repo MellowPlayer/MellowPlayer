@@ -1,8 +1,8 @@
-#include <MellowPlayer/Infrastructure/CommandLineArguments/ICommandLineArguments.hpp>
+#include "FakeApplication.hpp"
 #include <MellowPlayer/Infrastructure/Application/WithCommandLineArguments.hpp>
+#include <MellowPlayer/Infrastructure/CommandLineArguments/ICommandLineArguments.hpp>
 #include <Mocks/FakeCommnandLineArguments.hpp>
 #include <TestMacros.hpp>
-#include "FakeApplication.hpp"
 
 using namespace std;
 using namespace MellowPlayer::Infrastructure;

@@ -1,5 +1,5 @@
-#include <MellowPlayer/Infrastructure/Updater/Windows/WindowsUpdater.hpp>
 #include <MellowPlayer/Infrastructure/Updater/Release.hpp>
+#include <MellowPlayer/Infrastructure/Updater/Windows/WindowsUpdater.hpp>
 #include <QApplication>
 #include <QtCore/QDir>
 #include <QtCore/QProcessEnvironment>
@@ -36,9 +36,12 @@ void WindowsUpdater::setRelease(const Release* release)
 {
     AbstractPlatformUpdater::setRelease(release);
 
-    if (release_ != nullptr) {
-        for (auto& asset : release_->assets()) {
-            if (asset.isWindowsInstaller()) {
+    if (release_ != nullptr)
+    {
+        for (auto& asset : release_->assets())
+        {
+            if (asset.isWindowsInstaller())
+            {
                 asset_ = asset;
                 break;
             }

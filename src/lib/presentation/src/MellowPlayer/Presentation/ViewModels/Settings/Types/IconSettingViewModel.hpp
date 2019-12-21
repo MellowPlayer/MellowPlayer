@@ -23,4 +23,3 @@ namespace MellowPlayer::Presentation
         void onValueChanged() override;
     };
 }
-

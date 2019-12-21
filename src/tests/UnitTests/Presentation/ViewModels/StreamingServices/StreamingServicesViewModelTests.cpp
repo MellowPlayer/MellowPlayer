@@ -28,9 +28,16 @@ TEST_CASE("StreamingServicesControllerViewModel", "[UnitTest]")
     IWorkDispatcher& workDispatcher = pool.getWorkDispatcher();
     auto creatorMock = StreamingServiceCreatorMock::get();
     FakeCommandLineArguments commandLineArguments;
-    StreamingServicesViewModel viewModel(streamingServices, players, settings, workDispatcher, creatorMock.get(),
-                                         commandLineArguments, pool.getUserScriptFactory(),
-                                         pool.getContextProperties(), pool.getNetworkProxies(), pool.getThemeViewModel());
+    StreamingServicesViewModel viewModel(streamingServices,
+                                         players,
+                                         settings,
+                                         workDispatcher,
+                                         creatorMock.get(),
+                                         commandLineArguments,
+                                         pool.getUserScriptFactory(),
+                                         pool.getContextProperties(),
+                                         pool.getNetworkProxies(),
+                                         pool.getThemeViewModel());
     viewModel.initialize();
     viewModel.reload();
 
@@ -111,10 +118,16 @@ TEST_CASE("StreamingServicesControllerViewModel", "[UnitTest]")
         commandLineArguments.setService("Deezer");
         settings.get(SettingKey::PRIVATE_CURRENT_SERVICE).setValue("");
 
-        StreamingServicesViewModel viewModelWithCmdLine(streamingServices, players, settings, workDispatcher,
-                                                        creatorMock.get(), commandLineArguments,
-                                                        pool.getUserScriptFactory(), pool.getContextProperties(),
-                                                        pool.getNetworkProxies(), pool.getThemeViewModel());
+        StreamingServicesViewModel viewModelWithCmdLine(streamingServices,
+                                                        players,
+                                                        settings,
+                                                        workDispatcher,
+                                                        creatorMock.get(),
+                                                        commandLineArguments,
+                                                        pool.getUserScriptFactory(),
+                                                        pool.getContextProperties(),
+                                                        pool.getNetworkProxies(),
+                                                        pool.getThemeViewModel());
         REQUIRE(viewModelWithCmdLine.currentService() == nullptr);
         viewModelWithCmdLine.initialize();
         viewModelWithCmdLine.reload();

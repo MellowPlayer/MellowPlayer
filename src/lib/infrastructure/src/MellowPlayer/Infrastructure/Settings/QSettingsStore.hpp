@@ -1,8 +1,8 @@
 #pragma once
 
-#include <memory>
-#include <QSettings>
 #include <MellowPlayer/Domain/Settings/ISettingsStore.hpp>
+#include <QSettings>
+#include <memory>
 
 namespace MellowPlayer::Domain
 {

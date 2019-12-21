@@ -1,5 +1,5 @@
-#include <MellowPlayer/Presentation/Notifications/Notification.hpp>
 #include <MellowPlayer/Infrastructure/Settings/QSettingsStore.hpp>
+#include <MellowPlayer/Presentation/Notifications/Notification.hpp>
 #include <catch/catch.hpp>
 
 using namespace MellowPlayer::Domain;

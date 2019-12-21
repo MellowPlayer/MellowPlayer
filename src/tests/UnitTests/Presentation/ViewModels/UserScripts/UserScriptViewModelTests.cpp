@@ -1,7 +1,7 @@
-#include <catch/catch.hpp>
-#include <UnitTests/Domain/UserScripts/FakeUserScript.hpp>
 #include <MellowPlayer/Presentation/ViewModels/UserScripts/UserScriptViewModel.hpp>
 #include <QtTest/QSignalSpy>
+#include <UnitTests/Domain/UserScripts/FakeUserScript.hpp>
+#include <catch/catch.hpp>
 
 using namespace MellowPlayer::Domain;
 using namespace MellowPlayer::Domain::Tests;
@@ -15,7 +15,8 @@ SCENARIO("UserScritViewModelTests")
         userScript.setName("name");
         userScript.import("/path");
 
-        WHEN("a view model is created") {
+        WHEN("a view model is created")
+        {
             UserScriptViewModel viewModel(userScript);
             QSignalSpy spy(&viewModel, &UserScriptViewModel::nameChanged);
 
@@ -49,6 +50,5 @@ SCENARIO("UserScritViewModelTests")
                 }
             }
         }
-
     }
 }

@@ -1,6 +1,6 @@
-#include <MellowPlayer/Presentation/Notifications/NotificationFactory.hpp>
 #include <MellowPlayer/Domain/Player/Song.hpp>
 #include <MellowPlayer/Presentation/IconProvider.hpp>
+#include <MellowPlayer/Presentation/Notifications/NotificationFactory.hpp>
 
 using namespace MellowPlayer::Domain;
 using namespace MellowPlayer::Domain;

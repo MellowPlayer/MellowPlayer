@@ -5,7 +5,7 @@
 
 namespace MellowPlayer::Infrastructure::Tests
 {
-    class FakeBinTrayHttpClient: public IHttpClient
+    class FakeBinTrayHttpClient : public IHttpClient
     {
     public:
         void get(const QString &url) override;

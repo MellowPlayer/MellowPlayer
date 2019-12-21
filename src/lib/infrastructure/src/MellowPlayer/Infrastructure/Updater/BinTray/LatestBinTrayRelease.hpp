@@ -8,7 +8,7 @@ namespace MellowPlayer::Infrastructure
 {
     class IHttpClient;
 
-    class LatestBinTrayRelease: public ILatestRelease
+    class LatestBinTrayRelease : public ILatestRelease
     {
     public:
         explicit LatestBinTrayRelease(IHttpClient& httpClient);

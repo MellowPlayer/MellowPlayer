@@ -29,18 +29,18 @@ StreamingServiceViewModel::StreamingServiceViewModel(StreamingService& streaming
                                                      Players& players,
                                                      INetworkProxies& networkProxies,
                                                      ThemeViewModel& themeViewModel,
-                                                     QObject* parent) :
-        QObject(parent),
-        networkProxy_(networkProxies.get(streamingService.name())),
-        streamingService_(streamingService), 
-        settingsStore_(settingsStore),
-        player_(players.get(streamingService.name())),
-        userScriptsViewModel_(streamingService.name(), factory, settingsStore, this),
-        zoomFactor_(settingsStore_.value(zoomFactorSettingsKey(), 7).toInt()),
-        isActive_(false),
-        previewImageUrl_("qrc:/MellowPlayer/Presentation/images/home-background.png"),
-        _settingsCategoryViewModel(themeViewModel, streamingService.settings()),
-        logger_(Loggers::logger("StreamingServiceViewModel-" + name().toStdString()))
+                                                     QObject* parent)
+        : QObject(parent),
+          networkProxy_(networkProxies.get(streamingService.name())),
+          streamingService_(streamingService),
+          settingsStore_(settingsStore),
+          player_(players.get(streamingService.name())),
+          userScriptsViewModel_(streamingService.name(), factory, settingsStore, this),
+          zoomFactor_(settingsStore_.value(zoomFactorSettingsKey(), 7).toInt()),
+          isActive_(false),
+          previewImageUrl_("qrc:/MellowPlayer/Presentation/images/home-background.png"),
+          _settingsCategoryViewModel(themeViewModel, streamingService.settings()),
+          logger_(Loggers::logger("StreamingServiceViewModel-" + name().toStdString()))
 {
     connect(&streamingService_, &StreamingService::scriptChanged, this, &StreamingServiceViewModel::sourceCodeChanged);
     Q_ASSERT(networkProxy_ != nullptr);
@@ -107,7 +107,8 @@ int StreamingServiceViewModel::sortOrder() const
 
 void StreamingServiceViewModel::setSortOrder(int newOrder)
 {
-    if (newOrder != sortOrder()) {
+    if (newOrder != sortOrder())
+    {
         settingsStore_.setValue(sortOrderSettingsKey(), newOrder);
         LOG_DEBUG(logger_, "sort order changed: " << sortOrder());
         emit sortOrderChanged();
@@ -121,12 +122,14 @@ bool StreamingServiceViewModel::isEnabled() const
 
 void StreamingServiceViewModel::setEnabled(bool enabled)
 {
-    if (enabled != isEnabled()) {
+    if (enabled != isEnabled())
+    {
         settingsStore_.setValue(isEnabledSettingsKey(), enabled);
         LOG_DEBUG(logger_, "enabled changed: " << sortOrder());
         emit isEnabledChanged();
 
-        if (!enabled) {
+        if (!enabled)
+        {
             player_->suspend();
             setSortOrder(255);
         }
@@ -135,7 +138,8 @@ void StreamingServiceViewModel::setEnabled(bool enabled)
 
 void StreamingServiceViewModel::setUrl(const QString& newUrl)
 {
-    if (newUrl != url()) {
+    if (newUrl != url())
+    {
         settingsStore_.setValue(customUrlSettingsKey(), newUrl);
         emit urlChanged(newUrl);
     }
@@ -181,20 +185,23 @@ QObject* StreamingServiceViewModel::userScripts()
     return &userScriptsViewModel_;
 }
 
-int StreamingServiceViewModel::zoomFactor() const {
+int StreamingServiceViewModel::zoomFactor() const
+{
     return zoomFactor_;
 }
 
-void StreamingServiceViewModel::setZoomFactor(int zoomFactor) {
-    if (zoomFactor_ != zoomFactor) {
+void StreamingServiceViewModel::setZoomFactor(int zoomFactor)
+{
+    if (zoomFactor_ != zoomFactor)
+    {
         zoomFactor_ = zoomFactor;
         settingsStore_.setValue(zoomFactorSettingsKey(), zoomFactor);
         emit zoomFactorChanged();
     }
-
 }
 
-QString StreamingServiceViewModel::zoomFactorSettingsKey() const {
+QString StreamingServiceViewModel::zoomFactorSettingsKey() const
+{
     return streamingService_.name() + "/zoomFactor";
 }
 
@@ -235,7 +242,7 @@ QString StreamingServiceViewModel::sourceCode() const
     return sourceCode;
 }
 
-SettingsCategoryViewModel *StreamingServiceViewModel::settings()
+SettingsCategoryViewModel* StreamingServiceViewModel::settings()
 {
     return &_settingsCategoryViewModel;
 }

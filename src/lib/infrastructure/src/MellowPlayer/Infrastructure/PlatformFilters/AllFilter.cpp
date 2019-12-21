@@ -6,4 +6,3 @@ bool AllFilter::match() const
 {
     return true;
 }
-

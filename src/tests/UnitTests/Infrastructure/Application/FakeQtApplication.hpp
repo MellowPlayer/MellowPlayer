@@ -1,12 +1,12 @@
 #pragma once
 
+#include <MellowPlayer/Infrastructure/Application/QtApplication.hpp>
 #include <QtGui/QFont>
 #include <QtGui/QIcon>
-#include <MellowPlayer/Infrastructure/Application/QtApplication.hpp>
 
 namespace MellowPlayer::Infrastructure::Tests
 {
-    class FakeQtApplication: public IQtApplication
+    class FakeQtApplication : public IQtApplication
     {
     public:
         void setApplicationName(QString value) override

@@ -6,7 +6,7 @@ namespace MellowPlayer::Infrastructure
 {
     class ICommandLineArguments;
 
-    class WithCommandLineArguments: public ApplicationDecorator
+    class WithCommandLineArguments : public ApplicationDecorator
     {
     public:
         WithCommandLineArguments(const std::shared_ptr<IApplication>& application, ICommandLineArguments& commandLineArguments);

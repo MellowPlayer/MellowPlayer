@@ -1,9 +1,9 @@
 #pragma once
 
-#include <memory>
-#include <string>
 #include <MellowPlayer/Domain/Logging/LoggerConfig.hpp>
 #include <QMap>
+#include <memory>
+#include <string>
 
 namespace MellowPlayer::Domain
 {

@@ -1,15 +1,14 @@
 #include "Utils/DependencyPool.hpp"
-#include <catch/catch.hpp>
+#include <Fakes/FakeBinTrayHttpClient.hpp>
 #include <MellowPlayer/Domain/Settings/Setting.hpp>
 #include <MellowPlayer/Domain/Settings/SettingKey.hpp>
 #include <MellowPlayer/Domain/Settings/Settings.hpp>
 #include <MellowPlayer/Infrastructure/Updater/BinTray/LatestBinTrayRelease.hpp>
-#include <MellowPlayer/Infrastructure/Updater/UpdateChannel.hpp>
-#include <MellowPlayer/Infrastructure/Updater/Updater.hpp>
-#include <Fakes/FakeBinTrayHttpClient.hpp>
-#include <QtTest/QSignalSpy>
 #include <MellowPlayer/Infrastructure/Updater/Release.hpp>
 #include <MellowPlayer/Infrastructure/Updater/UpdateChannel.hpp>
+#include <MellowPlayer/Infrastructure/Updater/Updater.hpp>
+#include <QtTest/QSignalSpy>
+#include <catch/catch.hpp>
 
 using namespace MellowPlayer;
 using namespace MellowPlayer::Domain;
@@ -20,7 +19,7 @@ SCENARIO("check for stable updates")
 {
     MellowPlayer::Tests::DependencyPool pool;
     Settings& settings = pool.getSettings();
-    settings.get(SettingKey::MAIN_UPDATE_CHANNEL).setValue((int)UpdateChannel::Stable);
+    settings.get(SettingKey::MAIN_UPDATE_CHANNEL).setValue((int) UpdateChannel::Stable);
 
     GIVEN("current version is 2.2.4 from April 2017")
     {
@@ -92,7 +91,7 @@ SCENARIO("check for Continuous updates")
     LatestBinTrayRelease querier(fakeHttpClient);
     MellowPlayer::Tests::DependencyPool pool;
     Settings& settings = pool.getSettings();
-    settings.get(SettingKey::MAIN_UPDATE_CHANNEL).setValue((int)UpdateChannel::Continuous);
+    settings.get(SettingKey::MAIN_UPDATE_CHANNEL).setValue((int) UpdateChannel::Continuous);
 
     GIVEN("current version is 2.2.4 from April 2017")
     {

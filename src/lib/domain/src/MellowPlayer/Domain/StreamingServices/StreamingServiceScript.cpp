@@ -8,10 +8,10 @@ StreamingServiceScript::StreamingServiceScript(const QString& code, const QStrin
 
 bool StreamingServiceScript::isValid() const
 {
-    return code_.contains("function update") && code_.contains("function play")
-    && (code_.contains("function pause") && code_.contains("function goNext") && code_.contains("function goPrevious")
-        && code_.contains("function setVolume") && code_.contains("function addToFavorites"))
-    && code_.contains("function removeFromFavorites") && code_.contains("function seekToPosition");
+    return code_.contains("function update") && code_.contains("function play") &&
+           (code_.contains("function pause") && code_.contains("function goNext") && code_.contains("function goPrevious") &&
+            code_.contains("function setVolume") && code_.contains("function addToFavorites")) &&
+           code_.contains("function removeFromFavorites") && code_.contains("function seekToPosition");
 }
 
 QString StreamingServiceScript::code() const

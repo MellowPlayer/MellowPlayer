@@ -23,8 +23,7 @@ namespace MellowPlayer::Domain
         Q_PROPERTY(StreamingServiceScript* script READ script CONSTANT)
         Q_PROPERTY(SettingsCategory* settings READ settings CONSTANT)
     public:
-        StreamingService(const StreamingServiceMetadata& metadata, const Theme& theme = Theme(),
-                         const std::shared_ptr<SettingsCategory>& settings=nullptr);
+        StreamingService(const StreamingServiceMetadata& metadata, const Theme& theme = Theme(), const std::shared_ptr<SettingsCategory>& settings = nullptr);
         ~StreamingService();
 
         bool isValid() const;
