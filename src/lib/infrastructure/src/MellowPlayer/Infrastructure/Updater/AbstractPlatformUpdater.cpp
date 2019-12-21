@@ -4,7 +4,7 @@
 
 using namespace MellowPlayer::Infrastructure;
 
-AbstractPlatformUpdater::AbstractPlatformUpdater(IFileDownloader& fileDownloader) : fileDownloader_(fileDownloader)
+AbstractPlatformUpdater::AbstractPlatformUpdater(IFileDownloader& fileDownloader) : _fileDownloader(fileDownloader)
 {
     connect(&fileDownloader, &IFileDownloader::progressChanged, this, &AbstractPlatformUpdater::progressUpdated);
     connect(&fileDownloader, &IFileDownloader::finished, this, &AbstractPlatformUpdater::downloadFinished);
@@ -12,15 +12,15 @@ AbstractPlatformUpdater::AbstractPlatformUpdater(IFileDownloader& fileDownloader
 
 void AbstractPlatformUpdater::setRelease(const Release* release)
 {
-    release_ = release;
+    _release = release;
 }
 
 void AbstractPlatformUpdater::download()
 {
-    if (release_)
+    if (_release)
     {
-        assetFilePath_ = makeDestinationPath();
-        fileDownloader_.download(assetUrl(), assetFilePath_);
+        _assetFilePath = makeDestinationPath();
+        _fileDownloader.download(assetUrl(), _assetFilePath);
     }
 }
 
@@ -34,5 +34,5 @@ QString AbstractPlatformUpdater::makeDestinationPath()
 void AbstractPlatformUpdater::install()
 {
     emit progressUpdated(-1);
-    doInstall(assetFilePath_);
+    doInstall(_assetFilePath);
 }

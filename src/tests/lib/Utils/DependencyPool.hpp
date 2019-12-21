@@ -83,34 +83,34 @@ namespace MellowPlayer::Tests
 
     private:
         // mocks
-        std::unique_ptr<Infrastructure::ICommandLineArguments> mICommandLineArgs;
-        Domain::Tests::FakeSettingsStore mSettingsStore;
-        fakeit::Mock<Domain::IStreamingServiceCreator> mIStreamingServiceCreator;
-        fakeit::Mock<Presentation::INotificationPresenter> mINotificationPresenter;
-        fakeit::Mock<Domain::IUserScriptFactory> mUserScriptsFactoryMock;
+        std::unique_ptr<Infrastructure::ICommandLineArguments> _commandLineArgs;
+        Domain::Tests::FakeSettingsStore _settingsStore;
+        fakeit::Mock<Domain::IStreamingServiceCreator> _streamingServiceCreator;
+        fakeit::Mock<Presentation::INotificationPresenter> _notificationPresenter;
+        fakeit::Mock<Domain::IUserScriptFactory> _userScriptsFactoryMock;
 
         // app
-        std::unique_ptr<Domain::CurrentPlayer> pCurrentPlayer;
-        std::unique_ptr<Domain::ListeningHistory> pListeningHistory;
-        std::unique_ptr<Domain::Players> pPlayers;
-        std::unique_ptr<Domain::Settings> pSettings;
-        std::unique_ptr<Domain::StreamingServices> pStreamingServicesController;
+        std::unique_ptr<Domain::CurrentPlayer> _currentPlayer;
+        std::unique_ptr<Domain::ListeningHistory> _listeningHistory;
+        std::unique_ptr<Domain::Players> _players;
+        std::unique_ptr<Domain::Settings> _settings;
+        std::unique_ptr<Domain::StreamingServices> _streamingServices;
 
         // infra
-        std::unique_ptr<Infrastructure::LocalAlbumArt> pLocalAlbumArt;
-        std::unique_ptr<Infrastructure::Updater> pUpdater;
-        std::unique_ptr<Infrastructure::AbstractPlatformUpdater> pPlatformUpdater;
+        std::unique_ptr<Infrastructure::LocalAlbumArt> _localAlbumArt;
+        std::unique_ptr<Infrastructure::Updater> _updater;
+        std::unique_ptr<Infrastructure::AbstractPlatformUpdater> _platformUpdater;
 
         // presentation
-        std::unique_ptr<Presentation::ListeningHistoryViewModel> pListeningHistoryViewModel;
-        std::unique_ptr<Presentation::StreamingServicesViewModel> pStreamingServicesControllerViewModel;
-        std::unique_ptr<Presentation::ThemeViewModel> pThemeViewModel;
-        std::unique_ptr<Presentation::UpdaterViewModel> pUpdaterViewModel;
-        std::unique_ptr<Presentation::Notifications> pNotifier;
+        std::unique_ptr<Presentation::ListeningHistoryViewModel> _listeningHistoryViewModel;
+        std::unique_ptr<Presentation::StreamingServicesViewModel> _streamingServicesViewModel;
+        std::unique_ptr<Presentation::ThemeViewModel> _themeViewModel;
+        std::unique_ptr<Presentation::UpdaterViewModel> _updaterViewModel;
+        std::unique_ptr<Presentation::Notifications> _notifications;
 
-        std::unique_ptr<FakeListeningHistoryDatabase> dataProvider;
+        std::unique_ptr<FakeListeningHistoryDatabase> _dataProvider;
 
-        std::shared_ptr<Presentation::Tests::FakeContextProperties> contextProperties_;
-        Infrastructure::Tests::FakeNetworkProxies networkProxies_;
+        std::shared_ptr<Presentation::Tests::FakeContextProperties> _contextProperties;
+        Infrastructure::Tests::FakeNetworkProxies _networkProxies;
     };
 }

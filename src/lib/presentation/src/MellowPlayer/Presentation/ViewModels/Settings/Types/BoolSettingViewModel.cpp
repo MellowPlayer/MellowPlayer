@@ -10,12 +10,12 @@ BoolSettingViewModel::BoolSettingViewModel(Setting& setting, QObject* parent) : 
 
 bool BoolSettingViewModel::getValue() const
 {
-    return setting_.value().toBool();
+    return _setting.value().toBool();
 }
 
 void BoolSettingViewModel::setValue(bool value)
 {
-    setting_.setValue(value);
+    _setting.setValue(value);
 }
 
 void BoolSettingViewModel::onValueChanged()

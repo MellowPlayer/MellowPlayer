@@ -5,18 +5,18 @@
 using namespace MellowPlayer::Domain;
 using namespace MellowPlayer::Presentation;
 
-Mpris2Root::Mpris2Root(IMainWindow& mainWindow, QObject* parent) : QDBusAbstractAdaptor(parent), logger_(Loggers::logger("Mpris2Root")), mainWindow_(mainWindow)
+Mpris2Root::Mpris2Root(IMainWindow& mainWindow, QObject* parent) : QDBusAbstractAdaptor(parent), _logger(Loggers::logger("Mpris2Root")), _mainWindow(mainWindow)
 {
 }
 
 void Mpris2Root::Raise()
 {
-    mainWindow_.raise();
+    _mainWindow.raise();
 }
 
 void Mpris2Root::Quit()
 {
-    mainWindow_.requestQuit();
+    _mainWindow.requestQuit();
 }
 
 bool Mpris2Root::canRaise()

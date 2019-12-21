@@ -55,10 +55,10 @@ namespace MellowPlayer::Presentation
         void onInstalled();
 
     private:
-        Infrastructure::Updater& updater_;
-        bool visible_ = false;
-        bool installEnabled_ = false;
-        bool restartEnabled_ = false;
-        double progress_ = -1;
+        Infrastructure::Updater& _updater;
+        bool _visible = false;
+        bool _installEnabled = false;
+        bool _restartEnabled = false;
+        double _progress = -1;
     };
 }

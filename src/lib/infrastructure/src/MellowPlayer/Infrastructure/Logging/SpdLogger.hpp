@@ -19,11 +19,11 @@ namespace MellowPlayer::Infrastructure
     private:
         static std::shared_ptr<spdlog::logger> createLogger(const std::string& name, const Domain::LoggerConfig& config);
 
-        std::shared_ptr<spdlog::logger> logger_;
-        bool includeFileAndLine_;
-        std::string name_;
+        std::shared_ptr<spdlog::logger> _logger;
+        bool _includeFileAndLine;
+        std::string _name;
 
-        static std::shared_ptr<spdlog::sinks::rotating_file_sink_mt> errorSink_;
-        static std::shared_ptr<spdlog::sinks::rotating_file_sink_mt> allSink_;
+        static std::shared_ptr<spdlog::sinks::rotating_file_sink_mt> _errorSink;
+        static std::shared_ptr<spdlog::sinks::rotating_file_sink_mt> _allSink;
     };
 }

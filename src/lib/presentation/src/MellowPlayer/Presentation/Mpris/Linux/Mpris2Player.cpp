@@ -14,7 +14,7 @@ const qlonglong Mpris2Player::SEC_TO_MICROSEC = 1000000;
 const qlonglong Mpris2Player::SEEK_DELTA_LIMIT = Mpris2Player::SEC_TO_MICROSEC * 2;
 
 Mpris2Player::Mpris2Player(IPlayer& player, ILocalAlbumArt& localAlbumArt, QObject* parent)
-        : QDBusAbstractAdaptor(parent), previousPosition_(0), logger_(Loggers::logger("Mpris2Player")), player_(player), localAlbumArt_(localAlbumArt)
+        : QDBusAbstractAdaptor(parent), _previousPosition(0), _logger(Loggers::logger("Mpris2Player")), _player(player), _localAlbumArt(localAlbumArt)
 {
     connect(&player, &IPlayer::playbackStatusChanged, this, &Mpris2Player::onPlaybackStatusChanged);
     connect(&player, &IPlayer::currentSongChanged, this, &Mpris2Player::onSongChanged);
@@ -29,199 +29,199 @@ Mpris2Player::Mpris2Player(IPlayer& player, ILocalAlbumArt& localAlbumArt, QObje
 
 QString Mpris2Player::playbackStatus()
 {
-    auto retVal = statusToString(player_.playbackStatus());
-    LOG_TRACE(logger_, "playbackStatus() -> " + retVal);
+    auto retVal = statusToString(_player.playbackStatus());
+    LOG_TRACE(_logger, "playbackStatus() -> " + retVal);
     return retVal;
 }
 
 QString Mpris2Player::loopStatus()
 {
-    LOG_TRACE(logger_, "loopStatus() -> None");
+    LOG_TRACE(_logger, "loopStatus() -> None");
     return "None";
 }
 
 void Mpris2Player::setLoopStatus(const QString&)
 {
-    LOG_TRACE(logger_, "setLoopStatus() not implemented");
+    LOG_TRACE(_logger, "setLoopStatus() not implemented");
 }
 
 bool Mpris2Player::shuffle()
 {
-    LOG_TRACE(logger_, "shuffle() -> false");
+    LOG_TRACE(_logger, "shuffle() -> false");
     return false;
 }
 
 void Mpris2Player::setShuffle(bool)
 {
-    LOG_TRACE(logger_, "setShuffle not implemented");
+    LOG_TRACE(_logger, "setShuffle not implemented");
 }
 
 double Mpris2Player::volume()
 {
-    auto retVal = player_.volume();
-    LOG_TRACE(logger_, "volume() -> " << retVal);
+    auto retVal = _player.volume();
+    LOG_TRACE(_logger, "volume() -> " << retVal);
     return retVal;
 }
 
 void Mpris2Player::setVolume(double value)
 {
-    LOG_TRACE(logger_, "setVolume(" << value << ")");
-    player_.setVolume(value);
+    LOG_TRACE(_logger, "setVolume(" << value << ")");
+    _player.setVolume(value);
 }
 
 QVariantMap Mpris2Player::metadata()
 {
-    LOG_TRACE(logger_, "metadata()");
-    lastMetadata_ = toXesam(*player_.currentSong());
-    return lastMetadata_;
+    LOG_TRACE(_logger, "metadata()");
+    _lastMetadata = toXesam(*_player.currentSong());
+    return _lastMetadata;
 }
 
 double Mpris2Player::minimumRate()
 {
-    LOG_TRACE(logger_, "minimumRate() -> 1.0");
+    LOG_TRACE(_logger, "minimumRate() -> 1.0");
     return 1.0;
 }
 
 double Mpris2Player::maximumRate()
 {
-    LOG_TRACE(logger_, "maximumRate() -> 1.0");
+    LOG_TRACE(_logger, "maximumRate() -> 1.0");
     return 1.0;
 }
 
 double Mpris2Player::rate()
 {
-    LOG_TRACE(logger_, "rate() -> 1.0");
+    LOG_TRACE(_logger, "rate() -> 1.0");
     return 1.0;
 }
 
 void Mpris2Player::setRate(float)
 {
-    LOG_TRACE(logger_, "setRate() not implemented");
+    LOG_TRACE(_logger, "setRate() not implemented");
 }
 
 qlonglong Mpris2Player::position()
 {
-    auto pos = static_cast<qlonglong>(player_.position()) * SEC_TO_MICROSEC;
-    LOG_TRACE(logger_, "position() -> " << pos);
+    auto pos = static_cast<qlonglong>(_player.position()) * SEC_TO_MICROSEC;
+    LOG_TRACE(_logger, "position() -> " << pos);
     return pos;
 }
 
 bool Mpris2Player::canGoNext()
 {
-    auto retVal = player_.canGoNext();
-    LOG_TRACE(logger_, "canGoNext() -> " << retVal);
+    auto retVal = _player.canGoNext();
+    LOG_TRACE(_logger, "canGoNext() -> " << retVal);
     return retVal;
 }
 
 bool Mpris2Player::canGoPrevious()
 {
-    auto retVal = player_.canGoPrevious();
-    LOG_TRACE(logger_, "canGoPrevious() -> " << retVal);
+    auto retVal = _player.canGoPrevious();
+    LOG_TRACE(_logger, "canGoPrevious() -> " << retVal);
     return retVal;
 }
 
 bool Mpris2Player::canPlay()
 {
-    LOG_TRACE(logger_, "canPlay() -> true");
+    LOG_TRACE(_logger, "canPlay() -> true");
     return true;
 }
 
 bool Mpris2Player::canStop()
 {
-    LOG_TRACE(logger_, "canStop() -> false");
+    LOG_TRACE(_logger, "canStop() -> false");
     return false;
 }
 
 bool Mpris2Player::canPause()
 {
-    LOG_TRACE(logger_, "canPause() -> true");
+    LOG_TRACE(_logger, "canPause() -> true");
     return true;
 }
 
 bool Mpris2Player::canSeek()
 {
-    auto retVal = player_.canSeek();
-    LOG_TRACE(logger_, "canSeek() -> " << retVal);
+    auto retVal = _player.canSeek();
+    LOG_TRACE(_logger, "canSeek() -> " << retVal);
     return retVal;
 }
 
 bool Mpris2Player::canControl()
 {
-    LOG_TRACE(logger_, "canControl() -> true");
+    LOG_TRACE(_logger, "canControl() -> true");
     return true;
 }
 
 void Mpris2Player::PlayPause()
 {
-    LOG_TRACE(logger_, "PlayPause()");
-    player_.togglePlayPause();
+    LOG_TRACE(_logger, "PlayPause()");
+    _player.togglePlayPause();
 }
 
 void Mpris2Player::Play()
 {
-    LOG_TRACE(logger_, "Play()");
-    if (player_.playbackStatus() == Domain::PlaybackStatus::Paused || player_.playbackStatus() == Domain::PlaybackStatus::Stopped)
-        player_.play();
+    LOG_TRACE(_logger, "Play()");
+    if (_player.playbackStatus() == Domain::PlaybackStatus::Paused || _player.playbackStatus() == Domain::PlaybackStatus::Stopped)
+        _player.play();
 }
 
 void Mpris2Player::Pause()
 {
-    LOG_TRACE(logger_, "Pause()");
-    if (player_.playbackStatus() == Domain::PlaybackStatus::Playing)
-        player_.pause();
+    LOG_TRACE(_logger, "Pause()");
+    if (_player.playbackStatus() == Domain::PlaybackStatus::Playing)
+        _player.pause();
 }
 
 void Mpris2Player::Stop()
 {
-    LOG_TRACE(logger_, "Stop()");
+    LOG_TRACE(_logger, "Stop()");
     Pause();
 }
 
 void Mpris2Player::Next()
 {
-    LOG_TRACE(logger_, "Next()");
-    player_.next();
+    LOG_TRACE(_logger, "Next()");
+    _player.next();
 }
 
 void Mpris2Player::Previous()
 {
-    LOG_TRACE(logger_, "Previous()");
-    player_.previous();
+    LOG_TRACE(_logger, "Previous()");
+    _player.previous();
 }
 
 void Mpris2Player::Seek(qlonglong position)
 {
-    LOG_TRACE(logger_, "Seek(" << position << ")");
+    LOG_TRACE(_logger, "Seek(" << position << ")");
     qlonglong newPosition = this->position() + position;
-    previousPosition_ = 0;  // force emit seeked
-    player_.seekToPosition(newPosition / SEC_TO_MICROSEC);
+    _previousPosition = 0;  // force emit seeked
+    _player.seekToPosition(newPosition / SEC_TO_MICROSEC);
 }
 
 void Mpris2Player::SetPosition(const QDBusObjectPath&, qlonglong position)
 {
-    LOG_TRACE(logger_, "SetPosition(" << position << ")");
-    previousPosition_ = 0;  // force emit seeked
-    player_.seekToPosition(position / SEC_TO_MICROSEC);
+    LOG_TRACE(_logger, "SetPosition(" << position << ")");
+    _previousPosition = 0;  // force emit seeked
+    _player.seekToPosition(position / SEC_TO_MICROSEC);
 }
 
 void Mpris2Player::onPlaybackStatusChanged()
 {
-    LOG_TRACE(logger_, "onPlaybackStatusChanged(" + playbackStatus() + ")");
+    LOG_TRACE(_logger, "onPlaybackStatusChanged(" + playbackStatus() + ")");
     QVariantMap map;
-    map["PlaybackStatus"] = statusToString(player_.playbackStatus());
+    map["PlaybackStatus"] = statusToString(_player.playbackStatus());
     signalPlayerUpdate(map);
 }
 
 void Mpris2Player::onSongChanged(Song* song)
 {
-    LOG_TRACE(logger_, "onSongChanged()");
+    LOG_TRACE(_logger, "onSongChanged()");
     if (song != nullptr)
     {
         QVariantMap map;
         map["Metadata"] = toXesam(*song);
-        if (map != lastMetadata_)
+        if (map != _lastMetadata)
             signalPlayerUpdate(map);
-        lastMetadata_ = map;
+        _lastMetadata = map;
         connect(song, &Song::durationChanged, this, &Mpris2Player::onDurationChanged, Qt::UniqueConnection);
         connect(song, &Song::isFavoriteChanged, this, &Mpris2Player::onFavoriteChanged, Qt::UniqueConnection);
     }
@@ -229,65 +229,65 @@ void Mpris2Player::onSongChanged(Song* song)
 
 void Mpris2Player::onFavoriteChanged()
 {
-    LOG_TRACE(logger_, "onFavoriteChanged()");
-    onSongChanged(player_.currentSong());
+    LOG_TRACE(_logger, "onFavoriteChanged()");
+    onSongChanged(_player.currentSong());
 }
 
 void Mpris2Player::onArtUrlChanged()
 {
-    LOG_TRACE(logger_, "onArtUrlChanged()");
-    onSongChanged(player_.currentSong());
+    LOG_TRACE(_logger, "onArtUrlChanged()");
+    onSongChanged(_player.currentSong());
 }
 
 void Mpris2Player::onPositionChanged()
 {
-    qlonglong pos = static_cast<qlonglong>(player_.position()) * SEC_TO_MICROSEC;
-    if (labs(pos - previousPosition_) > SEEK_DELTA_LIMIT || (previousPosition_ == 0 && pos > 0))
+    qlonglong pos = static_cast<qlonglong>(_player.position()) * SEC_TO_MICROSEC;
+    if (labs(pos - _previousPosition) > SEEK_DELTA_LIMIT || (_previousPosition == 0 && pos > 0))
         emit Seeked(pos);
-    previousPosition_ = pos;
+    _previousPosition = pos;
 }
 
 void Mpris2Player::onDurationChanged()
 {
-    LOG_TRACE(logger_, "onDurationChanged()");
-    onSongChanged(player_.currentSong());
+    LOG_TRACE(_logger, "onDurationChanged()");
+    onSongChanged(_player.currentSong());
 }
 
 void Mpris2Player::onCanSeekChanged()
 {
-    LOG_TRACE(logger_, "onCanSeekChanged()");
+    LOG_TRACE(_logger, "onCanSeekChanged()");
     QVariantMap map;
-    map["CanSeek"] = player_.canSeek();
+    map["CanSeek"] = _player.canSeek();
     signalPlayerUpdate(map);
 }
 
 void Mpris2Player::onCanGoPreviousChanged()
 {
-    LOG_TRACE(logger_, "onCanGoPreviousChanged()");
+    LOG_TRACE(_logger, "onCanGoPreviousChanged()");
     QVariantMap map;
-    map["CanGoPrevious"] = player_.canGoPrevious();
+    map["CanGoPrevious"] = _player.canGoPrevious();
     signalPlayerUpdate(map);
 }
 
 void Mpris2Player::onCanGoNextChanged()
 {
-    LOG_TRACE(logger_, "onCanGoNextChanged()");
+    LOG_TRACE(_logger, "onCanGoNextChanged()");
     QVariantMap map;
-    map["CanGoNext"] = player_.canGoNext();
+    map["CanGoNext"] = _player.canGoNext();
     signalPlayerUpdate(map);
 }
 
 void Mpris2Player::onVolumeChanged()
 {
-    LOG_TRACE(logger_, "onVolumeChanged()");
+    LOG_TRACE(_logger, "onVolumeChanged()");
     QVariantMap map;
-    map["Volume"] = player_.volume();
+    map["Volume"] = _player.volume();
     signalPlayerUpdate(map);
 }
 
 QMap<QString, QVariant> Mpris2Player::toXesam(const Song& song)
 {
-    LOG_TRACE(logger_, "toXesam('" + song.toString() + "')");
+    LOG_TRACE(_logger, "toXesam('" + song.toString() + "')");
     QMap<QString, QVariant> map;
     if (song.isValid())
     {
@@ -304,11 +304,11 @@ QMap<QString, QVariant> Mpris2Player::toXesam(const Song& song)
             map["mpris:length"] = 1;
         QString trackId = QString("/org/mpris/MediaPlayer2/MellowPlayer/Track/%1").arg(song.uniqueId());
         map["mpris:trackid"] = QVariant(QDBusObjectPath(trackId).path());
-        auto url = localAlbumArt_.url();
+        auto url = _localAlbumArt.url();
         if (url.startsWith("file://"))
             map["mpris:artUrl"] = url;
         else
-            map["mpris:artUrl"] = "file://" + localAlbumArt_.url();
+            map["mpris:artUrl"] = "file://" + _localAlbumArt.url();
     }
     else
     {
@@ -323,7 +323,7 @@ QMap<QString, QVariant> Mpris2Player::toXesam(const Song& song)
         map["mpris:artUrl"] = "";
         map["xesam:userRating"] = 0;
     }
-    LOG_TRACE(logger_, "metadata: {" + qMapToString(map) + "\n}");
+    LOG_TRACE(_logger, "metadata: {" + qMapToString(map) + "\n}");
     return map;
 }
 
@@ -346,20 +346,20 @@ QString Mpris2Player::statusToString(PlaybackStatus status)
 
 void Mpris2Player::signalPlayerUpdate(const QVariantMap& map)
 {
-    LOG_TRACE(logger_, "signalPlayerUpdate");
+    LOG_TRACE(_logger, "signalPlayerUpdate");
     signalUpdate(map, "org.mpris.MediaPlayer2.Player");
 }
 
 void Mpris2Player::signalUpdate(const QVariantMap& map, const QString& interfaceName)
 {
-    LOG_TRACE(logger_, "signalUpdate");
+    LOG_TRACE(_logger, "signalUpdate");
     if (!map.isEmpty())
     {
         QDBusMessage signal = QDBusMessage::createSignal("/org/mpris/MediaPlayer2", "org.freedesktop.DBus.Properties", "PropertiesChanged");
         QVariantList args = QVariantList() << interfaceName << map << QStringList();
         signal.setArguments(args);
 
-        LOG_TRACE(logger_, "PropertiesChanged: {" + qMapToString(map) + "\n}");
+        LOG_TRACE(_logger, "PropertiesChanged: {" + qMapToString(map) + "\n}");
         QDBusConnection::sessionBus().send(signal);
     }
 }

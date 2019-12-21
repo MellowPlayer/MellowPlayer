@@ -35,7 +35,7 @@ bool UserScript::import(const QString& sourcePath)
     if (directory.create() && exists)
     {
         QString destinationPath = directory.generateFileName();
-        path_ = destinationPath;
+        _path = destinationPath;
         qDebug() << "importing" << sourceUrl << " to " << destinationPath;
         if (QFile::copy(sourceUrl, destinationPath))
             return load(destinationPath);
@@ -47,13 +47,13 @@ bool UserScript::import(const QString& sourcePath)
 bool UserScript::load(const QString& path)
 {
     qDebug() << "loading" << path;
-    path_ = path;
+    _path = path;
 
     QFile file(path);
     if (file.open(QFile::ReadOnly))
     {
         auto content = file.readAll();
-        code_ = QString::fromUtf8(content);
+        _code = QString::fromUtf8(content);
         return true;
     }
     return false;
@@ -61,5 +61,5 @@ bool UserScript::load(const QString& path)
 
 void UserScript::removeFile() const
 {
-    QFile::remove(path_);
+    QFile::remove(_path);
 }

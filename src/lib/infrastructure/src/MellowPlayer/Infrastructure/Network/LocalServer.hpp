@@ -35,8 +35,8 @@ namespace MellowPlayer::Infrastructure
         QString serverSocketFilePath() const override;
 
     private:
-        IFactory<ILocalSocket>& localSocketFactory_;
-        QString serverName_;
-        QLocalServer qLocalServer_;
+        IFactory<ILocalSocket>& _localSocketFactory;
+        QString _serverName;
+        QLocalServer _qLocalServer;
     };
 }

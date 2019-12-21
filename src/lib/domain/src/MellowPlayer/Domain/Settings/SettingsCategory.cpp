@@ -7,11 +7,11 @@
 using namespace std;
 using namespace MellowPlayer::Domain;
 
-SettingsCategory::SettingsCategory(const SettingsCategory::Data& categoryData, Settings* appSettings) : QObject(appSettings), data_(categoryData)
+SettingsCategory::SettingsCategory(const SettingsCategory::Data& categoryData, Settings* appSettings) : QObject(appSettings), _data(categoryData)
 {
-    for (int i = 0; i < data_.parameters.count(); ++i)
+    for (int i = 0; i < _data.parameters.count(); ++i)
     {
-        QJsonObject parameterObj = data_.parameters.at(i).toObject();
+        QJsonObject parameterObj = _data.parameters.at(i).toObject();
         Setting::Data settingData;
         settingData.name = parameterObj.value("name").toString();
         settingData.toolTip = parameterObj.value("tooltip").toString();
@@ -19,42 +19,42 @@ SettingsCategory::SettingsCategory(const SettingsCategory::Data& categoryData, S
         settingData.key = parameterObj.value("key").toString();
         settingData.defaultValue = parameterObj.value("default").toVariant();
         settingData.enableCondition = parameterObj.value("enabled").toString();
-        settings_.append(new Setting(*appSettings, *this, settingData));
+        _settings.append(new Setting(*appSettings, *this, settingData));
     }
 }
 
 void SettingsCategory::resolveDependencies()
 {
-    for (Setting* setting : settings_)
+    for (Setting* setting : _settings)
         setting->resolveDependency();
 }
 
 const QString& SettingsCategory::name() const
 {
-    return data_.name;
+    return _data.name;
 }
 
 const QString& SettingsCategory::icon() const
 {
-    return data_.icon;
+    return _data.icon;
 }
 
 const QString& SettingsCategory::key() const
 {
-    return data_.key;
+    return _data.key;
 }
 
 const QList<Setting*>& SettingsCategory::toList() const
 {
-    return settings_;
+    return _settings;
 }
 
 Setting& SettingsCategory::get(const QString& key) const
 {
-    for (Setting* param : settings_)
+    for (Setting* param : _settings)
         if (param->key() == key)
             return *param;
-    throw runtime_error("Unknown setting: " + data_.key.toStdString() + "/" + key.toStdString());
+    throw runtime_error("Unknown setting: " + _data.key.toStdString() + "/" + key.toStdString());
 }
 
 QString SettingsCategory::toJavascriptObject()
@@ -77,6 +77,6 @@ QString SettingsCategory::toJavascriptObject()
 
 void SettingsCategory::restoreDefaults()
 {
-    for (Setting* setting : settings_)
+    for (Setting* setting : _settings)
         setting->restoreDefaults();
 }

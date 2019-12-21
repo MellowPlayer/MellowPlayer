@@ -31,12 +31,12 @@ namespace MellowPlayer::Infrastructure
         virtual QString assetUrl() const = 0;
         virtual QString assetFileName() const = 0;
 
-        const Release* release_ = nullptr;
+        const Release* _release = nullptr;
 
     private:
         QString makeDestinationPath();
 
-        QString assetFilePath_;
-        IFileDownloader& fileDownloader_;
+        QString _assetFilePath;
+        IFileDownloader& _fileDownloader;
     };
 }

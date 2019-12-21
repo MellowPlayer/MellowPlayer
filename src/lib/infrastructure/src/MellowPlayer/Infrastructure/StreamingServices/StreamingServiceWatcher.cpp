@@ -10,9 +10,9 @@ using namespace std;
 using namespace MellowPlayer::Domain;
 using namespace MellowPlayer::Infrastructure;
 
-StreamingServiceWatcher::StreamingServiceWatcher() : logger_(Loggers::logger("StreamingServiceWatcher"))
+StreamingServiceWatcher::StreamingServiceWatcher() : _logger(Loggers::logger("StreamingServiceWatcher"))
 {
-    connect(&fileSystemWatcher_, &QFileSystemWatcher::fileChanged, this, &StreamingServiceWatcher::onFileChanged);
+    connect(&_fileSystemWatcher, &QFileSystemWatcher::fileChanged, this, &StreamingServiceWatcher::onFileChanged);
 }
 
 void StreamingServiceWatcher::watch(StreamingService& serviceToWatch)
@@ -21,7 +21,7 @@ void StreamingServiceWatcher::watch(StreamingService& serviceToWatch)
     const QString themePath = QDir::cleanPath(pluginDirectory + "/" + "theme.json");
     const QString scriptPath = QDir::cleanPath(pluginDirectory + "/" + "integration.js");
 
-    pluginInfo_.insert(pluginDirectory, new PluginInfo(serviceToWatch, scriptPath, themePath, this));
+    _pluginInfo.insert(pluginDirectory, new PluginInfo(serviceToWatch, scriptPath, themePath, this));
 
     watchPath(themePath);
     watchPath(scriptPath);
@@ -29,17 +29,17 @@ void StreamingServiceWatcher::watch(StreamingService& serviceToWatch)
 
 void StreamingServiceWatcher::watchPath(const QString& path)
 {
-    LOG_TRACE(logger_, "Watching path: " + path);
-    fileSystemWatcher_.addPath(path);
+    LOG_TRACE(_logger, "Watching path: " + path);
+    _fileSystemWatcher.addPath(path);
 }
 
 void StreamingServiceWatcher::onFileChanged(const QString& path)
 {
-    LOG_INFO(logger_, "Plugin file changed: " + path);
+    LOG_INFO(_logger, "Plugin file changed: " + path);
     QFileInfo fileInfo(path);
     const QString pluginDir = fileInfo.dir().absolutePath();
     const QString name = fileInfo.baseName();
-    StreamingService& service = pluginInfo_[pluginDir]->service_;
+    StreamingService& service = _pluginInfo[pluginDir]->_service;
 
     if (name == "integration")
     {
@@ -51,11 +51,11 @@ void StreamingServiceWatcher::onFileChanged(const QString& path)
         service.updateTheme(theme);
     }
 
-    fileSystemWatcher_.removePath(path);
-    fileSystemWatcher_.addPath(path);
+    _fileSystemWatcher.removePath(path);
+    _fileSystemWatcher.addPath(path);
 }
 
 StreamingServiceWatcher::PluginInfo::PluginInfo(StreamingService& service, QString scriptPath, QString themePath, QObject* parent)
-        : QObject(parent), service_(service), scriptPath_(scriptPath), themePath_(themePath)
+        : QObject(parent), _service(service), _scriptPath(scriptPath), _themePath(themePath)
 {
 }

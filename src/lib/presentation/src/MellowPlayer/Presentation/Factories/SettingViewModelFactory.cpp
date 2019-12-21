@@ -15,7 +15,7 @@
 using namespace MellowPlayer::Presentation;
 using namespace MellowPlayer::Domain;
 
-SettingViewModelFactory::SettingViewModelFactory(ThemeViewModel& themeViewModel) : themeViewModel_(themeViewModel)
+SettingViewModelFactory::SettingViewModelFactory(ThemeViewModel& themeViewModel) : _themeViewModel(themeViewModel)
 {
 }
 
@@ -35,7 +35,7 @@ SettingViewModel* SettingViewModelFactory::create(Setting& setting, QObject* par
     else if (type.startsWith("update-channel"))
         return new UpdateChannelSettingViewModel(setting, parent);
     else if (type.startsWith("theme"))
-        return new ThemeSettingViewModel(setting, parent, themeViewModel_);
+        return new ThemeSettingViewModel(setting, parent, _themeViewModel);
     else if (type.startsWith("user-agent"))
         return new UserAgentStringSettingViewModel(setting, parent);
     else if (type.startsWith("scaling-factor"))

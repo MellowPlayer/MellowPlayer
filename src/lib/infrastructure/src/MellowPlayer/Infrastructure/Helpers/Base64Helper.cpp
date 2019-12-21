@@ -6,7 +6,7 @@
 using namespace MellowPlayer::Domain;
 using namespace MellowPlayer::Infrastructure;
 
-Base64Helper::Base64Helper(QObject* parent) : QObject(parent), logger_(Loggers::logger())
+Base64Helper::Base64Helper(QObject* parent) : QObject(parent), _logger(Loggers::logger())
 {
 }
 
@@ -17,7 +17,7 @@ bool Base64Helper::isBase64(const QString& uri)
 
 QImage Base64Helper::getImage(const QString& uri)
 {
-    LOG_DEBUG(logger_, "decoding image: " << uri);
+    LOG_DEBUG(_logger, "decoding image: " << uri);
 
     QImage image;
     QRegExp re("data:(image\\/.*);base64,(.*)");
@@ -25,19 +25,19 @@ QImage Base64Helper::getImage(const QString& uri)
     int pos = re.indexIn(uri);
     if (pos == -1)
     {
-        LOG_WARN(logger_, "failed to decode base 64 image, not a valid data URI scheme...");
+        LOG_WARN(_logger, "failed to decode base 64 image, not a valid data URI scheme...");
         return image;
     }
 
     QStringList captures = re.capturedTexts();
     QString format = captures.at(1).toLower();
     QString data = captures.at(2);
-    LOG_DEBUG(logger_, "image format: " << format);
-    LOG_DEBUG(logger_, "image data: " << data);
+    LOG_DEBUG(_logger, "image format: " << format);
+    LOG_DEBUG(_logger, "image data: " << data);
 
     QByteArray decoded = QByteArray::fromBase64(data.toUtf8());
     if (!image.loadFromData(decoded, format.toStdString().c_str()))
-        LOG_WARN(logger_, "failed to load image from base64 string");
+        LOG_WARN(_logger, "failed to load image from base64 string");
 
     return image;
 }
@@ -48,11 +48,11 @@ bool Base64Helper::saveToFile(const QString& uri, const QString& path)
 
     if (!image.save(path, "PNG"))
     {
-        LOG_WARN(logger_, "failed to save decoded image");
+        LOG_WARN(_logger, "failed to save decoded image");
         return false;
     }
 
-    LOG_DEBUG(logger_, "image saved to: " << path);
+    LOG_DEBUG(_logger, "image saved to: " << path);
 
     return true;
 }

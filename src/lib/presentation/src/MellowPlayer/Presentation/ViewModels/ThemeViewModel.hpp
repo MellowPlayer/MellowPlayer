@@ -74,18 +74,18 @@ namespace MellowPlayer::Presentation
         void fromTheme(const Domain::Theme& newTheme);
         void collectThemes();
 
-        Domain::StreamingServices& streamingServices_;
-        Domain::IThemeLoader& loader_;
-        Domain::Setting& accentColorSetting_;
-        Domain::Setting& themeSetting_;
-        Domain::Setting& backgroundSetting_;
-        Domain::Setting& foregroundSetting_;
-        Domain::Setting& primaryBackgroundSetting_;
-        Domain::Setting& primaryForegroundSetting_;
-        Domain::Setting& secondaryBackgroundSetting_;
-        Domain::Setting& secondaryForegroundSetting_;
-        Domain::Theme currentTheme_;
-        QMap<QString, Domain::Theme> availableThemes_;
+        Domain::StreamingServices& _streamingServices;
+        Domain::IThemeLoader& _loader;
+        Domain::Setting& _accentColorSetting;
+        Domain::Setting& _themeSetting;
+        Domain::Setting& _backgroundSetting;
+        Domain::Setting& _foregroundSetting;
+        Domain::Setting& _primaryBackgroundSetting;
+        Domain::Setting& _primaryForegroundSetting;
+        Domain::Setting& _secondaryBackgroundSetting;
+        Domain::Setting& _secondaryForegroundSetting;
+        Domain::Theme _currentTheme;
+        QMap<QString, Domain::Theme> _availableThemes;
 
         bool isAdaptiveTheme() const;
     };

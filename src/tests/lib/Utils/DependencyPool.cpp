@@ -50,13 +50,13 @@ using namespace MellowPlayer::Presentation::Tests;
 using namespace MellowPlayer::Tests;
 
 DependencyPool::DependencyPool()
-        : mICommandLineArgs(make_unique<FakeCommandLineArguments>()),
-          mIStreamingServiceCreator(StreamingServiceCreatorMock::get()),
-          mINotificationPresenter(NotificationPresenterMock::get()),
-          dataProvider(make_unique<FakeListeningHistoryDatabase>()),
-          contextProperties_(std::make_shared<FakeContextProperties>())
+        : _commandLineArgs(make_unique<FakeCommandLineArguments>()),
+          _streamingServiceCreator(StreamingServiceCreatorMock::get()),
+          _notificationPresenter(NotificationPresenterMock::get()),
+          _dataProvider(make_unique<FakeListeningHistoryDatabase>()),
+          _contextProperties(std::make_shared<FakeContextProperties>())
 {
-    When(Method(mUserScriptsFactoryMock, create)).AlwaysDo([]() -> IUserScript* { return new FakeUserScript; });
+    When(Method(_userScriptsFactoryMock, create)).AlwaysDo([]() -> IUserScript* { return new FakeUserScript; });
 }
 
 DependencyPool::~DependencyPool() = default;
@@ -65,58 +65,58 @@ StreamingServices& DependencyPool::getStreamingServices()
 {
     static FakeStreamingServiceLoader streamingServiceLoader;
     static FakeStreamingServiceWatcher streamingServiceWatcher;
-    if (pStreamingServicesController == nullptr)
+    if (_streamingServices == nullptr)
     {
-        pStreamingServicesController = make_unique<StreamingServices>(streamingServiceLoader, streamingServiceWatcher);
-        pStreamingServicesController->load();
+        _streamingServices = make_unique<StreamingServices>(streamingServiceLoader, streamingServiceWatcher);
+        _streamingServices->load();
     }
-    return *pStreamingServicesController;
+    return *_streamingServices;
 }
 
 StreamingServicesViewModel& DependencyPool::getStreamingServicesViewModel()
 {
-    if (pStreamingServicesControllerViewModel == nullptr)
-        pStreamingServicesControllerViewModel = make_unique<StreamingServicesViewModel>(getStreamingServices(),
+    if (_streamingServicesViewModel == nullptr)
+        _streamingServicesViewModel = make_unique<StreamingServicesViewModel>(getStreamingServices(),
                                                                                         getPlayers(),
                                                                                         getSettings(),
                                                                                         getWorkDispatcher(),
                                                                                         getStreamingServicesCreator(),
                                                                                         getCommandLineArguments(),
                                                                                         getUserScriptFactory(),
-                                                                                        contextProperties_,
-                                                                                        networkProxies_,
+                                                                                        _contextProperties,
+                                                                                        _networkProxies,
                                                                                         getThemeViewModel());
-    return *pStreamingServicesControllerViewModel;
+    return *_streamingServicesViewModel;
 }
 
 Players& DependencyPool::getPlayers()
 {
-    if (pPlayers == nullptr)
-        pPlayers = make_unique<Players>(getStreamingServices());
-    return *pPlayers;
+    if (_players == nullptr)
+        _players = make_unique<Players>(getStreamingServices());
+    return *_players;
 }
 
 IStreamingServiceCreator& DependencyPool::getStreamingServicesCreator()
 {
-    return mIStreamingServiceCreator.get();
+    return _streamingServiceCreator.get();
 }
 
 ISettingsStore& DependencyPool::getSettingsStore()
 {
-    return mSettingsStore;
+    return _settingsStore;
 }
 
 Settings& DependencyPool::getSettings()
 {
     static SettingsSchemaLoader loader;
-    if (pSettings == nullptr)
-        pSettings = make_unique<Settings>(loader, getSettingsStore());
-    return *pSettings;
+    if (_settings == nullptr)
+        _settings = make_unique<Settings>(loader, getSettingsStore());
+    return *_settings;
 }
 
 ICommandLineArguments& DependencyPool::getCommandLineArguments()
 {
-    return *mICommandLineArgs;
+    return *_commandLineArgs;
 }
 
 IWorkDispatcher& DependencyPool::getWorkDispatcher()
@@ -127,94 +127,94 @@ IWorkDispatcher& DependencyPool::getWorkDispatcher()
 
 ListeningHistoryViewModel& DependencyPool::getListeningHistoryViewModel()
 {
-    if (pListeningHistoryViewModel == nullptr)
-        pListeningHistoryViewModel = make_unique<ListeningHistoryViewModel>(getListeningHistory(), contextProperties_);
-    return *pListeningHistoryViewModel;
+    if (_listeningHistoryViewModel == nullptr)
+        _listeningHistoryViewModel = make_unique<ListeningHistoryViewModel>(getListeningHistory(), _contextProperties);
+    return *_listeningHistoryViewModel;
 }
 
 ListeningHistory& DependencyPool::getListeningHistory()
 {
-    if (pListeningHistory == nullptr)
-        pListeningHistory = make_unique<ListeningHistory>(*dataProvider, getCurrentPlayer(), getSettings());
-    return *pListeningHistory;
+    if (_listeningHistory == nullptr)
+        _listeningHistory = make_unique<ListeningHistory>(*_dataProvider, getCurrentPlayer(), getSettings());
+    return *_listeningHistory;
 }
 
 IPlayer& DependencyPool::getCurrentPlayer()
 {
-    if (pCurrentPlayer == nullptr)
-        pCurrentPlayer = make_unique<CurrentPlayer>(getPlayers(), getStreamingServices());
-    return *pCurrentPlayer;
+    if (_currentPlayer == nullptr)
+        _currentPlayer = make_unique<CurrentPlayer>(getPlayers(), getStreamingServices());
+    return *_currentPlayer;
 }
 
 ThemeViewModel& DependencyPool::getThemeViewModel()
 {
     static auto mock = ThemeLoaderMock::get();
-    if (pThemeViewModel == nullptr)
-        pThemeViewModel = make_unique<ThemeViewModel>(getStreamingServices(), getSettings(), mock.get(), contextProperties_);
-    return *pThemeViewModel;
+    if (_themeViewModel == nullptr)
+        _themeViewModel = make_unique<ThemeViewModel>(getStreamingServices(), getSettings(), mock.get(), _contextProperties);
+    return *_themeViewModel;
 }
 
 UpdaterViewModel& DependencyPool::getUpdaterViewModel()
 {
-    if (pUpdaterViewModel == nullptr)
-        pUpdaterViewModel = make_unique<UpdaterViewModel>(getUpdater(), contextProperties_);
-    return *pUpdaterViewModel;
+    if (_updaterViewModel == nullptr)
+        _updaterViewModel = make_unique<UpdaterViewModel>(getUpdater(), _contextProperties);
+    return *_updaterViewModel;
 }
 
 Updater& DependencyPool::getUpdater()
 {
     static FakeBinTrayHttpClient httpClient;
     static LatestBinTrayRelease latestBinTrayRelease(httpClient);
-    if (pUpdater == nullptr)
-        pUpdater = make_unique<Updater>(latestBinTrayRelease, getSettings(), getPlatformUpdater());
-    return *pUpdater;
+    if (_updater == nullptr)
+        _updater = make_unique<Updater>(latestBinTrayRelease, getSettings(), getPlatformUpdater());
+    return *_updater;
 }
 
 Notifications& DependencyPool::getNotifier()
 {
-    if (pNotifier == nullptr)
-        pNotifier = make_unique<Notifications>(getCurrentPlayer(), getLocalAlbumArt(), getNotificationPresenter(), getStreamingServices(), getSettings());
-    return *pNotifier;
+    if (_notifications == nullptr)
+        _notifications = make_unique<Notifications>(getCurrentPlayer(), getLocalAlbumArt(), getNotificationPresenter(), getStreamingServices(), getSettings());
+    return *_notifications;
 }
 
 INotificationPresenter& DependencyPool::getNotificationPresenter()
 {
-    return mINotificationPresenter.get();
+    return _notificationPresenter.get();
 }
 
 LocalAlbumArt& DependencyPool::getLocalAlbumArt()
 {
     static FakeAlbumArtDownloader downloader;
 
-    if (pLocalAlbumArt == nullptr)
-        pLocalAlbumArt = make_unique<LocalAlbumArt>(getCurrentPlayer(), downloader);
-    return *pLocalAlbumArt;
+    if (_localAlbumArt == nullptr)
+        _localAlbumArt = make_unique<LocalAlbumArt>(getCurrentPlayer(), downloader);
+    return *_localAlbumArt;
 }
 
 Mock<INotificationPresenter>& DependencyPool::getNotificationPresenterMock()
 {
-    return mINotificationPresenter;
+    return _notificationPresenter;
 }
 
 AbstractPlatformUpdater& DependencyPool::getPlatformUpdater()
 {
     static FakeFileDownloader fakeFileDownloader;
-    if (pPlatformUpdater == nullptr)
-        pPlatformUpdater = make_unique<FakePlatformUpdater>(fakeFileDownloader);
-    return *pPlatformUpdater;
+    if (_platformUpdater == nullptr)
+        _platformUpdater = make_unique<FakePlatformUpdater>(fakeFileDownloader);
+    return *_platformUpdater;
 }
 
 IUserScriptFactory& DependencyPool::getUserScriptFactory()
 {
-    return mUserScriptsFactoryMock.get();
+    return _userScriptsFactoryMock.get();
 }
 
 std::shared_ptr<IContextProperties> DependencyPool::getContextProperties()
 {
-    return contextProperties_;
+    return _contextProperties;
 }
 
 INetworkProxies& DependencyPool::getNetworkProxies()
 {
-    return networkProxies_;
+    return _networkProxies;
 }

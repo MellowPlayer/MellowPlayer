@@ -16,11 +16,11 @@ QString MprisService::SERVICE_NAME = "org.mpris.MediaPlayer2.";
 QString MprisService::OBJECT_NAME = "/org/mpris/MediaPlayer2";
 
 MprisService::MprisService(IPlayer& player, ILocalAlbumArt& localAlbumArt, IMainWindow& window)
-        : logger_(Loggers::logger("Mpris")),
-          parent_(make_unique<QObject>()),
-          mpris2Root_(new Mpris2Root(window, parent_.get())),
-          mpris2Player_(new Mpris2Player(player, localAlbumArt, parent_.get())),
-          serviceName_(SERVICE_NAME + qApp->applicationName())
+        : _logger(Loggers::logger("Mpris")),
+          _parent(make_unique<QObject>()),
+          _mpris2Root(new Mpris2Root(window, _parent.get())),
+          _mpris2Player(new Mpris2Player(player, localAlbumArt, _parent.get())),
+          _serviceName(SERVICE_NAME + qApp->applicationName())
 {
 }
 
@@ -31,18 +31,18 @@ void MprisService::initialize(const IInitializable::ResultCallback& resultCallba
 
 bool MprisService::start()
 {
-    if (!QDBusConnection::sessionBus().registerService(serviceName_) || !QDBusConnection::sessionBus().registerObject(OBJECT_NAME, parent_.get()))
+    if (!QDBusConnection::sessionBus().registerService(_serviceName) || !QDBusConnection::sessionBus().registerObject(OBJECT_NAME, _parent.get()))
     {
-        LOG_WARN(logger_, "failed to register service on the session bus: " + serviceName_);
-        LOG_WARN(logger_, "failed to register object on the session bus: " + OBJECT_NAME);
+        LOG_WARN(_logger, "failed to register service on the session bus: " + _serviceName);
+        LOG_WARN(_logger, "failed to register object on the session bus: " + OBJECT_NAME);
         return false;
     }
-    LOG_INFO(logger_, "service started: " + serviceName_);
+    LOG_INFO(_logger, "service started: " + _serviceName);
     return true;
 }
 
 void MprisService::cleanUp()
 {
     QDBusConnection::sessionBus().unregisterObject(OBJECT_NAME);
-    QDBusConnection::sessionBus().unregisterObject(serviceName_);
+    QDBusConnection::sessionBus().unregisterObject(_serviceName);
 }

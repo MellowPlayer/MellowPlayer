@@ -37,7 +37,7 @@ namespace MellowPlayer::Presentation
         void raiseRequested();
 
     private:
-        IQmlApplicationEngine& qmlApplicationEngine_;
-        bool visible_;
+        IQmlApplicationEngine& _qmlApplicationEngine;
+        bool _visible;
     };
 }

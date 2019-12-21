@@ -41,16 +41,16 @@ namespace MellowPlayer::Presentation
 
     private:
         ApplicationViewModel& _application;
-        IMainWindow& mainWindow_;
-        UpdaterViewModel& updater_;
-        ListeningHistoryViewModel& listeningHistory_;
-        StreamingServicesViewModel& streamingServices_;
-        CacheViewModel cache_;
-        CookiesViewModel cookies_;
-        ClipBoardViewModel clipboard_;
-        DevToolsWindowViewModel devToolsWindow_;
-        ZoomViewModel& zoomViewModel_;
-        Infrastructure::ICommandLineArguments& commandLineArguments_;
-        QTranslator translator_;
+        IMainWindow& _mainWindow;
+        UpdaterViewModel& _updater;
+        ListeningHistoryViewModel& _listeningHistory;
+        StreamingServicesViewModel& _streamingServices;
+        CacheViewModel _cache;
+        CookiesViewModel _cookies;
+        ClipBoardViewModel _clipboard;
+        DevToolsWindowViewModel _devToolsWindow;
+        ZoomViewModel& _zoomViewModel;
+        Infrastructure::ICommandLineArguments& _commandLineArguments;
+        QTranslator _translator;
     };
 }

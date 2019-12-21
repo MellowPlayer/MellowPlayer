@@ -4,20 +4,20 @@ using namespace MellowPlayer::Domain;
 
 QString UserScriptBase::path() const
 {
-    return path_;
+    return _path;
 }
 
 QString UserScriptBase::code() const
 {
-    return code_;
+    return _code;
 }
 
 QString UserScriptBase::name() const
 {
-    return name_;
+    return _name;
 }
 
 void UserScriptBase::setName(const QString& name)
 {
-    name_ = name;
+    _name = name;
 }

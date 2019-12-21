@@ -64,14 +64,14 @@ namespace MellowPlayer::Domain
         void addSong(const Domain::Song* song, Domain::ListeningHistoryEntry& newEntry);
         void updateRemovedEntries();
 
-        QMap<QString, Domain::ListeningHistoryEntry> previousEntryPerPlayer_;
-        QList<Domain::ListeningHistoryEntry> entries_;
-        Setting& isEnabledSetting_;
-        Setting& limitSetting_;
+        QMap<QString, Domain::ListeningHistoryEntry> _previousEntryPerPlayer;
+        QList<Domain::ListeningHistoryEntry> _entries;
+        Setting& _isEnabledSetting;
+        Setting& _limitSetting;
 
     protected:
-        ILogger& logger_;
-        IListeningHistoryDatabase& database_;
-        IPlayer& player_;
+        ILogger& _logger;
+        IListeningHistoryDatabase& _database;
+        IPlayer& _player;
     };
 }

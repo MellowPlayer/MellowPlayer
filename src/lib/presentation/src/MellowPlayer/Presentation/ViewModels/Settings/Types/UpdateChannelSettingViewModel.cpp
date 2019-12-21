@@ -11,13 +11,13 @@ UpdateChannelSettingViewModel::UpdateChannelSettingViewModel(Setting& setting, Q
 
 QString UpdateChannelSettingViewModel::value() const
 {
-    UpdateChannel channel = static_cast<UpdateChannel>(setting_.value().toInt());
-    return stringer_.toTranslatedString(channel);
+    UpdateChannel channel = static_cast<UpdateChannel>(_setting.value().toInt());
+    return _stringer.toTranslatedString(channel);
 }
 
 QStringList UpdateChannelSettingViewModel::values() const
 {
-    return QStringList() << stringer_.toTranslatedString(UpdateChannel::Stable) << stringer_.toTranslatedString(UpdateChannel::Continuous);
+    return QStringList() << _stringer.toTranslatedString(UpdateChannel::Stable) << _stringer.toTranslatedString(UpdateChannel::Continuous);
 }
 
 QString UpdateChannelSettingViewModel::qmlComponent()
@@ -27,7 +27,7 @@ QString UpdateChannelSettingViewModel::qmlComponent()
 
 void UpdateChannelSettingViewModel::setValue(QString value)
 {
-    setting_.setValue(static_cast<int>(stringer_.fromString(value)));
+    _setting.setValue(static_cast<int>(_stringer.fromString(value)));
 }
 
 void UpdateChannelSettingViewModel::onValueChanged()

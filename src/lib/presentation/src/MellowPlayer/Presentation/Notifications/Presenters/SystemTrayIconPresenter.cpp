@@ -4,17 +4,17 @@
 
 using namespace MellowPlayer::Presentation;
 
-SystemTrayIconPresenter::SystemTrayIconPresenter(ISystemTrayIcon& systemTrayIcon) : systemTrayIcon_(systemTrayIcon)
+SystemTrayIconPresenter::SystemTrayIconPresenter(ISystemTrayIcon& systemTrayIcon) : _systemTrayIcon(systemTrayIcon)
 {
 }
 
 bool SystemTrayIconPresenter::display(const Notification& notification)
 {
-    systemTrayIcon_.showMessage(notification.title, notification.description);
+    _systemTrayIcon.showMessage(notification.title, notification.description);
     return true;
 }
 
 void SystemTrayIconPresenter::initialize()
 {
-    systemTrayIcon_.show();
+    _systemTrayIcon.show();
 }

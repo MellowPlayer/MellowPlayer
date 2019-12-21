@@ -2,34 +2,34 @@
 
 using namespace MellowPlayer::Domain;
 
-StreamingServiceScript::StreamingServiceScript(const QString& code, const QString& path) : QObject(), code_(code), path_(path)
+StreamingServiceScript::StreamingServiceScript(const QString& code, const QString& path) : QObject(), _code(code), _path(path)
 {
 }
 
 bool StreamingServiceScript::isValid() const
 {
-    return code_.contains("function update") && code_.contains("function play") &&
-           (code_.contains("function pause") && code_.contains("function goNext") && code_.contains("function goPrevious") &&
-            code_.contains("function setVolume") && code_.contains("function addToFavorites")) &&
-           code_.contains("function removeFromFavorites") && code_.contains("function seekToPosition");
+    return _code.contains("function update") && _code.contains("function play") &&
+           (_code.contains("function pause") && _code.contains("function goNext") && _code.contains("function goPrevious") &&
+            _code.contains("function setVolume") && _code.contains("function addToFavorites")) &&
+           _code.contains("function removeFromFavorites") && _code.contains("function seekToPosition");
 }
 
 QString StreamingServiceScript::code() const
 {
-    return code_;
+    return _code;
 }
 
 void StreamingServiceScript::setCode(const QString& value)
 {
-    if (code_ == value)
+    if (_code == value)
         return;
-    code_ = value;
+    _code = value;
     emit codeChanged(value);
 }
 
 const QString& StreamingServiceScript::path() const
 {
-    return path_;
+    return _path;
 }
 
 QString StreamingServiceScript::constants() const

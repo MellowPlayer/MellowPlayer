@@ -27,6 +27,6 @@ namespace MellowPlayer::Presentation
         void onValueChanged() override;
 
     private:
-        UpdateChannelStringer stringer_;
+        UpdateChannelStringer _stringer;
     };
 }

@@ -5,34 +5,34 @@ using namespace std;
 using namespace MellowPlayer::Infrastructure;
 
 LocalServer::LocalServer(IFactory<ILocalSocket>& localSocketFactory, const QString& serverName)
-        : localSocketFactory_(localSocketFactory), serverName_(serverName)
+        : _localSocketFactory(localSocketFactory), _serverName(serverName)
 {
     QLocalServer::removeServer(serverName);
-    qLocalServer_.setSocketOptions(QLocalServer::UserAccessOption);
-    connect(&qLocalServer_, &QLocalServer::newConnection, this, &ILocalServer::newConnection);
+    _qLocalServer.setSocketOptions(QLocalServer::UserAccessOption);
+    connect(&_qLocalServer, &QLocalServer::newConnection, this, &ILocalServer::newConnection);
 }
 
 void LocalServer::close()
 {
-    qLocalServer_.close();
+    _qLocalServer.close();
 }
 
 bool LocalServer::listen()
 {
-    return qLocalServer_.listen(serverName_);
+    return _qLocalServer.listen(_serverName);
 }
 
 bool LocalServer::isListening() const
 {
-    return qLocalServer_.isListening();
+    return _qLocalServer.isListening();
 }
 
 unique_ptr<ILocalSocket> LocalServer::nextPendingConnection()
 {
-    QLocalSocket* qLocalSocket = qLocalServer_.nextPendingConnection();
+    QLocalSocket* qLocalSocket = _qLocalServer.nextPendingConnection();
     if (qLocalSocket->isValid())
     {
-        unique_ptr<ILocalSocket> localSocket = localSocketFactory_.create();
+        unique_ptr<ILocalSocket> localSocket = _localSocketFactory.create();
         localSocket->setQLocalSocket(qLocalSocket);
         return localSocket;
     }
@@ -41,5 +41,5 @@ unique_ptr<ILocalSocket> LocalServer::nextPendingConnection()
 
 QString LocalServer::serverSocketFilePath() const
 {
-    return qLocalServer_.fullServerName();
+    return _qLocalServer.fullServerName();
 }

@@ -10,12 +10,12 @@ StringSettingViewModel::StringSettingViewModel(Setting& setting, QObject* parent
 
 QString StringSettingViewModel::getValue() const
 {
-    return setting_.value().toString();
+    return _setting.value().toString();
 }
 
 void StringSettingViewModel::setValue(QString value)
 {
-    setting_.setValue(value);
+    _setting.setValue(value);
 }
 
 void StringSettingViewModel::onValueChanged()

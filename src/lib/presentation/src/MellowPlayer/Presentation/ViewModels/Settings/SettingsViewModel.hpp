@@ -31,8 +31,8 @@ namespace MellowPlayer::Presentation
         void initialize(IQmlApplicationEngine& qmlApplicationEngine) override;
 
     private:
-        Domain::Settings& settings_;
-        SettingViewModelFactory factory_;
-        SettingsCategoryListModel* categories_;
+        Domain::Settings& _settings;
+        SettingViewModelFactory _factory;
+        SettingsCategoryListModel* _categories;
     };
 }

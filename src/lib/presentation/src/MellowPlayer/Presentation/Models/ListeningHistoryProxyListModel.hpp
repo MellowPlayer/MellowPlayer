@@ -19,8 +19,8 @@ namespace MellowPlayer::Presentation
         bool filterAcceptsRow(int sourceRow, const QModelIndex& sourceParent) const override;
 
     private:
-        ListeningHistoryListModel* sourceModel_;
-        QList<QString> disabledServices_;
-        QString searchFilter_;
+        ListeningHistoryListModel* _sourceModel;
+        QList<QString> _disabledServices;
+        QString _searchFilter;
     };
 }

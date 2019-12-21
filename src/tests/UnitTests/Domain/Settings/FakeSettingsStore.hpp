@@ -9,22 +9,22 @@ namespace MellowPlayer::Domain::Tests
     public:
         QVariant value(const QString& key, const QVariant& defaultValue = QVariant()) const override
         {
-            if (values_.contains(key))
-                return values_[key];
+            if (_values.contains(key))
+                return _values[key];
             return defaultValue;
         }
 
         void setValue(const QString& key, const QVariant& value) override
         {
-            values_[key] = value;
+            _values[key] = value;
         }
 
         void clear() override
         {
-            values_.clear();
+            _values.clear();
         }
 
     private:
-        QMap<QString, QVariant> values_;
+        QMap<QString, QVariant> _values;
     };
 }

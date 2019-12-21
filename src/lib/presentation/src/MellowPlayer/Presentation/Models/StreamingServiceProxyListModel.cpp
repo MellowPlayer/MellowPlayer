@@ -2,7 +2,7 @@
 
 using namespace MellowPlayer::Presentation;
 
-StreamingServiceProxyListModel::StreamingServiceProxyListModel(StreamingServiceListModel* sourceListModel) : sourceListModel_(sourceListModel)
+StreamingServiceProxyListModel::StreamingServiceProxyListModel(StreamingServiceListModel* sourceListModel) : _sourceListModel(sourceListModel)
 {
     setDynamicSortFilter(false);
     setSourceModel(sourceListModel);
@@ -11,18 +11,18 @@ StreamingServiceProxyListModel::StreamingServiceProxyListModel(StreamingServiceL
 
 bool StreamingServiceProxyListModel::filterAcceptsRow(int sourceRow, const QModelIndex&) const
 {
-    StreamingServiceViewModel* viewModel = sourceListModel_->at(sourceRow);
+    StreamingServiceViewModel* viewModel = _sourceListModel->at(sourceRow);
 
     if (viewModel->sortOrder() == -1)
         viewModel->setSortOrder(sourceRow);
 
-    return sourceListModel_->at(sourceRow)->isEnabled();
+    return _sourceListModel->at(sourceRow)->isEnabled();
 }
 
 bool MellowPlayer::Presentation::StreamingServiceProxyListModel::lessThan(const QModelIndex& sourceLeft, const QModelIndex& sourceRight) const
 {
-    StreamingServiceViewModel* left = sourceListModel_->at(sourceLeft.row());
-    StreamingServiceViewModel* right = sourceListModel_->at(sourceRight.row());
+    StreamingServiceViewModel* left = _sourceListModel->at(sourceLeft.row());
+    StreamingServiceViewModel* right = _sourceListModel->at(sourceRight.row());
 
     return left->sortOrder() < right->sortOrder();
 }

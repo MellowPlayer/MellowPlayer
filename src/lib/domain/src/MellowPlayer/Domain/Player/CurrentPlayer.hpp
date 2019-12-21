@@ -46,10 +46,10 @@ namespace MellowPlayer::Domain
         void onCurrentServiceChanged(Domain::StreamingService* streamingService);
 
     private:
-        Players& players_;
-        StreamingServices& streamingServices_;
-        Domain::Song nullSong_;
+        Players& _players;
+        StreamingServices& _streamingServices;
+        Domain::Song _nullSong;
 
-        std::shared_ptr<Player> currentPlayer_;
+        std::shared_ptr<Player> _currentPlayer;
     };
 }

@@ -33,7 +33,7 @@ namespace MellowPlayer::Presentation
         virtual void onValueChanged() = 0;
 
     protected:
-        Domain::Setting& setting_;
+        Domain::Setting& _setting;
 
     private slots:
         void onEnabledChanged();

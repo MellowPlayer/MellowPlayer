@@ -19,6 +19,6 @@ namespace MellowPlayer::Infrastructure
         const_iterator end(void) const;
 
     private:
-        QList<Filter> filters_;
+        QList<Filter> _filters;
     };
 }

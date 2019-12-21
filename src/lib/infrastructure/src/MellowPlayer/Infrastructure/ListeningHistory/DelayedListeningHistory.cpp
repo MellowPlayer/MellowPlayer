@@ -20,7 +20,7 @@ void DelayedListeningHistory::addSong(Song* song)
     shared_ptr<Song> songCopy = song->clone();
     _timer->stop();
     _timer->start(DELAY, [=]() {
-        if (*songCopy == *player_.currentSong())
+        if (*songCopy == *_player.currentSong())
             ListeningHistory::addSong(songCopy.get());
     });
 }

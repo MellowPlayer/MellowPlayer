@@ -39,6 +39,6 @@ namespace MellowPlayer::Infrastructure
     private:
         void initSignals();
 
-        QLocalSocket* qLocalSocket_;
+        QLocalSocket* _qLocalSocket;
     };
 }

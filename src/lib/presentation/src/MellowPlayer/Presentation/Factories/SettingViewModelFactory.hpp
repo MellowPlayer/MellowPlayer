@@ -19,6 +19,6 @@ namespace MellowPlayer::Presentation
         SettingViewModel* create(Domain::Setting& setting, QObject* parent = nullptr) const;
 
     private:
-        ThemeViewModel& themeViewModel_;
+        ThemeViewModel& _themeViewModel;
     };
 }

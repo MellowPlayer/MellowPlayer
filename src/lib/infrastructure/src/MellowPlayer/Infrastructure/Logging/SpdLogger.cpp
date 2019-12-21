@@ -8,8 +8,8 @@ using namespace spdlog;
 using namespace MellowPlayer::Domain;
 using namespace MellowPlayer::Infrastructure;
 
-shared_ptr<spdlog::sinks::rotating_file_sink_mt> SpdLogger::errorSink_ = nullptr;
-shared_ptr<spdlog::sinks::rotating_file_sink_mt> SpdLogger::allSink_ = nullptr;
+shared_ptr<spdlog::sinks::rotating_file_sink_mt> SpdLogger::_errorSink = nullptr;
+shared_ptr<spdlog::sinks::rotating_file_sink_mt> SpdLogger::_allSink = nullptr;
 
 shared_ptr<logger> SpdLogger::createLogger(const string& name, const LoggerConfig& config)
 {
@@ -31,18 +31,18 @@ shared_ptr<logger> SpdLogger::createLogger(const string& name, const LoggerConfi
             auto logDir = FileHelper::createLogDirectory().toStdString();
             auto logFileName = logDir + name;
 
-            if (SpdLogger::errorSink_ == nullptr)
+            if (SpdLogger::_errorSink == nullptr)
             {
-                SpdLogger::errorSink_ = make_shared<sinks::rotating_file_sink_mt>(logDir + "Errors.log", 1024 * 1024 * 20, 5);
-                SpdLogger::errorSink_->set_level(level::warn);
+                SpdLogger::_errorSink = make_shared<sinks::rotating_file_sink_mt>(logDir + "Errors.log", 1024 * 1024 * 20, 5);
+                SpdLogger::_errorSink->set_level(level::warn);
             }
-            sinks.push_back(SpdLogger::errorSink_);
+            sinks.push_back(SpdLogger::_errorSink);
 
-            if (SpdLogger::allSink_ == nullptr)
+            if (SpdLogger::_allSink == nullptr)
             {
-                SpdLogger::allSink_ = make_shared<sinks::rotating_file_sink_mt>(logDir + "All.log", 1024 * 1024 * 20, 5);
+                SpdLogger::_allSink = make_shared<sinks::rotating_file_sink_mt>(logDir + "All.log", 1024 * 1024 * 20, 5);
             }
-            sinks.push_back(SpdLogger::allSink_);
+            sinks.push_back(SpdLogger::_allSink);
         }
 
         // create and register logger
@@ -63,30 +63,30 @@ shared_ptr<logger> SpdLogger::createLogger(const string& name, const LoggerConfi
 }
 
 SpdLogger::SpdLogger(const string& name, const LoggerConfig& config)
-        : logger_(SpdLogger::createLogger(name, config)), includeFileAndLine_(config.showFileAndLine), name_(name)
+        : _logger(SpdLogger::createLogger(name, config)), _includeFileAndLine(config.showFileAndLine), _name(name)
 {
 }
 
 void SpdLogger::log(const string& message, LogLevel level, const char* file, int line)
 {
-    if (includeFileAndLine_ && file != nullptr && level == LogLevel::Trace)
-        logger_->log(static_cast<level::level_enum>(level), "{} ( \"{}:{}\" )", message, file, line);
+    if (_includeFileAndLine && file != nullptr && level == LogLevel::Trace)
+        _logger->log(static_cast<level::level_enum>(level), "{} ( \"{}:{}\" )", message, file, line);
     else
-        logger_->log(static_cast<level::level_enum>(level), message.c_str());
-    logger_->flush();
+        _logger->log(static_cast<level::level_enum>(level), message.c_str());
+    _logger->flush();
 }
 
 const string& SpdLogger::name() const
 {
-    return name_;
+    return _name;
 }
 
 void SpdLogger::setLogLevel(LogLevel level)
 {
     auto spdLogLevel = static_cast<level::level_enum>(level);
-    if (SpdLogger::allSink_)
+    if (SpdLogger::_allSink)
     {
-        SpdLogger::allSink_->set_level(spdLogLevel);
+        SpdLogger::_allSink->set_level(spdLogLevel);
     }
-    logger_->set_level(spdLogLevel);
+    _logger->set_level(spdLogLevel);
 }

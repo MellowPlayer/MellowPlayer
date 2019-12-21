@@ -21,7 +21,7 @@ namespace MellowPlayer::Infrastructure
         void doInstall(const QString& assetLocalPath) override;
         QString assetUrl() const override;
         QString assetFileName() const override;
-        Asset asset_;
+        Asset _asset;
         QString destinationDir() const;
         QString destinationPath() const;
     };

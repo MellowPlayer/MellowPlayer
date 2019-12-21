@@ -25,7 +25,7 @@ namespace MellowPlayer::Domain
         void codeChanged(QString);
 
     private:
-        QString code_;
-        QString path_;
+        QString _code;
+        QString _path;
     };
 }

@@ -6,32 +6,32 @@ using namespace MellowPlayer::Domain;
 using namespace MellowPlayer::Infrastructure;
 
 CommandLineArguments::CommandLineArguments()
-        : serviceOption_(QStringList() << "s"
+        : _serviceOption(QStringList() << "s"
                                        << "service",
                          "Select startup service",
                          "service"),
-          logLevelOption_(QStringList() << "l"
+          _logLevelOption(QStringList() << "l"
                                         << "log-level",
                           "Log level (0=TRACE, 1=DEBUG, 2=INFO, 3=WARNING, 4=ERROR, 5=CRITICAL, 6=OFF)",
                           "logLevel",
                           "1"),
-          playPauseOption_(QStringList() << "p"
+          _playPauseOption(QStringList() << "p"
                                          << "play-pause",
                            "Play or pause the current song"),
-          nextOption_(QStringList() << "f"
+          _nextOption(QStringList() << "f"
                                     << "next",
                       "Skip to the next song"),
-          previousOption_(QStringList() << "b"
+          _previousOption(QStringList() << "b"
                                         << "previous",
                           "Skip to the previous song"),
-          toggleFavoriteOption_(QStringList() << "t"
+          _toggleFavoriteOption(QStringList() << "t"
                                               << "toggle-favorite-song",
                                 "Add or remove the current song to/from your favorites"),
-          autoQuitDelayOption_(QStringList() << "d"
+          _autoQuitDelayOption(QStringList() << "d"
                                              << "auto-quit-delay",
                                "Auto quit delay [ms]",
                                "autoQuitDelay"),
-          startMinimizedOption_(QStringList() << "m"
+          _startMinimizedOption(QStringList() << "m"
                                               << "start-minimized",
                                 "Starts the application in minimized state")
 {
@@ -39,17 +39,17 @@ CommandLineArguments::CommandLineArguments()
 
 void CommandLineArguments::parse()
 {
-    parser_.setApplicationDescription("Cloud music player for your desktop!");
-    parser_.addVersionOption();
-    parser_.addHelpOption();
-    parser_.addOption(serviceOption_);
-    parser_.addOption(logLevelOption_);
-    parser_.addOption(playPauseOption_);
-    parser_.addOption(nextOption_);
-    parser_.addOption(previousOption_);
-    parser_.addOption(toggleFavoriteOption_);
-    parser_.addOption(autoQuitDelayOption_);
-    parser_.addOption(startMinimizedOption_);
+    _parser.setApplicationDescription("Cloud music player for your desktop!");
+    _parser.addVersionOption();
+    _parser.addHelpOption();
+    _parser.addOption(_serviceOption);
+    _parser.addOption(_logLevelOption);
+    _parser.addOption(_playPauseOption);
+    _parser.addOption(_nextOption);
+    _parser.addOption(_previousOption);
+    _parser.addOption(_toggleFavoriteOption);
+    _parser.addOption(_autoQuitDelayOption);
+    _parser.addOption(_startMinimizedOption);
 
     QStringList webEngineOptions = QStringList() << "--remote-debugging-port"
                                                  << "--ppapi-flash-path"
@@ -72,58 +72,58 @@ void CommandLineArguments::parse()
         if (addArg)
             args << arg;
     }
-    parser_.process(args);
+    _parser.process(args);
 
-    service_ = parser_.value(serviceOption_);
-    int logLevelValue = parser_.value(logLevelOption_).toInt();
+    _service = _parser.value(_serviceOption);
+    int logLevelValue = _parser.value(_logLevelOption).toInt();
     if (logLevelValue < 0 || logLevelValue > static_cast<int>(LogLevel::Off))
-        logLevel_ = LogLevel::Info;
+        _logLevel = LogLevel::Info;
     else
-        logLevel_ = static_cast<LogLevel>(logLevelValue);
-    autoQuitDelay_ = parser_.value(autoQuitDelayOption_).toInt();
+        _logLevel = static_cast<LogLevel>(logLevelValue);
+    _autoQuitDelay = _parser.value(_autoQuitDelayOption).toInt();
 
-    playRequested_ = parser_.isSet(playPauseOption_);
-    previousRequested_ = parser_.isSet(previousOption_);
-    nextRequested_ = parser_.isSet(nextOption_);
-    toggleFavoriteRequested_ = parser_.isSet(toggleFavoriteOption_);
-    startMinimized_ = parser_.isSet(startMinimizedOption_);
+    _playRequested = _parser.isSet(_playPauseOption);
+    _previousRequested = _parser.isSet(_previousOption);
+    _nextRequested = _parser.isSet(_nextOption);
+    _toggleFavoriteRequested = _parser.isSet(_toggleFavoriteOption);
+    _startMinimized = _parser.isSet(_startMinimizedOption);
 }
 
 QString CommandLineArguments::service() const
 {
-    return service_;
+    return _service;
 }
 
 int CommandLineArguments::autoQuitDelay() const
 {
-    return autoQuitDelay_;
+    return _autoQuitDelay;
 }
 
 bool CommandLineArguments::playPauseRequested() const
 {
-    return playRequested_;
+    return _playRequested;
 }
 
 bool CommandLineArguments::nextRequested() const
 {
-    return nextRequested_;
+    return _nextRequested;
 }
 
 bool CommandLineArguments::previousRequested() const
 {
-    return previousRequested_;
+    return _previousRequested;
 }
 
 LogLevel CommandLineArguments::logLevel() const
 {
-    return logLevel_;
+    return _logLevel;
 }
 bool CommandLineArguments::toggleFavoriteRequested() const
 {
-    return toggleFavoriteRequested_;
+    return _toggleFavoriteRequested;
 }
 
 bool CommandLineArguments::startMinimized() const
 {
-    return startMinimized_;
+    return _startMinimized;
 }

@@ -12,37 +12,37 @@ WindowsUpdater::WindowsUpdater(IFileDownloader& fileDownloader) : AbstractPlatfo
 
 bool WindowsUpdater::canInstall() const
 {
-    return asset_.isValid() && asset_.isWindowsInstaller();
+    return _asset.isValid() && _asset.isWindowsInstaller();
 }
 
 void WindowsUpdater::doInstall(const QString& assetLocalPath)
 {
-    installerPath_ = assetLocalPath;
+    _installerPath = assetLocalPath;
     // no installation here, we'll start the installer when user clicked on restart
-    emit installFinished(QFile::exists(installerPath_));
+    emit installFinished(QFile::exists(_installerPath));
 }
 
 QString WindowsUpdater::assetUrl() const
 {
-    return asset_.url();
+    return _asset.url();
 }
 
 QString WindowsUpdater::assetFileName() const
 {
-    return asset_.name();
+    return _asset.name();
 }
 
 void WindowsUpdater::setRelease(const Release* release)
 {
     AbstractPlatformUpdater::setRelease(release);
 
-    if (release_ != nullptr)
+    if (_release != nullptr)
     {
-        for (auto& asset : release_->assets())
+        for (auto& asset : _release->assets())
         {
             if (asset.isWindowsInstaller())
             {
-                asset_ = asset;
+                _asset = asset;
                 break;
             }
         }
@@ -51,6 +51,6 @@ void WindowsUpdater::setRelease(const Release* release)
 
 void WindowsUpdater::restart()
 {
-    QProcess::startDetached(installerPath_);
+    QProcess::startDetached(_installerPath);
     qApp->quit();
 }

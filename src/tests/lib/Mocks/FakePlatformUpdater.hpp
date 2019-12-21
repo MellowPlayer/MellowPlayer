@@ -13,12 +13,12 @@ namespace MellowPlayer::Tests
 
         bool canInstall() const override
         {
-            return canInstall_;
+            return _canInstall;
         }
 
         void setCanInstall(bool enable)
         {
-            canInstall_ = enable;
+            _canInstall = enable;
         }
 
         void finishDownload()
@@ -47,6 +47,6 @@ namespace MellowPlayer::Tests
         }
 
     private:
-        bool canInstall_ = false;
+        bool _canInstall = false;
     };
 }

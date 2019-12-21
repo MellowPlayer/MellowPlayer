@@ -10,6 +10,6 @@ namespace MellowPlayer::Infrastructure
         LinuxFilterBase();
 
     protected:
-        bool isAppImage_;
+        bool _isAppImage;
     };
 }

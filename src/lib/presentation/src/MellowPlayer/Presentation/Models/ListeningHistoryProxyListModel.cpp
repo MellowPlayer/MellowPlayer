@@ -3,7 +3,7 @@
 
 using namespace MellowPlayer::Presentation;
 
-ListeningHistoryProxyListModel::ListeningHistoryProxyListModel(ListeningHistoryListModel* sourceModel) : sourceModel_(sourceModel)
+ListeningHistoryProxyListModel::ListeningHistoryProxyListModel(ListeningHistoryListModel* sourceModel) : _sourceModel(sourceModel)
 {
     setSourceModel(sourceModel);
     setDynamicSortFilter(true);
@@ -12,29 +12,29 @@ ListeningHistoryProxyListModel::ListeningHistoryProxyListModel(ListeningHistoryL
 void ListeningHistoryProxyListModel::disableService(const QString& serviceName, bool disable)
 {
     if (disable)
-        disabledServices_.append(serviceName);
+        _disabledServices.append(serviceName);
     else
-        disabledServices_.removeOne(serviceName);
+        _disabledServices.removeOne(serviceName);
     invalidateFilter();
 }
 
 void ListeningHistoryProxyListModel::setSearchFilter(const QString& newSearchFilter)
 {
-    searchFilter_ = newSearchFilter.toLower();
+    _searchFilter = newSearchFilter.toLower();
     invalidateFilter();
 }
 
 bool ListeningHistoryProxyListModel::filterAcceptsRow(int sourceRow, const QModelIndex&) const
 {
-    ListeningHistoryEntryViewModel* entry = sourceModel_->at(sourceRow);
-    if (disabledServices_.contains(entry->service()))
+    ListeningHistoryEntryViewModel* entry = _sourceModel->at(sourceRow);
+    if (_disabledServices.contains(entry->service()))
         return false;
-    if (searchFilter_.isEmpty())
+    if (_searchFilter.isEmpty())
         return true;
     else
     {
-        bool titleContainsFilter = entry->title().toLower().contains(searchFilter_.toLower());
-        bool artistContainsFilter = entry->artist().toLower().contains(searchFilter_.toLower());
+        bool titleContainsFilter = entry->title().toLower().contains(_searchFilter.toLower());
+        bool artistContainsFilter = entry->artist().toLower().contains(_searchFilter.toLower());
         return titleContainsFilter || artistContainsFilter;
     }
 }

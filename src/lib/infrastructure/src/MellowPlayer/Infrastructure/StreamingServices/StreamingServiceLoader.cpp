@@ -20,7 +20,7 @@ using namespace MellowPlayer::Domain;
 using namespace MellowPlayer::Infrastructure;
 using namespace std;
 
-StreamingServiceLoader::StreamingServiceLoader(Settings& settings) : logger_(Loggers::logger("StreamingServiceLoader")), _settings(settings)
+StreamingServiceLoader::StreamingServiceLoader(Settings& settings) : _logger(Loggers::logger("StreamingServiceLoader")), _settings(settings)
 {
 }
 
@@ -31,10 +31,10 @@ QList<shared_ptr<StreamingService>> StreamingServiceLoader::load() const
     {
         if (!QDir(path).exists())
         {
-            LOG_DEBUG(logger_, "skipping plugin directory: " << path.toStdString().c_str() << " (directory not found)");
+            LOG_DEBUG(_logger, "skipping plugin directory: " << path.toStdString().c_str() << " (directory not found)");
             continue;
         }
-        LOG_DEBUG(logger_, "looking for services in " << path.toStdString().c_str());
+        LOG_DEBUG(_logger, "looking for services in " << path.toStdString().c_str());
         for (const QFileInfo& directory : QDir(path).entryInfoList(QDir::Dirs | QDir::NoDotAndDotDot))
         {
             if (checkServiceDirectory(directory.absoluteFilePath()))
@@ -44,12 +44,12 @@ QList<shared_ptr<StreamingService>> StreamingServiceLoader::load() const
                     continue;
                 if (service->isValid() && !containsService(services, service))
                 {
-                    LOG_INFO(logger_, service->name() + " streamingService successfully loaded (from \"" + directory.absoluteFilePath() + "\")");
+                    LOG_INFO(_logger, service->name() + " streamingService successfully loaded (from \"" + directory.absoluteFilePath() + "\")");
                     services.append(service);
                 }
                 else
                 {
-                    LOG_DEBUG(logger_, "skipping streamingService " + service->name() + ", already loaded from another source or invalid");
+                    LOG_DEBUG(_logger, "skipping streamingService " + service->name() + ", already loaded from another source or invalid");
                 }
             }
         }
@@ -101,7 +101,7 @@ StreamingServiceMetadata StreamingServiceLoader::readMetadata(const QString& fil
 
     QString supportedPlatforms = meta.value("supported_platforms").toString();
 
-    if (platformFilters_.match(supportedPlatforms))
+    if (_platformFilters.match(supportedPlatforms))
     {
         StreamingServiceMetadata serviceMetadata;
         serviceMetadata.author = meta.value("author").toString();
@@ -137,7 +137,7 @@ unique_ptr<StreamingService> StreamingServiceLoader::loadService(const QString& 
     }
     catch (std::runtime_error&)
     {
-        LOG_INFO(logger_, "plugin is not supported on this platform");
+        LOG_INFO(_logger, "plugin is not supported on this platform");
         return nullptr;
     }
     metadata.pluginDirectory = directory;

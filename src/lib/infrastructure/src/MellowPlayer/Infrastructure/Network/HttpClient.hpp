@@ -18,6 +18,6 @@ namespace MellowPlayer::Infrastructure
         void onFinished(QNetworkReply* reply);
 
     private:
-        QNetworkAccessManager networkAccessManager_;
+        QNetworkAccessManager _networkAccessManager;
     };
 }

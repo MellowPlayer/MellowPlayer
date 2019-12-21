@@ -28,10 +28,10 @@ namespace MellowPlayer::Infrastructure
         void onDownloadProgress(qint64 bytesReceived, qint64 bytesTotal);
 
     private:
-        Domain::ILogger& logger_;
-        QNetworkAccessManager networkAccessManager_;
-        QFileInfo destinationPath_;
-        QNetworkReply* currentReply_ = nullptr;
-        double progress_ = 0;
+        Domain::ILogger& _logger;
+        QNetworkAccessManager _networkAccessManager;
+        QFileInfo _destinationPath;
+        QNetworkReply* _currentReply = nullptr;
+        double _progress = 0;
     };
 }

@@ -11,10 +11,10 @@ TokenizedFilters::TokenizedFilters(const QString& filters)
     FilterConverter converter;
 
     for (auto token : tokens)
-        filters_.append(converter.fromString(token));
+        _filters.append(converter.fromString(token));
 }
 
-TokenizedFilters::TokenizedFilters(const QList<Filter>& filters) : filters_(filters)
+TokenizedFilters::TokenizedFilters(const QList<Filter>& filters) : _filters(filters)
 {
 }
 
@@ -23,7 +23,7 @@ QString TokenizedFilters::join() const
     QStringList strings;
     FilterConverter converter;
 
-    for (auto filter : filters_)
+    for (auto filter : _filters)
     {
         strings.append(converter.toString(filter));
     }
@@ -33,10 +33,10 @@ QString TokenizedFilters::join() const
 
 TokenizedFilters::const_iterator TokenizedFilters::begin(void) const
 {
-    return filters_.begin();
+    return _filters.begin();
 }
 
 TokenizedFilters::const_iterator TokenizedFilters::end(void) const
 {
-    return filters_.end();
+    return _filters.end();
 }

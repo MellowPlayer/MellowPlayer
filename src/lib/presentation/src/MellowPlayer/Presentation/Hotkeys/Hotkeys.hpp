@@ -43,23 +43,23 @@ namespace MellowPlayer::Presentation
         void updatePlayShortcut() const;
         void updateRestoreWindowShortcut() const;
 
-        Domain::ILogger& logger_;
-        Domain::IPlayer& player_;
-        IMainWindow& mainWindow_;
+        Domain::ILogger& _logger;
+        Domain::IPlayer& _player;
+        IMainWindow& _mainWindow;
 
-        std::shared_ptr<QxtGlobalShortcut> playShortcut_;
-        std::shared_ptr<QxtGlobalShortcut> nextShortcut_;
-        std::shared_ptr<QxtGlobalShortcut> previousShortcut_;
-        std::shared_ptr<QxtGlobalShortcut> favoriteShortcut_;
-        std::shared_ptr<QxtGlobalShortcut> restoreWindowShortcut_;
-        std::shared_ptr<QxtGlobalShortcut> mediaPlayShortcut_;
-        std::shared_ptr<QxtGlobalShortcut> mediaNextShortcut_;
-        std::shared_ptr<QxtGlobalShortcut> mediaPreviousShortcut_;
+        std::shared_ptr<QxtGlobalShortcut> _playShortcut;
+        std::shared_ptr<QxtGlobalShortcut> _nextShortcut;
+        std::shared_ptr<QxtGlobalShortcut> _previousShortcut;
+        std::shared_ptr<QxtGlobalShortcut> _favoriteShortcut;
+        std::shared_ptr<QxtGlobalShortcut> _restoreWindowShortcut;
+        std::shared_ptr<QxtGlobalShortcut> _mediaPlayShortcut;
+        std::shared_ptr<QxtGlobalShortcut> _mediaNextShortcut;
+        std::shared_ptr<QxtGlobalShortcut> _mediaPreviousShortcut;
 
-        Domain::Setting& playShortcutSetting_;
-        Domain::Setting& nextShortcutSetting_;
-        Domain::Setting& previousShortcutSetting_;
-        Domain::Setting& favoriteShortcutSetting_;
-        Domain::Setting& restoreWindowShortcutSetting_;
+        Domain::Setting& _playShortcutSetting;
+        Domain::Setting& _nextShortcutSetting;
+        Domain::Setting& _previousShortcutSetting;
+        Domain::Setting& _favoriteShortcutSetting;
+        Domain::Setting& _restoreWindowShortcutSetting;
     };
 }

@@ -40,7 +40,7 @@ namespace MellowPlayer::Domain
 
         bool operator==(const Song& other) const
         {
-            return uniqueId_ == other.uniqueId_;
+            return _uniqueId == other._uniqueId;
         }
         bool operator!=(const Song& other) const
         {
@@ -49,15 +49,15 @@ namespace MellowPlayer::Domain
 
         Q_INVOKABLE bool isValid() const
         {
-            return !uniqueId_.isEmpty() && !toString().isEmpty();
+            return !_uniqueId.isEmpty() && !toString().isEmpty();
         }
 
         QString toString() const
         {
-            if (!artist_.isEmpty())
-                return title_ + " by " + artist_;
+            if (!_artist.isEmpty())
+                return _title + " by " + _artist;
             else
-                return title_;
+                return _title;
         }
 
         std::shared_ptr<Song> clone() const
@@ -71,12 +71,12 @@ namespace MellowPlayer::Domain
         void artUrlChanged();
 
     private:
-        QString uniqueId_;
-        QString title_;
-        QString artist_;
-        QString album_;
-        QString artUrl_;
-        double duration_;  // in seconds
-        bool isFavorite_;
+        QString _uniqueId;
+        QString _title;
+        QString _artist;
+        QString _album;
+        QString _artUrl;
+        double _duration;  // in seconds
+        bool _isFavorite;
     };
 }

@@ -51,9 +51,9 @@ namespace MellowPlayer::Domain
         void themeChanged();
 
     private:
-        StreamingServiceMetadata metadata_;
-        Theme theme_;
+        StreamingServiceMetadata _metadata;
+        Theme _theme;
         std::shared_ptr<SettingsCategory> _settings;
-        std::unique_ptr<StreamingServiceScript> script_;
+        std::unique_ptr<StreamingServiceScript> _script;
     };
 }

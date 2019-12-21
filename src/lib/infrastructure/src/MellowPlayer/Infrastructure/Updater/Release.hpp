@@ -36,11 +36,11 @@ namespace MellowPlayer::Infrastructure
         static const Release& current();
 
     private:
-        QString url_;
-        QString name_;
-        QDate date_;
-        bool preRelease_;
-        AssetList assets_;
+        QString _url;
+        QString _name;
+        QDate _date;
+        bool _preRelease;
+        AssetList _assets;
 
         static Release current_;
     };

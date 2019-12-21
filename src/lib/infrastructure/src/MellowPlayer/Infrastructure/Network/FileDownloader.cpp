@@ -8,38 +8,38 @@
 using namespace MellowPlayer::Domain;
 using namespace MellowPlayer::Infrastructure;
 
-FileDownloader::FileDownloader() : logger_(Loggers::logger("FileDownloader"))
+FileDownloader::FileDownloader() : _logger(Loggers::logger("FileDownloader"))
 {
-    connect(&networkAccessManager_, &QNetworkAccessManager::finished, this, &FileDownloader::onDownloadFinished);
+    connect(&_networkAccessManager, &QNetworkAccessManager::finished, this, &FileDownloader::onDownloadFinished);
 }
 
 void FileDownloader::download(const QString& urlToDownload, const QString& filePath)
 {
     if (!isDownloading())
     {
-        LOG_DEBUG(logger_, "downloading " << urlToDownload << " to " << filePath);
-        progress_ = 0;
-        destinationPath_ = QFileInfo(filePath);
-        currentReply_ = networkAccessManager_.get(QNetworkRequest(QUrl(urlToDownload)));
-        connect(currentReply_, &QNetworkReply::downloadProgress, this, &FileDownloader::onDownloadProgress);
+        LOG_DEBUG(_logger, "downloading " << urlToDownload << " to " << filePath);
+        _progress = 0;
+        _destinationPath = QFileInfo(filePath);
+        _currentReply = _networkAccessManager.get(QNetworkRequest(QUrl(urlToDownload)));
+        connect(_currentReply, &QNetworkReply::downloadProgress, this, &FileDownloader::onDownloadProgress);
     }
 }
 
 double FileDownloader::progress() const
 {
-    return progress_;
+    return _progress;
 }
 
 bool FileDownloader::isDownloading() const
 {
-    return currentReply_ != nullptr;
+    return _currentReply != nullptr;
 }
 
 void FileDownloader::onDownloadFinished(QNetworkReply* reply)
 {
     bool success = false;
 
-    currentReply_ = nullptr;
+    _currentReply = nullptr;
 
     if (reply->error() == QNetworkReply::NoError)
     {
@@ -47,25 +47,25 @@ void FileDownloader::onDownloadFinished(QNetworkReply* reply)
 
         if (!redirectUrl.isEmpty())
         {
-            LOG_DEBUG(logger_, "redirected to: " << redirectUrl);
-            download(redirectUrl, destinationPath_.absoluteFilePath());
+            LOG_DEBUG(_logger, "redirected to: " << redirectUrl);
+            download(redirectUrl, _destinationPath.absoluteFilePath());
             return;
         }
 
         QByteArray replyData = reply->readAll();
-        QFile file(destinationPath_.absoluteFilePath());
+        QFile file(_destinationPath.absoluteFilePath());
         if (file.open(QIODevice::WriteOnly))
         {
             file.write(replyData);
 
-            LOG_DEBUG(logger_, "file downloaded with success: " << destinationPath_.absoluteFilePath());
+            LOG_DEBUG(_logger, "file downloaded with success: " << _destinationPath.absoluteFilePath());
             success = true;
         }
         else
-            LOG_DEBUG(logger_, "failed to write file: " << destinationPath_.absoluteFilePath() << " - Error: " << file.errorString());
+            LOG_DEBUG(_logger, "failed to write file: " << _destinationPath.absoluteFilePath() << " - Error: " << file.errorString());
     }
     else
-        LOG_DEBUG(logger_, "download failed: " << reply->errorString());
+        LOG_DEBUG(_logger, "download failed: " << reply->errorString());
 
     emit finished(success);
 }
@@ -77,10 +77,10 @@ void FileDownloader::onDownloadProgress(qint64 bytesReceived, qint64 bytesTotal)
         ratio = static_cast<double>(bytesReceived) / bytesTotal;
     double progress = (ratio * 100);
 
-    if (progress_ != progress)
+    if (_progress != progress)
     {
-        LOG_DEBUG(logger_, "download progress: " << progress);
-        progress_ = progress;
-        emit progressChanged(progress_);
+        LOG_DEBUG(_logger, "download progress: " << progress);
+        _progress = progress;
+        emit progressChanged(_progress);
     }
 }

@@ -35,8 +35,8 @@ namespace MellowPlayer::Infrastructure
         QStringList searchPaths() const;
         bool containsService(const QList<std::shared_ptr<Domain::StreamingService>>& services, std::shared_ptr<Domain::StreamingService>& toCheck) const;
 
-        Domain::ILogger& logger_;
+        Domain::ILogger& _logger;
         Domain::Settings& _settings;
-        PlatformFilters platformFilters_;
+        PlatformFilters _platformFilters;
     };
 }

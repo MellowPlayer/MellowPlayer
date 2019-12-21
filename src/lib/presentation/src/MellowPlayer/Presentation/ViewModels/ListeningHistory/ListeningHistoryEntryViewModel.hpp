@@ -31,7 +31,7 @@ namespace MellowPlayer::Presentation
         QString dateCategory() const;
 
     private:
-        Domain::ListeningHistoryEntry entry_;
-        DateTimeConverter dateTimeConverter_;
+        Domain::ListeningHistoryEntry _entry;
+        DateTimeConverter _dateTimeConverter;
     };
 }

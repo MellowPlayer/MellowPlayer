@@ -14,10 +14,10 @@ namespace MellowPlayer::Infrastructure
         Filter fromString(const QString& filterString) const;
 
     private:
-        QString linux_;
-        QString appImage_;
-        QString windows_;
-        QString osx_;
-        QString all_;
+        QString _linux;
+        QString _appImage;
+        QString _windows;
+        QString _osx;
+        QString _all;
     };
 }

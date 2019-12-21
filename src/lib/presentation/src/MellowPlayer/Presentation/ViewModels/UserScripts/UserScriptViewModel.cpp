@@ -4,36 +4,36 @@
 using namespace MellowPlayer::Domain;
 using namespace MellowPlayer::Presentation;
 
-UserScriptViewModel::UserScriptViewModel(IUserScript& model, QObject* parent) : QObject(parent), model_(model)
+UserScriptViewModel::UserScriptViewModel(IUserScript& model, QObject* parent) : QObject(parent), _model(model)
 {
 }
 
 QString UserScriptViewModel::name() const
 {
-    return model_.name();
+    return _model.name();
 }
 
 void UserScriptViewModel::setName(const QString& name)
 {
     Q_UNUSED(name);
-    if (name != model_.name())
+    if (name != _model.name())
     {
-        model_.setName(name);
+        _model.setName(name);
         emit nameChanged();
     }
 }
 
 QString UserScriptViewModel::code() const
 {
-    return model_.code();
+    return _model.code();
 }
 
 QString UserScriptViewModel::path() const
 {
-    return model_.path();
+    return _model.path();
 }
 
 IUserScript& UserScriptViewModel::model()
 {
-    return model_;
+    return _model;
 }

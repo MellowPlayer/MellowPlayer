@@ -11,46 +11,46 @@ using namespace MellowPlayer::Domain;
 using namespace MellowPlayer::Infrastructure;
 
 ApplicationNetworkProxy::ApplicationNetworkProxy(StreamingServices& streamingServices, INetworkProxies& networkProxies)
-        : logger_(Loggers::logger("ApplicationNetworkProxy")),
-          initialNetworkProxy_(QNetworkProxy::applicationProxy()),
-          streamingServices_(streamingServices),
-          networkProxies_(networkProxies)
+        : _logger(Loggers::logger("ApplicationNetworkProxy")),
+          _initialNetworkProxy(QNetworkProxy::applicationProxy()),
+          _streamingServices(streamingServices),
+          _networkProxies(networkProxies)
 {
     connect(&streamingServices, &StreamingServices::currentChanged, this, &ApplicationNetworkProxy::onCurrentStreamingServiceChanged);
 }
 
 void ApplicationNetworkProxy::onCurrentStreamingServiceChanged(StreamingService* service)
 {
-    if (currentNetworkProxy_)
-        disconnect(currentNetworkProxy_.get(), &NetworkProxy::changed, this, &ApplicationNetworkProxy::updateNetworkProxy);
+    if (_currentNetworkProxy)
+        disconnect(_currentNetworkProxy.get(), &NetworkProxy::changed, this, &ApplicationNetworkProxy::updateNetworkProxy);
 
     if (service != nullptr)
     {
-        currentServiceName_ = service->name();
-        currentNetworkProxy_ = networkProxies_.get(service->name());
-        connect(currentNetworkProxy_.get(), &NetworkProxy::changed, this, &ApplicationNetworkProxy::updateNetworkProxy);
+        _currentServiceName = service->name();
+        _currentNetworkProxy = _networkProxies.get(service->name());
+        connect(_currentNetworkProxy.get(), &NetworkProxy::changed, this, &ApplicationNetworkProxy::updateNetworkProxy);
     }
     else
-        currentNetworkProxy_ = nullptr;
+        _currentNetworkProxy = nullptr;
 
     updateNetworkProxy();
 }
 
 void ApplicationNetworkProxy::updateNetworkProxy()
 {
-    if (currentNetworkProxy_ != nullptr && currentNetworkProxy_->isValid())
+    if (_currentNetworkProxy != nullptr && _currentNetworkProxy->isValid())
     {
-        LOG_INFO(logger_, QString("Using %1 network proxy settings: %2").arg(currentServiceName_).arg(currentNetworkProxy_->toString()));
-        QNetworkProxy::setApplicationProxy(currentNetworkProxy_->create());
+        LOG_INFO(_logger, QString("Using %1 network proxy settings: _%2").arg(_currentServiceName).arg(_currentNetworkProxy->toString()));
+        QNetworkProxy::setApplicationProxy(_currentNetworkProxy->create());
     }
-    else if (QNetworkProxy::applicationProxy() != initialNetworkProxy_)
+    else if (QNetworkProxy::applicationProxy() != _initialNetworkProxy)
     {
-        LOG_INFO(logger_, "Restoring initial network proxy");
-        QNetworkProxy::setApplicationProxy(initialNetworkProxy_);
+        LOG_INFO(_logger, "Restoring initial network proxy");
+        QNetworkProxy::setApplicationProxy(_initialNetworkProxy);
     }
 }
 
 ApplicationNetworkProxy::~ApplicationNetworkProxy()
 {
-    QNetworkProxy::setApplicationProxy(initialNetworkProxy_);
+    QNetworkProxy::setApplicationProxy(_initialNetworkProxy);
 }

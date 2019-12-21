@@ -10,7 +10,7 @@ IconSettingViewModel::IconSettingViewModel(Setting &setting, QObject *parent) : 
 
 QString IconSettingViewModel::getValue() const
 {
-    return setting_.value().toString();
+    return _setting.value().toString();
 }
 
 QString IconSettingViewModel::qmlComponent()
@@ -20,7 +20,7 @@ QString IconSettingViewModel::qmlComponent()
 
 void IconSettingViewModel::setValue(QString value)
 {
-    setting_.setValue(value);
+    _setting.setValue(value);
 }
 
 void IconSettingViewModel::onValueChanged()

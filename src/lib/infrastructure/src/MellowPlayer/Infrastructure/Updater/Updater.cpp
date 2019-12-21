@@ -13,16 +13,16 @@ using namespace MellowPlayer::Domain;
 using namespace MellowPlayer::Infrastructure;
 
 Updater::Updater(ILatestRelease& releaseQuerier, Settings& settings, AbstractPlatformUpdater& platformUpdater)
-        : logger_(Loggers::logger("Updater")),
-          releaseQuerier_(releaseQuerier),
-          platformUpdater_(platformUpdater),
-          autoCheckEnabledSetting_(settings.get(SettingKey::MAIN_CHECK_FOR_UPDATES)),
-          updateChannelSetting_(settings.get(SettingKey::MAIN_UPDATE_CHANNEL)),
-          currentRelease_(&Release::current())
+        : _logger(Loggers::logger("Updater")),
+          _releaseQuerier(releaseQuerier),
+          _platformUpdater(platformUpdater),
+          _autoCheckEnabledSetting(settings.get(SettingKey::MAIN_CHECK_FOR_UPDATES)),
+          _updateChannelSetting(settings.get(SettingKey::MAIN_UPDATE_CHANNEL)),
+          _currentRelease(&Release::current())
 {
     releaseQuerier.setChannel(getChannel());
     connect(&releaseQuerier, &ILatestRelease::received, this, &Updater::onLatestReleaseReceived);
-    connect(&updateChannelSetting_, &Setting::valueChanged, this, &Updater::check);
+    connect(&_updateChannelSetting, &Setting::valueChanged, this, &Updater::check);
     connect(&platformUpdater, &AbstractPlatformUpdater::progressUpdated, this, &Updater::progressUpdated);
     connect(&platformUpdater, &AbstractPlatformUpdater::downloadFinished, this, &Updater::onDownloadFinished);
     connect(&platformUpdater, &AbstractPlatformUpdater::installFinished, this, &Updater::onInstallFinished);
@@ -30,75 +30,75 @@ Updater::Updater(ILatestRelease& releaseQuerier, Settings& settings, AbstractPla
 
 void Updater::check()
 {
-    LOG_INFO(logger_, "Checking for update");
+    LOG_INFO(_logger, "Checking for update");
     setStatus(Status::Checking);
-    releaseQuerier_.setChannel(getChannel());
-    releaseQuerier_.get();
+    _releaseQuerier.setChannel(getChannel());
+    _releaseQuerier.get();
 }
 
 UpdateChannel Updater::getChannel() const
 {
-    return static_cast<UpdateChannel>(updateChannelSetting_.value().toInt());
+    return static_cast<UpdateChannel>(_updateChannelSetting.value().toInt());
 }
 
 void Updater::install()
 {
-    LOG_INFO(logger_, "Downloading update");
+    LOG_INFO(_logger, "Downloading update");
     setStatus(Status::Downloading);
-    platformUpdater_.download();
+    _platformUpdater.download();
 }
 
 bool Updater::isUpdateAvailable() const
 {
-    return isUpdateAvailable_;
+    return _isUpdateAvailable;
 }
 
 bool Updater::canInstall() const
 {
-    return platformUpdater_.canInstall();
+    return _platformUpdater.canInstall();
 }
 
 const Release* Updater::latestRelease() const
 {
-    return latestRelease_;
+    return _latestRelease;
 }
 
 void Updater::onLatestReleaseReceived(const Release* release)
 {
-    if (release != nullptr && *release > *currentRelease_)
+    if (release != nullptr && *release > *_currentRelease)
     {
-        LOG_INFO(logger_, QString("Latest release is an update (%1 < %2)").arg(currentRelease_->name()).arg(release->name()));
+        LOG_INFO(_logger, QString("Latest release is an update (%1 < %2)").arg(_currentRelease->name()).arg(release->name()));
         setStatus(Status::UpdateAvailable);
-        latestRelease_ = release;
-        platformUpdater_.setRelease(latestRelease_);
-        isUpdateAvailable_ = true;
+        _latestRelease = release;
+        _platformUpdater.setRelease(_latestRelease);
+        _isUpdateAvailable = true;
         emit updateAvailable();
     }
     else
     {
-        LOG_INFO(logger_, QString("Current release is up to date..."));
+        LOG_INFO(_logger, QString("Current release is up to date..."));
         setStatus(Status::None);
-        latestRelease_ = nullptr;
-        isUpdateAvailable_ = false;
+        _latestRelease = nullptr;
+        _isUpdateAvailable = false;
         emit noUpdateAvailable();
     }
 }
 
 void Updater::setCurrentRelease(const Release* currentRelease)
 {
-    currentRelease_ = currentRelease;
+    _currentRelease = currentRelease;
 }
 
 Updater::Status Updater::status() const
 {
-    return status_;
+    return _status;
 }
 
 void Updater::setStatus(Updater::Status status)
 {
-    if (status_ != status)
+    if (_status != status)
     {
-        status_ = status;
+        _status = status;
         emit statusChanged();
     }
 }
@@ -107,13 +107,13 @@ void Updater::onDownloadFinished(bool succes)
 {
     if (succes)
     {
-        LOG_INFO(logger_, "download finished, installing...")
+        LOG_INFO(_logger, "download finished, installing...")
         setStatus(Status::Installing);
-        platformUpdater_.install();
+        _platformUpdater.install();
     }
     else
     {
-        LOG_ERROR(logger_, "download failed")
+        LOG_ERROR(_logger, "download failed")
         setStatus(Status::Failure);
     }
 }
@@ -121,17 +121,17 @@ void Updater::onInstallFinished(bool succes)
 {
     if (succes)
     {
-        LOG_INFO(logger_, "install finished, you can now restart the application");
+        LOG_INFO(_logger, "install finished, you can now restart the application");
         setStatus(Status::Installed);
         emit installed();
     }
     else
     {
-        LOG_ERROR(logger_, "install failed");
+        LOG_ERROR(_logger, "install failed");
         setStatus(Status::Failure);
     }
 }
 void Updater::restart()
 {
-    platformUpdater_.restart();
+    _platformUpdater.restart();
 }

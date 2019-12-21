@@ -11,12 +11,12 @@ ShortcutSettingViewModel::ShortcutSettingViewModel(Setting& setting, QObject* pa
 
 QString ShortcutSettingViewModel::getValue() const
 {
-    return setting_.value().toString();
+    return _setting.value().toString();
 }
 
 void ShortcutSettingViewModel::setValue(QString value)
 {
-    setting_.setValue(value);
+    _setting.setValue(value);
 }
 
 void ShortcutSettingViewModel::onValueChanged()

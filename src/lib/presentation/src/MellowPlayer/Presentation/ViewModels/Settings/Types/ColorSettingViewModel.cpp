@@ -10,12 +10,12 @@ ColorSettingViewModel::ColorSettingViewModel(Setting& setting, QObject* parent) 
 
 QColor ColorSettingViewModel::getValue() const
 {
-    return QColor(setting_.value().toString());
+    return QColor(_setting.value().toString());
 }
 
 void ColorSettingViewModel::setValue(QColor value)
 {
-    setting_.setValue(value.name());
+    _setting.setValue(value.name());
 }
 
 void ColorSettingViewModel::onValueChanged()

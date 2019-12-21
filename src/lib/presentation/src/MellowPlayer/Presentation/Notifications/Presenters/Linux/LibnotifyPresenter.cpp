@@ -13,7 +13,7 @@ using namespace MellowPlayer::Domain;
 using namespace MellowPlayer::Domain;
 using namespace MellowPlayer::Presentation;
 
-LibnotifyPresenter* LibnotifyPresenter::instance_ = nullptr;
+LibnotifyPresenter* LibnotifyPresenter::_instance = nullptr;
 
 void notify_action_callback(NotifyNotification*, char*, gpointer)
 {
@@ -21,23 +21,23 @@ void notify_action_callback(NotifyNotification*, char*, gpointer)
 }
 
 LibnotifyPresenter::LibnotifyPresenter(IMainWindow& mainWindow, IWorkDispatcher& workDispatcher)
-        : logger_(Loggers::logger("LibnotifyPresenter")), mainWindow_(mainWindow), _workDispatcher(workDispatcher), previousNotification_(nullptr)
+        : _logger(Loggers::logger("LibnotifyPresenter")), _mainWindow(mainWindow), _workDispatcher(workDispatcher), _previousNotification(nullptr)
 {
-    instance_ = this;
+    _instance = this;
 }
 
 void LibnotifyPresenter::initialize()
 {
     notify_init("MellowPlayer");
     checkSupportForActions();
-    LOG_DEBUG(logger_, "service started")
+    LOG_DEBUG(_logger, "service started")
 }
 
 void LibnotifyPresenter::checkSupportForActions()
 {
     GList* caps = notify_get_server_caps();
     if (g_list_find_custom(caps, "actions", (GCompareFunc) g_strcmp0) == NULL)
-        actionsSupported_ = false;
+        _actionsSupported = false;
     g_list_free_full(caps, g_free);
 }
 
@@ -46,26 +46,26 @@ bool LibnotifyPresenter::display(const Notification& notification)
     Q_UNUSED(notification)
     static LibnotifyStrings strings;
 
-    if (previousNotification_)
-        notify_notification_close(previousNotification_, 0);
+    if (_previousNotification)
+        notify_notification_close(_previousNotification, 0);
 
     QString title = "MellowPlayer - " + notification.title;
     NotifyNotification* n =
             notify_notification_new(title.toStdString().c_str(), notification.description.toStdString().c_str(), notification.icon.toStdString().c_str());
     notify_notification_set_timeout(n, 5000);
     string openStr = strings.open();
-    if (actionsSupported_)
+    if (_actionsSupported)
         notify_notification_add_action(n, "open", strings.open().c_str(), (NotifyActionCallback) notify_action_callback, nullptr, nullptr);
     notify_notification_set_hint(n, "desktop-entry", g_variant_new_string("mellowplayer"));
 
     _workDispatcher.invoke([=]() { notify_notification_show(n, 0); });
 
-    previousNotification_ = n;
+    _previousNotification = n;
 
     return true;
 }
 
 void LibnotifyPresenter::onActionCallback()
 {
-    instance_->mainWindow_.raise();
+    _instance->_mainWindow.raise();
 }

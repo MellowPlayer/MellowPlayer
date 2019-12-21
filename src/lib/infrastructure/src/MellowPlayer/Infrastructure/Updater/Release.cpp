@@ -5,43 +5,43 @@ using namespace MellowPlayer::Infrastructure;
 
 Release Release::current_(BuildConfig::getVersion(), QDate::fromString(BuildConfig::getBuildDate(), Qt::ISODate));
 
-Release::Release(const QString& name, const QDate& date, QObject* parent) : QObject(parent), url_(""), name_(name), date_(date), preRelease_(false), assets_()
+Release::Release(const QString& name, const QDate& date, QObject* parent) : QObject(parent), _url(""), _name(name), _date(date), _preRelease(false), _assets()
 {
 }
 
 Release::Release(const QString& url, const QString& name, const QDate& date, const AssetList& assets, bool preRelease, QObject* parent)
-        : QObject(parent), url_(url), name_(name), date_(date), preRelease_(preRelease), assets_(assets)
+        : QObject(parent), _url(url), _name(name), _date(date), _preRelease(preRelease), _assets(assets)
 {
 }
 
 QString Release::url() const
 {
-    return url_;
+    return _url;
 }
 
 QString Release::name() const
 {
-    return name_;
+    return _name;
 }
 
 QString Release::date() const
 {
-    return date_.toString("MMMM dd yyyy");
+    return _date.toString("MMMM dd yyyy");
 }
 
 bool Release::isPreRelease() const
 {
-    return preRelease_;
+    return _preRelease;
 }
 
 const AssetList& Release::assets() const
 {
-    return assets_;
+    return _assets;
 }
 
 bool Release::operator==(const Release& other) const
 {
-    return date_ == other.date_;
+    return _date == other._date;
 }
 
 bool Release::operator!=(const Release& other) const
@@ -51,22 +51,22 @@ bool Release::operator!=(const Release& other) const
 
 bool Release::operator>(const Release& other) const
 {
-    return date_ > other.date_;
+    return _date > other._date;
 }
 
 bool Release::operator>=(const Release& other) const
 {
-    return date_ >= other.date_;
+    return _date >= other._date;
 }
 
 bool Release::operator<(const Release& other) const
 {
-    return date_ < other.date_;
+    return _date < other._date;
 }
 
 bool Release::operator<=(const Release& other) const
 {
-    return date_ <= other.date_;
+    return _date <= other._date;
 }
 
 const Release& Release::current()
@@ -78,13 +78,13 @@ bool Release::isValid() const
 {
     bool isValid = !date().isEmpty() && !name().isEmpty();
 
-    if (isValid && !url_.isEmpty())
+    if (isValid && !_url.isEmpty())
     {
         bool haveAppImage = false;
         bool haveWindowsInstaller = false;
         bool haveDmg = false;
 
-        for (auto& asset : assets_)
+        for (auto& asset : _assets)
         {
             if (asset.isDmg())
                 haveDmg = true;

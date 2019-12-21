@@ -31,10 +31,10 @@ namespace MellowPlayer::Presentation
         void registerMetaTypes();
         void setupFont();
 
-        Infrastructure::IApplication& application_;
-        Infrastructure::IQtApplication& qtApplication_;
-        IMainWindow& mainWindow_;
-        QTranslator translator_;
-        bool restartRequested_;
+        Infrastructure::IApplication& _application;
+        Infrastructure::IQtApplication& _qtApplication;
+        IMainWindow& _mainWindow;
+        QTranslator _translator;
+        bool _restartRequested;
     };
 }

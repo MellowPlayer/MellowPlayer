@@ -7,7 +7,7 @@ using namespace MellowPlayer::Domain;
 using namespace std;
 
 StreamingService::StreamingService(const StreamingServiceMetadata& metadata, const Theme& theme, const std::shared_ptr<SettingsCategory>& settings)
-        : metadata_(metadata), theme_(theme), _settings(settings), script_(make_unique<StreamingServiceScript>(metadata.script, metadata.scriptPath))
+        : _metadata(metadata), _theme(theme), _settings(settings), _script(make_unique<StreamingServiceScript>(metadata.script, metadata.scriptPath))
 {
 }
 
@@ -15,53 +15,53 @@ StreamingService::~StreamingService() = default;
 
 const QString& StreamingService::author() const
 {
-    return metadata_.author;
+    return _metadata.author;
 }
 
 const QString& StreamingService::authorWebsite() const
 {
-    return metadata_.authorWebsite;
+    return _metadata.authorWebsite;
 }
 
 QString StreamingService::logo() const
 {
-    if (metadata_.logoPath.isEmpty())
+    if (_metadata.logoPath.isEmpty())
         return "";
 #ifdef Q_OS_WIN
-    return "file:" + metadata_.logoPath;
+    return "file:" + _metadata.logoPath;
 #else
-    return "file://" + metadata_.logoPath;
+    return "file://" + _metadata.logoPath;
 #endif
 }
 
 const QString& StreamingService::name() const
 {
-    return metadata_.name;
+    return _metadata.name;
 }
 
 QString StreamingService::url() const
 {
-    return metadata_.url;
+    return _metadata.url;
 }
 
 const QString& StreamingService::version() const
 {
-    return metadata_.version;
+    return _metadata.version;
 }
 
 bool StreamingService::isValid() const
 {
-    return metadata_.isValid() && script_->isValid();
+    return _metadata.isValid() && _script->isValid();
 }
 
 StreamingServiceScript* StreamingService::script() const
 {
-    return script_.get();
+    return _script.get();
 }
 
 const Theme& StreamingService::theme() const
 {
-    return theme_;
+    return _theme;
 }
 
 bool StreamingService::operator==(const StreamingService& rhs) const
@@ -81,17 +81,17 @@ SettingsCategory* StreamingService::settings() const
 
 void StreamingService::updateTheme(Theme& newTheme)
 {
-    theme_ = newTheme;
+    _theme = newTheme;
     emit themeChanged();
 }
 
 void StreamingService::updateScript(const QString& scriptCode)
 {
-    script_->setCode(scriptCode);
+    _script->setCode(scriptCode);
     emit scriptChanged();
 }
 
 QString StreamingService::pluginDirectory() const
 {
-    return metadata_.pluginDirectory;
+    return _metadata.pluginDirectory;
 }

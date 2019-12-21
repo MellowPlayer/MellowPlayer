@@ -18,6 +18,6 @@ namespace MellowPlayer::Presentation
         void load(const QUrl& url) override;
 
     private:
-        QQmlApplicationEngine engine_;
+        QQmlApplicationEngine _engine;
     };
 }

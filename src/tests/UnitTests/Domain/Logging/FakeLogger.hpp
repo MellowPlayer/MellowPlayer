@@ -18,7 +18,7 @@ namespace MellowPlayer::Domain::Tests
 
         const std::string& name() const override
         {
-            return name_;
+            return _name;
         }
 
         void setLogLevel(LogLevel) override
@@ -26,6 +26,6 @@ namespace MellowPlayer::Domain::Tests
         }
 
     private:
-        std::string name_;
+        std::string _name;
     };
 }

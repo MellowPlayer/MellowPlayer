@@ -22,16 +22,16 @@ ApplicationViewModel::ApplicationViewModel(IApplication& application,
                                            IQtApplication& qtApplication,
                                            IMainWindow& mainWindow,
                                            std::shared_ptr<IContextProperties> contextProperties)
-        : ContextProperty("_app", this, contextProperties),
-          application_(application),
-          qtApplication_(qtApplication),
-          mainWindow_(mainWindow),
-          restartRequested_(false)
+        : ContextProperty("app", this, contextProperties),
+          _application(application),
+          _qtApplication(qtApplication),
+          _mainWindow(mainWindow),
+          _restartRequested(false)
 {
-    qtApplication_.setWindowIcon(IconProvider::windowIcon());
+    _qtApplication.setWindowIcon(IconProvider::windowIcon());
 
-    connect(&application_, &IApplication::commitDataRequest, &mainWindow, &IMainWindow::forceQuitRequest);
-    connect(&application_, &IApplication::restoreWindowRequest, &mainWindow, &IMainWindow::raise);
+    connect(&_application, &IApplication::commitDataRequest, &mainWindow, &IMainWindow::forceQuitRequest);
+    connect(&_application, &IApplication::restoreWindowRequest, &mainWindow, &IMainWindow::raise);
     setupFont();
     registerMetaTypes();
     setupTranslations();
@@ -39,12 +39,12 @@ ApplicationViewModel::ApplicationViewModel(IApplication& application,
 
 void ApplicationViewModel::quit()
 {
-    application_.quit();
+    _application.quit();
 }
 
 void ApplicationViewModel::restart()
 {
-    application_.restart();
+    _application.restart();
 }
 
 void ApplicationViewModel::showLogs()
@@ -67,7 +67,7 @@ void ApplicationViewModel::setupFont()
     QFontDatabase::addApplicationFont(":/MellowPlayer/Presentation/fonts/Roboto/Roboto-Regular.ttf");
     QFontDatabase::addApplicationFont(":/MellowPlayer/Presentation/fonts/Roboto/Roboto-Thin.ttf");
     QFontDatabase::addApplicationFont(":/MellowPlayer/Presentation/fonts/Roboto/Roboto-ThinItalic.ttf");
-    qtApplication_.setFont(QFont("Roboto"));
+    _qtApplication.setFont(QFont("Roboto"));
 }
 
 void ApplicationViewModel::registerMetaTypes()
@@ -86,7 +86,7 @@ void ApplicationViewModel::registerMetaTypes()
 
 void ApplicationViewModel::setupTranslations()
 {
-    if (!translator_.load(QLocale(), "MellowPlayer", "_", ":/MellowPlayer/Translations"))
+    if (!_translator.load(QLocale(), "MellowPlayer", "_", ":/MellowPlayer/Translations"))
     {
         qWarning() << "failed to load translation: " << QLocale::system().name();
     }
@@ -98,7 +98,7 @@ void ApplicationViewModel::setupTranslations()
     while (it.hasNext())
         qInfo() << "  - " << it.next();
 
-    qtApplication_.installTranslator(&translator_);
+    _qtApplication.installTranslator(&_translator);
 }
 
 QString ApplicationViewModel::buildInfo() const

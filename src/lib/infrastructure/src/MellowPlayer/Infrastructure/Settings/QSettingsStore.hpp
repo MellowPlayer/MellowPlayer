@@ -24,7 +24,7 @@ namespace MellowPlayer::Infrastructure
         void setValue(const QString& key, const QVariant& value) override;
 
     private:
-        std::unique_ptr<QSettings> qSettings_;
-        Domain::ILogger& logger_;
+        std::unique_ptr<QSettings> _qSettings;
+        Domain::ILogger& _logger;
     };
 }

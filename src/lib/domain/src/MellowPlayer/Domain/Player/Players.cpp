@@ -18,11 +18,11 @@ Players::Players(StreamingServices& streamingServices)
 
 shared_ptr<Player> Players::get(const QString& serviceName) const
 {
-    return players_[serviceName];
+    return _players[serviceName];
 }
 
 void Players::onServiceAdded(StreamingService* service)
 {
-    if (!players_.contains(service->name()))
-        players_[service->name()] = make_shared<Player>(*service);
+    if (!_players.contains(service->name()))
+        _players[service->name()] = make_shared<Player>(*service);
 }

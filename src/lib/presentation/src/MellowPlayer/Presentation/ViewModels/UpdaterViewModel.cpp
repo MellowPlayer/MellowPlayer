@@ -8,7 +8,7 @@ using namespace MellowPlayer::Infrastructure;
 using namespace MellowPlayer::Presentation;
 
 UpdaterViewModel::UpdaterViewModel(Updater& updater, std::shared_ptr<IContextProperties> contextProperties)
-        : ContextProperty("_updater", this, contextProperties), updater_(updater)
+        : ContextProperty("updater", this, contextProperties), _updater(updater)
 {
     connect(&updater, &Updater::updateAvailable, this, &UpdaterViewModel::onUpdateAvailable);
     connect(&updater, &Updater::noUpdateAvailable, this, &UpdaterViewModel::onNoUpdateAvailable);
@@ -22,17 +22,17 @@ UpdaterViewModel::UpdaterViewModel(Updater& updater, std::shared_ptr<IContextPro
 
 bool UpdaterViewModel::visible() const
 {
-    return visible_;
+    return _visible;
 }
 
 bool UpdaterViewModel::installEnabled() const
 {
-    return installEnabled_;
+    return _installEnabled;
 }
 
 double UpdaterViewModel::progress() const
 {
-    return progress_;
+    return _progress;
 }
 
 void UpdaterViewModel::close()
@@ -43,7 +43,7 @@ void UpdaterViewModel::close()
 void UpdaterViewModel::check()
 {
     setProgress(-1);
-    updater_.check();
+    _updater.check();
 }
 
 void UpdaterViewModel::install()
@@ -51,7 +51,7 @@ void UpdaterViewModel::install()
     setInstallEnabled(false);
     setRestartEnabled(false);
     setProgress(-1);
-    updater_.install();
+    _updater.install();
 }
 
 void UpdaterViewModel::restart()
@@ -60,39 +60,39 @@ void UpdaterViewModel::restart()
     setRestartEnabled(false);
     setProgress(-1);
     setVisible(false);
-    updater_.restart();
+    _updater.restart();
 }
 
 void UpdaterViewModel::setVisible(bool visible)
 {
-    if (visible_ == visible)
+    if (_visible == visible)
         return;
 
-    visible_ = visible;
+    _visible = visible;
     emit visibleChanged();
 }
 
 void UpdaterViewModel::setInstallEnabled(bool enabled)
 {
-    if (installEnabled_ == enabled)
+    if (_installEnabled == enabled)
         return;
 
-    installEnabled_ = enabled;
+    _installEnabled = enabled;
     emit installEnabledChanged();
 }
 
 void UpdaterViewModel::setProgress(double progress)
 {
-    if (progress_ == progress)
+    if (_progress == progress)
         return;
 
-    progress_ = progress;
+    _progress = progress;
     emit progressChanged();
 }
 
 void UpdaterViewModel::onUpdateAvailable()
 {
-    setInstallEnabled(updater_.canInstall());
+    setInstallEnabled(_updater.canInstall());
     setRestartEnabled(false);
     setProgress(-1);
     setVisible(true);
@@ -108,7 +108,7 @@ void UpdaterViewModel::onNoUpdateAvailable()
 
 QString UpdaterViewModel::url() const
 {
-    const Release* r = updater_.latestRelease();
+    const Release* r = _updater.latestRelease();
     if (r != nullptr)
         return r->url();
     return "";
@@ -116,13 +116,13 @@ QString UpdaterViewModel::url() const
 
 QString UpdaterViewModel::status() const
 {
-    return UpdaterStatusConverter().toString(updater_.status());
+    return UpdaterStatusConverter().toString(_updater.status());
 }
 
 bool UpdaterViewModel::busy() const
 {
-    return updater_.status() == Updater::Status::Checking || updater_.status() == Updater::Status::Downloading ||
-           updater_.status() == Updater::Status::Installing;
+    return _updater.status() == Updater::Status::Checking || _updater.status() == Updater::Status::Downloading ||
+           _updater.status() == Updater::Status::Installing;
 }
 
 void UpdaterViewModel::onProgressUpdated(double progress)
@@ -131,13 +131,13 @@ void UpdaterViewModel::onProgressUpdated(double progress)
 }
 bool UpdaterViewModel::restartEnabled() const
 {
-    return restartEnabled_;
+    return _restartEnabled;
 }
 void UpdaterViewModel::setRestartEnabled(bool enabled)
 {
-    if (restartEnabled_ != enabled)
+    if (_restartEnabled != enabled)
     {
-        restartEnabled_ = enabled;
+        _restartEnabled = enabled;
         emit restartEnabledChanged();
     }
 }

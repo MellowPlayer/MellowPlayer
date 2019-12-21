@@ -2,27 +2,27 @@
 
 using namespace MellowPlayer::Infrastructure;
 
-LocalSocket::LocalSocket() : qLocalSocket_(new QLocalSocket(this))
+LocalSocket::LocalSocket() : _qLocalSocket(new QLocalSocket(this))
 {
     initSignals();
 }
 
 void LocalSocket::connectToServer(const QString& name, QIODevice::OpenMode openMode)
 {
-    qLocalSocket_->connectToServer(name, openMode);
+    _qLocalSocket->connectToServer(name, openMode);
 }
 
 void LocalSocket::disconnectFromServer()
 {
-    qLocalSocket_->disconnectFromServer();
+    _qLocalSocket->disconnectFromServer();
 }
 
 void LocalSocket::write(const QString& data)
 {
-    if (qLocalSocket_->state() == QLocalSocket::ConnectedState)
+    if (_qLocalSocket->state() == QLocalSocket::ConnectedState)
     {
-        qLocalSocket_->write(data.toLocal8Bit());
-        qLocalSocket_->waitForBytesWritten();
+        _qLocalSocket->write(data.toLocal8Bit());
+        _qLocalSocket->waitForBytesWritten();
     }
     else
         throw std::logic_error("cannot write data on a socket that is not connected");
@@ -30,20 +30,20 @@ void LocalSocket::write(const QString& data)
 
 void LocalSocket::setQLocalSocket(QLocalSocket* localSocket)
 {
-    delete qLocalSocket_;
-    qLocalSocket_ = localSocket;
+    delete _qLocalSocket;
+    _qLocalSocket = localSocket;
     initSignals();
 }
 
 QString LocalSocket::readAll()
 {
-    return qLocalSocket_->readAll();
+    return _qLocalSocket->readAll();
 }
 
 void LocalSocket::initSignals()
 {
-    connect(qLocalSocket_, &QLocalSocket::connected, this, &LocalSocket::connected);
-    connect(qLocalSocket_, &QLocalSocket::disconnected, this, &LocalSocket::disconnected);
-    connect(qLocalSocket_, &QLocalSocket::readyRead, this, &LocalSocket::readyRead);
-    connect(qLocalSocket_, QNonConstOverload<QLocalSocket::LocalSocketError>::of(&QLocalSocket::error), [=](QLocalSocket::LocalSocketError) { emit error(); });
+    connect(_qLocalSocket, &QLocalSocket::connected, this, &LocalSocket::connected);
+    connect(_qLocalSocket, &QLocalSocket::disconnected, this, &LocalSocket::disconnected);
+    connect(_qLocalSocket, &QLocalSocket::readyRead, this, &LocalSocket::readyRead);
+    connect(_qLocalSocket, QNonConstOverload<QLocalSocket::LocalSocketError>::of(&QLocalSocket::error), [=](QLocalSocket::LocalSocketError) { emit error(); });
 }

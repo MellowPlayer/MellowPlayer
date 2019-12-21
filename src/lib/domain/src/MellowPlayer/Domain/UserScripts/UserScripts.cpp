@@ -9,7 +9,7 @@
 using namespace MellowPlayer::Domain;
 
 UserScripts::UserScripts(const QString& serviceName, IUserScriptFactory& userScriptFactory, ISettingsStore& settingsStore)
-        : serviceName_(serviceName), userScriptFactory_(userScriptFactory), settingsStore_(settingsStore), _logger(Loggers::logger("UserScripts"))
+        : _serviceName(serviceName), _userScriptFactory(userScriptFactory), _settingsStore(settingsStore), _logger(Loggers::logger("UserScripts"))
 {
     auto scriptPaths = settingsStore.value(pathsKey(), QStringList()).toStringList();
     auto scriptNames = settingsStore.value(namesKey(), QStringList()).toStringList();
@@ -18,7 +18,7 @@ UserScripts::UserScripts(const QString& serviceName, IUserScriptFactory& userScr
     {
         auto path = scriptPaths.at(i);
         auto name = scriptNames.at(i);
-        auto* userScript = userScriptFactory_.create();
+        auto* userScript = _userScriptFactory.create();
         userScript->setName(name);
         if (userScript->load(path))
             _scripts.append(userScript);
@@ -42,7 +42,7 @@ IUserScript* UserScripts::add(const QString& userScriptName, const QString& sour
     sourcePath = sourcePath.replace("file:///", "");
 #endif
     LOG_INFO(_logger, "Add user script " << userScriptName.toStdString() << " from " << sourceScriptPath.toStdString());
-    auto* userScript = userScriptFactory_.create();
+    auto* userScript = _userScriptFactory.create();
     userScript->setName(userScriptName);
     if (userScript->import(sourcePath))
     {
@@ -59,12 +59,12 @@ IUserScript* UserScripts::add(const QString& userScriptName, const QString& sour
 
 void UserScripts::save(const QString& userScriptName, const IUserScript* userScript) const
 {
-    auto scriptPaths = settingsStore_.value(pathsKey(), QStringList()).toStringList();
+    auto scriptPaths = _settingsStore.value(pathsKey(), QStringList()).toStringList();
     scriptPaths.append(userScript->path());
-    auto scriptNames = settingsStore_.value(namesKey(), QStringList()).toStringList();
+    auto scriptNames = _settingsStore.value(namesKey(), QStringList()).toStringList();
     scriptNames.append(userScriptName);
-    settingsStore_.setValue(pathsKey(), scriptPaths);
-    settingsStore_.setValue(namesKey(), scriptNames);
+    _settingsStore.setValue(pathsKey(), scriptPaths);
+    _settingsStore.setValue(namesKey(), scriptNames);
 }
 
 void UserScripts::remove(const QString& scriptName)
@@ -75,12 +75,12 @@ void UserScripts::remove(const QString& scriptName)
         IUserScript* script = _scripts.at(index);
         if (script->name() == scriptName)
         {
-            auto scriptPaths = settingsStore_.value(pathsKey(), QStringList()).toStringList();
-            auto scriptNames = settingsStore_.value(namesKey(), QStringList()).toStringList();
+            auto scriptPaths = _settingsStore.value(pathsKey(), QStringList()).toStringList();
+            auto scriptNames = _settingsStore.value(namesKey(), QStringList()).toStringList();
             scriptNames.removeOne(_scripts.at(index)->name());
             scriptPaths.removeOne(_scripts.at(index)->path());
-            settingsStore_.setValue(pathsKey(), scriptPaths);
-            settingsStore_.setValue(namesKey(), scriptNames);
+            _settingsStore.setValue(pathsKey(), scriptPaths);
+            _settingsStore.setValue(namesKey(), scriptNames);
             script->removeFile();
             _scripts.removeAt(index);
             delete script;
@@ -101,10 +101,10 @@ UserScripts::const_iterator UserScripts::end(void) const
 
 QString UserScripts::pathsKey() const
 {
-    return serviceName_ + "/userScriptPaths";
+    return _serviceName + "/userScriptPaths";
 }
 
 QString UserScripts::namesKey() const
 {
-    return serviceName_ + "/userScriptNames";
+    return _serviceName + "/userScriptNames";
 }

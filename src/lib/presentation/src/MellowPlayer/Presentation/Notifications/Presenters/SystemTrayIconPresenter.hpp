@@ -15,6 +15,6 @@ namespace MellowPlayer::Presentation
         bool display(const Notification& notification) override;
 
     private:
-        ISystemTrayIcon& systemTrayIcon_;
+        ISystemTrayIcon& _systemTrayIcon;
     };
 }

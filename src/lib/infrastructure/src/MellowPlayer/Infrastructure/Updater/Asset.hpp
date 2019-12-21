@@ -20,7 +20,7 @@ namespace MellowPlayer::Infrastructure
         bool isValid() const;
 
     private:
-        QString name_;
-        QString url_;
+        QString _name;
+        QString _url;
     };
 }

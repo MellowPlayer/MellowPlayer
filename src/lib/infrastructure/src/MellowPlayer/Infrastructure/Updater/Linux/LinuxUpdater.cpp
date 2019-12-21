@@ -14,7 +14,7 @@ LinuxUpdater::LinuxUpdater(IFileDownloader& fileDownloader) : AbstractPlatformUp
 bool LinuxUpdater::canInstall() const
 {
     QString appImagePath = destinationDir();
-    return asset_.isValid() && asset_.isAppImage() && !appImagePath.isEmpty();
+    return _asset.isValid() && _asset.isAppImage() && !appImagePath.isEmpty();
 }
 
 QString LinuxUpdater::destinationDir() const
@@ -47,25 +47,25 @@ QString LinuxUpdater::destinationPath() const
 
 QString LinuxUpdater::assetUrl() const
 {
-    return asset_.url();
+    return _asset.url();
 }
 
 QString LinuxUpdater::assetFileName() const
 {
-    return asset_.name();
+    return _asset.name();
 }
 
 void LinuxUpdater::setRelease(const Release* release)
 {
     AbstractPlatformUpdater::setRelease(release);
 
-    if (release_ != nullptr)
+    if (_release != nullptr)
     {
-        for (auto& asset : release_->assets())
+        for (auto& asset : _release->assets())
         {
             if (asset.isAppImage())
             {
-                asset_ = asset;
+                _asset = asset;
                 break;
             }
         }

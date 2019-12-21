@@ -51,14 +51,14 @@ namespace MellowPlayer::Presentation
         const QString currentServiceLogo() const;
         bool isNotificationTypeEnabled(NotificationType type) const;
 
-        Domain::ILogger& logger_;
-        Domain::IPlayer& player_;
-        Domain::ILocalAlbumArt& localAlbumArt_;
-        INotificationPresenter& presenter_;
-        Domain::StreamingServices& streamingServices_;
-        Domain::Settings& settings_;
-        Notification previousNotif_;
-        NotificationFactory notificationFactory_;
-        QString previousSongId_;
+        Domain::ILogger& _logger;
+        Domain::IPlayer& _player;
+        Domain::ILocalAlbumArt& _localAlbumArt;
+        INotificationPresenter& _presenter;
+        Domain::StreamingServices& _streamingServices;
+        Domain::Settings& _settings;
+        Notification _previousNotif;
+        NotificationFactory _notificationFactory;
+        QString _previousSongId;
     };
 }

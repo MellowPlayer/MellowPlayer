@@ -68,16 +68,16 @@ namespace MellowPlayer::Domain
         void setCanAddToFavorites(bool value);
         void setCurrentVolume(double value);
 
-        ILogger& logger_;
-        double position_ = false;
-        PlaybackStatus playbackStatus_ = PlaybackStatus::Stopped;
-        bool canSeek_ = false;
-        bool canGoNext_ = false;
-        bool canGoPrevious_ = false;
-        bool canAddToFavorites_ = false;
-        double volume_ = 1;
-        std::unique_ptr<Domain::Song> currentSong_;
-        Domain::StreamingService& streamingService_;
-        PlaybackStatus suspendedState_ = PlaybackStatus::Stopped;
+        ILogger& _logger;
+        double _position = false;
+        PlaybackStatus _playbackStatus = PlaybackStatus::Stopped;
+        bool _canSeek = false;
+        bool _canGoNext = false;
+        bool _canGoPrevious = false;
+        bool _canAddToFavorites = false;
+        double _volume = 1;
+        std::unique_ptr<Domain::Song> _currentSong;
+        Domain::StreamingService& _streamingService;
+        PlaybackStatus _suspendedState = PlaybackStatus::Stopped;
     };
 }

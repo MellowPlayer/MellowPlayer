@@ -14,10 +14,10 @@ namespace MellowPlayer::Domain
         void setName(const QString& name) override;
 
     protected:
-        QString code_;
-        QString path_;
+        QString _code;
+        QString _path;
 
     private:
-        QString name_;
+        QString _name;
     };
 }

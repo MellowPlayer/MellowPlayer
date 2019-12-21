@@ -50,11 +50,11 @@ namespace MellowPlayer::Domain
     private:
         QString getFullKey() const;
 
-        ISettingsStore& settingsStore_;
-        Settings& settings_;
-        SettingsCategory& category_;
-        Data data_;
+        ISettingsStore& _settingsStore;
+        Settings& _settings;
+        SettingsCategory& _category;
+        Data _data;
         //        bool notOperator_ = false;
-        Setting* parentSetting_ = nullptr;
+        Setting* _parentSetting = nullptr;
     };
 }

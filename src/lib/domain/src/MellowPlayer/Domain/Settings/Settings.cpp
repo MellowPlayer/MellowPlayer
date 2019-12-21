@@ -8,7 +8,7 @@
 using namespace std;
 using namespace MellowPlayer::Domain;
 
-Settings::Settings(ISettingsSchemaLoader& configurationLoader, ISettingsStore& settingsStore) : settingsStore_(settingsStore)
+Settings::Settings(ISettingsSchemaLoader& configurationLoader, ISettingsStore& settingsStore) : _settingsStore(settingsStore)
 {
     QJsonDocument jsonDocument = configurationLoader.load();
     QJsonObject rootObject = jsonDocument.object();
@@ -22,21 +22,21 @@ Settings::Settings(ISettingsSchemaLoader& configurationLoader, ISettingsStore& s
         data.icon = categoryObject.value("icon").toString();
         data.key = categoryObject.value("key").toString();
         data.parameters = categoryObject.value("settings").toArray();
-        categories_.append(new SettingsCategory(data, this));
+        _categories.append(new SettingsCategory(data, this));
     }
 
-    for (SettingsCategory* category : categories_)
+    for (SettingsCategory* category : _categories)
         category->resolveDependencies();
 }
 
 const QList<SettingsCategory*>& Settings::categories() const
 {
-    return categories_;
+    return _categories;
 }
 
 SettingsCategory& Settings::category(const QString& key) const
 {
-    for (SettingsCategory* category : categories_)
+    for (SettingsCategory* category : _categories)
         if (category->key() == key)
             return *category;
     throw runtime_error("Unknown category: " + key.toStdString());
@@ -58,7 +58,7 @@ Setting& Settings::get(const QString& key) const
 
 ISettingsStore& Settings::store() const
 {
-    return settingsStore_;
+    return _settingsStore;
 }
 
 Setting& Settings::get(SettingKey::Keys key)
@@ -68,6 +68,6 @@ Setting& Settings::get(SettingKey::Keys key)
 
 void Settings::restoreDefaults()
 {
-    for (SettingsCategory* category : categories_)
+    for (SettingsCategory* category : _categories)
         category->restoreDefaults();
 }

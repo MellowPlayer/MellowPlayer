@@ -37,7 +37,7 @@ namespace MellowPlayer::Domain
         QString toJavascriptObject();
 
     private:
-        Data data_;
-        QList<Setting*> settings_;
+        Data _data;
+        QList<Setting*> _settings;
     };
 }

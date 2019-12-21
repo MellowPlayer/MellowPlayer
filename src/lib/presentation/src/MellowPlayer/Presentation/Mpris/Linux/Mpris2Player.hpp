@@ -96,10 +96,10 @@ namespace MellowPlayer::Presentation
         static const qlonglong SEC_TO_MICROSEC;
         static const qlonglong SEEK_DELTA_LIMIT;
 
-        qlonglong previousPosition_;
-        Domain::ILogger& logger_;
-        Domain::IPlayer& player_;
-        Domain::ILocalAlbumArt& localAlbumArt_;
-        QMap<QString, QVariant> lastMetadata_;
+        qlonglong _previousPosition;
+        Domain::ILogger& _logger;
+        Domain::IPlayer& _player;
+        Domain::ILocalAlbumArt& _localAlbumArt;
+        QMap<QString, QVariant> _lastMetadata;
     };
 }

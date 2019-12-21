@@ -16,20 +16,20 @@ TimeLimitSettingViewModel::TimeLimitSettingViewModel(Setting& setting, QObject* 
 
 void TimeLimitSettingViewModel::registerEnumTranslation(TimeLimits value, const QString& translation)
 {
-    stringToEnum_[translation] = value;
-    enumToString_[value] = translation;
+    _stringToEnum[translation] = value;
+    _enumToString[value] = translation;
 }
 
 QString TimeLimitSettingViewModel::value() const
 {
-    TimeLimits limit = static_cast<TimeLimits>(setting_.value().toInt());
-    return enumToString_[limit];
+    TimeLimits limit = static_cast<TimeLimits>(_setting.value().toInt());
+    return _enumToString[limit];
 }
 
 void TimeLimitSettingViewModel::setValue(QString value)
 {
-    TimeLimits limit = stringToEnum_[value];
-    setting_.setValue(static_cast<int>(limit));
+    TimeLimits limit = _stringToEnum[value];
+    _setting.setValue(static_cast<int>(limit));
 }
 
 void TimeLimitSettingViewModel::onValueChanged()
@@ -44,5 +44,5 @@ QString TimeLimitSettingViewModel::qmlComponent()
 
 QStringList TimeLimitSettingViewModel::values() const
 {
-    return stringToEnum_.keys();
+    return _stringToEnum.keys();
 }

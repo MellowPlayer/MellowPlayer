@@ -7,35 +7,35 @@ using namespace MellowPlayer::Domain;
 using namespace MellowPlayer::Presentation;
 
 SettingsViewModel::SettingsViewModel(Settings& settings, ThemeViewModel& themeViewModel, std::shared_ptr<IContextProperties> contextProperties)
-        : ContextProperty("_settings", this, contextProperties),
-          settings_(settings),
-          factory_(themeViewModel),
-          categories_(new SettingsCategoryListModel(this, "name"))
+        : ContextProperty("settings", this, contextProperties),
+          _settings(settings),
+          _factory(themeViewModel),
+          _categories(new SettingsCategoryListModel(this, "name"))
 {
     for (SettingsCategory* category : settings.categories())
     {
         if (category->key() != "private")
-            categories_->append(new SettingsCategoryViewModel(themeViewModel, category, this));
+            _categories->append(new SettingsCategoryViewModel(themeViewModel, category, this));
     }
-    categories_->append(new CustomSettingsCategoryViewModel("Streaming Services", u8"\ue405", "SettingsPages/ServiceSettingsPage.qml", themeViewModel, this));
-    categories_->append(new CustomSettingsCategoryViewModel("Cache", u8"\ue872", "SettingsPages/CacheSettingsPage.qml", themeViewModel, this));
+    _categories->append(new CustomSettingsCategoryViewModel("Streaming Services", u8"\ue405", "SettingsPages/ServiceSettingsPage.qml", themeViewModel, this));
+    _categories->append(new CustomSettingsCategoryViewModel("Cache", u8"\ue872", "SettingsPages/CacheSettingsPage.qml", themeViewModel, this));
 }
 
 SettingViewModel* SettingsViewModel::get(int key)
 {
     SettingKey::Keys settingKey = static_cast<SettingKey::Keys>(key);
-    Setting& setting = settings_.get(settingKey);
-    return factory_.create(setting, this);
+    Setting& setting = _settings.get(settingKey);
+    return _factory.create(setting, this);
 }
 
 SettingsCategoryListModel* SettingsViewModel::categories() const
 {
-    return categories_;
+    return _categories;
 }
 
 void SettingsViewModel::restoreDefaults()
 {
-    settings_.restoreDefaults();
+    _settings.restoreDefaults();
 }
 
 void SettingsViewModel::initialize(IQmlApplicationEngine& qmlApplicationEngine)

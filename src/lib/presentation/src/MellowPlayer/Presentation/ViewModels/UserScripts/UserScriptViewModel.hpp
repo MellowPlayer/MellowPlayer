@@ -30,6 +30,6 @@ namespace MellowPlayer::Presentation
         void nameChanged();
 
     private:
-        Domain::IUserScript& model_;
+        Domain::IUserScript& _model;
     };
 }

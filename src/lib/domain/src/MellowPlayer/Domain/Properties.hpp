@@ -5,12 +5,12 @@
 #define WRITABLE_PROPERTY(type, name, setter)                                                                                                                  \
 protected:                                                                                                                                                     \
     Q_PROPERTY(type name READ name WRITE setter NOTIFY name##Changed)                                                                                          \
-    type name##_;                                                                                                                                              \
+    type _name##;                                                                                                                                              \
                                                                                                                                                                \
 public:                                                                                                                                                        \
     virtual const type& name() const                                                                                                                           \
     {                                                                                                                                                          \
-        return name##_;                                                                                                                                        \
+        return _name##;                                                                                                                                        \
     }                                                                                                                                                          \
 public Q_SLOTS:                                                                                                                                                \
     virtual bool setter(const type& name)                                                                                                                      \
@@ -31,12 +31,12 @@ private:
 #define READONLY_PROPERTY(type, name, updater)                                                                                                                 \
 protected:                                                                                                                                                     \
     Q_PROPERTY(type name READ name NOTIFY name##Changed)                                                                                                       \
-    type name##_;                                                                                                                                              \
+    type _name##;                                                                                                                                              \
                                                                                                                                                                \
 public:                                                                                                                                                        \
     virtual const type& name() const                                                                                                                           \
     {                                                                                                                                                          \
-        return name##_;                                                                                                                                        \
+        return _name##;                                                                                                                                        \
     }                                                                                                                                                          \
     virtual bool updater(const type& name)                                                                                                                     \
     {                                                                                                                                                          \
@@ -56,12 +56,12 @@ private:
 #define CONSTANT_PROPERTY(type, name)                                                                                                                          \
 protected:                                                                                                                                                     \
     Q_PROPERTY(type name READ name CONSTANT)                                                                                                                   \
-    type name##_;                                                                                                                                              \
+    type _name##;                                                                                                                                              \
                                                                                                                                                                \
 public:                                                                                                                                                        \
     virtual const type& name() const                                                                                                                           \
     {                                                                                                                                                          \
-        return name##_;                                                                                                                                        \
+        return _name##;                                                                                                                                        \
     }                                                                                                                                                          \
                                                                                                                                                                \
 private:

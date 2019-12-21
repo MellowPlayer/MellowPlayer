@@ -31,9 +31,9 @@ namespace MellowPlayer::Presentation
         Q_INVOKABLE void restoreDefaults();
 
     private:
-        Domain::SettingsCategory* settingsCategory_;
-        SettingListModel* settingsListModel_;
-        SettingViewModelFactory settingViewModelFactory_;
+        Domain::SettingsCategory* _settingsCategory;
+        SettingListModel* _settingsListModel;
+        SettingViewModelFactory _settingViewModelFactory;
     };
 
     class CustomSettingsCategoryViewModel : public SettingsCategoryViewModel
@@ -51,8 +51,8 @@ namespace MellowPlayer::Presentation
         QString qmlComponent() const override;
 
     private:
-        QString name_;
-        QString icon_;
-        QString qmlComponent_;
+        QString _name;
+        QString _icon;
+        QString _qmlComponent;
     };
 }

@@ -60,7 +60,7 @@ namespace MellowPlayer::Presentation
     private:
         void registerEnumTranslation(Domain::TimeLimits value, const QString& translation);
 
-        QMap<QString, Domain::TimeLimits> stringToEnum_;
-        QMap<Domain::TimeLimits, QString> enumToString_;
+        QMap<QString, Domain::TimeLimits> _stringToEnum;
+        QMap<Domain::TimeLimits, QString> _enumToString;
     };
 }

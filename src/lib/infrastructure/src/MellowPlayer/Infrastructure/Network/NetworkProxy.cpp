@@ -3,20 +3,20 @@
 using namespace MellowPlayer::Infrastructure;
 
 NetworkProxy::NetworkProxy(const QVariantMap& qVariantMap)
-        : isEnabled_(qVariantMap["enabled"].toBool()), hostName_(qVariantMap["hostName"].toString()), port_(qVariantMap["port"].toInt())
+        : _isEnabled(qVariantMap["enabled"].toBool()), _hostName(qVariantMap["hostName"].toString()), _port(qVariantMap["port"].toInt())
 {
 }
 
 bool NetworkProxy::isEnabled() const
 {
-    return isEnabled_;
+    return _isEnabled;
 }
 
 void NetworkProxy::setEnabled(bool value)
 {
-    if (isEnabled_ != value)
+    if (_isEnabled != value)
     {
-        isEnabled_ = value;
+        _isEnabled = value;
         emit enabledChanged();
         emit changed();
     }
@@ -24,14 +24,14 @@ void NetworkProxy::setEnabled(bool value)
 
 QString NetworkProxy::hostName() const
 {
-    return hostName_;
+    return _hostName;
 }
 
 void NetworkProxy::setHostName(const QString& value)
 {
     if (hostName() != value)
     {
-        hostName_ = value;
+        _hostName = value;
         emit hostNameChanged();
         emit changed();
     }
@@ -39,14 +39,14 @@ void NetworkProxy::setHostName(const QString& value)
 
 int NetworkProxy::port() const
 {
-    return port_;
+    return _port;
 }
 
 void NetworkProxy::setPort(int value)
 {
     if (port() != value)
     {
-        port_ = value;
+        _port = value;
         emit portChanged();
         emit changed();
     }
@@ -56,9 +56,9 @@ QVariantMap NetworkProxy::toQVariantMap() const
 {
     QVariantMap qVariantMap;
 
-    qVariantMap["enabled"] = isEnabled_;
-    qVariantMap["port"] = port_;
-    qVariantMap["hostName"] = hostName_;
+    qVariantMap["enabled"] = _isEnabled;
+    qVariantMap["port"] = _port;
+    qVariantMap["hostName"] = _hostName;
 
     return qVariantMap;
 }
@@ -66,16 +66,16 @@ QVariantMap NetworkProxy::toQVariantMap() const
 QNetworkProxy NetworkProxy::create() const
 {
     if (isValid())
-        return QNetworkProxy(QNetworkProxy::HttpProxy, hostName_, static_cast<quint16>(port_));
+        return QNetworkProxy(QNetworkProxy::HttpProxy, _hostName, static_cast<quint16>(_port));
     return QNetworkProxy();
 }
 
 bool NetworkProxy::isValid() const
 {
-    return isEnabled_ && !hostName_.isEmpty() && port_ != 0;
+    return _isEnabled && !_hostName.isEmpty() && _port != 0;
 }
 
 QString NetworkProxy::toString() const
 {
-    return QString("%1:%2").arg(hostName_).arg(port_);
+    return QString("%1:%2").arg(_hostName).arg(_port);
 }

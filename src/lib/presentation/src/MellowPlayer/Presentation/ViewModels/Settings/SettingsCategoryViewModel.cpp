@@ -5,21 +5,21 @@ using namespace MellowPlayer::Domain;
 using namespace MellowPlayer::Presentation;
 
 SettingsCategoryViewModel::SettingsCategoryViewModel(ThemeViewModel& themeViewModel, SettingsCategory* settingsCategory, QObject* parent)
-        : QObject(parent), settingsCategory_(settingsCategory), settingsListModel_(new SettingListModel(this, "name")), settingViewModelFactory_(themeViewModel)
+        : QObject(parent), _settingsCategory(settingsCategory), _settingsListModel(new SettingListModel(this, "name")), _settingViewModelFactory(themeViewModel)
 {
     if (settingsCategory != nullptr)
         for (Setting* setting : settingsCategory->toList())
-            settingsListModel_->append(settingViewModelFactory_.create(*setting, this));
+            _settingsListModel->append(_settingViewModelFactory.create(*setting, this));
 }
 
 QString SettingsCategoryViewModel::name() const
 {
-    return settingsCategory_ != nullptr ? settingsCategory_->name() : "";
+    return _settingsCategory != nullptr ? _settingsCategory->name() : "";
 }
 
 QString SettingsCategoryViewModel::icon() const
 {
-    return settingsCategory_ != nullptr ? settingsCategory_->icon() : "";
+    return _settingsCategory != nullptr ? _settingsCategory->icon() : "";
 }
 
 QString SettingsCategoryViewModel::qmlComponent() const
@@ -29,12 +29,12 @@ QString SettingsCategoryViewModel::qmlComponent() const
 
 SettingListModel* SettingsCategoryViewModel::settingsModel()
 {
-    return settingsListModel_;
+    return _settingsListModel;
 }
 
 void SettingsCategoryViewModel::restoreDefaults()
 {
-    settingsCategory_->restoreDefaults();
+    _settingsCategory->restoreDefaults();
 }
 
 CustomSettingsCategoryViewModel::CustomSettingsCategoryViewModel(const QString& name,
@@ -42,21 +42,21 @@ CustomSettingsCategoryViewModel::CustomSettingsCategoryViewModel(const QString& 
                                                                  const QString& qmlComponent,
                                                                  ThemeViewModel& themeViewModel,
                                                                  QObject* parent)
-        : SettingsCategoryViewModel(themeViewModel, nullptr, parent), name_(name), icon_(icon), qmlComponent_(qmlComponent)
+        : SettingsCategoryViewModel(themeViewModel, nullptr, parent), _name(name), _icon(icon), _qmlComponent(qmlComponent)
 {
 }
 
 QString CustomSettingsCategoryViewModel::name() const
 {
-    return name_;
+    return _name;
 }
 
 QString CustomSettingsCategoryViewModel::icon() const
 {
-    return icon_;
+    return _icon;
 }
 
 QString CustomSettingsCategoryViewModel::qmlComponent() const
 {
-    return qmlComponent_;
+    return _qmlComponent;
 }

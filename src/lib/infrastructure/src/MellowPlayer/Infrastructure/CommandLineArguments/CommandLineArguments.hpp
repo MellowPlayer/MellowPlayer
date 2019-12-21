@@ -29,23 +29,23 @@ namespace MellowPlayer::Infrastructure
         bool startMinimized() const override;
 
     private:
-        QCommandLineParser parser_;
-        QCommandLineOption serviceOption_;
-        QCommandLineOption logLevelOption_;
-        QCommandLineOption playPauseOption_;
-        QCommandLineOption nextOption_;
-        QCommandLineOption previousOption_;
-        QCommandLineOption toggleFavoriteOption_;
-        QCommandLineOption autoQuitDelayOption_;
-        QCommandLineOption startMinimizedOption_;
+        QCommandLineParser _parser;
+        QCommandLineOption _serviceOption;
+        QCommandLineOption _logLevelOption;
+        QCommandLineOption _playPauseOption;
+        QCommandLineOption _nextOption;
+        QCommandLineOption _previousOption;
+        QCommandLineOption _toggleFavoriteOption;
+        QCommandLineOption _autoQuitDelayOption;
+        QCommandLineOption _startMinimizedOption;
 
-        QString service_;
-        Domain::LogLevel logLevel_;
-        bool playRequested_ = false;
-        bool nextRequested_ = false;
-        bool previousRequested_ = false;
-        bool toggleFavoriteRequested_ = false;
-        int autoQuitDelay_ = 0;
-        bool startMinimized_ = false;
+        QString _service;
+        Domain::LogLevel _logLevel;
+        bool _playRequested = false;
+        bool _nextRequested = false;
+        bool _previousRequested = false;
+        bool _toggleFavoriteRequested = false;
+        int _autoQuitDelay = 0;
+        bool _startMinimized = false;
     };
 }

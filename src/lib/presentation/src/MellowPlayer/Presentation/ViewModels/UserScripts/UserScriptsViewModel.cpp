@@ -6,9 +6,9 @@ using namespace MellowPlayer::Domain;
 using namespace MellowPlayer::Presentation;
 
 UserScriptsViewModel::UserScriptsViewModel(const QString& serviceName, IUserScriptFactory& userScriptFactory, ISettingsStore& settingsStore, QObject* parent)
-        : QObject(parent), userScripts_(serviceName, userScriptFactory, settingsStore)
+        : QObject(parent), _userScripts(serviceName, userScriptFactory, settingsStore)
 {
-    for (auto* userScriptModel : userScripts_)
+    for (auto* userScriptModel : _userScripts)
     {
         create(userScriptModel);
     }
@@ -16,14 +16,14 @@ UserScriptsViewModel::UserScriptsViewModel(const QString& serviceName, IUserScri
 
 QAbstractListModel* UserScriptsViewModel::model()
 {
-    return &model_;
+    return &_model;
 }
 
 bool UserScriptsViewModel::isValidName(const QString& name) const
 {
     QStringList names;
 
-    for (auto* userScriptModel : userScripts_)
+    for (auto* userScriptModel : _userScripts)
         names.append(userScriptModel->name());
 
     return !names.contains(name);
@@ -32,7 +32,7 @@ bool UserScriptsViewModel::isValidName(const QString& name) const
 bool UserScriptsViewModel::add(const QString& name, const QString& sourcePath)
 {
     bool hadUserScripts = hasScripts();
-    IUserScript* userScriptModel = userScripts_.add(name, sourcePath);
+    IUserScript* userScriptModel = _userScripts.add(name, sourcePath);
     if (userScriptModel != nullptr)
     {
         create(userScriptModel);
@@ -48,14 +48,14 @@ bool UserScriptsViewModel::add(const QString& name, const QString& sourcePath)
 void UserScriptsViewModel::remove(const QString& name)
 {
     bool hadUserScripts = hasScripts();
-    for (int i = 0; i < model_.count(); ++i)
+    for (int i = 0; i < _model.count(); ++i)
     {
-        if (model_.at(i)->name() == name)
+        if (_model.at(i)->name() == name)
         {
-            model_.remove(i);
+            _model.remove(i);
         }
     }
-    userScripts_.remove(name);
+    _userScripts.remove(name);
 
     if (hadUserScripts != hasScripts())
         emit hasScriptsChanged();
@@ -64,12 +64,12 @@ void UserScriptsViewModel::remove(const QString& name)
 void UserScriptsViewModel::create(IUserScript* userScriptModel)
 {
     auto* userScriptViewModel = new UserScriptViewModel(*userScriptModel, this);
-    model_.append(userScriptViewModel);
+    _model.append(userScriptViewModel);
 }
 
 bool UserScriptsViewModel::hasScripts() const
 {
-    return userScripts_.count() != 0;
+    return _userScripts.count() != 0;
 }
 
 QString UserScriptsViewModel::generateUniqueName(const QString& path) const

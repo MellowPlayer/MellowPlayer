@@ -60,19 +60,19 @@ namespace MellowPlayer::Presentation
     private:
         void setUpMenu();
 
-        Domain::ILogger& logger_;
-        Domain::IPlayer& player_;
-        IMainWindow& mainWindow_;
-        Domain::Settings& settings_;
-        Domain::Setting& showTrayIconSetting_;
-        Domain::Setting& customTrayIconSetting_;
+        Domain::ILogger& _logger;
+        Domain::IPlayer& _player;
+        IMainWindow& _mainWindow;
+        Domain::Settings& _settings;
+        Domain::Setting& _showTrayIconSetting;
+        Domain::Setting& _customTrayIconSetting;
 
-        QSystemTrayIcon qSystemTrayIcon_;
-        QMenu menu_;
-        QAction* playPauseAction_;
-        QAction* previousSongAction_;
-        QAction* nextSongAction_;
-        QAction* restoreWindowAction_;
-        QAction* quitApplicationAction_;
+        QSystemTrayIcon _qSystemTrayIcon;
+        QMenu _menu;
+        QAction* _playPauseAction;
+        QAction* _previousSongAction;
+        QAction* _nextSongAction;
+        QAction* _restoreWindowAction;
+        QAction* _quitApplicationAction;
     };
 }

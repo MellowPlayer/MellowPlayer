@@ -17,12 +17,12 @@ namespace MellowPlayer::Infrastructure::Tests
 
         void setService(const QString& service)
         {
-            service_ = service;
+            _service = service;
         }
 
         QString service() const override
         {
-            return service_;
+            return _service;
         }
 
         int autoQuitDelay() const override
@@ -32,42 +32,42 @@ namespace MellowPlayer::Infrastructure::Tests
 
         bool playPauseRequested() const override
         {
-            return playPauseRequested_;
+            return _playPauseRequested;
         }
 
         void setPlayPauseRequested(bool value)
         {
-            playPauseRequested_ = value;
+            _playPauseRequested = value;
         }
 
         bool nextRequested() const override
         {
-            return nextRequested_;
+            return _nextRequested;
         }
 
         void setNextRequested(bool value)
         {
-            nextRequested_ = value;
+            _nextRequested = value;
         }
 
         bool previousRequested() const override
         {
-            return previousRequested_;
+            return _previousRequested;
         }
 
         void setPreviousRequested(bool value)
         {
-            previousRequested_ = value;
+            _previousRequested = value;
         }
 
         bool toggleFavoriteRequested() const override
         {
-            return toggleFavoriteRequested_;
+            return _toggleFavoriteRequested;
         }
 
         void setToggleFavoriteRequested(bool value)
         {
-            toggleFavoriteRequested_ = value;
+            _toggleFavoriteRequested = value;
         }
 
         Domain::LogLevel logLevel() const override
@@ -83,10 +83,10 @@ namespace MellowPlayer::Infrastructure::Tests
         bool parsed = false;
 
     private:
-        QString service_;
-        bool playPauseRequested_ = false;
-        bool nextRequested_ = false;
-        bool previousRequested_ = false;
-        bool toggleFavoriteRequested_ = false;
+        QString _service;
+        bool _playPauseRequested = false;
+        bool _nextRequested = false;
+        bool _previousRequested = false;
+        bool _toggleFavoriteRequested = false;
     };
 }

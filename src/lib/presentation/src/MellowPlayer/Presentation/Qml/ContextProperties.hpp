@@ -29,8 +29,8 @@ namespace MellowPlayer::Presentation
         void initialize(const ResultCallback& resultCallback) override;
 
     private:
-        IQmlApplicationEngine& qmlApplicationEngine_;
-        QList<IContextProperty*> contextProperties_;
-        Domain::IPlayer& player_;
+        IQmlApplicationEngine& _qmlApplicationEngine;
+        QList<IContextProperty*> _contextProperties;
+        Domain::IPlayer& _player;
     };
 }

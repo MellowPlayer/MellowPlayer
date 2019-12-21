@@ -31,10 +31,10 @@ namespace MellowPlayer::Presentation
         static QString SERVICE_NAME;
         static QString OBJECT_NAME;
 
-        Domain::ILogger& logger_;
-        std::unique_ptr<QObject> parent_;
-        QObject* mpris2Root_;
-        QObject* mpris2Player_;
-        QString serviceName_;
+        Domain::ILogger& _logger;
+        std::unique_ptr<QObject> _parent;
+        QObject* _mpris2Root;
+        QObject* _mpris2Player;
+        QString _serviceName;
     };
 }

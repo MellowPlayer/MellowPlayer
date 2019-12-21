@@ -17,8 +17,8 @@ namespace MellowPlayer::Domain::Tests
 
         bool load(const QString& path) override
         {
-            UserScriptBase::path_ = path;
-            Domain::UserScriptBase::code_ = FAKE_USER_SCRIPT_CODE;
+            UserScriptBase::_path = path;
+            Domain::UserScriptBase::_code = FAKE_USER_SCRIPT_CODE;
             return true;
         }
 

@@ -47,6 +47,6 @@ namespace MellowPlayer::Presentation
         Infrastructure::Updater::Status fromString(const QString& string);
 
     private:
-        UpdaterStatusStrings strings_;
+        UpdaterStatusStrings _strings;
     };
 }

@@ -58,8 +58,8 @@ namespace MellowPlayer::Infrastructure
         void add(const QString& serviceName, const std::shared_ptr<NetworkProxy>& networkProxy);
         QString settingUrl(const QString& name) const;
 
-        QMap<QString, std::shared_ptr<NetworkProxy>> items_;
-        Domain::ISettingsStore& settingsStore_;
-        Domain::StreamingServices& streamingServices_;
+        QMap<QString, std::shared_ptr<NetworkProxy>> _items;
+        Domain::ISettingsStore& _settingsStore;
+        Domain::StreamingServices& _streamingServices;
     };
 }

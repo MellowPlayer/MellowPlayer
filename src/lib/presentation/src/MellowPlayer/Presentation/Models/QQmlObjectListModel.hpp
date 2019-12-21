@@ -541,25 +541,25 @@ public:
 
     void setItems(const QList<ItemType*>& items)
     {
-        remainingItems_ = items;
+        _remainingItems = items;
     }
 
     bool canFetchMore(const QModelIndex& = QModelIndex()) const override
     {
-        return remainingItems_.count() > 0;
+        return _remainingItems.count() > 0;
     }
 
     void fetchMore(const QModelIndex& = QModelIndex()) override
     {
-        for (int i = 0; i < 100 && remainingItems_.count() > 0; ++i)
+        for (int i = 0; i < 100 && _remainingItems.count() > 0; ++i)
         {
-            QQmlObjectListModel<ItemType>::append(remainingItems_.front());
-            remainingItems_.pop_front();
+            QQmlObjectListModel<ItemType>::append(_remainingItems.front());
+            _remainingItems.pop_front();
         }
     }
 
 private:
-    QList<ItemType*> remainingItems_;
+    QList<ItemType*> _remainingItems;
 };
 
 #endif  // QQMLOBJECTLISTMODEL_H

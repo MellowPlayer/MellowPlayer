@@ -25,12 +25,12 @@ void messageHandler(QtMsgType type, const QMessageLogContext& context, const QSt
     logger.log(message.toStdString(), logLevel, context.file, context.line);
 }
 
-unique_ptr<Loggers> Loggers::instance_ = nullptr;
+unique_ptr<Loggers> Loggers::_instance = nullptr;
 
 Loggers& Loggers::initialize(std::shared_ptr<ILoggerFactory> loggerFactory, const LoggerConfig& defaultConfig)
 {
-    instance_.reset(new Loggers(loggerFactory, defaultConfig));
-    return *instance_;
+    _instance.reset(new Loggers(loggerFactory, defaultConfig));
+    return *_instance;
 }
 
 Loggers& Loggers::initialize(std::shared_ptr<ILoggerFactory> loggerFactory, LogLevel logLevel)
@@ -42,13 +42,13 @@ Loggers& Loggers::initialize(std::shared_ptr<ILoggerFactory> loggerFactory, LogL
 
 Loggers& Loggers::instance()
 {
-    if (instance_ == nullptr)
+    if (_instance == nullptr)
         throw logic_error("Loggers::instance called before Loggers::initialize!");
-    return *instance_;
+    return *_instance;
 }
 
 Loggers::Loggers(std::shared_ptr<ILoggerFactory> loggerFactory, const LoggerConfig& defaultConfig)
-        : loggerFactory_(loggerFactory), defaultLoggerConfig_(defaultConfig)
+        : _loggerFactory(loggerFactory), _defaultLoggerConfig(defaultConfig)
 {
     qInstallMessageHandler(messageHandler);
 }
@@ -60,7 +60,7 @@ ILogger& Loggers::logger()
 
 ILogger& Loggers::logger(const std::string& name)
 {
-    return logger(name, instance().defaultLoggerConfig_);
+    return logger(name, instance()._defaultLoggerConfig);
 }
 
 ILogger& Loggers::logger(const std::string& name, const LoggerConfig& loggerConfig)
@@ -73,25 +73,25 @@ ILogger& Loggers::logger(const std::string& name, const LoggerConfig& loggerConf
 
 bool Loggers::loggerExists(const std::string& name)
 {
-    return loggersMap_.find(name) != loggersMap_.end();
+    return _loggersMap.find(name) != _loggersMap.end();
 }
 
 ILogger& Loggers::getExistingLogger(const std::string& name)
 {
-    return *loggersMap_[name];
+    return *_loggersMap[name];
 }
 
 ILogger& Loggers::createNewLogger(const std::string& name, const LoggerConfig& loggerConfig)
 {
-    loggersMap_[name] = loggerFactory_->create(name, loggerConfig);
+    _loggersMap[name] = _loggerFactory->create(name, loggerConfig);
     return getExistingLogger(name);
 }
 
 void Loggers::setDefaultLogLevel(LogLevel logLevel)
 {
-    defaultLoggerConfig_.logLevel = logLevel;
+    _defaultLoggerConfig.logLevel = logLevel;
 
-    for (auto logger : loggersMap_)
+    for (auto logger : _loggersMap)
     {
         logger->setLogLevel(logLevel);
     }

@@ -48,6 +48,6 @@ namespace MellowPlayer::Infrastructure
         void setFont(const QFont& font) override;
 
     private:
-        QApplication& qApplication_;
+        QApplication& _qApplication;
     };
 }

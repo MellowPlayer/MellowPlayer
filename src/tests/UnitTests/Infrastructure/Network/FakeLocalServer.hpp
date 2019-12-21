@@ -26,7 +26,7 @@ namespace MellowPlayer::Infrastructure::Tests
 
         bool isListening() const override
         {
-            return isListening_;
+            return _isListening;
         }
 
         QString serverSocketFilePath() const override

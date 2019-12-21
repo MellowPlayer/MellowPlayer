@@ -24,7 +24,7 @@ namespace MellowPlayer::Presentation
         virtual void initialize(IQmlApplicationEngine& qmlApplicationEngine) override;
 
     private:
-        QString name_;
-        QObject* propertyObject_;
+        QString _name;
+        QObject* _propertyObject;
     };
 }

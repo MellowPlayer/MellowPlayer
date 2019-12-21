@@ -28,7 +28,7 @@ namespace MellowPlayer::Domain
         void restoreDefaults();
 
     private:
-        ISettingsStore& settingsStore_;
-        QList<SettingsCategory*> categories_;
+        ISettingsStore& _settingsStore;
+        QList<SettingsCategory*> _categories;
     };
 }

@@ -27,9 +27,9 @@ namespace MellowPlayer::Domain
         QString pathsKey() const;
         QString namesKey() const;
 
-        QString serviceName_;
-        IUserScriptFactory& userScriptFactory_;
-        ISettingsStore& settingsStore_;
+        QString _serviceName;
+        IUserScriptFactory& _userScriptFactory;
+        ISettingsStore& _settingsStore;
         QList<IUserScript*> _scripts;
         ILogger& _logger;
 

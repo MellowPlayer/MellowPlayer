@@ -30,7 +30,7 @@ namespace MellowPlayer::Infrastructure
         bool openDatabase();
         bool initDatabase();
 
-        Domain::ILogger& logger_;
-        QSqlDatabase database_;
+        Domain::ILogger& _logger;
+        QSqlDatabase _database;
     };
 }

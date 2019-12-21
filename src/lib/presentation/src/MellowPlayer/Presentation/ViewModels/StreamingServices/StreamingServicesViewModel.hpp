@@ -83,18 +83,18 @@ namespace MellowPlayer::Presentation
         int nextIndex(int index) const;
         int previousIndex(int index) const;
 
-        Domain::StreamingServices& streamingServices_;
-        Domain::Players& players_;
-        Domain::Settings& settings_;
-        Domain::Setting& currentServiceSetting_;
-        Domain::IWorkDispatcher& workDispatcher_;
-        Domain::IStreamingServiceCreator& streamingServiceCreator_;
-        Infrastructure::ICommandLineArguments& commandLineArguments_;
-        Domain::IUserScriptFactory& userScriptFactory_;
-        Infrastructure::INetworkProxies& networkProxies_;
-        StreamingServiceListModel* allServices_;
-        StreamingServiceProxyListModel enabledServices_;
-        StreamingServiceViewModel* currentService_ = nullptr;
+        Domain::StreamingServices& _streamingServices;
+        Domain::Players& _players;
+        Domain::Settings& _settings;
+        Domain::Setting& _currentServiceSetting;
+        Domain::IWorkDispatcher& _workDispatcher;
+        Domain::IStreamingServiceCreator& _streamingServiceCreator;
+        Infrastructure::ICommandLineArguments& _commandLineArguments;
+        Domain::IUserScriptFactory& _userScriptFactory;
+        Infrastructure::INetworkProxies& _networkProxies;
+        StreamingServiceListModel* _allServices;
+        StreamingServiceProxyListModel _enabledServices;
+        StreamingServiceViewModel* _currentService = nullptr;
         ThemeViewModel& _themeViewModel;
     };
 }

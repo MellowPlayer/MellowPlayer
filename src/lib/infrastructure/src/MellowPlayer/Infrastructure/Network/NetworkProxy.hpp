@@ -111,8 +111,8 @@ namespace MellowPlayer::Infrastructure
         void portChanged();
 
     private:
-        bool isEnabled_ = false;
-        QString hostName_;
-        int port_ = 0;
+        bool _isEnabled = false;
+        QString _hostName;
+        int _port = 0;
     };
 }

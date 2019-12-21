@@ -8,28 +8,28 @@ using namespace MellowPlayer::Domain;
 using namespace MellowPlayer::Domain;
 using namespace MellowPlayer::Infrastructure;
 
-QSettingsStore::QSettingsStore() : qSettings_(make_unique<QSettings>("MellowPlayer", "MellowPlayer3")), logger_(Loggers::logger("SettingsStore"))
+QSettingsStore::QSettingsStore() : _qSettings(make_unique<QSettings>("MellowPlayer", "MellowPlayer3")), _logger(Loggers::logger("SettingsStore"))
 {
-    LOG_DEBUG(logger_, "Settings file: " << qSettings_->fileName().toStdString());
+    LOG_DEBUG(_logger, "Settings file: " << _qSettings->fileName().toStdString());
 }
 
 void QSettingsStore::setOrganizationName(const QString& orgName)
 {
-    qSettings_ = make_unique<QSettings>(orgName, "MellowPlayer3");
-    LOG_DEBUG(logger_, "Settings file: " << qSettings_->fileName().toStdString());
+    _qSettings = make_unique<QSettings>(orgName, "MellowPlayer3");
+    LOG_DEBUG(_logger, "Settings file: " << _qSettings->fileName().toStdString());
 }
 
 void QSettingsStore::clear()
 {
-    qSettings_->clear();
+    _qSettings->clear();
 }
 
 QVariant QSettingsStore::value(const QString& key, const QVariant& defaultValue) const
 {
-    return qSettings_->value(key, defaultValue);
+    return _qSettings->value(key, defaultValue);
 }
 
 void QSettingsStore::setValue(const QString& key, const QVariant& value)
 {
-    qSettings_->setValue(key, value);
+    _qSettings->setValue(key, value);
 }

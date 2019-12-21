@@ -28,11 +28,11 @@ namespace MellowPlayer::Presentation
     private:
         void checkSupportForActions();
 
-        Domain::ILogger& logger_;
-        IMainWindow& mainWindow_;
+        Domain::ILogger& _logger;
+        IMainWindow& _mainWindow;
         Domain::IWorkDispatcher& _workDispatcher;
-        _NotifyNotification* previousNotification_;
-        bool actionsSupported_ = true;
-        static LibnotifyPresenter* instance_;
+        _NotifyNotification* _previousNotification;
+        bool _actionsSupported = true;
+        static LibnotifyPresenter* _instance;
     };
 }

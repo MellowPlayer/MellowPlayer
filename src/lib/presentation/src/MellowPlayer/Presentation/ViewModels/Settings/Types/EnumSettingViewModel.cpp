@@ -10,12 +10,12 @@ EnumSettingViewModel::EnumSettingViewModel(Setting& setting, QObject* parent) : 
 
 QString EnumSettingViewModel::getValue() const
 {
-    return setting_.value().toString();
+    return _setting.value().toString();
 }
 
 void EnumSettingViewModel::setValue(QString value)
 {
-    setting_.setValue(value);
+    _setting.setValue(value);
 }
 
 void EnumSettingViewModel::onValueChanged()
@@ -30,7 +30,7 @@ QString EnumSettingViewModel::qmlComponent()
 
 QStringList EnumSettingViewModel::values() const
 {
-    QString list = setting_.type();
+    QString list = _setting.type();
     list = list.replace("enum[", "").replace("]", "").replace("'", "").replace("\"", "").replace(" ", "");
     return list.split(",");
 }

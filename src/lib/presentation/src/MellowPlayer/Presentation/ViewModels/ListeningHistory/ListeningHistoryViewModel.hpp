@@ -30,8 +30,8 @@ namespace MellowPlayer::Presentation
         void onEntryRemoved(int entryId);
 
     private:
-        Domain::IListeningHistory& listeningHistoryService_;
-        ListeningHistoryListModel* sourceModel_;
-        ListeningHistoryProxyListModel proxyModel_;
+        Domain::IListeningHistory& _listeningHistoryService;
+        ListeningHistoryListModel* _sourceModel;
+        ListeningHistoryProxyListModel _proxyModel;
     };
 }

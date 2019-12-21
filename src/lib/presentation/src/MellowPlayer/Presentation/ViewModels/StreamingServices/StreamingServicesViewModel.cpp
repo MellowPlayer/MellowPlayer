@@ -29,36 +29,36 @@ StreamingServicesViewModel::StreamingServicesViewModel(StreamingServices& stream
                                                        std::shared_ptr<IContextProperties> contextProperties,
                                                        INetworkProxies& networkProxies,
                                                        ThemeViewModel& themeViewModel)
-        : ContextProperty("_streamingServices", this, contextProperties),
-          streamingServices_(streamingServices),
-          players_(players),
-          settings_(settings),
-          currentServiceSetting_(settings.get(SettingKey::PRIVATE_CURRENT_SERVICE)),
-          workDispatcher_(workDispatcher),
-          streamingServiceCreator_(streamingServiceCreator),
-          commandLineArguments_(commandLineArguments),
-          userScriptFactory_(userScriptFactory),
-          networkProxies_(networkProxies),
-          allServices_(new StreamingServiceListModel(this, QByteArray(), "name")),
-          enabledServices_(allServices_),
+        : ContextProperty("streamingServices", this, contextProperties),
+          _streamingServices(streamingServices),
+          _players(players),
+          _settings(settings),
+          _currentServiceSetting(settings.get(SettingKey::PRIVATE_CURRENT_SERVICE)),
+          _workDispatcher(workDispatcher),
+          _streamingServiceCreator(streamingServiceCreator),
+          _commandLineArguments(commandLineArguments),
+          _userScriptFactory(userScriptFactory),
+          _networkProxies(networkProxies),
+          _allServices(new StreamingServiceListModel(this, QByteArray(), "name")),
+          _enabledServices(_allServices),
           _themeViewModel(themeViewModel)
 {
 }
 
 void StreamingServicesViewModel::initialize()
 {
-    streamingServices_.load();
-    for (auto& service : streamingServices_.toList())
+    _streamingServices.load();
+    for (auto& service : _streamingServices.toList())
     {
         onServiceAdded(service.get());
     }
 
-    connect(&streamingServices_, &StreamingServices::added, this, &StreamingServicesViewModel::onServiceAdded);
+    connect(&_streamingServices, &StreamingServices::added, this, &StreamingServicesViewModel::onServiceAdded);
 
-    auto currentServiceName = currentServiceSetting_.value().toString();
-    if (!commandLineArguments_.service().isEmpty())
-        currentServiceName = commandLineArguments_.service();
-    for (auto service : allServices_->toList())
+    auto currentServiceName = _currentServiceSetting.value().toString();
+    if (!_commandLineArguments.service().isEmpty())
+        currentServiceName = _commandLineArguments.service();
+    for (auto service : _allServices->toList())
     {
         if (service->name().toLower() == currentServiceName.toLower())
             setCurrentService(service);
@@ -67,48 +67,48 @@ void StreamingServicesViewModel::initialize()
 
 StreamingServiceViewModel* StreamingServicesViewModel::currentService() const
 {
-    return currentService_;
+    return _currentService;
 }
 
 void StreamingServicesViewModel::setCurrentService(QObject* value)
 {
-    if (currentService_ == value)
+    if (_currentService == value)
         return;
 
-    currentService_ = static_cast<StreamingServiceViewModel*>(value);
-    if (currentService_ == nullptr)
+    _currentService = static_cast<StreamingServiceViewModel*>(value);
+    if (_currentService == nullptr)
     {
-        currentServiceSetting_.setValue("");
-        streamingServices_.setCurrent(nullptr);
+        _currentServiceSetting.setValue("");
+        _streamingServices.setCurrent(nullptr);
     }
     else
     {
-        currentServiceSetting_.setValue(currentService_->name());
-        streamingServices_.setCurrent(currentService_->streamingService());
+        _currentServiceSetting.setValue(_currentService->name());
+        _streamingServices.setCurrent(_currentService->streamingService());
     }
 
-    emit currentServiceChanged(currentService_);
+    emit currentServiceChanged(_currentService);
 }
 
 void StreamingServicesViewModel::reload()
 {
-    streamingServices_.load();
+    _streamingServices.load();
 }
 
 void StreamingServicesViewModel::onServiceAdded(StreamingService* streamingService)
 {
-    auto* sv = new StreamingServiceViewModel(*streamingService, settings_.store(), userScriptFactory_, players_, networkProxies_, _themeViewModel, this);
-    allServices_->append(sv);
+    auto* sv = new StreamingServiceViewModel(*streamingService, _settings.store(), _userScriptFactory, _players, _networkProxies, _themeViewModel, this);
+    _allServices->append(sv);
 }
 
 void StreamingServicesViewModel::next()
 {
-    int currentIndex = allServices_->indexOf(currentService_);
+    int currentIndex = _allServices->indexOf(_currentService);
     int index = nextIndex(currentIndex);
 
     while (index != currentIndex)
     {
-        auto* sv = allServices_->at(index);
+        auto* sv = _allServices->at(index);
         if (sv->isActive() && sv->isEnabled())
         {
             setCurrentService(sv);
@@ -120,12 +120,12 @@ void StreamingServicesViewModel::next()
 
 void StreamingServicesViewModel::previous()
 {
-    int currentIndex = allServices_->indexOf(currentService_);
+    int currentIndex = _allServices->indexOf(_currentService);
     int index = previousIndex(currentIndex);
 
     while (index != currentIndex)
     {
-        auto* sv = allServices_->at(index);
+        auto* sv = _allServices->at(index);
         if (sv->isActive() && sv->isEnabled())
         {
             setCurrentService(sv);
@@ -163,17 +163,17 @@ void StreamingServicesViewModel::createService(const QString& serviceName,
             filters.append(Filter::Windows);
     }
     TokenizedFilters tokenizedFilters(filters);
-    workDispatcher_.invoke([=]() {
-        QString pluginDir = streamingServiceCreator_.create(serviceName, serviceUrl, authorName, authorWebsite, tokenizedFilters.join());
+    _workDispatcher.invoke([=]() {
+        QString pluginDir = _streamingServiceCreator.create(serviceName, serviceUrl, authorName, authorWebsite, tokenizedFilters.join());
         emit serviceCreated(pluginDir);
-        streamingServices_.load();
+        _streamingServices.load();
     });
 }
 
 int StreamingServicesViewModel::nextIndex(int index) const
 {
     int nextIndex = index + 1;
-    if (nextIndex >= allServices_->count())
+    if (nextIndex >= _allServices->count())
         nextIndex = 0;
     return nextIndex;
 }
@@ -182,17 +182,17 @@ int StreamingServicesViewModel::previousIndex(int index) const
 {
     int previousIndex = index - 1;
     if (previousIndex < 0)
-        previousIndex = allServices_->count() - 1;
+        previousIndex = _allServices->count() - 1;
     return previousIndex;
 }
 
 StreamingServiceListModel* StreamingServicesViewModel::allServices()
 {
-    return allServices_;
+    return _allServices;
 }
 StreamingServiceProxyListModel* StreamingServicesViewModel::enabledServices()
 {
-    return &enabledServices_;
+    return &_enabledServices;
 }
 
 void StreamingServicesViewModel::initialize(IQmlApplicationEngine& qmlApplicationEngine)

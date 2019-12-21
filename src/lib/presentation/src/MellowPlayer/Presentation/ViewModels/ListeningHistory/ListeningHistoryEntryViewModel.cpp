@@ -3,50 +3,50 @@
 using namespace MellowPlayer::Domain;
 using namespace MellowPlayer::Presentation;
 
-ListeningHistoryEntryViewModel::ListeningHistoryEntryViewModel(const ListeningHistoryEntry& entry, QObject* parent) : QObject(parent), entry_(entry)
+ListeningHistoryEntryViewModel::ListeningHistoryEntryViewModel(const ListeningHistoryEntry& entry, QObject* parent) : QObject(parent), _entry(entry)
 {
 }
 
 QString ListeningHistoryEntryViewModel::songId() const
 {
-    return entry_.songUniqueId;
+    return _entry.songUniqueId;
 }
 
 QString ListeningHistoryEntryViewModel::title() const
 {
-    return entry_.songTitle;
+    return _entry.songTitle;
 }
 
 QString ListeningHistoryEntryViewModel::artist() const
 {
-    return entry_.artist;
+    return _entry.artist;
 }
 
 QString ListeningHistoryEntryViewModel::artUrl() const
 {
-    return entry_.artUrl;
+    return _entry.artUrl;
 }
 
 QString ListeningHistoryEntryViewModel::service() const
 {
-    return entry_.serviceName;
+    return _entry.serviceName;
 }
 
 QString ListeningHistoryEntryViewModel::date() const
 {
-    return dateTimeConverter_.dateToString(entry_.dateTime());
+    return _dateTimeConverter.dateToString(_entry.dateTime());
 }
 
 QString ListeningHistoryEntryViewModel::time() const
 {
-    return dateTimeConverter_.timeToString(entry_.dateTime());
+    return _dateTimeConverter.timeToString(_entry.dateTime());
 }
 
 QString ListeningHistoryEntryViewModel::dateCategory() const
 {
-    return dateTimeConverter_.dateToCategory(entry_.dateTime());
+    return _dateTimeConverter.dateToCategory(_entry.dateTime());
 }
 int ListeningHistoryEntryViewModel::entryId() const
 {
-    return entry_.id;
+    return _entry.id;
 }

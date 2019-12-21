@@ -62,14 +62,14 @@ namespace MellowPlayer::Infrastructure
     private:
         UpdateChannel getChannel() const;
 
-        Domain::ILogger& logger_;
-        ILatestRelease& releaseQuerier_;
-        AbstractPlatformUpdater& platformUpdater_;
-        Domain::Setting& autoCheckEnabledSetting_;
-        Domain::Setting& updateChannelSetting_;
-        bool isUpdateAvailable_ = false;
-        const Release* currentRelease_;
-        const Release* latestRelease_ = nullptr;
-        Status status_ = Status::None;
+        Domain::ILogger& _logger;
+        ILatestRelease& _releaseQuerier;
+        AbstractPlatformUpdater& _platformUpdater;
+        Domain::Setting& _autoCheckEnabledSetting;
+        Domain::Setting& _updateChannelSetting;
+        bool _isUpdateAvailable = false;
+        const Release* _currentRelease;
+        const Release* _latestRelease = nullptr;
+        Status _status = Status::None;
     };
 }

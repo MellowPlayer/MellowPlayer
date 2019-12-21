@@ -29,15 +29,15 @@ namespace MellowPlayer::Infrastructure
         class PluginInfo : public QObject
         {
         public:
-            Domain::StreamingService& service_;
-            QString scriptPath_;
-            QString themePath_;
+            Domain::StreamingService& _service;
+            QString _scriptPath;
+            QString _themePath;
 
             PluginInfo(Domain::StreamingService& service, QString scriptPath, QString themePath, QObject* parent);
         };
 
-        Domain::ILogger& logger_;
-        QMap<QString, PluginInfo*> pluginInfo_;
-        QFileSystemWatcher fileSystemWatcher_;
+        Domain::ILogger& _logger;
+        QMap<QString, PluginInfo*> _pluginInfo;
+        QFileSystemWatcher _fileSystemWatcher;
     };
 }

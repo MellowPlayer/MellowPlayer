@@ -31,7 +31,7 @@ namespace MellowPlayer::Presentation
     private:
         void create(Domain::IUserScript* userScriptModel);
 
-        Domain::UserScripts userScripts_;
-        UserScriptListModel model_;
+        Domain::UserScripts _userScripts;
+        UserScriptListModel _model;
     };
 }

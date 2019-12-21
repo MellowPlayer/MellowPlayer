@@ -38,11 +38,11 @@ namespace MellowPlayer::Infrastructure
         void updateNetworkProxy();
 
     private:
-        Domain::ILogger& logger_;
-        QNetworkProxy initialNetworkProxy_;
-        QString currentServiceName_;
-        std::shared_ptr<NetworkProxy> currentNetworkProxy_;
-        Domain::StreamingServices& streamingServices_;
-        INetworkProxies& networkProxies_;
+        Domain::ILogger& _logger;
+        QNetworkProxy _initialNetworkProxy;
+        QString _currentServiceName;
+        std::shared_ptr<NetworkProxy> _currentNetworkProxy;
+        Domain::StreamingServices& _streamingServices;
+        INetworkProxies& _networkProxies;
     };
 }

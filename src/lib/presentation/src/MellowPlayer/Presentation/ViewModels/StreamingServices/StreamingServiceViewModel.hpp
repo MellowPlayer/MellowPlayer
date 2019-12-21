@@ -112,15 +112,15 @@ namespace MellowPlayer::Presentation
         QString zoomFactorSettingsKey() const;
         QString notificationsEnabledSettingsKey() const;
 
-        Domain::StreamingService& streamingService_;
-        Domain::ISettingsStore& settingsStore_;
-        std::shared_ptr<Domain::Player> player_;
-        UserScriptsViewModel userScriptsViewModel_;
-        int zoomFactor_;
-        bool isActive_;
-        QString previewImageUrl_;
+        Domain::StreamingService& _streamingService;
+        Domain::ISettingsStore& _settingsStore;
+        std::shared_ptr<Domain::Player> _player;
+        UserScriptsViewModel _userScriptsViewModel;
+        int _zoomFactor;
+        bool _isActive;
+        QString _previewImageUrl;
         SettingsCategoryViewModel _settingsCategoryViewModel;
-        Domain::ILogger& logger_;
+        Domain::ILogger& _logger;
         int _previewCount = 0;
     };
 }

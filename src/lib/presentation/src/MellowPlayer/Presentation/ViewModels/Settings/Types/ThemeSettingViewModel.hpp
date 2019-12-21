@@ -14,6 +14,6 @@ namespace MellowPlayer::Presentation
         QStringList values() const override;
 
     private:
-        ThemeViewModel& themeViewModel_;
+        ThemeViewModel& _themeViewModel;
     };
 }

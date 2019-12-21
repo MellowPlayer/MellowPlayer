@@ -11,18 +11,18 @@ using namespace MellowPlayer::Domain;
 using namespace std;
 
 StreamingServices::StreamingServices(IStreamingServiceLoader& loader, IStreamingServiceWatcher& watcher)
-        : logger_(Loggers::logger("StreamingServicesController")), loader_(loader), watcher_(watcher), current_(nullptr)
+        : _logger(Loggers::logger("StreamingServicesController")), _loader(loader), _watcher(watcher), _current(nullptr)
 {
 }
 
 void StreamingServices::load()
 {
-    auto newServices = loader_.load();
+    auto newServices = _loader.load();
 
     for (auto newService : newServices)
     {
         bool found = false;
-        for (auto service : services_)
+        for (auto service : _services)
         {
             if (*service == *newService)
             {
@@ -32,10 +32,10 @@ void StreamingServices::load()
         }
         if (!found)
         {
-            LOG_DEBUG(logger_, "service added: " + newService->name());
-            services_.append(newService);
+            LOG_DEBUG(_logger, "service added: " + newService->name());
+            _services.append(newService);
             if (!newService->pluginDirectory().startsWith("/usr/") && !newService->pluginDirectory().startsWith("/tmp/"))
-                watcher_.watch(*newService);
+                _watcher.watch(*newService);
             emit added(newService.get());
         }
     }
@@ -43,7 +43,7 @@ void StreamingServices::load()
 
 StreamingService& StreamingServices::get(const QString& name) const
 {
-    for (const auto& service : services_)
+    for (const auto& service : _services)
         if (service->name() == name)
             return *service;
     throw invalid_argument("unknown service: " + name.toStdString());
@@ -51,16 +51,16 @@ StreamingService& StreamingServices::get(const QString& name) const
 
 void StreamingServices::setCurrent(StreamingService* service)
 {
-    if (service == current_)
+    if (service == _current)
         return;
 
-    current_ = service;
-    emit currentChanged(current_);
-    if (current_)
-        LOG_INFO(logger_, "current service changed: " + current_->name());
+    _current = service;
+    emit currentChanged(_current);
+    if (_current)
+        LOG_INFO(_logger, "current service changed: " + _current->name());
 }
 
 StreamingService* StreamingServices::current() const
 {
-    return current_;
+    return _current;
 }

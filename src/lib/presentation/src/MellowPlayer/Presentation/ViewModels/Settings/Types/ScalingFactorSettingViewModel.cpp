@@ -10,13 +10,13 @@ ScalingFactorSettingViewModel::ScalingFactorSettingViewModel(Setting &setting, Q
 
 int ScalingFactorSettingViewModel::getValue() const
 {
-    int value = setting_.value().toInt();
+    int value = _setting.value().toInt();
     return value;
 }
 
 void ScalingFactorSettingViewModel::setValue(int value)
 {
-    setting_.setValue(value);
+    _setting.setValue(value);
 }
 
 QString ScalingFactorSettingViewModel::qmlComponent()

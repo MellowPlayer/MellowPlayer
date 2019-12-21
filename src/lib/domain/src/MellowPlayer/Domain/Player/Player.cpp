@@ -12,7 +12,7 @@ using namespace MellowPlayer::Domain;
 using namespace std;
 
 Player::Player(StreamingService& streamingService)
-        : logger_(Loggers::logger("Player-" + streamingService.name().toStdString())), currentSong_(nullptr), streamingService_(streamingService)
+        : _logger(Loggers::logger("Player-" + streamingService.name().toStdString())), _currentSong(nullptr), _streamingService(streamingService)
 {
 }
 
@@ -20,8 +20,8 @@ Player::~Player() = default;
 
 void Player::togglePlayPause()
 {
-    LOG_TRACE(logger_, "togglePlayePause");
-    if (playbackStatus_ == PlaybackStatus::Playing)
+    LOG_TRACE(_logger, "togglePlayePause");
+    if (_playbackStatus == PlaybackStatus::Playing)
         pause();
     else
         play();
@@ -35,9 +35,9 @@ void Player::seekToPosition(double value)
 
 void Player::setVolume(double value)
 {
-    if (value != volume_)
+    if (value != _volume)
     {
-        volume_ = value;
+        _volume = value;
         emit changeVolumeRequest(value);
         emit volumeChanged();
     }
@@ -45,11 +45,11 @@ void Player::setVolume(double value)
 
 void Player::toggleFavoriteSong()
 {
-    LOG_TRACE(logger_, "toggleFavoriteSong()");
-    if (currentSong_ == nullptr)
+    LOG_TRACE(_logger, "toggleFavoriteSong()");
+    if (_currentSong == nullptr)
         return;
 
-    if (currentSong_->isFavorite())
+    if (_currentSong->isFavorite())
         removeFromFavorites();
     else
         addToFavorites();
@@ -57,52 +57,52 @@ void Player::toggleFavoriteSong()
 
 Song* Player::currentSong()
 {
-    return currentSong_.get();
+    return _currentSong.get();
 }
 
 double Player::position() const
 {
-    return position_;
+    return _position;
 }
 
 PlaybackStatus Player::playbackStatus() const
 {
-    return playbackStatus_;
+    return _playbackStatus;
 }
 
 bool Player::canSeek() const
 {
-    return canSeek_;
+    return _canSeek;
 }
 
 bool Player::canGoNext() const
 {
-    return canGoNext_;
+    return _canGoNext;
 }
 
 bool Player::canGoPrevious() const
 {
-    return canGoPrevious_;
+    return _canGoPrevious;
 }
 
 bool Player::canAddToFavorites() const
 {
-    return canAddToFavorites_;
+    return _canAddToFavorites;
 }
 
 double Player::volume() const
 {
-    return volume_;
+    return _volume;
 }
 
 QString Player::serviceName() const
 {
-    return streamingService_.name();
+    return _streamingService.name();
 }
 
 void Player::setUpdateResults(const QVariant& results)
 {
-    LOG_TRACE(logger_, "setUpdateResults()");
+    LOG_TRACE(_logger, "setUpdateResults()");
     QVariantMap resultsMap = results.toMap();
 
     QString uniqueId = resultsMap.value("songId").toString().replace("-", "");
@@ -129,19 +129,19 @@ void Player::setUpdateResults(const QVariant& results)
 
 void Player::suspend()
 {
-    LOG_DEBUG(logger_, "suspend()");
-    suspendedState_ = playbackStatus_;
-    if (playbackStatus_ == PlaybackStatus::Playing)
+    LOG_DEBUG(_logger, "suspend()");
+    _suspendedState = _playbackStatus;
+    if (_playbackStatus == PlaybackStatus::Playing)
     {
         pause();
-        playbackStatus_ = PlaybackStatus::Paused;
+        _playbackStatus = PlaybackStatus::Paused;
     }
 }
 
 void Player::resume()
 {
-    LOG_DEBUG(logger_, "resume()");
-    if (suspendedState_ == PlaybackStatus::Playing)
+    LOG_DEBUG(_logger, "resume()");
+    if (_suspendedState == PlaybackStatus::Playing)
     {
         play();
     }
@@ -149,38 +149,38 @@ void Player::resume()
 
 void Player::setCurrentSong(unique_ptr<Song>& song)
 {
-    LOG_TRACE(logger_, "setCurrentSong()");
-    if (currentSong_ != nullptr && *currentSong_ == *song)
+    LOG_TRACE(_logger, "setCurrentSong()");
+    if (_currentSong != nullptr && *_currentSong == *song)
     {
-        currentSong_->setDuration(song->duration());
-        currentSong_->setFavorite(song->isFavorite());
-        currentSong_->setArtUrl(song->artUrl());
+        _currentSong->setDuration(song->duration());
+        _currentSong->setFavorite(song->isFavorite());
+        _currentSong->setArtUrl(song->artUrl());
         return;
     }
 
-    currentSong_ = std::move(song);
-    LOG_DEBUG(logger_, "song changed: " + (currentSong_->isValid() ? currentSong_->toString() : "NullSong"));
-    LOG_TRACE(logger_, "song id:" + currentSong_->uniqueId());
-    LOG_TRACE(logger_, "artUrl:" + currentSong_->artUrl());
-    emit currentSongChanged(currentSong_.get());
+    _currentSong = std::move(song);
+    LOG_DEBUG(_logger, "song changed: " + (_currentSong->isValid() ? _currentSong->toString() : "NullSong"));
+    LOG_TRACE(_logger, "song id:" + _currentSong->uniqueId());
+    LOG_TRACE(_logger, "artUrl:" + _currentSong->artUrl());
+    emit currentSongChanged(_currentSong.get());
 }
 
 void Player::setPosition(double value)
 {
-    if (value == position_)
+    if (value == _position)
         return;
 
-    position_ = value;
+    _position = value;
     emit positionChanged();
 }
 
 void Player::setPlaybackStatus(PlaybackStatus value)
 {
-    if (value == playbackStatus_)
+    if (value == _playbackStatus)
         return;
 
-    playbackStatus_ = value;
-    LOG_DEBUG(logger_, "playback status changed: " << static_cast<int>(value));
+    _playbackStatus = value;
+    LOG_DEBUG(_logger, "playback status changed: " << static_cast<int>(value));
     emit playbackStatusChanged();
     emit isPlayingChanged();
     emit isStoppedChanged();
@@ -188,52 +188,52 @@ void Player::setPlaybackStatus(PlaybackStatus value)
 
 void Player::setCanSeek(bool value)
 {
-    if (value == canSeek_)
+    if (value == _canSeek)
         return;
 
-    canSeek_ = value;
+    _canSeek = value;
     emit canSeekChanged();
 }
 
 void Player::setCanGoNext(bool value)
 {
-    if (value == canGoNext_)
+    if (value == _canGoNext)
         return;
 
-    canGoNext_ = value;
+    _canGoNext = value;
     emit canGoNextChanged();
 }
 
 void Player::setCanGoPrevious(bool value)
 {
-    if (value == canGoPrevious_)
+    if (value == _canGoPrevious)
         return;
 
-    canGoPrevious_ = value;
+    _canGoPrevious = value;
     emit canGoPreviousChanged();
 }
 
 void Player::setCanAddToFavorites(bool value)
 {
-    if (value == canAddToFavorites_)
+    if (value == _canAddToFavorites)
         return;
 
-    canAddToFavorites_ = value;
+    _canAddToFavorites = value;
     emit canAddToFavoritesChanged();
 }
 
 void Player::setCurrentVolume(double value)
 {
-    if (value == volume_)
+    if (value == _volume)
         return;
 
-    volume_ = value;
+    _volume = value;
     emit volumeChanged();
 }
 
 bool Player::operator==(const Player& other) const
 {
-    return streamingService_ == other.streamingService_;
+    return _streamingService == other._streamingService;
 }
 
 bool Player::operator!=(const Player& other) const
@@ -243,15 +243,15 @@ bool Player::operator!=(const Player& other) const
 
 bool Player::isPlaying() const
 {
-    return playbackStatus_ == PlaybackStatus::Playing;
+    return _playbackStatus == PlaybackStatus::Playing;
 }
 
 bool Player::isStopped() const
 {
-    return playbackStatus_ == PlaybackStatus::Stopped;
+    return _playbackStatus == PlaybackStatus::Stopped;
 }
 
 QString Player::serviceLogo() const
 {
-    return streamingService_.logo();
+    return _streamingService.logo();
 }

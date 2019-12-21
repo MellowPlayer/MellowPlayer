@@ -6,7 +6,7 @@ using namespace MellowPlayer::Infrastructure;
 using namespace MellowPlayer::Presentation;
 
 MainWindowViewModel::MainWindowViewModel(std::shared_ptr<IContextProperties> contextProperties, IQmlApplicationEngine& qmlApplicationEngine)
-        : ContextProperty("_window", this, contextProperties), qmlApplicationEngine_(qmlApplicationEngine), visible_(false)
+        : ContextProperty("window", this, contextProperties), _qmlApplicationEngine(qmlApplicationEngine), _visible(false)
 {
 }
 
@@ -17,8 +17,8 @@ void MainWindowViewModel::show()
 
 void MainWindowViewModel::load()
 {
-    qmlApplicationEngine_.addImportPath("qrc:/MellowPlayer/imports");
-    qmlApplicationEngine_.load(QUrl("qrc:/MellowPlayer/main.qml"));
+    _qmlApplicationEngine.addImportPath("qrc:/MellowPlayer/imports");
+    _qmlApplicationEngine.load(QUrl("qrc:/MellowPlayer/main.qml"));
 }
 
 void MainWindowViewModel::hide()
@@ -28,14 +28,14 @@ void MainWindowViewModel::hide()
 
 bool MainWindowViewModel::isVisible() const
 {
-    return visible_;
+    return _visible;
 }
 
 void MainWindowViewModel::setVisible(bool visible)
 {
-    if (visible_ != visible)
+    if (_visible != visible)
     {
-        visible_ = visible;
+        _visible = visible;
         emit visibleChanged();
     }
 }

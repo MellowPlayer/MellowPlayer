@@ -28,9 +28,9 @@ namespace MellowPlayer::Infrastructure
         bool isBase64Image(const QString& artUrl);
         bool createBase64Image(const QString base64String);
 
-        FileDownloader fileDownloader_;
-        QFileInfo localUrl_;
-        Domain::ILogger& logger_;
-        Base64Helper base64Helper_;
+        FileDownloader _fileDownloader;
+        QFileInfo _localUrl;
+        Domain::ILogger& _logger;
+        Base64Helper _base64Helper;
     };
 }

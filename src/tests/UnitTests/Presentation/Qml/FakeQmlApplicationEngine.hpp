@@ -13,42 +13,42 @@ namespace MellowPlayer::Presentation::Tests
     public:
         void setContextProperty(const QString& name, QObject* object) override
         {
-            contextProperties_[name] = object;
+            _contextProperties[name] = object;
         }
 
         bool hasContextProperty(const QString& name)
         {
-            return contextProperties_.contains(name);
+            return _contextProperties.contains(name);
         }
 
         QObject* contextProperty(const QString& name) const
         {
-            return contextProperties_[name];
+            return _contextProperties[name];
         }
 
         void addImportPath(const QString& path) override
         {
-            importPaths_.append(path);
+            _importPaths.append(path);
         }
 
         int importPathsCount()
         {
-            return importPaths_.count();
+            return _importPaths.count();
         }
 
         void load(const QUrl& url) override
         {
-            loadedUrl_ = url;
+            _loadedUrl = url;
         }
 
         bool isLoaded() const
         {
-            return !loadedUrl_.isEmpty();
+            return !_loadedUrl.isEmpty();
         }
 
     private:
-        QMap<QString, QObject*> contextProperties_;
-        QStringList importPaths_;
-        QUrl loadedUrl_;
+        QMap<QString, QObject*> _contextProperties;
+        QStringList _importPaths;
+        QUrl _loadedUrl;
     };
 }

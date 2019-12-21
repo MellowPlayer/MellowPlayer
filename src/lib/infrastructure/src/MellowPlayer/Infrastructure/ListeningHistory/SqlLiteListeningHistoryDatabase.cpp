@@ -13,26 +13,26 @@ using namespace MellowPlayer::Domain;
 using namespace MellowPlayer::Domain;
 using namespace MellowPlayer::Infrastructure;
 
-SqlLiteListeningHistoryDatabase::SqlLiteListeningHistoryDatabase() : logger_(Loggers::logger("SqlLiteListeningHistoryDataProvider"))
+SqlLiteListeningHistoryDatabase::SqlLiteListeningHistoryDatabase() : _logger(Loggers::logger("SqlLiteListeningHistoryDataProvider"))
 {
 }
 
 SqlLiteListeningHistoryDatabase::~SqlLiteListeningHistoryDatabase()
 {
-    database_.close();
+    _database.close();
 }
 
 bool SqlLiteListeningHistoryDatabase::openDatabase()
 {
     auto path = getDatabasePath();
-    LOG_DEBUG(logger_, "opening listening history db: " + path)
-    database_.setDatabaseName(path);
-    if (!database_.open())
+    LOG_DEBUG(_logger, "opening listening history db: " + path)
+    _database.setDatabaseName(path);
+    if (!_database.open())
     {
-        LOG_WARN(logger_, "connection with database failed: " + path)
+        LOG_WARN(_logger, "connection with database failed: " + path)
         return false;
     }
-    LOG_DEBUG(logger_, "connected to database: " + path)
+    LOG_DEBUG(_logger, "connected to database: " + path)
     return true;
 }
 
@@ -52,7 +52,7 @@ int SqlLiteListeningHistoryDatabase::add(const ListeningHistoryEntry& entry)
 
     if (!query.exec())
     {
-        LOG_WARN(logger_, "failed to add listening history entry to db: " + query.lastError().text());
+        LOG_WARN(_logger, "failed to add listening history entry to db: " + query.lastError().text());
         return -1;
     }
     else
@@ -65,7 +65,7 @@ void SqlLiteListeningHistoryDatabase::clear()
     query.prepare("DELETE FROM song");
 
     if (!query.exec())
-        LOG_WARN(logger_, "failed to clear listening history: " + query.lastError().text());
+        LOG_WARN(_logger, "failed to clear listening history: " + query.lastError().text());
 }
 
 void SqlLiteListeningHistoryDatabase::remove(const QString& filterKey, const QString& filterValue)
@@ -75,7 +75,7 @@ void SqlLiteListeningHistoryDatabase::remove(const QString& filterKey, const QSt
     query.bindValue(QString(":%1").arg(filterKey), filterValue);
 
     if (!query.exec())
-        LOG_WARN(logger_, "failed to clear listening history: " + query.lastError().text());
+        LOG_WARN(_logger, "failed to clear listening history: " + query.lastError().text());
 }
 
 void SqlLiteListeningHistoryDatabase::removeMany(const QList<int>& identifiers)
@@ -89,7 +89,7 @@ void SqlLiteListeningHistoryDatabase::removeMany(const QList<int>& identifiers)
     QString queryString = QString("DELETE FROM song WHERE id IN (%1)").arg(numberList);
 
     if (!query.exec(queryString))
-        LOG_WARN(logger_, "failed to clear listening history: " + query.lastError().text());
+        LOG_WARN(_logger, "failed to clear listening history: " + query.lastError().text());
 }
 
 QList<ListeningHistoryEntry> SqlLiteListeningHistoryDatabase::toList() const
@@ -125,9 +125,9 @@ QList<ListeningHistoryEntry> SqlLiteListeningHistoryDatabase::toList() const
 
 bool SqlLiteListeningHistoryDatabase::initDatabase()
 {
-    if (database_.tables().count() == 0)
+    if (_database.tables().count() == 0)
     {
-        LOG_DEBUG(logger_, "creating database");
+        LOG_DEBUG(_logger, "creating database");
         QSqlQuery query;
         query.prepare("CREATE TABLE song(id INTEGER PRIMARY KEY, songUniqueId "
                       "TEXT, songTitle TEXT, artist TEXT, album TEXT, "
@@ -135,7 +135,7 @@ bool SqlLiteListeningHistoryDatabase::initDatabase()
         if (!query.exec())
         {
             return false;
-            LOG_WARN(logger_, "failed to create song table: " + query.lastError().text());
+            LOG_WARN(_logger, "failed to create song table: " + query.lastError().text());
         }
     }
     return true;
@@ -143,7 +143,7 @@ bool SqlLiteListeningHistoryDatabase::initDatabase()
 
 bool SqlLiteListeningHistoryDatabase::initialize()
 {
-    database_ = QSqlDatabase::addDatabase("QSQLITE");
+    _database = QSqlDatabase::addDatabase("QSQLITE");
     if (openDatabase())
         return initDatabase();
     return false;

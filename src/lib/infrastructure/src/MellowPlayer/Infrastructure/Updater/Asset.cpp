@@ -7,36 +7,36 @@ Asset::Asset() : Asset("", "")
 {
 }
 
-Asset::Asset(const QString& name, const QString& url) : name_(name), url_(url)
+Asset::Asset(const QString& name, const QString& url) : _name(name), _url(url)
 {
 }
 
 QString Asset::name() const
 {
-    return name_;
+    return _name;
 }
 
 QString Asset::url() const
 {
-    return url_;
+    return _url;
 }
 
 bool Asset::isAppImage() const
 {
-    return name_.toLower().endsWith(".appimage");
+    return _name.toLower().endsWith(".appimage");
 }
 
 bool Asset::isWindowsInstaller() const
 {
-    return name_.toLower().endsWith("_setup.exe");
+    return _name.toLower().endsWith("_setup.exe");
 }
 
 bool Asset::isDmg() const
 {
-    return name_.endsWith(".dmg");
+    return _name.endsWith(".dmg");
 }
 
 bool Asset::isValid() const
 {
-    return QUrl(url_).isValid() && (isAppImage() || isWindowsInstaller() || isDmg());
+    return QUrl(_url).isValid() && (isAppImage() || isWindowsInstaller() || isDmg());
 }

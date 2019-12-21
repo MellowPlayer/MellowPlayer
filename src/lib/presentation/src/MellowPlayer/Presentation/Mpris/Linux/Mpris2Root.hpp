@@ -45,7 +45,7 @@ namespace MellowPlayer::Presentation
         void Quit();
 
     private:
-        Domain::ILogger& logger_;
-        IMainWindow& mainWindow_;
+        Domain::ILogger& _logger;
+        IMainWindow& _mainWindow;
     };
 }

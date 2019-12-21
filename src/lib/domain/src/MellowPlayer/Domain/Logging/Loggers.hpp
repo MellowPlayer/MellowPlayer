@@ -34,10 +34,10 @@ namespace MellowPlayer::Domain
         ILogger& getExistingLogger(const std::string& name);
         ILogger& createNewLogger(const std::string& name, const LoggerConfig& loggerConfig);
 
-        std::shared_ptr<ILoggerFactory> loggerFactory_;
-        QMap<std::string, std::shared_ptr<ILogger>> loggersMap_;
-        LoggerConfig defaultLoggerConfig_;
+        std::shared_ptr<ILoggerFactory> _loggerFactory;
+        QMap<std::string, std::shared_ptr<ILogger>> _loggersMap;
+        LoggerConfig _defaultLoggerConfig;
 
-        static std::unique_ptr<Loggers> instance_;
+        static std::unique_ptr<Loggers> _instance;
     };
 }

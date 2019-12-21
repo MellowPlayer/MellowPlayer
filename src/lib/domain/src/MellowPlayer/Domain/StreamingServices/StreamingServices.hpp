@@ -22,7 +22,7 @@ namespace MellowPlayer::Domain
         Domain::StreamingService& get(const QString& name) const;
         const QList<std::shared_ptr<Domain::StreamingService>>& toList() const
         {
-            return services_;
+            return _services;
         }
 
         void setCurrent(Domain::StreamingService* service);
@@ -33,10 +33,10 @@ namespace MellowPlayer::Domain
         void currentChanged(StreamingService* service);
 
     private:
-        ILogger& logger_;
-        IStreamingServiceLoader& loader_;
-        IStreamingServiceWatcher& watcher_;
-        QList<std::shared_ptr<MellowPlayer::Domain::StreamingService>> services_;
-        Domain::StreamingService* current_;
+        ILogger& _logger;
+        IStreamingServiceLoader& _loader;
+        IStreamingServiceWatcher& _watcher;
+        QList<std::shared_ptr<MellowPlayer::Domain::StreamingService>> _services;
+        Domain::StreamingService* _current;
     };
 }

@@ -23,38 +23,38 @@ QmlSetup::QmlSetup(ApplicationViewModel& application,
                    ZoomViewModel& zoomViewModel,
                    ICommandLineArguments& commandLineOptions)
         : _application(application),
-          mainWindow_(mainWindow),
-          updater_(updater),
-          listeningHistory_(listeningHistory),
-          streamingServices_(streamingServices),
-          cache_(contextProperties),
-          cookies_(contextProperties),
-          clipboard_(contextProperties),
-          devToolsWindow_(contextProperties),
-          zoomViewModel_(zoomViewModel),
-          commandLineArguments_(commandLineOptions)
+          _mainWindow(mainWindow),
+          _updater(updater),
+          _listeningHistory(listeningHistory),
+          _streamingServices(streamingServices),
+          _cache(contextProperties),
+          _cookies(contextProperties),
+          _clipboard(contextProperties),
+          _devToolsWindow(contextProperties),
+          _zoomViewModel(zoomViewModel),
+          _commandLineArguments(commandLineOptions)
 {
 }
 
 void QmlSetup::initialize(const ResultCallback& resultCallback)
 {
-    cache_.clear();
-    streamingServices_.initialize();
-    listeningHistory_.initialize();
-    mainWindow_.load();
-    if (!commandLineArguments_.startMinimized())
-        mainWindow_.show();
+    _cache.clear();
+    _streamingServices.initialize();
+    _listeningHistory.initialize();
+    _mainWindow.load();
+    if (!_commandLineArguments.startMinimized())
+        _mainWindow.show();
     else
-        mainWindow_.hide();
-    updater_.check();
+        _mainWindow.hide();
+    _updater.check();
 
     resultCallback(true);
 }
 
 void QmlSetup::cleanUp()
 {
-    mainWindow_.hide();
-    cache_.clear();
+    _mainWindow.hide();
+    _cache.clear();
 }
 
 QString QmlSetup::toString() const

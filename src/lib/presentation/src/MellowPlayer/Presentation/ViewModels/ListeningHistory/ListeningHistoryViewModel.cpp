@@ -6,65 +6,65 @@ using namespace MellowPlayer::Domain;
 using namespace MellowPlayer::Presentation;
 
 ListeningHistoryViewModel::ListeningHistoryViewModel(IListeningHistory& listeningHistory, std::shared_ptr<IContextProperties> contextProperties)
-        : ContextProperty("_listeningHistory", this, contextProperties),
-          listeningHistoryService_(listeningHistory),
-          sourceModel_(new ListeningHistoryListModel(this, "title", "entryId")),
-          proxyModel_(sourceModel_)
+        : ContextProperty("listeningHistory", this, contextProperties),
+          _listeningHistoryService(listeningHistory),
+          _sourceModel(new ListeningHistoryListModel(this, "title", "entryId")),
+          _proxyModel(_sourceModel)
 {
-    proxyModel_.setSourceModel(sourceModel_);
+    _proxyModel.setSourceModel(_sourceModel);
 }
 
 ListeningHistoryProxyListModel* ListeningHistoryViewModel::model()
 {
-    return &proxyModel_;
+    return &_proxyModel;
 }
 
 void ListeningHistoryViewModel::onEntryAdded(const ListeningHistoryEntry& entry)
 {
-    sourceModel_->prepend(new ListeningHistoryEntryViewModel(entry, this));
+    _sourceModel->prepend(new ListeningHistoryEntryViewModel(entry, this));
 }
 
 void ListeningHistoryViewModel::onEntryRemoved(int entryId)
 {
-    sourceModel_->remove(sourceModel_->getByUid(QString("%1").arg(entryId)));
+    _sourceModel->remove(_sourceModel->getByUid(QString("%1").arg(entryId)));
 }
 
 void ListeningHistoryViewModel::initialize()
 {
-    connect(&listeningHistoryService_, &ListeningHistory::entryAdded, this, &ListeningHistoryViewModel::onEntryAdded);
-    connect(&listeningHistoryService_, &ListeningHistory::entryRemoved, this, &ListeningHistoryViewModel::onEntryRemoved);
-    listeningHistoryService_.initialize();
+    connect(&_listeningHistoryService, &ListeningHistory::entryAdded, this, &ListeningHistoryViewModel::onEntryAdded);
+    connect(&_listeningHistoryService, &ListeningHistory::entryRemoved, this, &ListeningHistoryViewModel::onEntryRemoved);
+    _listeningHistoryService.initialize();
     QList<ListeningHistoryEntryViewModel*> items;
-    for (const auto& entry : listeningHistoryService_.toList())
+    for (const auto& entry : _listeningHistoryService.toList())
     {
         items.prepend(new ListeningHistoryEntryViewModel(entry, this));
     }
-    sourceModel_->setItems(items);
+    _sourceModel->setItems(items);
 }
 
 void ListeningHistoryViewModel::disableService(const QString& serviceName, bool disable)
 {
-    proxyModel_.disableService(serviceName, disable);
+    _proxyModel.disableService(serviceName, disable);
 }
 
 void ListeningHistoryViewModel::setSearchFilter(const QString& searchFilter)
 {
-    proxyModel_.setSearchFilter(searchFilter);
+    _proxyModel.setSearchFilter(searchFilter);
 }
 
 void ListeningHistoryViewModel::removeById(int id)
 {
-    listeningHistoryService_.removeById(id);
+    _listeningHistoryService.removeById(id);
 }
 
 void ListeningHistoryViewModel::removeByDateCategory(const QString& dateCategory)
 {
     QList<int> toRemove;
-    for (int i = 0; i < sourceModel_->count(); ++i)
+    for (int i = 0; i < _sourceModel->count(); ++i)
     {
-        ListeningHistoryEntryViewModel* entry = sourceModel_->at(i);
+        ListeningHistoryEntryViewModel* entry = _sourceModel->at(i);
         if (entry->dateCategory() == dateCategory)
             toRemove.append(entry->entryId());
     }
-    listeningHistoryService_.removeManyById(toRemove);
+    _listeningHistoryService.removeManyById(toRemove);
 }

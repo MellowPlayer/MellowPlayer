@@ -7,13 +7,13 @@ using namespace MellowPlayer::Domain;
 
 QtConcurrentWorkDispatcher::QtConcurrentWorkDispatcher()
 {
-    connect(&timer_, &QTimer::timeout, this, &QtConcurrentWorkDispatcher::onTimeout);
+    connect(&_timer, &QTimer::timeout, this, &QtConcurrentWorkDispatcher::onTimeout);
 }
 
 void QtConcurrentWorkDispatcher::invoke(const function<void(void)>& workerFunction)
 {
     QtConcurrent::run(QThreadPool::globalInstance(), [=]() {
-        QMutexLocker mutexLocker(&mutex_);
+        QMutexLocker mutexLocker(&_mutex);
         workerFunction();
     });
 }
@@ -21,9 +21,9 @@ void QtConcurrentWorkDispatcher::invoke(const function<void(void)>& workerFuncti
 void QtConcurrentWorkDispatcher::delayInvoke(int delayMilliseconds, const std::function<void(void)>& workerFunction)
 {
     delayedWorkerFunction = workerFunction;
-    timer_.stop();
-    timer_.setInterval(delayMilliseconds);
-    timer_.start();
+    _timer.stop();
+    _timer.setInterval(delayMilliseconds);
+    _timer.start();
 }
 
 void QtConcurrentWorkDispatcher::onTimeout()
