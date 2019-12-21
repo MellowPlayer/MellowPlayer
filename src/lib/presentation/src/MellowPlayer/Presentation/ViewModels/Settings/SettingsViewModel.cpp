@@ -7,7 +7,7 @@ using namespace MellowPlayer::Domain;
 using namespace MellowPlayer::Presentation;
 
 SettingsViewModel::SettingsViewModel(Settings& settings, ThemeViewModel& themeViewModel, std::shared_ptr<IContextProperties> contextProperties)
-        : ContextProperty("settings", this, contextProperties),
+        : ContextProperty("_settings", this, contextProperties),
           _settings(settings),
           _factory(themeViewModel),
           _categories(new SettingsCategoryListModel(this, "name"))

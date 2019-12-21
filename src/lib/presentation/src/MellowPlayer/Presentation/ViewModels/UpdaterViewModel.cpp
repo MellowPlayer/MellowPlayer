@@ -8,7 +8,7 @@ using namespace MellowPlayer::Infrastructure;
 using namespace MellowPlayer::Presentation;
 
 UpdaterViewModel::UpdaterViewModel(Updater& updater, std::shared_ptr<IContextProperties> contextProperties)
-        : ContextProperty("updater", this, contextProperties), _updater(updater)
+        : ContextProperty("_updater", this, contextProperties), _updater(updater)
 {
     connect(&updater, &Updater::updateAvailable, this, &UpdaterViewModel::onUpdateAvailable);
     connect(&updater, &Updater::noUpdateAvailable, this, &UpdaterViewModel::onNoUpdateAvailable);

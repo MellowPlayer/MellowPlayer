@@ -17,7 +17,7 @@ ThemeViewModel::ThemeViewModel(StreamingServices& streamingServices,
                                Settings& settings,
                                IThemeLoader& themeLoader,
                                std::shared_ptr<IContextProperties> contextProperties)
-        : ContextProperty("theme", this, contextProperties),
+        : ContextProperty("_theme", this, contextProperties),
           _streamingServices(streamingServices),
           _loader(themeLoader),
           _accentColorSetting(settings.get(SettingKey::APPEARANCE_ACCENT)),

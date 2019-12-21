@@ -38,6 +38,7 @@ QmlSetup::QmlSetup(ApplicationViewModel& application,
 
 void QmlSetup::initialize(const ResultCallback& resultCallback)
 {
+    _application.initialize();
     _cache.clear();
     _streamingServices.initialize();
     _listeningHistory.initialize();

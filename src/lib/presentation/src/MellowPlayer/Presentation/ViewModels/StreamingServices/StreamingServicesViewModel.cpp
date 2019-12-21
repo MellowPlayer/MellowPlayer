@@ -29,7 +29,7 @@ StreamingServicesViewModel::StreamingServicesViewModel(StreamingServices& stream
                                                        std::shared_ptr<IContextProperties> contextProperties,
                                                        INetworkProxies& networkProxies,
                                                        ThemeViewModel& themeViewModel)
-        : ContextProperty("streamingServices", this, contextProperties),
+        : ContextProperty("_streamingServices", this, contextProperties),
           _streamingServices(streamingServices),
           _players(players),
           _settings(settings),

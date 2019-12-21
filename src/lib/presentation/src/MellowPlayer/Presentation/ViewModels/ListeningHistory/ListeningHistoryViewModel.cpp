@@ -6,7 +6,7 @@ using namespace MellowPlayer::Domain;
 using namespace MellowPlayer::Presentation;
 
 ListeningHistoryViewModel::ListeningHistoryViewModel(IListeningHistory& listeningHistory, std::shared_ptr<IContextProperties> contextProperties)
-        : ContextProperty("listeningHistory", this, contextProperties),
+        : ContextProperty("_listeningHistory", this, contextProperties),
           _listeningHistoryService(listeningHistory),
           _sourceModel(new ListeningHistoryListModel(this, "title", "entryId")),
           _proxyModel(_sourceModel)

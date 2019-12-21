@@ -22,7 +22,7 @@ ApplicationViewModel::ApplicationViewModel(IApplication& application,
                                            IQtApplication& qtApplication,
                                            IMainWindow& mainWindow,
                                            std::shared_ptr<IContextProperties> contextProperties)
-        : ContextProperty("app", this, contextProperties),
+        : ContextProperty("_app", this, contextProperties),
           _application(application),
           _qtApplication(qtApplication),
           _mainWindow(mainWindow),
@@ -32,9 +32,6 @@ ApplicationViewModel::ApplicationViewModel(IApplication& application,
 
     connect(&_application, &IApplication::commitDataRequest, &mainWindow, &IMainWindow::forceQuitRequest);
     connect(&_application, &IApplication::restoreWindowRequest, &mainWindow, &IMainWindow::raise);
-    setupFont();
-    registerMetaTypes();
-    setupTranslations();
 }
 
 void ApplicationViewModel::quit()
@@ -104,4 +101,11 @@ void ApplicationViewModel::setupTranslations()
 QString ApplicationViewModel::buildInfo() const
 {
     return BuildConfig::buildInfo();
+}
+
+void ApplicationViewModel::initialize()
+{
+    setupFont();
+    registerMetaTypes();
+    setupTranslations();
 }

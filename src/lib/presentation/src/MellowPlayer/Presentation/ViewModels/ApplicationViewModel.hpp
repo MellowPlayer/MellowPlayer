@@ -20,6 +20,8 @@ namespace MellowPlayer::Presentation
                              IMainWindow& mainWindow,
                              std::shared_ptr<IContextProperties> contextProperties);
 
+        void initialize();
+
         Q_INVOKABLE void quit();
         Q_INVOKABLE void restart();
         Q_INVOKABLE void showLogs();
