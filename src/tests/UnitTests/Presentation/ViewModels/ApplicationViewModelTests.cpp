@@ -37,7 +37,7 @@ SCENARIO("ApplicationViewModelTests")
 
         WHEN("Application is initialized")
         {
-            application.initialize();
+            applicationViewModel.initialize();
 
             THEN("font is set")
             {
