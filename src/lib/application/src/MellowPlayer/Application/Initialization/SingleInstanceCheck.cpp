@@ -114,7 +114,7 @@ void SingleInstanceCheck::onSecondaryApplicationActionRequest()
 void SingleInstanceCheck::initializeSecondaryApplication()
 {
     _isPrimary = false;
-    LOG_DEBUG(_logger, "Initializing secondary application");
+    LOG_DEBUG(_logger, "Another instance is already running, transmitting command line arguments...");
 
     _localSocket = _localSocketFactory.create();
     connect(_localSocket.get(), &ILocalSocket::connected, this, &SingleInstanceCheck::onConnectedToPrimaryApplication);

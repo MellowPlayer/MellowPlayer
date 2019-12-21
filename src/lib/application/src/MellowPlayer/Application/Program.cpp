@@ -49,7 +49,7 @@ void Program::initialize() const
         }
         else
         {
-            LOG_ERROR(_logger, "Initialization finished with failure: " << _initializationSequence.errorMessage());
+            LOG_ERROR(_logger, "Initialization finished with failure");
             QTimer::singleShot(1, [=]() { _application.quit(-1); });
         }
     });
@@ -87,7 +87,7 @@ void logStart()
     auto version = BuildConfig::getVersion();
     auto buildInfo = BuildConfig::buildInfo();
 
-    LOG_ERROR(logger, "****************************** Starting ***************************************");
+    LOG_WARN(logger, "****************************** Starting ***************************************");
     LOG_INFO(logger, QString("MellowPlayer %1 - %2").arg(version).arg(buildInfo));
     LOG_INFO(logger, "Log directory: " + logDirectory);
 }
@@ -99,7 +99,7 @@ void logStop()
     auto version = BuildConfig::getVersion();
     auto buildInfo = BuildConfig::buildInfo();
 
-    LOG_ERROR(logger, "****************************** Stopped ***************************************");
+    LOG_WARN(logger, "****************************** Stopped ***************************************");
 }
 
 void configureQt(QApplication& qApplication)

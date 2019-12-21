@@ -36,7 +36,7 @@ int InitializationSequence::count() const
 
 void InitializationSequence::initialize(const IInitializable::ResultCallback& resultCallback)
 {
-    LOG_DEBUG(_logger, "Starting Initialization sequence");
+    LOG_DEBUG(_logger, "Starting initialization sequence");
 
     _resultCallback = resultCallback;
     _currentIndex = 0;
@@ -49,7 +49,7 @@ void InitializationSequence::initialize(const IInitializable::ResultCallback& re
 
 void InitializationSequence::onFinished(bool result)
 {
-    LOG_DEBUG(_logger, "Finished Initialization sequence, status: " << (result ? "SUCCESS" : "FAILED"));
+    LOG_DEBUG(_logger, "Finished with status: " << (result ? "SUCCESS" : "FAILED"));
     _resultCallback(result);
 }
 
@@ -58,7 +58,7 @@ void InitializationSequence::initializeNext()
     try
     {
         // clang-format off
-        auto msg = QString("Starting Initialization step (%1/%2) [%3]")
+        auto msg = QString("Starting initialization step (%1/%2) [%3]")
                            .arg(_currentIndex + 1)
                            .arg(_count)
                            .arg(currentItem()->toString());
@@ -87,11 +87,11 @@ void InitializationSequence::onItemInitialized(bool initialized)
     if (!initialized)
     {
         // clang-format off
-        auto msg = QString("Initialization step (%1/%2) [%3] failed: %4")
+        auto msg = QString("Initialization step failed (%1/%2) [%3], Error = \"%4\"")
                            .arg(_currentIndex + 1)
                            .arg(_count)
                            .arg(item->toString())
-                           .arg(item->errorMessage());
+                           .arg(item->errorMessage().toLower());
         // clang-format on
         LOG_ERROR(_logger, msg);
         onFinished(false);
