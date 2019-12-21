@@ -21,11 +21,13 @@ namespace MellowPlayer::Presentation
     {
     public:
         MprisService(Domain::IPlayer& player, Domain::ILocalAlbumArt& localAlbumArt, IMainWindow& window);
-        ~MprisService();
 
-        bool start() override;
+        void initialize(const ResultCallback& resultCallback) override;
+        void cleanUp() override;
 
     private:
+        bool start();
+
         static QString SERVICE_NAME;
         static QString OBJECT_NAME;
 

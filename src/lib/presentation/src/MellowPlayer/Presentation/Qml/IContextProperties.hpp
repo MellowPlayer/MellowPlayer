@@ -1,5 +1,7 @@
 #pragma once
 
+#include <MellowPlayer/Domain/IInitializable.hpp>
+
 namespace MellowPlayer::Presentation
 {
     class IContextProperty;
@@ -7,7 +9,7 @@ namespace MellowPlayer::Presentation
     /**
      * Registers context properties in the current QmlContext.
      */
-    class IContextProperties
+    class IContextProperties : public Domain::IInitializable
     {
     public:
         virtual ~IContextProperties() = default;
@@ -19,9 +21,9 @@ namespace MellowPlayer::Presentation
          */
         virtual void add(IContextProperty& contextProperty) = 0;
 
-        /**
-         * Registers all added context properties
-         */
-        virtual void initialize() = 0;
+        QString toString() const override
+        {
+            return "ContextProperties";
+        }
     };
 }

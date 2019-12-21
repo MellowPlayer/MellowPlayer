@@ -5,7 +5,7 @@
 
 using namespace MellowPlayer::Presentation;
 
-CookiesViewModel::CookiesViewModel(IContextProperties& contextProperties)
+CookiesViewModel::CookiesViewModel(std::shared_ptr<IContextProperties> contextProperties)
         : ContextProperty("_cookies", this, contextProperties)
 {
 

@@ -1,10 +1,11 @@
 #pragma once
 
+#include <MellowPlayer/Domain/IInitializable.hpp>
 #include <QString>
 
 namespace MellowPlayer::Presentation
 {
-    class ISystemTrayIcon
+    class ISystemTrayIcon : public Domain::IInitializable
     {
     public:
         virtual ~ISystemTrayIcon() = default;

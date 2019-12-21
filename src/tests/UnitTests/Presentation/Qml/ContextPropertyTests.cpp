@@ -12,8 +12,8 @@ SCENARIO("ContextPropertyTests")
     {
         FakeQmlApplicationEngine qmlApplicationEngine;
         QObject propertyObject;
-        FakeContextProperties contextProperties;
-        contextProperties.setQmlApplicationEngine(&qmlApplicationEngine);
+        auto contextProperties = std::make_shared<FakeContextProperties>();
+        contextProperties->setQmlApplicationEngine(&qmlApplicationEngine);
 
         WHEN("I create a context property")
         {
@@ -21,12 +21,12 @@ SCENARIO("ContextPropertyTests")
 
             THEN("propertyObject has been added to the context properties")
             {
-                REQUIRE(contextProperties.contains(contextProperty));
+                REQUIRE(contextProperties->contains(contextProperty));
             }
 
             AND_WHEN("I call initialize on contextProperties")
             {
-                contextProperties.initialize();
+                contextProperties->initialize([=](bool){});
 
                 THEN("context property was added to the qmlApplicationEngine")
                 {

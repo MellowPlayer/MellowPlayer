@@ -9,7 +9,7 @@ using namespace MellowPlayer::Presentation;
 
 SettingsViewModel::SettingsViewModel(Settings& settings,
                                      ThemeViewModel& themeViewModel,
-                                     IContextProperties& contextProperties)
+                                     std::shared_ptr<IContextProperties> contextProperties)
         : ContextProperty("_settings", this, contextProperties),
           settings_(settings),
           factory_(themeViewModel),

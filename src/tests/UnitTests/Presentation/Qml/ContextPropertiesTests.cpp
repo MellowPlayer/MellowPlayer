@@ -21,7 +21,7 @@ SCENARIO("ContextPropertiesTests")
 
         WHEN("I call initialize")
         {
-            contextProperties.initialize();
+            contextProperties.initialize([=](bool){});
 
             THEN("player name exists in qmlApplicationEngine")
             {

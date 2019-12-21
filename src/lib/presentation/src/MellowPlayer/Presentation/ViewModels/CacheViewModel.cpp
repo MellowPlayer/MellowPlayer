@@ -6,7 +6,7 @@
 
 using namespace MellowPlayer::Presentation;
 
-CacheViewModel::CacheViewModel(IContextProperties& contextProperties)
+CacheViewModel::CacheViewModel(std::shared_ptr<IContextProperties> contextProperties)
         : ContextProperty("_cache", this, contextProperties)
 {
 

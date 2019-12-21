@@ -3,13 +3,18 @@
 using namespace MellowPlayer::Domain;
 using namespace std;
 
-string LoggerConfig::DEFAULT_LOG_FORMAT = "[%L] [%Y-%m-%d %H-%M-%S:%f] [%n] %v";
+string LoggerConfig::DEFAULT_LOG_FORMAT = "[%L] [%P] [%Y-%m-%d %H-%M-%S:%f] [%n] %v";
 
-LoggerConfig::LoggerConfig()
+LoggerConfig::LoggerConfig(LogLevel level)
 {
-    logLevel = LogLevel::Debug;
+    logLevel = level;
     logFormat = DEFAULT_LOG_FORMAT;
     createConsoleLogger = true;
     createFileLoggers = true;
     showFileAndLine = true;
+}
+
+LoggerConfig::LoggerConfig() : LoggerConfig(LogLevel::Debug)
+{
+
 }

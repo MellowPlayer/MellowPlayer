@@ -32,11 +32,14 @@ namespace MellowPlayer::Presentation
 {
     class IMainWindow;
 
-    class SystemTrayIcon : public QObject, public ISystemTrayIcon
+    class SystemTrayIcon : public ISystemTrayIcon
     {
         Q_OBJECT
     public:
         SystemTrayIcon(Domain::IPlayer& player, IMainWindow& mainWindow, Domain::Settings& settings);
+
+        void initialize(const ResultCallback& resultCallback) override;
+        QString toString() const override;
 
         void show() override;
         void hide() override;

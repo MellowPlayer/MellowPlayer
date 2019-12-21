@@ -18,7 +18,7 @@ TEST_CASE("HotkeysServiceTests", "[UnitTest]")
     DependencyPool pool;
     Settings& settings = pool.getSettings();
     Hotkeys hotkeys(playerMock.get(), settings, mainWindow);
-    hotkeys.initialize();
+    hotkeys.initialize([=](bool){});
 
     SECTION("togglePlayPause")
     {

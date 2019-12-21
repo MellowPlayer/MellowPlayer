@@ -29,15 +29,6 @@ Notifications::Notifications(IPlayer& player,
 {
 }
 
-void Notifications::initialize()
-{
-    LOG_TRACE(logger_, "initialize");
-    connect(&player_, &IPlayer::currentSongChanged, this, &Notifications::onCurrentSongChanged);
-    connect(&player_, &IPlayer::playbackStatusChanged, this, &Notifications::onPlaybackStatusChanged);
-    connect(&localAlbumArt_, &ILocalAlbumArt::urlChanged, this, &Notifications::onCurrentSongUrlChanged);
-    presenter_.initialize();
-}
-
 bool Notifications::display(const Notification& notification)
 {
     LOG_TRACE(logger_, "display");
@@ -139,4 +130,22 @@ bool Notifications::isNotificationTypeEnabled(NotificationType type) const
     }
 
     return isEnabled;
+}
+
+void Notifications::initialize(const ResultCallback& resultCallback)
+{
+    LOG_TRACE(logger_, "initialize");
+
+    connect(&player_, &IPlayer::currentSongChanged, this, &Notifications::onCurrentSongChanged);
+    connect(&player_, &IPlayer::playbackStatusChanged, this, &Notifications::onPlaybackStatusChanged);
+    connect(&localAlbumArt_, &ILocalAlbumArt::urlChanged, this, &Notifications::onCurrentSongUrlChanged);
+
+    presenter_.initialize();
+
+    resultCallback(true);
+}
+
+QString Notifications::toString() const
+{
+    return "Notifications";
 }

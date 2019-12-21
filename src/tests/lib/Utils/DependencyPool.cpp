@@ -47,13 +47,15 @@ using namespace MellowPlayer::Domain::Tests;
 using namespace MellowPlayer::Presentation;
 using namespace MellowPlayer::Infrastructure;
 using namespace MellowPlayer::Infrastructure::Tests;
+using namespace MellowPlayer::Presentation::Tests;
 using namespace MellowPlayer::Tests;
 
 DependencyPool::DependencyPool()
         : mICommandLineArgs(make_unique<FakeCommandLineArguments>()),
           mIStreamingServiceCreator(StreamingServiceCreatorMock::get()),
           mINotificationPresenter(NotificationPresenterMock::get()),
-          dataProvider(make_unique<FakeListeningHistoryDatabase>())
+          dataProvider(make_unique<FakeListeningHistoryDatabase>()),
+          contextProperties_(std::make_shared<FakeContextProperties>())
 {
     When(Method(mUserScriptsFactoryMock, create)).AlwaysDo([]() -> IUserScript* {
         return new FakeUserScript;
@@ -213,7 +215,7 @@ IUserScriptFactory& DependencyPool::getUserScriptFactory()
     return mUserScriptsFactoryMock.get();
 }
 
-IContextProperties& DependencyPool::getContextProperties()
+std::shared_ptr<IContextProperties> DependencyPool::getContextProperties()
 {
     return contextProperties_;
 }

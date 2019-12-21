@@ -1,7 +1,8 @@
 #pragma once
 
-#include <QObject>
+#include <MellowPlayer/Domain/IInitializable.hpp>
 #include <QJsonObject>
+#include <QObject>
 
 namespace MellowPlayer::Domain
 {
@@ -12,7 +13,7 @@ namespace MellowPlayer::Domain
 
 namespace MellowPlayer::Infrastructure
 {
-    class ApplicationStatusFile : public QObject
+    class ApplicationStatusFile : public Domain::IInitializable
     {
         Q_OBJECT
     public:
@@ -20,6 +21,10 @@ namespace MellowPlayer::Infrastructure
 
         void create();
         void remove();
+
+        void initialize(const ResultCallback& resultCallback) override;
+        void cleanUp() override;
+        QString toString() const override;
 
     private slots:
         void OnCurrentPlayerUpdated();

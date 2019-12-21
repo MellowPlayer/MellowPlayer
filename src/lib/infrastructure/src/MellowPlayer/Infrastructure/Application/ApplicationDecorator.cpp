@@ -22,9 +22,9 @@ int ApplicationDecorator::run()
     return application_->run();
 }
 
-void ApplicationDecorator::quit()
+void ApplicationDecorator::quit(int returnCode)
 {
-    application_->quit();
+    application_->quit(returnCode);
 }
 
 void ApplicationDecorator::restart()

@@ -18,7 +18,7 @@ namespace MellowPlayer::Presentation
         ApplicationViewModel(Infrastructure::IApplication& application,
                              Infrastructure::IQtApplication& qtApplication,
                              IMainWindow& mainWindow,
-                             IContextProperties& contextProperties);
+                             std::shared_ptr<IContextProperties> contextProperties);
 
         Q_INVOKABLE void quit();
         Q_INVOKABLE void restart();

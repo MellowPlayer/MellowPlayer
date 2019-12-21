@@ -79,7 +79,7 @@ namespace MellowPlayer::Tests
         Presentation::ThemeViewModel& getThemeViewModel();
         Presentation::UpdaterViewModel& getUpdaterViewModel();
         Presentation::INotificationPresenter& getNotificationPresenter();
-        Presentation::IContextProperties& getContextProperties();
+        std::shared_ptr<Presentation::IContextProperties> getContextProperties();
 
     private:
         // mocks
@@ -110,7 +110,7 @@ namespace MellowPlayer::Tests
 
         std::unique_ptr<FakeListeningHistoryDatabase> dataProvider;
 
-        Presentation::Tests::FakeContextProperties contextProperties_;
+        std::shared_ptr<Presentation::Tests::FakeContextProperties> contextProperties_;
         Infrastructure::Tests::FakeNetworkProxies networkProxies_;
     };
 }

@@ -9,7 +9,7 @@ using namespace MellowPlayer::Presentation::Tests;
 
 TEST_CASE("ClipBoardViewModelTests")
 {
-    FakeContextProperties contextProperties;
+    auto contextProperties = std::make_shared<FakeContextProperties>();
     ClipBoardViewModel clipBoardViewModel(contextProperties);
     QClipboard* clipboard = qApp->clipboard();
     clipboard->clear();

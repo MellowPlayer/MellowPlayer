@@ -28,7 +28,7 @@ int TestsRunner::runTests(int argc, char** argv)
 
     QtWebEngine::initialize();
 
-    SpdLoggerFactory loggerFactory;
+    auto loggerFactory = std::make_shared<SpdLoggerFactory>();
     LoggerConfig loggerConfig;
     loggerConfig.createFileLoggers = false;
 

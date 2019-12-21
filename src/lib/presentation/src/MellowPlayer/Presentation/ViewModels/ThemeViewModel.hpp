@@ -31,7 +31,7 @@ namespace MellowPlayer::Presentation
         ThemeViewModel(Domain::StreamingServices& streamingServices,
                        Domain::Settings& settings,
                        Domain::IThemeLoader& themeLoader,
-                       IContextProperties& contextProperties);
+                       std::shared_ptr<IContextProperties> contextProperties);
 
         bool isDark() const;
         QString accent() const;

@@ -19,7 +19,7 @@ set_property(SOURCE ${CMAKE_CURRENT_BINARY_DIR}/qrc_languages.cpp PROPERTY SKIP_
 
 # Create main executable
 file(GLOB_RECURSE HEADER_FILES ${CMAKE_SOURCE_DIR}/lib/*.hpp)
-set(SOURCE_FILES main.cpp Program.cpp Program.hpp DI.hpp)
+set(SOURCE_FILES main.cpp)
 if(WIN32)
     set(SOURCE_FILES ${SOURCE_FILES} MellowPlayer.rc)
     configure_file(../../scripts/packaging/windows/setup_templ.iss ${CMAKE_BINARY_DIR}/setup.iss)
@@ -30,6 +30,7 @@ target_link_libraries(${PROJECT_NAME}
         MellowPlayer.Domain
         MellowPlayer.Presentation
         MellowPlayer.Infrastructure
+        MellowPlayer.Application
         Qt5::Concurrent Qt5::Core Qt5::Gui Qt5::Network Qt5::Qml Qt5::Quick Qt5::QuickControls2
         Qt5::Sql Qt5::Svg Qt5::WebEngine Qt5::WebEngineWidgets Qt5::Widgets Qt5::WebChannel qxtglobalshortcut)
 
@@ -66,6 +67,7 @@ if (WIN32)
             MellowPlayer.Domain
             MellowPlayer.Presentation
             MellowPlayer.Infrastructure
+            MellowPlayer.Application
             Qt5::Concurrent Qt5::Core Qt5::Gui Qt5::Network Qt5::Qml Qt5::Quick Qt5::QuickControls2
             Qt5::Sql Qt5::Svg Qt5::WebEngine Qt5::WebEngineWidgets Qt5::Widgets qxtglobalshortcut)
     IF(USE_QML_IMPORT_LIB)

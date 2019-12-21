@@ -33,11 +33,14 @@ TEST_CASE("MprisServiceTests", "[IntegrationTest]")
     SECTION("start should succeed the first time")
     {
         if (QDBusConnection::sessionBus().isConnected()) {
-            REQUIRE(mprisService.start());
+            bool success = false;
+            mprisService.initialize([&](bool initializedWithSuccess) { success = initializedWithSuccess; });
+            REQUIRE(success);
 
             SECTION("should fail the second time ")
             {
-                REQUIRE(!mprisService.start());
+                mprisService.initialize([&](bool initializedWithSuccess) { success = initializedWithSuccess; });
+                REQUIRE(!success);
             }
         }
     }

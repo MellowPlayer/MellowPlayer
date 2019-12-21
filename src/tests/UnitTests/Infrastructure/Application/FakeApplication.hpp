@@ -19,7 +19,7 @@ namespace MellowPlayer::Infrastructure::Tests
             return returnCode;
         }
 
-        void quit() override
+        void quit(int) override
         {
             quitRequested = true;
         }

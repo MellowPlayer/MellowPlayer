@@ -18,7 +18,7 @@ SCENARIO("ApplicationViewModelTests")
     {
         FakeQtApplication qtApplication;
         FakeApplication application;
-        FakeContextProperties contextProperties;
+        auto contextProperties = std::make_shared<FakeContextProperties>();
         FakeMainWindow mainWindow;
         ApplicationViewModel applicationViewModel(application, qtApplication, mainWindow, contextProperties);
 
@@ -31,7 +31,7 @@ SCENARIO("ApplicationViewModelTests")
 
             AND_THEN("context property has been added")
             {
-                contextProperties.contains(applicationViewModel);
+                contextProperties->contains(applicationViewModel);
             }
         }
 

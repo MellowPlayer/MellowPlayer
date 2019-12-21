@@ -55,6 +55,7 @@ namespace MellowPlayer::Domain
         bool showFileAndLine;
 
         LoggerConfig();
+        explicit LoggerConfig(LogLevel level);
 
         static std::string DEFAULT_LOG_FORMAT;
     };

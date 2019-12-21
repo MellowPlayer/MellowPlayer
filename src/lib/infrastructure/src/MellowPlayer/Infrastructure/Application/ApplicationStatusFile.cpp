@@ -90,3 +90,19 @@ void ApplicationStatusFile::writeFile(const QString& fileName, const QByteArray&
     file.write(data);
     file.close();
 }
+
+void ApplicationStatusFile::initialize(const ResultCallback& resultCallback)
+{
+    create();
+    resultCallback(true);
+}
+
+void ApplicationStatusFile::cleanUp()
+{
+    remove();
+}
+
+QString ApplicationStatusFile::toString() const
+{
+    return "ApplicationStatusFile";
+}

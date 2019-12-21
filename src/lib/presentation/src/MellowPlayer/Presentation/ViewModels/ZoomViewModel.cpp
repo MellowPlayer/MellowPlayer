@@ -5,7 +5,7 @@
 using namespace MellowPlayer::Domain;
 using namespace MellowPlayer::Presentation;
 
-ZoomViewModel::ZoomViewModel(IContextProperties &contextProperties, ISettingsStore& settingsStore)
+ZoomViewModel::ZoomViewModel(std::shared_ptr<IContextProperties> contextProperties, ISettingsStore& settingsStore)
         : ContextProperty("_zoom", this, contextProperties),
           _settingsStore(settingsStore)
 {

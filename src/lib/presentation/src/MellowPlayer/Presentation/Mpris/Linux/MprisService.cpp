@@ -25,10 +25,9 @@ MprisService::MprisService(IPlayer& player, ILocalAlbumArt& localAlbumArt, IMain
 
 }
 
-MprisService::~MprisService()
+void MprisService::initialize(const IInitializable::ResultCallback& resultCallback)
 {
-    QDBusConnection::sessionBus().unregisterObject(OBJECT_NAME);
-    QDBusConnection::sessionBus().unregisterObject(serviceName_);
+    resultCallback(start());
 }
 
 bool MprisService::start()
@@ -42,3 +41,8 @@ bool MprisService::start()
     return true;
 }
 
+void MprisService::cleanUp()
+{
+    QDBusConnection::sessionBus().unregisterObject(OBJECT_NAME);
+    QDBusConnection::sessionBus().unregisterObject(serviceName_);
+}

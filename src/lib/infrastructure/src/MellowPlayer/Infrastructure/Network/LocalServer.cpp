@@ -30,9 +30,13 @@ bool LocalServer::isListening() const
 unique_ptr<ILocalSocket> LocalServer::nextPendingConnection()
 {
     QLocalSocket* qLocalSocket = qLocalServer_.nextPendingConnection();
-    unique_ptr<ILocalSocket> localSocket = localSocketFactory_.create();
-    localSocket->setQLocalSocket(qLocalSocket);
-    return localSocket;
+    if (qLocalSocket->isValid())
+    {
+        unique_ptr<ILocalSocket> localSocket = localSocketFactory_.create();
+        localSocket->setQLocalSocket(qLocalSocket);
+        return localSocket;
+    }
+    return nullptr;
 }
 
 QString LocalServer::serverSocketFilePath() const

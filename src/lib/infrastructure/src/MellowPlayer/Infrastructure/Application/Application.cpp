@@ -7,10 +7,10 @@
 using namespace std;
 using namespace MellowPlayer::Infrastructure;
 
-Application::Application(IQtApplication& qtApplication)
-        : qtApp_(qtApplication), restartRequested_(false)
+Application::Application(IQtApplication& qtApplication, const std::shared_ptr<ApplicationNetworkProxy>& applicationNetworkProxy)
+        : _qtApp(qtApplication), _applicationNetworkProxy(applicationNetworkProxy), _restartRequested(false)
 {
-    connect(&qtApp_, &IQtApplication::commitDataRequest, this, &Application::commitDataRequest);
+    connect(&_qtApp, &IQtApplication::commitDataRequest, this, &Application::commitDataRequest);
 }
 
 void Application::initialize()
@@ -21,10 +21,10 @@ void Application::initialize()
 int Application::run()
 {
     emit started();
-    auto returnCode = qtApp_.run();
+    auto returnCode = _qtApp.run();
     emit finished();
 
-    if (restartRequested_) {
+    if (_restartRequested) {
         qWarning() << "restarting application...";
         QProcess::startDetached(qApp->arguments()[0], qApp->arguments());
     }
@@ -32,14 +32,14 @@ int Application::run()
     return returnCode;
 }
 
-void Application::quit()
+void Application::quit(int returnCode)
 {
-    qtApp_.exit(0);
+    _qtApp.exit(returnCode);
 }
 
 void Application::restart()
 {
-    restartRequested_ = true;
+    _restartRequested = true;
     quit();
 }
 

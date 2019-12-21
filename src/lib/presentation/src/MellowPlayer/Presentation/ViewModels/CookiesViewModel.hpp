@@ -9,7 +9,7 @@ namespace MellowPlayer::Presentation
     {
         Q_OBJECT
     public:
-        explicit CookiesViewModel(IContextProperties& contextProperties);
+        explicit CookiesViewModel(std::shared_ptr<IContextProperties> contextProperties);
 
         Q_INVOKABLE void clear();
     };

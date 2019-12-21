@@ -16,8 +16,7 @@ using namespace MellowPlayer::Presentation;
 SystemTrayIcon::SystemTrayIcon(IPlayer& player,
                                IMainWindow& mainWindow,
                                Settings& settings)
-        : QObject(),
-          logger_(Loggers::logger("SystemTrayIcon")),
+        : logger_(Loggers::logger("SystemTrayIcon")),
           player_(player),
           mainWindow_(mainWindow),
           settings_(settings),
@@ -128,6 +127,16 @@ void SystemTrayIcon::onShowTrayIconSettingValueChanged()
         show();
     else
         hide();
+}
+void SystemTrayIcon::initialize(const IInitializable::ResultCallback& resultCallback)
+{
+    show();
+    resultCallback(true);
+}
+
+QString SystemTrayIcon::toString() const
+{
+    return "SystemTrayIcon";
 }
 
 QString SystemTrayIconStrings::playPause() const

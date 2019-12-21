@@ -21,7 +21,7 @@ using namespace MellowPlayer::Infrastructure;
 ApplicationViewModel::ApplicationViewModel(IApplication& application,
                                            IQtApplication& qtApplication,
                                            IMainWindow& mainWindow,
-                                           IContextProperties& contextProperties)
+                                           std::shared_ptr<IContextProperties> contextProperties)
         : ContextProperty("_app", this, contextProperties),
           application_(application),
           qtApplication_(qtApplication),
@@ -32,11 +32,9 @@ ApplicationViewModel::ApplicationViewModel(IApplication& application,
 
     connect(&application_, &IApplication::commitDataRequest, &mainWindow, &IMainWindow::forceQuitRequest);
     connect(&application_, &IApplication::restoreWindowRequest, &mainWindow, &IMainWindow::raise);
-    connect(&application_, &IApplication::initialized, [&]() {
-        setupFont();
-        registerMetaTypes();
-        setupTranslations();
-    });
+    setupFont();
+    registerMetaTypes();
+    setupTranslations();
 }
 
 

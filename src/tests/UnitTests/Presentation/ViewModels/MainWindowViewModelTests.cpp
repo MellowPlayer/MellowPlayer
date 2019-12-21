@@ -11,7 +11,7 @@ SCENARIO("MainWindowViewModelTests")
 {
     GIVEN("A main window instance")
     {
-        FakeContextProperties contextProperties;
+        auto contextProperties = std::make_shared<FakeContextProperties>();
         FakeQmlApplicationEngine qmlApplicationEngine;
         MainWindowViewModel mainWindow(contextProperties, qmlApplicationEngine);
 
@@ -19,7 +19,7 @@ SCENARIO("MainWindowViewModelTests")
         {
             THEN("it is added to the context properties")
             {
-                contextProperties.contains(mainWindow);
+                contextProperties->contains(mainWindow);
             }
 
             AND_THEN("window is not yet visible")

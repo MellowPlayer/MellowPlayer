@@ -1,6 +1,7 @@
 #pragma once
 
 #include "IContextProperty.hpp"
+#include <memory>
 
 namespace MellowPlayer::Presentation
 {
@@ -18,7 +19,7 @@ namespace MellowPlayer::Presentation
          *
          * @param contextProperties
          */
-        ContextProperty(const QString& name, QObject* propertyObject, IContextProperties& contextProperties);
+        ContextProperty(const QString& name, QObject* propertyObject, std::shared_ptr<IContextProperties> contextProperties);
 
         virtual void initialize(IQmlApplicationEngine& qmlApplicationEngine) override;
 

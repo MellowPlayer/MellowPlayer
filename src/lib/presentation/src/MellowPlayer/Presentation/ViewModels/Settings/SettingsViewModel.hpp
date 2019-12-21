@@ -23,7 +23,7 @@ namespace MellowPlayer::Presentation
     public:
         SettingsViewModel(Domain::Settings& settings,
                           ThemeViewModel& themeViewModel,
-                          IContextProperties& contextProperties);
+                          std::shared_ptr<IContextProperties> contextProperties);
 
         SettingsCategoryListModel* categories() const;
 

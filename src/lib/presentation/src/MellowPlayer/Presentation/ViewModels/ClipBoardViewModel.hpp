@@ -9,7 +9,7 @@ namespace MellowPlayer::Presentation
     {
         Q_OBJECT
     public:
-        explicit ClipBoardViewModel(IContextProperties& contextProperties);
+        explicit ClipBoardViewModel(std::shared_ptr<IContextProperties> contextProperties);
 
         Q_INVOKABLE void setText(const QString& text);
         Q_INVOKABLE bool canPaste() const;

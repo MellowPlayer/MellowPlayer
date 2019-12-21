@@ -26,7 +26,7 @@ namespace MellowPlayer::Presentation
 
         void add(IContextProperty& contextProperty) override;
 
-        void initialize() override;
+        void initialize(const ResultCallback& resultCallback) override;
 
     private:
         IQmlApplicationEngine& qmlApplicationEngine_;

@@ -1,11 +1,16 @@
 #pragma once
 
+#include <MellowPlayer/Domain/IInitializable.hpp>
 namespace MellowPlayer::Presentation
 {
-    class IMprisService
+    class IMprisService : public Domain::IInitializable
     {
     public:
         virtual ~IMprisService() = default;
-        virtual bool start() = 0;
+
+        QString toString() const override
+        {
+            return "Mpris";
+        }
     };
 }

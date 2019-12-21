@@ -10,7 +10,7 @@ namespace MellowPlayer::Infrastructure
     public:
         virtual void initialize() = 0;
         virtual int run() = 0;
-        virtual void quit() = 0;
+        virtual void quit(int returnCode=0) = 0;
         virtual void restart() = 0;
         virtual void restoreWindow() = 0;
 

@@ -12,7 +12,7 @@ namespace MellowPlayer::Infrastructure
 
         void initialize() override;
         int run() override;
-        void quit() override;
+        void quit(int returnCode=0) override;
         void restart() override;
         void restoreWindow() override;
 

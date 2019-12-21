@@ -1,6 +1,7 @@
 #pragma once
 
 #include "NotificationFactory.hpp"
+#include <MellowPlayer/Domain/IInitializable.hpp>
 #include <QObject>
 
 namespace MellowPlayer::Domain
@@ -17,16 +18,13 @@ namespace MellowPlayer::Presentation
 {
     class INotificationPresenter;
 
-    class INotifications
+    class INotifications : public Domain::IInitializable
     {
     public:
-        virtual ~INotifications() = default;
-
-        virtual void initialize() = 0;
         virtual bool display(const Notification& notification) = 0;
     };
 
-    class Notifications : public QObject, public INotifications
+    class Notifications : public INotifications
     {
         Q_OBJECT
     public:
@@ -36,7 +34,9 @@ namespace MellowPlayer::Presentation
                       Domain::StreamingServices& streamingServices,
                       Domain::Settings& settings);
 
-        void initialize();
+        void initialize(const ResultCallback& resultCallback) override;
+
+        QString toString() const override;
         bool display(const Notification& notification);
 
     public slots:

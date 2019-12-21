@@ -9,7 +9,7 @@ namespace MellowPlayer::Presentation
     {
         Q_OBJECT
     public:
-        explicit CacheViewModel(IContextProperties& contextProperties);
+        explicit CacheViewModel(std::shared_ptr<IContextProperties> contextProperties);
 
         Q_INVOKABLE void clear();
     };

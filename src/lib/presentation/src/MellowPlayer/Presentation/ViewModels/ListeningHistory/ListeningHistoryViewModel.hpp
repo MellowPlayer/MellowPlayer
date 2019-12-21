@@ -15,7 +15,7 @@ namespace MellowPlayer::Presentation
         Q_OBJECT
         Q_PROPERTY(QAbstractItemModel* model READ model CONSTANT)
     public:
-        ListeningHistoryViewModel(Domain::IListeningHistory& listeningHistory, IContextProperties& contextProperties);
+        ListeningHistoryViewModel(Domain::IListeningHistory& listeningHistory, std::shared_ptr<IContextProperties> contextProperties);
 
         using ContextProperty::initialize;
         void initialize();

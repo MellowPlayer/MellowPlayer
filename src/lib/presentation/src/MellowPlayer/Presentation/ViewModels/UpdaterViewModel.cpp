@@ -7,7 +7,7 @@ using namespace MellowPlayer::Domain;
 using namespace MellowPlayer::Infrastructure;
 using namespace MellowPlayer::Presentation;
 
-UpdaterViewModel::UpdaterViewModel(Updater& updater, IContextProperties& contextProperties)
+UpdaterViewModel::UpdaterViewModel(Updater& updater, std::shared_ptr<IContextProperties> contextProperties)
         : ContextProperty("_updater", this, contextProperties),
           updater_(updater)
 {

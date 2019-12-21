@@ -18,7 +18,7 @@ TEST_CASE("SettingsViewModelTests")
     DependencyPool pool;
     Settings& settings = pool.getSettings();
     ThemeViewModel& themeViewModel = pool.getThemeViewModel();
-    FakeContextProperties contextProperties;
+    auto contextProperties = std::make_shared<FakeContextProperties>();
     SettingsViewModel settingsViewModel(settings, themeViewModel, contextProperties);
 
     SECTION("get")

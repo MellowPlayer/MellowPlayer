@@ -38,7 +38,7 @@ TEST_CASE("NotificationsTests", "[UnitTest]")
 
     SECTION("initialize")
     {
-        notifications.initialize();
+        notifications.initialize([=](bool){});
         Verify(Method(notificationPresenterMock, initialize)).Once();
     }
 

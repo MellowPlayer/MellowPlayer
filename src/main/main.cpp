@@ -1,6 +1,6 @@
-#include "Program.hpp"
+#include <MellowPlayer/Application/Program.hpp>
 
-using namespace MellowPlayer::Main;
+using namespace MellowPlayer::Application;
 
 int main(int argc, char** argv)
 {

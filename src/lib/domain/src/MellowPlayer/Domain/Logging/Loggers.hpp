@@ -13,8 +13,8 @@ namespace MellowPlayer::Domain
     class Loggers
     {
     public:
-        static Loggers& initialize(ILoggerFactory& loggerFactory, const LoggerConfig& defaultConfig = LoggerConfig());
-        static Loggers& initialize(ILoggerFactory& loggerFactory, LogLevel logLevel);
+        static Loggers& initialize(std::shared_ptr<ILoggerFactory> loggerFactory, const LoggerConfig& defaultConfig = LoggerConfig());
+        static Loggers& initialize(std::shared_ptr<ILoggerFactory> loggerFactory, LogLevel logLevel);
         static Loggers& instance();
 
         static ILogger& logger();
@@ -28,13 +28,13 @@ namespace MellowPlayer::Domain
         Loggers(Loggers&&) = default;
         Loggers& operator=(const Loggers&) = delete;
         Loggers& operator=(Loggers&&) = default;
-        Loggers(ILoggerFactory& loggerFactory, const LoggerConfig& defaultConfig);
+        Loggers(std::shared_ptr<ILoggerFactory> loggerFactory, const LoggerConfig& defaultConfig);
 
         bool loggerExists(const std::string& name);
         ILogger& getExistingLogger(const std::string& name);
         ILogger& createNewLogger(const std::string& name, const LoggerConfig& loggerConfig);
 
-        ILoggerFactory& loggerFactory_;
+        std::shared_ptr<ILoggerFactory> loggerFactory_;
         QMap<std::string, std::shared_ptr<ILogger>> loggersMap_;
         LoggerConfig defaultLoggerConfig_;
 

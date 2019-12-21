@@ -11,7 +11,7 @@ using namespace MellowPlayer::Presentation::Tests;
 
 SCENARIO("ZoomViewModel tests")
 {
-    FakeContextProperties contextProperties;
+    auto contextProperties = std::make_shared<FakeContextProperties>();
     FakeSettingsStore settingsStore;
     ZoomViewModel sut(contextProperties, settingsStore);
 
