@@ -65,6 +65,11 @@ void configureEnvironment()
 {
     qputenv("QTWEBENGINE_DIALOG_SET", "QtQuickControls2");
     qputenv("QTWEBENGINE_REMOTE_DEBUGGING", "4242");
+
+    QCoreApplication::setApplicationName("MellowPlayer3");
+    QCoreApplication::setApplicationVersion(BuildConfig::getVersion());
+    QCoreApplication::setOrganizationDomain("com.gitlab.ColinDuquesnoy");
+    QCoreApplication::setOrganizationName("MellowPlayer");
 }
 
 void configureHiDpiSupport()
@@ -102,14 +107,9 @@ void logStop()
     LOG_WARN(logger, "****************************** Stopped ***************************************");
 }
 
-void configureQt(QApplication& qApplication)
+void configureForQmlAndWebEngine(QApplication& qApplication)
 {
-    qApplication.setApplicationName("MellowPlayer3");
     qApplication.setApplicationDisplayName("MellowPlayer");
-    qApplication.setApplicationVersion(BuildConfig::getVersion());
-    qApplication.setOrganizationDomain("com.gitlab.ColinDuquesnoy");
-    qApplication.setOrganizationName("MellowPlayer");
-
     QtWebEngine::initialize();
     QQuickStyle::setStyle("Material");
 }
@@ -121,14 +121,13 @@ int Program::main(int argc, char** argv)
     configureLogging();
 
     QApplication qApplication(argc, argv);
+    configureForQmlAndWebEngine(qApplication);
 
     CommandLineArguments commandLineArguments;
     commandLineArguments.parse();
 
     Loggers::instance().setDefaultLogLevel(commandLineArguments.logLevel());
     logStart();
-
-    configureQt(qApplication);
 
     di::extension::detail::scoped scope{};
     auto injector = defaultInjector(scope, qApplication, commandLineArguments);
