@@ -353,16 +353,19 @@ void Mpris2Player::signalPlayerUpdate(const QVariantMap& map)
 void Mpris2Player::signalUpdate(const QVariantMap& map, const QString& interfaceName)
 {
     LOG_TRACE(_logger, "signalUpdate");
-    if (!map.isEmpty())
+    QVariantMap mapWithOrigin = map;
+    mapWithOrigin["origin"] = "MellowPlayer";
+    if (!mapWithOrigin.isEmpty())
     {
         QDBusMessage signal = QDBusMessage::createSignal("/org/mpris/MediaPlayer2", "org.freedesktop.DBus.Properties", "PropertiesChanged");
-        QVariantList args = QVariantList() << interfaceName << map << QStringList();
+        QVariantList args = QVariantList() << interfaceName << mapWithOrigin << QStringList();
         signal.setArguments(args);
 
-        LOG_TRACE(_logger, "PropertiesChanged: {" + qMapToString(map) + "\n}");
+        LOG_TRACE(_logger, "PropertiesChanged: {" + qMapToString(mapWithOrigin) + "\n}");
         QDBusConnection::sessionBus().send(signal);
     }
 }
+
 QString Mpris2Player::qMapToString(const QMap<QString, QVariant>& map)
 {
     QString output;
