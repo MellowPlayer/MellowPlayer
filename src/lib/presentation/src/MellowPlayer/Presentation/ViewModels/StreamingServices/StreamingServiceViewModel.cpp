@@ -238,7 +238,7 @@ QString StreamingServiceViewModel::sourceCode() const
 {
     auto sourceCode = _streamingService.script()->constants() + "\n" + _streamingService.script()->code() + "\n";
     if (_streamingService.settings() != nullptr)
-        sourceCode += QString("var pluginSettings = JSON.parse(_'%1')\n").arg(_streamingService.settings()->toJavascriptObject());
+        sourceCode += QString("var pluginSettings = JSON.parse('%1')\n").arg(_streamingService.settings()->toJavascriptObject());
     return sourceCode;
 }
 
