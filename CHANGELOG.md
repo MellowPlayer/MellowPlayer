@@ -1,5 +1,13 @@
 # Change log
 
+## [3.5.8](https://gitlab.com/ColinDuquesnoy/MellowPlayer/tree/3.5.8) (2019-12-27)
+[Full Changelog](https://gitlab.com/ColinDuquesnoy/MellowPlayer/compare/3.5.7...3.5.8)
+
+**Fixed bugs:**
+
+- Logs are place in the wrong folder [\#389](https://gitlab.com/ColinDuquesnoy/MellowPlayer/issues/389)
+
+
 ## [3.5.7](https://gitlab.com/ColinDuquesnoy/MellowPlayer/tree/3.5.7) (2019-12-27)
 [Full Changelog](https://gitlab.com/ColinDuquesnoy/MellowPlayer/compare/3.5.6...3.5.7)
 
