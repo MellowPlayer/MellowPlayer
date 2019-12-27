@@ -1,4 +1,4 @@
-version: 3.5.90.{build}
+version: 3.5.7.{build}
 
 os: Visual Studio 2017
 
@@ -7,7 +7,7 @@ platform:
 
 environment:
     QTDIR: C:\Qt\5.12.5\msvc2017_64
-    APP_VERSION: 3.5.90
+    APP_VERSION: 3.5.7
     BINTRAY_API_KEY:
         secure: 5JxFMiIEPLEzENmBD2AV6eOfA7+9kTfh276P91CoijHfboWrdgvpvci9vuiOxXRa
 
