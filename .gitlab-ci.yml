@@ -82,8 +82,8 @@ flatpak:
 deploy:continuous:
     image: alpine:latest
     stage: deploy
-    only:
-        - master@ColinDuquesnoy/MellowPlayer
+    except:
+        - tags
     dependencies:
         - appimage
         - flatpak
