@@ -7,7 +7,6 @@ endmacro()
 
 macro (create_test target libs)
     configure_file(${CMAKE_SOURCE_DIR}/cmake/test_main.cpp.in test_main.cpp)
-    STRING(REPLACE "-Werror" "" CMAKE_CXX_FLAGS ${CMAKE_CXX_FLAGS})
     STRING(REPLACE "-Weverything" "" CMAKE_CXX_FLAGS ${CMAKE_CXX_FLAGS})
     add_executable(${PROJECT_NAME} ${SOURCE_FILES} test_main.cpp)
     target_link_libraries(${PROJECT_NAME}
