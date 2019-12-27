@@ -114,7 +114,7 @@ void ListeningHistory::updateRemovedEntries()
     auto dbSet = QSet(db.begin(), db.end());
     auto removedEntries = QSet(_entries.begin(), _entries.end()).subtract(dbSet).values();
 #endif
-    for (auto entry : removedEntries)
+    for (const auto& entry : removedEntries)
     {
         int index = _entries.indexOf(entry);
         _entries.removeAt(index);
