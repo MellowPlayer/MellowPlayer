@@ -68,6 +68,11 @@ int Program::main(int argc, char** argv)
     qputenv("QTWEBENGINE_DIALOG_SET", "QtQuickControls2");
     qputenv("QTWEBENGINE_REMOTE_DEBUGGING", "4242");
 
+    QCoreApplication::setApplicationName("MellowPlayer3");
+    QCoreApplication::setApplicationVersion(BuildConfig::getVersion());
+    QCoreApplication::setOrganizationDomain("com.gitlab.ColinDuquesnoy");
+    QCoreApplication::setOrganizationName("MellowPlayer");
+
     HiDPISupport hiDPISupport;
     hiDPISupport.configure();
 
@@ -77,11 +82,7 @@ int Program::main(int argc, char** argv)
     Loggers::initialize(loggerFactory, loggerConfig);
 
     QApplication qApplication(argc, argv);
-    qApplication.setApplicationName("MellowPlayer3");
     qApplication.setApplicationDisplayName("MellowPlayer");
-    qApplication.setApplicationVersion(BuildConfig::getVersion());
-    qApplication.setOrganizationDomain("com.gitlab.ColinDuquesnoy");
-    qApplication.setOrganizationName("MellowPlayer");
 
     QtWebEngine::initialize();
     QQuickStyle::setStyle("Material");
