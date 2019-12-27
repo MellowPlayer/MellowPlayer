@@ -1,5 +1,17 @@
 # Change log
 
+## [3.5.7](https://gitlab.com/ColinDuquesnoy/MellowPlayer/tree/3.5.7) (2019-12-27)
+[Full Changelog](https://gitlab.com/ColinDuquesnoy/MellowPlayer/compare/3.5.6...3.5.7)
+
+
+**Fixed bugs:**
+
+- Compilation issues with Qt 5.14 [\#385](https://gitlab.com/ColinDuquesnoy/MellowPlayer/issues/385)
+
+**Merged merge requests:**
+
+- [Google Play Music] Parse times in both MM:SS and HH:MM:SS formats [\#316](https://gitlab.com/ColinDuquesnoy/MellowPlayer/merge_requests/316) ([cspiegel](https://gitlab.com/cspiegel))
+
 ## [3.5.6](https://gitlab.com/ColinDuquesnoy/MellowPlayer/tree/3.5.6) (2019-11-24)
 [Full Changelog](https://gitlab.com/ColinDuquesnoy/MellowPlayer/compare/3.5.5...3.5.6)
 
