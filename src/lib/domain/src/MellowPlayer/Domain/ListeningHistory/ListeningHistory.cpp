@@ -1,29 +1,29 @@
-#include <QDateTime>
-#include <QSet>
-#include <QVariant>
-#include <QTimer>
-#include <algorithm>
-#include <MellowPlayer/Domain/ListeningHistory/ListeningHistory.hpp>
-#include <MellowPlayer/Domain/ListeningHistory/IListeningHistoryDatabase.hpp>
-#include <MellowPlayer/Domain/Player/IPlayer.hpp>
-#include <MellowPlayer/Domain/Settings/Setting.hpp>
-#include <MellowPlayer/Domain/Settings/Settings.hpp>
-#include <MellowPlayer/Domain/ListeningHistory/TimeLimits.hpp>
 #include <MellowPlayer/Domain/IWorkDispatcher.hpp>
+#include <MellowPlayer/Domain/ListeningHistory/IListeningHistoryDatabase.hpp>
+#include <MellowPlayer/Domain/ListeningHistory/ListeningHistory.hpp>
+#include <MellowPlayer/Domain/ListeningHistory/TimeLimits.hpp>
 #include <MellowPlayer/Domain/Logging/ILogger.hpp>
 #include <MellowPlayer/Domain/Logging/Loggers.hpp>
 #include <MellowPlayer/Domain/Logging/LoggingMacros.hpp>
+#include <MellowPlayer/Domain/Player/IPlayer.hpp>
 #include <MellowPlayer/Domain/Player/Song.hpp>
+#include <MellowPlayer/Domain/Settings/Setting.hpp>
 #include <MellowPlayer/Domain/Settings/SettingKey.hpp>
+#include <MellowPlayer/Domain/Settings/Settings.hpp>
+#include <QDateTime>
+#include <QSet>
+#include <QTimer>
+#include <QVariant>
+#include <algorithm>
 
 using namespace MellowPlayer::Domain;
 
 ListeningHistory::ListeningHistory(IListeningHistoryDatabase& model, IPlayer& player, Settings& settings)
-        : isEnabledSetting_(settings.get(SettingKey::PRIVACY_ENABLE_LISTENING_HISTORY)),
-          limitSetting_(settings.get(SettingKey::PRIVACY_LISTENING_HISTORY_LIMIT)),
-          logger_(Loggers::logger("ListeningHistory")),
-          database_(model),
-          player_(player)
+        : isEnabledSetting_(settings.get(SettingKey::PRIVACY_ENABLE_LISTENING_HISTORY))
+        , limitSetting_(settings.get(SettingKey::PRIVACY_LISTENING_HISTORY_LIMIT))
+        , logger_(Loggers::logger("ListeningHistory"))
+        , database_(model)
+        , player_(player)
 {
     connect(&player, &IPlayer::currentSongChanged, this, &ListeningHistory::onSongChanged);
     connect(&player, &IPlayer::playbackStatusChanged, this, &ListeningHistory::onPlaybackStatusChanged);
@@ -36,7 +36,7 @@ void ListeningHistory::onPlaybackStatusChanged()
     addSong(player_.currentSong());
 }
 
-void ListeningHistory::onSongChanged(Song *song)
+void ListeningHistory::onSongChanged(Song* song)
 {
     addSong(song);
 }
@@ -107,7 +107,13 @@ void ListeningHistory::addSong(const Song* song, ListeningHistoryEntry& newEntry
 
 void ListeningHistory::updateRemovedEntries()
 {
-    auto removedEntries = entries_.toSet().subtract(database_.toList().toSet()).toList();
+#if QT_VERSION < QT_VERSION_CHECK(5, 14, 0)
+    auto removedEntries = entries_.toSet().subtract(database_.toList().toSet()).values();
+#else
+    auto db = database_.toList();
+    auto dbSet = QSet(db.begin(), db.end());
+    auto removedEntries = QSet(entries_.begin(), entries_.end()).subtract(dbSet).values();
+#endif
     for (auto entry : removedEntries) {
         int index = entries_.indexOf(entry);
         entries_.removeAt(index);
@@ -158,7 +164,7 @@ void ListeningHistory::clearOutdatedEntries()
         TimeLimits entryLimit = dateToTimeLimit(entry.dateTime());
         // previous id is checked because we changed our appending rules, this is a workaround to
         // automatically clean listening history db that could contains many duplicate songs.
-        if (entryLimit > limit  || previousId == entry.songUniqueId) {
+        if (entryLimit > limit || previousId == entry.songUniqueId) {
             items.append(entry.id);
             LOG_DEBUG(logger_, "Removing entry " << entry.songTitle);
         }
