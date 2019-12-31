@@ -12,7 +12,7 @@ SCENARIO("ZoomViewModel tests")
 {
     auto contextProperties = std::make_shared<FakeContextProperties>();
     FakeSettingsStore settingsStore;
-    ZoomViewModel sut(contextProperties, settingsStore);
+    ZoomViewModel sut(*contextProperties, settingsStore);
 
     double defaultValue = 1;
 

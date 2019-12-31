@@ -79,7 +79,7 @@ namespace MellowPlayer::Tests
         Presentation::ThemeViewModel& getThemeViewModel();
         Presentation::UpdaterViewModel& getUpdaterViewModel();
         Presentation::INotificationPresenter& getNotificationPresenter();
-        std::shared_ptr<Presentation::IContextProperties> getContextProperties();
+        Presentation::IContextProperties& getContextProperties();
 
     private:
         // mocks

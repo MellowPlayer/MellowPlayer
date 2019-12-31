@@ -20,7 +20,7 @@ SCENARIO("ApplicationViewModelTests")
         FakeApplication application;
         auto contextProperties = std::make_shared<FakeContextProperties>();
         FakeMainWindow mainWindow;
-        ApplicationViewModel applicationViewModel(application, qtApplication, mainWindow, contextProperties);
+        ApplicationViewModel applicationViewModel(application, qtApplication, mainWindow, *contextProperties);
 
         WHEN("Application is created")
         {

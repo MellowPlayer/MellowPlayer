@@ -3,6 +3,7 @@
 #    include <MellowPlayer/Presentation/Notifications/Notification.hpp>
 #    include <MellowPlayer/Presentation/Notifications/Presenters/Linux/LibnotifyPresenter.hpp>
 #    include <Mocks/FakeWorkDispatcher.hpp>
+#    include <Mocks/SystemTrayIconMock.hpp>
 #    include <UnitTests/Presentation/FakeMainWindow.hpp>
 #    include <catch/catch.hpp>
 
@@ -15,7 +16,8 @@ TEST_CASE("LibnotifyPresenterTests")
 {
     FakeMainWindow mainWindow;
     FakeWorkDispatcher workDispatcher;
-    LibnotifyPresenter presenter(mainWindow, workDispatcher);
+    auto systemTrayIconMock = SystemTrayIconMock::get();
+    LibnotifyPresenter presenter(mainWindow, workDispatcher, systemTrayIconMock.get());
     presenter.initialize();
 
     SECTION("display test")

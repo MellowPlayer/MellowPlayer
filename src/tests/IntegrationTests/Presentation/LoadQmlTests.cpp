@@ -13,8 +13,8 @@ TEST_CASE("LoadQmlTests")
     QmlApplicationEngine qmlApplicationEngine;
     auto playerMock = PlayerMock::get();
     auto contextProperties = std::make_shared<ContextProperties>(qmlApplicationEngine, playerMock.get());
-    MainWindowViewModel mainWindow(contextProperties, qmlApplicationEngine);
-    contextProperties->initialize([=](bool) {});
+    MainWindowViewModel mainWindow(*contextProperties, qmlApplicationEngine);
+    contextProperties->registerToQml();
 
     REQUIRE_NOTHROW(mainWindow.load());
 }

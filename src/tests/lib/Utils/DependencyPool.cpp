@@ -83,7 +83,7 @@ StreamingServicesViewModel& DependencyPool::getStreamingServicesViewModel()
                                                                                         getStreamingServicesCreator(),
                                                                                         getCommandLineArguments(),
                                                                                         getUserScriptFactory(),
-                                                                                        _contextProperties,
+                                                                                        *_contextProperties,
                                                                                         _networkProxies,
                                                                                         getThemeViewModel());
     return *_streamingServicesViewModel;
@@ -128,7 +128,7 @@ IWorkDispatcher& DependencyPool::getWorkDispatcher()
 ListeningHistoryViewModel& DependencyPool::getListeningHistoryViewModel()
 {
     if (_listeningHistoryViewModel == nullptr)
-        _listeningHistoryViewModel = make_unique<ListeningHistoryViewModel>(getListeningHistory(), _contextProperties);
+        _listeningHistoryViewModel = make_unique<ListeningHistoryViewModel>(getListeningHistory(), *_contextProperties);
     return *_listeningHistoryViewModel;
 }
 
@@ -150,14 +150,14 @@ ThemeViewModel& DependencyPool::getThemeViewModel()
 {
     static auto mock = ThemeLoaderMock::get();
     if (_themeViewModel == nullptr)
-        _themeViewModel = make_unique<ThemeViewModel>(getStreamingServices(), getSettings(), mock.get(), _contextProperties);
+        _themeViewModel = make_unique<ThemeViewModel>(getStreamingServices(), getSettings(), mock.get(), *_contextProperties);
     return *_themeViewModel;
 }
 
 UpdaterViewModel& DependencyPool::getUpdaterViewModel()
 {
     if (_updaterViewModel == nullptr)
-        _updaterViewModel = make_unique<UpdaterViewModel>(getUpdater(), _contextProperties);
+        _updaterViewModel = make_unique<UpdaterViewModel>(getUpdater(), *_contextProperties);
     return *_updaterViewModel;
 }
 
@@ -211,7 +211,7 @@ IUserScriptFactory& DependencyPool::getUserScriptFactory()
 
 IContextProperties& DependencyPool::getContextProperties()
 {
-    return _contextProperties;
+    return *_contextProperties;
 }
 
 INetworkProxies& DependencyPool::getNetworkProxies()

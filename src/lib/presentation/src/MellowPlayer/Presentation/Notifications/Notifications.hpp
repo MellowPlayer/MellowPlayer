@@ -29,16 +29,16 @@ namespace MellowPlayer::Presentation
                       Domain::Settings& settings);
 
         void initialize(const ResultCallback& resultCallback) override;
-
         QString toString() const override;
+
+        bool display(const Notification& notification);
 
     public slots:
         void onCurrentSongChanged(Domain::Song* song);
         void onPlaybackStatusChanged();
-        void onCurrentSongUrlChanged();
 
+        void onCurrentSongUrlChanged();
     private:
-        bool display(const Notification& notification);
         void showSongNotification(Domain::Song* song, const QString& localAlbumArtUrl);
         bool isPlaying() const;
         const QString currentServiceName() const;

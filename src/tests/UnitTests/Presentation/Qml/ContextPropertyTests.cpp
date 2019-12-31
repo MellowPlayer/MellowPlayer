@@ -17,7 +17,7 @@ SCENARIO("ContextPropertyTests")
 
         WHEN("I create a context property")
         {
-            ContextProperty contextProperty("ContextPropertyName", &propertyObject, contextProperties);
+            ContextProperty contextProperty("ContextPropertyName", &propertyObject, *contextProperties);
 
             THEN("propertyObject has been added to the context properties")
             {
@@ -26,7 +26,7 @@ SCENARIO("ContextPropertyTests")
 
             AND_WHEN("I call initialize on contextProperties")
             {
-                contextProperties->initialize([=](bool) {});
+                contextProperties->registerToQml();
 
                 THEN("context property was added to the qmlApplicationEngine")
                 {

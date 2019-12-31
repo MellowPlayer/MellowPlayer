@@ -13,7 +13,7 @@ SCENARIO("MainWindowViewModelTests")
     {
         auto contextProperties = std::make_shared<FakeContextProperties>();
         FakeQmlApplicationEngine qmlApplicationEngine;
-        MainWindowViewModel mainWindow(contextProperties, qmlApplicationEngine);
+        MainWindowViewModel mainWindow(*contextProperties, qmlApplicationEngine);
 
         WHEN("Creating main window")
         {

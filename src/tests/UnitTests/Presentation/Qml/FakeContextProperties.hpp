@@ -24,7 +24,7 @@ namespace MellowPlayer::Presentation::Tests
             return _items.contains(&contextProperty);
         }
 
-        void initialize(const ResultCallback& resultCallback) override
+        void registerToQml() override
         {
             if (qmlApplicationEngine_)
             {
@@ -32,8 +32,6 @@ namespace MellowPlayer::Presentation::Tests
                     if (contextProperty)
                         contextProperty->initialize(*qmlApplicationEngine_);
             }
-
-            resultCallback(true);
         }
 
     private:
