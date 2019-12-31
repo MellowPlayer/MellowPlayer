@@ -1,6 +1,6 @@
 #pragma once
 
-#include <MellowPlayer/Presentation/Mpris/IMprisService.hpp>
+#include <MellowPlayer/Domain/IInitializable.hpp>
 #include <QObject>
 #include <memory>
 
@@ -17,13 +17,14 @@ namespace MellowPlayer::Presentation
     class Mpris2Player;
     class IMainWindow;
 
-    class MprisService : public IMprisService
+    class MprisService : public Domain::IInitializable
     {
     public:
         MprisService(Domain::IPlayer& player, Domain::ILocalAlbumArt& localAlbumArt, IMainWindow& window);
 
         void initialize(const ResultCallback& resultCallback) override;
         void cleanUp() override;
+        QString toString() const override;
 
     private:
         bool start();

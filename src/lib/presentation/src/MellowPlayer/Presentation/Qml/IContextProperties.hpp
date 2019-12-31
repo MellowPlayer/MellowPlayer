@@ -9,7 +9,7 @@ namespace MellowPlayer::Presentation
     /**
      * Registers context properties in the current QmlContext.
      */
-    class IContextProperties : public Domain::IInitializable
+    class IContextProperties
     {
     public:
         virtual ~IContextProperties() = default;
@@ -20,10 +20,6 @@ namespace MellowPlayer::Presentation
          * @param contextProperty
          */
         virtual void add(IContextProperty& contextProperty) = 0;
-
-        QString toString() const override
-        {
-            return "ContextProperties";
-        }
+        virtual void registerToQml() = 0;
     };
 }

@@ -41,7 +41,7 @@ namespace MellowPlayer::Presentation
                                    Domain::IStreamingServiceCreator& streamingServiceCreator,
                                    Infrastructure::ICommandLineArguments& commandLineArguments,
                                    Domain::IUserScriptFactory& userScriptFactory,
-                                   std::shared_ptr<IContextProperties> contextProperties,
+                                   IContextProperties& contextProperties,
                                    Infrastructure::INetworkProxies& networkProxies,
                                    ThemeViewModel& themeViewModel);
 

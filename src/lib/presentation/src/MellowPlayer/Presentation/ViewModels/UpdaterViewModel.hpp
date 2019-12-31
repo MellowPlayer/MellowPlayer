@@ -21,7 +21,7 @@ namespace MellowPlayer::Presentation
         Q_PROPERTY(bool restartEnabled READ restartEnabled NOTIFY restartEnabledChanged)
         Q_PROPERTY(double progress READ progress NOTIFY progressChanged)
     public:
-        UpdaterViewModel(Infrastructure::Updater& updater, std::shared_ptr<IContextProperties> contextProperties);
+        UpdaterViewModel(Infrastructure::Updater& updater, IContextProperties& contextProperties);
 
         QString url() const;
         QString status() const;

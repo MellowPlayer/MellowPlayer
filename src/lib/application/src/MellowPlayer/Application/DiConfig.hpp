@@ -7,7 +7,7 @@
 #if defined(Q_OS_LINUX) || defined(Q_OS_FREEBSD)
 #    include <MellowPlayer/Infrastructure/Updater/Linux/LinuxUpdater.hpp>
 #    include <MellowPlayer/Presentation/Mpris/Linux/MprisService.hpp>
-#    include <MellowPlayer/Presentation/ViewModels/QmlSetup.hpp>
+#    include <MellowPlayer/Presentation/ViewModels/GuiSetup.hpp>
 #elif defined(Q_OS_WIN)
 #    include <MellowPlayer/Infrastructure/Updater/Windows/WindowsUpdater.hpp>
 #elif defined(Q_OS_OSX)
@@ -63,9 +63,6 @@
 #include <MellowPlayer/Infrastructure/Updater/Updater.hpp>
 #include <MellowPlayer/Infrastructure/UserScripts/UserScriptFactory.hpp>
 #include <MellowPlayer/Presentation/Hotkeys/Hotkeys.hpp>
-#include <MellowPlayer/Presentation/Hotkeys/IHotkeys.hpp>
-#include <MellowPlayer/Presentation/Mpris/IMprisService.hpp>
-#include <MellowPlayer/Presentation/Mpris/NullMprisService.hpp>
 #include <MellowPlayer/Presentation/Notifications/ISystemTrayIcon.hpp>
 #include <MellowPlayer/Presentation/Notifications/Notifications.hpp>
 #include <MellowPlayer/Presentation/Notifications/Presenters/SystemTrayIconPresenter.hpp>
@@ -77,9 +74,9 @@
 #include <MellowPlayer/Presentation/ViewModels/ApplicationViewModel.hpp>
 #include <MellowPlayer/Presentation/ViewModels/CacheViewModel.hpp>
 #include <MellowPlayer/Presentation/ViewModels/CookiesViewModel.hpp>
+#include <MellowPlayer/Presentation/ViewModels/GuiSetup.hpp>
 #include <MellowPlayer/Presentation/ViewModels/ListeningHistory/ListeningHistoryViewModel.hpp>
 #include <MellowPlayer/Presentation/ViewModels/MainWindowViewModel.hpp>
-#include <MellowPlayer/Presentation/ViewModels/QmlSetup.hpp>
 #include <MellowPlayer/Presentation/ViewModels/Settings/SettingsViewModel.hpp>
 #include <MellowPlayer/Presentation/ViewModels/StreamingServices/StreamingServicesViewModel.hpp>
 #include <MellowPlayer/Presentation/ViewModels/ThemeViewModel.hpp>
@@ -116,7 +113,6 @@ auto defaultInjector = [](di::extension::detail::scoped& scope, QApplication& qA
         di::bind<ILoggerFactory>().to<SpdLoggerFactory>().in(di::singleton),
         di::bind<IAlbumArtDownloader>().to<AlbumArtDownloader>().in(di::singleton),
         di::bind<ILocalAlbumArt>().to<LocalAlbumArt>().in(di::singleton),
-        di::bind<IHotkeys>().to<Hotkeys>().in(di::singleton),
         di::bind<ISystemTrayIcon>().to<SystemTrayIcon>().in(di::singleton),
         di::bind<IListeningHistoryDatabase>().to<SqlLiteListeningHistoryDatabase>().in(di::singleton),
         di::bind<ISettingsStore>().to<QSettingsStore>().in(di::singleton),
@@ -129,22 +125,19 @@ auto defaultInjector = [](di::extension::detail::scoped& scope, QApplication& qA
         di::bind<IFileDownloader>().to<FileDownloader>().in(di::singleton),
         di::bind<IUserScriptFactory>().to<UserScriptFactory>().in(di::singleton),
         di::bind<IMainWindow>().to<MainWindowViewModel>().in(di::singleton),
-        di::bind<INotifications>().to<Notifications>().in(di::singleton),
         di::bind<INetworkProxies>().to<NetworkProxies>().in(di::singleton),
         di::bind<ITimer>().to<Timer>().in(di::unique),
         di::bind<IListeningHistory>().to<DelayedListeningHistory>().in(di::singleton),
 
 #if defined(Q_OS_LINUX) || defined(Q_OS_FREEBSD)
-        di::bind<AbstractPlatformUpdater>().to<LinuxUpdater>(),
-        di::bind<INotificationPresenter>().to<LibnotifyPresenter>(),
+        di::bind<AbstractPlatformUpdater>().to<LinuxUpdater>().in(di::singleton),
+        di::bind<INotificationPresenter>().to<LibnotifyPresenter>().in(di::singleton),
 #elif defined(Q_OS_WIN)
-        di::bind<IMprisService>().to<NullMprisService>(),
-        di::bind<AbstractPlatformUpdater>().to<WindowsUpdater>(),
-        di::make_injector(di::bind<INotificationPresenter>().to<SystemTrayIconPresenter>()),
+        di::bind<AbstractPlatformUpdater>().to<WindowsUpdater>().in(di::singleton),
+        di::make_injector(di::bind<INotificationPresenter>().to<SystemTrayIconPresenter>()).in(di::singleton),
 #elif defined(Q_OS_OSX)
-        di::bind<IMprisService>().to<NullMprisService>(),
-        di::bind<AbstractPlatformUpdater>().to<OSXUpdater>(),
-        di::make_injector(di::bind<INotificationPresenter>().to<SystemTrayIconPresenter>()),
+        di::bind<AbstractPlatformUpdater>().to<OSXUpdater>().in(di::singleton),
+        di::make_injector(di::bind<INotificationPresenter>().to<SystemTrayIconPresenter>()).in(di::singleton),
 #endif
 
         di::bind<IInitializable* []>().to<
@@ -153,11 +146,9 @@ auto defaultInjector = [](di::extension::detail::scoped& scope, QApplication& qA
 #if defined(Q_OS_LINUX) || defined(Q_OS_FREEBSD)
                 MprisService,
 #endif
-                IHotkeys,
-                IContextProperties,
-                QmlSetup,
-                Notifications,
-                SystemTrayIcon
+                Hotkeys,
+                GuiSetup,
+                Notifications
         >()
     );
 };

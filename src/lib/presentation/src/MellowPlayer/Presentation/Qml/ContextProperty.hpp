@@ -19,7 +19,7 @@ namespace MellowPlayer::Presentation
          *
          * @param contextProperties
          */
-        ContextProperty(const QString& name, QObject* propertyObject, std::shared_ptr<IContextProperties> contextProperties);
+        ContextProperty(const QString& name, QObject* propertyObject, IContextProperties& contextProperties);
 
         virtual void initialize(IQmlApplicationEngine& qmlApplicationEngine) override;
 

@@ -209,7 +209,7 @@ IUserScriptFactory& DependencyPool::getUserScriptFactory()
     return _userScriptsFactoryMock.get();
 }
 
-std::shared_ptr<IContextProperties> DependencyPool::getContextProperties()
+IContextProperties& DependencyPool::getContextProperties()
 {
     return _contextProperties;
 }

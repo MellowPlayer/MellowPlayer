@@ -1,6 +1,6 @@
 #pragma once
 
-#include <MellowPlayer/Presentation/Hotkeys/IHotkeys.hpp>
+#include <MellowPlayer/Domain/IInitializable.hpp>
 #include <QObject>
 #include <memory>
 
@@ -18,7 +18,7 @@ namespace MellowPlayer::Presentation
 {
     class IMainWindow;
 
-    class Hotkeys : public IHotkeys
+    class Hotkeys : public Domain::IInitializable
     {
         Q_OBJECT
     public:
@@ -29,12 +29,12 @@ namespace MellowPlayer::Presentation
         void cleanUp() override;
         QString toString() const override;
 
-    public slots:
-        void togglePlayPause() override;
-        void next() override;
-        void previous() override;
-        void toggleFavoriteSong() override;
-        void restoreWindow() override;
+    private slots:
+        void togglePlayPause();
+        void next();
+        void previous();
+        void toggleFavoriteSong();
+        void restoreWindow();
 
     private:
         void updateFavoriteShortcut() const;

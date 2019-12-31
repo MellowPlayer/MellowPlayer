@@ -38,9 +38,6 @@ namespace MellowPlayer::Presentation
     public:
         SystemTrayIcon(Domain::IPlayer& player, IMainWindow& mainWindow, Domain::Settings& settings);
 
-        void initialize(const ResultCallback& resultCallback) override;
-        QString toString() const override;
-
         void show() override;
         void hide() override;
         void showMessage(const QString& title, const QString& message) override;

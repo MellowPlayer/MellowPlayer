@@ -18,13 +18,7 @@ namespace MellowPlayer::Presentation
 {
     class INotificationPresenter;
 
-    class INotifications : public Domain::IInitializable
-    {
-    public:
-        virtual bool display(const Notification& notification) = 0;
-    };
-
-    class Notifications : public INotifications
+    class Notifications : public Domain::IInitializable
     {
         Q_OBJECT
     public:
@@ -37,7 +31,6 @@ namespace MellowPlayer::Presentation
         void initialize(const ResultCallback& resultCallback) override;
 
         QString toString() const override;
-        bool display(const Notification& notification);
 
     public slots:
         void onCurrentSongChanged(Domain::Song* song);
@@ -45,6 +38,7 @@ namespace MellowPlayer::Presentation
         void onCurrentSongUrlChanged();
 
     private:
+        bool display(const Notification& notification);
         void showSongNotification(Domain::Song* song, const QString& localAlbumArtUrl);
         bool isPlaying() const;
         const QString currentServiceName() const;

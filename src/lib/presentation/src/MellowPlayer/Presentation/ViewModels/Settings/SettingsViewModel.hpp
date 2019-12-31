@@ -21,7 +21,7 @@ namespace MellowPlayer::Presentation
         Q_OBJECT
         Q_PROPERTY(QAbstractItemModel* categories READ categories CONSTANT)
     public:
-        SettingsViewModel(Domain::Settings& settings, ThemeViewModel& themeViewModel, std::shared_ptr<IContextProperties> contextProperties);
+        SettingsViewModel(Domain::Settings& settings, ThemeViewModel& themeViewModel, IContextProperties& contextProperties);
 
         SettingsCategoryListModel* categories() const;
 

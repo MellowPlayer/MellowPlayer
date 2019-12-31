@@ -14,11 +14,12 @@ namespace MellowPlayer::Presentation
 {
     class IMainWindow;
     struct Notification;
+    class ISystemTrayIcon;
 
     class LibnotifyPresenter : public INotificationPresenter
     {
     public:
-        explicit LibnotifyPresenter(IMainWindow& mainWindow, Domain::IWorkDispatcher& workDispatcher);
+        explicit LibnotifyPresenter(IMainWindow& mainWindow, Domain::IWorkDispatcher& workDispatcher, ISystemTrayIcon& systemTrayIcon);
 
         void initialize() override;
         bool display(const Notification& notification) override;
@@ -32,6 +33,7 @@ namespace MellowPlayer::Presentation
         IMainWindow& _mainWindow;
         Domain::IWorkDispatcher& _workDispatcher;
         _NotifyNotification* _previousNotification;
+        ISystemTrayIcon& _systemTrayIcon;
         bool _actionsSupported = true;
         static LibnotifyPresenter* _instance;
     };

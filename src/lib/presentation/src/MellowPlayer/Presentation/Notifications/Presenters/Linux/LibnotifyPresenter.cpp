@@ -6,6 +6,7 @@
 #include <MellowPlayer/Presentation/Notifications/Presenters/Linux/LibnotifyPresenter.hpp>
 #include <MellowPlayer/Presentation/Notifications/Presenters/Linux/LibnotifyStrings.hpp>
 #undef Q_SIGNALS
+#include <MellowPlayer/Presentation/Notifications/ISystemTrayIcon.hpp>
 #include <libnotify/notify.h>
 
 using namespace std;
@@ -20,8 +21,12 @@ void notify_action_callback(NotifyNotification*, char*, gpointer)
     LibnotifyPresenter::onActionCallback();
 }
 
-LibnotifyPresenter::LibnotifyPresenter(IMainWindow& mainWindow, IWorkDispatcher& workDispatcher)
-        : _logger(Loggers::logger("LibnotifyPresenter")), _mainWindow(mainWindow), _workDispatcher(workDispatcher), _previousNotification(nullptr)
+LibnotifyPresenter::LibnotifyPresenter(IMainWindow& mainWindow, IWorkDispatcher& workDispatcher, ISystemTrayIcon& trayIcon)
+        : _logger(Loggers::logger("LibnotifyPresenter")),
+          _mainWindow(mainWindow),
+          _workDispatcher(workDispatcher),
+          _previousNotification(nullptr),
+          _systemTrayIcon(trayIcon)
 {
     _instance = this;
 }
@@ -30,6 +35,7 @@ void LibnotifyPresenter::initialize()
 {
     notify_init("MellowPlayer");
     checkSupportForActions();
+    _systemTrayIcon.show();
     LOG_DEBUG(_logger, "service started")
 }
 

@@ -16,7 +16,7 @@ using namespace MellowPlayer::Presentation;
 ThemeViewModel::ThemeViewModel(StreamingServices& streamingServices,
                                Settings& settings,
                                IThemeLoader& themeLoader,
-                               std::shared_ptr<IContextProperties> contextProperties)
+                               IContextProperties& contextProperties)
         : ContextProperty("_theme", this, contextProperties),
           _streamingServices(streamingServices),
           _loader(themeLoader),

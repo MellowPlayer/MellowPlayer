@@ -18,13 +18,11 @@ void ContextProperties::add(IContextProperty& contextProperty)
     _contextProperties.append(&contextProperty);
 }
 
-void ContextProperties::initialize(const ResultCallback& resultCallback)
+void ContextProperties::registerToQml()
 {
     qmlRegisterUncreatableType<Player>("MellowPlayer", 3, 0, "Player", "Player cannot be instantiated from QML");
     _qmlApplicationEngine.setContextProperty("_player", &_player);
 
     for (auto* contextProperty : _contextProperties)
         contextProperty->initialize(_qmlApplicationEngine);
-
-    resultCallback(true);
 }

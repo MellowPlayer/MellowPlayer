@@ -3,10 +3,10 @@
 
 using namespace MellowPlayer::Presentation;
 
-ContextProperty::ContextProperty(const QString& name, QObject* propertyObject, std::shared_ptr<IContextProperties> contextProperties)
+ContextProperty::ContextProperty(const QString& name, QObject* propertyObject, IContextProperties& contextProperties)
         : _name(name), _propertyObject(propertyObject)
 {
-    contextProperties->add(*this);
+    contextProperties.add(*this);
 }
 
 void ContextProperty::initialize(IQmlApplicationEngine& qmlApplicationEngine)

@@ -8,7 +8,7 @@ using namespace std;
 
 void messageHandler(QtMsgType type, const QMessageLogContext& context, const QString& message)
 {
-    string category(context.category);
+    string category(context.category != nullptr ? context.category : "qt");
     ILogger& logger = Loggers::logger(category == "default" ? "qt" : category);
 
     // QtCriticalMsg, QtFatalMsg, QtSystemMsg = QtCriticalMsg

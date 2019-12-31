@@ -122,16 +122,6 @@ void SystemTrayIcon::onShowTrayIconSettingValueChanged()
     else
         hide();
 }
-void SystemTrayIcon::initialize(const IInitializable::ResultCallback& resultCallback)
-{
-    show();
-    resultCallback(true);
-}
-
-QString SystemTrayIcon::toString() const
-{
-    return "SystemTrayIcon";
-}
 
 QString SystemTrayIconStrings::playPause() const
 {

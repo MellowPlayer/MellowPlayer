@@ -18,7 +18,7 @@ namespace MellowPlayer::Presentation
         ApplicationViewModel(Infrastructure::IApplication& application,
                              Infrastructure::IQtApplication& qtApplication,
                              IMainWindow& mainWindow,
-                             std::shared_ptr<IContextProperties> contextProperties);
+                             IContextProperties& contextProperties);
 
         void initialize();
 

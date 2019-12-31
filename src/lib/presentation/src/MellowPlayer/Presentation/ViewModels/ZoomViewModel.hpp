@@ -15,7 +15,7 @@ namespace MellowPlayer::Presentation
         Q_OBJECT
         Q_PROPERTY(double value READ value WRITE setValue NOTIFY valueChanged)
     public:
-        explicit ZoomViewModel(std::shared_ptr<IContextProperties> contextProperties, Domain::ISettingsStore& settingsStore);
+        explicit ZoomViewModel(IContextProperties& contextProperties, Domain::ISettingsStore& settingsStore);
 
         double value() const;
         void setValue(double value);

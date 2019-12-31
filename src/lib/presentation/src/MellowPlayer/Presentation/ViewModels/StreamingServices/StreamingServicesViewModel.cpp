@@ -26,7 +26,7 @@ StreamingServicesViewModel::StreamingServicesViewModel(StreamingServices& stream
                                                        IStreamingServiceCreator& streamingServiceCreator,
                                                        ICommandLineArguments& commandLineArguments,
                                                        IUserScriptFactory& userScriptFactory,
-                                                       std::shared_ptr<IContextProperties> contextProperties,
+                                                       IContextProperties& contextProperties,
                                                        INetworkProxies& networkProxies,
                                                        ThemeViewModel& themeViewModel)
         : ContextProperty("_streamingServices", this, contextProperties),

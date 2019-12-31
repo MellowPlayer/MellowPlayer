@@ -1,7 +1,7 @@
 #include <MellowPlayer/Domain/Player/Player.hpp>
 #include <MellowPlayer/Domain/StreamingServices/StreamingService.hpp>
 #include <MellowPlayer/Infrastructure/CommandLineArguments/ICommandLineArguments.hpp>
-#include <MellowPlayer/Presentation/ViewModels/QmlSetup.hpp>
+#include <MellowPlayer/Presentation/ViewModels/GuiSetup.hpp>
 #include <QDesktopServices>
 #include <QtCore/QDirIterator>
 #include <QtCore/QThread>
@@ -12,14 +12,14 @@ using namespace MellowPlayer::Domain;
 using namespace MellowPlayer::Infrastructure;
 using namespace MellowPlayer::Presentation;
 
-QmlSetup::QmlSetup(ApplicationViewModel& application,
+GuiSetup::GuiSetup(ApplicationViewModel& application,
                    IMainWindow& mainWindow,
                    SettingsViewModel&,
                    ThemeViewModel&,
                    UpdaterViewModel& updater,
                    ListeningHistoryViewModel& listeningHistory,
                    StreamingServicesViewModel& streamingServices,
-                   std::shared_ptr<IContextProperties> contextProperties,
+                   IContextProperties& contextProperties,
                    ZoomViewModel& zoomViewModel,
                    ICommandLineArguments& commandLineOptions)
         : _application(application),
@@ -32,33 +32,37 @@ QmlSetup::QmlSetup(ApplicationViewModel& application,
           _clipboard(contextProperties),
           _devToolsWindow(contextProperties),
           _zoomViewModel(zoomViewModel),
-          _commandLineArguments(commandLineOptions)
+          _commandLineArguments(commandLineOptions),
+          _contextProperties(contextProperties)
 {
 }
 
-void QmlSetup::initialize(const ResultCallback& resultCallback)
+void GuiSetup::initialize(const ResultCallback& resultCallback)
 {
     _application.initialize();
     _cache.clear();
     _streamingServices.initialize();
     _listeningHistory.initialize();
+
+    _contextProperties.registerToQml();
     _mainWindow.load();
     if (!_commandLineArguments.startMinimized())
         _mainWindow.show();
     else
         _mainWindow.hide();
+
     _updater.check();
 
     resultCallback(true);
 }
 
-void QmlSetup::cleanUp()
+void GuiSetup::cleanUp()
 {
     _mainWindow.hide();
     _cache.clear();
 }
 
-QString QmlSetup::toString() const
+QString GuiSetup::toString() const
 {
-    return "QmlSetup";
+    return "GuiSetup";
 }

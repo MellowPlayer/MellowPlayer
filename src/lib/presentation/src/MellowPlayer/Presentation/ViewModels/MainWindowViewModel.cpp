@@ -5,7 +5,7 @@
 using namespace MellowPlayer::Infrastructure;
 using namespace MellowPlayer::Presentation;
 
-MainWindowViewModel::MainWindowViewModel(std::shared_ptr<IContextProperties> contextProperties, IQmlApplicationEngine& qmlApplicationEngine)
+MainWindowViewModel::MainWindowViewModel(IContextProperties& contextProperties, IQmlApplicationEngine& qmlApplicationEngine)
         : ContextProperty("_window", this, contextProperties), _qmlApplicationEngine(qmlApplicationEngine), _visible(false)
 {
 }

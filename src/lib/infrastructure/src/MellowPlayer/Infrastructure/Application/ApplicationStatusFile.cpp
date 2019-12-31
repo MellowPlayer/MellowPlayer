@@ -14,13 +14,13 @@ using namespace MellowPlayer::Domain;
 
 ApplicationStatusFile::ApplicationStatusFile(IPlayer& currentPlayer) : currentPlayer(currentPlayer), logger(Loggers::logger("ApplicationStatusFile"))
 {
-    connect(&currentPlayer, &IPlayer::currentSongChanged, this, &ApplicationStatusFile::OnCurrentPlayerUpdated);
-    connect(&currentPlayer, &IPlayer::playbackStatusChanged, this, &ApplicationStatusFile::OnCurrentPlayerUpdated);
+    connect(&currentPlayer, &IPlayer::currentSongChanged, this, &ApplicationStatusFile::onCurrentPlayerUpdated);
+    connect(&currentPlayer, &IPlayer::playbackStatusChanged, this, &ApplicationStatusFile::onCurrentPlayerUpdated);
 }
 
 void ApplicationStatusFile::create()
 {
-    OnCurrentPlayerUpdated();
+    onCurrentPlayerUpdated();
 }
 
 void ApplicationStatusFile::remove()
@@ -33,7 +33,7 @@ QString ApplicationStatusFile::fileName() const
     return QDir::tempPath() + QDir::separator() + "mellowplayer-status.json";
 }
 
-void ApplicationStatusFile::OnCurrentPlayerUpdated()
+void ApplicationStatusFile::onCurrentPlayerUpdated()
 {
     auto playerStatus = serializePlayerStatus();
     if (playerStatus != previousPlayerStatus)
@@ -61,7 +61,7 @@ QJsonObject ApplicationStatusFile::serializeCurrentSong() const
 
     if (currentSong)
     {
-        connect(currentSong, &Song::isFavoriteChanged, this, &ApplicationStatusFile::OnCurrentPlayerUpdated, Qt::UniqueConnection);
+        connect(currentSong, &Song::isFavoriteChanged, this, &ApplicationStatusFile::onCurrentPlayerUpdated, Qt::UniqueConnection);
 
         jsonSong["artist"] = currentSong->artist();
         jsonSong["title"] = currentSong->title();

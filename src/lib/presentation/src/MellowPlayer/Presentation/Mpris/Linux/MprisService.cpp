@@ -46,3 +46,8 @@ void MprisService::cleanUp()
     QDBusConnection::sessionBus().unregisterObject(OBJECT_NAME);
     QDBusConnection::sessionBus().unregisterObject(_serviceName);
 }
+
+QString MprisService::toString() const
+{
+    return "Mpris";
+}

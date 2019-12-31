@@ -4,6 +4,7 @@
 #include <MellowPlayer/Infrastructure/Application/QtApplication.hpp>
 #include <MellowPlayer/Infrastructure/CommandLineArguments/ICommandLineArguments.hpp>
 #include <MellowPlayer/Presentation/IMainWindow.hpp>
+#include <MellowPlayer/Presentation/Notifications/ISystemTrayIcon.hpp>
 #include <MellowPlayer/Presentation/Qml/IContextProperties.hpp>
 #include <MellowPlayer/Presentation/ViewModels/ApplicationViewModel.hpp>
 #include <MellowPlayer/Presentation/ViewModels/CacheViewModel.hpp>
@@ -20,18 +21,18 @@
 
 namespace MellowPlayer::Presentation
 {
-    class QmlSetup : public Domain::IInitializable
+    class GuiSetup : public Domain::IInitializable
     {
         Q_OBJECT
     public:
-        QmlSetup(ApplicationViewModel& application,
+        GuiSetup(ApplicationViewModel& application,
                  IMainWindow& mainWindow,
                  SettingsViewModel& settings,
                  ThemeViewModel& theme,
                  UpdaterViewModel& updater,
                  ListeningHistoryViewModel& listeningHistory,
                  StreamingServicesViewModel& streamingServices,
-                 std::shared_ptr<IContextProperties> contextProperties,
+                 IContextProperties& contextProperties,
                  ZoomViewModel& zoomViewModel,
                  Infrastructure::ICommandLineArguments& commandLineOptions);
 
@@ -52,5 +53,6 @@ namespace MellowPlayer::Presentation
         ZoomViewModel& _zoomViewModel;
         Infrastructure::ICommandLineArguments& _commandLineArguments;
         QTranslator _translator;
+        IContextProperties& _contextProperties;
     };
 }

@@ -19,17 +19,18 @@ namespace MellowPlayer::Infrastructure
     public:
         ApplicationStatusFile(Domain::IPlayer& currentPlayer);
 
-        void create();
-        void remove();
 
         void initialize(const ResultCallback& resultCallback) override;
         void cleanUp() override;
         QString toString() const override;
 
     private slots:
-        void OnCurrentPlayerUpdated();
+        void onCurrentPlayerUpdated();
 
     private:
+        void create();
+        void remove();
+
         QString fileName() const;
         QJsonObject serializePlayerStatus() const;
         QJsonObject serializeCurrentSong() const;
