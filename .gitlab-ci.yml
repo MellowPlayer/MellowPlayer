@@ -5,7 +5,7 @@ stages:
     - deploy
 
 variables:
-    APP_VERSION: '3.5.91'
+    APP_VERSION: '3.5.92'
 
 .linux:
     image: registry.gitlab.com/colinduquesnoy/mellowplayer/build-images/linux:latest
@@ -82,8 +82,8 @@ flatpak:
 deploy:continuous:
     image: alpine:latest
     stage: deploy
-    except:
-        - tags
+    only:
+        - master@ColinDuquesnoy/MellowPlayer
     dependencies:
         - appimage
         - flatpak
