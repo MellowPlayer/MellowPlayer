@@ -40,7 +40,6 @@ GuiSetup::GuiSetup(ApplicationViewModel& application,
 void GuiSetup::initialize(const ResultCallback& resultCallback)
 {
     _application.initialize();
-    _cache.clear();
     _streamingServices.initialize();
     _listeningHistory.initialize();
 
