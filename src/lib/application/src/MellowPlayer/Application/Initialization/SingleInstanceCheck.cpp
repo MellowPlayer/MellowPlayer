@@ -183,3 +183,14 @@ void SingleInstanceCheck::pollState()
         ;
     }
 }
+bool SingleInstanceCheck::IsAnotherInstanceRunning()
+{
+    auto lockFilePath = QStandardPaths::standardLocations(QStandardPaths::AppDataLocation).first() + QDir::separator() + "single-instance.lock";
+    auto lockFile = QLockFile(lockFilePath);
+    lockFile.setStaleLockTime(0);
+    if (lockFile.tryLock(100)) {
+        lockFile.unlock();
+        return false;
+    }
+    return true;
+}

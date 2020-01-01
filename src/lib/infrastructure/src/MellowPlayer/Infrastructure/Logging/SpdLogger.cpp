@@ -33,14 +33,14 @@ shared_ptr<logger> SpdLogger::createLogger(const string& name, const LoggerConfi
 
             if (SpdLogger::_errorSink == nullptr)
             {
-                SpdLogger::_errorSink = make_shared<sinks::rotating_file_sink_mt>(logDir + "Errors.log", 1024 * 1024 * 20, 5);
+                SpdLogger::_errorSink = make_shared<sinks::rotating_file_sink_mt>(logDir + config.logFilePrefix + "Errors.log", 1024 * 1024 * 20, 5);
                 SpdLogger::_errorSink->set_level(level::warn);
             }
             sinks.push_back(SpdLogger::_errorSink);
 
             if (SpdLogger::_allSink == nullptr)
             {
-                SpdLogger::_allSink = make_shared<sinks::rotating_file_sink_mt>(logDir + "All.log", 1024 * 1024 * 20, 5);
+                SpdLogger::_allSink = make_shared<sinks::rotating_file_sink_mt>(logDir + config.logFilePrefix + "All.log", 1024 * 1024 * 20, 5);
             }
             sinks.push_back(SpdLogger::_allSink);
         }

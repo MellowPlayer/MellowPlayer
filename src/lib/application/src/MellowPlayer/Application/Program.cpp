@@ -81,6 +81,8 @@ void configureHiDpiSupport()
 void configureLogging()
 {
     LoggerConfig loggerConfig;
+    if (SingleInstanceCheck::IsAnotherInstanceRunning())
+        loggerConfig.logFilePrefix = "Secondary.";
     auto loggerFactory = std::make_shared<SpdLoggerFactory>();
     Loggers::initialize(loggerFactory, loggerConfig);
 }

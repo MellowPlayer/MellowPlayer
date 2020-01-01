@@ -54,6 +54,8 @@ namespace MellowPlayer::Domain
          */
         bool showFileAndLine;
 
+        std::string logFilePrefix;
+
         LoggerConfig();
         explicit LoggerConfig(LogLevel level);
 

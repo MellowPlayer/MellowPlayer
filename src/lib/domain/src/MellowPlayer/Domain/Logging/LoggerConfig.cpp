@@ -12,6 +12,7 @@ LoggerConfig::LoggerConfig(LogLevel level)
     createConsoleLogger = true;
     createFileLoggers = true;
     showFileAndLine = true;
+    logFilePrefix = "";
 }
 
 LoggerConfig::LoggerConfig() : LoggerConfig(LogLevel::Debug)

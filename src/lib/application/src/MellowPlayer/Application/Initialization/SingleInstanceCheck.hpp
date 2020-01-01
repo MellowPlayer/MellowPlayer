@@ -38,6 +38,8 @@ namespace MellowPlayer::Application
         QString errorMessage() const override;
         QString toString() const override;
 
+        static bool IsAnotherInstanceRunning();
+
     private slots:
         void pollState();
 
