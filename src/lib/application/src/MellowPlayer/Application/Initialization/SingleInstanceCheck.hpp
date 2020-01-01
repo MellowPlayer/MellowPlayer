@@ -44,6 +44,7 @@ namespace MellowPlayer::Application
         void pollState();
 
     private:
+        static QString GetLockFilePath();
         void initializePrimaryApplication();
         void onSecondaryApplicationConnected();
         void onSecondaryApplicationActionRequest();

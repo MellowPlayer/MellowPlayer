@@ -34,7 +34,7 @@ SingleInstanceCheck::SingleInstanceCheck(IApplication& application,
           _commandLineArguments(commandLineArguments),
           _localServerFactory(localServerFactory),
           _localSocketFactory(localSocketFactory),
-          _lockFilePath(QStandardPaths::standardLocations(QStandardPaths::AppDataLocation).first() + QDir::separator() + "single-instance.lock"),
+          _lockFilePath(GetLockFilePath()),
           _lockFile(_lockFilePath),
           _isPrimary(false)
 {
@@ -183,14 +183,19 @@ void SingleInstanceCheck::pollState()
         ;
     }
 }
+
 bool SingleInstanceCheck::IsAnotherInstanceRunning()
 {
-    auto lockFilePath = QStandardPaths::standardLocations(QStandardPaths::AppDataLocation).first() + QDir::separator() + "single-instance.lock";
-    auto lockFile = QLockFile(lockFilePath);
-    lockFile.setStaleLockTime(0);
-    if (lockFile.tryLock(100)) {
-        lockFile.unlock();
+    QLockFile lock(GetLockFilePath());
+    lock.setStaleLockTime(0);
+    if (lock.tryLock(100)) {
+        lock.unlock();
         return false;
     }
     return true;
+}
+
+QString SingleInstanceCheck::GetLockFilePath()
+{
+    return QStandardPaths::standardLocations(QStandardPaths::AppDataLocation).first() + QDir::separator() + "single-instance.lock";
 }
