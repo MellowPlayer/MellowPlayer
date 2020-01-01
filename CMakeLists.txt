@@ -23,7 +23,6 @@ set_option(BUILD_TESTS OFF BOOL "TRUE to build the tests, FALSE to ignore them."
 set_option(ENABLE_COVERAGE OFF BOOL "True to build code coverage targerts")
 set_option(ENABLE_LCOV_REPORT OFF BOOL "True to enable lcov coverage report. Default is False.")
 set_option(STATIC_LIBSTDCPP OFF BOOL "True to link statically with libstdc++ and libgcc")
-set_option(UPDATE_TRANSLATIONS OFF BOOL "True to update translations")
 set_option(DEFAULT_THEME "Adaptive" STRING "The default theme (available: Default, Midna, MidnaDark, Breeze, BreezeDark, Deezer, Spotify,...)")
 set_option(CHECK_QML_SYNTAX ON BOOL "Whether to check for QML/Javascript syntax errors. Default is ON")
 if (UNIX)

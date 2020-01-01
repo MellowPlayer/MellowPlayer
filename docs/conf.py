@@ -48,7 +48,7 @@ master_doc = 'index'
 
 # General information about the project.
 project = 'MellowPlayer'
-copyright = '2015, Colin Duquesnoy'
+copyright = '2014-2020, Colin Duquesnoy'
 author = 'Colin Duquesnoy'
 
 # The version info for the project you're documenting, acts as replacement for
