@@ -110,12 +110,20 @@ void logStop()
 void configureForQmlAndWebEngine(QApplication& qApplication)
 {
     qApplication.setApplicationDisplayName("MellowPlayer");
+#if QT_VERSION < QT_VERSION_CHECK(5, 14, 0)
+    // With Qt < 5.14 it is recommended to initialize qtwebengine AFTER creating QApplication
     QtWebEngine::initialize();
+#endif
     QQuickStyle::setStyle("Material");
 }
 
 int Program::main(int argc, char** argv)
 {
+#if QT_VERSION >= QT_VERSION_CHECK(5, 14, 0)
+    // With Qt >= 5.14 it is recommended to initialize qtwebengine BEFORE creating QApplication
+    QtWebEngine::initialize();
+#endif
+
     configureEnvironment();
     configureHiDpiSupport();
     configureLogging();
