@@ -176,7 +176,7 @@ void SingleInstanceCheck::pollState()
     QFileInfo serverFile(_localServer->serverSocketFilePath());
     if (!serverFile.exists())
     {
-        LOG_WARN(_logger, "server file diseappeared, trying to restore local server");
+        LOG_WARN(_logger, "server file disappeared trying to restore local server");
         _localServer->close();
         if (_localServer->listen())
             LOG_INFO(_logger, "local server restored");
