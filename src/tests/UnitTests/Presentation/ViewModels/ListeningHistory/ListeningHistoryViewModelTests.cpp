@@ -20,7 +20,7 @@ using namespace MellowPlayer::Tests;
 
 void initializeHistory(ListeningHistoryViewModel& listeningHistoryViewModel)
 {
-    listeningHistoryViewModel.initialize();
+    listeningHistoryViewModel.load();
     listeningHistoryViewModel.model()->fetchMore(QModelIndex());
 }
 
@@ -45,7 +45,7 @@ TEST_CASE("ListeningHistoryViewModelTests")
     {
         REQUIRE(listeningHistoryViewModel.model()->rowCount() == 0);
         currentPlayer.setUpdateResults(getSongVariantMap("Song1", "Id1"));
-        listeningHistoryViewModel.initialize();
+        listeningHistoryViewModel.load();
         REQUIRE(listeningHistoryViewModel.model()->rowCount() == 0);
         REQUIRE(listeningHistoryViewModel.model()->canFetchMore(QModelIndex()));
         listeningHistoryViewModel.model()->fetchMore(QModelIndex());

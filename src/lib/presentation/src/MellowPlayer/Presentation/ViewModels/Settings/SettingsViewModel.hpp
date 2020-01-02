@@ -28,7 +28,7 @@ namespace MellowPlayer::Presentation
         Q_INVOKABLE SettingViewModel* get(int key);
         Q_INVOKABLE void restoreDefaults();
 
-        void initialize(IQmlApplicationEngine& qmlApplicationEngine) override;
+        void registerTo(IQmlApplicationEngine& qmlApplicationEngine) override;
 
     private:
         Domain::Settings& _settings;

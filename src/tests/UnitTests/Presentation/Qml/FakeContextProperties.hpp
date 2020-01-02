@@ -30,7 +30,7 @@ namespace MellowPlayer::Presentation::Tests
             {
                 for (auto* contextProperty : _items)
                     if (contextProperty)
-                        contextProperty->initialize(*qmlApplicationEngine_);
+                        contextProperty->registerTo(*qmlApplicationEngine_);
             }
         }
 

@@ -21,12 +21,8 @@ void notify_action_callback(NotifyNotification*, char*, gpointer)
     LibnotifyPresenter::onActionCallback();
 }
 
-LibnotifyPresenter::LibnotifyPresenter(IMainWindow& mainWindow, IWorkDispatcher& workDispatcher, ISystemTrayIcon& trayIcon)
-        : _logger(Loggers::logger("LibnotifyPresenter")),
-          _mainWindow(mainWindow),
-          _workDispatcher(workDispatcher),
-          _previousNotification(nullptr),
-          _systemTrayIcon(trayIcon)
+LibnotifyPresenter::LibnotifyPresenter(IMainWindow& mainWindow, IWorkDispatcher& workDispatcher)
+        : _logger(Loggers::logger("LibnotifyPresenter")), _mainWindow(mainWindow), _workDispatcher(workDispatcher), _previousNotification(nullptr)
 {
     _instance = this;
 }
@@ -35,7 +31,6 @@ void LibnotifyPresenter::initialize()
 {
     notify_init("MellowPlayer");
     checkSupportForActions();
-    _systemTrayIcon.show();
     LOG_DEBUG(_logger, "service started")
 }
 

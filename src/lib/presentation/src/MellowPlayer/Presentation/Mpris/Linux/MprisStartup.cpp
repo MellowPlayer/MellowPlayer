@@ -6,16 +6,16 @@
 #include <MellowPlayer/Domain/Logging/Loggers.hpp>
 #include <MellowPlayer/Domain/Logging/LoggingMacros.hpp>
 #include <MellowPlayer/Presentation/IMainWindow.hpp>
-#include <MellowPlayer/Presentation/Mpris/Linux/Mpris2Startup.hpp>
+#include <MellowPlayer/Presentation/Mpris/Linux/MprisStartup.hpp>
 
 using namespace MellowPlayer::Domain;
 using namespace MellowPlayer::Presentation;
 using namespace std;
 
-QString Mpris2Startup::SERVICE_NAME = "org.mpris.MediaPlayer2.";
-QString Mpris2Startup::OBJECT_NAME = "/org/mpris/MediaPlayer2";
+QString MprisStartup::SERVICE_NAME = "org.mpris.MediaPlayer2.";
+QString MprisStartup::OBJECT_NAME = "/org/mpris/MediaPlayer2";
 
-Mpris2Startup::Mpris2Startup(IPlayer& player, ILocalAlbumArt& localAlbumArt, IMainWindow& window)
+MprisStartup::MprisStartup(IPlayer& player, ILocalAlbumArt& localAlbumArt, IMainWindow& window)
         : _logger(Loggers::logger("Mpris")),
           _parent(make_unique<QObject>()),
           _mpris2Root(new Mpris2Root(window, _parent.get())),
@@ -24,12 +24,12 @@ Mpris2Startup::Mpris2Startup(IPlayer& player, ILocalAlbumArt& localAlbumArt, IMa
 {
 }
 
-void Mpris2Startup::initialize(const IInitializable::ResultCallback& resultCallback)
+void MprisStartup::initialize(const Initializable::ResultCallback& resultCallback)
 {
     resultCallback(start());
 }
 
-bool Mpris2Startup::start()
+bool MprisStartup::start()
 {
     if (!QDBusConnection::sessionBus().registerService(_serviceName) || !QDBusConnection::sessionBus().registerObject(OBJECT_NAME, _parent.get()))
     {
@@ -41,13 +41,8 @@ bool Mpris2Startup::start()
     return true;
 }
 
-void Mpris2Startup::cleanUp()
+void MprisStartup::cleanUp()
 {
     QDBusConnection::sessionBus().unregisterObject(OBJECT_NAME);
     QDBusConnection::sessionBus().unregisterObject(_serviceName);
-}
-
-QString Mpris2Startup::toString() const
-{
-    return "Mpris";
 }

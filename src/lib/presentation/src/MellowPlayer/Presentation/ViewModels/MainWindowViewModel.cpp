@@ -1,28 +1,25 @@
+#include <MellowPlayer/Domain/Logging/Loggers.hpp>
 #include <MellowPlayer/Infrastructure/BuildConfig.hpp>
-#include <MellowPlayer/Presentation/Qml/IQmlApplicationEngine.hpp>
 #include <MellowPlayer/Presentation/ViewModels/MainWindowViewModel.hpp>
 
+using namespace MellowPlayer::Domain;
 using namespace MellowPlayer::Infrastructure;
 using namespace MellowPlayer::Presentation;
 
-MainWindowViewModel::MainWindowViewModel(IContextProperties& contextProperties, IQmlApplicationEngine& qmlApplicationEngine)
-        : ContextProperty("_window", this, contextProperties), _qmlApplicationEngine(qmlApplicationEngine), _visible(false)
+MainWindowViewModel::MainWindowViewModel(IContextProperties& contextProperties)
+        : ContextProperty("_window", this, contextProperties), _visible(false), _logger(Loggers::logger("MainWindow"))
 {
 }
 
 void MainWindowViewModel::show()
 {
+    LOG_DEBUG(_logger, "show");
     setVisible(true);
-}
-
-void MainWindowViewModel::load()
-{
-    _qmlApplicationEngine.addImportPath("qrc:/MellowPlayer/imports");
-    _qmlApplicationEngine.load(QUrl("qrc:/MellowPlayer/main.qml"));
 }
 
 void MainWindowViewModel::hide()
 {
+    LOG_DEBUG(_logger, "hide");
     setVisible(false);
 }
 
@@ -35,6 +32,8 @@ void MainWindowViewModel::setVisible(bool visible)
 {
     if (_visible != visible)
     {
+        LOG_DEBUG(_logger, "setVisible " << visible);
+
         _visible = visible;
         emit visibleChanged();
     }
@@ -42,10 +41,14 @@ void MainWindowViewModel::setVisible(bool visible)
 
 void MainWindowViewModel::requestQuit()
 {
+    LOG_DEBUG(_logger, "request quit");
+
     emit quitRequest();
 }
 
 void MainWindowViewModel::raise()
 {
+    LOG_DEBUG(_logger, "raise");
+
     emit raiseRequested();
 }

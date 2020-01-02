@@ -29,11 +29,13 @@ void ListeningHistoryViewModel::onEntryRemoved(int entryId)
     _sourceModel->remove(_sourceModel->getByUid(QString("%1").arg(entryId)));
 }
 
-void ListeningHistoryViewModel::initialize()
+void ListeningHistoryViewModel::load()
 {
     connect(&_listeningHistoryService, &ListeningHistory::entryAdded, this, &ListeningHistoryViewModel::onEntryAdded);
     connect(&_listeningHistoryService, &ListeningHistory::entryRemoved, this, &ListeningHistoryViewModel::onEntryRemoved);
-    _listeningHistoryService.initialize();
+
+    _listeningHistoryService.load();
+
     QList<ListeningHistoryEntryViewModel*> items;
     for (const auto& entry : _listeningHistoryService.toList())
     {

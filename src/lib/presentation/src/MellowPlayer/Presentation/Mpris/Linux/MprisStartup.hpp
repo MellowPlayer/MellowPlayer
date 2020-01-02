@@ -1,6 +1,6 @@
 #pragma once
 
-#include <MellowPlayer/Domain/IInitializable.hpp>
+#include <MellowPlayer/Domain/Initializable.hpp>
 #include <QObject>
 #include <memory>
 
@@ -17,14 +17,14 @@ namespace MellowPlayer::Presentation
     class Mpris2Player;
     class IMainWindow;
 
-    class Mpris2Startup : public Domain::IInitializable
+    class MprisStartup : public Domain::Initializable
     {
+        Q_OBJECT
     public:
-        Mpris2Startup(Domain::IPlayer& player, Domain::ILocalAlbumArt& localAlbumArt, IMainWindow& window);
+        MprisStartup(Domain::IPlayer& player, Domain::ILocalAlbumArt& localAlbumArt, IMainWindow& window);
 
         void initialize(const ResultCallback& resultCallback) override;
         void cleanUp() override;
-        QString toString() const override;
 
     private:
         bool start();

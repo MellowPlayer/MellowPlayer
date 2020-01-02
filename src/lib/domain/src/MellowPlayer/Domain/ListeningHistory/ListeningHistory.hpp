@@ -20,7 +20,7 @@ namespace MellowPlayer::Domain
     public:
         virtual ~IListeningHistory() = default;
 
-        virtual void initialize() = 0;
+        virtual void load() = 0;
         virtual QList<Domain::ListeningHistoryEntry> toList() const = 0;
         virtual int count() const = 0;
         virtual void clear() = 0;
@@ -43,7 +43,7 @@ namespace MellowPlayer::Domain
     public:
         ListeningHistory(IListeningHistoryDatabase& model, IPlayer& player_, Settings& settings);
 
-        void initialize() override;
+        void load() override;
         QList<Domain::ListeningHistoryEntry> toList() const override;
         int count() const override;
         void clear() override;

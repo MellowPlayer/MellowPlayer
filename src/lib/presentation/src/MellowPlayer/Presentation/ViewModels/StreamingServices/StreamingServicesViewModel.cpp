@@ -58,6 +58,7 @@ void StreamingServicesViewModel::initialize()
     auto currentServiceName = _currentServiceSetting.value().toString();
     if (!_commandLineArguments.service().isEmpty())
         currentServiceName = _commandLineArguments.service();
+
     for (auto service : _allServices->toList())
     {
         if (service->name().toLower() == currentServiceName.toLower())
@@ -195,8 +196,8 @@ StreamingServiceProxyListModel* StreamingServicesViewModel::enabledServices()
     return &_enabledServices;
 }
 
-void StreamingServicesViewModel::initialize(IQmlApplicationEngine& qmlApplicationEngine)
+void StreamingServicesViewModel::registerTo(IQmlApplicationEngine& qmlApplicationEngine)
 {
     qRegisterMetaType<Infrastructure::NetworkProxy*>("Infrastructure::NetworkProxy*");
-    ContextProperty::initialize(qmlApplicationEngine);
+    ContextProperty::registerTo(qmlApplicationEngine);
 }

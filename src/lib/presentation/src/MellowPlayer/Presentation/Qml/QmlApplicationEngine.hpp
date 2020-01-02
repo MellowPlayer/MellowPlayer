@@ -15,7 +15,7 @@ namespace MellowPlayer::Presentation
 
         void setContextProperty(const QString& name, QObject* object) override;
         void addImportPath(const QString& path) override;
-        void load(const QUrl& url) override;
+        bool load(const QUrl& url) override;
 
     private:
         QQmlApplicationEngine _engine;

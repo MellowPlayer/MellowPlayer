@@ -102,8 +102,3 @@ void ApplicationStatusFile::cleanUp()
 {
     remove();
 }
-
-QString ApplicationStatusFile::toString() const
-{
-    return "ApplicationStatusFile";
-}

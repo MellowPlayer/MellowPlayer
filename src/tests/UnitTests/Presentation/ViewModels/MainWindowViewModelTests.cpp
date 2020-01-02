@@ -12,8 +12,7 @@ SCENARIO("MainWindowViewModelTests")
     GIVEN("A main window instance")
     {
         auto contextProperties = std::make_shared<FakeContextProperties>();
-        FakeQmlApplicationEngine qmlApplicationEngine;
-        MainWindowViewModel mainWindow(*contextProperties, qmlApplicationEngine);
+        MainWindowViewModel mainWindow(*contextProperties);
 
         WHEN("Creating main window")
         {
@@ -25,21 +24,6 @@ SCENARIO("MainWindowViewModelTests")
             AND_THEN("window is not yet visible")
             {
                 REQUIRE(!mainWindow.isVisible());
-            }
-        }
-
-        WHEN("loading window")
-        {
-            mainWindow.load();
-
-            THEN("import path is defined")
-            {
-                REQUIRE(qmlApplicationEngine.importPathsCount() != 0);
-            }
-
-            AND_THEN("qmlApplicationEngine is loaded")
-            {
-                REQUIRE(qmlApplicationEngine.isLoaded());
             }
         }
 

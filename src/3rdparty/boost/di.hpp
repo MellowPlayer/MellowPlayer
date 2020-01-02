@@ -243,28 +243,27 @@ struct make_index_sequence_impl {
 #else
 template <int>
 struct make_index_sequence_impl;
-template <>
-struct make_index_sequence_impl<0> : index_sequence<> {};
-template <>
-struct make_index_sequence_impl<1> : index_sequence<0> {};
-template <>
-struct make_index_sequence_impl<2> : index_sequence<0, 1> {};
-template <>
-struct make_index_sequence_impl<3> : index_sequence<0, 1, 2> {};
-template <>
-struct make_index_sequence_impl<4> : index_sequence<0, 1, 2, 3> {};
-template <>
-struct make_index_sequence_impl<5> : index_sequence<0, 1, 2, 3, 4> {};
-template <>
-struct make_index_sequence_impl<6> : index_sequence<0, 1, 2, 3, 4, 5> {};
-template <>
-struct make_index_sequence_impl<7> : index_sequence<0, 1, 2, 3, 4, 5, 6> {};
-template <>
-struct make_index_sequence_impl<8> : index_sequence<0, 1, 2, 3, 4, 5, 6, 7> {};
-template <>
-struct make_index_sequence_impl<9> : index_sequence<0, 1, 2, 3, 4, 5, 6, 7, 8> {};
-template <>
-struct make_index_sequence_impl<10> : index_sequence<0, 1, 2, 3, 4, 5, 6, 7, 8, 9> {};
+template <> struct make_index_sequence_impl<0> : index_sequence<> {};
+template <> struct make_index_sequence_impl<1> : index_sequence<0> {};
+template <> struct make_index_sequence_impl<2> : index_sequence<0, 1> {};
+template <> struct make_index_sequence_impl<3> : index_sequence<0, 1, 2> {};
+template <> struct make_index_sequence_impl<4> : index_sequence<0, 1, 2, 3> {};
+template <> struct make_index_sequence_impl<5> : index_sequence<0, 1, 2, 3, 4> {};
+template <> struct make_index_sequence_impl<6> : index_sequence<0, 1, 2, 3, 4, 5> {};
+template <> struct make_index_sequence_impl<7> : index_sequence<0, 1, 2, 3, 4, 5, 6> {};
+template <> struct make_index_sequence_impl<8> : index_sequence<0, 1, 2, 3, 4, 5, 6, 7> {};
+template <> struct make_index_sequence_impl<9> : index_sequence<0, 1, 2, 3, 4, 5, 6, 7, 8> {};
+template <> struct make_index_sequence_impl<10> : index_sequence<0, 1, 2, 3, 4, 5, 6, 7, 8, 9> {};
+template <> struct make_index_sequence_impl<11> : index_sequence<0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10> {};
+template <> struct make_index_sequence_impl<12> : index_sequence<0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11> {};
+template <> struct make_index_sequence_impl<13> : index_sequence<0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12> {};
+template <> struct make_index_sequence_impl<14> : index_sequence<0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13> {};
+template <> struct make_index_sequence_impl<15> : index_sequence<0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14> {};
+template <> struct make_index_sequence_impl<16> : index_sequence<0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15> {};
+template <> struct make_index_sequence_impl<17> : index_sequence<0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16> {};
+template <> struct make_index_sequence_impl<18> : index_sequence<0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17> {};
+template <> struct make_index_sequence_impl<19> : index_sequence<0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18> {};
+template <> struct make_index_sequence_impl<20> : index_sequence<0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19> {};
 #endif
 template <int N>
 using make_index_sequence = typename make_index_sequence_impl<N>::type;

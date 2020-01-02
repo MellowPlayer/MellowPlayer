@@ -4,14 +4,14 @@
 #include <MellowPlayer/Domain/Player/IPlayer.hpp>
 #include <MellowPlayer/Domain/Settings/Setting.hpp>
 #include <MellowPlayer/Domain/Settings/Settings.hpp>
-#include <MellowPlayer/Presentation/Hotkeys/HotkeysSetup.hpp>
+#include <MellowPlayer/Presentation/Hotkeys/Hotkeys.hpp>
 #include <MellowPlayer/Presentation/IMainWindow.hpp>
 #include <qxtglobalshortcut.h>
 
 using namespace MellowPlayer::Domain;
 using namespace MellowPlayer::Presentation;
 
-HotkeysSetup::HotkeysSetup(IPlayer& player, Settings& settings, IMainWindow& mainWindow)
+Hotkeys::Hotkeys(IPlayer& player, Settings& settings, IMainWindow& mainWindow)
         : _logger(Loggers::logger("Hotkeys")),
           _player(player),
           _mainWindow(mainWindow),
@@ -21,88 +21,84 @@ HotkeysSetup::HotkeysSetup(IPlayer& player, Settings& settings, IMainWindow& mai
           _favoriteShortcutSetting(settings.get(SettingKey::SHORTCUTS_FAVORITE)),
           _restoreWindowShortcutSetting(settings.get(SettingKey::SHORTCUTS_RESTORE_WINDOW))
 {
-    connect(&_playShortcutSetting, &Setting::valueChanged, this, &HotkeysSetup::updatePlayShortcut);
-    connect(&_nextShortcutSetting, &Setting::valueChanged, this, &HotkeysSetup::updateNextShortcut);
-    connect(&_previousShortcutSetting, &Setting::valueChanged, this, &HotkeysSetup::updatePreviousShorcut);
-    connect(&_favoriteShortcutSetting, &Setting::valueChanged, this, &HotkeysSetup::updateFavoriteShortcut);
-    connect(&_restoreWindowShortcutSetting, &Setting::valueChanged, this, &HotkeysSetup::updateRestoreWindowShortcut);
+    connect(&_playShortcutSetting, &Setting::valueChanged, this, &Hotkeys::updatePlayShortcut);
+    connect(&_nextShortcutSetting, &Setting::valueChanged, this, &Hotkeys::updateNextShortcut);
+    connect(&_previousShortcutSetting, &Setting::valueChanged, this, &Hotkeys::updatePreviousShorcut);
+    connect(&_favoriteShortcutSetting, &Setting::valueChanged, this, &Hotkeys::updateFavoriteShortcut);
+    connect(&_restoreWindowShortcutSetting, &Setting::valueChanged, this, &Hotkeys::updateRestoreWindowShortcut);
 }
 
-void HotkeysSetup::togglePlayPause()
+void Hotkeys::togglePlayPause()
 {
     _player.togglePlayPause();
 }
 
-void HotkeysSetup::next()
+void Hotkeys::next()
 {
     _player.next();
 }
 
-void HotkeysSetup::previous()
+void Hotkeys::previous()
 {
     _player.previous();
 }
 
-void HotkeysSetup::toggleFavoriteSong()
+void Hotkeys::toggleFavoriteSong()
 {
     _player.toggleFavoriteSong();
 }
 
-HotkeysSetup::~HotkeysSetup()
-{
-}
-
-void HotkeysSetup::updatePlayShortcut() const
+void Hotkeys::updatePlayShortcut() const
 {
     _playShortcut->setShortcut(QKeySequence(_playShortcutSetting.value().toString()));
 }
 
-void HotkeysSetup::updateNextShortcut() const
+void Hotkeys::updateNextShortcut() const
 {
     _nextShortcut->setShortcut(QKeySequence(_nextShortcutSetting.value().toString()));
 }
 
-void HotkeysSetup::updatePreviousShorcut() const
+void Hotkeys::updatePreviousShorcut() const
 {
     _previousShortcut->setShortcut(QKeySequence(_previousShortcutSetting.value().toString()));
 }
 
-void HotkeysSetup::updateFavoriteShortcut() const
+void Hotkeys::updateFavoriteShortcut() const
 {
     _favoriteShortcut->setShortcut(QKeySequence(_favoriteShortcutSetting.value().toString()));
 }
 
-void HotkeysSetup::restoreWindow()
+void Hotkeys::restoreWindow()
 {
     _mainWindow.raise();
 }
 
-void HotkeysSetup::updateRestoreWindowShortcut() const
+void Hotkeys::updateRestoreWindowShortcut() const
 {
     _restoreWindowShortcut->setShortcut(QKeySequence(_restoreWindowShortcutSetting.value().toString()));
 }
 
-void HotkeysSetup::initialize(const IInitializable::ResultCallback& resultCallback)
+void Hotkeys::grab()
 {
     _playShortcut = std::make_shared<QxtGlobalShortcut>();
     updatePlayShortcut();
-    connect(_playShortcut.get(), &QxtGlobalShortcut::activated, this, &HotkeysSetup::togglePlayPause);
+    connect(_playShortcut.get(), &QxtGlobalShortcut::activated, this, &Hotkeys::togglePlayPause);
 
     _nextShortcut = std::make_shared<QxtGlobalShortcut>();
     updateNextShortcut();
-    connect(_nextShortcut.get(), &QxtGlobalShortcut::activated, this, &HotkeysSetup::next);
+    connect(_nextShortcut.get(), &QxtGlobalShortcut::activated, this, &Hotkeys::next);
 
     _previousShortcut = std::make_shared<QxtGlobalShortcut>();
     updatePreviousShorcut();
-    connect(_previousShortcut.get(), &QxtGlobalShortcut::activated, this, &HotkeysSetup::previous);
+    connect(_previousShortcut.get(), &QxtGlobalShortcut::activated, this, &Hotkeys::previous);
 
     _favoriteShortcut = std::make_shared<QxtGlobalShortcut>();
     updateFavoriteShortcut();
-    connect(_favoriteShortcut.get(), &QxtGlobalShortcut::activated, this, &HotkeysSetup::toggleFavoriteSong);
+    connect(_favoriteShortcut.get(), &QxtGlobalShortcut::activated, this, &Hotkeys::toggleFavoriteSong);
 
     _restoreWindowShortcut = std::make_shared<QxtGlobalShortcut>();
     updateRestoreWindowShortcut();
-    connect(_restoreWindowShortcut.get(), &QxtGlobalShortcut::activated, this, &HotkeysSetup::restoreWindow);
+    connect(_restoreWindowShortcut.get(), &QxtGlobalShortcut::activated, this, &Hotkeys::restoreWindow);
 
 #ifdef Q_OS_WIN
     _mediaPlayShortcut = std::make_shared<QxtGlobalShortcut>();
@@ -118,16 +114,10 @@ void HotkeysSetup::initialize(const IInitializable::ResultCallback& resultCallba
     connect(_mediaPreviousShortcut.get(), &QxtGlobalShortcut::activated, this, &Hotkeys::previous);
 #endif
 
-    LOG_DEBUG(_logger, "hotkeys configured");
-    resultCallback(true);
+    LOG_DEBUG(_logger, "hotkeys grabbed");
 }
 
-QString HotkeysSetup::toString() const
-{
-    return "Hotkeys";
-}
-
-void HotkeysSetup::cleanUp()
+void Hotkeys::unGrab()
 {
     _playShortcut = nullptr;
     _nextShortcut = nullptr;
@@ -138,4 +128,6 @@ void HotkeysSetup::cleanUp()
     _mediaPlayShortcut = nullptr;
     _mediaNextShortcut = nullptr;
     _mediaPreviousShortcut = nullptr;
+
+    LOG_DEBUG(_logger, "hotkeys un-grabbed");
 }

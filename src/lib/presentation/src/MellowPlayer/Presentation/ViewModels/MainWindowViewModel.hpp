@@ -4,6 +4,11 @@
 #include <MellowPlayer/Presentation/Qml/ContextProperty.hpp>
 #include <QObject>
 
+namespace MellowPlayer::Domain
+{
+    class ILogger;
+}
+
 namespace MellowPlayer::Presentation
 {
     class IQmlApplicationEngine;
@@ -13,10 +18,9 @@ namespace MellowPlayer::Presentation
         Q_OBJECT
         Q_PROPERTY(bool visible READ isVisible WRITE setVisible NOTIFY visibleChanged)
     public:
-        MainWindowViewModel(IContextProperties& contextProperties, IQmlApplicationEngine& qmlApplicationEngine);
+        MainWindowViewModel(IContextProperties& contextProperties);
 
         // IMainWindow implementation
-        void load() override;
         void show() override;
         void hide() override;
         void raise() override;
@@ -37,7 +41,7 @@ namespace MellowPlayer::Presentation
         void raiseRequested();
 
     private:
-        IQmlApplicationEngine& _qmlApplicationEngine;
         bool _visible;
+        Domain::ILogger& _logger;
     };
 }

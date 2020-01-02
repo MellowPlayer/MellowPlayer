@@ -1,4 +1,5 @@
 #define BOOST_DI_CFG_DIAGNOSTICS_LEVEL 2
+#define BOOST_DI_CFG_CTOR_LIMIT_SIZE 20
 
 void logStart();
 #include "Program.hpp"

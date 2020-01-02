@@ -36,9 +36,10 @@ namespace MellowPlayer::Presentation::Tests
             return _importPaths.count();
         }
 
-        void load(const QUrl& url) override
+        bool load(const QUrl& url) override
         {
             _loadedUrl = url;
+            return true;
         }
 
         bool isLoaded() const

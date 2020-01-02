@@ -1,6 +1,8 @@
 #pragma once
 
-#include <MellowPlayer/Domain/IInitializable.hpp>
+#include <MellowPlayer/Domain/Initializable.hpp>
+#include <MellowPlayer/Infrastructure/Network/LocalServer.hpp>
+#include <MellowPlayer/Infrastructure/Network/LocalSocket.hpp>
 #include <QString>
 #include <QTimer>
 #include <QtCore/QLockFile>
@@ -15,16 +17,15 @@ namespace MellowPlayer::Domain
 namespace MellowPlayer::Infrastructure
 {
     class IQtApplication;
-    class ILocalServer;
-    class ILocalSocket;
     class ICommandLineArguments;
     class IApplication;
 }
 
 namespace MellowPlayer::Application
 {
-    class SingleInstanceCheckup : public Domain::IInitializable
+    class SingleInstanceCheckup : public Domain::Initializable
     {
+        Q_OBJECT
     public:
         SingleInstanceCheckup(Infrastructure::IApplication& application,
                             Domain::IPlayer& currentPlayer,
@@ -36,7 +37,6 @@ namespace MellowPlayer::Application
         void cleanUp() override;
 
         QString errorMessage() const override;
-        QString toString() const override;
 
         static bool IsAnotherInstanceRunning();
 

@@ -7,11 +7,6 @@ namespace MellowPlayer::Presentation::Tests
     class FakeMainWindow : public IMainWindow
     {
     public:
-        void load() override
-        {
-            isLoaded = true;
-        }
-
         void show() override
         {
             isShown = true;

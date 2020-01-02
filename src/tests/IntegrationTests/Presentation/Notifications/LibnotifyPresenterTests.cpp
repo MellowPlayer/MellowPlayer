@@ -16,8 +16,7 @@ TEST_CASE("LibnotifyPresenterTests")
 {
     FakeMainWindow mainWindow;
     FakeWorkDispatcher workDispatcher;
-    auto systemTrayIconMock = SystemTrayIconMock::get();
-    LibnotifyPresenter presenter(mainWindow, workDispatcher, systemTrayIconMock.get());
+    LibnotifyPresenter presenter(mainWindow, workDispatcher);
     presenter.initialize();
 
     SECTION("display test")

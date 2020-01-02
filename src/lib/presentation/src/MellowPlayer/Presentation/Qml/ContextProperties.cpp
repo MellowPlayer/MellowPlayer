@@ -24,5 +24,5 @@ void ContextProperties::registerToQml()
     _qmlApplicationEngine.setContextProperty("_player", &_player);
 
     for (auto* contextProperty : _contextProperties)
-        contextProperty->initialize(_qmlApplicationEngine);
+        contextProperty->registerTo(_qmlApplicationEngine);
 }

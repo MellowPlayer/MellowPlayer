@@ -5,9 +5,9 @@
 #endif
 
 #if defined(Q_OS_LINUX) || defined(Q_OS_FREEBSD)
+#    include <MellowPlayer/Application/Initialization/Steps/QmlTypesSetup.hpp>
 #    include <MellowPlayer/Infrastructure/Updater/Linux/LinuxUpdater.hpp>
-#    include <MellowPlayer/Presentation/Mpris/Linux/Mpris2Startup.hpp>
-#    include <MellowPlayer/Presentation/ViewModels/GuiSetup.hpp>
+#    include <MellowPlayer/Presentation/Mpris/Linux/MprisStartup.hpp>
 #elif defined(Q_OS_WIN)
 #    include <MellowPlayer/Infrastructure/Updater/Windows/WindowsUpdater.hpp>
 #elif defined(Q_OS_OSX)
@@ -15,7 +15,19 @@
 #endif
 
 #include <MellowPlayer/Application/Initialization/InitializationSequence.hpp>
-#include <MellowPlayer/Application/Initialization/SingleInstanceCheckup.hpp>
+#include <MellowPlayer/Application/Initialization/Steps/ApplicationUpdatesCheckup.hpp>
+#include <MellowPlayer/Application/Initialization/Steps/CacheCleanup.hpp>
+#include <MellowPlayer/Application/Initialization/Steps/FontsSetup.hpp>
+#include <MellowPlayer/Application/Initialization/Steps/HotkeysSetup.hpp>
+#include <MellowPlayer/Application/Initialization/Steps/ListeningHistorySetup.hpp>
+#include <MellowPlayer/Application/Initialization/Steps/MainWindowStartup.hpp>
+#include <MellowPlayer/Application/Initialization/Steps/NotificationsSetup.hpp>
+#include <MellowPlayer/Application/Initialization/Steps/QmlEngineStartup.hpp>
+#include <MellowPlayer/Application/Initialization/Steps/QmlTypesSetup.hpp>
+#include <MellowPlayer/Application/Initialization/Steps/SingleInstanceCheckup.hpp>
+#include <MellowPlayer/Application/Initialization/Steps/StreamingServicesSetup.hpp>
+#include <MellowPlayer/Application/Initialization/Steps/SystemTrayIconStartup.hpp>
+#include <MellowPlayer/Application/Initialization/Steps/TranslationsSetup.hpp>
 #include <MellowPlayer/Domain/AlbumArt/IAlbumArtDownloader.hpp>
 #include <MellowPlayer/Domain/AlbumArt/ILocalAlbumArt.hpp>
 #include <MellowPlayer/Domain/ListeningHistory/IListeningHistoryDatabase.hpp>
@@ -62,9 +74,8 @@
 #include <MellowPlayer/Infrastructure/Updater/ILatestRelease.hpp>
 #include <MellowPlayer/Infrastructure/Updater/Updater.hpp>
 #include <MellowPlayer/Infrastructure/UserScripts/UserScriptFactory.hpp>
-#include <MellowPlayer/Presentation/Hotkeys/HotkeysSetup.hpp>
+#include <MellowPlayer/Presentation/Hotkeys/Hotkeys.hpp>
 #include <MellowPlayer/Presentation/Notifications/PlayerNotifications.hpp>
-#include <MellowPlayer/Presentation/Notifications/NotificationsSetup.hpp>
 #include <MellowPlayer/Presentation/Notifications/Presenters/SystemTrayIconPresenter.hpp>
 #include <MellowPlayer/Presentation/Notifications/SystemTrayIcon.hpp>
 #include <MellowPlayer/Presentation/Qml/ContextProperties.hpp>
@@ -74,7 +85,6 @@
 #include <MellowPlayer/Presentation/ViewModels/ApplicationViewModel.hpp>
 #include <MellowPlayer/Presentation/ViewModels/CacheViewModel.hpp>
 #include <MellowPlayer/Presentation/ViewModels/CookiesViewModel.hpp>
-#include <MellowPlayer/Presentation/ViewModels/GuiSetup.hpp>
 #include <MellowPlayer/Presentation/ViewModels/ListeningHistory/ListeningHistoryViewModel.hpp>
 #include <MellowPlayer/Presentation/ViewModels/MainWindowViewModel.hpp>
 #include <MellowPlayer/Presentation/ViewModels/Settings/SettingsViewModel.hpp>
@@ -129,6 +139,7 @@ auto defaultInjector = [](di::extension::detail::scoped& scope, QApplication& qA
         di::bind<ITimer>().to<Timer>().in(di::unique),
         di::bind<IListeningHistory>().to<DelayedListeningHistory>().in(di::singleton),
         di::bind<IPlayerNotifications>().to<PlayerNotifications>().in(di::singleton),
+        di::bind<IHotkeys>().to<Hotkeys>().in(di::singleton),
 
 #if defined(Q_OS_LINUX) || defined(Q_OS_FREEBSD)
         di::bind<AbstractPlatformUpdater>().to<LinuxUpdater>().in(di::singleton),
@@ -141,15 +152,24 @@ auto defaultInjector = [](di::extension::detail::scoped& scope, QApplication& qA
         di::make_injector(di::bind<INotificationPresenter>().to<SystemTrayIconPresenter>()).in(di::singleton),
 #endif
 
-        di::bind<IInitializable* []>().to<
+        di::bind<Initializable* []>().to<
                 SingleInstanceCheckup,
                 ApplicationStatusFile,
+                StreamingServicesSetup,
+                ListeningHistorySetup,
 #if defined(Q_OS_LINUX) || defined(Q_OS_FREEBSD)
-                Mpris2Startup,
+                MprisStartup,
 #endif
                 HotkeysSetup,
-                GuiSetup,
-                NotificationsSetup
+                SystemTrayIconStartup,
+                NotificationsSetup,
+                FontsSetup,
+                TranslationsSetup,
+                QmlTypesSetup,
+                QmlEngineStartup,
+                MainWindowStartup,
+                CacheCleanup,
+                ApplicationUpdatesCheckup
         >()
     );
 };

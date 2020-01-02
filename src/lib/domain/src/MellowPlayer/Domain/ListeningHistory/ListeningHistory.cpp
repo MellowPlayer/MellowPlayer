@@ -47,7 +47,7 @@ void ListeningHistory::addSong(Song* song)
     addSong(song, newEntry);
 }
 
-void ListeningHistory::initialize()
+void ListeningHistory::load()
 {
     _database.initialize();
     _entries = _database.toList();

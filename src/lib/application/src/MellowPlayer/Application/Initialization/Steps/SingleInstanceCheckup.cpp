@@ -28,7 +28,7 @@ SingleInstanceCheckup::SingleInstanceCheckup(IApplication& application,
                                          ICommandLineArguments& commandLineArguments,
                                          IFactory<ILocalServer, QString>& localServerFactory,
                                          IFactory<ILocalSocket>& localSocketFactory)
-        : _logger(Loggers::logger("SingleInstanceCheck")),
+        : _logger(Loggers::logger("SingleInstanceCheckup")),
           _application(application),
           _currentPlayer(currentPlayer),
           _commandLineArguments(commandLineArguments),
@@ -52,11 +52,6 @@ void SingleInstanceCheckup::initialize(const ResultCallback& resultCallback)
         initializePrimaryApplication();
     else
         initializeSecondaryApplication();
-}
-
-QString SingleInstanceCheckup::toString() const
-{
-    return "SingleInstanceCheck";
 }
 
 QString SingleInstanceCheckup::errorMessage() const

@@ -10,7 +10,6 @@ namespace MellowPlayer::Presentation
     public:
         virtual ~IMainWindow() override;
 
-        virtual void load() = 0;
         virtual void show() = 0;
         virtual void hide() = 0;
         virtual void raise() = 0;

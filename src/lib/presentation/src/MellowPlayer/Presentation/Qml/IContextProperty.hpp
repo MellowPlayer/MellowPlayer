@@ -23,6 +23,6 @@ namespace MellowPlayer::Presentation
          *
          * @param qmlApplicationEngine
          */
-        virtual void initialize(IQmlApplicationEngine& qmlApplicationEngine) = 0;
+        virtual void registerTo(IQmlApplicationEngine& qmlApplicationEngine) = 0;
     };
 }

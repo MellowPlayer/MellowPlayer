@@ -1,6 +1,8 @@
 #pragma once
 
+#include <MellowPlayer/Domain/Logging/ILogger.hpp>
 #include <MellowPlayer/Domain/Logging/LoggerConfig.hpp>
+#include <MellowPlayer/Domain/Logging/LoggingMacros.hpp>
 #include <QMap>
 #include <memory>
 #include <string>

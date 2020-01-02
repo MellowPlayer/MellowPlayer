@@ -20,8 +20,6 @@ namespace MellowPlayer::Presentation
                              IMainWindow& mainWindow,
                              IContextProperties& contextProperties);
 
-        void initialize();
-
         Q_INVOKABLE void quit();
         Q_INVOKABLE void restart();
         Q_INVOKABLE void showLogs();
@@ -29,10 +27,6 @@ namespace MellowPlayer::Presentation
         QString buildInfo() const;
 
     private:
-        void setupTranslations();
-        void registerMetaTypes();
-        void setupFont();
-
         Infrastructure::IApplication& _application;
         Infrastructure::IQtApplication& _qtApplication;
         IMainWindow& _mainWindow;

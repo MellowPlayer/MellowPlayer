@@ -7,7 +7,7 @@ namespace MellowPlayer::Presentation::Tests
     class FakeContextProperty : public QObject, public IContextProperty
     {
     public:
-        void initialize(IQmlApplicationEngine& qmlApplicationEngine) override
+        void registerTo(IQmlApplicationEngine& qmlApplicationEngine) override
         {
             qmlApplicationEngine.setContextProperty(name, propertyObject);
         }

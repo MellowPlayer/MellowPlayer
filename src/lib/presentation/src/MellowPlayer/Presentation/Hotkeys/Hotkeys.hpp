@@ -1,6 +1,6 @@
 #pragma once
 
-#include <MellowPlayer/Domain/IInitializable.hpp>
+#include <MellowPlayer/Domain/Initializable.hpp>
 #include <QObject>
 #include <memory>
 
@@ -18,16 +18,23 @@ namespace MellowPlayer::Presentation
 {
     class IMainWindow;
 
-    class HotkeysSetup : public Domain::IInitializable
+    class IHotkeys : public QObject
+    {
+    public:
+        virtual ~IHotkeys() = default;
+
+        virtual void grab() = 0;
+        virtual void unGrab() = 0;
+    };
+
+    class Hotkeys : public IHotkeys
     {
         Q_OBJECT
     public:
-        HotkeysSetup(Domain::IPlayer& player, Domain::Settings& settings, IMainWindow& mainWindow);
-        ~HotkeysSetup();
+        Hotkeys(Domain::IPlayer& player, Domain::Settings& settings, IMainWindow& mainWindow);
 
-        void initialize(const ResultCallback& resultCallback) override;
-        void cleanUp() override;
-        QString toString() const override;
+        void grab() override;
+        void unGrab() override;
 
     private slots:
         void togglePlayPause();

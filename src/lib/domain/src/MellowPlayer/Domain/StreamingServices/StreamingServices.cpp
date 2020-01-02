@@ -11,7 +11,7 @@ using namespace MellowPlayer::Domain;
 using namespace std;
 
 StreamingServices::StreamingServices(IStreamingServiceLoader& loader, IStreamingServiceWatcher& watcher)
-        : _logger(Loggers::logger("StreamingServicesController")), _loader(loader), _watcher(watcher), _current(nullptr)
+        : _logger(Loggers::logger("StreamingServices")), _loader(loader), _watcher(watcher), _current(nullptr)
 {
 }
 

@@ -19,7 +19,7 @@ if(UNIX AND NOT APPLE)
         glob_recurse_excl(LIBNOTIFY_PRESENTER_HEADER_FILES src/MellowPlayer/Presentation/Notifications/Presenters/Linux/*.hpp "")
         glob_recurse_excl(LIBNOTIFY_PRESENTER_SOURCE_FILES src/MellowPlayer/Presentation/Notifications/Presenters/Linux/*.cpp "")
         set(SOURCE_FILES ${SOURCE_FILES} ${LIBNOTIFY_PRESENTER_SOURCE_FILES})
-        set(HEADER_FILES ${HEADER_FILES} ${LIBNOTIFY_PRESENTER_HEADER_FILES} src/MellowPlayer/Presentation/Notifications/IPlayerNotifications.hpp src/MellowPlayer/Presentation/Notifications/PlayerNotifications.cpp src/MellowPlayer/Presentation/Notifications/PlayerNotifications.hpp)
+        set(HEADER_FILES ${HEADER_FILES} ${LIBNOTIFY_PRESENTER_HEADER_FILES})
     endif()
 endif()
 

@@ -7,19 +7,19 @@ using namespace std;
 using namespace MellowPlayer::Domain;
 using namespace MellowPlayer::Application;
 
-InitializationSequence::InitializationSequence(const std::vector<std::shared_ptr<IInitializable>>& items) : _logger(Loggers::logger("InitializationSequence"))
+InitializationSequence::InitializationSequence(const std::vector<std::shared_ptr<Initializable>>& items) : _logger(Loggers::logger("InitializationSequence"))
 {
     for (const auto& item : items)
         append(item);
 }
 
-void InitializationSequence::append(const std::shared_ptr<IInitializable>& item)
+void InitializationSequence::append(const std::shared_ptr<Initializable>& item)
 {
     _itemsToInitialize.append(item);
     _count = _itemsToInitialize.count();
 }
 
-std::shared_ptr<IInitializable> InitializationSequence::currentItem() const
+std::shared_ptr<Initializable> InitializationSequence::currentItem() const
 {
     return _itemsToInitialize.isEmpty() ? nullptr : _itemsToInitialize.first();
 }
@@ -34,7 +34,7 @@ int InitializationSequence::count() const
     return _count;
 }
 
-void InitializationSequence::initialize(const IInitializable::ResultCallback& resultCallback)
+void InitializationSequence::initialize(const Initializable::ResultCallback& resultCallback)
 {
     LOG_DEBUG(_logger, "Starting initialization sequence");
 
@@ -58,18 +58,19 @@ void InitializationSequence::initializeNext()
     try
     {
         // clang-format off
-        auto msg = QString("Starting initialization step (%1/%2) [%3]")
+        auto msg = QString("Started initialization step (%1/%2) [%3]")
                            .arg(_currentIndex + 1)
                            .arg(_count)
                            .arg(currentItem()->toString());
         // clang-format on
         LOG_DEBUG(_logger, msg);
+        _elapsedTimer.start();
         currentItem()->initialize([=](bool result) { onItemInitialized(result); });
     }
     catch (const std::exception& exception)
     {
         // clang-format off
-        auto msg = QString("Unhandled exception while Initialization step (%1/%2) [%3]: %4")
+        auto msg = QString("Unhandled exception while initialization step (%1/%2) [%3]: %4")
                            .arg(_currentIndex + 1)
                            .arg(_count)
                            .arg(currentItem()->toString())
@@ -87,10 +88,11 @@ void InitializationSequence::onItemInitialized(bool initialized)
     if (!initialized)
     {
         // clang-format off
-        auto msg = QString("Initialization step failed (%1/%2) [%3], Error = \"%4\"")
+        auto msg = QString("Initialization step failed (%1/%2) [%3] | %4ms, Error = \"%5\"")
                            .arg(_currentIndex + 1)
                            .arg(_count)
                            .arg(item->toString())
+                           .arg(_elapsedTimer.elapsed())
                            .arg(item->errorMessage().toLower());
         // clang-format on
         LOG_ERROR(_logger, msg);
@@ -99,10 +101,11 @@ void InitializationSequence::onItemInitialized(bool initialized)
     else
     {
         // clang-format off
-        auto msg = QString("Finished Initialization step (%1/%2) [%3]")
+        auto msg = QString("Finished initialization step (%1/%2) [%3] | %4ms")
                 .arg(_currentIndex + 1)
                 .arg(_count)
-                .arg(item->toString());
+                .arg(item->toString())
+                .arg(_elapsedTimer.elapsed());
         // clang-format on
         LOG_DEBUG(_logger, msg);
 
@@ -119,12 +122,12 @@ void InitializationSequence::onItemInitialized(bool initialized)
 
 void InitializationSequence::cleanUp()
 {
-    LOG_DEBUG(_logger, "Cleanup Initialization sequence");
+    LOG_DEBUG(_logger, "Cleanup initialization sequence");
     int i = 0;
     for (auto& item : _initializedItems)
     {
         // clang-format off
-        auto msg = QString("Cleaning Initialization step (%1/%2) [%3]")
+        auto msg = QString("Cleaning initialization step (%1/%2) [%3]")
                            .arg(i + 1)
                            .arg(_initializedItems.count())
                            .arg(item->toString());

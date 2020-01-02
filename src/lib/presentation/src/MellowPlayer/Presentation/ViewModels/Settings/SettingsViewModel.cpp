@@ -38,8 +38,8 @@ void SettingsViewModel::restoreDefaults()
     _settings.restoreDefaults();
 }
 
-void SettingsViewModel::initialize(IQmlApplicationEngine& qmlApplicationEngine)
+void SettingsViewModel::registerTo(IQmlApplicationEngine& qmlApplicationEngine)
 {
     qmlRegisterUncreatableType<SettingKey>("MellowPlayer", 3, 0, "SettingKey", "SettingKey cannot be instantiated from QML");
-    ContextProperty::initialize(qmlApplicationEngine);
+    ContextProperty::registerTo(qmlApplicationEngine);
 }

@@ -13,7 +13,8 @@ void QmlApplicationEngine::addImportPath(const QString& path)
     _engine.addImportPath(path);
 }
 
-void QmlApplicationEngine::load(const QUrl& url)
+bool QmlApplicationEngine::load(const QUrl& url)
 {
     _engine.load(url);
+    return _engine.rootObjects().count() > 0;
 }

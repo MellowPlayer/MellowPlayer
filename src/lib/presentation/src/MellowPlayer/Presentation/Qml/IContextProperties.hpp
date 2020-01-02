@@ -1,6 +1,6 @@
 #pragma once
 
-#include <MellowPlayer/Domain/IInitializable.hpp>
+#include <MellowPlayer/Domain/Initializable.hpp>
 
 namespace MellowPlayer::Presentation
 {

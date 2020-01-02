@@ -35,21 +35,6 @@ SCENARIO("ApplicationViewModelTests")
             }
         }
 
-        WHEN("Application is initialized")
-        {
-            applicationViewModel.initialize();
-
-            THEN("font is set")
-            {
-                REQUIRE(qtApplication.isFontSet);
-            }
-
-            AND_THEN("translator is set")
-            {
-                REQUIRE(qtApplication.translator != nullptr);
-            }
-        }
-
         WHEN("commitDataRequest is emitted")
         {
             QSignalSpy spy(&mainWindow, &IMainWindow::forceQuitRequest);

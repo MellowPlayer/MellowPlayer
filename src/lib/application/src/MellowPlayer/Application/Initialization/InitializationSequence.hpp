@@ -1,6 +1,7 @@
 #pragma once
 
-#include <MellowPlayer/Domain/IInitializable.hpp>
+#include <MellowPlayer/Domain/Initializable.hpp>
+#include <QtCore/QElapsedTimer>
 #include <QtCore/QList>
 #include <QtCore/QString>
 #include <memory>
@@ -13,13 +14,13 @@ namespace MellowPlayer::Domain
 
 namespace MellowPlayer::Application
 {
-    class InitializationSequence : public Domain::IInitializable
+    class InitializationSequence : public Domain::Initializable
     {
     public:
-        explicit InitializationSequence(const std::vector<std::shared_ptr<Domain::IInitializable>>& items);
+        explicit InitializationSequence(const std::vector<std::shared_ptr<Domain::Initializable>>& items);
 
-        void append(const std::shared_ptr<Domain::IInitializable>& item);
-        std::shared_ptr<Domain::IInitializable> currentItem() const;
+        void append(const std::shared_ptr<Domain::Initializable>& item);
+        std::shared_ptr<Domain::Initializable> currentItem() const;
 
         int currentIndex() const;
         int count() const;
@@ -27,10 +28,6 @@ namespace MellowPlayer::Application
         void cleanUp() override;
 
         QString errorMessage() const override;
-        QString toString() const override
-        {
-            return "InitializationSequence";
-        };
 
     private:
         void onFinished(bool result);
@@ -38,10 +35,11 @@ namespace MellowPlayer::Application
         void onItemInitialized(bool result);
 
         Domain::ILogger& _logger;
-        QList<std::shared_ptr<Domain::IInitializable>> _itemsToInitialize;
-        QList<std::shared_ptr<Domain::IInitializable>> _initializedItems;
-        Domain::IInitializable::ResultCallback _resultCallback;
+        QList<std::shared_ptr<Domain::Initializable>> _itemsToInitialize;
+        QList<std::shared_ptr<Domain::Initializable>> _initializedItems;
+        Domain::Initializable::ResultCallback _resultCallback;
         QString _exceptionMessage;
+        QElapsedTimer _elapsedTimer;
         int _count = 0;
         int _currentIndex = 0;
     };

@@ -45,7 +45,7 @@ namespace MellowPlayer::Presentation
                                    Infrastructure::INetworkProxies& networkProxies,
                                    ThemeViewModel& themeViewModel);
 
-        using ContextProperty::initialize;
+        using ContextProperty::registerTo;
         void initialize();
 
         Q_INVOKABLE void reload();
@@ -66,7 +66,7 @@ namespace MellowPlayer::Presentation
                                        bool osxPlatform,
                                        bool windowsPlatform);
 
-        void initialize(IQmlApplicationEngine& qmlApplicationEngine) override;
+        void registerTo(IQmlApplicationEngine& qmlApplicationEngine) override;
 
     public slots:
         void setCurrentService(QObject* value);
