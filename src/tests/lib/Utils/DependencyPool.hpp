@@ -39,7 +39,7 @@ namespace MellowPlayer::Presentation
     class StreamingServicesViewModel;
     class ThemeViewModel;
     class UpdaterViewModel;
-    class Notifications;
+    class IPlayerNotifications;
     class INotificationPresenter;
 }
 
@@ -73,7 +73,7 @@ namespace MellowPlayer::Tests
         Infrastructure::INetworkProxies& getNetworkProxies();
 
         // Presentation Layer
-        Presentation::Notifications& getNotifier();
+        Presentation::IPlayerNotifications& playerNotifications();
         Presentation::StreamingServicesViewModel& getStreamingServicesViewModel();
         Presentation::ListeningHistoryViewModel& getListeningHistoryViewModel();
         Presentation::ThemeViewModel& getThemeViewModel();
@@ -106,7 +106,7 @@ namespace MellowPlayer::Tests
         std::unique_ptr<Presentation::StreamingServicesViewModel> _streamingServicesViewModel;
         std::unique_ptr<Presentation::ThemeViewModel> _themeViewModel;
         std::unique_ptr<Presentation::UpdaterViewModel> _updaterViewModel;
-        std::unique_ptr<Presentation::Notifications> _notifications;
+        std::unique_ptr<Presentation::IPlayerNotifications> _notifications;
 
         std::unique_ptr<FakeListeningHistoryDatabase> _dataProvider;
 

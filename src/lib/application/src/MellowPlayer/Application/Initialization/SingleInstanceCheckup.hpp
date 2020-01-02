@@ -23,10 +23,10 @@ namespace MellowPlayer::Infrastructure
 
 namespace MellowPlayer::Application
 {
-    class SingleInstanceCheck : public Domain::IInitializable
+    class SingleInstanceCheckup : public Domain::IInitializable
     {
     public:
-        SingleInstanceCheck(Infrastructure::IApplication& application,
+        SingleInstanceCheckup(Infrastructure::IApplication& application,
                             Domain::IPlayer& currentPlayer,
                             Infrastructure::ICommandLineArguments& commandLineArguments,
                             IFactory<Infrastructure::ILocalServer, QString>& localServerFactory,

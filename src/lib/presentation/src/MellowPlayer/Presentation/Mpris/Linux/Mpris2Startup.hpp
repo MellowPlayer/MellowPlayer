@@ -17,10 +17,10 @@ namespace MellowPlayer::Presentation
     class Mpris2Player;
     class IMainWindow;
 
-    class MprisService : public Domain::IInitializable
+    class Mpris2Startup : public Domain::IInitializable
     {
     public:
-        MprisService(Domain::IPlayer& player, Domain::ILocalAlbumArt& localAlbumArt, IMainWindow& window);
+        Mpris2Startup(Domain::IPlayer& player, Domain::ILocalAlbumArt& localAlbumArt, IMainWindow& window);
 
         void initialize(const ResultCallback& resultCallback) override;
         void cleanUp() override;

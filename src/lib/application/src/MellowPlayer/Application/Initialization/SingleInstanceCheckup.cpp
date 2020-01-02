@@ -1,4 +1,4 @@
-#include "SingleInstanceCheck.hpp"
+#include "SingleInstanceCheckup.hpp"
 #include <MellowPlayer/Domain/Logging/ILogger.hpp>
 #include <MellowPlayer/Domain/Logging/Loggers.hpp>
 #include <MellowPlayer/Domain/Logging/LoggingMacros.hpp>
@@ -17,13 +17,13 @@ using namespace MellowPlayer::Application;
 using namespace MellowPlayer::Infrastructure;
 using namespace MellowPlayer::Domain;
 
-const QString SingleInstanceCheck::_playPauseAction = "play-pause";
-const QString SingleInstanceCheck::_nextAction = "next";
-const QString SingleInstanceCheck::_previousAction = "previous";
-const QString SingleInstanceCheck::_restoreWindowAction = "restore-window";
-const QString SingleInstanceCheck::_toggleFavoriteAction = "toggle-favorite";
+const QString SingleInstanceCheckup::_playPauseAction = "play-pause";
+const QString SingleInstanceCheckup::_nextAction = "next";
+const QString SingleInstanceCheckup::_previousAction = "previous";
+const QString SingleInstanceCheckup::_restoreWindowAction = "restore-window";
+const QString SingleInstanceCheckup::_toggleFavoriteAction = "toggle-favorite";
 
-SingleInstanceCheck::SingleInstanceCheck(IApplication& application,
+SingleInstanceCheckup::SingleInstanceCheckup(IApplication& application,
                                          IPlayer& currentPlayer,
                                          ICommandLineArguments& commandLineArguments,
                                          IFactory<ILocalServer, QString>& localServerFactory,
@@ -43,7 +43,7 @@ SingleInstanceCheck::SingleInstanceCheck(IApplication& application,
     _lockFile.setStaleLockTime(0);
 }
 
-void SingleInstanceCheck::initialize(const ResultCallback& resultCallback)
+void SingleInstanceCheckup::initialize(const ResultCallback& resultCallback)
 {
     _resultCallback = resultCallback;
 
@@ -54,33 +54,33 @@ void SingleInstanceCheck::initialize(const ResultCallback& resultCallback)
         initializeSecondaryApplication();
 }
 
-QString SingleInstanceCheck::toString() const
+QString SingleInstanceCheckup::toString() const
 {
     return "SingleInstanceCheck";
 }
 
-QString SingleInstanceCheck::errorMessage() const
+QString SingleInstanceCheckup::errorMessage() const
 {
     return "Another instance is already running";
 }
 
-void SingleInstanceCheck::initializePrimaryApplication()
+void SingleInstanceCheckup::initializePrimaryApplication()
 {
     _isPrimary = true;
     LOG_DEBUG(_logger, "Initializing primary application");
 
     _localServer = _localServerFactory.create(qApp->applicationName());
-    connect(_localServer.get(), &ILocalServer::newConnection, this, &SingleInstanceCheck::onSecondaryApplicationConnected);
+    connect(_localServer.get(), &ILocalServer::newConnection, this, &SingleInstanceCheckup::onSecondaryApplicationConnected);
     _localServer->listen();
 
-    connect(&_pollStateTimer, &QTimer::timeout, this, &SingleInstanceCheck::pollState);
+    connect(&_pollStateTimer, &QTimer::timeout, this, &SingleInstanceCheckup::pollState);
     _pollStateTimer.setInterval(1000);
     _pollStateTimer.start();
 
     _resultCallback(true);
 }
 
-void SingleInstanceCheck::onSecondaryApplicationConnected()
+void SingleInstanceCheckup::onSecondaryApplicationConnected()
 {
     auto nextConnection = _localServer->nextPendingConnection();
     if (nextConnection)
@@ -90,11 +90,11 @@ void SingleInstanceCheck::onSecondaryApplicationConnected()
 
         LOG_INFO(_logger, "Another application was started, showing this one instead");
         _localSocket = move(nextConnection);
-        connect(_localSocket.get(), &ILocalSocket::readyRead, this, &SingleInstanceCheck::onSecondaryApplicationActionRequest);
+        connect(_localSocket.get(), &ILocalSocket::readyRead, this, &SingleInstanceCheckup::onSecondaryApplicationActionRequest);
     }
 }
 
-void SingleInstanceCheck::onSecondaryApplicationActionRequest()
+void SingleInstanceCheckup::onSecondaryApplicationActionRequest()
 {
     QString action = QString(_localSocket->readAll()).split("\n")[0];
     LOG_INFO(_logger, "Secondary application request: " << action);
@@ -111,18 +111,18 @@ void SingleInstanceCheck::onSecondaryApplicationActionRequest()
         _application.restoreWindow();
 }
 
-void SingleInstanceCheck::initializeSecondaryApplication()
+void SingleInstanceCheckup::initializeSecondaryApplication()
 {
     _isPrimary = false;
     LOG_DEBUG(_logger, "Another instance is already running, transmitting command line arguments...");
 
     _localSocket = _localSocketFactory.create();
-    connect(_localSocket.get(), &ILocalSocket::connected, this, &SingleInstanceCheck::onConnectedToPrimaryApplication);
-    connect(_localSocket.get(), &ILocalSocket::error, this, &SingleInstanceCheck::onConnectionErrorWithPrimaryApplication);
+    connect(_localSocket.get(), &ILocalSocket::connected, this, &SingleInstanceCheckup::onConnectedToPrimaryApplication);
+    connect(_localSocket.get(), &ILocalSocket::error, this, &SingleInstanceCheckup::onConnectionErrorWithPrimaryApplication);
     _localSocket->connectToServer(qApp->applicationName(), QIODevice::WriteOnly);
 }
 
-void SingleInstanceCheck::onConnectedToPrimaryApplication()
+void SingleInstanceCheckup::onConnectedToPrimaryApplication()
 {
     LOG_INFO(_logger, "connection with the primary application succeeded");
     QString action = requestedAcion();
@@ -131,13 +131,13 @@ void SingleInstanceCheck::onConnectedToPrimaryApplication()
     _resultCallback(false);
 }
 
-void SingleInstanceCheck::onConnectionErrorWithPrimaryApplication()
+void SingleInstanceCheckup::onConnectionErrorWithPrimaryApplication()
 {
     LOG_WARN(_logger, "could not connect to the primary application, quitting...");
     _resultCallback(false);
 }
 
-QString SingleInstanceCheck::requestedAcion() const
+QString SingleInstanceCheckup::requestedAcion() const
 {
     if (_commandLineArguments.playPauseRequested())
         return _playPauseAction;
@@ -150,7 +150,7 @@ QString SingleInstanceCheck::requestedAcion() const
     return _restoreWindowAction;
 }
 
-void SingleInstanceCheck::cleanUp()
+void SingleInstanceCheckup::cleanUp()
 {
     if (_isPrimary)
     {
@@ -163,7 +163,7 @@ void SingleInstanceCheck::cleanUp()
     }
 }
 
-void SingleInstanceCheck::pollState()
+void SingleInstanceCheckup::pollState()
 {
     QFileInfo lockFile(_lockFilePath);
     if (!lockFile.exists())
@@ -184,7 +184,7 @@ void SingleInstanceCheck::pollState()
     }
 }
 
-bool SingleInstanceCheck::IsAnotherInstanceRunning()
+bool SingleInstanceCheckup::IsAnotherInstanceRunning()
 {
     QLockFile lock(GetLockFilePath());
     lock.setStaleLockTime(0);
@@ -195,7 +195,7 @@ bool SingleInstanceCheck::IsAnotherInstanceRunning()
     return true;
 }
 
-QString SingleInstanceCheck::GetLockFilePath()
+QString SingleInstanceCheckup::GetLockFilePath()
 {
     return QStandardPaths::standardLocations(QStandardPaths::AppDataLocation).first() + QDir::separator() + "single-instance.lock";
 }

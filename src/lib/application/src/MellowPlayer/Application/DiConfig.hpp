@@ -6,7 +6,7 @@
 
 #if defined(Q_OS_LINUX) || defined(Q_OS_FREEBSD)
 #    include <MellowPlayer/Infrastructure/Updater/Linux/LinuxUpdater.hpp>
-#    include <MellowPlayer/Presentation/Mpris/Linux/MprisService.hpp>
+#    include <MellowPlayer/Presentation/Mpris/Linux/Mpris2Startup.hpp>
 #    include <MellowPlayer/Presentation/ViewModels/GuiSetup.hpp>
 #elif defined(Q_OS_WIN)
 #    include <MellowPlayer/Infrastructure/Updater/Windows/WindowsUpdater.hpp>
@@ -15,7 +15,7 @@
 #endif
 
 #include <MellowPlayer/Application/Initialization/InitializationSequence.hpp>
-#include <MellowPlayer/Application/Initialization/SingleInstanceCheck.hpp>
+#include <MellowPlayer/Application/Initialization/SingleInstanceCheckup.hpp>
 #include <MellowPlayer/Domain/AlbumArt/IAlbumArtDownloader.hpp>
 #include <MellowPlayer/Domain/AlbumArt/ILocalAlbumArt.hpp>
 #include <MellowPlayer/Domain/ListeningHistory/IListeningHistoryDatabase.hpp>
@@ -62,9 +62,9 @@
 #include <MellowPlayer/Infrastructure/Updater/ILatestRelease.hpp>
 #include <MellowPlayer/Infrastructure/Updater/Updater.hpp>
 #include <MellowPlayer/Infrastructure/UserScripts/UserScriptFactory.hpp>
-#include <MellowPlayer/Presentation/Hotkeys/Hotkeys.hpp>
-#include <MellowPlayer/Presentation/Notifications/ISystemTrayIcon.hpp>
-#include <MellowPlayer/Presentation/Notifications/Notifications.hpp>
+#include <MellowPlayer/Presentation/Hotkeys/HotkeysSetup.hpp>
+#include <MellowPlayer/Presentation/Notifications/PlayerNotifications.hpp>
+#include <MellowPlayer/Presentation/Notifications/NotificationsSetup.hpp>
 #include <MellowPlayer/Presentation/Notifications/Presenters/SystemTrayIconPresenter.hpp>
 #include <MellowPlayer/Presentation/Notifications/SystemTrayIcon.hpp>
 #include <MellowPlayer/Presentation/Qml/ContextProperties.hpp>
@@ -128,6 +128,7 @@ auto defaultInjector = [](di::extension::detail::scoped& scope, QApplication& qA
         di::bind<INetworkProxies>().to<NetworkProxies>().in(di::singleton),
         di::bind<ITimer>().to<Timer>().in(di::unique),
         di::bind<IListeningHistory>().to<DelayedListeningHistory>().in(di::singleton),
+        di::bind<IPlayerNotifications>().to<PlayerNotifications>().in(di::singleton),
 
 #if defined(Q_OS_LINUX) || defined(Q_OS_FREEBSD)
         di::bind<AbstractPlatformUpdater>().to<LinuxUpdater>().in(di::singleton),
@@ -141,14 +142,14 @@ auto defaultInjector = [](di::extension::detail::scoped& scope, QApplication& qA
 #endif
 
         di::bind<IInitializable* []>().to<
-                SingleInstanceCheck,
+                SingleInstanceCheckup,
                 ApplicationStatusFile,
 #if defined(Q_OS_LINUX) || defined(Q_OS_FREEBSD)
-                MprisService,
+                Mpris2Startup,
 #endif
-                Hotkeys,
+                HotkeysSetup,
                 GuiSetup,
-                Notifications
+                NotificationsSetup
         >()
     );
 };

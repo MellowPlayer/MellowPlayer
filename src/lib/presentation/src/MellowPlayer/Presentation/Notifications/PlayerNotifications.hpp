@@ -1,7 +1,7 @@
 #pragma once
 
+#include "IPlayerNotifications.hpp"
 #include "NotificationFactory.hpp"
-#include <MellowPlayer/Domain/IInitializable.hpp>
 #include <QObject>
 
 namespace MellowPlayer::Domain
@@ -18,26 +18,25 @@ namespace MellowPlayer::Presentation
 {
     class INotificationPresenter;
 
-    class Notifications : public Domain::IInitializable
+    class PlayerNotifications : public QObject, public IPlayerNotifications
     {
         Q_OBJECT
     public:
-        Notifications(Domain::IPlayer& player,
-                      Domain::ILocalAlbumArt& localAlbumArtService,
-                      INotificationPresenter& presenter,
-                      Domain::StreamingServices& streamingServices,
-                      Domain::Settings& settings);
+        PlayerNotifications(Domain::IPlayer& player,
+                            Domain::ILocalAlbumArt& localAlbumArtService,
+                            INotificationPresenter& presenter,
+                            Domain::StreamingServices& streamingServices,
+                            Domain::Settings& settings);
 
-        void initialize(const ResultCallback& resultCallback) override;
-        QString toString() const override;
-
-        bool display(const Notification& notification);
+        void listen() override;
+        bool display(const Notification& notification) override;
 
     public slots:
         void onCurrentSongChanged(Domain::Song* song);
         void onPlaybackStatusChanged();
 
         void onCurrentSongUrlChanged();
+
     private:
         void showSongNotification(Domain::Song* song, const QString& localAlbumArtUrl);
         bool isPlaying() const;

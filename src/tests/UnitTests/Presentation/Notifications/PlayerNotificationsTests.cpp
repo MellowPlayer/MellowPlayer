@@ -2,7 +2,8 @@
 #include <MellowPlayer/Domain/Settings/Setting.hpp>
 #include <MellowPlayer/Domain/Settings/Settings.hpp>
 #include <MellowPlayer/Infrastructure/AlbumArt/LocalAlbumArt.hpp>
-#include <MellowPlayer/Presentation/Notifications/Notifications.hpp>
+#include <MellowPlayer/Presentation/Notifications/PlayerNotifications.hpp>
+#include <MellowPlayer/Presentation/Notifications/Notification.hpp>
 #include <Utils/DependencyPool.hpp>
 #include <catch/catch.hpp>
 #include <fakeit/fakeit.hpp>
@@ -17,7 +18,8 @@ TEST_CASE("NotificationsTests", "[UnitTest]")
     MellowPlayer::Tests::DependencyPool pool;
 
     Settings& settings = pool.getSettings();
-    Notifications& notifications = pool.getNotifier();
+    PlayerNotifications sut(pool.getCurrentPlayer(), pool.getLocalAlbumArt(), pool.getNotificationPresenter(), pool.getStreamingServices(), pool.getSettings());
+
     Mock<LocalAlbumArt> localAlbumArtServiceSpy(pool.getLocalAlbumArt());
     Mock<IPlayer> playerSpy(pool.getCurrentPlayer());
     Mock<INotificationPresenter>& notificationPresenterMock = pool.getNotificationPresenterMock();
@@ -29,6 +31,7 @@ TEST_CASE("NotificationsTests", "[UnitTest]")
 
     Song validSong("uniqueId", "songTitle", "artistName", "album", "artUrl", 50, false);
     REQUIRE(validSong.isValid());
+
     Song invalidSong("", "", "", "", "", 50, false);
     REQUIRE(!invalidSong.isValid());
 
@@ -36,16 +39,10 @@ TEST_CASE("NotificationsTests", "[UnitTest]")
     When(Method(localAlbumArtServiceSpy, isReady)).AlwaysReturn(true);
     When(Method(playerSpy, currentSong)).AlwaysReturn(&validSong);
 
-    SECTION("initialize")
-    {
-        notifications.initialize([=](bool) {});
-        Verify(Method(notificationPresenterMock, initialize)).Once();
-    }
-
     SECTION("display allowed notification")
     {
         Notification notif{"title", "message", "", NotificationType::NewSong};
-        REQUIRE(notifications.display(notif));
+        REQUIRE(sut.display(notif));
         Verify(Method(notificationPresenterMock, display)).Once();
     }
 
@@ -53,7 +50,7 @@ TEST_CASE("NotificationsTests", "[UnitTest]")
     {
         playNotifEnabled.setValue(false);
         Notification notif{"title", "message", "", NotificationType::NewSong};
-        REQUIRE(!notifications.display(notif));
+        REQUIRE(!sut.display(notif));
         Verify(Method(notificationPresenterMock, display)).Never();
     }
 
@@ -62,7 +59,7 @@ TEST_CASE("NotificationsTests", "[UnitTest]")
             "player is playing and "
             "art is ready")
     {
-        notifications.onCurrentSongChanged(&validSong);
+        sut.onCurrentSongChanged(&validSong);
         Verify(Method(notificationPresenterMock, display)).Once();
     }
 
@@ -70,7 +67,7 @@ TEST_CASE("NotificationsTests", "[UnitTest]")
     {
         auto& currentPlayer = pool.getCurrentPlayer();
         pool.getSettingsStore().setValue(currentPlayer.serviceName() + "/notificationsEnabled", false);
-        notifications.onCurrentSongChanged(&validSong);
+        sut.onCurrentSongChanged(&validSong);
         Verify(Method(notificationPresenterMock, display)).Never();
         pool.getSettingsStore().setValue(currentPlayer.serviceName() + "/notificationsEnabled", true);
     }
@@ -79,20 +76,20 @@ TEST_CASE("NotificationsTests", "[UnitTest]")
             "playing")
     {
         When(Method(playerSpy, playbackStatus)).AlwaysReturn(PlaybackStatus::Paused);
-        notifications.onCurrentSongChanged(&validSong);
+        sut.onCurrentSongChanged(&validSong);
         Verify(Method(notificationPresenterMock, display)).Never();
     }
 
     SECTION("don't display current song changed notification if art is not ready")
     {
         When(Method(localAlbumArtServiceSpy, isReady)).AlwaysReturn(false);
-        notifications.onCurrentSongChanged(&validSong);
+        sut.onCurrentSongChanged(&validSong);
         Verify(Method(notificationPresenterMock, display)).Never();
 
         SECTION("display current song changed notification when album art is ready")
         {
             When(Method(localAlbumArtServiceSpy, isReady)).AlwaysReturn(true);
-            notifications.onCurrentSongUrlChanged();
+            sut.onCurrentSongUrlChanged();
             Verify(Method(notificationPresenterMock, display)).Once();
         }
     }
@@ -100,21 +97,21 @@ TEST_CASE("NotificationsTests", "[UnitTest]")
     SECTION("don't display current song changed notification if current song is "
             "invalid")
     {
-        notifications.onCurrentSongChanged(&invalidSong);
+        sut.onCurrentSongChanged(&invalidSong);
         Verify(Method(notificationPresenterMock, display)).Never();
     }
 
     SECTION("display current song changed notification when playback status "
             "changed to Playing")
     {
-        notifications.onPlaybackStatusChanged();
+        sut.onPlaybackStatusChanged();
         Verify(Method(notificationPresenterMock, display)).Once();
     }
 
     SECTION("display paused notification when playback status changed to Paused")
     {
         When(Method(playerSpy, playbackStatus)).AlwaysReturn(PlaybackStatus::Paused);
-        notifications.onPlaybackStatusChanged();
+        sut.onPlaybackStatusChanged();
         Verify(Method(notificationPresenterMock, display)).Once();
     }
 
@@ -122,7 +119,7 @@ TEST_CASE("NotificationsTests", "[UnitTest]")
             "Stopped")
     {
         When(Method(playerSpy, playbackStatus)).AlwaysReturn(PlaybackStatus::Stopped);
-        notifications.onPlaybackStatusChanged();
+        sut.onPlaybackStatusChanged();
         Verify(Method(notificationPresenterMock, display)).Never();
     }
 }

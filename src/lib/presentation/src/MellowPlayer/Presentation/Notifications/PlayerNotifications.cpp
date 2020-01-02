@@ -1,3 +1,4 @@
+#include "PlayerNotifications.hpp"
 #include <MellowPlayer/Domain/AlbumArt/ILocalAlbumArt.hpp>
 #include <MellowPlayer/Domain/Logging/ILogger.hpp>
 #include <MellowPlayer/Domain/Logging/Loggers.hpp>
@@ -9,18 +10,17 @@
 #include <MellowPlayer/Domain/Settings/Settings.hpp>
 #include <MellowPlayer/Domain/StreamingServices/StreamingService.hpp>
 #include <MellowPlayer/Domain/StreamingServices/StreamingServices.hpp>
-#include <MellowPlayer/Presentation/Notifications/Notifications.hpp>
 #include <MellowPlayer/Presentation/Notifications/Presenters/INotificationPresenter.hpp>
 
 using namespace MellowPlayer::Domain;
 using namespace MellowPlayer::Presentation;
 
-Notifications::Notifications(IPlayer& player,
-                             ILocalAlbumArt& localAlbumArtService,
-                             INotificationPresenter& presenter,
-                             StreamingServices& streamingServices,
-                             Settings& settings)
-        : _logger(Loggers::logger("Notifier")),
+PlayerNotifications::PlayerNotifications(IPlayer& player,
+                                                         ILocalAlbumArt& localAlbumArtService,
+                                                         INotificationPresenter& presenter,
+                                                         StreamingServices& streamingServices,
+                                                         Settings& settings)
+        : _logger(Loggers::logger("PlayerNotifications")),
           _player(player),
           _localAlbumArt(localAlbumArtService),
           _presenter(presenter),
@@ -29,7 +29,7 @@ Notifications::Notifications(IPlayer& player,
 {
 }
 
-bool Notifications::display(const Notification& notification)
+bool PlayerNotifications::display(const Notification& notification)
 {
     LOG_TRACE(_logger, "display");
     if (!isNotificationTypeEnabled(notification.type) || _previousNotif == notification)
@@ -42,13 +42,13 @@ bool Notifications::display(const Notification& notification)
     return true;
 }
 
-void Notifications::onCurrentSongChanged(Song* song)
+void PlayerNotifications::onCurrentSongChanged(Song* song)
 {
     LOG_TRACE(_logger, "onCurrentSongChanged");
     showSongNotification(song, _localAlbumArt.url());
 }
 
-void Notifications::onPlaybackStatusChanged()
+void PlayerNotifications::onPlaybackStatusChanged()
 {
     LOG_TRACE(_logger, "onPlaybackStatusChanged");
     switch (_player.playbackStatus())
@@ -64,13 +64,13 @@ void Notifications::onPlaybackStatusChanged()
     }
 }
 
-void Notifications::onCurrentSongUrlChanged()
+void PlayerNotifications::onCurrentSongUrlChanged()
 {
     LOG_TRACE(_logger, "onCurrentSongUrlChanged");
     showSongNotification(_player.currentSong(), _localAlbumArt.url());
 }
 
-void Notifications::showSongNotification(Song* song, const QString& localAlbumArtUrl)
+void PlayerNotifications::showSongNotification(Song* song, const QString& localAlbumArtUrl)
 {
     LOG_TRACE(_logger, "showSongNotification");
     if (song == nullptr)
@@ -88,24 +88,24 @@ void Notifications::showSongNotification(Song* song, const QString& localAlbumAr
     }
 }
 
-bool Notifications::isPlaying() const
+bool PlayerNotifications::isPlaying() const
 {
     return _player.playbackStatus() == PlaybackStatus::Playing;
 }
 
-const QString Notifications::currentServiceName() const
+const QString PlayerNotifications::currentServiceName() const
 {
     auto currentService = _streamingServices.current();
     return currentService != nullptr ? currentService->name() : "";
 }
 
-const QString Notifications::currentServiceLogo() const
+const QString PlayerNotifications::currentServiceLogo() const
 {
     auto currentService = _streamingServices.current();
     return currentService != nullptr ? currentService->logo() : "";
 }
 
-bool Notifications::isNotificationTypeEnabled(NotificationType type) const
+bool PlayerNotifications::isNotificationTypeEnabled(NotificationType type) const
 {
     auto check = [](const Setting& setting) { return setting.isEnabled() && setting.value().toBool(); };
 
@@ -119,6 +119,7 @@ bool Notifications::isNotificationTypeEnabled(NotificationType type) const
     case NotificationType::Paused: {
         const Setting& setting = _settings.get(SettingKey::NOTIFICATIONS_PAUSED);
         isEnabled = check(setting) && serviceNotificationsEnabled;
+
         break;
     }
     case NotificationType::NewSong: {
@@ -136,20 +137,11 @@ bool Notifications::isNotificationTypeEnabled(NotificationType type) const
     return isEnabled;
 }
 
-void Notifications::initialize(const ResultCallback& resultCallback)
+void PlayerNotifications::listen()
 {
-    LOG_TRACE(_logger, "initialize");
+    LOG_TRACE(_logger, "listen");
 
-    connect(&_player, &IPlayer::currentSongChanged, this, &Notifications::onCurrentSongChanged);
-    connect(&_player, &IPlayer::playbackStatusChanged, this, &Notifications::onPlaybackStatusChanged);
-    connect(&_localAlbumArt, &ILocalAlbumArt::urlChanged, this, &Notifications::onCurrentSongUrlChanged);
-
-    _presenter.initialize();
-
-    resultCallback(true);
-}
-
-QString Notifications::toString() const
-{
-    return "Notifications";
+    connect(&_player, &IPlayer::currentSongChanged, this, &PlayerNotifications::onCurrentSongChanged);
+    connect(&_player, &IPlayer::playbackStatusChanged, this, &PlayerNotifications::onPlaybackStatusChanged);
+    connect(&_localAlbumArt, &ILocalAlbumArt::urlChanged, this, &PlayerNotifications::onCurrentSongUrlChanged);
 }

@@ -18,12 +18,12 @@ namespace MellowPlayer::Presentation
 {
     class IMainWindow;
 
-    class Hotkeys : public Domain::IInitializable
+    class HotkeysSetup : public Domain::IInitializable
     {
         Q_OBJECT
     public:
-        Hotkeys(Domain::IPlayer& player, Domain::Settings& settings, IMainWindow& mainWindow);
-        ~Hotkeys();
+        HotkeysSetup(Domain::IPlayer& player, Domain::Settings& settings, IMainWindow& mainWindow);
+        ~HotkeysSetup();
 
         void initialize(const ResultCallback& resultCallback) override;
         void cleanUp() override;

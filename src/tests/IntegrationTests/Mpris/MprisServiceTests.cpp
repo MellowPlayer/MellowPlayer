@@ -5,7 +5,7 @@
 #    include <MellowPlayer/Domain/Player/Players.hpp>
 #    include <MellowPlayer/Domain/StreamingServices/StreamingServices.hpp>
 #    include <MellowPlayer/Infrastructure/AlbumArt/LocalAlbumArt.hpp>
-#    include <MellowPlayer/Presentation/Mpris/Linux/MprisService.hpp>
+#    include <MellowPlayer/Presentation/Mpris/Linux/Mpris2Startup.hpp>
 #    include <Mocks/AlbumArtDownloaderMock.hpp>
 #    include <QtDBus/QDBusConnection>
 #    include <UnitTests/Domain/StreamingServices/FakeStreamingServiceLoader.hpp>
@@ -29,7 +29,7 @@ TEST_CASE("MprisServiceTests", "[IntegrationTest]")
     LocalAlbumArt localAlbumArt(player, albumArtDownloader);
     FakeMainWindow mainWindow;
 
-    MprisService mprisService(player, localAlbumArt, mainWindow);
+    Mpris2Startup mprisService(player, localAlbumArt, mainWindow);
     SECTION("start should succeed the first time")
     {
         if (QDBusConnection::sessionBus().isConnected())

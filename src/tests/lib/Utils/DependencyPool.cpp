@@ -17,7 +17,7 @@
 #include <MellowPlayer/Infrastructure/Settings/SettingsSchemaLoader.hpp>
 #include <MellowPlayer/Infrastructure/Updater/BinTray/LatestBinTrayRelease.hpp>
 
-#include <MellowPlayer/Presentation/Notifications/Notifications.hpp>
+#include <MellowPlayer/Presentation/Notifications/PlayerNotifications.hpp>
 #include <MellowPlayer/Presentation/ViewModels/ListeningHistory/ListeningHistoryViewModel.hpp>
 #include <MellowPlayer/Presentation/ViewModels/StreamingServices/StreamingServicesViewModel.hpp>
 #include <MellowPlayer/Presentation/ViewModels/ThemeViewModel.hpp>
@@ -170,10 +170,10 @@ Updater& DependencyPool::getUpdater()
     return *_updater;
 }
 
-Notifications& DependencyPool::getNotifier()
+IPlayerNotifications& DependencyPool::playerNotifications()
 {
     if (_notifications == nullptr)
-        _notifications = make_unique<Notifications>(getCurrentPlayer(), getLocalAlbumArt(), getNotificationPresenter(), getStreamingServices(), getSettings());
+        _notifications = make_unique<PlayerNotifications>(getCurrentPlayer(), getLocalAlbumArt(), getNotificationPresenter(), getStreamingServices(), getSettings());
     return *_notifications;
 }
 
