@@ -30,7 +30,6 @@ int TestsRunner::runTests(int argc, char** argv)
 
     auto loggerFactory = std::make_shared<SpdLoggerFactory>();
     LoggerConfig loggerConfig;
-    loggerConfig.createFileLoggers = false;
 
     try
     {
