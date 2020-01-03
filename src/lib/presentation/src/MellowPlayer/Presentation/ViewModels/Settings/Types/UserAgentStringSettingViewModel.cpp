@@ -14,7 +14,7 @@ QString UserAgentStringSettingViewModel::getValue() const
 
     if (value.isEmpty())
     {
-        QWebEngineProfile profile("Default");
+        auto& profile = *QWebEngineProfile::defaultProfile();
         value = profile.httpUserAgent();
     }
 

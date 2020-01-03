@@ -11,7 +11,7 @@ CookiesViewModel::CookiesViewModel(IContextProperties& contextProperties) : Cont
 
 void CookiesViewModel::clear()
 {
-    QWebEngineProfile profile("Default");
+    auto& profile = *QWebEngineProfile::defaultProfile();
     QDir storageDir(profile.persistentStoragePath());
     qDebug() << "removing persistent storage directory: " << storageDir;
     storageDir.removeRecursively();

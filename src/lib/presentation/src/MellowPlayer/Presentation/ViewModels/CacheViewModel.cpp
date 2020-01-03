@@ -13,7 +13,7 @@ CacheViewModel::CacheViewModel(IContextProperties& contextProperties) : ContextP
 void CacheViewModel::clear()
 {
     // clear http cache
-    QWebEngineProfile profile("Default");
+    auto& profile = *QWebEngineProfile::defaultProfile();
     profile.clearHttpCache();
 
     // clear mellowplayer cache (covers,...)
