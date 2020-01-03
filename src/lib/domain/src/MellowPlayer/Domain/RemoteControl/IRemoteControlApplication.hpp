@@ -2,6 +2,7 @@
 
 #include <QObject>
 #include <QString>
+#include <functional>
 
 namespace MellowPlayer::Domain
 {
