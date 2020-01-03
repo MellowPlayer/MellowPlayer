@@ -96,7 +96,7 @@ void logStart()
     auto buildInfo = BuildConfig::buildInfo();
 
     LOG_WARN(logger, "****************************** Starting ***************************************");
-    LOG_INFO(logger, QString("MellowPlayer %1 - %2").arg(version).arg(buildInfo));
+    LOG_WARN(logger, QString("MellowPlayer %1 - %2").arg(version).arg(buildInfo));
     LOG_INFO(logger, "Log directory: " + logDirectory);
 }
 

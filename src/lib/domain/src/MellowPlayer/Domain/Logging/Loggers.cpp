@@ -22,6 +22,12 @@ void messageHandler(QtMsgType type, const QMessageLogContext& context, const QSt
     if (category == "js")
         logLevel = LogLevel::Debug;
 
+    if (message.startsWith("Remote debugging"))
+        logLevel = LogLevel::Info;
+
+    if (message.startsWith("Attribute Qt::AA_ShareOpenGLContexts must be set"))
+        logLevel = LogLevel::Trace;
+
     logger.log(message.toStdString(), logLevel, context.file, context.line);
 }
 

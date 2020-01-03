@@ -23,7 +23,8 @@ namespace MellowPlayer::Infrastructure
         bool _includeFileAndLine;
         std::string _name;
 
-        static std::shared_ptr<spdlog::sinks::rotating_file_sink_mt> _errorSink;
-        static std::shared_ptr<spdlog::sinks::rotating_file_sink_mt> _allSink;
+        static spdlog::sink_ptr _consoleSink;
+        static spdlog::sink_ptr _errorFileSink;
+        static spdlog::sink_ptr _allFileSink;
     };
 }

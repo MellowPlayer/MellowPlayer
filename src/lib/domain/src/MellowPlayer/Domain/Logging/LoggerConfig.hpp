@@ -39,16 +39,6 @@ namespace MellowPlayer::Domain
         std::string logFormat;
 
         /**
-         * @brief True to create console logger. Default is true.
-         */
-        bool createConsoleLogger;
-
-        /**
-         * @brief True to create a file loggers. Default is true.
-         */
-        bool createFileLoggers;
-
-        /**
          * @brief True to show file and line where log record was emitted. Default is
          * true.
          */

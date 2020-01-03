@@ -10,7 +10,7 @@ using namespace MellowPlayer::Infrastructure;
 
 QSettingsStore::QSettingsStore() : _qSettings(make_unique<QSettings>("MellowPlayer", "MellowPlayer3")), _logger(Loggers::logger("SettingsStore"))
 {
-    LOG_DEBUG(_logger, "Settings file: " << _qSettings->fileName().toStdString());
+    LOG_INFO(_logger, "Settings file: " << _qSettings->fileName().toStdString());
 }
 
 void QSettingsStore::setOrganizationName(const QString& orgName)

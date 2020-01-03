@@ -158,7 +158,7 @@ void ListeningHistory::clearOutdatedEntries()
     if (limit == TimeLimits::Never)
         return;
 
-    LOG_INFO(_logger, "Cleaning history ");
+    LOG_DEBUG(_logger, "Cleaning history");
     QString previousId;
     QList<int> items;
     for (auto entry : _entries)
