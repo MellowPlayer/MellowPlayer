@@ -405,6 +405,18 @@
           "type": "int",
           "default": 720,
           "key": "window-height"
+        },
+        {
+          "name": "",
+          "type": "bool",
+          "default": true,
+          "key": "remote-control-enabled"
+        },
+        {
+          "name": "",
+          "type": "bool",
+          "default": false,
+          "key": "remote-control-auto-start"
         }
       ]
     }

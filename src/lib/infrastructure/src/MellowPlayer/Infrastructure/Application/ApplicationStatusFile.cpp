@@ -12,20 +12,30 @@
 using namespace MellowPlayer::Infrastructure;
 using namespace MellowPlayer::Domain;
 
-ApplicationStatusFile::ApplicationStatusFile(IPlayer& currentPlayer) : currentPlayer(currentPlayer), logger(Loggers::logger("ApplicationStatusFile"))
+ApplicationStatusFile::ApplicationStatusFile(IPlayer& currentPlayer) : _currentPlayer(currentPlayer), _logger(Loggers::logger("ApplicationStatusFile"))
 {
-    connect(&currentPlayer, &IPlayer::currentSongChanged, this, &ApplicationStatusFile::onCurrentPlayerUpdated);
-    connect(&currentPlayer, &IPlayer::playbackStatusChanged, this, &ApplicationStatusFile::onCurrentPlayerUpdated);
+
 }
 
 void ApplicationStatusFile::create()
 {
+    connect(&_currentPlayer, &IPlayer::currentSongChanged, this, &ApplicationStatusFile::onCurrentPlayerUpdated);
+    connect(&_currentPlayer, &IPlayer::playbackStatusChanged, this, &ApplicationStatusFile::onCurrentPlayerUpdated);
+
     onCurrentPlayerUpdated();
+
+    LOG_DEBUG(_logger, "Writing player status changes to " << fileName());
+    LOG_INFO(_logger, "Application Status File: " << fileName());
 }
 
 void ApplicationStatusFile::remove()
 {
     QFile::remove(fileName());
+
+    disconnect(&_currentPlayer, &IPlayer::currentSongChanged, this, &ApplicationStatusFile::onCurrentPlayerUpdated);
+    disconnect(&_currentPlayer, &IPlayer::playbackStatusChanged, this, &ApplicationStatusFile::onCurrentPlayerUpdated);
+
+    LOG_DEBUG(_logger, fileName() << " removed and player status monitoring disabled");
 }
 
 QString ApplicationStatusFile::fileName() const
@@ -36,28 +46,28 @@ QString ApplicationStatusFile::fileName() const
 void ApplicationStatusFile::onCurrentPlayerUpdated()
 {
     auto playerStatus = serializePlayerStatus();
-    if (playerStatus != previousPlayerStatus)
+    if (playerStatus != _previousPlayerStatus)
     {
         auto json = QJsonDocument(playerStatus).toJson();
-        LOG_TRACE(logger, "Updating player status <" << fileName() << ">: " << json.toStdString());
+        LOG_TRACE(_logger, "Updating player status <" << fileName() << ">: " << json.toStdString());
         writeFile(fileName(), json);
-        previousPlayerStatus = playerStatus;
+        _previousPlayerStatus = playerStatus;
     }
 }
 QJsonObject ApplicationStatusFile::serializePlayerStatus() const
 {
     QJsonObject playerStatus;
 
-    playerStatus["isPlaying"] = currentPlayer.isPlaying();
+    playerStatus["isPlaying"] = _currentPlayer.isPlaying();
     playerStatus["currentSong"] = serializeCurrentSong();
-    playerStatus["serviceName"] = currentPlayer.serviceName();
+    playerStatus["serviceName"] = _currentPlayer.serviceName();
 
     return playerStatus;
 }
 QJsonObject ApplicationStatusFile::serializeCurrentSong() const
 {
     QJsonObject jsonSong;
-    auto* currentSong = currentPlayer.currentSong();
+    auto* currentSong = _currentPlayer.currentSong();
 
     if (currentSong)
     {
@@ -85,20 +95,9 @@ void ApplicationStatusFile::writeFile(const QString& fileName, const QByteArray&
     QFile file(fileName);
     if (!file.open(QFile::WriteOnly))
     {
-        LOG_WARN(logger, "Failed to write player status to " << fileName);
+        LOG_WARN(_logger, "Failed to write player status to " << fileName);
         return;
     }
     file.write(data);
     file.close();
-}
-
-void ApplicationStatusFile::initialize(const ResultCallback& resultCallback)
-{
-    create();
-    resultCallback(true);
-}
-
-void ApplicationStatusFile::cleanUp()
-{
-    remove();
 }

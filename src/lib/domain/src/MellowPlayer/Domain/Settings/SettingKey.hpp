@@ -39,6 +39,8 @@ namespace MellowPlayer::Domain
             PRIVACY_LISTENING_HISTORY_LIMIT,
             PRIVACY_USER_AGENT,
             PRIVATE_CURRENT_SERVICE,
+            PRIVATE_REMOTE_CONTROL_AUTO_START,
+            PRIVATE_REMOTE_CONTROL_ENABLED,
             PRIVATE_SHOW_CLOSE_TO_TRAY_MESSAGE,
             PRIVATE_WINDOW_HEIGHT,
             PRIVATE_WINDOW_WIDTH,
@@ -96,6 +98,8 @@ namespace MellowPlayer::Domain
             enumToString << "privacy/listening-history-limit";
             enumToString << "privacy/user-agent";
             enumToString << "private/current-service";
+            enumToString << "private/remote-control-auto-start";
+            enumToString << "private/remote-control-enabled";
             enumToString << "private/show-close-to-tray-message";
             enumToString << "private/window-height";
             enumToString << "private/window-width";

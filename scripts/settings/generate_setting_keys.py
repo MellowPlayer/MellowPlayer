@@ -96,7 +96,7 @@ def get_setting_key_names(keys):
 
 def create_setting_key(enum_names, enum_values, template):
     content = template % {'enum_values': enum_values, 'enum_names': enum_names}
-    with open('src/lib/domain/include/MellowPlayer/Domain/Settings/SettingKey.hpp', 'w') as f:
+    with open('src/lib/domain/src/MellowPlayer/Domain/Settings/SettingKey.hpp', 'w') as f:
         f.write(content)
 
 

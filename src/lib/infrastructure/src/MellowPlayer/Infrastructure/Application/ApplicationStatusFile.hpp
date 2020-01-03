@@ -1,6 +1,7 @@
 #pragma once
 
 #include <MellowPlayer/Domain/Initializable.hpp>
+#include <MellowPlayer/Domain/RemoteControl/IApplicationStatusFile.hpp>
 #include <QJsonObject>
 #include <QObject>
 
@@ -13,30 +14,26 @@ namespace MellowPlayer::Domain
 
 namespace MellowPlayer::Infrastructure
 {
-    class ApplicationStatusFile : public Domain::Initializable
+    class ApplicationStatusFile : public Domain::IApplicationStatusFile
     {
         Q_OBJECT
     public:
-        ApplicationStatusFile(Domain::IPlayer& currentPlayer);
+        explicit ApplicationStatusFile(Domain::IPlayer& currentPlayer);
 
-
-        void initialize(const ResultCallback& resultCallback) override;
-        void cleanUp() override;
+        void create() override;
+        void remove() override;
 
     private slots:
         void onCurrentPlayerUpdated();
 
     private:
-        void create();
-        void remove();
-
         QString fileName() const;
         QJsonObject serializePlayerStatus() const;
         QJsonObject serializeCurrentSong() const;
         void writeFile(const QString& fileName, const QByteArray& data) const;
 
-        Domain::IPlayer& currentPlayer;
-        Domain::ILogger& logger;
-        QJsonObject previousPlayerStatus;
+        Domain::IPlayer& _currentPlayer;
+        Domain::ILogger& _logger;
+        QJsonObject _previousPlayerStatus;
     };
 }

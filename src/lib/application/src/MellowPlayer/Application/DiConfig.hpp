@@ -24,6 +24,7 @@
 #include <MellowPlayer/Application/Initialization/Steps/NotificationsSetup.hpp>
 #include <MellowPlayer/Application/Initialization/Steps/QmlEngineStartup.hpp>
 #include <MellowPlayer/Application/Initialization/Steps/QmlTypesSetup.hpp>
+#include <MellowPlayer/Application/Initialization/Steps/RemoteControlSetup.hpp>
 #include <MellowPlayer/Application/Initialization/Steps/SingleInstanceCheckup.hpp>
 #include <MellowPlayer/Application/Initialization/Steps/StreamingServicesSetup.hpp>
 #include <MellowPlayer/Application/Initialization/Steps/SystemTrayIconStartup.hpp>
@@ -35,6 +36,7 @@
 #include <MellowPlayer/Domain/Player/CurrentPlayer.hpp>
 #include <MellowPlayer/Domain/Player/IPlayer.hpp>
 #include <MellowPlayer/Domain/Player/Players.hpp>
+#include <MellowPlayer/Domain/RemoteControl/RemoteControl.hpp>
 #include <MellowPlayer/Domain/Settings/ISettingsSchemaLoader.hpp>
 #include <MellowPlayer/Domain/Settings/ISettingsStore.hpp>
 #include <MellowPlayer/Domain/Settings/Settings.hpp>
@@ -140,6 +142,9 @@ auto defaultInjector = [](di::extension::detail::scoped& scope, QApplication& qA
         di::bind<IListeningHistory>().to<DelayedListeningHistory>().in(di::singleton),
         di::bind<IPlayerNotifications>().to<PlayerNotifications>().in(di::singleton),
         di::bind<IHotkeys>().to<Hotkeys>().in(di::singleton),
+        di::bind<IApplicationStatusFile>().to<ApplicationStatusFile>().in(di::singleton),
+        di::bind<IRemoteControl>().to<RemoteControl>().in(di::singleton),
+
 
 #if defined(Q_OS_LINUX) || defined(Q_OS_FREEBSD)
         di::bind<AbstractPlatformUpdater>().to<LinuxUpdater>().in(di::singleton),
@@ -154,7 +159,7 @@ auto defaultInjector = [](di::extension::detail::scoped& scope, QApplication& qA
 
         di::bind<Initializable* []>().to<
                 SingleInstanceCheckup,
-                ApplicationStatusFile,
+                RemoteControlSetup,
                 StreamingServicesSetup,
                 ListeningHistorySetup,
 #if defined(Q_OS_LINUX) || defined(Q_OS_FREEBSD)
