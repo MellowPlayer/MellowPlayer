@@ -2,6 +2,8 @@
 
 namespace MellowPlayer::Domain
 {
+    class IRemoteControlApplication;
+
     class IRemoteControl
     {
     public:
@@ -15,5 +17,7 @@ namespace MellowPlayer::Domain
 
         virtual bool isAutoStartEnabled() const = 0;
         virtual void setAutoStartEnabled(bool value) = 0;
+
+        virtual IRemoteControlApplication& application() const = 0;
     };
 }

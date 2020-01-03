@@ -31,13 +31,12 @@ PlayerNotifications::PlayerNotifications(IPlayer& player,
 
 bool PlayerNotifications::display(const Notification& notification)
 {
-    LOG_TRACE(_logger, "display");
     if (!isNotificationTypeEnabled(notification.type) || _previousNotif == notification)
     {
         LOG_DEBUG(_logger, "notification disabled: " + notification.toString());
         return false;
     }
-    LOG_DEBUG(_logger, "display notification: " + notification.toString());
+    LOG_INFO(_logger, notification.toString());
     _presenter.display(notification);
     return true;
 }

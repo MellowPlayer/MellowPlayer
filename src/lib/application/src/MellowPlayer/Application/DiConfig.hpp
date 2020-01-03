@@ -24,7 +24,9 @@
 #include <MellowPlayer/Application/Initialization/Steps/NotificationsSetup.hpp>
 #include <MellowPlayer/Application/Initialization/Steps/QmlEngineStartup.hpp>
 #include <MellowPlayer/Application/Initialization/Steps/QmlTypesSetup.hpp>
+#include <MellowPlayer/Application/Initialization/Steps/RemoteControlCheckup.hpp>
 #include <MellowPlayer/Application/Initialization/Steps/RemoteControlSetup.hpp>
+#include <MellowPlayer/Application/Initialization/Steps/RemoteControlStartup.hpp>
 #include <MellowPlayer/Application/Initialization/Steps/SingleInstanceCheckup.hpp>
 #include <MellowPlayer/Application/Initialization/Steps/StreamingServicesSetup.hpp>
 #include <MellowPlayer/Application/Initialization/Steps/SystemTrayIconStartup.hpp>
@@ -65,6 +67,7 @@
 #include <MellowPlayer/Infrastructure/Network/NetworkProxies.hpp>
 #include <MellowPlayer/Infrastructure/Network/NetworkProxy.hpp>
 #include <MellowPlayer/Infrastructure/QtConcurrentWorkDispatcher.hpp>
+#include <MellowPlayer/Infrastructure/RemoteControl/MellowPlayerConnect.hpp>
 #include <MellowPlayer/Infrastructure/Settings/QSettingsStore.hpp>
 #include <MellowPlayer/Infrastructure/Settings/SettingsSchemaLoader.hpp>
 #include <MellowPlayer/Infrastructure/StreamingServices/StreamingServiceCreator.hpp>
@@ -144,7 +147,7 @@ auto defaultInjector = [](di::extension::detail::scoped& scope, QApplication& qA
         di::bind<IHotkeys>().to<Hotkeys>().in(di::singleton),
         di::bind<IApplicationStatusFile>().to<ApplicationStatusFile>().in(di::singleton),
         di::bind<IRemoteControl>().to<RemoteControl>().in(di::singleton),
-
+        di::bind<IRemoteControlApplication>().to<MellowPlayerConnect>().in(di::singleton),
 
 #if defined(Q_OS_LINUX) || defined(Q_OS_FREEBSD)
         di::bind<AbstractPlatformUpdater>().to<LinuxUpdater>().in(di::singleton),
@@ -174,7 +177,9 @@ auto defaultInjector = [](di::extension::detail::scoped& scope, QApplication& qA
                 QmlEngineStartup,
                 MainWindowStartup,
                 CacheCleanup,
-                ApplicationUpdatesCheckup
+                ApplicationUpdatesCheckup,
+                RemoteControlCheckup,
+                RemoteControlStartup
         >()
     );
 };

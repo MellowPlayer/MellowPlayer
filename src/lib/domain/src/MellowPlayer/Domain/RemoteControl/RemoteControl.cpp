@@ -1,13 +1,17 @@
 #include "RemoteControl.hpp"
+#include <MellowPlayer/Domain/Logging/Loggers.hpp>
 #include <MellowPlayer/Domain/RemoteControl/IApplicationStatusFile.hpp>
+#include <MellowPlayer/Domain/Settings/Setting.hpp>
 #include <MellowPlayer/Domain/Settings/SettingKey.hpp>
 #include <MellowPlayer/Domain/Settings/Settings.hpp>
-#include <MellowPlayer/Domain/Settings/Setting.hpp>
 
 using namespace MellowPlayer::Domain;
 
-RemoteControl::RemoteControl(IApplicationStatusFile& applicationStatusFile, Settings& settings)
-        : _applicationStatusFile(applicationStatusFile), _settings(settings)
+RemoteControl::RemoteControl(IApplicationStatusFile& applicationStatusFile, Settings& settings, IRemoteControlApplication& remoteControlApplication)
+        : _logger(Loggers::logger("RemoteControl")),
+          _applicationStatusFile(applicationStatusFile),
+          _settings(settings),
+          _remoteControlApplication(remoteControlApplication)
 {
 }
 
@@ -29,12 +33,14 @@ void RemoteControl::setEnabled(bool value)
 
 void RemoteControl::activate()
 {
+    LOG_INFO(_logger, "Activating remote control");
     _settings.get(SettingKey::PRIVATE_REMOTE_CONTROL_ENABLED).setValue(true);
     _applicationStatusFile.create();
 }
 
 void RemoteControl::deactivate()
 {
+    LOG_INFO(_logger, "De-activating remote control");
     _settings.get(SettingKey::PRIVATE_REMOTE_CONTROL_ENABLED).setValue(false);
     _applicationStatusFile.remove();
 }
@@ -47,4 +53,9 @@ bool RemoteControl::isAutoStartEnabled() const
 void RemoteControl::setAutoStartEnabled(bool value)
 {
     _settings.get(SettingKey::PRIVATE_REMOTE_CONTROL_AUTO_START).setValue(value);
+}
+
+IRemoteControlApplication& RemoteControl::application() const
+{
+    return _remoteControlApplication;
 }
