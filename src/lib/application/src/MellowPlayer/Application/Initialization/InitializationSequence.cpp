@@ -15,7 +15,9 @@ InitializationSequence::InitializationSequence(const std::vector<std::shared_ptr
 
 void InitializationSequence::append(const std::shared_ptr<Initializable>& item)
 {
-    _itemsToInitialize.append(item);
+    _allItems.append(item);
+    if (item->isEnabled())
+        _itemsToInitialize.append(item);
     _count = _itemsToInitialize.count();
 }
 

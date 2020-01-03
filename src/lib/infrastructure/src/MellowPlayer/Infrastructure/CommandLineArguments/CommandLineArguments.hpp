@@ -31,7 +31,8 @@ namespace MellowPlayer::Infrastructure
     private:
         QCommandLineParser _parser;
         QCommandLineOption _serviceOption;
-        QCommandLineOption _logLevelOption;
+        QCommandLineOption _verboseOption;
+        QCommandLineOption _veryVerboseOption;
         QCommandLineOption _playPauseOption;
         QCommandLineOption _nextOption;
         QCommandLineOption _previousOption;

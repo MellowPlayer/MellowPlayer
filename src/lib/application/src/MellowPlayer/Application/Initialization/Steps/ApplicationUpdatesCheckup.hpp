@@ -11,7 +11,7 @@ namespace MellowPlayer::Application
 {
     class ApplicationUpdatesCheckup : public Domain::Initializable
     {
-    Q_OBJECT
+        Q_OBJECT
     public:
         explicit ApplicationUpdatesCheckup(Presentation::UpdaterViewModel& updater);
 

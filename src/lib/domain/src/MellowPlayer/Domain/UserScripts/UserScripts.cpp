@@ -41,7 +41,7 @@ IUserScript* UserScripts::add(const QString& userScriptName, const QString& sour
 #ifdef Q_OS_WIN
     sourcePath = sourcePath.replace("file:///", "");
 #endif
-    LOG_INFO(_logger, "Add user script " << userScriptName.toStdString() << " from " << sourceScriptPath.toStdString());
+    LOG_DEBUG(_logger, "Add user script " << userScriptName.toStdString() << " from " << sourceScriptPath.toStdString());
     auto* userScript = _userScriptFactory.create();
     userScript->setName(userScriptName);
     if (userScript->import(sourcePath))

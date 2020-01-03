@@ -30,7 +30,7 @@ Updater::Updater(ILatestRelease& releaseQuerier, Settings& settings, AbstractPla
 
 void Updater::check()
 {
-    LOG_INFO(_logger, "Checking for update");
+    LOG_DEBUG(_logger, "Checking for update");
     setStatus(Status::Checking);
     _releaseQuerier.setChannel(getChannel());
     _releaseQuerier.get();
@@ -43,7 +43,7 @@ UpdateChannel Updater::getChannel() const
 
 void Updater::install()
 {
-    LOG_INFO(_logger, "Downloading update");
+    LOG_DEBUG(_logger, "Downloading update");
     setStatus(Status::Downloading);
     _platformUpdater.download();
 }
@@ -67,7 +67,7 @@ void Updater::onLatestReleaseReceived(const Release* release)
 {
     if (release != nullptr && *release > *_currentRelease)
     {
-        LOG_INFO(_logger, QString("Latest release is an update (%1 < %2)").arg(_currentRelease->name()).arg(release->name()));
+        LOG_DEBUG(_logger, QString("Latest release is an update (%1 < %2)").arg(_currentRelease->name()).arg(release->name()));
         setStatus(Status::UpdateAvailable);
         _latestRelease = release;
         _platformUpdater.setRelease(_latestRelease);
@@ -76,7 +76,7 @@ void Updater::onLatestReleaseReceived(const Release* release)
     }
     else
     {
-        LOG_INFO(_logger, QString("Current release is up to date..."));
+        LOG_DEBUG(_logger, QString("Current release is up to date..."));
         setStatus(Status::None);
         _latestRelease = nullptr;
         _isUpdateAvailable = false;
@@ -107,7 +107,7 @@ void Updater::onDownloadFinished(bool succes)
 {
     if (succes)
     {
-        LOG_INFO(_logger, "download finished, installing...")
+        LOG_DEBUG(_logger, "download finished, installing...")
         setStatus(Status::Installing);
         _platformUpdater.install();
     }
@@ -121,7 +121,7 @@ void Updater::onInstallFinished(bool succes)
 {
     if (succes)
     {
-        LOG_INFO(_logger, "install finished, you can now restart the application");
+        LOG_DEBUG(_logger, "install finished, you can now restart the application");
         setStatus(Status::Installed);
         emit installed();
     }

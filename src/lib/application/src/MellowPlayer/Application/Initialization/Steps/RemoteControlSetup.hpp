@@ -16,6 +16,7 @@ namespace MellowPlayer::Application
         explicit RemoteControlSetup(Domain::IRemoteControl& remoteControl);
 
         void initialize(const ResultCallback& resultCallback) override;
+        bool isEnabled() const override;
 
     private:
         Domain::IRemoteControl& _remoteControl;

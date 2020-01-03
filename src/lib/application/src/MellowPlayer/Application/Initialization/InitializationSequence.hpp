@@ -35,6 +35,7 @@ namespace MellowPlayer::Application
         void onItemInitialized(bool result);
 
         Domain::ILogger& _logger;
+        QList<std::shared_ptr<Domain::Initializable>> _allItems;
         QList<std::shared_ptr<Domain::Initializable>> _itemsToInitialize;
         QList<std::shared_ptr<Domain::Initializable>> _initializedItems;
         Domain::Initializable::ResultCallback _resultCallback;

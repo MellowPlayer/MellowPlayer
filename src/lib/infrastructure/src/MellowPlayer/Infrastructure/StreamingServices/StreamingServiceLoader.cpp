@@ -44,7 +44,7 @@ QList<shared_ptr<StreamingService>> StreamingServiceLoader::load() const
                     continue;
                 if (service->isValid() && !containsService(services, service))
                 {
-                    LOG_INFO(_logger, service->name() + " streamingService successfully loaded from: \"" + directory.absoluteFilePath() + "\"");
+                    LOG_DEBUG(_logger, service->name() + " streamingService successfully loaded from: \"" + directory.absoluteFilePath() + "\"");
                     services.append(service);
                 }
                 else

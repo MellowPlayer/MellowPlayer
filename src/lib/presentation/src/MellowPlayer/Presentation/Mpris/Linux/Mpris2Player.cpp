@@ -346,13 +346,11 @@ QString Mpris2Player::statusToString(PlaybackStatus status)
 
 void Mpris2Player::signalPlayerUpdate(const QVariantMap& map)
 {
-    LOG_TRACE(_logger, "signalPlayerUpdate");
     signalUpdate(map, "org.mpris.MediaPlayer2.Player");
 }
 
 void Mpris2Player::signalUpdate(const QVariantMap& map, const QString& interfaceName)
 {
-    LOG_TRACE(_logger, "signalUpdate");
     QVariantMap mapWithOrigin = map;
     mapWithOrigin["origin"] = "MellowPlayer";
     if (!mapWithOrigin.isEmpty())

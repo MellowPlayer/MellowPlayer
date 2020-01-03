@@ -83,7 +83,7 @@ void SingleInstanceCheckup::onSecondaryApplicationConnected()
         if (_localSocket)
             _localSocket->disconnectFromServer();
 
-        LOG_INFO(_logger, "Another application was started, showing this one instead");
+        LOG_DEBUG(_logger, "Another application was started, showing this one instead");
         _localSocket = move(nextConnection);
         connect(_localSocket.get(), &ILocalSocket::readyRead, this, &SingleInstanceCheckup::onSecondaryApplicationActionRequest);
     }
@@ -92,7 +92,7 @@ void SingleInstanceCheckup::onSecondaryApplicationConnected()
 void SingleInstanceCheckup::onSecondaryApplicationActionRequest()
 {
     QString action = QString(_localSocket->readAll()).split("\n")[0];
-    LOG_INFO(_logger, "Secondary application request: " << action);
+    LOG_DEBUG(_logger, "Secondary application request: " << action);
 
     if (action == _playPauseAction)
         _currentPlayer.togglePlayPause();
@@ -119,7 +119,7 @@ void SingleInstanceCheckup::initializeSecondaryApplication()
 
 void SingleInstanceCheckup::onConnectedToPrimaryApplication()
 {
-    LOG_INFO(_logger, "connection with the primary application succeeded");
+    LOG_DEBUG(_logger, "connection with the primary application succeeded");
     QString action = requestedAcion();
     LOG_DEBUG(_logger, "sending action: " << action);
     _localSocket->write(action + "\n");
@@ -165,7 +165,7 @@ void SingleInstanceCheckup::pollState()
     {
         LOG_WARN(_logger, "lock file disappeared, trying to restore lock");
         if (_lockFile.tryLock(100))
-            LOG_INFO(_logger, "lock restored");
+        LOG_DEBUG(_logger, "lock restored");
     }
 
     QFileInfo serverFile(_localServer->serverSocketFilePath());
@@ -174,7 +174,7 @@ void SingleInstanceCheckup::pollState()
         LOG_WARN(_logger, "server file disappeared trying to restore local server");
         _localServer->close();
         if (_localServer->listen())
-            LOG_INFO(_logger, "local server restored");
+        LOG_DEBUG(_logger, "local server restored");
         ;
     }
 }

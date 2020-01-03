@@ -35,7 +35,7 @@ void StreamingServiceWatcher::watchPath(const QString& path)
 
 void StreamingServiceWatcher::onFileChanged(const QString& path)
 {
-    LOG_INFO(_logger, "Plugin file changed: " + path);
+    LOG_DEBUG(_logger, "Plugin file changed: " + path);
     QFileInfo fileInfo(path);
     const QString pluginDir = fileInfo.dir().absolutePath();
     const QString name = fileInfo.baseName();

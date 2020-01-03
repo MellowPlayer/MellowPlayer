@@ -13,25 +13,19 @@ RemoteControlStartup::RemoteControlStartup(IRemoteControl& remoteControl)
 
 void RemoteControlStartup::initialize(const ResultCallback& resultCallback)
 {
-    if (_remoteControl.isAutoStartEnabled())
+    if (_remoteControlApplication.isInstalled())
     {
-        if (!_remoteControlApplication.isInstalled())
-        {
-            LOG_WARN(_logger, "Cannot start " << _remoteControlApplication.name() << ", application is not installed");
-        }
-        else
-        {
-            if (_remoteControlApplication.isOutdated())
-                LOG_WARN(_logger, "Outdated version of " << _remoteControlApplication.name() << " will be started");
+        if (_remoteControlApplication.isOutdated())
+            LOG_WARN(_logger, "Outdated version of " << _remoteControlApplication.name() << " will be started");
 
-            LOG_INFO(_logger, "Starting up " << _remoteControlApplication.name());
-            _remoteControlApplication.start();
-        }
-    }
-    else
-    {
-        LOG_DEBUG(_logger, "Automatic start-up disabled, doing nothing");
+        LOG_DEBUG(_logger, "Starting up " << _remoteControlApplication.name());
+        _remoteControlApplication.start();
     }
 
     resultCallback(true);
+}
+
+bool RemoteControlStartup::isEnabled() const
+{
+    return _remoteControl.isEnabled() && _remoteControl.isAutoStartEnabled();
 }

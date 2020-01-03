@@ -18,7 +18,7 @@ void TranslationsSetup::initialize(const MellowPlayer::Domain::Initializable::Re
         qWarning() << "failed to load translation: " << QLocale::system().name();
     }
     else
-        qInfo() << "Translation successfully loaded: " << QLocale::system().name();
+        qDebug() << "Translation successfully loaded: " << QLocale::system().name();
 
     qDebug() << "Available translations: ";
     QDirIterator it(":/MellowPlayer/Translations", QStringList() << "*.qm", QDir::Files, QDirIterator::Subdirectories);

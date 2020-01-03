@@ -16,7 +16,7 @@ QSettingsStore::QSettingsStore() : _qSettings(make_unique<QSettings>("MellowPlay
 void QSettingsStore::setOrganizationName(const QString& orgName)
 {
     _qSettings = make_unique<QSettings>(orgName, "MellowPlayer3");
-    LOG_DEBUG(_logger, "Settings file: " << _qSettings->fileName().toStdString());
+    LOG_INFO(_logger, "Settings file: " << _qSettings->fileName().toStdString());
 }
 
 void QSettingsStore::clear()

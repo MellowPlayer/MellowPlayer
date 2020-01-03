@@ -40,12 +40,12 @@ void ApplicationNetworkProxy::updateNetworkProxy()
 {
     if (_currentNetworkProxy != nullptr && _currentNetworkProxy->isValid())
     {
-        LOG_INFO(_logger, QString("Using %1 network proxy settings: _%2").arg(_currentServiceName).arg(_currentNetworkProxy->toString()));
+        LOG_DEBUG(_logger, QString("Using %1 network proxy settings: _%2").arg(_currentServiceName).arg(_currentNetworkProxy->toString()));
         QNetworkProxy::setApplicationProxy(_currentNetworkProxy->create());
     }
     else if (QNetworkProxy::applicationProxy() != _initialNetworkProxy)
     {
-        LOG_INFO(_logger, "Restoring initial network proxy");
+        LOG_DEBUG(_logger, "Restoring initial network proxy");
         QNetworkProxy::setApplicationProxy(_initialNetworkProxy);
     }
 }

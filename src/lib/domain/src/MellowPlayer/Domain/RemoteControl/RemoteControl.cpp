@@ -33,14 +33,14 @@ void RemoteControl::setEnabled(bool value)
 
 void RemoteControl::activate()
 {
-    LOG_INFO(_logger, "Activating remote control");
+    LOG_DEBUG(_logger, "Activating remote control");
     _settings.get(SettingKey::PRIVATE_REMOTE_CONTROL_ENABLED).setValue(true);
     _applicationStatusFile.create();
 }
 
 void RemoteControl::deactivate()
 {
-    LOG_INFO(_logger, "De-activating remote control");
+    LOG_DEBUG(_logger, "Deactivating remote control");
     _settings.get(SettingKey::PRIVATE_REMOTE_CONTROL_ENABLED).setValue(false);
     _applicationStatusFile.remove();
 }

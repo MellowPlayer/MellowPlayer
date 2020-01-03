@@ -102,7 +102,6 @@ QString Player::serviceName() const
 
 void Player::setUpdateResults(const QVariant& results)
 {
-    LOG_TRACE(_logger, "setUpdateResults()");
     QVariantMap resultsMap = results.toMap();
 
     QString uniqueId = resultsMap.value("songId").toString().replace("-", "");
@@ -149,7 +148,6 @@ void Player::resume()
 
 void Player::setCurrentSong(unique_ptr<Song>& song)
 {
-    LOG_TRACE(_logger, "setCurrentSong()");
     if (_currentSong != nullptr && *_currentSong == *song)
     {
         _currentSong->setDuration(song->duration());

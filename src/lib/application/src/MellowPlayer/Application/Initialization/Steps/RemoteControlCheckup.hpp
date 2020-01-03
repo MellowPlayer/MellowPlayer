@@ -4,6 +4,7 @@
 
 namespace MellowPlayer::Domain
 {
+    class IRemoteControl;
     class IRemoteControlApplication;
     class ILogger;
 }
@@ -14,14 +15,16 @@ namespace MellowPlayer::Application
     {
         Q_OBJECT
     public:
-        explicit RemoteControlCheckup(Domain::IRemoteControlApplication& remoteControl);
+        explicit RemoteControlCheckup(Domain::IRemoteControl& remoteControl);
 
         void initialize(const ResultCallback& resultCallback) override;
+        bool isEnabled() const override;
 
         QString errorMessage() const override;
 
     private:
         Domain::ILogger& _logger;
+        Domain::IRemoteControl& _remoteControl;
         Domain::IRemoteControlApplication& _remoteControlApplication;
         QString _errorMessage;
     };

@@ -30,7 +30,7 @@ InstallationState MellowPlayerConnect::installationState() const
 
 void MellowPlayerConnect::install(const IRemoteControlApplication::InstallCallback& installCallback)
 {
-    LOG_INFO(_logger, "Installing " << name());
+    LOG_DEBUG(_logger, "Installing " << name());
     checkInstallation();
     installCallback(false, "Not implemented");
 }
@@ -42,12 +42,12 @@ bool MellowPlayerConnect::isInstalling() const
 
 void MellowPlayerConnect::start()
 {
-    LOG_INFO(_logger, "Starting " << name());
+    LOG_DEBUG(_logger, "Starting " << name());
 }
 
 void MellowPlayerConnect::stop()
 {
-    LOG_INFO(_logger, "Stopping " << name());
+    LOG_DEBUG(_logger, "Stopping " << name());
 }
 
 InstallationState MellowPlayerConnect::checkInstallation()

@@ -10,11 +10,12 @@ CommandLineArguments::CommandLineArguments()
                                        << "service",
                          "Select startup service",
                          "service"),
-          _logLevelOption(QStringList() << "l"
-                                        << "log-level",
-                          "Log level (0=TRACE, 1=DEBUG, 2=INFO, 3=WARNING, 4=ERROR, 5=CRITICAL, 6=OFF)",
-                          "logLevel",
-                          "1"),
+          _verboseOption(QStringList() << "V"
+                                       << "verbose",
+                         "Enable verbose mode"),
+          _veryVerboseOption(QStringList() << "W"
+                                           << "very-verbose",
+                             "Enable very verbose mode"),
           _playPauseOption(QStringList() << "p"
                                          << "play-pause",
                            "Play or pause the current song"),
@@ -43,7 +44,8 @@ void CommandLineArguments::parse()
     _parser.addVersionOption();
     _parser.addHelpOption();
     _parser.addOption(_serviceOption);
-    _parser.addOption(_logLevelOption);
+    _parser.addOption(_verboseOption);
+    _parser.addOption(_veryVerboseOption);
     _parser.addOption(_playPauseOption);
     _parser.addOption(_nextOption);
     _parser.addOption(_previousOption);
@@ -75,11 +77,13 @@ void CommandLineArguments::parse()
     _parser.process(args);
 
     _service = _parser.value(_serviceOption);
-    int logLevelValue = _parser.value(_logLevelOption).toInt();
-    if (logLevelValue < 0 || logLevelValue > static_cast<int>(LogLevel::Off))
-        _logLevel = LogLevel::Info;
-    else
-        _logLevel = static_cast<LogLevel>(logLevelValue);
+
+    _logLevel = LogLevel::Info;
+    if (_parser.isSet(_verboseOption))
+        _logLevel = LogLevel::Debug;
+    if (_parser.isSet(_veryVerboseOption))
+        _logLevel = LogLevel::Trace;
+
     _autoQuitDelay = _parser.value(_autoQuitDelayOption).toInt();
 
     _playRequested = _parser.isSet(_playPauseOption);

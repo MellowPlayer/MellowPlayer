@@ -22,6 +22,11 @@ namespace MellowPlayer::Domain
 
         };
 
+        virtual bool isEnabled() const
+        {
+            return true;
+        }
+
         virtual QString errorMessage() const
         {
             return "";

@@ -19,11 +19,8 @@ void messageHandler(QtMsgType type, const QMessageLogContext& context, const QSt
                                           {QtFatalMsg, LogLevel::Critical}};
     auto logLevel = toLogLevel[type];
 
-    if (category == "js")
+    if (category == "js" || message.startsWith("Remote debugging"))
         logLevel = LogLevel::Debug;
-
-    if (message.startsWith("Remote debugging"))
-        logLevel = LogLevel::Info;
 
     if (message.startsWith("Attribute Qt::AA_ShareOpenGLContexts must be set"))
         logLevel = LogLevel::Trace;

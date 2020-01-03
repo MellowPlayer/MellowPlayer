@@ -11,10 +11,12 @@ RemoteControlSetup::RemoteControlSetup(IRemoteControl& remoteControl) : _remoteC
 
 void RemoteControlSetup::initialize(const ResultCallback& resultCallback)
 {
-    if (_remoteControl.isEnabled())
-        _remoteControl.activate();
-    else
-        _remoteControl.deactivate();
+    _remoteControl.activate();
 
     resultCallback(true);
+}
+
+bool RemoteControlSetup::isEnabled() const
+{
+    return _remoteControl.isEnabled();
 }
