@@ -22,5 +22,6 @@ namespace MellowPlayer::Infrastructure
         virtual bool toggleFavoriteRequested() const = 0;
         virtual Domain::LogLevel logLevel() const = 0;
         virtual bool startMinimized() const = 0;
+        virtual bool allowMultipleInstances() const = 0;
     };
 }

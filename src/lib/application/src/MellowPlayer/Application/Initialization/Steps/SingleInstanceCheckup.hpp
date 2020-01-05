@@ -28,13 +28,14 @@ namespace MellowPlayer::Application
         Q_OBJECT
     public:
         SingleInstanceCheckup(Infrastructure::IApplication& application,
-                            Domain::IPlayer& currentPlayer,
-                            Infrastructure::ICommandLineArguments& commandLineArguments,
-                            IFactory<Infrastructure::ILocalServer, QString>& localServerFactory,
-                            IFactory<Infrastructure::ILocalSocket>& localSocketFactory);
+                              Domain::IPlayer& currentPlayer,
+                              Infrastructure::ICommandLineArguments& commandLineArguments,
+                              IFactory<Infrastructure::ILocalServer, QString>& localServerFactory,
+                              IFactory<Infrastructure::ILocalSocket>& localSocketFactory);
 
         void initialize(const ResultCallback& resultCallback) override;
         void cleanUp() override;
+        bool isEnabled() const override;
 
         QString errorMessage() const override;
 

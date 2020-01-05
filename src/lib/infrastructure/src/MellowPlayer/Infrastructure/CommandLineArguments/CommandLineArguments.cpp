@@ -34,7 +34,8 @@ CommandLineArguments::CommandLineArguments()
                                "autoQuitDelay"),
           _startMinimizedOption(QStringList() << "m"
                                               << "start-minimized",
-                                "Starts the application in minimized state")
+                                "Starts the application in minimized state"),
+          _allowMultipleInstancesOption(QStringList() << "i" << "allow-multiple-instances", "Allow multiple instances of the application")
 {
 }
 
@@ -52,6 +53,7 @@ void CommandLineArguments::parse()
     _parser.addOption(_toggleFavoriteOption);
     _parser.addOption(_autoQuitDelayOption);
     _parser.addOption(_startMinimizedOption);
+    _parser.addOption(_allowMultipleInstancesOption);
 
     QStringList webEngineOptions = QStringList() << "--remote-debugging-port"
                                                  << "--ppapi-flash-path"
@@ -91,6 +93,7 @@ void CommandLineArguments::parse()
     _nextRequested = _parser.isSet(_nextOption);
     _toggleFavoriteRequested = _parser.isSet(_toggleFavoriteOption);
     _startMinimized = _parser.isSet(_startMinimizedOption);
+    _allowMultipleInstances = _parser.isSet(_allowMultipleInstancesOption);
 }
 
 QString CommandLineArguments::service() const
@@ -130,4 +133,9 @@ bool CommandLineArguments::toggleFavoriteRequested() const
 bool CommandLineArguments::startMinimized() const
 {
     return _startMinimized;
+}
+
+bool CommandLineArguments::allowMultipleInstances() const
+{
+    return _allowMultipleInstances;
 }

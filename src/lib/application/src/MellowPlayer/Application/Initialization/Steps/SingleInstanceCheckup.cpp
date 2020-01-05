@@ -194,3 +194,8 @@ QString SingleInstanceCheckup::GetLockFilePath()
 {
     return QStandardPaths::standardLocations(QStandardPaths::AppDataLocation).first() + QDir::separator() + "single-instance.lock";
 }
+
+bool SingleInstanceCheckup::isEnabled() const
+{
+    return !_commandLineArguments.allowMultipleInstances();
+}
