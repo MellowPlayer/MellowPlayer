@@ -26,7 +26,8 @@ MprisStartup::MprisStartup(IPlayer& player, ILocalAlbumArt& localAlbumArt, IMain
 
 void MprisStartup::initialize(const Initializable::ResultCallback& resultCallback)
 {
-    resultCallback(start());
+    start();
+    resultCallback(true);
 }
 
 bool MprisStartup::start()
