@@ -14,6 +14,7 @@
 #include <MellowPlayer/Presentation/ViewModels/DevToolsWindowViewModel.hpp>
 #include <MellowPlayer/Presentation/ViewModels/ListeningHistory/ListeningHistoryViewModel.hpp>
 #include <MellowPlayer/Presentation/ViewModels/MainWindowViewModel.hpp>
+#include <MellowPlayer/Presentation/ViewModels/RemoteControlViewModel.hpp>
 #include <MellowPlayer/Presentation/ViewModels/Settings/SettingsViewModel.hpp>
 #include <MellowPlayer/Presentation/ViewModels/StreamingServices/StreamingServicesViewModel.hpp>
 #include <MellowPlayer/Presentation/ViewModels/ThemeViewModel.hpp>
@@ -27,18 +28,19 @@ namespace MellowPlayer::Application
         Q_OBJECT
     public:
         QmlTypesSetup(Presentation::ApplicationViewModel&,
-                 Presentation::IMainWindow&,
-                 Presentation::SettingsViewModel&,
-                 Presentation::ThemeViewModel&,
-                 Presentation::UpdaterViewModel&,
-                 Presentation::ListeningHistoryViewModel&,
-                 Presentation::StreamingServicesViewModel&,
-                 Presentation::ZoomViewModel&,
-                 Presentation::CacheViewModel&,
-                 Presentation::CookiesViewModel&,
-                 Presentation::ClipBoardViewModel&,
-                 Presentation::DevToolsWindowViewModel&,
-                 Presentation::IContextProperties& contextProperties);
+                      Presentation::IMainWindow&,
+                      Presentation::SettingsViewModel&,
+                      Presentation::ThemeViewModel&,
+                      Presentation::UpdaterViewModel&,
+                      Presentation::ListeningHistoryViewModel&,
+                      Presentation::StreamingServicesViewModel&,
+                      Presentation::ZoomViewModel&,
+                      Presentation::CacheViewModel&,
+                      Presentation::CookiesViewModel&,
+                      Presentation::ClipBoardViewModel&,
+                      Presentation::DevToolsWindowViewModel&,
+                      Presentation::RemoteControlViewModel&,
+                      Presentation::IContextProperties& contextProperties);
 
         void initialize(const ResultCallback& resultCallback) override;
 

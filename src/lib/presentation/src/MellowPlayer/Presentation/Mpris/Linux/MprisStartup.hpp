@@ -26,9 +26,9 @@ namespace MellowPlayer::Presentation
         void initialize(const ResultCallback& resultCallback) override;
         void cleanUp() override;
 
-    private:
         bool start();
 
+    private:
         static QString SERVICE_NAME;
         static QString OBJECT_NAME;
 

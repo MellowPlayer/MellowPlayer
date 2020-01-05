@@ -18,6 +18,7 @@ SettingsViewModel::SettingsViewModel(Settings& settings, ThemeViewModel& themeVi
             _categories->append(new SettingsCategoryViewModel(themeViewModel, category, this));
     }
     _categories->append(new CustomSettingsCategoryViewModel("Streaming Services", u8"\ue405", "SettingsPages/ServiceSettingsPage.qml", themeViewModel, this));
+    _categories->append(new CustomSettingsCategoryViewModel("Remote Control", u8"\ue8c7", "SettingsPages/RemoteControlSettingsPage.qml", themeViewModel, this));
     _categories->append(new CustomSettingsCategoryViewModel("Cache", u8"\ue872", "SettingsPages/CacheSettingsPage.qml", themeViewModel, this));
 }
 

@@ -59,6 +59,13 @@
         <file>MellowPlayer/Pages/SettingsPage.qml</file>
         <file>MellowPlayer/SettingsPages/AutomaticSettingsPage.qml</file>
         <file>MellowPlayer/SettingsPages/CacheSettingsPage.qml</file>
+        <file>MellowPlayer/SettingsPages/RemoteControlSettingsPage.qml</file>
+        <file>MellowPlayer/SettingsPages/RemoteControl/RemoteControlState.qml</file>
+        <file>MellowPlayer/SettingsPages/RemoteControl/RemoteControlState_Installing.qml</file>
+        <file>MellowPlayer/SettingsPages/RemoteControl/RemoteControlState_NotEnabled.qml</file>
+        <file>MellowPlayer/SettingsPages/RemoteControl/RemoteControlState_NotInstalled.qml</file>
+        <file>MellowPlayer/SettingsPages/RemoteControl/RemoteControlState_Running.qml</file>
+        <file>MellowPlayer/SettingsPages/RemoteControl/RemoteControlState_Stopped.qml</file>
         <file>MellowPlayer/SettingsPages/ServiceSettingsPage.qml</file>
         <file>MellowPlayer/DateCategoryTranslator.js</file>
         <file>MellowPlayer/Dialogs.js</file>

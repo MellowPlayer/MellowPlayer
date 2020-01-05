@@ -172,8 +172,8 @@ Page {
                 Loader {
                     source: Qt.resolvedUrl("../" + model.qmlComponent)
 
-                    Layout.fillHeight: true
-                    Layout.fillWidth: true
+                    width: parent.width
+                    height: parent.height
                 }
             }
         }

@@ -18,6 +18,9 @@ namespace MellowPlayer::Infrastructure
         QString logo() const override;
         QString name() const override;
         QString version() const override;
+        QString minimumRequiredVersion() const override;
+        QString homePage() const override;
+        QString url() const override;
 
         Domain::InstallationState checkInstallation() override;
 
@@ -27,8 +30,16 @@ namespace MellowPlayer::Infrastructure
 
         void start() override;
         void stop() override;
+        bool isRunning() const override;
 
     private:
+        void setInstallationState(Domain::InstallationState value);
+        void setRunning(bool value);
+        void setInstalling(bool value);
+
+        bool _running = false;
+        bool _installing = false;
+        Domain::InstallationState _installationState = Domain::InstallationState::NotInstalled;
         Domain::ILogger& _logger;
         QVersionNumber _minimumRequiredVersion;
     };

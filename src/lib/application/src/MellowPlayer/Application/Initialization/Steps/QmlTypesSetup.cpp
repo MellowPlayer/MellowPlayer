@@ -22,6 +22,7 @@ QmlTypesSetup::QmlTypesSetup(ApplicationViewModel&,
                              CookiesViewModel&,
                              ClipBoardViewModel&,
                              DevToolsWindowViewModel&,
+                             RemoteControlViewModel&,
                              IContextProperties& contextProperties)
         : _contextProperties(contextProperties)
 {

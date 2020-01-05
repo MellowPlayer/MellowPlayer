@@ -24,10 +24,7 @@ void RemoteControl::setEnabled(bool value)
 {
     if (isEnabled() != value)
     {
-        if (value)
-            activate();
-        else
-            deactivate();
+        value ? activate() : deactivate();
     }
 }
 
@@ -36,6 +33,7 @@ void RemoteControl::activate()
     LOG_DEBUG(_logger, "Activating remote control");
     _settings.get(SettingKey::PRIVATE_REMOTE_CONTROL_ENABLED).setValue(true);
     _applicationStatusFile.create();
+    emit enabledChanged();
 }
 
 void RemoteControl::deactivate()
@@ -43,6 +41,7 @@ void RemoteControl::deactivate()
     LOG_DEBUG(_logger, "Deactivating remote control");
     _settings.get(SettingKey::PRIVATE_REMOTE_CONTROL_ENABLED).setValue(false);
     _applicationStatusFile.remove();
+    emit enabledChanged();
 }
 
 bool RemoteControl::isAutoStartEnabled() const
@@ -52,7 +51,12 @@ bool RemoteControl::isAutoStartEnabled() const
 
 void RemoteControl::setAutoStartEnabled(bool value)
 {
-    _settings.get(SettingKey::PRIVATE_REMOTE_CONTROL_AUTO_START).setValue(value);
+    if (value != isAutoStartEnabled())
+    {
+        LOG_DEBUG(_logger, "Automatic startup: " << value);
+        _settings.get(SettingKey::PRIVATE_REMOTE_CONTROL_AUTO_START).setValue(value);
+        emit autoStartEnabledChanged();
+    }
 }
 
 IRemoteControlApplication& RemoteControl::application() const

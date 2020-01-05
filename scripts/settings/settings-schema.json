@@ -409,7 +409,7 @@
         {
           "name": "",
           "type": "bool",
-          "default": true,
+          "default": false,
           "key": "remote-control-enabled"
         },
         {

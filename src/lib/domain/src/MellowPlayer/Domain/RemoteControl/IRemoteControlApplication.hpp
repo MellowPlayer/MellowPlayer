@@ -23,13 +23,17 @@ namespace MellowPlayer::Domain
 
         virtual QString logo() const = 0;
         virtual QString name() const = 0;
+        virtual QString homePage() const = 0;
+        virtual QString url() const = 0;
         virtual QString version() const = 0;
+        virtual QString minimumRequiredVersion() const = 0;
 
         virtual void install(const InstallCallback& installCallback) = 0;
         virtual bool isInstalling() const = 0;
 
         virtual void start() = 0;
         virtual void stop() = 0;
+        virtual bool isRunning() const = 0;
 
         bool isInstalled() const { return installationState() != InstallationState::NotInstalled; }
         bool isOutdated() const { return installationState() == InstallationState::Outdated; }
@@ -39,5 +43,7 @@ namespace MellowPlayer::Domain
 
     signals:
         void installationStateChanged();
+        void installingChanged();
+        void runningChanged();
     };
 }

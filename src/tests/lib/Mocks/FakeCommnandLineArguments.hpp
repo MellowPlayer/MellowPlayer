@@ -80,6 +80,11 @@ namespace MellowPlayer::Infrastructure::Tests
             return false;
         }
 
+        bool allowMultipleInstances() const override
+        {
+            return false;
+        }
+
         bool parsed = false;
 
     private:

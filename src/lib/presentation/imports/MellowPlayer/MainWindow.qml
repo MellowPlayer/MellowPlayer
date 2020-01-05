@@ -192,6 +192,14 @@ ApplicationWindow {
     }
 
     MessageBoxDialog {
+        id: errorDialog
+
+        standardButtons: MessageBoxDialog.Close
+
+        onAccepted: close()
+    }
+
+    MessageBoxDialog {
         id: exitToTrayMsgBox
 
         title: qsTr("Closing to system tray")

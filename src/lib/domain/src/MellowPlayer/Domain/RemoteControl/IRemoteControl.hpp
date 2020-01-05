@@ -1,11 +1,14 @@
 #pragma once
 
+#include <QObject>
+
 namespace MellowPlayer::Domain
 {
     class IRemoteControlApplication;
 
-    class IRemoteControl
+    class IRemoteControl : public QObject
     {
+        Q_OBJECT
     public:
         virtual ~IRemoteControl() = default;
 
@@ -19,5 +22,9 @@ namespace MellowPlayer::Domain
         virtual void setAutoStartEnabled(bool value) = 0;
 
         virtual IRemoteControlApplication& application() const = 0;
+
+    signals:
+        void enabledChanged();
+        void autoStartEnabledChanged();
     };
 }

@@ -61,6 +61,13 @@ SelectServicePage 3.0 Pages/SelectServicePage.qml
 SettingsPage 3.0 Pages/SettingsPage.qml
 AutomaticSettingsPage 3.0 SettingsPages/AutomaticSettingsPage.qml
 CacheSettingsPage 3.0 SettingsPages/CacheSettingsPage.qml
+RemoteControlSettingsPage 3.0 SettingsPages/RemoteControlSettingsPage.qml
+RemoteControlState 3.0 SettingsPages/RemoteControl/RemoteControlState.qml
+RemoteControlState_Installing 3.0 SettingsPages/RemoteControl/RemoteControlState_Installing.qml
+RemoteControlState_NotEnabled 3.0 SettingsPages/RemoteControl/RemoteControlState_NotEnabled.qml
+RemoteControlState_NotInstalled 3.0 SettingsPages/RemoteControl/RemoteControlState_NotInstalled.qml
+RemoteControlState_Running 3.0 SettingsPages/RemoteControl/RemoteControlState_Running.qml
+RemoteControlState_Stopped 3.0 SettingsPages/RemoteControl/RemoteControlState_Stopped.qml
 ServiceSettingsPage 3.0 SettingsPages/ServiceSettingsPage.qml
 SettingsTranslator 3.0 SettingsTranslator.js
 ReportIssueDialog 3.0 Dialogs/ReportIssueDialog.qml
