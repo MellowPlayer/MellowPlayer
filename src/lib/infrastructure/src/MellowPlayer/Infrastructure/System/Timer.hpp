@@ -1,6 +1,6 @@
 #pragma once
 
-#include <MellowPlayer/Infrastructure/ITimer.hpp>
+#include <MellowPlayer/Infrastructure/System/ITimer.hpp>
 #include <QTimer>
 
 namespace MellowPlayer::Infrastructure

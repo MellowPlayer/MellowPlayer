@@ -1,5 +1,9 @@
 #include "MellowPlayerConnect.hpp"
 #include <MellowPlayer/Domain/Logging/Loggers.hpp>
+#include <MellowPlayer/Infrastructure/System/ITextFile.hpp>
+#include <MellowPlayer/Infrastructure/System/ITextFileFactory.hpp>
+#include <QtCore/QDir>
+#include <QtCore/QStandardPaths>
 #include <QtCore/QTimer>
 #include <QtNetwork/QHostAddress>
 #include <QtNetwork/QNetworkInterface>
@@ -7,8 +11,14 @@
 using namespace MellowPlayer::Domain;
 using namespace MellowPlayer::Infrastructure;
 
-MellowPlayerConnect::MellowPlayerConnect() : _logger(Loggers::logger("MellowPlayerConnect")), _minimumRequiredVersion(0, 2, 0)
+MellowPlayerConnect::MellowPlayerConnect(ITextFileFactory& textFileFactory)
+        : _textFileFactory(textFileFactory),
+          _logger(Loggers::logger("MellowPlayer.Connect")),
+          _minimumRequiredVersion(0, 2, 0),
+          _installationDirectory(QStandardPaths::standardLocations(QStandardPaths::AppDataLocation).first() + QDir::separator() + "RemoteControl" +
+                                 QDir::separator() + "mellowplayer-connect")
 {
+
 }
 
 QString MellowPlayerConnect::logo() const
@@ -23,7 +33,7 @@ QString MellowPlayerConnect::name() const
 
 QString MellowPlayerConnect::version() const
 {
-    return _minimumRequiredVersion.toString();
+    return _version.toString();
 }
 
 QString MellowPlayerConnect::minimumRequiredVersion() const
@@ -40,7 +50,7 @@ QString MellowPlayerConnect::url() const
 {
     for (auto& address : QNetworkInterface::allAddresses())
     {
-        if(!address.isLoopback() && address.protocol() == QAbstractSocket::IPv4Protocol)
+        if (!address.isLoopback() && address.protocol() == QAbstractSocket::IPv4Protocol)
         {
             auto url = "http://" + address.toString() + ":5000";
             return url;
@@ -51,7 +61,22 @@ QString MellowPlayerConnect::url() const
 
 InstallationState MellowPlayerConnect::checkInstallation()
 {
-    return InstallationState::UpToDate;
+    LOG_DEBUG(_logger, "Installation directory: " << _installationDirectory);
+    auto versionPath = _installationDirectory + QDir::separator() + "version";
+    auto versionFile = _textFileFactory.create(versionPath);
+    if (!versionFile->exists())
+    {
+        LOG_DEBUG(_logger, versionPath << " not found -> NotInstalled");
+        setInstallationState(InstallationState::NotInstalled);
+    }
+    else
+    {
+        _version = QVersionNumber::fromString(versionFile->read().split(QRegExp("[\r\n]"), QString::SkipEmptyParts).first());
+        bool upToDate = _version >= _minimumRequiredVersion;
+        LOG_DEBUG(_logger, "Found version " << _version.toString() << ", required version is " << _minimumRequiredVersion.toString() << ": " << (upToDate ? "OK" : "NOK"));
+        setInstallationState(upToDate ? InstallationState::UpToDate : InstallationState::Outdated);
+    }
+    return installationState();
 }
 
 InstallationState MellowPlayerConnect::installationState() const
@@ -61,8 +86,10 @@ InstallationState MellowPlayerConnect::installationState() const
 
 void MellowPlayerConnect::install(const IRemoteControlApplication::InstallCallback& installCallback)
 {
+    if (isRunning())
+        stop();
+
     LOG_DEBUG(_logger, "Installing " << name());
-    stop();
     setInstalling(true);
 
     QTimer::singleShot(5000, [=]() {
@@ -80,6 +107,7 @@ bool MellowPlayerConnect::isInstalling() const
 
 void MellowPlayerConnect::start()
 {
+    // TODO pay attention to use the same process, what about flatpak?
     LOG_DEBUG(_logger, "Starting " << name());
     setRunning(true);
 }
@@ -103,6 +131,7 @@ void MellowPlayerConnect::setInstallationState(InstallationState value)
         emit installationStateChanged();
     }
 }
+
 void MellowPlayerConnect::setRunning(bool value)
 {
     if (_running != value)
@@ -111,6 +140,7 @@ void MellowPlayerConnect::setRunning(bool value)
         emit runningChanged();
     }
 }
+
 void MellowPlayerConnect::setInstalling(bool value)
 {
     if (_installing != value)

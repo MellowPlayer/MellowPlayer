@@ -66,15 +66,16 @@
 #include <MellowPlayer/Infrastructure/Network/LocalSocket.hpp>
 #include <MellowPlayer/Infrastructure/Network/NetworkProxies.hpp>
 #include <MellowPlayer/Infrastructure/Network/NetworkProxy.hpp>
-#include <MellowPlayer/Infrastructure/QtConcurrentWorkDispatcher.hpp>
 #include <MellowPlayer/Infrastructure/RemoteControl/MellowPlayerConnect.hpp>
 #include <MellowPlayer/Infrastructure/Settings/QSettingsStore.hpp>
 #include <MellowPlayer/Infrastructure/Settings/SettingsSchemaLoader.hpp>
 #include <MellowPlayer/Infrastructure/StreamingServices/StreamingServiceCreator.hpp>
 #include <MellowPlayer/Infrastructure/StreamingServices/StreamingServiceLoader.hpp>
 #include <MellowPlayer/Infrastructure/StreamingServices/StreamingServiceWatcher.hpp>
+#include <MellowPlayer/Infrastructure/System/QtConcurrentWorkDispatcher.hpp>
+#include <MellowPlayer/Infrastructure/System/TextFileFactory.hpp>
+#include <MellowPlayer/Infrastructure/System/Timer.hpp>
 #include <MellowPlayer/Infrastructure/Theme/ThemeLoader.hpp>
-#include <MellowPlayer/Infrastructure/Timer.hpp>
 #include <MellowPlayer/Infrastructure/Updater/BinTray/LatestBinTrayRelease.hpp>
 #include <MellowPlayer/Infrastructure/Updater/ILatestRelease.hpp>
 #include <MellowPlayer/Infrastructure/Updater/Updater.hpp>
@@ -146,6 +147,7 @@ auto defaultInjector = [](di::extension::detail::scoped& scope, QApplication& qA
         di::bind<IPlayerNotifications>().to<PlayerNotifications>().in(di::singleton),
         di::bind<IHotkeys>().to<Hotkeys>().in(di::singleton),
         di::bind<IApplicationStatusFile>().to<ApplicationStatusFile>().in(di::singleton),
+        di::bind<ITextFileFactory>().to<TextFileFactory>().in(di::singleton),
         di::bind<IRemoteControl>().to<RemoteControl>().in(di::singleton),
         di::bind<IRemoteControlApplication>().to<MellowPlayerConnect>().in(di::singleton),
 

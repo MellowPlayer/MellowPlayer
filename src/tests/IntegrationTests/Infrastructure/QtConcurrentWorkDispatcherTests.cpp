@@ -1,4 +1,4 @@
-#include <MellowPlayer/Infrastructure/QtConcurrentWorkDispatcher.hpp>
+#include <MellowPlayer/Infrastructure/System/QtConcurrentWorkDispatcher.hpp>
 #include <QtTest/qtestsystem.h>
 #include <catch/catch.hpp>
 #include <thread>

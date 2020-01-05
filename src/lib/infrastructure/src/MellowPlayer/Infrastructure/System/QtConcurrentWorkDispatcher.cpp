@@ -1,4 +1,4 @@
-#include <MellowPlayer/Infrastructure/QtConcurrentWorkDispatcher.hpp>
+#include <MellowPlayer/Infrastructure/System/QtConcurrentWorkDispatcher.hpp>
 #include <QtConcurrent>
 
 using namespace std;

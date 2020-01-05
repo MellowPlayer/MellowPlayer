@@ -10,10 +10,12 @@ namespace MellowPlayer::Domain
 
 namespace MellowPlayer::Infrastructure
 {
+    class ITextFileFactory;
+
     class MellowPlayerConnect : public Domain::IRemoteControlApplication
     {
     public:
-        MellowPlayerConnect();
+        explicit MellowPlayerConnect(ITextFileFactory& textFileFactory);
 
         QString logo() const override;
         QString name() const override;
@@ -37,10 +39,13 @@ namespace MellowPlayer::Infrastructure
         void setRunning(bool value);
         void setInstalling(bool value);
 
+        ITextFileFactory& _textFileFactory;
+        QVersionNumber _version;
         bool _running = false;
         bool _installing = false;
         Domain::InstallationState _installationState = Domain::InstallationState::NotInstalled;
         Domain::ILogger& _logger;
         QVersionNumber _minimumRequiredVersion;
+        QString _installationDirectory;
     };
 }

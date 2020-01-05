@@ -1,7 +1,7 @@
 #pragma once
 
 #include <MellowPlayer/Domain/ListeningHistory/ListeningHistory.hpp>
-#include <MellowPlayer/Infrastructure/ITimer.hpp>
+#include <MellowPlayer/Infrastructure/System/ITimer.hpp>
 #include <memory>
 
 namespace MellowPlayer::Infrastructure
