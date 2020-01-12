@@ -48,12 +48,12 @@ namespace MellowPlayer::Infrastructure::Tests
         bool isListening_ = false;
     };
 
-    class FakeLocalServerFactory : public IFactory<ILocalServer, QString>
+    class FakeLocalServerFactory : public ILocalServerFactory
     {
     public:
-        std::unique_ptr<ILocalServer> create(QString&&) const override
+        std::shared_ptr<ILocalServer> create(QString&&) const override
         {
-            auto localServer = std::make_unique<FakeLocalServer>();
+            auto localServer = std::make_shared<FakeLocalServer>();
 
             auto nonConstThis = const_cast<FakeLocalServerFactory*>(this);
             nonConstThis->lastServerCreated = localServer.get();

@@ -6,15 +6,6 @@
 using namespace std;
 using namespace MellowPlayer::Infrastructure;
 
-class LocalSocketFactory : public IFactory<ILocalSocket>
-{
-public:
-    std::unique_ptr<ILocalSocket> create() const override
-    {
-        return make_unique<LocalSocket>();
-    }
-};
-
 SCENARIO("LocalServer and LocalSocket integration tests")
 {
     GIVEN("A local server and a local socket")
@@ -28,7 +19,7 @@ SCENARIO("LocalServer and LocalSocket integration tests")
         REQUIRE(!server.serverSocketFilePath().isEmpty());
 
         LocalSocket socket;
-        unique_ptr<ILocalSocket> newConnection = nullptr;
+        shared_ptr<ILocalSocket> newConnection = nullptr;
         QObject::connect(&server, &ILocalServer::newConnection, [&]() { newConnection = server.nextPendingConnection(); });
 
         WHEN("I connect the socket to the server")

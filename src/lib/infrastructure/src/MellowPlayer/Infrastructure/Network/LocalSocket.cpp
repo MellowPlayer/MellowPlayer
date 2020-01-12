@@ -47,3 +47,8 @@ void LocalSocket::initSignals()
     connect(_qLocalSocket, &QLocalSocket::readyRead, this, &LocalSocket::readyRead);
     connect(_qLocalSocket, QNonConstOverload<QLocalSocket::LocalSocketError>::of(&QLocalSocket::error), [=](QLocalSocket::LocalSocketError) { emit error(); });
 }
+
+std::shared_ptr<ILocalSocket> LocalSocketFactory::create()
+{
+    return std::make_shared<LocalSocket>();
+}

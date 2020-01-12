@@ -30,8 +30,8 @@ namespace MellowPlayer::Application
         SingleInstanceCheckup(Infrastructure::IApplication& application,
                               Domain::IPlayer& currentPlayer,
                               Infrastructure::ICommandLineArguments& commandLineArguments,
-                              IFactory<Infrastructure::ILocalServer, QString>& localServerFactory,
-                              IFactory<Infrastructure::ILocalSocket>& localSocketFactory);
+                              Infrastructure::ILocalServerFactory& localServerFactory,
+                              Infrastructure::ILocalSocketFactory& localSocketFactory);
 
         void initialize(const ResultCallback& resultCallback) override;
         void cleanUp() override;
@@ -59,10 +59,10 @@ namespace MellowPlayer::Application
         Infrastructure::IApplication& _application;
         Domain::IPlayer& _currentPlayer;
         Infrastructure::ICommandLineArguments& _commandLineArguments;
-        IFactory<Infrastructure::ILocalServer, QString>& _localServerFactory;
-        IFactory<Infrastructure::ILocalSocket>& _localSocketFactory;
-        std::unique_ptr<Infrastructure::ILocalServer> _localServer;
-        std::unique_ptr<Infrastructure::ILocalSocket> _localSocket;
+        Infrastructure::ILocalServerFactory& _localServerFactory;
+        Infrastructure::ILocalSocketFactory& _localSocketFactory;
+        std::shared_ptr<Infrastructure::ILocalServer> _localServer;
+        std::shared_ptr<Infrastructure::ILocalSocket> _localSocket;
         QString _lockFilePath;
         QLockFile _lockFile;
         bool _isPrimary;

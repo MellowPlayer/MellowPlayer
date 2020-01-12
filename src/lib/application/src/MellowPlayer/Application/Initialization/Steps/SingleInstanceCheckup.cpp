@@ -26,8 +26,8 @@ const QString SingleInstanceCheckup::_toggleFavoriteAction = "toggle-favorite";
 SingleInstanceCheckup::SingleInstanceCheckup(IApplication& application,
                                          IPlayer& currentPlayer,
                                          ICommandLineArguments& commandLineArguments,
-                                         IFactory<ILocalServer, QString>& localServerFactory,
-                                         IFactory<ILocalSocket>& localSocketFactory)
+                                         ILocalServerFactory& localServerFactory,
+                                         ILocalSocketFactory& localSocketFactory)
         : _logger(Loggers::logger("SingleInstanceCheckup")),
           _application(application),
           _currentPlayer(currentPlayer),

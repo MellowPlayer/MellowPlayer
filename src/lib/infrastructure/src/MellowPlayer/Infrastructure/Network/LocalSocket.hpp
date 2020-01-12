@@ -3,6 +3,7 @@
 #include <QtCore/QIODevice>
 #include <QtCore/QObject>
 #include <QtNetwork/QLocalSocket>
+#include <memory>
 
 namespace MellowPlayer::Infrastructure
 {
@@ -40,5 +41,19 @@ namespace MellowPlayer::Infrastructure
         void initSignals();
 
         QLocalSocket* _qLocalSocket;
+    };
+
+    class ILocalSocketFactory
+    {
+    public:
+        virtual ~ILocalSocketFactory() = default;
+
+        virtual std::shared_ptr<ILocalSocket> create() = 0;
+    };
+
+    class LocalSocketFactory : public ILocalSocketFactory
+    {
+    public:
+        std::shared_ptr<ILocalSocket> create() override;
     };
 }

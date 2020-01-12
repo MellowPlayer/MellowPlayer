@@ -4,7 +4,7 @@
 using namespace std;
 using namespace MellowPlayer::Infrastructure;
 
-LocalServer::LocalServer(IFactory<ILocalSocket>& localSocketFactory, const QString& serverName)
+LocalServer::LocalServer(ILocalSocketFactory& localSocketFactory, const QString& serverName)
         : _localSocketFactory(localSocketFactory), _serverName(serverName)
 {
     QLocalServer::removeServer(serverName);
@@ -27,12 +27,12 @@ bool LocalServer::isListening() const
     return _qLocalServer.isListening();
 }
 
-unique_ptr<ILocalSocket> LocalServer::nextPendingConnection()
+shared_ptr<ILocalSocket> LocalServer::nextPendingConnection()
 {
     QLocalSocket* qLocalSocket = _qLocalServer.nextPendingConnection();
     if (qLocalSocket->isValid())
     {
-        unique_ptr<ILocalSocket> localSocket = _localSocketFactory.create();
+        auto localSocket = _localSocketFactory.create();
         localSocket->setQLocalSocket(qLocalSocket);
         return localSocket;
     }
@@ -42,4 +42,13 @@ unique_ptr<ILocalSocket> LocalServer::nextPendingConnection()
 QString LocalServer::serverSocketFilePath() const
 {
     return _qLocalServer.fullServerName();
+}
+
+LocalServerFactory::LocalServerFactory(ILocalSocketFactory& localSocketFactory) : _localSocketFactory(localSocketFactory)
+{
+}
+
+std::shared_ptr<ILocalServer> LocalServerFactory::create(const QString& serverName)
+{
+    return std::make_shared<LocalServer>(_localSocketFactory, serverName);
 }
