@@ -127,6 +127,12 @@ WebEngineView {
         d.updateShowScrollBars()
     }
 
+    Shortcut {
+        enabled: mainWindow.visibility === ApplicationWindow.FullScreen
+        sequence: "Escape"
+        onActivated: root.fullScreenCancelled()
+    }
+
     ValidationMessage {
         id: validationMessage
     }
