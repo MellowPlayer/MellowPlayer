@@ -11,9 +11,7 @@ QtObject {
         onClosing: destroy();
     }
 
-    function createDialog(profile) {
-        var newDialog = browserDialogComponent.createObject(root);
-        newDialog.currentWebView.profile = profile;
-        return newDialog;
+    function createDialog() {
+        return browserDialogComponent.createObject(root);
     }
 }

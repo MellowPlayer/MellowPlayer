@@ -26,8 +26,7 @@ ApplicationWindow {
 
     function openWebPopup(request, profile) {
         if (request.userInitiated) {
-            var dialog = d.applicationRoot.createDialog(profile);
-            request.openIn(dialog.currentWebView);
+            d.applicationRoot.createDialog(profile).open(request, profile)
         }
     }
 
