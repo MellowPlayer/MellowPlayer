@@ -42,7 +42,6 @@ ApplicationWindow {
             if (d.previousVisibility === ApplicationWindow.Maximized)
                 mainWindow.showMaximized()
         }
-        mainToolBar.visible = !request.toggleOn;
         request.accept();
     }
 
@@ -98,7 +97,7 @@ ApplicationWindow {
     header: MainToolBar {
         id: mainToolBar
 
-        visible: _settings.get(SettingKey.APPEARANCE_TOOLBAR_VISIBLE).value
+        visible: _settings.get(SettingKey.APPEARANCE_TOOLBAR_VISIBLE).value && mainWindow.visibility !== ApplicationWindow.FullScreen
     }
 
     footer: UpdateToolBar { }
@@ -262,7 +261,10 @@ ApplicationWindow {
 
     Shortcut {
         sequence: _settings.get(SettingKey.SHORTCUTS_SHOW_TOOLBAR).value
-        onActivated: _settings.get(SettingKey.APPEARANCE_TOOLBAR_VISIBLE).value = !_settings.get(SettingKey.APPEARANCE_TOOLBAR_VISIBLE).value
+        onActivated: {
+            console.warn("CTRL+T")
+            _settings.get(SettingKey.APPEARANCE_TOOLBAR_VISIBLE).value = !_settings.get(SettingKey.APPEARANCE_TOOLBAR_VISIBLE).value
+        }
     }
 
     QtObject {
