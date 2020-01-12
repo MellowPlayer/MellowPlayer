@@ -5,12 +5,15 @@ import QtWebEngine 1.5
 Window {
     id: window
 
-    property alias currentWebView: webView
+    function open(request, profile) {
+        webView.profile = profile
+        webView.url = request.requestedUrl
+        showNormal()
+    }
 
     flags: Qt.Dialog
-    width: 800
-    height: 600
-    visible: true
+    width: 1280
+    height: 720
     // @disable-check M16
     onClosing: destroy()
 
@@ -18,8 +21,7 @@ Window {
         id: webView
 
         anchors.fill: parent
-        settings.pluginsEnabled: true
-        settings.javascriptEnabled: true
+        visible: window.visible
 
         onWindowCloseRequested: window.close();
         onNewViewRequested: mainWindow.openWebPopup(request, profile)
