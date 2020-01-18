@@ -1,5 +1,15 @@
 # Change log
 
+## [3.5.9](https://gitlab.com/ColinDuquesnoy/MellowPlayer/tree/3.5.9) (2020-1-18)
+[Full Changelog](https://gitlab.com/ColinDuquesnoy/MellowPlayer/compare/3.5.8...3.5.9)
+
+**Fixed bugs:**
+
+- Escape does not work to exit fullscreen (e.g. on Youtube) [\#398](https://gitlab.com/ColinDuquesnoy/MellowPlayer/issues/398)
+- Main tool bar don't close after making window fullscreen [\#393](https://gitlab.com/ColinDuquesnoy/MellowPlayer/issues/393)
+- Blank popup windows with Qt 5.14 [\#390](https://gitlab.com/ColinDuquesnoy/MellowPlayer/issues/390)
+
+
 ## [3.5.8](https://gitlab.com/ColinDuquesnoy/MellowPlayer/tree/3.5.8) (2019-12-27)
 [Full Changelog](https://gitlab.com/ColinDuquesnoy/MellowPlayer/compare/3.5.7...3.5.8)
 
