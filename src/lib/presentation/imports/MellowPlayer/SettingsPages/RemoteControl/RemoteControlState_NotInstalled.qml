@@ -12,7 +12,7 @@ RemoteControlState {
     message:  qsTr("Install <b>%1</b> to finish Remote Control Setup").arg(_remoteControl.appInfo.name)
     icon: MaterialIcons.icon_get_app
     buttonText: qsTr("Install ") + _remoteControl.appInfo.name
-    versionMessage: qsTr("Require <b>%1</b> <i>%2</i>").arg(_remoteControl.appInfo.name).arg(_remoteControl.appInfo.minimumRequiredVersion)
+    versionMessage: qsTr("Require <a href=\"%3\">%1</a> <i>%2</i>").arg(_remoteControl.appInfo.name).arg(_remoteControl.appInfo.minimumRequiredVersion).arg(_remoteControl.appInfo.homePage)
 
     onButtonClicked: _remoteControl.install()
 }

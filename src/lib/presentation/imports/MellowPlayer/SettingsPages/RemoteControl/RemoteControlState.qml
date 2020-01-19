@@ -17,7 +17,7 @@ Item {
     property bool busyIndicatorVisible: false
     property bool autoStartCheckBoxVisible: false
     property bool footerVisible: true
-    property string versionMessage:  qsTr("<b>%1</b> <i>%2</i>").arg(_remoteControl.appInfo.name).arg(_remoteControl.appInfo.version)
+    property string versionMessage:  qsTr("<a href=\"%3\">%1</a> <i>%2</i>").arg(_remoteControl.appInfo.name).arg(_remoteControl.appInfo.version).arg(_remoteControl.appInfo.homePage)
 
     signal buttonClicked()
 
@@ -115,9 +115,17 @@ Item {
                     Layout.alignment: Qt.AlignHCenter
                     Layout.preferredHeight: 38
                     Layout.preferredWidth: 38
+
+                    MouseArea {
+                        anchors.fill: parent
+                        cursorShape: containsMouse ? Qt.PointingHandCursor : Qt.ArrowCursor
+                        hoverEnabled: true
+
+                        onClicked: Qt.openUrlExternally(_remoteControl.appInfo.homePage)
+                    }
                 }
 
-                Label {
+                Link {
                     text: root.versionMessage
                 }
 
