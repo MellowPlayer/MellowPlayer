@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg
+   xmlns="http://www.w3.org/2000/svg"
+   height="140"
+   width="140"
+   version="1.1"
+   viewBox="0 0 140 140">
+  <circle
+     r="70"
+     style="fill:#7f7f7f"
+     cy="70"
+     cx="70" />
+  <path
+     style="fill:#ffffff"
+     d="m 36.274,30.0005 v 80 h 21.457 a 3.618,3.618 0 0 0 3.617,-3.618 v -15.367 h 5.372 c 26.27,0 37.01,-14.804 37.01,-32.12 0,-21.371 -16.239,-28.896 -31.522,-28.896 H 36.27" />
+</svg>
