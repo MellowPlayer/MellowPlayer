@@ -37,71 +37,60 @@
 //     ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
 var previousSongHash = "";
-var artUrl = "";
-
-function convertArtUrlToBase64() {
-    try {
-        var artBlobUrl = document.getElementsByClassName('AudioVideoPlayerControls-buttonGroupLeft-3kwFX')[
-            0].children[0].children[0].children[0].children[0].children[0].children[0].children[0].children[0]
-            .style["background-image"];
-        artBlobUrl = artBlobUrl.replace('url("', "").replace('")', "");
-
-        // Get the data URL of the blob
-        var request = new XMLHttpRequest();
-        request.open('GET', artBlobUrl, true);
-        request.responseType = 'blob';
-        request.onload = function() {
-            var reader = new FileReader();
-            reader.readAsDataURL(request.response);
-            reader.onload = function(e) {
-                artUrl = e.target.result;
-            };
-        };
-        request.send();
-    } catch (e) {
-        console.warn("failed to convertArtUrl: ", e);
-    }
-}
+var updateInfoCache = {
+    "playbackStatus": 0,
+    "songId": 0,
+    "songTitle": 0,
+};
 
 function update() {
-    var controlClassName = document.getElementsByClassName('AudioVideoPlayerControls-controls-OwK1f')[0];
+    var controlClassName = document.getElementsByClassName('AudioVideoPlayerView-container-kWiFsz')[0];
     // if controlClassName is undefined the audioplayer isn't opened yet
     if (!controlClassName)
         return;
     var playbackStatus = mellowplayer.PlaybackStatus.STOPPED;
     if (document.querySelector('[aria-label=Pause]') !== null)
         playbackStatus = mellowplayer.PlaybackStatus.PLAYING;
-    else if (document.querySelector('[aria-label=Play]') !== null)
-        playbackStatus = mellowplayer.PlaybackStatus.PAUSED;
+    else if (document.querySelector('[aria-label=Play]') !== null) {
+        updateInfoCache["playbackStatus"] = mellowplayer.PlaybackStatus.PAUSED;
+        return updateInfoCache;
+    }
 
     // We'll use this multiple times later on as it packs all the media info
-    var mediaInfoElement = document.getElementsByClassName('AudioVideoPlayerControls-buttonGroupLeft-3kwFX')[
-        0].children[0].children[0];
-
+    var mediaInfoElement = document.getElementsByClassName('PlayerControlsMetadata-container-2wqMfv')[0];
 
     try {
-        var songTitle = mediaInfoElement.children[1].children[0].title
+        var topElement = mediaInfoElement.children[0].title;
     } catch (e) {
-        var songTitle = '';
+        var topElement = '';
     }
+
     try {
-        var artistInfoElement = mediaInfoElement.children[1].children[1];
-        var artistName = artistInfoElement.children[0].title;
-        var albumTitle = artistInfoElement.children[2].title;
+        var middleLeftElement = mediaInfoElement.children[1].children[0].innerText;
     } catch (e) {
-        var artistName = '';
+        var middleLeftElement = '';
+    }
+    if (middleLeftElement.match(/^\s*((S\d+\s*)?([·]\s*)?E\d+|\d+\/\d+\/\d+)\s*$/mg) !== null) {
+        // Episodic or Date; Series is on the top
+        try {
+            var songTitle = mediaInfoElement.children[1].children[2].title;
+        } catch (e) {
+            var songTitle = '';
+        }
+        var artistName = topElement;
         var albumTitle = '';
+    } else {
+        var songTitle = topElement;
+        try {
+            var artistName = mediaInfoElement.children[1].children[0].innerText;
+            var albumTitle = mediaInfoElement.children[1].children[2].title;
+        } catch (e) {
+            var artistName = '';
+            var albumTitle = '';
+        }
     }
 
-    var songHash = getHashCode(songTitle)
-
-    if (songHash !== previousSongHash) {
-        previousSongHash = songHash
-        artUrl = "";
-        convertArtUrlToBase64();
-    }
-
-    var updateInfo = {
+    updateInfoCache = {
         "playbackStatus": playbackStatus,
         "canSeek": false,
         "canGoNext": true,
@@ -110,19 +99,18 @@ function update() {
         "volume": 1,
         "duration": mediaTime("duration"),
         "position": mediaTime("position"),
-        "songId": songHash,
+        "songId": getHashCode(songTitle),
         "songTitle": songTitle,
         "artistName": artistName,
         "albumTitle": albumTitle,
-        "artUrl": artUrl,
-        "isFavorite": false
+//        "artUrl": artUrl,
     };
 
-    return updateInfo;
+    return updateInfoCache;
 }
 
 function mediaTime(type) {
-    var timeElement = document.getElementsByClassName("DurationRemaining-container-1F4w8")[0]
+    var timeElement = document.getElementsByClassName("DurationRemaining-container-1F4w8F")[0]
 
     // if timeElement doesn't exist yet the site didn't finish loading yet
     if (!timeElement)
@@ -132,10 +120,10 @@ function mediaTime(type) {
 
     if (type === "position")
         // songPosition
-        var time = timeElement.split("-->")[1].split("<!--")[0];
+        var time = timeElement.split(" / ")[0];
     else
         // songDuration
-        var time = timeElement.split("-->")[5].split("<!--")[0];
+        var time = timeElement.split(" / ")[1];
 
     return toSeconds(time);
 }
@@ -202,3 +190,4 @@ function removeFromFavorites() {
 function seekToPosition(position) {
     // not supported
 }
+
