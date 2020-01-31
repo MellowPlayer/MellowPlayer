@@ -72,7 +72,9 @@
 #include <MellowPlayer/Infrastructure/StreamingServices/StreamingServiceCreator.hpp>
 #include <MellowPlayer/Infrastructure/StreamingServices/StreamingServiceLoader.hpp>
 #include <MellowPlayer/Infrastructure/StreamingServices/StreamingServiceWatcher.hpp>
+#include <MellowPlayer/Infrastructure/System/ProcessFactory.hpp>
 #include <MellowPlayer/Infrastructure/System/QtConcurrentWorkDispatcher.hpp>
+#include <MellowPlayer/Infrastructure/System/ShellScriptFactory.hpp>
 #include <MellowPlayer/Infrastructure/System/TextFileFactory.hpp>
 #include <MellowPlayer/Infrastructure/System/Timer.hpp>
 #include <MellowPlayer/Infrastructure/Theme/ThemeLoader.hpp>
@@ -148,6 +150,8 @@ auto defaultInjector = [](di::extension::detail::scoped& scope, QApplication& qA
         di::bind<IHotkeys>().to<Hotkeys>().in(di::singleton).in(scope),
         di::bind<IApplicationStatusFile>().to<ApplicationStatusFile>().in(di::singleton).in(scope),
         di::bind<ITextFileFactory>().to<TextFileFactory>().in(di::singleton).in(scope),
+        di::bind<IProcessFactory>().to<ProcessFactory>().in(di::singleton).in(scope),
+        di::bind<IShellScriptFactory>().to<ShellScriptFactory>().in(di::singleton).in(scope),
         di::bind<IRemoteControl>().to<RemoteControl>().in(di::singleton).in(scope),
         di::bind<IRemoteControlApplication>().to<MellowPlayerConnect>().in(di::singleton).in(scope),
 

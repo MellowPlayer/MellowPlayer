@@ -11,14 +11,14 @@
 using namespace MellowPlayer::Domain;
 using namespace MellowPlayer::Infrastructure;
 
-MellowPlayerConnect::MellowPlayerConnect(ITextFileFactory& textFileFactory)
+MellowPlayerConnect::MellowPlayerConnect(ITextFileFactory& textFileFactory, IShellScriptFactory& shellScriptFactory)
         : _textFileFactory(textFileFactory),
+          _shellScriptFactory(shellScriptFactory),
           _logger(Loggers::logger("MellowPlayer.Connect")),
           _minimumRequiredVersion(0, 2, 0),
           _installationDirectory(QStandardPaths::standardLocations(QStandardPaths::AppDataLocation).first() + QDir::separator() + "RemoteControl" +
                                  QDir::separator() + "mellowplayer-connect")
 {
-
 }
 
 QString MellowPlayerConnect::logo() const
@@ -73,7 +73,9 @@ InstallationState MellowPlayerConnect::checkInstallation()
     {
         _version = QVersionNumber::fromString(versionFile->read().split(QRegExp("[\r\n]"), QString::SkipEmptyParts).first());
         bool upToDate = _version >= _minimumRequiredVersion;
-        LOG_DEBUG(_logger, "Found version " << _version.toString() << ", required version is " << _minimumRequiredVersion.toString() << ": " << (upToDate ? "OK" : "NOK"));
+        LOG_DEBUG(
+                _logger,
+                "Found version " << _version.toString() << ", required version is " << _minimumRequiredVersion.toString() << ": " << (upToDate ? "OK" : "NOK"));
         setInstallationState(upToDate ? InstallationState::UpToDate : InstallationState::Outdated);
     }
     return installationState();

@@ -11,11 +11,12 @@ namespace MellowPlayer::Domain
 namespace MellowPlayer::Infrastructure
 {
     class ITextFileFactory;
+    class IShellScriptFactory;
 
     class MellowPlayerConnect : public Domain::IRemoteControlApplication
     {
     public:
-        explicit MellowPlayerConnect(ITextFileFactory& textFileFactory);
+        explicit MellowPlayerConnect(ITextFileFactory& textFileFactory, IShellScriptFactory& shellScriptFactory);
 
         QString logo() const override;
         QString name() const override;
@@ -25,7 +26,6 @@ namespace MellowPlayer::Infrastructure
         QString url() const override;
 
         Domain::InstallationState checkInstallation() override;
-
         Domain::InstallationState installationState() const override;
         void install(const InstallCallback& installCallback) override;
         bool isInstalling() const override;
@@ -40,6 +40,7 @@ namespace MellowPlayer::Infrastructure
         void setInstalling(bool value);
 
         ITextFileFactory& _textFileFactory;
+        IShellScriptFactory& _shellScriptFactory;
         QVersionNumber _version;
         bool _running = false;
         bool _installing = false;
