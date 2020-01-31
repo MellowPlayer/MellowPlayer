@@ -18,3 +18,8 @@ bool QmlApplicationEngine::load(const QUrl& url)
     _engine.load(url);
     return _engine.rootObjects().count() > 0;
 }
+
+void QmlApplicationEngine::setContextProperty(const QString& name, QVariant value)
+{
+    _engine.rootContext()->setContextProperty(name, value);
+}

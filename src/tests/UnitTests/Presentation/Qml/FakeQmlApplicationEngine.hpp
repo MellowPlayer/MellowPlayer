@@ -16,6 +16,10 @@ namespace MellowPlayer::Presentation::Tests
             _contextProperties[name] = object;
         }
 
+        void setContextProperty(const QString&, QVariant) override
+        {
+        }
+
         bool hasContextProperty(const QString& name)
         {
             return _contextProperties.contains(name);

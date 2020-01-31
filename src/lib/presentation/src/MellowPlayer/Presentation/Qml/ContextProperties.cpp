@@ -22,6 +22,7 @@ void ContextProperties::registerToQml()
 {
     qmlRegisterUncreatableType<Player>("MellowPlayer", 3, 0, "Player", "Player cannot be instantiated from QML");
     _qmlApplicationEngine.setContextProperty("_player", &_player);
+    _qmlApplicationEngine.setContextProperty("_usePopupDialogWorkaround", QVersionNumber::fromString(qVersion()) >= QVersionNumber(5, 14, 0));
 
     for (auto* contextProperty : _contextProperties)
         contextProperty->registerTo(_qmlApplicationEngine);

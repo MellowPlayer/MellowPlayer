@@ -22,6 +22,8 @@ namespace MellowPlayer::Presentation
          */
         virtual void setContextProperty(const QString& name, QObject* object) = 0;
 
+        virtual void setContextProperty(const QString& name, QVariant value) = 0;
+
         /**
          * Adds a path to the QML import path list.
          *
