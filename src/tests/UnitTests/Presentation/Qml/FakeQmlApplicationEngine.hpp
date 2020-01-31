@@ -16,7 +16,7 @@ namespace MellowPlayer::Presentation::Tests
             _contextProperties[name] = object;
         }
 
-        void setContextProperty(const QString&, QVariant) override
+        void setContextProperty(const QString&, const QVariant&) override
         {
         }
 
