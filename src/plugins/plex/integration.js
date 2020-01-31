@@ -49,9 +49,9 @@ function update() {
     if (!controlClassName)
         return;
     var playbackStatus = mellowplayer.PlaybackStatus.STOPPED;
-    if (document.querySelector('[aria-label=Pause]') !== null)
+    if (document.querySelector('button[data-qa-id=pauseButton]') !== null)
         playbackStatus = mellowplayer.PlaybackStatus.PLAYING;
-    else if (document.querySelector('[aria-label=Play]') !== null) {
+    else if (document.querySelector('button[data-qa-id=resumeButton]') !== null) {
         updateInfoCache["playbackStatus"] = mellowplayer.PlaybackStatus.PAUSED;
         return updateInfoCache;
     }
@@ -156,23 +156,23 @@ function clickButton(buttonName) {
         triggerMouseEvent(elm, 'click', x, y);
     }
 
-    clickOnElement(document.querySelector("[aria-label=" + buttonName + "]"))
+    clickOnElement(document.querySelector("button[data-qa-id=" + buttonName + "]"))
 }
 
 function play() {
-    clickButton('Play');
+    clickButton('resumeButton');
 }
 
 function pause() {
-    clickButton('Pause');
+    clickButton('pauseButton');
 }
 
 function goNext() {
-    clickButton('Next');
+    clickButton('nextButton');
 }
 
 function goPrevious() {
-    clickButton('Previous');
+    clickButton('previousButton');
 }
 
 function setVolume(volume) {
