@@ -2,6 +2,7 @@
 
 #include <MellowPlayer/Domain/RemoteControl/IRemoteControlApplication.hpp>
 #include <QtCore/QVersionNumber>
+#include <memory>
 
 namespace MellowPlayer::Domain
 {
@@ -11,6 +12,7 @@ namespace MellowPlayer::Domain
 namespace MellowPlayer::Infrastructure
 {
     class ITextFileFactory;
+    class IShellScript;
     class IShellScriptFactory;
 
     class MellowPlayerConnect : public Domain::IRemoteControlApplication
@@ -48,5 +50,6 @@ namespace MellowPlayer::Infrastructure
         Domain::ILogger& _logger;
         QVersionNumber _minimumRequiredVersion;
         QString _installationDirectory;
+        std::shared_ptr<IShellScript> _installScript;
     };
 }

@@ -1,5 +1,7 @@
 #include "MellowPlayerConnect.hpp"
 #include <MellowPlayer/Domain/Logging/Loggers.hpp>
+#include <MellowPlayer/Infrastructure/System/IShellScript.hpp>
+#include <MellowPlayer/Infrastructure/System/IShellScriptFactory.hpp>
 #include <MellowPlayer/Infrastructure/System/ITextFile.hpp>
 #include <MellowPlayer/Infrastructure/System/ITextFileFactory.hpp>
 #include <QtCore/QDir>
@@ -88,17 +90,40 @@ InstallationState MellowPlayerConnect::installationState() const
 
 void MellowPlayerConnect::install(const IRemoteControlApplication::InstallCallback& installCallback)
 {
+    if (isInstalling())
+        return;
+
     if (isRunning())
         stop();
 
     LOG_DEBUG(_logger, "Installing " << name());
     setInstalling(true);
 
-    QTimer::singleShot(5000, [=]() {
+    _installScript = _shellScriptFactory.create();
+    QString downloadUrl = QString("https://gitlab.com/ColinDuquesnoy/mellowplayer-connect/-/jobs/artifacts/%1/raw/mellowplayer-connect.tar.gz?job=%2")
+                                  .arg(minimumRequiredVersion());
+    ;
+#if defined(Q_OS_UNIX)
+    downloadUrl = downloadUrl.arg("publish-linux-x64");
+    _installScript->setScript(":/MellowPlayer/Infrastructure/scripts/install-mellowplayer-connect.sh");
+#elif defined(Q_OS_WIN)
+    downloadUrl = downloadUrl.arg("publish-win-x64");
+    _installScript->setScript("qrc:/MellowPlayer/Infrastructure/scripts/install-mellowplayer-connect.bat");
+#else
+    // not supported
+    retrun;
+#endif
+    _installScript->setScriptArguments({downloadUrl, _installationDirectory});
+    _installScript->execute([=](int exitCode, const QString&, const QString& errorOutput) {
+        LOG_DEBUG(_logger, "Installion finished");
         setInstallationState(checkInstallation());
         // execute process and call below lines in callback
         setInstalling(false);
-        installCallback(true, "");
+        installCallback(exitCode == 0, errorOutput);
+    });
+
+    QTimer::singleShot(5000, [=]() {
+
     });
 }
 
@@ -111,13 +136,13 @@ void MellowPlayerConnect::start()
 {
     // TODO pay attention to use the same process, what about flatpak?
     LOG_DEBUG(_logger, "Starting " << name());
-    setRunning(true);
+//    setRunning(true);
 }
 
 void MellowPlayerConnect::stop()
 {
     LOG_DEBUG(_logger, "Stopping " << name());
-    setRunning(false);
+//    setRunning(false);
 }
 
 bool MellowPlayerConnect::isRunning() const

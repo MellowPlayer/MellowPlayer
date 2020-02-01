@@ -142,12 +142,13 @@ void RemoteControlViewModel::install()
 
 void RemoteControlViewModel::start()
 {
-    _remoteControlApplication.start();
+    emit error("Start MellowPlayer.Connect failed", "Not implemented");
+    // _remoteControlApplication.start();
 }
 
 void RemoteControlViewModel::stop()
 {
-    _remoteControlApplication.stop();
+    // _remoteControlApplication.stop();
 }
 
 bool RemoteControlViewModel::isAutoStartEnabled() const

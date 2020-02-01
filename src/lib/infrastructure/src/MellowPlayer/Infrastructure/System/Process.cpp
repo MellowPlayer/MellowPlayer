@@ -9,8 +9,8 @@ using namespace MellowPlayer::Infrastructure;
 Process::Process(const QString& name) : _logger(Loggers::logger(QString("Process[%1]").arg(name).toStdString()))
 {
     connect(&_qProcess, &QProcess::readyReadStandardOutput, this, &Process::onReadyReadStandardOutput);
-    connect(&_qProcess, &QProcess::readAllStandardError, this, &Process::onReadyReadErrorOutput);
-    connect(&_qProcess, SIGNAL(finished(int,QProcess::ExitStatus)), this, SLOT(onFinished(int,QProcess::ExitStatus)));
+    connect(&_qProcess, &QProcess::readyReadStandardError, this, &Process::onReadyReadErrorOutput);
+    connect(&_qProcess, QOverload<int, QProcess::ExitStatus>::of(&QProcess::finished), this, &Process::onFinished);
 }
 
 void Process::setProgram(const QString& program)
@@ -46,7 +46,7 @@ void Process::setLogOutput(bool value)
 void Process::execute(const ExecuteCallback& callback)
 {
     _callback = callback;
-    LOG_DEBUG(_logger, "Starting process " << _qProcess.program() << _qProcess.arguments().join(" ") << " @ " << _qProcess.workingDirectory());
+    LOG_DEBUG(_logger, "Starting process " << _qProcess.program() << " " << _qProcess.arguments().join(" ") << " @ " << _qProcess.workingDirectory());
 
     _qProcess.start();
 }
@@ -66,10 +66,10 @@ void Process::readOutput(const QProcess::ProcessChannel channel)
     _qProcess.setReadChannel(channel);
     while(_qProcess.canReadLine())
     {
-        auto line = _qProcess.readLine();
+        auto line = _qProcess.readLine().replace("\n", "");
 
         if (_logOutput)
-            LOG_DEBUG(_logger, (channel == QProcess::StandardOutput ? "stdout" : "stderr") << line.toStdString());
+            LOG_DEBUG(_logger, (channel == QProcess::StandardOutput ? "stdout: " : "stderr: ") << line.toStdString());
 
         if (channel == QProcess::StandardOutput && _bufferizeStandardOutput)
             _standardOutput.append(line);

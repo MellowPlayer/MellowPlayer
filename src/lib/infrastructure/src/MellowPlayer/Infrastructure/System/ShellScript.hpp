@@ -2,6 +2,11 @@
 
 #include <MellowPlayer/Infrastructure/System/IShellScript.hpp>
 
+namespace MellowPlayer::Domain
+{
+    class ILogger;
+}
+
 namespace MellowPlayer::Infrastructure
 {
     class ITextFileFactory;
@@ -28,7 +33,7 @@ namespace MellowPlayer::Infrastructure
         QString _interpreter;
         QString _path;
         QStringList _arguments;
-
+        Domain::ILogger& _logger;
         std::shared_ptr<IProcess> _process;
     };
 }

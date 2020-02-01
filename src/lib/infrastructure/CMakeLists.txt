@@ -10,6 +10,7 @@ configure_file(resources/PluginTemplate/metadata.ini ${CMAKE_CURRENT_BINARY_DIR}
 configure_file(resources/PluginTemplate/theme.json ${CMAKE_CURRENT_BINARY_DIR}/resources/PluginTemplate/theme.json)
 configure_file(resources/PluginTemplate/logo.svg ${CMAKE_CURRENT_BINARY_DIR}/resources/PluginTemplate/logo.svg)
 configure_file(resources/images/mellowplayer-connect.svg ${CMAKE_CURRENT_BINARY_DIR}/resources/images/mellowplayer-connect.svg)
+configure_file(resources/scripts/install-mellowplayer-connect.sh ${CMAKE_CURRENT_BINARY_DIR}/resources/scripts/install-mellowplayer-connect.sh)
 
 configure_file(src/MellowPlayer/Infrastructure/BuildConfig.cpp.in ${CMAKE_BINARY_DIR}/BuildConfig.cpp)
 
