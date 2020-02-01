@@ -99,6 +99,8 @@ void logStart()
     LOG_WARN(logger, QString("MellowPlayer %1 - %2").arg(version).arg(buildInfo));
     LOG_INFO(logger, "Log directory: " + logDirectory);
 
+    LOG_INFO(logger, "Args: [" << qApp->arguments().join(", ") << "]");
+
     QString appImagePath = qgetenv("APPIMAGE");
     if (!appImagePath.isEmpty())
         LOG_DEBUG(logger, "Running from AppImage" << appImagePath);
