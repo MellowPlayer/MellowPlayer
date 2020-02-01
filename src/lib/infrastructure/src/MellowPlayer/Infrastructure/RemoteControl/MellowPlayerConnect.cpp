@@ -109,13 +109,11 @@ void MellowPlayerConnect::install(const IRemoteControlApplication::InstallCallba
 #if defined(Q_OS_UNIX)
     downloadUrl = downloadUrl.arg("publish-linux-x64");
     _installScript->setScript(":/MellowPlayer/Infrastructure/scripts/install-mellowplayer-connect.sh");
-#elif defined(Q_OS_WIN)
+#else
     downloadUrl = downloadUrl.arg("publish-win-x64");
     _installScript->setScript("qrc:/MellowPlayer/Infrastructure/scripts/install-mellowplayer-connect.bat");
-#else
-    // not supported
-    retrun;
 #endif
+
     _installScript->setScriptArguments({downloadUrl, _installationDirectory});
     _installScript->execute([=](int exitCode, const QString&, const QString& errorOutput) {
         LOG_DEBUG(_logger, "Installion finished");
