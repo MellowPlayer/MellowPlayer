@@ -140,13 +140,11 @@ void MellowPlayerConnect::start()
     _process = _processFactory.create(name());
     auto extension = "";
 #if Q_OS_WIN
-    extension = ".exe"
+    extension = ".exe";
 #endif
-                _process->setProgram(_installationDirectory + QDir::separator() + "MellowPlayer.Connect" + extension);
+    _process->setProgram(_installationDirectory + QDir::separator() + "MellowPlayer.Connect" + extension);
     _process->setWorkingDirectory(_installationDirectory);
-    _process->execute([=](int, const QString&, const QString&) {
-        LOG_DEBUG(_logger, "Process finished");
-    });
+    _process->execute([=](int, const QString&, const QString&) { LOG_DEBUG(_logger, "Process finished"); });
     setRunning(true);
 }
 
