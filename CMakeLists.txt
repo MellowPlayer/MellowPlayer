@@ -3,11 +3,21 @@ cmake_minimum_required(VERSION 3.10)
 project(MellowPlayer)
 
 set(VERSION_MAJOR 3)
-set(VERSION_MINOR 5)
-set(VERSION_PATCH 92)
-set(VERSION_TWEAK 0)
+set(VERSION_MINOR 6)
+set(VERSION_PATCH 0)
 
-project(MellowPlayer VERSION "${VERSION_MAJOR}.${VERSION_MINOR}.${VERSION_PATCH}")
+if(EXISTS ${PROJECT_SOURCE_DIR}/.git/)
+    execute_process(
+            COMMAND git rev-list HEAD --count
+            WORKING_DIRECTORY ${CMAKE_SOURCE_DIR}
+            OUTPUT_VARIABLE VERSION_TWEAK
+            OUTPUT_STRIP_TRAILING_WHITESPACE
+    )
+else()
+    set(VERSION_TWEAK 0)
+endif()
+
+project(MellowPlayer VERSION "${VERSION_MAJOR}.${VERSION_MINOR}.${VERSION_PATCH}.${VERSION_TWEAK}")
 
 message(STATUS "Building MellowPlayer version ${PROJECT_VERSION}")
 
