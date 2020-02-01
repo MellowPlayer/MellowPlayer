@@ -100,8 +100,6 @@ void logStart()
     LOG_INFO(logger, "Log directory: " + logDirectory);
     LOG_INFO(logger, "Args: [" << qApp->arguments().join(", ") << "]");
 
-    LOG_INFO(logger, "Args: [" << qApp->arguments().join(", ") << "]");
-
     QString appImagePath = qgetenv("APPIMAGE");
     if (!appImagePath.isEmpty())
         LOG_DEBUG(logger, "Running from AppImage" << appImagePath);
