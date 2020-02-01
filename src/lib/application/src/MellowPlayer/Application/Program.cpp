@@ -122,19 +122,27 @@ void configureForQmlAndWebEngine(QApplication& qApplication)
 {
     qApplication.setApplicationDisplayName("MellowPlayer");
 #if QT_VERSION < QT_VERSION_CHECK(5, 14, 0)
-    // With Qt < 5.14 it is recommended to initialize qtwebengine AFTER creating QApplication
+    // With Qt < 5.14 it is recommended to initialize QtWebEngine AFTER creating QApplication
     QtWebEngine::initialize();
 #endif
     QQuickStyle::setStyle("Material");
 }
 
+int exec(QApplication& qApplication, CommandLineArguments& commandLineArguments)
+{
+    di::extension::detail::scoped scope = {};
+    auto injector = defaultInjector(scope, qApplication, commandLineArguments);
+
+    auto program = injector.create<Program>();
+    return program.execute();
+}
+
 int Program::main(int argc, char** argv)
 {
 #if QT_VERSION >= QT_VERSION_CHECK(5, 14, 0)
-    // With Qt >= 5.14 it is recommended to initialize qtwebengine BEFORE creating QApplication
+    // With Qt >= 5.14 it is recommended to initialize QtWebEngine BEFORE creating QApplication
     QtWebEngine::initialize();
 #endif
-
     configureEnvironment();
     configureHiDpiSupport();
     configureLogging();
@@ -144,15 +152,11 @@ int Program::main(int argc, char** argv)
 
     CommandLineArguments commandLineArguments;
     commandLineArguments.parse();
-
     Loggers::instance().setDefaultLogLevel(commandLineArguments.logLevel());
+
     logStart();
-
-    di::extension::detail::scoped scope{};
-    auto injector = defaultInjector(scope, qApplication, commandLineArguments);
-
-    auto program = injector.create<Program&>();
-    auto returnCode = program.execute();
+    auto returnCode = exec(qApplication, commandLineArguments);
     logStop();
+
     return returnCode;
 }

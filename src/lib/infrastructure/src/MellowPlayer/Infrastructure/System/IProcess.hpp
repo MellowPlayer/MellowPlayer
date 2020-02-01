@@ -20,5 +20,6 @@ namespace MellowPlayer::Infrastructure
         virtual void setLogOutput(bool value) = 0;
 
         virtual void execute(const ExecuteCallback& callback) = 0;
+        virtual void stop() = 0;
     };
 }

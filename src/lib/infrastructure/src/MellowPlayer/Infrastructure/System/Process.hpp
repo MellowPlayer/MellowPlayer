@@ -15,6 +15,7 @@ namespace MellowPlayer::Infrastructure
         Q_OBJECT
     public:
         Process(const QString& name);
+        ~Process();
 
         void setProgram(const QString& program) override;
         void setArguments(const QStringList& arguments) override;
@@ -22,7 +23,9 @@ namespace MellowPlayer::Infrastructure
         void setBufferizeStandardOutput(bool value) override;
         void setBufferizeErrorOutput(bool value) override;
         void setLogOutput(bool value) override;
+
         void execute(const ExecuteCallback& callback) override;
+        void stop() override;
 
     private slots:
         void onReadyReadStandardOutput();

@@ -13,6 +13,11 @@ Process::Process(const QString& name) : _logger(Loggers::logger(QString("Process
     connect(&_qProcess, QOverload<int, QProcess::ExitStatus>::of(&QProcess::finished), this, &Process::onFinished);
 }
 
+Process::~Process()
+{
+    stop();
+}
+
 void Process::setProgram(const QString& program)
 {
     _qProcess.setProgram(program);
@@ -91,4 +96,12 @@ void Process::onFinished(int exitCode, QProcess::ExitStatus exitStatus)
     }
 
     _callback(exitCode, _standardOutput.join("\n"), _errorOutput.join("\n"));
+}
+void Process::stop()
+{
+    if (_qProcess.isOpen())
+    {
+        _qProcess.terminate();
+        _qProcess.waitForFinished();
+    }
 }

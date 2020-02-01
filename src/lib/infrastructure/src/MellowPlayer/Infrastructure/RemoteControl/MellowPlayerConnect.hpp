@@ -14,11 +14,13 @@ namespace MellowPlayer::Infrastructure
     class ITextFileFactory;
     class IShellScript;
     class IShellScriptFactory;
+    class IProcess;
+    class IProcessFactory;
 
     class MellowPlayerConnect : public Domain::IRemoteControlApplication
     {
     public:
-        explicit MellowPlayerConnect(ITextFileFactory& textFileFactory, IShellScriptFactory& shellScriptFactory);
+        explicit MellowPlayerConnect(ITextFileFactory& textFileFactory, IShellScriptFactory& shellScriptFactory, IProcessFactory& processFactory);
 
         QString logo() const override;
         QString name() const override;
@@ -43,6 +45,7 @@ namespace MellowPlayer::Infrastructure
 
         ITextFileFactory& _textFileFactory;
         IShellScriptFactory& _shellScriptFactory;
+        IProcessFactory& _processFactory;
         QVersionNumber _version;
         bool _running = false;
         bool _installing = false;
@@ -51,5 +54,6 @@ namespace MellowPlayer::Infrastructure
         QVersionNumber _minimumRequiredVersion;
         QString _installationDirectory;
         std::shared_ptr<IShellScript> _installScript;
+        std::shared_ptr<IProcess> _process;
     };
 }

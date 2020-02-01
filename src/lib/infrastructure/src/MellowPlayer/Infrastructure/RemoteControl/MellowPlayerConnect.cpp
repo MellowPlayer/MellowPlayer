@@ -1,5 +1,7 @@
 #include "MellowPlayerConnect.hpp"
 #include <MellowPlayer/Domain/Logging/Loggers.hpp>
+#include <MellowPlayer/Infrastructure/System/IProcess.hpp>
+#include <MellowPlayer/Infrastructure/System/IProcessFactory.hpp>
 #include <MellowPlayer/Infrastructure/System/IShellScript.hpp>
 #include <MellowPlayer/Infrastructure/System/IShellScriptFactory.hpp>
 #include <MellowPlayer/Infrastructure/System/ITextFile.hpp>
@@ -13,9 +15,10 @@
 using namespace MellowPlayer::Domain;
 using namespace MellowPlayer::Infrastructure;
 
-MellowPlayerConnect::MellowPlayerConnect(ITextFileFactory& textFileFactory, IShellScriptFactory& shellScriptFactory)
+MellowPlayerConnect::MellowPlayerConnect(ITextFileFactory& textFileFactory, IShellScriptFactory& shellScriptFactory, IProcessFactory& processFactory)
         : _textFileFactory(textFileFactory),
           _shellScriptFactory(shellScriptFactory),
+          _processFactory(processFactory),
           _logger(Loggers::logger("MellowPlayer.Connect")),
           _minimumRequiredVersion(0, 2, 0),
           _installationDirectory(QStandardPaths::standardLocations(QStandardPaths::AppDataLocation).first() + QDir::separator() + "RemoteControl" +
@@ -136,13 +139,28 @@ void MellowPlayerConnect::start()
 {
     // TODO pay attention to use the same process, what about flatpak?
     LOG_DEBUG(_logger, "Starting " << name());
-//    setRunning(true);
+    _process = _processFactory.create(name());
+    auto extension = "";
+#if Q_OS_WIN
+    extension = ".exe"
+#endif
+                _process->setProgram(_installationDirectory + QDir::separator() + "MellowPlayer.Connect" + extension);
+    _process->setWorkingDirectory(_installationDirectory);
+    _process->execute([=](int, const QString&, const QString&) {
+        LOG_DEBUG(_logger, "Process finished");
+    });
+    setRunning(true);
 }
 
 void MellowPlayerConnect::stop()
 {
+    if (_process == nullptr)
+        return;
+
     LOG_DEBUG(_logger, "Stopping " << name());
-//    setRunning(false);
+    _process->stop();
+    _process = nullptr;
+    setRunning(false);
 }
 
 bool MellowPlayerConnect::isRunning() const
