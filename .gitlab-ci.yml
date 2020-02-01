@@ -88,7 +88,7 @@ deploy:continuous:
         - appimage
         - flatpak
     script:
-        - apk add --no-cache curl
+        - apk add --no-cache curl git
         - curl -T ./MellowPlayer-x86_64.AppImage -ucolinduquesnoy:${BINTRAY_API_KEY} "https://api.bintray.com/content/colinduquesnoy/MellowPlayer/Continuous/${APP_VERSION}.$(git rev-list HEAD --count)/continuous/${APP_VERSION}.$(git rev-list HEAD --count)/MellowPlayer-x86_64.AppImage?publish=1&override=1&explode=0"
         - curl -T ./MellowPlayer.flatpak -ucolinduquesnoy:${BINTRAY_API_KEY} "https://api.bintray.com/content/colinduquesnoy/MellowPlayer/Continuous/${APP_VERSION}.$(git rev-list HEAD --count)/continuous/${APP_VERSION}.$(git rev-list HEAD --count)/MellowPlayer.flatpak?publish=1&override=1&explode=0"
 
