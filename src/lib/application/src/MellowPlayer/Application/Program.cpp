@@ -98,6 +98,7 @@ void logStart()
     LOG_WARN(logger, "****************************** Starting ***************************************");
     LOG_WARN(logger, QString("MellowPlayer %1 - %2").arg(version).arg(buildInfo));
     LOG_INFO(logger, "Log directory: " + logDirectory);
+    LOG_INFO(logger, "Args: [" << qApp->arguments().join(", ") << "]");
 
     LOG_INFO(logger, "Args: [" << qApp->arguments().join(", ") << "]");
 
