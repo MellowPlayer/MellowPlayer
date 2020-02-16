@@ -134,8 +134,8 @@ bool SqlLiteListeningHistoryDatabase::initDatabase()
                       "artUrl TEXT, serviceName TEXT, time TEXT);");
         if (!query.exec())
         {
-            return false;
             LOG_WARN(_logger, "failed to create song table: " + query.lastError().text());
+            return false;
         }
     }
     return true;

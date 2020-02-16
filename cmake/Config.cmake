@@ -37,10 +37,10 @@ endif()
 set(CMAKE_CXX_STANDARD_REQUIRED on)
 set(CMAKE_CXX_STANDARD 17)
 if(MSVC_COMPILER)
-    add_compile_options("/std:c++latest")
+    add_compile_options("/std:c++17")
+    add_definitions(-D_SILENCE_CXX17_OLD_ALLOCATOR_MEMBERS_DEPRECATION_WARNING)
 endif()
 set(CMAKE_POSITION_INDEPENDENT_CODE ON)
-
 # find common packages
 find_package(Threads)
 

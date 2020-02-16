@@ -2,7 +2,7 @@
 
 namespace MellowPlayer::Presentation
 {
-    class Notification;
+    struct Notification;
 
     class IPlayerNotifications
     {
