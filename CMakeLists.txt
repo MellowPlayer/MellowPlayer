@@ -10,9 +10,13 @@ if(EXISTS ${PROJECT_SOURCE_DIR}/.git/)
     execute_process(
             COMMAND git rev-list HEAD --count
             WORKING_DIRECTORY ${CMAKE_SOURCE_DIR}
+
             OUTPUT_VARIABLE VERSION_TWEAK
             OUTPUT_STRIP_TRAILING_WHITESPACE
     )
+    if (VERSION_TWEAK STREQUAL "")
+        set(VERSION_TWEAK 0)
+    endif()
 else()
     set(VERSION_TWEAK 0)
 endif()
