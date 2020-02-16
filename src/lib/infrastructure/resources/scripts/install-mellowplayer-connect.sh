@@ -9,7 +9,7 @@ ARCHIVE_PATH="/tmp/mellowplayer-connect.tar.gz"
 echo "Downloading MellowPlayer.Connect from $DOWNLOAD_URL";
 echo "Installation directory: $INSTALLATION_DIRECTORY";
 
-rm $ARCHIVE_PATH
+rm -rf $ARCHIVE_PATH
 
 
 if [ -x "$(command -v wget)" ]; then
