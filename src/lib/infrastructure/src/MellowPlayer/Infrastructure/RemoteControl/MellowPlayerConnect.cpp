@@ -104,15 +104,15 @@ void MellowPlayerConnect::install(const IRemoteControlApplication::InstallCallba
     setInstalling(true);
 
     _installScript = _shellScriptFactory.create();
-    QString downloadUrl = QString("https://gitlab.com/ColinDuquesnoy/mellowplayer-connect/-/jobs/artifacts/%1/raw/mellowplayer-connect.tar.gz?job=%2")
+    QString downloadUrl = QString("https://gitlab.com/ColinDuquesnoy/mellowplayer-connect/-/jobs/artifacts/%1/raw/mellowplayer-connect.%2?job=%3")
                                   .arg(minimumRequiredVersion());
     ;
 #if defined(Q_OS_UNIX)
-    downloadUrl = downloadUrl.arg("publish-linux-x64");
+    downloadUrl = downloadUrl.arg("tar.gz").arg("publish-linux-x64");
     _installScript->setScript(":/MellowPlayer/Infrastructure/scripts/install-mellowplayer-connect.sh");
 #else
-    downloadUrl = downloadUrl.arg("publish-win-x64");
-    _installScript->setScript("qrc:/MellowPlayer/Infrastructure/scripts/install-mellowplayer-connect.bat");
+    downloadUrl = downloadUrl.arg("zip").arg("publish-win-x64");
+    _installScript->setScript(":/MellowPlayer/Infrastructure/scripts/install-mellowplayer-connect.ps1");
 #endif
 
     _installScript->setScriptArguments({downloadUrl, _installationDirectory});

@@ -102,6 +102,9 @@ void Process::stop()
     if (_qProcess.isOpen())
     {
         _qProcess.terminate();
+#ifdef Q_OS_WIN
+        _qProcess.kill();
+#endif
         _qProcess.waitForFinished();
     }
 }

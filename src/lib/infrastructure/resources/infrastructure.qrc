@@ -7,5 +7,6 @@
         <file>PluginTemplate/theme.json</file>
         <file>images/mellowplayer-connect.svg</file>
         <file>scripts/install-mellowplayer-connect.sh</file>
+        <file>scripts/install-mellowplayer-connect.ps1</file>
     </qresource>
 </RCC>

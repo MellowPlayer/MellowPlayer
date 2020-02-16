@@ -56,7 +56,14 @@ void ShellScript::execute(const IProcess::ExecuteCallback& executeCallback)
 {
     _process = _processFactory.create(QFileInfo(_path).baseName());
     _process->setProgram(_interpreter);
-    _process->setArguments(QStringList{_path} + _arguments);
+
+    auto arguments = QStringList{_path} + _arguments;
+
+    if (_interpreter == "powershell.exe")
+        arguments = QStringList{"-ExecutionPolicy", "unrestricted", "-File"} + arguments;
+
+    _process->setArguments(arguments);
+    _process->setWorkingDirectory(QFileInfo(_path).absoluteDir().absolutePath());
     _process->setBufferizeErrorOutput(true);
     _process->execute(executeCallback);
 }
