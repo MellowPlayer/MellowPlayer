@@ -1,5 +1,5 @@
 //
-// Copyright (c) 2012-2018 Kris Jusiak (kris at jusiak dot net)
+// Copyright (c) 2012-2019 Kris Jusiak (kris at jusiak dot net)
 //
 // Distributed under the Boost Software License, Version 1.0.
 // (See accompanying file LICENSE_1_0.txt or copy at http://www.boost.org/LICENSE_1_0.txt)
@@ -8,6 +8,9 @@
 #define BOOST_DI_FWD_HPP
 
 #include "boost/di/fwd_ext.hpp"
+
+namespace placeholders {
+__BOOST_DI_UNUSED static const struct arg { } _{}; }
 
 template <class, class = void>
 struct named {};
@@ -63,8 +66,9 @@ template <class, class...>
 struct array;
 
 struct deduced {};
+struct none {};
 
-template <class, class TExpected = deduced, class = TExpected, class = no_name, class = void>
+template <class, class TExpected = deduced, class = TExpected, class = no_name, class = void, class = none>
 class dependency;
 }  // namespace core
 

@@ -1,5 +1,5 @@
 //
-// Copyright (c) 2012-2018 Kris Jusiak (kris at jusiak dot net)
+// Copyright (c) 2012-2019 Kris Jusiak (kris at jusiak dot net)
 //
 // Distributed under the Boost Software License, Version 1.0.
 // (See accompanying file LICENSE_1_0.txt or copy at http://www.boost.org/LICENSE_1_0.txt)
@@ -58,11 +58,25 @@ create<T> (
 
 }  // namespace detail
 
+#if defined(__MSVC__)  // __pph__
+template <class T, class... Ts>
+struct injector
+    : detail::injector<
+          BOOST_DI_CFG, __BOOST_DI_REQUIRES_MSG(concepts::boundable<aux::type<T, Ts...>>),
+          core::dependency<scopes::instance, aux::unique_t<type_traits::named_decay_t<T>, type_traits::named_decay_t<Ts>...>,
+                           aux::type_list<type_traits::add_named_t<T>, type_traits::add_named_t<Ts>...>>> {
+  using detail::injector<
+      BOOST_DI_CFG, __BOOST_DI_REQUIRES_MSG(concepts::boundable<aux::type<T, Ts...>>),
+      core::dependency<scopes::instance, aux::unique_t<type_traits::named_decay_t<T>, type_traits::named_decay_t<Ts>...>,
+                       aux::type_list<type_traits::add_named_t<T>, type_traits::add_named_t<Ts>...>>>::injector;
+};
+#else   // __pph__
 template <class T, class... Ts>
 using injector = detail::injector<
     BOOST_DI_CFG, __BOOST_DI_REQUIRES_MSG(concepts::boundable<aux::type<T, Ts...>>),
     core::dependency<scopes::instance, aux::unique_t<type_traits::named_decay_t<T>, type_traits::named_decay_t<Ts>...>,
                      aux::type_list<type_traits::add_named_t<T>, type_traits::add_named_t<Ts>...>>>;
+#endif  // __pph__
 
 // clang-format off
 #define __BOOST_DI_EXPOSE_IMPL__(...) decltype(BOOST_DI_NAMESPACE::detail::__VA_ARGS__), // __pph__

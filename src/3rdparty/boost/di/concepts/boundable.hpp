@@ -1,5 +1,5 @@
 //
-// Copyright (c) 2012-2018 Kris Jusiak (kris at jusiak dot net)
+// Copyright (c) 2012-2019 Kris Jusiak (kris at jusiak dot net)
 //
 // Distributed under the Boost Software License, Version 1.0.
 // (See accompanying file LICENSE_1_0.txt or copy at http://www.boost.org/LICENSE_1_0.txt)
@@ -105,9 +105,9 @@ using boundable_bindings =
                        typename type_<typename get_not_supported<TDeps...>::type>::is_neither_a_dependency_nor_an_injector>;
 
 template <class... Ts>
-using get_any_of_error = aux::conditional_t<
-    aux::is_same<aux::bool_list<aux::always<Ts>::value...>, aux::bool_list<aux::is_same<aux::true_type, Ts>::value...>>::value,
-    aux::true_type, any_of<Ts...>>;
+struct get_any_of_error : aux::conditional<aux::is_same<aux::bool_list<aux::always<Ts>::value...>,
+                                                        aux::bool_list<aux::is_same<aux::true_type, Ts>::value...>>::value,
+                                           aux::true_type, any_of<Ts...>> {};
 
 template <bool, class...>
 struct is_related {
@@ -166,8 +166,8 @@ template <class... TDeps>  // bindings
 auto boundable_impl(aux::type_list<TDeps...> &&) -> boundable_bindings<TDeps...>;
 
 template <class T, class... Ts>  // any_of
-auto boundable_impl(concepts::any_of<Ts...>&&, T &&)
-    -> get_any_of_error<decltype(boundable_impl(aux::declval<Ts>(), aux::declval<T>()))...>;
+auto boundable_impl(concepts::any_of<Ts...>&&, T &&) ->
+    typename get_any_of_error<decltype(boundable_impl(aux::declval<Ts>(), aux::declval<T>()))...>::type;
 
 template <class... TDeps>  // make_injector
 auto boundable_impl(aux::type<TDeps...> &&) -> typename get_is_unique_error_impl<typename aux::is_unique<TDeps...>::type>::type;
@@ -182,6 +182,6 @@ struct boundable__ {
 template <class... Ts>
 using boundable = typename boundable__<Ts...>::type;
 
-}  // concepts
+}  // namespace concepts
 
 #endif
