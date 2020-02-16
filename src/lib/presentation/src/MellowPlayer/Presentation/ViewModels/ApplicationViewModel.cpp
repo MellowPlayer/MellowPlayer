@@ -9,6 +9,7 @@
 #include <QDesktopServices>
 #include <QtCore/QDebug>
 #include <QtGui/QFontDatabase>
+#include <QProcess>
 
 using namespace MellowPlayer::Domain;
 using namespace MellowPlayer::Presentation;
@@ -43,7 +44,13 @@ void ApplicationViewModel::restart()
 void ApplicationViewModel::showLogs()
 {
     auto logDirectory = FileHelper::logDirectory();
-    QDesktopServices::openUrl(logDirectory + "All.log");
+    auto logFile = QUrl::fromLocalFile(logDirectory + "All.log");
+#ifdef Q_OS_UNIX
+    QProcess::startDetached("xdg-open", {logFile.toString()});
+#else
+    QDesktopServices::openUrl(logFile);
+#endif
+
 }
 
 QString ApplicationViewModel::buildInfo() const
