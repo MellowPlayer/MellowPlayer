@@ -564,22 +564,22 @@ listened to will appear here...</source>
 <context>
     <name>MainWindow</name>
     <message>
-        <location filename="../../lib/presentation/imports/MellowPlayer/MainWindow.qml" line="185"/>
+        <location filename="../../lib/presentation/imports/MellowPlayer/MainWindow.qml" line="183"/>
         <source>Are you sure you want to quit MellowPlayer?</source>
         <translation>Είστε σίγουρος ότι θέλετε να τερματιστεί ο MellowPlayer;</translation>
     </message>
     <message>
-        <location filename="../../lib/presentation/imports/MellowPlayer/MainWindow.qml" line="186"/>
+        <location filename="../../lib/presentation/imports/MellowPlayer/MainWindow.qml" line="184"/>
         <source>Confirm quit</source>
         <translation>Επιβεβαίωση τερματισμού</translation>
     </message>
     <message>
-        <location filename="../../lib/presentation/imports/MellowPlayer/MainWindow.qml" line="197"/>
+        <location filename="../../lib/presentation/imports/MellowPlayer/MainWindow.qml" line="203"/>
         <source>Closing to system tray</source>
         <translation>Κλείσιμο στην μπάρα συστήματος</translation>
     </message>
     <message>
-        <location filename="../../lib/presentation/imports/MellowPlayer/MainWindow.qml" line="198"/>
+        <location filename="../../lib/presentation/imports/MellowPlayer/MainWindow.qml" line="204"/>
         <source>&lt;p&gt;MellowPlayer will continue to run in background.&lt;br&gt;You can quit the application or restore the main window via the system tray icon menu.&lt;/p&gt;</source>
         <translation>&lt;p&gt;Ο MellowPlayer θα συνεχίσει να τρέχει στο παρασκήνιο.&lt;br&gt;Μπορείτε να κλείσετε την εφαρμογή η να επαναφέρετε το κύριο παράθυρο μέσω της μπάρας συστήματος.&lt;/p&gt;</translation>
     </message>
@@ -738,6 +738,121 @@ listened to will appear here...</source>
     </message>
 </context>
 <context>
+    <name>RemoteControlState</name>
+    <message>
+        <location filename="../../lib/presentation/imports/MellowPlayer/SettingsPages/RemoteControl/RemoteControlState.qml" line="20"/>
+        <source>&lt;a href=&quot;%3&quot;&gt;%1&lt;/a&gt; &lt;i&gt;%2&lt;/i&gt;</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <location filename="../../lib/presentation/imports/MellowPlayer/SettingsPages/RemoteControl/RemoteControlState.qml" line="90"/>
+        <source>Run at startup</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <location filename="../../lib/presentation/imports/MellowPlayer/SettingsPages/RemoteControl/RemoteControlState.qml" line="137"/>
+        <source>Disable Remote Control</source>
+        <translation type="unfinished"/>
+    </message>
+</context>
+<context>
+    <name>RemoteControlState_Installing</name>
+    <message>
+        <location filename="../../lib/presentation/imports/MellowPlayer/SettingsPages/RemoteControl/RemoteControlState_Installing.qml" line="11"/>
+        <source>Installing Remote Control Application</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <location filename="../../lib/presentation/imports/MellowPlayer/SettingsPages/RemoteControl/RemoteControlState_Installing.qml" line="12"/>
+        <source>Installing &lt;b&gt;%1&lt;/b&gt;. Please wait,
+this may take a few minutes...</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <location filename="../../lib/presentation/imports/MellowPlayer/SettingsPages/RemoteControl/RemoteControlState_Installing.qml" line="16"/>
+        <source>Require &lt;a href=&quot;%3&quot;&gt;%1&lt;/a&gt; &lt;i&gt;%2&lt;/i&gt;</source>
+        <translation type="unfinished"/>
+    </message>
+</context>
+<context>
+    <name>RemoteControlState_NotEnabled</name>
+    <message>
+        <location filename="../../lib/presentation/imports/MellowPlayer/SettingsPages/RemoteControl/RemoteControlState_NotEnabled.qml" line="12"/>
+        <source>Remote Control Disabled</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <location filename="../../lib/presentation/imports/MellowPlayer/SettingsPages/RemoteControl/RemoteControlState_NotEnabled.qml" line="13"/>
+        <source>Enable Remote Control to be able to control MellowPlayer playback
+ from any device in your LAN!</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <location filename="../../lib/presentation/imports/MellowPlayer/SettingsPages/RemoteControl/RemoteControlState_NotEnabled.qml" line="16"/>
+        <source>Enable Remote Control</source>
+        <translation type="unfinished"/>
+    </message>
+</context>
+<context>
+    <name>RemoteControlState_NotInstalled</name>
+    <message>
+        <location filename="../../lib/presentation/imports/MellowPlayer/SettingsPages/RemoteControl/RemoteControlState_NotInstalled.qml" line="11"/>
+        <source>Install Remote Control Application</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <location filename="../../lib/presentation/imports/MellowPlayer/SettingsPages/RemoteControl/RemoteControlState_NotInstalled.qml" line="12"/>
+        <source>Install &lt;b&gt;%1&lt;/b&gt; to finish Remote Control Setup</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <location filename="../../lib/presentation/imports/MellowPlayer/SettingsPages/RemoteControl/RemoteControlState_NotInstalled.qml" line="14"/>
+        <source>Install </source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <location filename="../../lib/presentation/imports/MellowPlayer/SettingsPages/RemoteControl/RemoteControlState_NotInstalled.qml" line="15"/>
+        <source>Require &lt;a href=&quot;%3&quot;&gt;%1&lt;/a&gt; &lt;i&gt;%2&lt;/i&gt;</source>
+        <translation type="unfinished"/>
+    </message>
+</context>
+<context>
+    <name>RemoteControlState_Running</name>
+    <message>
+        <location filename="../../lib/presentation/imports/MellowPlayer/SettingsPages/RemoteControl/RemoteControlState_Running.qml" line="11"/>
+        <source>Remote Control Application Running</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <location filename="../../lib/presentation/imports/MellowPlayer/SettingsPages/RemoteControl/RemoteControlState_Running.qml" line="12"/>
+        <source>&lt;b&gt;%1&lt;/b&gt; is listening on &lt;a href=&quot;%2&quot;&gt;%2&lt;/a&gt;</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <location filename="../../lib/presentation/imports/MellowPlayer/SettingsPages/RemoteControl/RemoteControlState_Running.qml" line="14"/>
+        <source>Stop </source>
+        <translation type="unfinished"/>
+    </message>
+</context>
+<context>
+    <name>RemoteControlState_Stopped</name>
+    <message>
+        <location filename="../../lib/presentation/imports/MellowPlayer/SettingsPages/RemoteControl/RemoteControlState_Stopped.qml" line="11"/>
+        <source>Start Remote Control Application</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <location filename="../../lib/presentation/imports/MellowPlayer/SettingsPages/RemoteControl/RemoteControlState_Stopped.qml" line="12"/>
+        <source>Start &lt;b&gt;%1&lt;/b&gt; to be able to control MellowPlayer playback&lt;br&gt; from any device in your LAN!</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <location filename="../../lib/presentation/imports/MellowPlayer/SettingsPages/RemoteControl/RemoteControlState_Stopped.qml" line="14"/>
+        <source>Start </source>
+        <translation type="unfinished"/>
+    </message>
+</context>
+<context>
     <name>ReportIssueDialog</name>
     <message>
         <location filename="../../lib/presentation/imports/MellowPlayer/Dialogs/ReportIssueDialog.qml" line="44"/>
@@ -843,11 +958,6 @@ listened to will appear here...</source>
         <translation>Κλείσιμο στην μπάρα συστήματος</translation>
     </message>
     <message>
-        <location filename="../../lib/presentation/imports/MellowPlayer/SettingsTranslator.js" line="8"/>
-        <source>Show system tray icon</source>
-        <translation>Εμφάνιση στην μπάρα συστήματος</translation>
-    </message>
-    <message>
         <location filename="../../lib/presentation/imports/MellowPlayer/SettingsTranslator.js" line="5"/>
         <source>Check for updates</source>
         <translation>Ελεγχός για ενημερώσεις</translation>
@@ -861,6 +971,11 @@ listened to will appear here...</source>
         <location filename="../../lib/presentation/imports/MellowPlayer/SettingsTranslator.js" line="7"/>
         <source>Playback requires user gesture</source>
         <translation type="unfinished"/>
+    </message>
+    <message>
+        <location filename="../../lib/presentation/imports/MellowPlayer/SettingsTranslator.js" line="8"/>
+        <source>Show system tray icon</source>
+        <translation>Εμφάνιση στην μπάρα συστήματος</translation>
     </message>
     <message>
         <location filename="../../lib/presentation/imports/MellowPlayer/SettingsTranslator.js" line="9"/>
@@ -1064,14 +1179,34 @@ listened to will appear here...</source>
         <translation>User agent</translation>
     </message>
     <message>
+        <location filename="../../lib/presentation/imports/MellowPlayer/SettingsTranslator.js" line="59"/>
+        <source>Enable this option to get a confirmation message when you leave MellowPlayer.</source>
+        <translation>Ενεργοποιήστε αυτή την επιλογή για να λάβετε ένα μήνυμα επιβεβαίωσης, όταν φεύγετε από το MellowPlayer.</translation>
+    </message>
+    <message>
+        <location filename="../../lib/presentation/imports/MellowPlayer/SettingsTranslator.js" line="60"/>
+        <source>Enable this option to close the application in the system tray and continue listening to your musing in background.</source>
+        <translation>Ενεργοποιήστε αυτή την επιλογή για να κλείσετε την εφαρμογή στην μπάρα συστήματος και να συνεχίσετε να ακούτε τραγούδια στο παρασκήνιο.</translation>
+    </message>
+    <message>
         <location filename="../../lib/presentation/imports/MellowPlayer/SettingsTranslator.js" line="61"/>
         <source>Automatically check for updates</source>
         <translation>Αυτόματος έλεγχος για ενημερώσεις</translation>
     </message>
     <message>
+        <location filename="../../lib/presentation/imports/MellowPlayer/SettingsTranslator.js" line="62"/>
+        <source>Choose which update channel to use</source>
+        <translation>Επιλέξτε τον δίαυλο ενημερώσεων πού θέλετε να χρησιμοποιήσετε</translation>
+    </message>
+    <message>
         <location filename="../../lib/presentation/imports/MellowPlayer/SettingsTranslator.js" line="63"/>
         <source>Inhibits playback of media content until the user interacts with the page.</source>
         <translation type="unfinished"/>
+    </message>
+    <message>
+        <location filename="../../lib/presentation/imports/MellowPlayer/SettingsTranslator.js" line="64"/>
+        <source>Disable this option to hide the system tray icon</source>
+        <translation>Απενεργοποιήστε αυτή την επιλογή για να αποκρύψετε το εικονίδιο του δίσκου συστήματος</translation>
     </message>
     <message>
         <location filename="../../lib/presentation/imports/MellowPlayer/SettingsTranslator.js" line="65"/>
@@ -1107,46 +1242,6 @@ listened to will appear here...</source>
         <location filename="../../lib/presentation/imports/MellowPlayer/SettingsTranslator.js" line="71"/>
         <source>Show/Hide player controls in main toolbar</source>
         <translation type="unfinished"/>
-    </message>
-    <message>
-        <location filename="../../lib/presentation/imports/MellowPlayer/SettingsTranslator.js" line="95"/>
-        <source>Show or hide main tool bar</source>
-        <translation type="unfinished"/>
-    </message>
-    <message>
-        <location filename="../../lib/presentation/imports/MellowPlayer/SettingsTranslator.js" line="98"/>
-        <source>Report an issue</source>
-        <translation type="unfinished"/>
-    </message>
-    <message>
-        <location filename="../../lib/presentation/imports/MellowPlayer/SettingsTranslator.js" line="104"/>
-        <source>Specifies the user agent string used by web views</source>
-        <translation>Καθορισμός της συμβολοσειράς παράγοντα χρήστη </translation>
-    </message>
-    <message>
-        <location filename="../../lib/presentation/imports/MellowPlayer/SettingsTranslator.js" line="116"/>
-        <source>Streaming Services</source>
-        <translation>Υπηρεσίες Streaming</translation>
-    </message>
-    <message>
-        <location filename="../../lib/presentation/imports/MellowPlayer/SettingsTranslator.js" line="59"/>
-        <source>Enable this option to get a confirmation message when you leave MellowPlayer.</source>
-        <translation>Ενεργοποιήστε αυτή την επιλογή για να λάβετε ένα μήνυμα επιβεβαίωσης, όταν φεύγετε από το MellowPlayer.</translation>
-    </message>
-    <message>
-        <location filename="../../lib/presentation/imports/MellowPlayer/SettingsTranslator.js" line="60"/>
-        <source>Enable this option to close the application in the system tray and continue listening to your musing in background.</source>
-        <translation>Ενεργοποιήστε αυτή την επιλογή για να κλείσετε την εφαρμογή στην μπάρα συστήματος και να συνεχίσετε να ακούτε τραγούδια στο παρασκήνιο.</translation>
-    </message>
-    <message>
-        <location filename="../../lib/presentation/imports/MellowPlayer/SettingsTranslator.js" line="64"/>
-        <source>Disable this option to hide the system tray icon</source>
-        <translation>Απενεργοποιήστε αυτή την επιλογή για να αποκρύψετε το εικονίδιο του δίσκου συστήματος</translation>
-    </message>
-    <message>
-        <location filename="../../lib/presentation/imports/MellowPlayer/SettingsTranslator.js" line="62"/>
-        <source>Choose which update channel to use</source>
-        <translation>Επιλέξτε τον δίαυλο ενημερώσεων πού θέλετε να χρησιμοποιήσετε</translation>
     </message>
     <message>
         <location filename="../../lib/presentation/imports/MellowPlayer/SettingsTranslator.js" line="72"/>
@@ -1264,6 +1359,11 @@ listened to will appear here...</source>
         <translation>Εμφάνιση η απόκρυψη τού ιστορικού τραγουδιών</translation>
     </message>
     <message>
+        <location filename="../../lib/presentation/imports/MellowPlayer/SettingsTranslator.js" line="95"/>
+        <source>Show or hide main tool bar</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
         <location filename="../../lib/presentation/imports/MellowPlayer/SettingsTranslator.js" line="96"/>
         <source>Show settings page</source>
         <translation>Εμφάνιση της σελίδας ρυθμίσεων</translation>
@@ -1272,6 +1372,11 @@ listened to will appear here...</source>
         <location filename="../../lib/presentation/imports/MellowPlayer/SettingsTranslator.js" line="97"/>
         <source>Show the plugin creation wizard</source>
         <translation>Εμφάνιση τού οδηγού δημιουργίας plugin</translation>
+    </message>
+    <message>
+        <location filename="../../lib/presentation/imports/MellowPlayer/SettingsTranslator.js" line="98"/>
+        <source>Report an issue</source>
+        <translation type="unfinished"/>
     </message>
     <message>
         <location filename="../../lib/presentation/imports/MellowPlayer/SettingsTranslator.js" line="100"/>
@@ -1294,32 +1399,47 @@ listened to will appear here...</source>
         <translation>Καθορισμός ορίου τού ιστορικού τραγουδιών</translation>
     </message>
     <message>
+        <location filename="../../lib/presentation/imports/MellowPlayer/SettingsTranslator.js" line="104"/>
+        <source>Specifies the user agent string used by web views</source>
+        <translation>Καθορισμός της συμβολοσειράς παράγοντα χρήστη </translation>
+    </message>
+    <message>
+        <location filename="../../lib/presentation/imports/MellowPlayer/SettingsTranslator.js" line="116"/>
+        <source>Streaming Services</source>
+        <translation>Υπηρεσίες Streaming</translation>
+    </message>
+    <message>
         <location filename="../../lib/presentation/imports/MellowPlayer/SettingsTranslator.js" line="117"/>
         <source>Cache</source>
         <translation>Μνήμη</translation>
     </message>
     <message>
         <location filename="../../lib/presentation/imports/MellowPlayer/SettingsTranslator.js" line="118"/>
+        <source>Remote Control</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <location filename="../../lib/presentation/imports/MellowPlayer/SettingsTranslator.js" line="119"/>
         <source>General</source>
         <translation>Γενικά</translation>
     </message>
     <message>
-        <location filename="../../lib/presentation/imports/MellowPlayer/SettingsTranslator.js" line="119"/>
+        <location filename="../../lib/presentation/imports/MellowPlayer/SettingsTranslator.js" line="120"/>
         <source>Appearance</source>
         <translation>Εμφάνιση</translation>
     </message>
     <message>
-        <location filename="../../lib/presentation/imports/MellowPlayer/SettingsTranslator.js" line="120"/>
+        <location filename="../../lib/presentation/imports/MellowPlayer/SettingsTranslator.js" line="121"/>
         <source>Notifications</source>
         <translation>Ειδοποιήσεις</translation>
     </message>
     <message>
-        <location filename="../../lib/presentation/imports/MellowPlayer/SettingsTranslator.js" line="121"/>
+        <location filename="../../lib/presentation/imports/MellowPlayer/SettingsTranslator.js" line="122"/>
         <source>Shortcuts</source>
         <translation>Συντομεύσεις</translation>
     </message>
     <message>
-        <location filename="../../lib/presentation/imports/MellowPlayer/SettingsTranslator.js" line="122"/>
+        <location filename="../../lib/presentation/imports/MellowPlayer/SettingsTranslator.js" line="123"/>
         <source>Privacy</source>
         <translation>Απόρρητο</translation>
     </message>

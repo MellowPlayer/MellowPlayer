@@ -115,6 +115,7 @@ function translateCategory(category) {
     var translations = {
         "Streaming Services": qsTr("Streaming Services"),
         "Cache": qsTr("Cache"),
+        "Remote Control": qsTr("Remote Control"),
         'General': qsTr('General'),
         'Appearance': qsTr('Appearance'),
         'Notifications': qsTr('Notifications'),

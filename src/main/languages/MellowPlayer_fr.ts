@@ -563,22 +563,22 @@ listened to will appear here...</source>
 <context>
     <name>MainWindow</name>
     <message>
-        <location filename="../../lib/presentation/imports/MellowPlayer/MainWindow.qml" line="185"/>
+        <location filename="../../lib/presentation/imports/MellowPlayer/MainWindow.qml" line="183"/>
         <source>Are you sure you want to quit MellowPlayer?</source>
         <translation>Etes-vous sûr de vouloir quitter MellowPlayer?</translation>
     </message>
     <message>
-        <location filename="../../lib/presentation/imports/MellowPlayer/MainWindow.qml" line="186"/>
+        <location filename="../../lib/presentation/imports/MellowPlayer/MainWindow.qml" line="184"/>
         <source>Confirm quit</source>
         <translation>Confirmer la sortie de l&apos;application</translation>
     </message>
     <message>
-        <location filename="../../lib/presentation/imports/MellowPlayer/MainWindow.qml" line="197"/>
+        <location filename="../../lib/presentation/imports/MellowPlayer/MainWindow.qml" line="203"/>
         <source>Closing to system tray</source>
         <translation>Réduction dans la barre des tâches</translation>
     </message>
     <message>
-        <location filename="../../lib/presentation/imports/MellowPlayer/MainWindow.qml" line="198"/>
+        <location filename="../../lib/presentation/imports/MellowPlayer/MainWindow.qml" line="204"/>
         <source>&lt;p&gt;MellowPlayer will continue to run in background.&lt;br&gt;You can quit the application or restore the main window via the system tray icon menu.&lt;/p&gt;</source>
         <translation>&lt;p&gt;MellowPlayer va continuer de fonctionner en arrière plan.&lt;br&gt;Vous pouvez quitter l&apos;application ou restaurer la fenêtre via le menu de l&apos;icône de la barre des tâches.&lt;/p&gt;</translation>
     </message>
@@ -737,6 +737,122 @@ listened to will appear here...</source>
     </message>
 </context>
 <context>
+    <name>RemoteControlState</name>
+    <message>
+        <location filename="../../lib/presentation/imports/MellowPlayer/SettingsPages/RemoteControl/RemoteControlState.qml" line="20"/>
+        <source>&lt;a href=&quot;%3&quot;&gt;%1&lt;/a&gt; &lt;i&gt;%2&lt;/i&gt;</source>
+        <translation>&lt;a href=&quot;%3&quot;&gt;%1&lt;/a&gt; &lt;i&gt;%2&lt;/i&gt;</translation>
+    </message>
+    <message>
+        <location filename="../../lib/presentation/imports/MellowPlayer/SettingsPages/RemoteControl/RemoteControlState.qml" line="90"/>
+        <source>Run at startup</source>
+        <translation>Exécuter au démarrage</translation>
+    </message>
+    <message>
+        <location filename="../../lib/presentation/imports/MellowPlayer/SettingsPages/RemoteControl/RemoteControlState.qml" line="137"/>
+        <source>Disable Remote Control</source>
+        <translation>Désactiver le contrôle à distance</translation>
+    </message>
+</context>
+<context>
+    <name>RemoteControlState_Installing</name>
+    <message>
+        <location filename="../../lib/presentation/imports/MellowPlayer/SettingsPages/RemoteControl/RemoteControlState_Installing.qml" line="11"/>
+        <source>Installing Remote Control Application</source>
+        <translation>Installation de l&apos;application de contrôle à distance en cours</translation>
+    </message>
+    <message>
+        <location filename="../../lib/presentation/imports/MellowPlayer/SettingsPages/RemoteControl/RemoteControlState_Installing.qml" line="12"/>
+        <source>Installing &lt;b&gt;%1&lt;/b&gt;. Please wait,
+this may take a few minutes...</source>
+        <translation>Installation de &lt;b&gt;%1&lt;/b&gt;. Veuillez patienter,
+l&apos;opération peut prendre quelques minutes...</translation>
+    </message>
+    <message>
+        <location filename="../../lib/presentation/imports/MellowPlayer/SettingsPages/RemoteControl/RemoteControlState_Installing.qml" line="16"/>
+        <source>Require &lt;a href=&quot;%3&quot;&gt;%1&lt;/a&gt; &lt;i&gt;%2&lt;/i&gt;</source>
+        <translation>Requiert &lt;a href=&quot;%3&quot;&gt;%1&lt;/a&gt; &lt;i&gt;%2&lt;/i&gt;</translation>
+    </message>
+</context>
+<context>
+    <name>RemoteControlState_NotEnabled</name>
+    <message>
+        <location filename="../../lib/presentation/imports/MellowPlayer/SettingsPages/RemoteControl/RemoteControlState_NotEnabled.qml" line="12"/>
+        <source>Remote Control Disabled</source>
+        <translation>Contrôle à distance désactivé</translation>
+    </message>
+    <message>
+        <location filename="../../lib/presentation/imports/MellowPlayer/SettingsPages/RemoteControl/RemoteControlState_NotEnabled.qml" line="13"/>
+        <source>Enable Remote Control to be able to control MellowPlayer playback
+ from any device in your LAN!</source>
+        <translation>Activez le contrôle à distance pour contrôler MellowPlayer depuis n&apos;importe quel appareil dans votre LAN!</translation>
+    </message>
+    <message>
+        <location filename="../../lib/presentation/imports/MellowPlayer/SettingsPages/RemoteControl/RemoteControlState_NotEnabled.qml" line="16"/>
+        <source>Enable Remote Control</source>
+        <translation>Activer le contrôle à distance</translation>
+    </message>
+</context>
+<context>
+    <name>RemoteControlState_NotInstalled</name>
+    <message>
+        <location filename="../../lib/presentation/imports/MellowPlayer/SettingsPages/RemoteControl/RemoteControlState_NotInstalled.qml" line="11"/>
+        <source>Install Remote Control Application</source>
+        <translation>Installer l&apos;application de contrôle à distance</translation>
+    </message>
+    <message>
+        <location filename="../../lib/presentation/imports/MellowPlayer/SettingsPages/RemoteControl/RemoteControlState_NotInstalled.qml" line="12"/>
+        <source>Install &lt;b&gt;%1&lt;/b&gt; to finish Remote Control Setup</source>
+        <translation>Installez &lt;b&gt;%1&lt;/b&gt; pour terminer la préparation du contrôle à distance</translation>
+    </message>
+    <message>
+        <location filename="../../lib/presentation/imports/MellowPlayer/SettingsPages/RemoteControl/RemoteControlState_NotInstalled.qml" line="14"/>
+        <source>Install </source>
+        <translation>Installer </translation>
+    </message>
+    <message>
+        <location filename="../../lib/presentation/imports/MellowPlayer/SettingsPages/RemoteControl/RemoteControlState_NotInstalled.qml" line="15"/>
+        <source>Require &lt;a href=&quot;%3&quot;&gt;%1&lt;/a&gt; &lt;i&gt;%2&lt;/i&gt;</source>
+        <translation>Requiert &lt;a href=&quot;%3&quot;&gt;%1&lt;/a&gt; &lt;i&gt;%2&lt;/i&gt;</translation>
+    </message>
+</context>
+<context>
+    <name>RemoteControlState_Running</name>
+    <message>
+        <location filename="../../lib/presentation/imports/MellowPlayer/SettingsPages/RemoteControl/RemoteControlState_Running.qml" line="11"/>
+        <source>Remote Control Application Running</source>
+        <translation>L&apos;application de contrôle à distance en cours d&apos;exécution</translation>
+    </message>
+    <message>
+        <location filename="../../lib/presentation/imports/MellowPlayer/SettingsPages/RemoteControl/RemoteControlState_Running.qml" line="12"/>
+        <source>&lt;b&gt;%1&lt;/b&gt; is listening on &lt;a href=&quot;%2&quot;&gt;%2&lt;/a&gt;</source>
+        <translation>&lt;b&gt;%1&lt;/b&gt; écoute sur &lt;a href=&quot;%2&quot;&gt;%2&lt;/a&gt;</translation>
+    </message>
+    <message>
+        <location filename="../../lib/presentation/imports/MellowPlayer/SettingsPages/RemoteControl/RemoteControlState_Running.qml" line="14"/>
+        <source>Stop </source>
+        <translation>Arrêter </translation>
+    </message>
+</context>
+<context>
+    <name>RemoteControlState_Stopped</name>
+    <message>
+        <location filename="../../lib/presentation/imports/MellowPlayer/SettingsPages/RemoteControl/RemoteControlState_Stopped.qml" line="11"/>
+        <source>Start Remote Control Application</source>
+        <translation>Démarrer l&apos;application de contrôle à distance</translation>
+    </message>
+    <message>
+        <location filename="../../lib/presentation/imports/MellowPlayer/SettingsPages/RemoteControl/RemoteControlState_Stopped.qml" line="12"/>
+        <source>Start &lt;b&gt;%1&lt;/b&gt; to be able to control MellowPlayer playback&lt;br&gt; from any device in your LAN!</source>
+        <translation>Démarrez &lt;b&gt;%1&lt;/b&gt; pour contrôler MellowPlayer &lt;br&gt; depuis n&apos;importe quel appareil dans votre LAN!</translation>
+    </message>
+    <message>
+        <location filename="../../lib/presentation/imports/MellowPlayer/SettingsPages/RemoteControl/RemoteControlState_Stopped.qml" line="14"/>
+        <source>Start </source>
+        <translation>Démarrer </translation>
+    </message>
+</context>
+<context>
     <name>ReportIssueDialog</name>
     <message>
         <location filename="../../lib/presentation/imports/MellowPlayer/Dialogs/ReportIssueDialog.qml" line="44"/>
@@ -842,11 +958,6 @@ listened to will appear here...</source>
         <translation>Réduire l&apos;application dans la barre des tâches</translation>
     </message>
     <message>
-        <location filename="../../lib/presentation/imports/MellowPlayer/SettingsTranslator.js" line="8"/>
-        <source>Show system tray icon</source>
-        <translation>Afficher l&apos;icône de la barre des tâches</translation>
-    </message>
-    <message>
         <location filename="../../lib/presentation/imports/MellowPlayer/SettingsTranslator.js" line="5"/>
         <source>Check for updates</source>
         <translation>Vérifier les mises à jour</translation>
@@ -860,6 +971,11 @@ listened to will appear here...</source>
         <location filename="../../lib/presentation/imports/MellowPlayer/SettingsTranslator.js" line="7"/>
         <source>Playback requires user gesture</source>
         <translation>La lecture nécessite un geste de l&apos;utilisateur</translation>
+    </message>
+    <message>
+        <location filename="../../lib/presentation/imports/MellowPlayer/SettingsTranslator.js" line="8"/>
+        <source>Show system tray icon</source>
+        <translation>Afficher l&apos;icône de la barre des tâches</translation>
     </message>
     <message>
         <location filename="../../lib/presentation/imports/MellowPlayer/SettingsTranslator.js" line="9"/>
@@ -1063,14 +1179,34 @@ listened to will appear here...</source>
         <translation>Agent utilisateur</translation>
     </message>
     <message>
+        <location filename="../../lib/presentation/imports/MellowPlayer/SettingsTranslator.js" line="59"/>
+        <source>Enable this option to get a confirmation message when you leave MellowPlayer.</source>
+        <translation>Activez cette option pour avoir une demande de confirmation lorsque vous quittez MellowPlayer.</translation>
+    </message>
+    <message>
+        <location filename="../../lib/presentation/imports/MellowPlayer/SettingsTranslator.js" line="60"/>
+        <source>Enable this option to close the application in the system tray and continue listening to your musing in background.</source>
+        <translation>Activez cette option pour réduire l&apos;application dans la barre des tâches et continuer à jouer la musique en arrière plan au lieu de fermer l&apos;application.</translation>
+    </message>
+    <message>
         <location filename="../../lib/presentation/imports/MellowPlayer/SettingsTranslator.js" line="61"/>
         <source>Automatically check for updates</source>
         <translation>Vérifier automatiquement les mises à jour au démarrage de l&apos;application</translation>
     </message>
     <message>
+        <location filename="../../lib/presentation/imports/MellowPlayer/SettingsTranslator.js" line="62"/>
+        <source>Choose which update channel to use</source>
+        <translation>Choisissez le canal de mises à jour</translation>
+    </message>
+    <message>
         <location filename="../../lib/presentation/imports/MellowPlayer/SettingsTranslator.js" line="63"/>
         <source>Inhibits playback of media content until the user interacts with the page.</source>
         <translation>Empêche la lecture du contenu jusqu&apos;à ce que l&apos;utilisateur interagisse avec la page.</translation>
+    </message>
+    <message>
+        <location filename="../../lib/presentation/imports/MellowPlayer/SettingsTranslator.js" line="64"/>
+        <source>Disable this option to hide the system tray icon</source>
+        <translation>Désactivez cette option pour cacher l&apos;icône de la barre des tâches</translation>
     </message>
     <message>
         <location filename="../../lib/presentation/imports/MellowPlayer/SettingsTranslator.js" line="65"/>
@@ -1106,46 +1242,6 @@ listened to will appear here...</source>
         <location filename="../../lib/presentation/imports/MellowPlayer/SettingsTranslator.js" line="71"/>
         <source>Show/Hide player controls in main toolbar</source>
         <translation>Afficher/Cacher les contrôles du lecteur dans la barre d&apos;outils</translation>
-    </message>
-    <message>
-        <location filename="../../lib/presentation/imports/MellowPlayer/SettingsTranslator.js" line="95"/>
-        <source>Show or hide main tool bar</source>
-        <translation>Afficher la barre d&apos;outils principale</translation>
-    </message>
-    <message>
-        <location filename="../../lib/presentation/imports/MellowPlayer/SettingsTranslator.js" line="98"/>
-        <source>Report an issue</source>
-        <translation>Reporter un problème</translation>
-    </message>
-    <message>
-        <location filename="../../lib/presentation/imports/MellowPlayer/SettingsTranslator.js" line="104"/>
-        <source>Specifies the user agent string used by web views</source>
-        <translation>Spécifie l&apos;agent utilisateur utilisé dans les requêtes http</translation>
-    </message>
-    <message>
-        <location filename="../../lib/presentation/imports/MellowPlayer/SettingsTranslator.js" line="116"/>
-        <source>Streaming Services</source>
-        <translation>Services de streaming</translation>
-    </message>
-    <message>
-        <location filename="../../lib/presentation/imports/MellowPlayer/SettingsTranslator.js" line="59"/>
-        <source>Enable this option to get a confirmation message when you leave MellowPlayer.</source>
-        <translation>Activez cette option pour avoir une demande de confirmation lorsque vous quittez MellowPlayer.</translation>
-    </message>
-    <message>
-        <location filename="../../lib/presentation/imports/MellowPlayer/SettingsTranslator.js" line="60"/>
-        <source>Enable this option to close the application in the system tray and continue listening to your musing in background.</source>
-        <translation>Activez cette option pour réduire l&apos;application dans la barre des tâches et continuer à jouer la musique en arrière plan au lieu de fermer l&apos;application.</translation>
-    </message>
-    <message>
-        <location filename="../../lib/presentation/imports/MellowPlayer/SettingsTranslator.js" line="64"/>
-        <source>Disable this option to hide the system tray icon</source>
-        <translation>Désactivez cette option pour cacher l&apos;icône de la barre des tâches</translation>
-    </message>
-    <message>
-        <location filename="../../lib/presentation/imports/MellowPlayer/SettingsTranslator.js" line="62"/>
-        <source>Choose which update channel to use</source>
-        <translation>Choisissez le canal de mises à jour</translation>
     </message>
     <message>
         <location filename="../../lib/presentation/imports/MellowPlayer/SettingsTranslator.js" line="72"/>
@@ -1263,6 +1359,11 @@ listened to will appear here...</source>
         <translation>Affiche l&apos;historique d&apos;écoutes</translation>
     </message>
     <message>
+        <location filename="../../lib/presentation/imports/MellowPlayer/SettingsTranslator.js" line="95"/>
+        <source>Show or hide main tool bar</source>
+        <translation>Afficher la barre d&apos;outils principale</translation>
+    </message>
+    <message>
         <location filename="../../lib/presentation/imports/MellowPlayer/SettingsTranslator.js" line="96"/>
         <source>Show settings page</source>
         <translation>Affiche la page des paramètres de l&apos;application</translation>
@@ -1271,6 +1372,11 @@ listened to will appear here...</source>
         <location filename="../../lib/presentation/imports/MellowPlayer/SettingsTranslator.js" line="97"/>
         <source>Show the plugin creation wizard</source>
         <translation>Affiche le wizard de création de plugin</translation>
+    </message>
+    <message>
+        <location filename="../../lib/presentation/imports/MellowPlayer/SettingsTranslator.js" line="98"/>
+        <source>Report an issue</source>
+        <translation>Reporter un problème</translation>
     </message>
     <message>
         <location filename="../../lib/presentation/imports/MellowPlayer/SettingsTranslator.js" line="100"/>
@@ -1293,32 +1399,47 @@ listened to will appear here...</source>
         <translation>Spécifie la limite de l&apos;historique d&apos;écoute, les pistes écoutées avant la limite seront automatiquement supprimées de l&apos;historique</translation>
     </message>
     <message>
+        <location filename="../../lib/presentation/imports/MellowPlayer/SettingsTranslator.js" line="104"/>
+        <source>Specifies the user agent string used by web views</source>
+        <translation>Spécifie l&apos;agent utilisateur utilisé dans les requêtes http</translation>
+    </message>
+    <message>
+        <location filename="../../lib/presentation/imports/MellowPlayer/SettingsTranslator.js" line="116"/>
+        <source>Streaming Services</source>
+        <translation>Services de streaming</translation>
+    </message>
+    <message>
         <location filename="../../lib/presentation/imports/MellowPlayer/SettingsTranslator.js" line="117"/>
         <source>Cache</source>
         <translation>Cache</translation>
     </message>
     <message>
         <location filename="../../lib/presentation/imports/MellowPlayer/SettingsTranslator.js" line="118"/>
+        <source>Remote Control</source>
+        <translation>Contrôle à distance</translation>
+    </message>
+    <message>
+        <location filename="../../lib/presentation/imports/MellowPlayer/SettingsTranslator.js" line="119"/>
         <source>General</source>
         <translation>Général</translation>
     </message>
     <message>
-        <location filename="../../lib/presentation/imports/MellowPlayer/SettingsTranslator.js" line="119"/>
+        <location filename="../../lib/presentation/imports/MellowPlayer/SettingsTranslator.js" line="120"/>
         <source>Appearance</source>
         <translation>Apparence</translation>
     </message>
     <message>
-        <location filename="../../lib/presentation/imports/MellowPlayer/SettingsTranslator.js" line="120"/>
+        <location filename="../../lib/presentation/imports/MellowPlayer/SettingsTranslator.js" line="121"/>
         <source>Notifications</source>
         <translation>Notifications</translation>
     </message>
     <message>
-        <location filename="../../lib/presentation/imports/MellowPlayer/SettingsTranslator.js" line="121"/>
+        <location filename="../../lib/presentation/imports/MellowPlayer/SettingsTranslator.js" line="122"/>
         <source>Shortcuts</source>
         <translation>Raccourcis clavier</translation>
     </message>
     <message>
-        <location filename="../../lib/presentation/imports/MellowPlayer/SettingsTranslator.js" line="122"/>
+        <location filename="../../lib/presentation/imports/MellowPlayer/SettingsTranslator.js" line="123"/>
         <source>Privacy</source>
         <translation>Vie privée</translation>
     </message>
@@ -1555,7 +1676,7 @@ listened to will appear here...</source>
     <message>
         <location filename="../../lib/presentation/imports/MellowPlayer/Controls/UpdateToolBar.qml" line="62"/>
         <source>Install</source>
-        <translation>Installer</translation>
+        <translation>Installer </translation>
     </message>
     <message>
         <location filename="../../lib/presentation/imports/MellowPlayer/Controls/UpdateToolBar.qml" line="70"/>
