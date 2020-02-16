@@ -1703,8 +1703,8 @@ class dependency : dependency_base,
   }
   template <class... Ts, __BOOST_DI_REQUIRES(aux::is_array<TExpected, Ts...>::value) = 0>
   auto to() noexcept {
-    using type = aux::remove_pointer_t<aux::remove_extent_t<TExpected>>;
-    return dependency<TScope, array<type>, array<type, Ts...>, TName, TPriority, TCtor>{};
+    using mtype = aux::remove_pointer_t<aux::remove_extent_t<TExpected>>;
+    return dependency<TScope, array<mtype>, array<mtype, Ts...>, TName, TPriority, TCtor>{};
   }
   template <class T, __BOOST_DI_REQUIRES_MSG(concepts::boundable<TExpected, T>) = 0>
   auto to(std::initializer_list<T> il) noexcept {

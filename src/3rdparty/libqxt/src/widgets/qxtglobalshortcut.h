@@ -37,7 +37,7 @@
 #include <QObject>
 class QxtGlobalShortcutPrivate;
 
-class QXT_GUI_EXPORT QxtGlobalShortcut : public QObject {
+class QxtGlobalShortcut : public QObject {
   Q_OBJECT
   QXT_DECLARE_PRIVATE(QxtGlobalShortcut)
   Q_PROPERTY(bool enabled READ isEnabled WRITE setEnabled)
