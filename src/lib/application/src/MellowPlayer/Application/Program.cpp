@@ -99,14 +99,11 @@ void logStart()
     LOG_WARN(logger, QString("MellowPlayer %1 - %2").arg(version).arg(buildInfo));
     LOG_INFO(logger, "Log directory: " + logDirectory);
     LOG_INFO(logger, "Args: [" << qApp->arguments().join(", ") << "]");
+    LOG_INFO(logger, "Working directory: " << qApp->applicationDirPath());
 
     QString appImagePath = qgetenv("APPIMAGE");
     if (!appImagePath.isEmpty())
-        LOG_DEBUG(logger, "Running from AppImage" << appImagePath);
-
-    QString flatpakId = qgetenv("FLATPAK_ID");
-    if (!flatpakId.isEmpty())
-        LOG_DEBUG(logger, "Running from flatpak: " << flatpakId);
+        LOG_DEBUG(logger, "Running from AppImage: " << appImagePath);
 }
 
 void logStop()

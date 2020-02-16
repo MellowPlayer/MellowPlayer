@@ -11,6 +11,7 @@
 #include <QtCore/QTimer>
 #include <QtNetwork/QHostAddress>
 #include <QtNetwork/QNetworkInterface>
+#include <QApplication>
 
 using namespace MellowPlayer::Domain;
 using namespace MellowPlayer::Infrastructure;
@@ -142,7 +143,16 @@ void MellowPlayerConnect::start()
 #ifdef Q_OS_WIN
     extension = ".exe";
 #endif
+
+    QStringList arguments {};
+    auto executable = QFileInfo(qApp->arguments().first()).canonicalFilePath();
+    if (QFileInfo(executable).exists())
+    {
+        arguments.append("--mellowplayer");
+        arguments.append(executable);
+    }
     _process->setProgram(_installationDirectory + QDir::separator() + "MellowPlayer.Connect" + extension);
+    _process->setArguments(arguments);
     _process->setWorkingDirectory(_installationDirectory);
     _process->execute([=](int, const QString&, const QString&) { LOG_DEBUG(_logger, "Process finished"); });
     setRunning(true);
