@@ -43,8 +43,9 @@ namespace MellowPlayer::Presentation
         Q_PROPERTY(QString previewImageUrl READ previewImageUrl WRITE setPreviewImageUrl NOTIFY previewImageUrlChanged)
         Q_PROPERTY(QString sourceCode READ sourceCode NOTIFY sourceCodeChanged)
         Q_PROPERTY(SettingsCategoryViewModel* settings READ settings CONSTANT)
+        Q_PROPERTY(bool broken READ isBroken WRITE setBroken NOTIFY brokenChanged)
+        Q_PROPERTY(bool hasKnownIssues READ hasKnownIssues NOTIFY hasKnownIssuesChanged)
         CONSTANT_OBJECT_PROPERTY(Infrastructure::NetworkProxy, networkProxy)
-
     public:
         StreamingServiceViewModel(Domain::StreamingService& streamingService,
                                   Domain::ISettingsStore& settingsStore,
@@ -53,6 +54,8 @@ namespace MellowPlayer::Presentation
                                   Infrastructure::INetworkProxies& networkProxies,
                                   ThemeViewModel& themeViewModel,
                                   QObject* parent = nullptr);
+
+        void checkForKnownIssues();
 
         QString logo() const;
         QString name() const;
@@ -86,11 +89,15 @@ namespace MellowPlayer::Presentation
         QString previewImageUrl() const;
         QString sourceCode() const;
 
+        bool isBroken() const;
+        bool hasKnownIssues() const;
+
         SettingsCategoryViewModel* settings();
 
     public slots:
         void setUrl(const QString& newUrl);
         void setActive(bool isActive);
+        void setBroken(bool value);
 
         void setPreviewImageUrl(QString previewImageUrl);
         QString getPreviewImageUrlForSave();
@@ -104,6 +111,8 @@ namespace MellowPlayer::Presentation
         void isActiveChanged();
         void previewImageUrlChanged();
         void sourceCodeChanged();
+        void brokenChanged();
+        void hasKnownIssuesChanged();
 
     private:
         QString customUrlSettingsKey() const;
@@ -122,5 +131,7 @@ namespace MellowPlayer::Presentation
         SettingsCategoryViewModel _settingsCategoryViewModel;
         Domain::ILogger& _logger;
         int _previewCount = 0;
+        bool _isBroken = false;
+        QString _issueLink = "";
     };
 }

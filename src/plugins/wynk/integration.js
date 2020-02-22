@@ -33,38 +33,33 @@ function getPlayerScope() {
 }
 
 function update() {
-    try {
-        var player = getPlayerScope();
+    var player = getPlayerScope();
 
-        var audio = player.audio;
-        var playbackStatus = mellowplayer.PlaybackStatus.STOPPED;
-        if (audio.paused && !player.showLoadingSong)
-            playbackStatus = mellowplayer.PlaybackStatus.PAUSED;
-        else if (!audio.paused && !player.showLoadingSong)
-            playbackStatus = mellowplayer.PlaybackStatus.PLAYING;
-        else
-            playbackStatus = mellowplayer.PlaybackStatus.BUFFERING;
+    var audio = player.audio;
+    var playbackStatus = mellowplayer.PlaybackStatus.STOPPED;
+    if (audio.paused && !player.showLoadingSong)
+        playbackStatus = mellowplayer.PlaybackStatus.PAUSED;
+    else if (!audio.paused && !player.showLoadingSong)
+        playbackStatus = mellowplayer.PlaybackStatus.PLAYING;
+    else
+        playbackStatus = mellowplayer.PlaybackStatus.BUFFERING;
 
-        return {
-            "playbackStatus": playbackStatus,
-            "canSeek": false,
-            "canGoNext": true,
-            "canGoPrevious": true,
-            "canAddToFavorites": false,
-            "volume": 1,
-            "duration": toSeconds(document.getElementsByClassName("time")[1].innerText),
-            "position": toSeconds(document.getElementsByClassName("time")[0].innerText),
-            "songId": getHashCode(player.currentSong.title),
-            "songTitle": player.currentSong.title,
-            "artistName": player.currentSong.subtitleId,
-            "albumTitle": player.currentSong.album,
-            "artUrl": player.currentSong.largeImage,
-            "isFavorite": false
-        };
-    }
-    catch (e) {
-        return  {}
-    }
+    return {
+        "playbackStatus": playbackStatus,
+        "canSeek": false,
+        "canGoNext": true,
+        "canGoPrevious": true,
+        "canAddToFavorites": false,
+        "volume": 1,
+        "duration": toSeconds(document.getElementsByClassName("time")[1].innerText),
+        "position": toSeconds(document.getElementsByClassName("time")[0].innerText),
+        "songId": getHashCode(player.currentSong.title),
+        "songTitle": player.currentSong.title,
+        "artistName": player.currentSong.subtitleId,
+        "albumTitle": player.currentSong.album,
+        "artUrl": player.currentSong.largeImage,
+        "isFavorite": false
+    };
 }
 
 function play() {

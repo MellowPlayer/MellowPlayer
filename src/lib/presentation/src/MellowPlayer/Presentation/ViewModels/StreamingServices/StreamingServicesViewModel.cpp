@@ -47,14 +47,20 @@ StreamingServicesViewModel::StreamingServicesViewModel(StreamingServices& stream
 
 void StreamingServicesViewModel::initialize()
 {
+    load();
+    initializeCurrent();
+}
+
+void StreamingServicesViewModel::load()
+{
     _streamingServices.load();
     for (auto& service : _streamingServices.toList())
-    {
         onServiceAdded(service.get());
-    }
-
     connect(&_streamingServices, &StreamingServices::added, this, &StreamingServicesViewModel::onServiceAdded);
+}
 
+void StreamingServicesViewModel::initializeCurrent()
+{
     auto currentServiceName = _currentServiceSetting.value().toString();
     if (!_commandLineArguments.service().isEmpty())
         currentServiceName = _commandLineArguments.service();
@@ -62,7 +68,9 @@ void StreamingServicesViewModel::initialize()
     for (auto service : _allServices->toList())
     {
         if (service->name().toLower() == currentServiceName.toLower())
+        {
             setCurrentService(service);
+        }
     }
 }
 
@@ -99,6 +107,7 @@ void StreamingServicesViewModel::reload()
 void StreamingServicesViewModel::onServiceAdded(StreamingService* streamingService)
 {
     auto* sv = new StreamingServiceViewModel(*streamingService, _settings.store(), _userScriptFactory, _players, _networkProxies, _themeViewModel, this);
+    sv->checkForKnownIssues();
     _allServices->append(sv);
 }
 

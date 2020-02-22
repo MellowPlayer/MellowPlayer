@@ -260,3 +260,29 @@ QString StreamingServiceViewModel::getPreviewImageUrlForSave()
     auto filePath = QFileInfo(dirPath, QString("%1-%2.jpg").arg(name()).arg(_previewCount)).absoluteFilePath();
     return filePath;
 }
+
+void StreamingServiceViewModel::checkForKnownIssues()
+{
+}
+
+bool StreamingServiceViewModel::isBroken() const
+{
+    return _isBroken;
+}
+
+void StreamingServiceViewModel::setBroken(bool value)
+{
+    if (_isBroken != value)
+    {
+        _isBroken = value;
+        emit brokenChanged();
+
+        if (_isBroken)
+            LOG_WARN(_logger, name() << " integration plugin is broken");
+    }
+}
+
+bool StreamingServiceViewModel::hasKnownIssues() const
+{
+    return !_issueLink.isEmpty();
+}

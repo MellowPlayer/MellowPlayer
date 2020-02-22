@@ -96,5 +96,7 @@ namespace MellowPlayer::Presentation
         StreamingServiceProxyListModel _enabledServices;
         StreamingServiceViewModel* _currentService = nullptr;
         ThemeViewModel& _themeViewModel;
+        void initializeCurrent();
+        void load();
     };
 }

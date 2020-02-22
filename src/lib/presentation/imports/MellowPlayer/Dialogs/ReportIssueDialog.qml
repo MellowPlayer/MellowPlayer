@@ -143,7 +143,7 @@ Dialog {
             }
 
             Link {
-                name: qsTr("Please, read the contributing guidelines before submitting your bug report!")
+                name: qsTr("Please, read the contributing guidelines before submitting the bug report!")
                 url: "https://gitlab.com/ColinDuquesnoy/MellowPlayer/blob/master/CONTRIBUTING.md#reporting-bugs-or-wishes"
 
                 Layout.alignment: Qt.AlignHCenter
@@ -159,7 +159,7 @@ Dialog {
                 }
 
                 Label {
-                    text: qsTr("Thank you for taking the time to report your issue!")
+                    text: qsTr("Thank you for taking the time to report the issue!")
                     font.bold: true
                     horizontalAlignment: "AlignHCenter"
 

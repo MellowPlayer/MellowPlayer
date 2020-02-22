@@ -110,10 +110,11 @@ bool ThemeViewModel::isAdaptiveTheme() const
 
 void ThemeViewModel::onCurrentServiceChanged(StreamingService* streamingService)
 {
-    connect(streamingService, &StreamingService::themeChanged, this, &ThemeViewModel::update, Qt::UniqueConnection);
-
     if (streamingService != nullptr)
+    {
+        connect(streamingService, &StreamingService::themeChanged, this, &ThemeViewModel::update, Qt::UniqueConnection);
         update();
+    }
 }
 
 void ThemeViewModel::setAccent(const QString& value)

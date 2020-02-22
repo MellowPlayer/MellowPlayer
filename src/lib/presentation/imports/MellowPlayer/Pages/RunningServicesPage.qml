@@ -18,8 +18,7 @@ StackLayout {
     }
 
     function add(service) {
-        var component = Qt.createComponent(Qt.resolvedUrl("../Controls/WebView.qml"))
-        component.createObject(root, {"service": service} );
+        webViewComponent.createObject(root, {"service": service} );
         service.isActive = true;
         service.isEnabledChanged.connect(function() {
             if (!service.isEnabled)
@@ -87,7 +86,16 @@ StackLayout {
 
         sequence: setting.value
         onActivated: _streamingServices.previous()
-}
+    }
 
-    Component { id: webView; WebView { anchors.fill: parent } }
+    Connections {
+        target: _streamingServices
+        onCurrentServiceChanged: currentIndex = indexOf(_streamingServices.currentService)
+    }
+
+    Component {
+        id: webViewComponent;
+
+        WebView { }
+    }
 }

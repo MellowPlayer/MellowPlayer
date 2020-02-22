@@ -3,22 +3,27 @@ MellowPlayer = {
     webChannel: null,
     player: null,
     refreshInterval: 100,
-    refresh: function() {
+    refresh: function () {
         if (MellowPlayer.ready && MellowPlayer.player.isRunning) {
-            var updateResults = update();
             try {
-                if(updateResults.songId == 0)
-                    updateResults.songId = getHashCode(updateResults.songTitle);
+                var updateResults = update();
+                try {
+                    if (updateResults.songId == 0)
+                        updateResults.songId = getHashCode(updateResults.songTitle);
+                } catch (e) {
+                    updateResults.songId = -1;
+                }
+                MellowPlayer.player.updateResults = updateResults;
             } catch (e) {
-                updateResults.songId = -1;
+                MellowPlayer.player.broken = true;
+                console.error(e);
             }
-            MellowPlayer.player.updateResults = updateResults;
         }
     },
-    initialize: function() {
+    initialize: function () {
         console.log("Connecting to MellowPlayer's WebChannel...");
         try {
-            MellowPlayer.webChannel = new QWebChannel(qt.webChannelTransport, function(channel) {
+            MellowPlayer.webChannel = new QWebChannel(qt.webChannelTransport, function (channel) {
                 console.log("Connected to MellowPlayer's WebChannel, ready to send/receive messages!");
                 MellowPlayer.player = channel.objects.player;
 
@@ -35,9 +40,7 @@ MellowPlayer = {
                 MellowPlayer.ready = true;
                 window.setInterval(MellowPlayer.refresh, MellowPlayer.refreshInterval);
             });
-        }
-        catch (e)
-        {
+        } catch (e) {
             console.warn(e);
         }
     }
