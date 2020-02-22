@@ -34,7 +34,7 @@ StreamingServiceViewModel::StreamingServiceViewModel(StreamingService& streaming
                                                      Players& players,
                                                      INetworkProxies& networkProxies,
                                                      ThemeViewModel& themeViewModel,
-                                                     std::unique_ptr<Infrastructure::IHttpClient> httpClient,
+                                                     std::unique_ptr<IHttpClient> httpClient,
                                                      QObject* parent)
         : QObject(parent),
           networkProxy_(networkProxies.get(streamingService.name())),

@@ -1,9 +1,9 @@
 #pragma once
 
-#include "../../../../../../../../usr/include/c++/9/memory"
-#include "../../../3rdparty/fakeit/fakeit.hpp"
-#include "../../../lib/domain/src/MellowPlayer/Domain/Logging/LoggerConfig.hpp"
-#include "../../../lib/infrastructure/src/MellowPlayer/Infrastructure/CommandLineArguments/ICommandLineArguments.hpp"
+#include <memory>
+#include <fakeit.hpp>
+#include <MellowPlayer/Domain/Logging/LoggerConfig.hpp>
+#include <MellowPlayer/Infrastructure/CommandLineArguments/ICommandLineArguments.hpp>
 
 namespace MellowPlayer::Infrastructure::Tests
 {
