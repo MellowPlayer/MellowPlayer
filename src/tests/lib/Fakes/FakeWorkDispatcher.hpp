@@ -1,6 +1,6 @@
 #pragma once
 
-#include <MellowPlayer/Domain/IWorkDispatcher.hpp>
+#include "../../../lib/domain/src/MellowPlayer/Domain/IWorkDispatcher.hpp"
 
 class FakeWorkDispatcher : public MellowPlayer::Domain::IWorkDispatcher
 {

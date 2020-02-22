@@ -5,12 +5,13 @@
 #include <QtCore/QJsonDocument>
 #include <QtCore/QJsonObject>
 #include <QtCore/QVersionNumber>
+#include <QUrl>
 
 using namespace MellowPlayer::Infrastructure;
 
-LatestBinTrayRelease::LatestBinTrayRelease(IHttpClient& httpClient) : _httpClient(httpClient)
+LatestBinTrayRelease::LatestBinTrayRelease(std::unique_ptr<IHttpClient> httpClient) : _httpClient(std::move(httpClient))
 {
-    connect(&httpClient, &IHttpClient::replyReceived, this, &LatestBinTrayRelease::onReplyReceived);
+    connect(_httpClient.get(), &IHttpClient::replyReceived, this, &LatestBinTrayRelease::onReplyReceived);
 }
 
 void MellowPlayer::Infrastructure::LatestBinTrayRelease::setChannel(UpdateChannel channel)
@@ -20,7 +21,7 @@ void MellowPlayer::Infrastructure::LatestBinTrayRelease::setChannel(UpdateChanne
 
 void MellowPlayer::Infrastructure::LatestBinTrayRelease::get()
 {
-    _httpClient.get(QString("https://api.bintray.com/packages/colinduquesnoy/MellowPlayer/%1/files").arg(channelToString()));
+    _httpClient->get(QUrl(QString("https://api.bintray.com/packages/colinduquesnoy/MellowPlayer/%1/files").arg(channelToString())));
 }
 
 QString LatestBinTrayRelease::channelToString() const

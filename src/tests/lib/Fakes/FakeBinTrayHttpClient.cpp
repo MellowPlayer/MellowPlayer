@@ -1,12 +1,13 @@
 #include "FakeBinTrayHttpClient.hpp"
 #include <QtCore/QDate>
+#include <QUrl>
 
 using namespace MellowPlayer::Infrastructure;
 using namespace MellowPlayer::Infrastructure::Tests;
 
-void FakeBinTrayHttpClient::get(const QString &url)
+void FakeBinTrayHttpClient::get(const QUrl &url)
 {
-    if (url == "https://api.bintray.com/packages/colinduquesnoy/MellowPlayer/Continuous/files")
+    if (url.toString() == "https://api.bintray.com/packages/colinduquesnoy/MellowPlayer/Continuous/files")
         emit replyReceived("[\n"
                            "  {\n"
                            "    \"name\": \"MellowPlayer_Setup.exe\",\n"
@@ -70,4 +71,10 @@ QString FakeBinTrayHttpClient::expectedVersion(UpdateChannel channel)
 QDate FakeBinTrayHttpClient::expectedDate(UpdateChannel channel)
 {
     return channel == UpdateChannel ::Stable ? QDate::fromString("2018-07-02", Qt::ISODate) : QDate::fromString("2018-12-02", Qt::ISODate);
+}
+
+void FakeBinTrayHttpClient::get(const QUrl& url, const std::function<void(const QByteArray& replyData)>& callback)
+{
+    _callback = callback;
+    get(url);
 }

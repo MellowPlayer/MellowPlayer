@@ -7,5 +7,6 @@ using namespace MellowPlayer::Infrastructure;
 class FakeHttpClient : public IHttpClient
 {
 public:
-    void get(const QString& url) override;
+    void get(const QUrl& url) override;
+    void get(const QUrl& url, const std::function<void(const QByteArray& replyData)>& callback) override;
 };

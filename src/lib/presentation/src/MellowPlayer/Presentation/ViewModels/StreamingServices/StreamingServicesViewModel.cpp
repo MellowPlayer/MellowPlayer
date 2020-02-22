@@ -6,6 +6,7 @@
 #include <MellowPlayer/Domain/StreamingServices/StreamingService.hpp>
 #include <MellowPlayer/Domain/StreamingServices/StreamingServices.hpp>
 #include <MellowPlayer/Infrastructure/CommandLineArguments/ICommandLineArguments.hpp>
+#include <MellowPlayer/Infrastructure/Network/IHttpClientFactory.hpp>
 #include <MellowPlayer/Infrastructure/Network/NetworkProxy.hpp>
 #include <MellowPlayer/Infrastructure/PlatformFilters/TokenizedFilters.hpp>
 #include <MellowPlayer/Presentation/ViewModels/StreamingServices/StreamingServicesViewModel.hpp>
@@ -28,7 +29,8 @@ StreamingServicesViewModel::StreamingServicesViewModel(StreamingServices& stream
                                                        IUserScriptFactory& userScriptFactory,
                                                        IContextProperties& contextProperties,
                                                        INetworkProxies& networkProxies,
-                                                       ThemeViewModel& themeViewModel)
+                                                       ThemeViewModel& themeViewModel,
+                                                       IHttpClientFactory& httpClientFactory)
         : ContextProperty("_streamingServices", this, contextProperties),
           _streamingServices(streamingServices),
           _players(players),
@@ -41,7 +43,8 @@ StreamingServicesViewModel::StreamingServicesViewModel(StreamingServices& stream
           _networkProxies(networkProxies),
           _allServices(new StreamingServiceListModel(this, QByteArray(), "name")),
           _enabledServices(_allServices),
-          _themeViewModel(themeViewModel)
+          _themeViewModel(themeViewModel),
+          _httpClientFactory(httpClientFactory)
 {
 }
 
@@ -106,7 +109,8 @@ void StreamingServicesViewModel::reload()
 
 void StreamingServicesViewModel::onServiceAdded(StreamingService* streamingService)
 {
-    auto* sv = new StreamingServiceViewModel(*streamingService, _settings.store(), _userScriptFactory, _players, _networkProxies, _themeViewModel, this);
+    auto* sv = new StreamingServiceViewModel(
+            *streamingService, _settings.store(), _userScriptFactory, _players, _networkProxies, _themeViewModel, _httpClientFactory.create(), this);
     sv->checkForKnownIssues();
     _allServices->append(sv);
 }

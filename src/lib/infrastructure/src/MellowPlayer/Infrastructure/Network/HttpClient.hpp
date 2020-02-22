@@ -12,12 +12,14 @@ namespace MellowPlayer::Infrastructure
         Q_OBJECT
     public:
         HttpClient();
-        void get(const QString& url) override;
+        void get(const QUrl& url) override;
+        void get(const QUrl& url, const std::function<void(const QByteArray& replyData)>& callback) override;
 
     private slots:
         void onFinished(QNetworkReply* reply);
 
     private:
         QNetworkAccessManager _networkAccessManager;
+        std::function<void(const QByteArray& replyData)> _callback;
     };
 }

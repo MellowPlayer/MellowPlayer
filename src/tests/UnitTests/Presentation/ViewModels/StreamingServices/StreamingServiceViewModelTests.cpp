@@ -1,3 +1,4 @@
+#include <Fakes/FakeHttpClient.hpp>
 #include <MellowPlayer/Domain/Player/Players.hpp>
 #include <MellowPlayer/Domain/StreamingServices/StreamingService.hpp>
 #include <MellowPlayer/Domain/StreamingServices/StreamingServices.hpp>
@@ -23,9 +24,9 @@ TEST_CASE("StreamingServiceModelTests", "[UnitTest]")
     StreamingService& service1 = *streamingServices.toList()[0];
     StreamingService& service2 = *streamingServices.toList()[1];
 
-    StreamingServiceViewModel viewModel(service1, settingsStore, pool.getUserScriptFactory(), players, pool.getNetworkProxies(), pool.getThemeViewModel());
-    StreamingServiceViewModel sameModel(service1, settingsStore, pool.getUserScriptFactory(), players, pool.getNetworkProxies(), pool.getThemeViewModel());
-    StreamingServiceViewModel model2(service2, settingsStore, pool.getUserScriptFactory(), players, pool.getNetworkProxies(), pool.getThemeViewModel());
+    StreamingServiceViewModel viewModel(service1, settingsStore, pool.getUserScriptFactory(), players, pool.getNetworkProxies(), pool.getThemeViewModel(), std::make_unique<FakeHttpClient>());
+    StreamingServiceViewModel sameModel(service1, settingsStore, pool.getUserScriptFactory(), players, pool.getNetworkProxies(), pool.getThemeViewModel(), std::make_unique<FakeHttpClient>());
+    StreamingServiceViewModel model2(service2, settingsStore, pool.getUserScriptFactory(), players, pool.getNetworkProxies(), pool.getThemeViewModel(), std::make_unique<FakeHttpClient>());
 
     SECTION("basic properties")
     {

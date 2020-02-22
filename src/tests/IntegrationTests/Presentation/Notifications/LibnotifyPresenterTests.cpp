@@ -1,8 +1,8 @@
 #ifdef USE_LIBNOTIFY
 
+#    include <Fakes/FakeWorkDispatcher.hpp>
 #    include <MellowPlayer/Presentation/Notifications/Notification.hpp>
 #    include <MellowPlayer/Presentation/Notifications/Presenters/Linux/LibnotifyPresenter.hpp>
-#    include <Mocks/FakeWorkDispatcher.hpp>
 #    include <Mocks/SystemTrayIconMock.hpp>
 #    include <UnitTests/Presentation/FakeMainWindow.hpp>
 #    include <catch/catch.hpp>

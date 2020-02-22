@@ -11,9 +11,14 @@
 #include <MellowPlayer/Infrastructure/Network/NetworkProxies.hpp>
 #include <MellowPlayer/Infrastructure/Network/NetworkProxy.hpp>
 #include <MellowPlayer/Presentation/ViewModels/StreamingServices/StreamingServiceViewModel.hpp>
+#include <QUrlQuery>
 #include <QtCore/QDir>
 #include <QtCore/QStandardPaths>
-#include <qfile.h>
+#include <QFile>
+#include <QJsonDocument>
+#include <QJsonArray>
+#include <QJsonObject>
+#include <QDesktopServices>
 
 using namespace std;
 using namespace MellowPlayer::Domain;
@@ -29,6 +34,7 @@ StreamingServiceViewModel::StreamingServiceViewModel(StreamingService& streaming
                                                      Players& players,
                                                      INetworkProxies& networkProxies,
                                                      ThemeViewModel& themeViewModel,
+                                                     std::unique_ptr<Infrastructure::IHttpClient> httpClient,
                                                      QObject* parent)
         : QObject(parent),
           networkProxy_(networkProxies.get(streamingService.name())),
@@ -40,7 +46,8 @@ StreamingServiceViewModel::StreamingServiceViewModel(StreamingService& streaming
           _isActive(false),
           _previewImageUrl("qrc:/MellowPlayer/Presentation/images/home-background.png"),
           _settingsCategoryViewModel(themeViewModel, streamingService.settings()),
-          _logger(Loggers::logger("StreamingServiceViewModel-" + name().toStdString()))
+          _logger(Loggers::logger("StreamingServiceViewModel-" + name().toStdString())),
+          _httpClient(std::move(httpClient))
 {
     connect(&_streamingService, &StreamingService::scriptChanged, this, &StreamingServiceViewModel::sourceCodeChanged);
     Q_ASSERT(networkProxy_ != nullptr);
@@ -263,6 +270,26 @@ QString StreamingServiceViewModel::getPreviewImageUrlForSave()
 
 void StreamingServiceViewModel::checkForKnownIssues()
 {
+    auto url = QUrl("https://gitlab.com/api/v4/projects/9602590/issues");
+    QUrlQuery query;
+    query.addQueryItem("state", "opened");
+    query.addQueryItem("labels", "broken integration plugin");
+    query.addQueryItem("search", name());
+    query.addQueryItem("in", "title");
+    url.setQuery(query);
+
+    _httpClient->get(url, [=](const QByteArray& data) {
+        auto jsonDocument = QJsonDocument::fromJson(data);
+        auto issues = jsonDocument.array();
+        if (issues.count() == 1)
+        {
+            auto issue = issues.first().toObject();
+            _issueLink = issue["web_url"].toString();
+            emit hasKnownIssuesChanged();
+            setBroken(true);
+            LOG_WARN(_logger, "Known issue found: " << _issueLink);
+        }
+    });
 }
 
 bool StreamingServiceViewModel::isBroken() const
@@ -285,4 +312,9 @@ void StreamingServiceViewModel::setBroken(bool value)
 bool StreamingServiceViewModel::hasKnownIssues() const
 {
     return !_issueLink.isEmpty();
+}
+
+void StreamingServiceViewModel::openKnownIssue()
+{
+    QDesktopServices::openUrl(_issueLink);
 }

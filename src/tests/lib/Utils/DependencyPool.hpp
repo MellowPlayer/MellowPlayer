@@ -3,6 +3,7 @@
 #include <fakeit/fakeit.hpp>
 #include <memory>
 
+#include <Fakes/FakeHttpClientFactory.hpp>
 #include <MellowPlayer/Domain/Settings/ISettingsStore.hpp>
 #include <MellowPlayer/Domain/StreamingServices/IStreamingServiceCreator.hpp>
 #include <MellowPlayer/Domain/UserScripts/IUserScriptFactory.hpp>
@@ -103,6 +104,7 @@ namespace MellowPlayer::Tests
 
         // presentation
         std::unique_ptr<Presentation::ListeningHistoryViewModel> _listeningHistoryViewModel;
+        FakeHttpClientFactory _httpClientFactory;
         std::unique_ptr<Presentation::StreamingServicesViewModel> _streamingServicesViewModel;
         std::unique_ptr<Presentation::ThemeViewModel> _themeViewModel;
         std::unique_ptr<Presentation::UpdaterViewModel> _updaterViewModel;

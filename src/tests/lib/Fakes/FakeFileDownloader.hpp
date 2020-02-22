@@ -1,6 +1,6 @@
 #pragma once
 
-#include <MellowPlayer/Infrastructure/Network/IFileDownloader.hpp>
+#include "../../../lib/infrastructure/src/MellowPlayer/Infrastructure/Network/IFileDownloader.hpp"
 
 namespace MellowPlayer::Tests
 {

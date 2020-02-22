@@ -1,6 +1,6 @@
 #pragma once
 
-#include <MellowPlayer/Infrastructure/Updater/AbstractPlatformUpdater.hpp>
+#include "../../../lib/infrastructure/src/MellowPlayer/Infrastructure/Updater/AbstractPlatformUpdater.hpp"
 
 namespace MellowPlayer::Tests
 {

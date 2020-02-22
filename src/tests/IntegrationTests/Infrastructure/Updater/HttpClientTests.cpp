@@ -15,7 +15,7 @@ SCENARIO("HttpClient get github API response", "[!mayfail]")
 
         WHEN("a get request is send")
         {
-            client.get("https://api.github.com/");
+            client.get(QUrl("https://api.github.com/"));
 
             THEN("it receives a non empty response")
             {

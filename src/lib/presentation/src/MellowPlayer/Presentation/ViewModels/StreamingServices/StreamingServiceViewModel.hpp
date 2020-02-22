@@ -1,6 +1,7 @@
 #pragma once
 
 #include <MellowPlayer/Domain/Properties.hpp>
+#include <MellowPlayer/Infrastructure/Network/IHttpClient.hpp>
 #include <MellowPlayer/Presentation/ViewModels/Settings/SettingsCategoryViewModel.hpp>
 #include <MellowPlayer/Presentation/ViewModels/UserScripts/UserScriptsViewModel.hpp>
 #include <QtCore/QObject>
@@ -53,6 +54,7 @@ namespace MellowPlayer::Presentation
                                   Domain::Players& players,
                                   Infrastructure::INetworkProxies& networkProxies,
                                   ThemeViewModel& themeViewModel,
+                                  std::unique_ptr<Infrastructure::IHttpClient> httpClient,
                                   QObject* parent = nullptr);
 
         void checkForKnownIssues();
@@ -102,6 +104,8 @@ namespace MellowPlayer::Presentation
         void setPreviewImageUrl(QString previewImageUrl);
         QString getPreviewImageUrlForSave();
 
+        void openKnownIssue();
+
     signals:
         void urlChanged(const QString&);
         void sortOrderChanged();
@@ -131,6 +135,7 @@ namespace MellowPlayer::Presentation
         SettingsCategoryViewModel _settingsCategoryViewModel;
         Domain::ILogger& _logger;
         int _previewCount = 0;
+        std::unique_ptr<Infrastructure::IHttpClient> _httpClient;
         bool _isBroken = false;
         QString _issueLink = "";
     };

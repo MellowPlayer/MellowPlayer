@@ -1,7 +1,7 @@
 #pragma once
 
-#include <MellowPlayer/Domain/ListeningHistory/IListeningHistoryDatabase.hpp>
-#include <MellowPlayer/Domain/ListeningHistory/ListeningHistoryEntry.hpp>
+#include "../../../lib/domain/src/MellowPlayer/Domain/ListeningHistory/IListeningHistoryDatabase.hpp"
+#include "../../../lib/domain/src/MellowPlayer/Domain/ListeningHistory/ListeningHistoryEntry.hpp"
 
 class FakeListeningHistoryDatabase : public MellowPlayer::Domain::IListeningHistoryDatabase
 {

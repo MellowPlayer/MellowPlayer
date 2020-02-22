@@ -23,6 +23,7 @@ namespace MellowPlayer::Infrastructure
 {
     class ICommandLineArguments;
     class INetworkProxies;
+    class IHttpClientFactory;
 }
 
 namespace MellowPlayer::Presentation
@@ -43,7 +44,8 @@ namespace MellowPlayer::Presentation
                                    Domain::IUserScriptFactory& userScriptFactory,
                                    IContextProperties& contextProperties,
                                    Infrastructure::INetworkProxies& networkProxies,
-                                   ThemeViewModel& themeViewModel);
+                                   ThemeViewModel& themeViewModel,
+                                   Infrastructure::IHttpClientFactory& httpClientFactory);
 
         using ContextProperty::registerTo;
         void initialize();
@@ -96,6 +98,7 @@ namespace MellowPlayer::Presentation
         StreamingServiceProxyListModel _enabledServices;
         StreamingServiceViewModel* _currentService = nullptr;
         ThemeViewModel& _themeViewModel;
+        Infrastructure::IHttpClientFactory& _httpClientFactory;
         void initializeCurrent();
         void load();
     };

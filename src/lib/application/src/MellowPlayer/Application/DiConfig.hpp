@@ -61,7 +61,7 @@
 #include <MellowPlayer/Infrastructure/Network/ApplicationNetworkProxy.hpp>
 #include <MellowPlayer/Infrastructure/Network/FileDownloader.hpp>
 #include <MellowPlayer/Infrastructure/Network/HttpClient.hpp>
-#include <MellowPlayer/Infrastructure/Network/IHttpClient.hpp>
+#include <MellowPlayer/Infrastructure/Network/HttpClientFactory.hpp>
 #include <MellowPlayer/Infrastructure/Network/LocalServer.hpp>
 #include <MellowPlayer/Infrastructure/Network/LocalSocket.hpp>
 #include <MellowPlayer/Infrastructure/Network/NetworkProxies.hpp>
@@ -139,7 +139,8 @@ auto defaultInjector = [](di::extension::detail::scoped& scope, QApplication& qA
         di::bind<IStreamingServiceCreator>().to<StreamingServiceCreator>().in(di::singleton).in(scope),
         di::bind<IThemeLoader>().to<ThemeLoader>().in(di::singleton).in(scope),
         di::bind<ILatestRelease>().to<LatestBinTrayRelease>().in(di::singleton).in(scope),
-        di::bind<IHttpClient>().to<HttpClient>().in(di::singleton).in(scope),
+        di::bind<IHttpClient>().to<HttpClient>().in(di::unique),
+        di::bind<IHttpClientFactory>().to<HttpClientFactory>().in(di::singleton).in(scope),
         di::bind<IFileDownloader>().to<FileDownloader>().in(di::singleton).in(scope),
         di::bind<IUserScriptFactory>().to<UserScriptFactory>().in(di::singleton).in(scope),
         di::bind<IMainWindow>().to<MainWindowViewModel>().in(di::singleton).in(scope),

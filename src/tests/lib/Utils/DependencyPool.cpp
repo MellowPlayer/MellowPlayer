@@ -24,13 +24,13 @@
 #include <MellowPlayer/Presentation/ViewModels/UpdaterViewModel.hpp>
 
 #include <Fakes/FakeBinTrayHttpClient.hpp>
+#include <Fakes/FakeCommnandLineArguments.hpp>
+#include <Fakes/FakeFileDownloader.hpp>
+#include <Fakes/FakeHttpClient.hpp>
+#include <Fakes/FakeListeningHistoryDatabase.hpp>
+#include <Fakes/FakePlatformUpdater.hpp>
+#include <Fakes/FakeWorkDispatcher.hpp>
 #include <Mocks/AlbumArtDownloaderMock.hpp>
-#include <Mocks/FakeCommnandLineArguments.hpp>
-#include <Mocks/FakeFileDownloader.hpp>
-#include <Mocks/FakeHttpClient.hpp>
-#include <Mocks/FakeListeningHistoryDatabase.hpp>
-#include <Mocks/FakePlatformUpdater.hpp>
-#include <Mocks/FakeWorkDispatcher.hpp>
 #include <Mocks/NotificationPresenterMock.hpp>
 #include <Mocks/StreamingServiceCreatorMock.hpp>
 #include <Mocks/ThemeLoaderMock.hpp>
@@ -85,7 +85,8 @@ StreamingServicesViewModel& DependencyPool::getStreamingServicesViewModel()
                                                                                         getUserScriptFactory(),
                                                                                         *_contextProperties,
                                                                                         _networkProxies,
-                                                                                        getThemeViewModel());
+                                                                                        getThemeViewModel(),
+                                                                                        _httpClientFactory);
     return *_streamingServicesViewModel;
 }
 
@@ -163,8 +164,7 @@ UpdaterViewModel& DependencyPool::getUpdaterViewModel()
 
 Updater& DependencyPool::getUpdater()
 {
-    static FakeBinTrayHttpClient httpClient;
-    static LatestBinTrayRelease latestBinTrayRelease(httpClient);
+    static LatestBinTrayRelease latestBinTrayRelease(std::make_unique<FakeBinTrayHttpClient>());
     if (_updater == nullptr)
         _updater = make_unique<Updater>(latestBinTrayRelease, getSettings(), getPlatformUpdater());
     return *_updater;

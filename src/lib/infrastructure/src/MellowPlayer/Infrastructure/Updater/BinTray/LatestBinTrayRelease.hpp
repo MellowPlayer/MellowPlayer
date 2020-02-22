@@ -1,6 +1,7 @@
 #pragma once
 
 #include <MellowPlayer/Infrastructure/Updater/ILatestRelease.hpp>
+#include <memory>
 
 class QJsonArray;
 
@@ -11,7 +12,7 @@ namespace MellowPlayer::Infrastructure
     class LatestBinTrayRelease : public ILatestRelease
     {
     public:
-        explicit LatestBinTrayRelease(IHttpClient& httpClient);
+        explicit LatestBinTrayRelease(std::unique_ptr<IHttpClient> httpClient);
 
         void setChannel(UpdateChannel channel) override;
         void get() override;
@@ -22,7 +23,7 @@ namespace MellowPlayer::Infrastructure
         QString findLatestVersion(const QJsonArray& replyData);
 
         QString channelToString() const;
-        IHttpClient& _httpClient;
+        std::unique_ptr<IHttpClient> _httpClient;
         UpdateChannel _channel;
 
         QString makeUrl(QString path);

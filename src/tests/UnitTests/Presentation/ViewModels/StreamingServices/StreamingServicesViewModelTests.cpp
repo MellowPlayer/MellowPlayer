@@ -1,3 +1,5 @@
+#include <Fakes/FakeCommnandLineArguments.hpp>
+#include <Fakes/FakeHttpClientFactory.hpp>
 #include <MellowPlayer/Domain/Player/Player.hpp>
 #include <MellowPlayer/Domain/Player/Players.hpp>
 #include <MellowPlayer/Domain/Settings/Setting.hpp>
@@ -5,7 +7,6 @@
 #include <MellowPlayer/Domain/StreamingServices/StreamingService.hpp>
 #include <MellowPlayer/Domain/StreamingServices/StreamingServices.hpp>
 #include <MellowPlayer/Presentation/ViewModels/StreamingServices/StreamingServicesViewModel.hpp>
-#include <Mocks/FakeCommnandLineArguments.hpp>
 #include <Mocks/StreamingServiceCreatorMock.hpp>
 #include <QtTest/QSignalSpy>
 #include <Utils/DependencyPool.hpp>
@@ -28,6 +29,7 @@ TEST_CASE("StreamingServicesControllerViewModel", "[UnitTest]")
     IWorkDispatcher& workDispatcher = pool.getWorkDispatcher();
     auto creatorMock = StreamingServiceCreatorMock::get();
     FakeCommandLineArguments commandLineArguments;
+    FakeHttpClientFactory httpClientFactory;
     StreamingServicesViewModel viewModel(streamingServices,
                                          players,
                                          settings,
@@ -37,7 +39,8 @@ TEST_CASE("StreamingServicesControllerViewModel", "[UnitTest]")
                                          pool.getUserScriptFactory(),
                                          pool.getContextProperties(),
                                          pool.getNetworkProxies(),
-                                         pool.getThemeViewModel());
+                                         pool.getThemeViewModel(),
+                                         httpClientFactory);
     viewModel.initialize();
     viewModel.reload();
 
@@ -127,7 +130,8 @@ TEST_CASE("StreamingServicesControllerViewModel", "[UnitTest]")
                                                         pool.getUserScriptFactory(),
                                                         pool.getContextProperties(),
                                                         pool.getNetworkProxies(),
-                                                        pool.getThemeViewModel());
+                                                        pool.getThemeViewModel(),
+                                                        httpClientFactory);
         REQUIRE(viewModelWithCmdLine.currentService() == nullptr);
         viewModelWithCmdLine.initialize();
         viewModelWithCmdLine.reload();

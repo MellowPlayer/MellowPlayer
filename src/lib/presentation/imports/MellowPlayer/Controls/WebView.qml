@@ -359,7 +359,7 @@ Page {
             Label {
                 Layout.leftMargin: 12
 
-                text: root.service.hasKnownIssues ? qsTr("This plugin is broken, this is a known issue...") : qsTr("This plugin is broken and it looks like we are not aware of it. <b>Please report the issue!</b>")
+                text: root.service.hasKnownIssues ? qsTr("This plugin is broken. We are aware of the issue, <b>your help is welcome</b>!") : qsTr("This plugin might be broken and it looks like we are not aware of it. <b>Please report the issue!</b>")
             }
 
             Item {
@@ -367,10 +367,10 @@ Page {
             }
 
             ToolButton {
-                text: qsTr("See opened issue on gitlab")
+                text: qsTr("See issue on gitlab")
                 visible: root.service.hasKnownIssues
 
-                onClicked: Qt.openUrlExternally(oot.service.issueUrl)
+                onClicked: root.service.openKnownIssue()
             }
 
             ToolButton {

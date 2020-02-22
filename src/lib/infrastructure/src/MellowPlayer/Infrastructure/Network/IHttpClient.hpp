@@ -1,6 +1,7 @@
 #pragma once
 
 #include <QtCore/QObject>
+#include <functional>
 
 namespace MellowPlayer::Infrastructure
 {
@@ -9,7 +10,8 @@ namespace MellowPlayer::Infrastructure
         Q_OBJECT
     public:
         virtual ~IHttpClient() = default;
-        virtual void get(const QString& url) = 0;
+        virtual void get(const QUrl& url) = 0;
+        virtual void get(const QUrl& url, const std::function<void(const QByteArray& replyData)>& callback) = 0;
 
     signals:
         void replyReceived(const QByteArray& replyData);

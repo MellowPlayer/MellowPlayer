@@ -87,8 +87,8 @@ SCENARIO("check for stable updates")
 
 SCENARIO("check for Continuous updates")
 {
-    FakeBinTrayHttpClient fakeHttpClient;
-    LatestBinTrayRelease querier(fakeHttpClient);
+    auto fakeHttpClient = std::make_unique<FakeBinTrayHttpClient>();
+    LatestBinTrayRelease querier(std::move(fakeHttpClient));
     MellowPlayer::Tests::DependencyPool pool;
     Settings& settings = pool.getSettings();
     settings.get(SettingKey::MAIN_UPDATE_CHANNEL).setValue((int) UpdateChannel::Continuous);
