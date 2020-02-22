@@ -877,13 +877,13 @@ this may take a few minutes...</source>
     </message>
     <message>
         <location filename="../../lib/presentation/imports/MellowPlayer/Dialogs/ReportIssueDialog.qml" line="146"/>
-        <source>Please, read the contributing guidelines before submitting your bug report!</source>
-        <translation>Пожалуйста, ознакомьтесь с руководством прежде чем отправлять отчет об ошибке!</translation>
+        <source>Please, read the contributing guidelines before submitting the bug report!</source>
+        <translation type="unfinished"/>
     </message>
     <message>
         <location filename="../../lib/presentation/imports/MellowPlayer/Dialogs/ReportIssueDialog.qml" line="162"/>
-        <source>Thank you for taking the time to report your issue!</source>
-        <translation>Спасибо, что уделили время, и отправили этот отчет!</translation>
+        <source>Thank you for taking the time to report the issue!</source>
+        <translation type="unfinished"/>
     </message>
     <message>
         <location filename="../../lib/presentation/imports/MellowPlayer/Dialogs/ReportIssueDialog.qml" line="185"/>
@@ -1714,6 +1714,29 @@ this may take a few minutes...</source>
         <location filename="../../lib/presentation/src/MellowPlayer/Presentation/Converters/UpdaterStatusConverter.hpp" line="37"/>
         <source>Failed to install update, check logs for warning and errors and try again...</source>
         <translation>Не удалось установить обновление, проверьте лог файл на наличие предупреждений и ошибок и попробуйте снова...</translation>
+    </message>
+</context>
+<context>
+    <name>WebView</name>
+    <message>
+        <location filename="../../lib/presentation/imports/MellowPlayer/Controls/WebView.qml" line="362"/>
+        <source>This plugin is broken. We are aware of the issue, &lt;b&gt;your help is welcome&lt;/b&gt;!</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <location filename="../../lib/presentation/imports/MellowPlayer/Controls/WebView.qml" line="362"/>
+        <source>This plugin might be broken and it looks like we are not aware of it. &lt;b&gt;Please report the issue!&lt;/b&gt;</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <location filename="../../lib/presentation/imports/MellowPlayer/Controls/WebView.qml" line="370"/>
+        <source>See issue on gitlab</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <location filename="../../lib/presentation/imports/MellowPlayer/Controls/WebView.qml" line="377"/>
+        <source>Report broken plugin</source>
+        <translation type="unfinished"/>
     </message>
 </context>
 <context>
