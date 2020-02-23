@@ -1,6 +1,9 @@
 import QtQuick 2.9
 import QtQuick.Controls 2.2
 
+import MellowPlayer 3.0
+
+
 Menu {
     id: root
 
@@ -33,6 +36,13 @@ Menu {
         interval: 200
         onTriggered: root.open()
     }
+
+    MenuItem {
+        text: qsTr("Toggle main toolbar")
+        onClicked: _settings.get(SettingKey.APPEARANCE_TOOLBAR_VISIBLE).value = !_settings.get(SettingKey.APPEARANCE_TOOLBAR_VISIBLE).value
+    }
+
+    MenuSeparator { }
 
     MenuItem {
         height: visible ? implicitHeight : 0

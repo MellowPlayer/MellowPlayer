@@ -89,8 +89,8 @@ Page {
             contextMenu.canCopy = request.selectedText !== "";
             contextMenu.canPaste = request.isContentEditable && _clipboard.canPaste();
             contextMenu.canUnselect = request.selectedText !== "";
-            contextMenu.canGoBack = root.canGoBack;
-            contextMenu.canGoForward = root.canGoForward;
+            contextMenu.canGoBack = webView.canGoBack;
+            contextMenu.canGoForward = webView.canGoForward;
             contextMenu.hasLink = request.linkText !== "";
             contextMenu.show();
         }
