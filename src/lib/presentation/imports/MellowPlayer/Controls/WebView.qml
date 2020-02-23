@@ -80,7 +80,7 @@ Page {
         userScripts: d.getUserScripts()
         zoomFactor: _zoom.value
         webChannel: webChannel
-        audioMuted: _streamingServices.currentService.name !== root.service.name
+        audioMuted: _streamingServices.currentService !== null && _streamingServices.currentService.name !== root.service.name
 
         onContextMenuRequested: {
             request.accepted = true;

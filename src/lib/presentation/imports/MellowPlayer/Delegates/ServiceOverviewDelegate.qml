@@ -10,95 +10,177 @@ import MellowPlayer 3.0
 Item {
     id: root
 
-    property int index
+    property int index: model.sortIndex
     property string backgroundColor: Material.background
-    property bool hovered: false
+    property bool hovered: mouseArea.containsMouse
     property var service: model.qtObject
 
-    onIndexChanged: model.sortOrder = root.index
+    onIndexChanged: model.sortIndex = root.index
+    Drag.active: mouseArea.drag.active
 
-    Component.onCompleted: model.sortOrder = root.index
+    Component.onCompleted: model.sortIndex = root.index
 
-    Pane {
+    Item {
+        id: pane
+
         anchors.fill: parent
         anchors.margins: parent.width / 50
 
+        layer.enabled: true
+        layer.effect: OpacityMask {
+            maskSource: Rectangle {
+                width: root.width
+                height: root.height
+                radius: 6
+            }
+        }
+
         Material.elevation: state == "hover" ? 8 : 4
 
-        Image {
-            id: preview
-            x: 0
-            y: 0
-            width: parent.width
-            height: parent.height
-            source: model.previewImageUrl
-        }
+        Item {
+            anchors.fill: parent
 
-        Desaturate {
-            id: filter
-            anchors.fill: preview
-            source: preview
-            desaturation: 1.0
-        }
+            Image {
+                id: preview
 
-        ColorOverlay {
-            id: overlay
-            anchors.fill: preview
-            source: preview
-            color: "black"
-            opacity: 0.3
-        }
+                property bool rounded: true
+                property bool adapt: true
 
-        state: root.hovered ? "hover" : ""
-
-        states: State {
-            name: "hover"
-
-            PropertyChanges {
-                target: filter
-                desaturation: 0.0
+                anchors.fill: parent
+                source: model.previewImageUrl
             }
 
-            PropertyChanges {
-                target: overlay
-                opacity: 0.0
+            FastBlur {
+                anchors.fill: preview
+                source: preview
+                radius: 32
+            }
 
+            ColorOverlay {
+                id: overlay
+                anchors.fill: preview
+                source: preview
+                color: "black"
+                opacity: 0.3
+            }
+
+            state: root.hovered || starButton.hovered || stopButton.hovered ? "hover" : ""
+            states: State {
+                name: "hover"
+
+                PropertyChanges {
+                    target: overlay
+                    opacity: 0.0
+
+                }
+            }
+            transitions: [
+                Transition {
+                    PropertyAnimation { properties: "opacity" }
+                }
+            ]
+
+            Image {
+                anchors.horizontalCenter: parent.horizontalCenter
+                y: parent.height / 5
+                antialiasing: true
+                height: 64; width: 64
+                mipmap: true
+                source: model.logo
             }
         }
 
-        transitions: [
-            Transition {
-                PropertyAnimation { properties: "desaturation, opacity" }
-            }
-        ]
+        MouseArea {
+            id: mouseArea
 
-        Pane {
-            anchors.centerIn: parent
-            Material.background: "#404040"
-            Material.elevation: 2
+            anchors.fill: parent
+            drag.target: item
+            hoverEnabled: true
+            propagateComposedEvents: true
+
+            onClicked: root.activate();
+            onReleased: root.Drag.drop();
+            onWheel: wheel.accepted = false
+        }
+
+        IconToolButton {
+            id: stopButton
+
+            anchors {
+                top: parent.top
+                right: parent.right
+            }
+            visible: model.isActive
+            padding: 0
+            iconChar: MaterialIcons.icon_power_settings_new
+            font.bold: true
+            font.pixelSize: 16
+            tooltip: qsTr("Stop")
+
+            onClicked: mainWindow.runningServices.remove(model)
+
+            Material.foreground: Material.Red
+        }
+
+        Rectangle {
+            anchors {
+                bottom: parent.bottom
+                left: parent.left
+                right: parent.right
+            }
+            color: "#404040"
             opacity: 0.9
+            implicitHeight: layout.implicitHeight
+
+            Material.theme: Material.Dark
+            Material.foreground: "white"
 
             RowLayout {
+                id: layout
+
                 anchors.fill: parent
-                spacing: 9
+                spacing: 0
 
-                Image {
-                    Layout.maximumWidth: 32
-                    Layout.maximumHeight: 32
-                    source: model.logo
-                    antialiasing: true
-                    mipmap: true
+                IconToolButton {
+                    id: starButton
+                    padding: 0
+                    iconChar: checked ? MaterialIcons.icon_star : MaterialIcons.icon_star_border
+                    font.bold: true
+                    font.pixelSize: 16
+                    checkable: true
+                    checked: model.favorite
+                    tooltip: checked ? qsTr("Remove service from favorites") : qsTr("Add service to favorites")
+
+                    onCheckedChanged: model.favorite = checked
+
+                    Material.accent: Material.color(Material.Amber, Material.Shade600)
                 }
 
-                Text {
-                    id: lblName
-                    Layout.fillWidth: true
+                Item { Layout.fillWidth: true }
 
-                    color: "white"
-                    text: model.name
-                    horizontalAlignment: Text.AlignHCenter
-                    verticalAlignment: Text.AlignVCenter
+                IconToolButton {
+                    id: settingsButton
+
+                    padding: 0
+                    iconChar: MaterialIcons.icon_settings
+                    font.pixelSize: 16
+
+                    tooltip: qsTr("Settings")
+
+                    onClicked: {
+                        settingsDialog.service = model;
+                        settingsDialog.open()
+                    }
                 }
+            }
+
+            Text {
+                id: lblName
+
+                anchors.centerIn: parent
+                color: "white"
+                text: model.name
+                font.bold: true
             }
         }
     }

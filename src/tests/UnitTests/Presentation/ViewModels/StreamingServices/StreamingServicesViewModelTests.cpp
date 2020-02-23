@@ -44,14 +44,14 @@ TEST_CASE("StreamingServicesControllerViewModel", "[UnitTest]")
     viewModel.initialize();
     viewModel.reload();
 
-    StreamingServiceViewModel* service1 = viewModel.allServices()->at(0);
-    StreamingServiceViewModel* service2 = viewModel.allServices()->at(1);
-    StreamingServiceViewModel* service3 = viewModel.allServices()->at(2);
+    StreamingServiceViewModel* service1 = viewModel.services().at(0);
+    StreamingServiceViewModel* service2 = viewModel.services().at(1);
+    StreamingServiceViewModel* service3 = viewModel.services().at(2);
 
     SECTION("setCurrentService changes current streaming service")
     {
         REQUIRE(viewModel.currentService() == nullptr);
-        viewModel.setCurrentService(viewModel.allServices()->toList()[1]);
+        viewModel.setCurrentService(viewModel.services()[1]);
         REQUIRE(viewModel.currentService()->streamingService() == streamingServices.current());
         viewModel.setCurrentService(nullptr);
     }

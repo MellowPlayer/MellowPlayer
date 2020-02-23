@@ -8,25 +8,48 @@
 #include <MellowPlayer/Presentation/IMainWindow.hpp>
 #include <MellowPlayer/Presentation/IconProvider.hpp>
 #include <MellowPlayer/Presentation/Notifications/SystemTrayIcon.hpp>
+#include <MellowPlayer/Presentation/ViewModels/StreamingServices/StreamingServicesViewModel.hpp>
 
 using namespace MellowPlayer::Domain;
 using namespace MellowPlayer::Infrastructure;
 using namespace MellowPlayer::Presentation;
 
-SystemTrayIcon::SystemTrayIcon(IPlayer& player, IMainWindow& mainWindow, Settings& settings)
+SystemTrayIcon::SystemTrayIcon(IPlayer& player, IMainWindow& mainWindow, Settings& settings, StreamingServicesViewModel& streamingServices)
         : _logger(Loggers::logger("SystemTrayIcon")),
           _player(player),
           _mainWindow(mainWindow),
           _settings(settings),
           _showTrayIconSetting(settings.get(SettingKey::APPEARANCE_SHOW_TRAY_ICON)),
           _customTrayIconSetting(settings.get(SettingKey::APPEARANCE_CUSTOM_TRAY_ICON)),
+          _streamingServices(streamingServices),
           _qSystemTrayIcon(IconProvider::trayIcon())
 {
     connect(&_qSystemTrayIcon, &QSystemTrayIcon::activated, this, &SystemTrayIcon::onActivated);
     connect(&_showTrayIconSetting, &Setting::valueChanged, this, &SystemTrayIcon::onShowTrayIconSettingValueChanged);
     connect(&_customTrayIconSetting, &Setting::valueChanged, this, &SystemTrayIcon::updateIcon);
+    connect(&_streamingServices, &StreamingServicesViewModel::currentServiceChanged, this, &SystemTrayIcon::setupFavoritesMenu);
     setUpMenu();
     updateIcon();
+}
+
+void SystemTrayIcon::setupFavoritesMenu()
+{
+    _favoritesMenu->clear();
+
+    for (auto* service : _streamingServices.services())
+    {
+        connect(service, &StreamingServiceViewModel::favoriteChanged, this, &SystemTrayIcon::setupFavoritesMenu, Qt::UniqueConnection);
+
+        if (service->isFavorite())
+        {
+            auto* action = _favoritesMenu->addAction(service->name());
+            action->setCheckable(true);
+            action->setChecked(_streamingServices.currentService() == service);
+            connect(action, &QAction::triggered, [=]() {
+                _streamingServices.activate(service);
+            });
+        }
+    }
 }
 
 void SystemTrayIcon::updateIcon()
@@ -71,6 +94,10 @@ void SystemTrayIcon::setUpMenu()
 
     _previousSongAction = _menu.addAction(IconProvider::previous(), strings.previous());
     connect(_previousSongAction, &QAction::triggered, this, &SystemTrayIcon::previous);
+
+    _menu.addSeparator();
+
+    _favoritesMenu = _menu.addMenu(strings.favoriteServices());
 
     _menu.addSeparator();
 
@@ -123,6 +150,11 @@ void SystemTrayIcon::onShowTrayIconSettingValueChanged()
         hide();
 }
 
+void SystemTrayIcon::selectService()
+{
+
+}
+
 QString SystemTrayIconStrings::playPause() const
 {
     return tr("Play/Pause");
@@ -146,4 +178,8 @@ QString SystemTrayIconStrings::restoreWindow() const
 QString SystemTrayIconStrings::quit() const
 {
     return tr("Quit");
+}
+QString SystemTrayIconStrings::favoriteServices() const
+{
+    return tr("Favorite services");
 }

@@ -35,8 +35,7 @@ namespace MellowPlayer::Presentation
         Q_PROPERTY(QString version READ version CONSTANT)
         Q_PROPERTY(QString authorName READ authorName CONSTANT)
         Q_PROPERTY(QString authorWebsite READ authorWebsite CONSTANT)
-        Q_PROPERTY(bool isEnabled READ isEnabled WRITE setEnabled NOTIFY isEnabledChanged)
-        Q_PROPERTY(int sortOrder READ sortOrder WRITE setSortOrder NOTIFY sortOrderChanged)
+        Q_PROPERTY(int sortIndex READ sortIndex WRITE setSortIndex NOTIFY sortIndexChanged)
         Q_PROPERTY(QObject* userScripts READ userScripts CONSTANT)
         Q_PROPERTY(int zoomFactor READ zoomFactor WRITE setZoomFactor NOTIFY zoomFactorChanged)
         Q_PROPERTY(bool notificationsEnabled READ notificationsEnabled WRITE setNotificationsEnabled NOTIFY notificationsEnabledChanged)
@@ -46,6 +45,7 @@ namespace MellowPlayer::Presentation
         Q_PROPERTY(SettingsCategoryViewModel* settings READ settings CONSTANT)
         Q_PROPERTY(bool broken READ isBroken WRITE setBroken NOTIFY brokenChanged)
         Q_PROPERTY(bool hasKnownIssues READ hasKnownIssues NOTIFY hasKnownIssuesChanged)
+        Q_PROPERTY(bool favorite READ isFavorite WRITE setFavorite NOTIFY favoriteChanged)
         CONSTANT_OBJECT_PROPERTY(Infrastructure::NetworkProxy, networkProxy)
     public:
         StreamingServiceViewModel(Domain::StreamingService& streamingService,
@@ -72,11 +72,8 @@ namespace MellowPlayer::Presentation
 
         Domain::StreamingService* streamingService() const;
 
-        int sortOrder() const;
-        void setSortOrder(int newOrder);
-
-        bool isEnabled() const;
-        void setEnabled(bool enabled);
+        int sortIndex() const;
+        void setSortIndex(int newOrder);
 
         QObject* userScripts();
 
@@ -94,6 +91,9 @@ namespace MellowPlayer::Presentation
         bool isBroken() const;
         bool hasKnownIssues() const;
 
+        bool isFavorite() const;
+        void setFavorite(bool value);
+
         SettingsCategoryViewModel* settings();
 
     public slots:
@@ -108,8 +108,7 @@ namespace MellowPlayer::Presentation
 
     signals:
         void urlChanged(const QString&);
-        void sortOrderChanged();
-        void isEnabledChanged();
+        void sortIndexChanged();
         void zoomFactorChanged();
         void notificationsEnabledChanged();
         void isActiveChanged();
@@ -117,11 +116,12 @@ namespace MellowPlayer::Presentation
         void sourceCodeChanged();
         void brokenChanged();
         void hasKnownIssuesChanged();
+        void favoriteChanged();
 
     private:
         QString customUrlSettingsKey() const;
-        QString sortOrderSettingsKey() const;
-        QString isEnabledSettingsKey() const;
+        QString sortIndexSettingKey() const;
+        QString favoriteSettingKey() const;
         QString zoomFactorSettingsKey() const;
         QString notificationsEnabledSettingsKey() const;
 

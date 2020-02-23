@@ -48,7 +48,7 @@ Pane {
 
             Repeater {
                 z: 1
-                model: _streamingServices.enabledServices
+                model: _streamingServices.filteredServices
 
                 Button {
                     id: filter

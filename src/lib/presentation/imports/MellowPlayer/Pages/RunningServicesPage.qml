@@ -10,9 +10,11 @@ StackLayout {
     property WebView currentWebView: itemAt(currentIndex)
 
     function indexOf(service) {
-        for(var i = 0; i < count; i++) {
-            if (itemAt(i).service.name === service.name)
-                return i;
+        if (service !== null) {
+            for(var i = 0; i < count; i++) {
+                if (itemAt(i).service.name === service.name)
+                    return i;
+            }
         }
         return -1;
     }
@@ -20,10 +22,6 @@ StackLayout {
     function add(service) {
         webViewComponent.createObject(root, {"service": service} );
         service.isActive = true;
-        service.isEnabledChanged.connect(function() {
-            if (!service.isEnabled)
-                remove(service);
-        } );
     }
 
     function remove(service) {

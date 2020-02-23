@@ -4,21 +4,22 @@
 #include <Mocks/PlayerMock.hpp>
 #include <UnitTests/Domain/Settings/FakeSettingsStore.hpp>
 #include <UnitTests/Presentation/FakeMainWindow.hpp>
+#include <Utils/DependencyPool.hpp>
 #include <catch/catch.hpp>
 
 using namespace MellowPlayer::Domain::Tests;
 using namespace MellowPlayer::Presentation;
 using namespace MellowPlayer::Presentation::Tests;
 using namespace MellowPlayer::Infrastructure;
+using namespace MellowPlayer::Tests;
 
 TEST_CASE("SystemTrayIconTests")
 {
     auto playerMock = PlayerMock::get();
-    FakeSettingsStore settingsStore;
-    SettingsSchemaLoader loader;
-    Settings settings(loader, settingsStore);
+    DependencyPool pool;
     FakeMainWindow mainWindow;
-    SystemTrayIcon systemTrayIcon(playerMock.get(), mainWindow, settings);
+
+    SystemTrayIcon systemTrayIcon(playerMock.get(), mainWindow, pool.getSettings(), pool.getStreamingServicesViewModel());
 
     SECTION("don't show window onActivated with context menu")
     {

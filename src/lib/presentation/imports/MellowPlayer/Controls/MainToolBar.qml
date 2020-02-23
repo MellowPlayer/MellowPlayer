@@ -340,6 +340,7 @@ ToolBar {
                         visible: _updater.busy
                     }
                 }
+
                 MenuSeparator { }
 
                 IconMenuItem {
@@ -368,12 +369,21 @@ ToolBar {
         anchors.centerIn: parent
         height: root.height
         width: 500
-        visible: mainWindow.isOnRunningServicesPage && _settings.get(SettingKey.APPEARANCE_PLAYER_CONTROLS_VISIBLE).value
+
+        Label {
+            anchors.centerIn: parent
+            text: qsTr("Which streaming service would you like to use?")
+            font.pixelSize: 16
+            visible: !songInfoItem.visible
+        }
 
         ColumnLayout {
+            id: songInfoItem
+
             anchors.fill: parent
             anchors.margins: 9
             spacing: 0
+            visible: mainWindow.isOnRunningServicesPage && _settings.get(SettingKey.APPEARANCE_PLAYER_CONTROLS_VISIBLE).value
 
             Label {
                 Layout.fillHeight: true

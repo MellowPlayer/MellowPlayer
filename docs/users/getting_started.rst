@@ -9,8 +9,14 @@ On the first startup, you'll be presented with the following screen:
 .. image:: ../_static/home-page.png
     :align: center
 
-Just click on a service to start running it. You can start multiple service at the same time and quickly switch between
-them using Ctrl+Tab/Ctrl+Shift+Tab.
+Just click on a service to start running it.
+
+You can start multiple service at the same time and quickly switch between
+them using Ctrl+Tab/Ctrl+Shift+Tab. You can stop a service by clicking on the power button.
+
+You can mark a service as a favorite by clicking on the little start icon. Favorite services are available from the system tray icon and you can choose to view only those services in the home page by activating the switch at the top left.
+
+You can also use the filter bar to look for a service by name.
 
 .. image:: ../_static/main-window.png
     :align: center

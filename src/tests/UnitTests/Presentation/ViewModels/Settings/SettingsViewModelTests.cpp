@@ -29,7 +29,7 @@ TEST_CASE("SettingsViewModelTests")
 
     SECTION("categories")
     {
-        int extraCategories = 3;
+        int extraCategories = 2;
         REQUIRE(settingsViewModel.categories()->count() - extraCategories == (settings.categories().count() - 1));
     }
 

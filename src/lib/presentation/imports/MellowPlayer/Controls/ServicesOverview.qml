@@ -11,35 +11,68 @@ Item {
 
     ColumnLayout {
         anchors.fill: parent
+        spacing: 0
 
-        Label {
-            text: qsTr("Which streaming service would you like to use?")
-            font.pixelSize: 32
-            horizontalAlignment: Text.AlignHCenter
-
+        Item {
             Layout.fillWidth: true
-            Layout.topMargin: 64
+            Layout.preferredHeight: filtersLayout.implicitHeight
+            Layout.topMargin: 24
+
+            RowLayout {
+                id: filtersLayout
+                spacing: 0
+
+                anchors.centerIn: parent
+                implicitWidth: gridView.width
+
+                Switch {
+                    property var setting: _settings.get(SettingKey.PRIVATE_SHOW_FAVORITE_SERVICES)
+
+                    text: qsTr("Show only favorite services")
+                    font.bold: true
+                    checked: setting.value
+                    onCheckedChanged: setting.value = checked
+
+                }
+
+                Item { Layout.fillWidth: true }
+
+
+                TextField {
+                    id: searchTextField
+
+                    placeholderText: qsTr("Search within available services")
+                    selectByMouse: true
+
+                    onTextChanged: _streamingServices.filteredServices.setSearchText(text)
+
+                    Component.onCompleted: forceActiveFocus()
+                    Layout.preferredWidth: 340
+                }
+            }
         }
 
-        RowLayout {
+        Item {
+            clip: true
+
             Layout.fillHeight: true
             Layout.fillWidth: true
             Layout.topMargin: 32
-            Layout.bottomMargin: 64
+            Layout.bottomMargin: 32
 
             Item {
-                clip: true
-
-                Layout.fillHeight: true
-                Layout.fillWidth: true
-                Layout.leftMargin: 96
-                Layout.rightMargin: 96
+                anchors.fill: parent
+                anchors.leftMargin: 96
+                anchors.rightMargin: 96
+                anchors.topMargin: 12
 
                 GridView {
                     id: gridView
 
                     property bool dragActive: false
                     property int itemSpacing: 48
+
+                    signal dropped()
 
                     anchors.centerIn: parent
                     focus: true
@@ -51,8 +84,8 @@ Item {
                         id: visualModel
 
                         Component.onCompleted: {
-                            _streamingServices.enabledServices.update()
-                            model = _streamingServices.enabledServices
+                            _streamingServices.filteredServices.update()
+                            model = _streamingServices.filteredServices
                         }
 
                         delegate: Item {
@@ -67,16 +100,25 @@ Item {
                             ServiceOverviewDelegate {
                                 id: item
 
+                                function updateIndex() { index = delegateRoot.visualIndex }
+
                                 anchors { horizontalCenter: parent.horizontalCenter; verticalCenter: parent.verticalCenter }
                                 height: gridView.cellHeight - 4; width: gridView.cellWidth - 4
-                                hovered: mouseArea.containsMouse
-                                index: delegateRoot.visualIndex
 
-                                Drag.active: mouseArea.drag.active
                                 Drag.source: delegateRoot
                                 Drag.hotSpot.x: gridView.cellWidth / 2
                                 Drag.hotSpot.y: gridView.cellHeight / 2
-                                Drag.onActiveChanged: gridView.dragActive = Drag.active
+                                Drag.onActiveChanged: {
+                                    gridView.dragActive = Drag.active
+                                    if (!Drag.active)
+                                        gridView.dropped()
+                                }
+
+                                Connections {
+                                    target: gridView
+
+                                    onDropped: item.index = delegateRoot.visualIndex
+                                }
 
                                 states: State {
                                     when: item.Drag.active
@@ -99,40 +141,12 @@ Item {
                                 }
                             }
 
-                            MouseArea {
-                                id: mouseArea
-
-                                anchors.fill: parent
-                                drag.target: item
-                                hoverEnabled: true
-
-                                onClicked: item.activate()
-                                onReleased: item.Drag.drop()
-                            }
-
                             DropArea {
                                 anchors { fill: parent; margins: 15 }
 
-                                onEntered: visualModel.items.move(drag.source.visualIndex, delegateRoot.visualIndex)
-                            }
-
-                            RoundButton {
-                                id: btOff
-
-                                anchors { top: parent.top; right: parent.right; margins: 2 }
-                                hoverEnabled: true
-                                visible: !item.Drag.active && model.isActive
-                                padding: 0
-
-                                Material.background: Material.color(Material.Red)
-                                Material.foreground: "white"
-
-                                text: MaterialIcons.icon_close
-                                font.family: MaterialIcons.family
-                                font.bold: true
-                                font.pixelSize: 22
-
-                                onClicked: mainWindow.runningServices.remove(model)
+                                onEntered: {
+                                    visualModel.items.move(drag.source.visualIndex, delegateRoot.visualIndex)
+                                }
                             }
                         }
                     }
@@ -147,103 +161,6 @@ Item {
                         hoverEnabled: true
                     }
                 }
-            }
-        }
-    }
-
-    Pane {
-        id: removedLabel
-
-        property var service: null
-
-        anchors.bottom: parent.bottom
-        anchors.horizontalCenter: parent.horizontalCenter
-        anchors.bottomMargin: 16
-        visible: false
-
-        onServiceChanged: {
-            if (service != null) {
-                visible = true
-                timer.running = true;
-                timer.restart();
-            }
-        }
-
-        Material.background: _theme.primary
-        Material.foreground: _theme.primaryForeground
-        Material.elevation: 4
-
-        RowLayout {
-            anchors.centerIn: parent
-
-            Label {
-                text: removedLabel.service !== null ? removedLabel.service.name + qsTr(" has been removed from overview.") : ""
-                font.bold: true
-                font.pixelSize: 16
-            }
-
-            Label {
-                text: '<a href="https://action/undo">' + qsTr("UNDO") + '</a>'
-                font.bold: true
-                font.pixelSize: 16
-
-                onLinkActivated: {
-                    removedLabel.service.isEnabled = true
-                    removedLabel.service = null;
-                    removedLabel.visible = false;
-                    _streamingServices.enabledServices.update()
-                }
-
-                MouseArea {
-                    anchors.fill: parent
-                    acceptedButtons: Qt.NoButton
-                    cursorShape: parent.hoveredLink ? Qt.PointingHandCursor : Qt.ArrowCursor
-                }
-            }
-        }
-
-        Timer {
-            id: timer
-            interval: 3000
-            repeat: false
-            running: false
-
-            onTriggered: removedLabel.visible = false
-        }
-    }
-
-    Label {
-        id: trashLabel
-
-        anchors { bottom: parent.bottom; right: parent.right; rightMargin: 16; bottomMargin: 16}
-        text: MaterialIcons.icon_delete
-        font.family: MaterialIcons.family
-        font.pixelSize: 64
-        opacity: trashDropArea.containsDrag ? 1 : gridView.dragActive ? 0.5 : 0
-        color: trashDropArea.containsDrag ? Material.color(Material.Red) : Material.foreground
-        z: 50
-
-        DropArea {
-            id: trashDropArea
-
-            x: parent.width / 2 - width / 2
-            y: parent.height / 2 - height/ 2
-            width: gridView.cellWidth
-            height: gridView.cellHeight
-
-            onDropped: {
-                var position = scrollBar.position;
-                gridView.dragActive = false;
-                drag.source.service.isEnabled = false;
-                _streamingServices.enabledServices.update()
-                removedLabel.service = drag.source.service;
-                scrollBar.position = position;
-            }
-        }
-
-        Behavior on opacity {
-            NumberAnimation {
-                duration: 100
             }
         }
     }

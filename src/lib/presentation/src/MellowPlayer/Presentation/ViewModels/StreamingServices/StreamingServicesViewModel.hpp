@@ -31,8 +31,7 @@ namespace MellowPlayer::Presentation
     class StreamingServicesViewModel : public QObject, public ContextProperty
     {
         Q_OBJECT
-        Q_PROPERTY(QAbstractListModel* allServices READ allServices CONSTANT)
-        Q_PROPERTY(QAbstractItemModel* enabledServices READ enabledServices CONSTANT)
+        Q_PROPERTY(QAbstractItemModel* filteredServices READ filteredServices CONSTANT)
         Q_PROPERTY(QObject* currentService READ currentService WRITE setCurrentService NOTIFY currentServiceChanged)
     public:
         StreamingServicesViewModel(Domain::StreamingServices& streamingServices,
@@ -50,10 +49,12 @@ namespace MellowPlayer::Presentation
         using ContextProperty::registerTo;
         void initialize();
 
+        void activate(QObject* service);
+
         Q_INVOKABLE void reload();
 
-        StreamingServiceListModel* allServices();
-        StreamingServiceProxyListModel* enabledServices();
+        QList<StreamingServiceViewModel*> services() const;
+        StreamingServiceProxyListModel* filteredServices();
         StreamingServiceViewModel* currentService() const;
 
         Q_INVOKABLE void next();
@@ -77,6 +78,7 @@ namespace MellowPlayer::Presentation
         void currentServiceChanged(QObject* currentService);
         void currentIndexChanged(int currentIndex);
         void serviceCreated(const QString& directory);
+        void activationRequested(QObject* service);
 
     private slots:
         void onServiceAdded(Domain::StreamingService* streamingService);
@@ -94,8 +96,8 @@ namespace MellowPlayer::Presentation
         Infrastructure::ICommandLineArguments& _commandLineArguments;
         Domain::IUserScriptFactory& _userScriptFactory;
         Infrastructure::INetworkProxies& _networkProxies;
-        StreamingServiceListModel* _allServices;
-        StreamingServiceProxyListModel _enabledServices;
+        StreamingServiceListModel* _services;
+        StreamingServiceProxyListModel _filteredServices;
         StreamingServiceViewModel* _currentService = nullptr;
         ThemeViewModel& _themeViewModel;
         Infrastructure::IHttpClientFactory& _httpClientFactory;

@@ -21,6 +21,7 @@ public:
     QString previous() const;
     QString restoreWindow() const;
     QString quit() const;
+    QString favoriteServices() const;
 };
 
 namespace MellowPlayer::Infrastructure
@@ -31,12 +32,15 @@ namespace MellowPlayer::Infrastructure
 namespace MellowPlayer::Presentation
 {
     class IMainWindow;
+    class StreamingServicesViewModel;
 
     class SystemTrayIcon : public ISystemTrayIcon
     {
         Q_OBJECT
     public:
-        SystemTrayIcon(Domain::IPlayer& player, IMainWindow& mainWindow, Domain::Settings& settings);
+        SystemTrayIcon(Domain::IPlayer& player, IMainWindow& mainWindow, Domain::Settings& settings, StreamingServicesViewModel& streamingServices);
+
+        void setupFavoritesMenu() override;
 
         void show() override;
         void hide() override;
@@ -49,6 +53,7 @@ namespace MellowPlayer::Presentation
         void previous();
         void restoreWindow();
         void quit();
+        void selectService();
 
     private slots:
         void onShowTrayIconSettingValueChanged();
@@ -63,6 +68,7 @@ namespace MellowPlayer::Presentation
         Domain::Settings& _settings;
         Domain::Setting& _showTrayIconSetting;
         Domain::Setting& _customTrayIconSetting;
+        StreamingServicesViewModel& _streamingServices;
 
         QSystemTrayIcon _qSystemTrayIcon;
         QMenu _menu;
@@ -71,5 +77,6 @@ namespace MellowPlayer::Presentation
         QAction* _nextSongAction;
         QAction* _restoreWindowAction;
         QAction* _quitApplicationAction;
+        QMenu* _favoritesMenu;
     };
 }

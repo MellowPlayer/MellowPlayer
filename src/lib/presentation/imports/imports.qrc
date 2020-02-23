@@ -32,7 +32,6 @@
         <file>MellowPlayer/Delegates/ListeningHistoryEntryDelegate.qml</file>
         <file>MellowPlayer/Delegates/ListeningHistorySectionDelegate.qml</file>
         <file>MellowPlayer/Delegates/ServiceOverviewDelegate.qml</file>
-        <file>MellowPlayer/Delegates/ServiceSettingDelegate.qml</file>
         <file>MellowPlayer/Delegates/ShortcutSettingDelegate.qml</file>
         <file>MellowPlayer/Delegates/SpinBoxDelegate.qml</file>
         <file>MellowPlayer/Delegates/StringSettingDelegate.qml</file>
@@ -66,7 +65,6 @@
         <file>MellowPlayer/SettingsPages/RemoteControl/RemoteControlState_NotInstalled.qml</file>
         <file>MellowPlayer/SettingsPages/RemoteControl/RemoteControlState_Running.qml</file>
         <file>MellowPlayer/SettingsPages/RemoteControl/RemoteControlState_Stopped.qml</file>
-        <file>MellowPlayer/SettingsPages/ServiceSettingsPage.qml</file>
         <file>MellowPlayer/DateCategoryTranslator.js</file>
         <file>MellowPlayer/Dialogs.js</file>
         <file>MellowPlayer/SettingsTranslator.js</file>

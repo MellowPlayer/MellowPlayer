@@ -52,27 +52,14 @@ TEST_CASE("StreamingServiceModelTests", "[UnitTest]")
 
     SECTION("sort order is undefined initially")
     {
-        REQUIRE(viewModel.sortOrder() == -1);
+        REQUIRE(viewModel.sortIndex() == -1);
     }
 
     SECTION("setSortOrder sortOrderChanged signal is emitted")
     {
-        QSignalSpy spy(&viewModel, &StreamingServiceViewModel::sortOrderChanged);
-        viewModel.setSortOrder(2);
-        REQUIRE(viewModel.sortOrder() == 2);
-        REQUIRE(spy.count() == 1);
-    }
-
-    SECTION("isEnabled is true initially")
-    {
-        REQUIRE(viewModel.isEnabled());
-    }
-
-    SECTION("setEnabled isEnabledChanged signal is emitted")
-    {
-        QSignalSpy spy(&viewModel, &StreamingServiceViewModel::isEnabledChanged);
-        viewModel.setEnabled(false);
-        REQUIRE(!viewModel.isEnabled());
+        QSignalSpy spy(&viewModel, &StreamingServiceViewModel::sortIndexChanged);
+        viewModel.setSortIndex(2);
+        REQUIRE(viewModel.sortIndex() == 2);
         REQUIRE(spy.count() == 1);
     }
 

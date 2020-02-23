@@ -417,6 +417,12 @@
           "type": "bool",
           "default": false,
           "key": "remote-control-auto-start"
+        },
+        {
+          "name": "",
+          "type": "bool",
+          "default": false,
+          "key": "show-favorite-services"
         }
       ]
     }

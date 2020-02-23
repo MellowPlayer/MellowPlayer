@@ -42,6 +42,7 @@ namespace MellowPlayer::Domain
             PRIVATE_REMOTE_CONTROL_AUTO_START,
             PRIVATE_REMOTE_CONTROL_ENABLED,
             PRIVATE_SHOW_CLOSE_TO_TRAY_MESSAGE,
+            PRIVATE_SHOW_FAVORITE_SERVICES,
             PRIVATE_WINDOW_HEIGHT,
             PRIVATE_WINDOW_WIDTH,
             SHORTCUTS_ABOUT,
@@ -101,6 +102,7 @@ namespace MellowPlayer::Domain
             enumToString << "private/remote-control-auto-start";
             enumToString << "private/remote-control-enabled";
             enumToString << "private/show-close-to-tray-message";
+            enumToString << "private/show-favorite-services";
             enumToString << "private/window-height";
             enumToString << "private/window-width";
             enumToString << "shortcuts/about";

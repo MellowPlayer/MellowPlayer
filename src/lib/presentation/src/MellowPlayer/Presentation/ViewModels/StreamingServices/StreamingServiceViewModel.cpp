@@ -52,8 +52,7 @@ StreamingServiceViewModel::StreamingServiceViewModel(StreamingService& streaming
     connect(&_streamingService, &StreamingService::scriptChanged, this, &StreamingServiceViewModel::sourceCodeChanged);
     Q_ASSERT(networkProxy_ != nullptr);
 
-    if (isEnabled())
-        LOG_DEBUG(_logger, "sort order: " << sortOrder());
+    LOG_DEBUG(_logger, "sort order: " << sortIndex());
 }
 
 QString StreamingServiceViewModel::logo() const
@@ -107,39 +106,18 @@ StreamingService* StreamingServiceViewModel::streamingService() const
     return &_streamingService;
 }
 
-int StreamingServiceViewModel::sortOrder() const
+int StreamingServiceViewModel::sortIndex() const
 {
-    return _settingsStore.value(sortOrderSettingsKey(), "-1").toInt();
+    return _settingsStore.value(sortIndexSettingKey(), "-1").toInt();
 }
 
-void StreamingServiceViewModel::setSortOrder(int newOrder)
+void StreamingServiceViewModel::setSortIndex(int newOrder)
 {
-    if (newOrder != sortOrder())
+    if (newOrder != sortIndex())
     {
-        _settingsStore.setValue(sortOrderSettingsKey(), newOrder);
-        LOG_DEBUG(_logger, "sort order changed: " << sortOrder());
-        emit sortOrderChanged();
-    }
-}
-
-bool StreamingServiceViewModel::isEnabled() const
-{
-    return _settingsStore.value(isEnabledSettingsKey(), "true").toBool();
-}
-
-void StreamingServiceViewModel::setEnabled(bool enabled)
-{
-    if (enabled != isEnabled())
-    {
-        _settingsStore.setValue(isEnabledSettingsKey(), enabled);
-        LOG_DEBUG(_logger, "enabled changed: " << sortOrder());
-        emit isEnabledChanged();
-
-        if (!enabled)
-        {
-            _player->suspend();
-            setSortOrder(255);
-        }
+        _settingsStore.setValue(sortIndexSettingKey(), newOrder);
+        LOG_DEBUG(_logger, "sort order changed: " << sortIndex());
+        emit sortIndexChanged();
     }
 }
 
@@ -177,14 +155,14 @@ QString StreamingServiceViewModel::customUrlSettingsKey() const
     return _streamingService.name() + "/url";
 }
 
-QString StreamingServiceViewModel::sortOrderSettingsKey() const
+QString StreamingServiceViewModel::sortIndexSettingKey() const
 {
-    return _streamingService.name() + "/sortOrder";
+    return _streamingService.name() + "/sortIndex";
 }
 
-QString StreamingServiceViewModel::isEnabledSettingsKey() const
+QString StreamingServiceViewModel::favoriteSettingKey() const
 {
-    return _streamingService.name() + "/isEnabled";
+    return _streamingService.name() + "/favorite";
 }
 
 QObject* StreamingServiceViewModel::userScripts()
@@ -317,4 +295,19 @@ bool StreamingServiceViewModel::hasKnownIssues() const
 void StreamingServiceViewModel::openKnownIssue()
 {
     QDesktopServices::openUrl(_issueLink);
+}
+
+bool StreamingServiceViewModel::isFavorite() const
+{
+    return _settingsStore.value(favoriteSettingKey(), "false").toBool();
+}
+
+void StreamingServiceViewModel::setFavorite(bool value)
+{
+    if (value != isFavorite())
+    {
+        _settingsStore.setValue(favoriteSettingKey(), value);
+        LOG_DEBUG(_logger, "favorite changed: " << isFavorite());
+        emit favoriteChanged();
+    }
 }

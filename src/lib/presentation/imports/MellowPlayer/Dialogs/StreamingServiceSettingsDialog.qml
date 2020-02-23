@@ -118,21 +118,6 @@ Dialog {
                         anchors.fill: parent
 
                         SwitchDelegate {
-                            checked: service.isEnabled
-                            hoverEnabled: true
-                            text: "Enabled"
-
-                            onCheckedChanged: {
-                                service.isEnabled = checked;
-                                _streamingServices.enabledServices.update();
-                            }
-
-                            Layout.fillWidth: true
-                        }
-
-                        ItemDelegateSeparator { Layout.fillWidth: true }
-
-                        SwitchDelegate {
                             checked: service.notificationsEnabled
                             hoverEnabled: true
                             text: "Notifications"
@@ -515,7 +500,6 @@ Dialog {
         property string authorName: ""
         property string authorWebsite: ""
         property bool notificationsEnabled: true
-        property bool isEnabled: true
         property var settings: undefined
         property QtObject userScripts: QtObject { }
         property QtObject networkProxy: QtObject {

@@ -10,6 +10,7 @@ SystemTrayIconStartup::SystemTrayIconStartup(ISystemTrayIcon& systemTrayIcon) : 
 
 void SystemTrayIconStartup::initialize(const ResultCallback& resultCallback)
 {
+    _systemTrayIcon.setupFavoritesMenu();
     _systemTrayIcon.show();
     resultCallback(true);
 }

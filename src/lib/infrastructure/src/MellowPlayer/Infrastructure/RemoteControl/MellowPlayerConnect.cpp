@@ -136,7 +136,6 @@ bool MellowPlayerConnect::isInstalling() const
 
 void MellowPlayerConnect::start()
 {
-    // TODO pay attention to use the same process, what about flatpak?
     LOG_DEBUG(_logger, "Starting " << name());
     _process = _processFactory.create(name());
     auto extension = "";

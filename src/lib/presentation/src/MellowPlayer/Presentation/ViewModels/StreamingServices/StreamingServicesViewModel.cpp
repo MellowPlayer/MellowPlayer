@@ -41,8 +41,8 @@ StreamingServicesViewModel::StreamingServicesViewModel(StreamingServices& stream
           _commandLineArguments(commandLineArguments),
           _userScriptFactory(userScriptFactory),
           _networkProxies(networkProxies),
-          _allServices(new StreamingServiceListModel(this, QByteArray(), "name")),
-          _enabledServices(_allServices),
+          _services(new StreamingServiceListModel(this, QByteArray(), "name")),
+          _filteredServices(_services, settings),
           _themeViewModel(themeViewModel),
           _httpClientFactory(httpClientFactory)
 {
@@ -68,7 +68,7 @@ void StreamingServicesViewModel::initializeCurrent()
     if (!_commandLineArguments.service().isEmpty())
         currentServiceName = _commandLineArguments.service();
 
-    for (auto service : _allServices->toList())
+    for (auto service : _services->toList())
     {
         if (service->name().toLower() == currentServiceName.toLower())
         {
@@ -112,18 +112,18 @@ void StreamingServicesViewModel::onServiceAdded(StreamingService* streamingServi
     auto* sv = new StreamingServiceViewModel(
             *streamingService, _settings.store(), _userScriptFactory, _players, _networkProxies, _themeViewModel, _httpClientFactory.create(), this);
     sv->checkForKnownIssues();
-    _allServices->append(sv);
+    _services->append(sv);
 }
 
 void StreamingServicesViewModel::next()
 {
-    int currentIndex = _allServices->indexOf(_currentService);
+    int currentIndex = _services->indexOf(_currentService);
     int index = nextIndex(currentIndex);
 
     while (index != currentIndex)
     {
-        auto* sv = _allServices->at(index);
-        if (sv->isActive() && sv->isEnabled())
+        auto* sv = _services->at(index);
+        if (sv->isActive())
         {
             setCurrentService(sv);
             break;
@@ -134,13 +134,13 @@ void StreamingServicesViewModel::next()
 
 void StreamingServicesViewModel::previous()
 {
-    int currentIndex = _allServices->indexOf(_currentService);
+    int currentIndex = _services->indexOf(_currentService);
     int index = previousIndex(currentIndex);
 
     while (index != currentIndex)
     {
-        auto* sv = _allServices->at(index);
-        if (sv->isActive() && sv->isEnabled())
+        auto* sv = _services->at(index);
+        if (sv->isActive())
         {
             setCurrentService(sv);
             break;
@@ -187,7 +187,7 @@ void StreamingServicesViewModel::createService(const QString& serviceName,
 int StreamingServicesViewModel::nextIndex(int index) const
 {
     int nextIndex = index + 1;
-    if (nextIndex >= _allServices->count())
+    if (nextIndex >= _services->count())
         nextIndex = 0;
     return nextIndex;
 }
@@ -196,21 +196,27 @@ int StreamingServicesViewModel::previousIndex(int index) const
 {
     int previousIndex = index - 1;
     if (previousIndex < 0)
-        previousIndex = _allServices->count() - 1;
+        previousIndex = _services->count() - 1;
     return previousIndex;
 }
 
-StreamingServiceListModel* StreamingServicesViewModel::allServices()
+QList<StreamingServiceViewModel*> StreamingServicesViewModel::services() const
 {
-    return _allServices;
+    return _services->toList();
 }
-StreamingServiceProxyListModel* StreamingServicesViewModel::enabledServices()
+
+StreamingServiceProxyListModel* StreamingServicesViewModel::filteredServices()
 {
-    return &_enabledServices;
+    return &_filteredServices;
 }
 
 void StreamingServicesViewModel::registerTo(IQmlApplicationEngine& qmlApplicationEngine)
 {
     qRegisterMetaType<Infrastructure::NetworkProxy*>("Infrastructure::NetworkProxy*");
     ContextProperty::registerTo(qmlApplicationEngine);
+}
+
+void StreamingServicesViewModel::activate(QObject* service)
+{
+    emit activationRequested(service);
 }

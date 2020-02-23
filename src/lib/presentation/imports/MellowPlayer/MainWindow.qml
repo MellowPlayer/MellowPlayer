@@ -242,6 +242,13 @@ ApplicationWindow {
         id: reportIssueDialog
     }
 
+    StreamingServiceSettingsDialog {
+        id: settingsDialog
+
+        height: 540; width: 960
+        x: parent.width / 2 - width / 2; y: parent.height / 2 - height / 2
+    }
+
     Connections {
         target: _window;
 
@@ -249,6 +256,12 @@ ApplicationWindow {
         onQuitRequest: d.quit()
         onForceQuitRequest: { d.forceQuit = true; _app.quit() }
         onRaiseRequested: d.restoreWindow()
+    }
+
+    Connections {
+        target: _streamingServices;
+
+        onActivationRequested: mainWindow.activateService(service)
     }
 
     Shortcut {
