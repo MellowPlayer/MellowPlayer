@@ -66,6 +66,7 @@ void configureEnvironment()
 {
     qputenv("QTWEBENGINE_DIALOG_SET", "QtQuickControls2");
     qputenv("QTWEBENGINE_REMOTE_DEBUGGING", "4242");
+    qputenv("QTWEBENGINE_CHROMIUM_FLAGS", "--disable-features=MediaSessionService");
 
     QCoreApplication::setApplicationName("MellowPlayer3");
     QCoreApplication::setApplicationVersion(BuildConfig::getVersion());
