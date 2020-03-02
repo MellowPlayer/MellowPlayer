@@ -20,7 +20,7 @@ bool StreamingServiceProxyListModel::filterAcceptsRow(int sourceRow, const QMode
 {
     StreamingServiceViewModel* viewModel = _sourceListModel->at(sourceRow);
 
-    connect(viewModel, &StreamingServiceViewModel::favoriteChanged, this, &StreamingServiceProxyListModel::update, Qt::UniqueConnection);
+    connect(viewModel, &StreamingServiceViewModel::favoriteChanged, this, &StreamingServiceProxyListModel::onFavoriteChanged, Qt::UniqueConnection);
     connect(viewModel, &StreamingServiceViewModel::isActiveChanged, this, &StreamingServiceProxyListModel::update, Qt::UniqueConnection);
 
     if (viewModel->sortIndex() == -1 && _searchText.isEmpty())
@@ -58,4 +58,10 @@ void StreamingServiceProxyListModel::setSearchText(const QString& searchText)
         _searchText = searchText;
         update();
     }
+}
+
+void StreamingServiceProxyListModel::onFavoriteChanged()
+{
+    if (_showFavoriteSetting.value().toBool())
+        update();
 }

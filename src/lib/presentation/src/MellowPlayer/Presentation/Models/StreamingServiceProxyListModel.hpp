@@ -23,6 +23,9 @@ namespace MellowPlayer::Presentation
         bool filterAcceptsRow(int sourceRow, const QModelIndex& sourceParent) const override;
         bool lessThan(const QModelIndex& sourceLeft, const QModelIndex& sourceRight) const override;
 
+    private slots:
+        void onFavoriteChanged();
+
     private:
         StreamingServiceListModel* _sourceListModel;
         Domain::Setting& _showFavoriteSetting;
