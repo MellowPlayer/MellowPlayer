@@ -25,6 +25,7 @@ namespace MellowPlayer::Presentation
 
     private slots:
         void onFavoriteChanged();
+        void onActiveChanged();
 
     private:
         StreamingServiceListModel* _sourceListModel;
