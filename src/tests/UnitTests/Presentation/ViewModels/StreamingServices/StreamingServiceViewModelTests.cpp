@@ -1,6 +1,7 @@
 #include <Fakes/FakeHttpClient.hpp>
 #include <MellowPlayer/Domain/Player/Players.hpp>
 #include <MellowPlayer/Domain/StreamingServices/StreamingService.hpp>
+#include <MellowPlayer/Domain/StreamingServices/StreamingServiceScript.hpp>
 #include <MellowPlayer/Domain/StreamingServices/StreamingServices.hpp>
 #include <MellowPlayer/Infrastructure/Network/NetworkProxy.hpp>
 #include <MellowPlayer/Presentation/ViewModels/StreamingServices/StreamingServicesViewModel.hpp>
@@ -22,6 +23,7 @@ TEST_CASE("StreamingServiceModelTests", "[UnitTest]")
     ISettingsStore& settingsStore = pool.getSettingsStore();
 
     StreamingService& service1 = *streamingServices.toList()[0];
+    service1.script()->setCode("some source code");
     StreamingService& service2 = *streamingServices.toList()[1];
 
     StreamingServiceViewModel viewModel(service1, settingsStore, pool.getUserScriptFactory(), players, pool.getNetworkProxies(), pool.getThemeViewModel(), std::make_unique<FakeHttpClient>());
@@ -74,6 +76,8 @@ TEST_CASE("StreamingServiceModelTests", "[UnitTest]")
     SECTION("reload plugin when streaming service script has changed")
     {
         QSignalSpy spy(&viewModel, &StreamingServiceViewModel::sourceCodeChanged);
+
+        REQUIRE(!viewModel.sourceCode().isEmpty());
 
         emit service1.scriptChanged();
 
