@@ -1,11 +1,46 @@
-function update() {
-    if (document.getElementById('play-button').title == 'Pause')
-        playbackStatus = MellowPlayer.PlaybackStatus.PLAYING;
-    else
-        playbackStatus = MellowPlayer.PlaybackStatus.PAUSED;
+function getTitle() {
+    try {
+        return document.getElementsByClassName('title')[0].innerText.split('\n')[0];
+    } catch(e) {
+        return "";
+    }
+}
 
+function getArtist() {
+    try {
+        return document.getElementsByClassName('artist')[0].innerText;
+    } catch(e) {
+        return "";
+    }
+}
+
+function getAlbum() {
+    try {
+        return document.getElementsByClassName('album')[0].innerText;
+    } catch(e) {
+        return "";
+    }
+}
+
+function getArtUrl() {
+    try {
+        return document.getElementsByClassName('now_playing_cover')[0].currentSrc;
+    } catch(e) {
+        return "";
+    }
+}
+
+function getPlaybackStatus() {
+    try {
+        if (document.getElementById('play-button').title == 'Pause')
+            return MellowPlayer.PlaybackStatus.PLAYING;
+    } catch (e) { }
+    return MellowPlayer.PlaybackStatus.PAUSED;
+}
+
+function update() {
     return {
-        "playbackStatus": playbackStatus,
+        "playbackStatus": getPlaybackStatus(),
         "canSeek": false,
         "canGoNext": true,
         "canGoPrevious": false,
@@ -14,10 +49,10 @@ function update() {
         "duration": 0,
         "position": 0,
         "songId": 0,
-        "songTitle": document.getElementsByClassName('title')[0].innerText.split('\n')[0],
-        "artistName": document.getElementsByClassName('artist')[0].innerText,
-        "albumTitle": document.getElementsByClassName('album')[0].innerText,
-        "artUrl": document.getElementsByClassName('now_playing_cover')[0].currentSrc,
+        "songTitle": getTitle(),
+        "artistName": getArtist(),
+        "albumTitle": getAlbum(),
+        "artUrl": getArtUrl(),
         "isFavorite": false
     };
 }
