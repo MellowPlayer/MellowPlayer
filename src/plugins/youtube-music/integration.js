@@ -20,7 +20,7 @@
 var player;
 
 var defaultArray = {
-    "playbackStatus": MellowPlayer.PlaybackStatus.STOPPED,
+    "playbackStatus": 0,
     "volume": 0,
     "duration": 0,
     "position": 0,
@@ -79,16 +79,28 @@ function update() {
     var songTitle = "", artistName = "", artUrl = "";
 
     // Song title
-    var songTitle = document.querySelector('.title.ytmusic-player-bar').innerText;
+    try {
+        var songTitle = document.querySelector('.title.ytmusic-player-bar').innerText;
+    } catch (e) {
+        var songTitle = "";
+    }
 
     if(songTitle == "")
-	return defaultArray;
+	    return defaultArray;
 
     // Artist name
-    var artistName = document.querySelector('.subtitle.ytmusic-player-bar .yt-formatted-string').innerText.trim();
+    try {
+        var artistName = document.querySelector('.subtitle.ytmusic-player-bar .yt-formatted-string').innerText.trim();
+    } catch (e) {
+        var artistName = "";
+    }
 
     // Art URL
-    var artUrl = document.querySelector('img.ytmusic-player-bar').src;
+    try {
+        var artUrl = document.querySelector('img.ytmusic-player-bar').src;
+    } catch (e) {
+        var artUrl = "";
+    }
 
     return {
         "playbackStatus": playbackStatus,
