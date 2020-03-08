@@ -57,15 +57,15 @@ function getSongInfos() {
 
 function getArtist() {
     var tokens = getSongInfos().split("-");
-    if (tokens.length > 2)
-        return [0].trim();
+    if (tokens.length >= 2)
+        return tokens[0].trim();
     return "";
 }
 
 function getTitle() {
     var tokens = getSongInfos().split("-");
-    if (tokens.length > 2)
-        return getSongInfos().split("-")[1].trim();
+    if (tokens.length >= 2)
+        return tokens[1].trim();
     return getSongInfos();
 }
 
@@ -88,7 +88,7 @@ function update() {
         "songId": getHashCode(getTitle()),
         "songTitle": getTitle(),
         "artistName": getArtist(),
-        "albumTitle": '',
+        "albumTitle": "",
         "artUrl": getArtUrl(),
         "isFavorite": false,
         "duration": 0,
