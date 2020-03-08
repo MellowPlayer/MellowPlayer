@@ -18,45 +18,6 @@ function getAlbumTitle(infoTable) {
     return "";
 }
 
-// The two functions below can be used to control playback position and volume level
-// See https://www.martin-brennan.com/simulating-mouse-click-event-javascript/ , 
-// https://developer.mozilla.org/en-US/docs/Web/API/Element/getBoundingClientRect
-// and https://developer.mozilla.org/en-US/docs/Web/API/MouseEvent for details
-/**
- * @param element    (HTMLElement) Element to send events to. 
- * @param eventName  (String) type of the MouseEvent to send. 
- * @param relativeX  (Float) relative x position within the boundaries of the element, 
- * as a fraction of the element's width(0..1). 
- * @param relativeY  (Float) relative y position within the boundaries of the element,
- * as a fraction of the element's height(0..1).
-*/
-function sendMouseEventToElement(element, eventName, relativeX, relativeY) {
-    var clientRect = element.getBoundingClientRect();   
-    var event = new MouseEvent(eventName, {
-        'view': window,
-        'bubbles': true,
-        'cancelable': true,
-        'clientX': clientRect.left + (clientRect.width * relativeX),
-        'clientY': clientRect.top + (clientRect.height * relativeY)
-    });
-    element.dispatchEvent(event);
-}
-/**
- * Emulates mouse click on the specified position of the given element
- * @param element    (HTMLElement) Element to send click to. 
- * @param relativeX  (Float) relative x position within the boundaries of the element, 
- * as a fraction of the element's width(0..1). 
- * @param relativeY  (Float) relative y position within the boundaries of the element,
- * as a fraction of the element's height(0..1).
-*/
-function sendMouseClickToElement(element, relativeX, relativeY) {
-    sendMouseEventToElement(element, 'mouseenter', relativeX, relativeY);
-    sendMouseEventToElement(element, 'mousedown', relativeX, relativeY);
-    sendMouseEventToElement(element, 'click', relativeX, relativeY);
-    sendMouseEventToElement(element, 'mouseup', relativeX, relativeY);
-    sendMouseEventToElement(element, 'mouseleave', relativeX, relativeY);
-}
-
 function update() {
     var results = {
         "playbackStatus": MellowPlayer.PlaybackStatus.STOPPED,
@@ -102,7 +63,7 @@ function update() {
         if(svgLoading) {
             results.playbackStatus = MellowPlayer.PlaybackStatus.BUFFERING;
             previousID = results.songId;
-        };
+        }
         
         results.artUrl = getItemByTestID("current-media-imagery", infoDiv).children[0].src;
         
@@ -113,7 +74,7 @@ function update() {
         
         // We skip the default album image placeholder, it loads before the first album loads, so on start there won't
         // be a album on MPRIS as it will be cached for the first loaded song, also it doesn't show up as it is svg
-        if(results.artUrl.indexOf("defaultAlbumImage.78c633.svg") !== -1)
+        if(results.artUrl && results.artUrl.indexOf("defaultAlbumImage.78c633.svg") !== -1)
             results.artUrl = "";
 
         // If the player is playing but the song has changed, check the progress
@@ -121,7 +82,7 @@ function update() {
         // have missed the buffering event
         if(results.songId != previousID && progressState < previousState && progressState > -100) {
             previousID = results.songId;
-        };
+        }
 
         // also don't allow to load the art if we still hasn't started buffering.
         // We drop the status about the song until we find the art, so it won't create multiple item in the listening history
@@ -131,7 +92,7 @@ function update() {
             results.artUrl = "";
             
             return results;
-        };
+        }
 
         results.canGoNext = !getItemByTestID("next", infoDiv).disabled;
         results.canGoPrevious = !getItemByTestID("previous", infoDiv).disabled;
@@ -147,8 +108,8 @@ function update() {
 
         // Save the progress state in the end
         previousState = progressState;
-    };
-    
+    }
+
     return results;
 }
 
