@@ -16,42 +16,40 @@
 // along with MellowPlayer.  If not, see <http://www.gnu.org/licenses/>.
 //
 //-----------------------------------------------------------------------------
-function update() {
+
+function getPlaybackStatus() {
     var controlClassName = document.getElementsByClassName('playControl')[0].className;
     var playbackStatus = MellowPlayer.PlaybackStatus.PAUSED;
     if (controlClassName.indexOf("playing") !== -1)
         playbackStatus = MellowPlayer.PlaybackStatus.PLAYING;
     else if (controlClassName.indexOf("disabled") !== -1)
         playbackStatus = MellowPlayer.PlaybackStatus.STOPPED;
+
+    return playbackStatus;
+}
+
+function getArtUrl() {
     try {
-        var artUrl = document.getElementsByClassName('playbackSoundBadge')[
-            0].children[0].children[0].children[0].style["background-image"];
-        artUrl = artUrl.replace('url("', "").replace('")', "").replace('50x50', '250x250');
-        var songId = artUrl.match('-(\\d*)-')[1];
+        let artUrl = document.getElementsByClassName('playbackSoundBadge')[0].children[0].children[0].children[0].style["background-image"];
+        return artUrl.replace('url("', "").replace('")', "").replace('50x50', '250x250');
     } catch (e) {
-        var songId = 0;
-        var artUrl = '';
+        return "";
     }
+}
+
+function getTitle() {
     try {
-        var songTitle = document.getElementsByClassName('playbackSoundBadge__titleLink')[0].title;
+        return document.getElementsByClassName('playbackSoundBadge__titleLink')[0].title;
     } catch (e) {
-        songTitle = '';
+        return '';
     }
-    return {
-        "playbackStatus": playbackStatus,
-        "canSeek": false,
-        "canGoNext": true,
-        "canGoPrevious": true,
-        "canAddToFavorites": true,
-        "volume": 1,
-        "duration": readTime('playbackTimeline__duration'),
-        "position": readTime('playbackTimeline__timePassed'),
-        "songId": songId,
-        "songTitle": songTitle,
-        "artistName": '',
-        "albumTitle": '',
-        "artUrl": artUrl,
-        "isFavorite": isFavorite()
+}
+
+function getArtist() {
+    try {
+        return document.getElementsByClassName('playbackSoundBadge__lightLink')[0].title;
+    } catch (e) {
+        return "";
     }
 }
 
@@ -78,14 +76,37 @@ function readTime(elementClassName) {
     return hours * 3600 + minutes * 60 + seconds;
 }
 
+function getPosition() {
+    return readTime('playbackTimeline__timePassed');
+}
+
+function getDuration() {
+    return readTime('playbackTimeline__duration');
+}
+
+function update() {
+    return {
+        "playbackStatus": getPlaybackStatus(),
+        "canSeek": true,
+        "canGoNext": true,
+        "canGoPrevious": true,
+        "canAddToFavorites": true,
+        "volume": 1,
+        "duration": getDuration(),
+        "position": getPosition(),
+        "songId": getTitle(),
+        "songTitle": getTitle(),
+        "artistName": getArtist(),
+        "albumTitle": '',
+        "artUrl": getArtUrl(),
+        "isFavorite": isFavorite()
+    }
+}
+
 function isFavorite() {
     try {
-        if (document.getElementsByClassName('playbackSoundBadge__like')[0].title === "Unlike")
-            return true;
-        else
-            return false;
-    } catch(e)
-    {
+        return document.getElementsByClassName('playbackSoundBadge__like')[0].title === "Unlike";
+    } catch (e) {
         return false;
     }
 }
@@ -123,5 +144,7 @@ function setVolume(volume) {
 }
 
 function seekToPosition(position) {
-    // not supported
+    let positionSlider = document.getElementsByClassName('playbackTimeline__progressWrapper')[0];
+    const duration = getDuration();
+    sendMouseClickToElement(positionSlider, position / duration, 0.5);
 }
