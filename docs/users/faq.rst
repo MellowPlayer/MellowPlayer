@@ -44,3 +44,18 @@ Make sure you have installed both the proprietary audio codecs (ffmpeg with extr
     sudo cp ./usr/lib/chromium/libwidevinecdmadapter.so /usr/lib/chromium
     sudo chmod 644 /usr/lib/chromium/libwidevinecdm.so
     sudo chmod 644 /usr/lib/chromium/libwidevinecdmadapter.so
+
+
+There is a message saying that the browser is not supported. What can I do?
+----------------------------------------------------------------------------
+
+If you get the following (or similar) error message::
+
+    You are trying to sign in from a browser or app that doesn't allow us to keep your account secure.
+    Try using a different browser.
+
+You may want to try to `spoof your user agent`_ .
+
+To change the user agent in MellowPlayer: **Settings -> Privacy -> User Agent**.
+
+.. _spoof your user agent: https://help.vivaldi.com/article/user-agent-spoofing/
