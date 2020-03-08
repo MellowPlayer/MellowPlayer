@@ -179,8 +179,5 @@ function removeFromFavorites() {
 function seekToPosition(position) {
     let positionSlider = getElementByXpath('//*[@id="react-root"]/div/section/div[5]/div/div/div[1]/div[6]/div/div[1]/div[3]');
     const duration = getDuration();
-
-    console.warn(position);
-
     sendMouseClickToElement(positionSlider, position / duration, 0.5);
 }
