@@ -95,11 +95,19 @@ function readTime(timeString) {
 }
 
 function getPosition() {
-    return readTime(document.querySelector('.playback-bar__progress-time:first-child').innerText);
+    try {
+        return readTime(document.querySelector('.playback-bar__progress-time:first-child').innerText);
+    } catch (e) {
+        return 0;
+    }
 }
 
 function getDuration() {
-    return readTime(document.querySelector('.playback-bar__progress-time:last-child').innerText);
+    try {
+        return readTime(document.querySelector('.playback-bar__progress-time:last-child').innerText);
+    } catch (e) {
+        return 0;
+    }
 }
 
 function getVolume() {
