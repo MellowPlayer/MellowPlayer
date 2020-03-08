@@ -33,7 +33,7 @@ function isPlaying() {
 function update() {
     try {
         var buttons = getButtons();
-        var playbackStatus = isPlaying() ? mellowplayer.PlaybackStatus.PLAYING : mellowplayer.PlaybackStatus.PAUSED;
+        var playbackStatus = isPlaying() ? MellowPlayer.PlaybackStatus.PLAYING : MellowPlayer.PlaybackStatus.PAUSED;
         var songTitle = document.querySelector(".title_artist .t").innerText;
         return {
             "playbackStatus": playbackStatus,
@@ -53,7 +53,7 @@ function update() {
         };
     } catch (e) {
         return {
-            "playbackStatus": mellowplayer.PlaybackStatus.STOPPED,
+            "playbackStatus": MellowPlayer.PlaybackStatus.STOPPED,
             "canSeek": false,
             "canGoNext": false,
             "canGoPrevious": false,

@@ -3,13 +3,13 @@ var pausedTiming = -1;
 function update() {
     var playing = window.currently_playing || false;
     var current = currently_playing_info(playing);
-    var playbackStatus = mellowplayer.PlaybackStatus.STOPPED;
+    var playbackStatus = MellowPlayer.PlaybackStatus.STOPPED;
     var current_volume = window.current_volume || 1;
     if (playing) {
         if (global_playState < 1 && sound_instances[currently_playing].position < 1000) {
-            playbackStatus = mellowplayer.PlaybackStatus.BUFFERING;
+            playbackStatus = MellowPlayer.PlaybackStatus.BUFFERING;
         } else {
-            playbackStatus = mellowplayer.PlaybackStatus.PLAYING;
+            playbackStatus = MellowPlayer.PlaybackStatus.PLAYING;
         }
     }
     return {

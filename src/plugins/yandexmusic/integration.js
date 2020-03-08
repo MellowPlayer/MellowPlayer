@@ -17,9 +17,9 @@ function appendProtocol(url) {
 function update() {
     var playbackStatus;
     if (externalAPI.isPlaying())
-        playbackStatus = mellowplayer.PlaybackStatus.PLAYING;
+        playbackStatus = MellowPlayer.PlaybackStatus.PLAYING;
     else
-        playbackStatus = mellowplayer.PlaybackStatus.PAUSED;
+        playbackStatus = MellowPlayer.PlaybackStatus.PAUSED;
 
 
     var track = externalAPI.getCurrentTrack();

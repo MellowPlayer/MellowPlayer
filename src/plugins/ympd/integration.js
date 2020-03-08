@@ -2,13 +2,13 @@ function getPlaybackStatus() {
     try {
         var playIcon = document.getElementById("play-icon").className;
         if (playIcon === "glyphicon glyphicon-play") {
-            return mellowplayer.PlaybackStatus.PAUSED;
+            return MellowPlayer.PlaybackStatus.PAUSED;
         }
         else {
-            return mellowplayer.PlaybackStatus.PLAYING;
+            return MellowPlayer.PlaybackStatus.PLAYING;
         }
     } catch (e) {
-        return mellowplayer.PlaybackStatus.STOPPED;
+        return MellowPlayer.PlaybackStatus.STOPPED;
     }
 }
 

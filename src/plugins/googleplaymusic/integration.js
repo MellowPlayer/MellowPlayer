@@ -101,11 +101,11 @@ function update() {
     var playbackStatus;
 
     if (!pp || pp.disabled)
-        playbackStatus = mellowplayer.PlaybackStatus.STOPPED;
+        playbackStatus = MellowPlayer.PlaybackStatus.STOPPED;
     else if (pp.className.indexOf("playing") != -1)
-        playbackStatus = mellowplayer.PlaybackStatus.PLAYING;
+        playbackStatus = MellowPlayer.PlaybackStatus.PLAYING;
     else
-        playbackStatus = mellowplayer.PlaybackStatus.PAUSED;
+        playbackStatus = MellowPlayer.PlaybackStatus.PAUSED;
 
     var elm;
 
@@ -165,7 +165,7 @@ function update() {
     // and https://github.com/gmusic-utils/gmusic.js/blob/master/src/constants/selectors.js
 
     elm = getButtons().thumbUp;
-    var canAddToFavorites = elm != null && playbackStatus != mellowplayer.PlaybackStatus.STOPPED;
+    var canAddToFavorites = elm != null && playbackStatus != MellowPlayer.PlaybackStatus.STOPPED;
     var isFavorite = false;    
     try {
         isFavorite = elm.__data__.icon === 'thumb-up';

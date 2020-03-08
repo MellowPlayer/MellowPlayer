@@ -74,10 +74,10 @@ function hasClass(elem, className) {
 
 function getPlaybackStatus() {
     if (hasClass(document.getElementsByClassName("playbutton")[0], "playing")) {
-        return mellowplayer.PlaybackStatus.PLAYING;
+        return MellowPlayer.PlaybackStatus.PLAYING;
     }
     else {
-        return mellowplayer.PlaybackStatus.STOPPED;
+        return MellowPlayer.PlaybackStatus.STOPPED;
     }
 }
 
@@ -85,10 +85,10 @@ function getPlaybackStatusOnHome() {
     var miniPlayer=document.getElementsByClassName("playbutton playing");
     var a=document.getElementsByClassName("playing");
     if (miniPlayer.length > 0 || a.length > 0) {
-            return mellowplayer.PlaybackStatus.PLAYING;
+            return MellowPlayer.PlaybackStatus.PLAYING;
     }
     else {
-        return mellowplayer.PlaybackStatus.STOPPED;
+        return MellowPlayer.PlaybackStatus.STOPPED;
     }
 }
 

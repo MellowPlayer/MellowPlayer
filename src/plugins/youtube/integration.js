@@ -23,7 +23,7 @@ function update() {
     // If the player is not currently playing a video
     if(!document.getElementsByTagName('ytd-app')[0].attributes['is-watch-page']) {
         return {
-            "playbackStatus": mellowplayer.PlaybackStatus.STOPPED,
+            "playbackStatus": MellowPlayer.PlaybackStatus.STOPPED,
             "volume": 0,
             "duration": 0,
             "position": 0,
@@ -71,19 +71,19 @@ function update() {
     // Playback status
     switch(player.getPlayerState()) {
         case 1:
-            var playbackStatus = mellowplayer.PlaybackStatus.PLAYING;
+            var playbackStatus = MellowPlayer.PlaybackStatus.PLAYING;
             break;
 
         case 2:
-            var playbackStatus = mellowplayer.PlaybackStatus.PAUSED;
+            var playbackStatus = MellowPlayer.PlaybackStatus.PAUSED;
             break;
 
         case 3:
-            var playbackStatus = mellowplayer.PlaybackStatus.BUFFERING;
+            var playbackStatus = MellowPlayer.PlaybackStatus.BUFFERING;
             break;
 
         default:
-            var playbackStatus = mellowplayer.PlaybackStatus.STOPPED;
+            var playbackStatus = MellowPlayer.PlaybackStatus.STOPPED;
     }
 
     // Song title

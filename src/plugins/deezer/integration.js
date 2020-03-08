@@ -17,13 +17,13 @@
 //
 //-----------------------------------------------------------------------------
 function update() {
-    var playbackStatus = mellowplayer.PlaybackStatus.STOPPED;
+    var playbackStatus = MellowPlayer.PlaybackStatus.STOPPED;
     if (dzPlayer.isPlaying())
-        playbackStatus = mellowplayer.PlaybackStatus.PLAYING;
+        playbackStatus = MellowPlayer.PlaybackStatus.PLAYING;
     else if (dzPlayer.isPaused())
-        playbackStatus = mellowplayer.PlaybackStatus.PAUSED;
+        playbackStatus = MellowPlayer.PlaybackStatus.PAUSED;
     else if (dzPlayer.isLoading())
-        playbackStatus = mellowplayer.PlaybackStatus.BUFFERING;
+        playbackStatus = MellowPlayer.PlaybackStatus.BUFFERING;
 
     return {
         "playbackStatus": playbackStatus,

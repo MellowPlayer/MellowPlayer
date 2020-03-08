@@ -169,10 +169,4 @@ TEST_CASE("StreamingServiceScriptTests", "[UnitTest]")
         StreamingServiceScript script(code, "path");
         REQUIRE(!script.isValid());
     }
-
-    SECTION("StreamingServiceScript.constants")
-    {
-        StreamingServiceScript script("", "");
-        REQUIRE(!script.constants().isEmpty());
-    }
 }

@@ -1,6 +1,6 @@
 function update() {
     return {
-        "playbackStatus": mellowplayer.PlaybackStatus.STOPPED,
+        "playbackStatus": MellowPlayer.PlaybackStatus.STOPPED,
         "canSeek": false,
         "canGoNext": false,
         "canGoPrevious": false,

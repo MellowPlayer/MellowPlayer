@@ -17,11 +17,11 @@ function update() {
     var playbackStatus;
 
     if (!elm || elm.className.indexOf("disabled)") != -1)
-        playbackStatus = mellowplayer.PlaybackStatus.STOPPED;
+        playbackStatus = MellowPlayer.PlaybackStatus.STOPPED;
     else if (elm.className.indexOf("playerIconPlay") != -1)
-        playbackStatus = mellowplayer.PlaybackStatus.PAUSED;
+        playbackStatus = MellowPlayer.PlaybackStatus.PAUSED;
     else
-        playbackStatus = mellowplayer.PlaybackStatus.PLAYING;
+        playbackStatus = MellowPlayer.PlaybackStatus.PLAYING;
 
     var artUrl = null;
     try {

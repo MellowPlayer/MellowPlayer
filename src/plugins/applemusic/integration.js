@@ -17,13 +17,13 @@
 //
 //-----------------------------------------------------------------------------
 function update() {
-    var playbackStatus = mellowplayer.PlaybackStatus.STOPPED;
+    var playbackStatus = MellowPlayer.PlaybackStatus.STOPPED;
     if (MusicKit.getInstance().nowPlayingItem != undefined && MusicKit.getInstance().nowPlayingItem.isLoading)
-        playbackStatus = mellowplayer.PlaybackStatus.BUFFERING;
+        playbackStatus = MellowPlayer.PlaybackStatus.BUFFERING;
     else if (MusicKit.getInstance().isPlaying)
-        playbackStatus = mellowplayer.PlaybackStatus.PLAYING;
+        playbackStatus = MellowPlayer.PlaybackStatus.PLAYING;
     else if (!MusicKit.getInstance().isPlaying)
-        playbackStatus = mellowplayer.PlaybackStatus.PAUSED;
+        playbackStatus = MellowPlayer.PlaybackStatus.PAUSED;
 
     try {
         var songId = MusicKit.getInstance().nowPlayingItem.songId;
@@ -57,7 +57,7 @@ function update() {
 
     return {
         "playbackStatus": playbackStatus,
-        "canSeek": playbackStatus === mellowplayer.PlaybackStatus.PLAYING || playbackStatus === mellowplayer.PlaybackStatus.PAUSED,
+        "canSeek": playbackStatus === MellowPlayer.PlaybackStatus.PLAYING || playbackStatus === MellowPlayer.PlaybackStatus.PAUSED,
         "canGoNext": MusicKit.getInstance().queue.nextPlayableItem != undefined,
         "canGoPrevious": MusicKit.getInstance().queue.previousPlayableItem != undefined,
         "canAddToFavorites": false,

@@ -36,13 +36,13 @@ function update() {
     var player = getPlayerScope();
 
     var audio = player.audio;
-    var playbackStatus = mellowplayer.PlaybackStatus.STOPPED;
+    var playbackStatus = MellowPlayer.PlaybackStatus.STOPPED;
     if (audio.paused && !player.showLoadingSong)
-        playbackStatus = mellowplayer.PlaybackStatus.PAUSED;
+        playbackStatus = MellowPlayer.PlaybackStatus.PAUSED;
     else if (!audio.paused && !player.showLoadingSong)
-        playbackStatus = mellowplayer.PlaybackStatus.PLAYING;
+        playbackStatus = MellowPlayer.PlaybackStatus.PLAYING;
     else
-        playbackStatus = mellowplayer.PlaybackStatus.BUFFERING;
+        playbackStatus = MellowPlayer.PlaybackStatus.BUFFERING;
 
     return {
         "playbackStatus": playbackStatus,

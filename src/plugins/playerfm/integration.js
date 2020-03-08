@@ -1,6 +1,6 @@
 function update() {
     return {
-        "playbackStatus": player.isPlaying() ? mellowplayer.PlaybackStatus.PLAYING : mellowplayer.PlaybackStatus.PAUSED,
+        "playbackStatus": player.isPlaying() ? MellowPlayer.PlaybackStatus.PLAYING : MellowPlayer.PlaybackStatus.PAUSED,
         "canSeek": true,
         "canGoNext": true,
         "canGoPrevious": true,

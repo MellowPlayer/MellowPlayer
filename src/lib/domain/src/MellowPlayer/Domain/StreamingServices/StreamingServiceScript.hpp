@@ -15,8 +15,6 @@ namespace MellowPlayer::Domain
 
         bool isValid() const;
 
-        QString constants() const;
-
         QString code() const;
         void setCode(const QString& value);
 

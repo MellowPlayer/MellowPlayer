@@ -40,11 +40,11 @@ function getPlaybackStatus() {
     var buttons = getPlayerButtons();
 
     if (buttons.play === null && buttons.pause === null)
-        return mellowplayer.PlaybackStatus.STOPPED;
+        return MellowPlayer.PlaybackStatus.STOPPED;
     else if (buttons.play !== null)
-        return mellowplayer.PlaybackStatus.PAUSED;
+        return MellowPlayer.PlaybackStatus.PAUSED;
     else
-        return mellowplayer.PlaybackStatus.PLAYING;
+        return MellowPlayer.PlaybackStatus.PLAYING;
 }
 
 function getSongInfos() {

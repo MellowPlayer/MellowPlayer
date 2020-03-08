@@ -18,11 +18,11 @@
 //-----------------------------------------------------------------------------
 function update() {
     var controlClassName = document.getElementsByClassName('playControl')[0].className;
-    var playbackStatus = mellowplayer.PlaybackStatus.PAUSED;
+    var playbackStatus = MellowPlayer.PlaybackStatus.PAUSED;
     if (controlClassName.indexOf("playing") !== -1)
-        playbackStatus = mellowplayer.PlaybackStatus.PLAYING;
+        playbackStatus = MellowPlayer.PlaybackStatus.PLAYING;
     else if (controlClassName.indexOf("disabled") !== -1)
-        playbackStatus = mellowplayer.PlaybackStatus.STOPPED;
+        playbackStatus = MellowPlayer.PlaybackStatus.STOPPED;
     try {
         var artUrl = document.getElementsByClassName('playbackSoundBadge')[
             0].children[0].children[0].children[0].style["background-image"];

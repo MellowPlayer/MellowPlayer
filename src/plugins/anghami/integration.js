@@ -15,7 +15,7 @@
 // along with MellowPlayer.  If not, see <http://www.gnu.org/licenses/>.
 //
 //-----------------------------------------------------------------------------
-var playbackStatus = mellowplayer.PlaybackStatus.STOPPED;
+var playbackStatus = MellowPlayer.PlaybackStatus.STOPPED;
 
 function update() {
     return {
@@ -87,12 +87,12 @@ function getArtist() {
 
 function play() {
     $('#player .icon-play').click();
-    playbackStatus = mellowplayer.PlaybackStatus.PLAYING;
+    playbackStatus = MellowPlayer.PlaybackStatus.PLAYING;
 }
 
 function pause() {
     $('#player .icon-pause-2').click();
-    playbackStatus = mellowplayer.PlaybackStatus.PAUSED;
+    playbackStatus = MellowPlayer.PlaybackStatus.PAUSED;
 }
 
 function goNext() {

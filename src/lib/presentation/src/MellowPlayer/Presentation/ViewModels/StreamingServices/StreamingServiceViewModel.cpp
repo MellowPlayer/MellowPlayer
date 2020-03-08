@@ -221,7 +221,7 @@ QString StreamingServiceViewModel::notificationsEnabledSettingsKey() const
 
 QString StreamingServiceViewModel::sourceCode() const
 {
-    auto sourceCode = _streamingService.script()->constants() + "\n" + _streamingService.script()->code() + "\n";
+    auto sourceCode = _streamingService.script()->code();
     if (_streamingService.settings() != nullptr)
         sourceCode += QString("var pluginSettings = JSON.parse('%1')\n").arg(_streamingService.settings()->toJavascriptObject());
     return sourceCode;

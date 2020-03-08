@@ -22,13 +22,13 @@ function getPlayerScope() {
 function update() {
     var scope = getPlayerScope();
 
-    var playbackStatus = mellowplayer.PlaybackStatus.STOPPED;
+    var playbackStatus = MellowPlayer.PlaybackStatus.STOPPED;
     if (scope.mediaPlayer.buffering) {
-        playbackStatus = mellowplayer.PlaybackStatus.BUFFERING;
+        playbackStatus = MellowPlayer.PlaybackStatus.BUFFERING;
     } else if (scope.mediaPlayer.remotePlayerState.playing) {
-        playbackStatus = mellowplayer.PlaybackStatus.PLAYING;
+        playbackStatus = MellowPlayer.PlaybackStatus.PLAYING;
     } else {
-        playbackStatus = mellowplayer.PlaybackStatus.PAUSED;
+        playbackStatus = MellowPlayer.PlaybackStatus.PAUSED;
     }
 
     return {

@@ -7,13 +7,13 @@ function getPlaybackStatus() {
         var displayType = playPauseButton().style.display;
         
         if (displayType === "block")
-            return mellowplayer.PlaybackStatus.PLAYING;
+            return MellowPlayer.PlaybackStatus.PLAYING;
         else
-            return mellowplayer.PlaybackStatus.PAUSED;
+            return MellowPlayer.PlaybackStatus.PAUSED;
     }
     catch (e)
     {
-        return mellowplayer.PlaybackStatus.STOPPED;
+        return MellowPlayer.PlaybackStatus.STOPPED;
     }
 }
 

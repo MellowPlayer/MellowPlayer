@@ -22,7 +22,7 @@ function getPlayer() {
 function update() {
     const player = getPlayer();
     let res = {
-        playbackStatus: mellowplayer.PlaybackStatus.STOPPED,
+        playbackStatus: MellowPlayer.PlaybackStatus.STOPPED,
         canSeek: true,
         canGoNext: true,
         canGoPrevious: false,
@@ -40,9 +40,9 @@ function update() {
 
     if (player) {
         if (player.props.playStatus === "PLAYING")
-            res.playbackStatus = mellowplayer.PlaybackStatus.PLAYING;
+            res.playbackStatus = MellowPlayer.PlaybackStatus.PLAYING;
         else if (player.props.playStatus === "PAUSED")
-            res.playbackStatus = mellowplayer.PlaybackStatus.PAUSED;
+            res.playbackStatus = MellowPlayer.PlaybackStatus.PAUSED;
 
         res.volume = player.props.volume / 100.;
         res.duration = player.props.totalDuration / 1000;

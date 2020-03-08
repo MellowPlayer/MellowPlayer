@@ -72,7 +72,7 @@ This function is called regularly to update the player information.
 
 You must return a dictionnary with the following keys:
 
-- **playbackStatus** *(int)*: Use mellowplayer.PlaybackStatus)*. **Mandatory**
+- **playbackStatus** *(int)*: Use MellowPlayer.PlaybackStatus)*. **Mandatory**
 - **canSeek** *(bool)*: True if the player can seek into the current song.
 - **canGoNext** *(bool)*: True if the player can skip to the next song.
 - **canGoPrevious** *(bool)*: True if the playe can skip to the previous song.
@@ -137,10 +137,10 @@ PlaybackStatus
 
 MellowPlayer will inject a few constants that you can use for representing the current PlaybackStatus:
 
-- **mellowplayer.PlaybackStatus.STOPPED**: indicates that the playback has stopped.
-- **mellowplayer.PlaybackStatus.PAUSED**: indicates that the playback has paused.
-- **mellowplayer.PlaybackStatus.BUFFERING**: indicates that the a song is buffering.
-- **mellowplayer.PlaybackStatus.PLAYING**: indicates that the a song is currently playing.
+- **MellowPlayer.PlaybackStatus.STOPPED**: indicates that the playback has stopped.
+- **MellowPlayer.PlaybackStatus.PAUSED**: indicates that the playback has paused.
+- **MellowPlayer.PlaybackStatus.BUFFERING**: indicates that the a song is buffering.
+- **MellowPlayer.PlaybackStatus.PLAYING**: indicates that the a song is currently playing.
 
 Utility functions
 -----------------

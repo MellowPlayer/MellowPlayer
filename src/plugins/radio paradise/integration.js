@@ -1,8 +1,8 @@
 function update() {
     if (document.getElementById('play-button').title == 'Pause')
-        playbackStatus = mellowplayer.PlaybackStatus.PLAYING;
+        playbackStatus = MellowPlayer.PlaybackStatus.PLAYING;
     else
-        playbackStatus = mellowplayer.PlaybackStatus.PAUSED;
+        playbackStatus = MellowPlayer.PlaybackStatus.PAUSED;
 
     return {
         "playbackStatus": playbackStatus,

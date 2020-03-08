@@ -48,11 +48,11 @@ function update() {
     // if controlClassName is undefined the audioplayer isn't opened yet
     if (!controlClassName)
         return;
-    var playbackStatus = mellowplayer.PlaybackStatus.STOPPED;
+    var playbackStatus = MellowPlayer.PlaybackStatus.STOPPED;
     if (document.querySelector('button[data-qa-id=pauseButton]') !== null)
-        playbackStatus = mellowplayer.PlaybackStatus.PLAYING;
+        playbackStatus = MellowPlayer.PlaybackStatus.PLAYING;
     else if (document.querySelector('button[data-qa-id=resumeButton]') !== null) {
-        updateInfoCache["playbackStatus"] = mellowplayer.PlaybackStatus.PAUSED;
+        updateInfoCache["playbackStatus"] = MellowPlayer.PlaybackStatus.PAUSED;
         return updateInfoCache;
     }
 

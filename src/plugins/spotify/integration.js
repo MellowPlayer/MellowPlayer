@@ -51,10 +51,10 @@ function getButtons() {
 function getPlaybackStatus() {
     var button = getButtons().playPause;
     if (button === null)
-        return mellowplayer.PlaybackStatus.STOPPED;
+        return MellowPlayer.PlaybackStatus.STOPPED;
     else if (button.title === "Play")
-        return mellowplayer.PlaybackStatus.PAUSED;
-    return mellowplayer.PlaybackStatus.PLAYING;
+        return MellowPlayer.PlaybackStatus.PAUSED;
+    return MellowPlayer.PlaybackStatus.PLAYING;
 }
 
 function getArtist() {

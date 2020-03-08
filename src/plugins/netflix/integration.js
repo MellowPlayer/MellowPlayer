@@ -42,10 +42,10 @@ function update() {
 
         // Pause or not
         if( player.paused )
-            var playbackStatus = mellowplayer.PlaybackStatus.PAUSED;
+            var playbackStatus = MellowPlayer.PlaybackStatus.PAUSED;
 
         else
-            var playbackStatus = mellowplayer.PlaybackStatus.PLAYING;
+            var playbackStatus = MellowPlayer.PlaybackStatus.PLAYING;
 
         return {
             "playbackStatus": playbackStatus,
@@ -69,7 +69,7 @@ function update() {
     artUrl = '';
 
     return {
-        "playbackStatus": mellowplayer.PlaybackStatus.STOPPED,
+        "playbackStatus": MellowPlayer.PlaybackStatus.STOPPED,
         "canSeek": false,
         "canGoNext": false,
         "canGoPrevious": false,

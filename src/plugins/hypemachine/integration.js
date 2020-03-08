@@ -32,10 +32,10 @@ function hasClass(elem, className) {
 
 function getPlaybackStatus() {
     if (hasClass(document.getElementById("playerPlay"), "pause")) {
-        return mellowplayer.PlaybackStatus.PLAYING;
+        return MellowPlayer.PlaybackStatus.PLAYING;
     }
     else {
-        return mellowplayer.PlaybackStatus.STOPPED;
+        return MellowPlayer.PlaybackStatus.STOPPED;
     }
 }
 

@@ -108,11 +108,11 @@ function getPosition() {
 
 function getPlaybackStatus() {
     var controlClassName = document.getElementsByClassName("sm2-bar-ui")[0].className;
-    var playbackStatus = mellowplayer.PlaybackStatus.STOPPED;
+    var playbackStatus = MellowPlayer.PlaybackStatus.STOPPED;
     if (controlClassName === "sm2-bar-ui full-width playing")
-        playbackStatus = mellowplayer.PlaybackStatus.PLAYING;
+        playbackStatus = MellowPlayer.PlaybackStatus.PLAYING;
     else if (controlClassName === "sm2-bar-ui full-width paused")
-        playbackStatus = mellowplayer.PlaybackStatus.PAUSED;
+        playbackStatus = MellowPlayer.PlaybackStatus.PAUSED;
     return playbackStatus;
 }
 

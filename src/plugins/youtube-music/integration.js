@@ -20,7 +20,7 @@
 var player;
 
 var defaultArray = {
-    "playbackStatus": mellowplayer.PlaybackStatus.STOPPED,
+    "playbackStatus": MellowPlayer.PlaybackStatus.STOPPED,
     "volume": 0,
     "duration": 0,
     "position": 0,
@@ -71,9 +71,9 @@ function update() {
 
     // Playback status
     if (player.paused) {
-        var playbackStatus = mellowplayer.PlaybackStatus.PAUSED;
+        var playbackStatus = MellowPlayer.PlaybackStatus.PAUSED;
     } else {
-        var playbackStatus = mellowplayer.PlaybackStatus.PLAYING;
+        var playbackStatus = MellowPlayer.PlaybackStatus.PLAYING;
     }
 
     var songTitle = "", artistName = "", artUrl = "";

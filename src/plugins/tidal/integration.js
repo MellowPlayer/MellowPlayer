@@ -59,7 +59,7 @@ function sendMouseClickToElement(element, relativeX, relativeY) {
 
 function update() {
     var results = {
-        "playbackStatus": mellowplayer.PlaybackStatus.STOPPED,
+        "playbackStatus": MellowPlayer.PlaybackStatus.STOPPED,
         "canSeek": false,
         "canGoNext": false,
         "canGoPrevious": false,
@@ -97,10 +97,10 @@ function update() {
         results.songTitle = getItemByTestID("footer-track-title", infoDiv).children[0].innerHTML;
         results.songId = getHashCode(getItemByTestID("footer-track-title", infoDiv).children[0].href);
         
-        results.playbackStatus = isPaused() ? mellowplayer.PlaybackStatus.PAUSED : mellowplayer.PlaybackStatus.PLAYING;
+        results.playbackStatus = isPaused() ? MellowPlayer.PlaybackStatus.PAUSED : MellowPlayer.PlaybackStatus.PLAYING;
         // Check if the loading svg is present
         if(svgLoading) {
-            results.playbackStatus = mellowplayer.PlaybackStatus.BUFFERING;
+            results.playbackStatus = MellowPlayer.PlaybackStatus.BUFFERING;
             previousID = results.songId;
         };
         
@@ -125,7 +125,7 @@ function update() {
 
         // also don't allow to load the art if we still hasn't started buffering.
         // We drop the status about the song until we find the art, so it won't create multiple item in the listening history
-        if(results.songId != previousID || results.playbackStatus == mellowplayer.PlaybackStatus.BUFFERING) {
+        if(results.songId != previousID || results.playbackStatus == MellowPlayer.PlaybackStatus.BUFFERING) {
             results.songTitle = "";
             results.songId = 0;
             results.artUrl = "";

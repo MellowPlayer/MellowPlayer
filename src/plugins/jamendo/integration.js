@@ -10,14 +10,14 @@ function getPlaybackStatus() {
     var playButton = document.getElementsByClassName("player-controls_play")[0];
 
     if (playButton === undefined )
-        return mellowplayer.PlaybackStatus.STOPPED;
+        return MellowPlayer.PlaybackStatus.STOPPED;
     var playTitle = playButton.attributes["data-jam-title-play"].value;
     var pauseTitle = playButton.attributes["data-jam-title-pause"].value;
 
     if (playButton.title === playTitle)
-        return mellowplayer.PlaybackStatus.PAUSED;
+        return MellowPlayer.PlaybackStatus.PAUSED;
     else
-        return mellowplayer.PlaybackStatus.PLAYING;
+        return MellowPlayer.PlaybackStatus.PLAYING;
 }
 
 function getSongTitle() {

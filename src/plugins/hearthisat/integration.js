@@ -117,14 +117,14 @@ function getPlaybackStatus() {
     var track = getCurrentTrack();
 
     if (!track)
-        return mellowplayer.PlaybackStatus.STOPPED;
+        return MellowPlayer.PlaybackStatus.STOPPED;
 
     if (!isCurrentTrackInPlaylist() || track.isBuffering === true)
-        return mellowplayer.PlaybackStatus.BUFFERING;
+        return MellowPlayer.PlaybackStatus.BUFFERING;
     if (track.paused)
-        return mellowplayer.PlaybackStatus.PAUSED;
+        return MellowPlayer.PlaybackStatus.PAUSED;
     else
-        return mellowplayer.PlaybackStatus.PLAYING;
+        return MellowPlayer.PlaybackStatus.PLAYING;
 }
 
 function getSongId() {
