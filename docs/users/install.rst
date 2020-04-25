@@ -9,10 +9,9 @@ GNU/Linux
 
 We provide several ways to install a pre-compiled version of MellowPlayer on GNU/Linux:
 
-1. Native package (only for Ubuntu, Fedora, ArchLinux & openSUSE)
+1. Native package
 2. Flatpak
 3. AppImage
-
 
 To choose which kind of installer you should use, follow those simple rules:
 
@@ -38,17 +37,6 @@ Most services require proprietary audio codecs to work. You can install them fro
 
     sudo dnf install qt5-qtwebengine-freeworld
 
-Flash 
-*****
-
-Services such as Deezer and Tidal require flash to work. You can install it from the adobe repositories:
-
-.. code-block:: bash
-
-    sudo rpm -ivh http://linuxdownload.adobe.com/adobe-release/adobe-release-i386-1.0-1.noarch.rpm
-    sudo rpm --import /etc/pki/rpm-gpg/RPM-GPG-KEY-adobe-linux
-    sudo dnf install flash-player-ppapi
-
 Widevine
 ********
 
@@ -69,107 +57,6 @@ Some services such as Spotify and Amazon Music requires the widevine ppapi plugi
 
 .. note:: You might need to adapt this script to download a version of chromium and widevine that match the version used by your Qt installation.
 
-Ubuntu
-++++++
-
-18.04
-*****
-
-Before installing MellowPlayer, **make sure the universe repository is enabled**:
-
-.. code-block:: bash
-
-    sudo add-apt-repository universe
-
-
-Install procedure:
-
-.. code-block:: bash
-
-    sudo sh -c "echo 'deb http://download.opensuse.org/repositories/home:/ColinDuquesnoy/xUbuntu_18.04/ /' > /etc/apt/sources.list.d/mellowplayer.list"
-    wget -nv https://download.opensuse.org/repositories/home:ColinDuquesnoy/xUbuntu_18.04/Release.key -O Release.key
-    sudo apt-key add - < Release.key
-    sudo apt update
-    sudo apt install mellowplayer
-
-    
-19.10
-*****
-
-Before installing MellowPlayer, **make sure the universe repository is enabled**:
-
-.. code-block:: bash
-
-    sudo add-apt-repository universe
-
-
-Install procedure:
-
-.. code-block:: bash
-
-    sudo sh -c "echo 'deb http://download.opensuse.org/repositories/home:/ColinDuquesnoy/xUbuntu_19.10/ /' > /etc/apt/sources.list.d/mellowplayer.list"
-    wget -nv https://download.opensuse.org/repositories/home:ColinDuquesnoy/xUbuntu_19.10/Release.key -O Release.key
-    sudo apt-key add - < Release.key
-    sudo apt update
-    sudo apt install mellowplayer
-
-20.04
-******
-
-Before installing MellowPlayer, **make sure the universe repository is enabled**:
-
-.. code-block:: bash
-
-    sudo add-apt-repository universe
-
-
-Install procedure:
-
-.. code-block:: bash
-
-    sudo sh -c "echo 'deb http://download.opensuse.org/repositories/home:/ColinDuquesnoy/xUbuntu_20.04/ /' > /etc/apt/sources.list.d/mellowplayer.list"
-    wget -nv https://download.opensuse.org/repositories/home:ColinDuquesnoy/xUbuntu_20.04/Release.key -O Release.key
-    sudo apt-key add - < Release.key
-    sudo apt update
-    sudo apt install mellowplayer
-
-Debian
-++++++
-
-Stable (Buster)
-***************
-
-.. code-block:: bash
-
-    sudo sh -c "echo 'deb https://download.opensuse.org/repositories/home:/ColinDuquesnoy/Debian_10/ /' > /etc/apt/sources.list.d/mellowplayer.list"
-    wget -nv https://download.opensuse.org/repositories/home:/ColinDuquesnoy/Debian_10/Release.key -O Release.key
-    sudo apt-key add - < Release.key
-    sudo apt update
-    sudo apt install mellowplayer
-
-
-Testing
-*******
-
-.. code-block:: bash
-
-    sudo sh -c "echo 'deb https://download.opensuse.org/repositories/home:/ColinDuquesnoy/Debian_Testing/ /' > /etc/apt/sources.list.d/mellowplayer.list"
-    wget -nv https://download.opensuse.org/repositories/home:/ColinDuquesnoy/Debian_Testing/Release.key -O Release.key
-    sudo apt-key add - < Release.key
-    sudo apt update
-    sudo apt install mellowplayer
-
-Unstable
-********
-
-.. code-block:: bash
-
-    sudo sh -c "echo 'deb https://download.opensuse.org/repositories/home:/ColinDuquesnoy/Debian_Unstable/ /' > /etc/apt/sources.list.d/mellowplayer.list"
-    wget -nv https://download.opensuse.org/repositories/home:/ColinDuquesnoy/Debian_Unstable/Release.key -O Release.key
-    sudo apt-key add - < Release.key
-    sudo apt update
-    sudo apt install mellowplayer
-    
 ArchLinux
 +++++++++
 
@@ -181,29 +68,6 @@ MellowPlayer is available from the `AUR`_, install it with your favorite AUR too
     yaourt -S mellowplayer
 
 .. _AUR: https://aur.archlinux.org/packages/mellowplayer
-
-openSUSE Leap 15
-++++++++++++++++
-
-Use the `openSUSE build service`_ web interface or install manually:
-
-.. code-block:: bash
-
-    zypper addrepo https://download.opensuse.org/repositories/home:ColinDuquesnoy/openSUSE_Leap_15.1/home:ColinDuquesnoy.repo
-    zypper refresh
-    zypper install MellowPlayer
-
-
-openSUSE Tumbleweed
-+++++++++++++++++++
-
-Use the `openSUSE build service`_ web interface or install manually:
-
-.. code-block:: bash
-
-    zypper addrepo http://download.opensuse.org/repositories/home:ColinDuquesnoy/openSUSE_Tumbleweed/home:ColinDuquesnoy.repo
-    zypper refresh
-    zypper install MellowPlayer
 
 KaOS
 ++++
@@ -217,6 +81,12 @@ MellowPlayer is available from `KaOSx/apps`_ repository, just run:
 
 .. _KaOSx/apps: https://kaosx.us/packages/packages.php?sortby=name&sortdir=&flagged=&page=&repo=apps&exact=&search=mellowplayer
 
+Other distributions
+++++++++++++++++++++
+
+Pre-compiled packages for other distributions (Ubuntu, openSUSE,...) can be found on our `OBS Download Page`_
+
+.. _OBS Download Page: https://software.opensuse.org//download.html?project=home%3AColinDuquesnoy&package=mellowplayer
 
 Flatpak
 +++++++
