@@ -1,5 +1,34 @@
 # Change log
 
+## [3.6.0](https://gitlab.com/ColinDuquesnoy/MellowPlayer/tree/3.6.0) (2020-4-25)
+[Full Changelog](https://gitlab.com/ColinDuquesnoy/MellowPlayer/compare/3.5.10...3.6.0)
+
+**Implemented enhancements:**
+
+- Change to logging rules & related command line arguments [\#392](https://gitlab.com/ColinDuquesnoy/MellowPlayer/issues/392)
+- `Accept-Language` header support [\#372](https://gitlab.com/ColinDuquesnoy/MellowPlayer/issues/372)
+- Detection of broken plugins [\#340](https://gitlab.com/ColinDuquesnoy/MellowPlayer/issues/340)
+- Add ability to filter by favorite services [\#336](https://gitlab.com/ColinDuquesnoy/MellowPlayer/issues/336)
+- Remote control MellowPlayer instance from any other device [\#332](https://gitlab.com/ColinDuquesnoy/MellowPlayer/issues/332)
+- Pandora support [\#331](https://gitlab.com/ColinDuquesnoy/MellowPlayer/issues/331)
+- Add a filter bar to service selection screen [\#327](https://gitlab.com/ColinDuquesnoy/MellowPlayer/issues/327)
+- Show hidden player bar from contextual menu [\#314](https://gitlab.com/ColinDuquesnoy/MellowPlayer/issues/314)
+
+**Fixed bugs:**
+
+- "origin" is a non-standard property emitted with PropertiesChanged [\#413](https://gitlab.com/ColinDuquesnoy/MellowPlayer/issues/413)
+- QtWebEngine (chromium) exposes useless MPRIS interface [\#407](https://gitlab.com/ColinDuquesnoy/MellowPlayer/issues/407)
+- Mixcloud integration plugin is broken [\#405](https://gitlab.com/ColinDuquesnoy/MellowPlayer/issues/405)
+- 2 config files are created: MellowPlayer.conf & MellowPlayer3.conf [\#381](https://gitlab.com/ColinDuquesnoy/MellowPlayer/issues/381)
+- org.mpris.MediaPlayer2.Player.Stop dbus method make toggle play/pause instead of stop [\#380](https://gitlab.com/ColinDuquesnoy/MellowPlayer/issues/380)
+- Restore window does not work in all cases [\#376](https://gitlab.com/ColinDuquesnoy/MellowPlayer/issues/376)
+
+
+**Merged merge requests:**
+
+- MPRIS: Do not expose broken chromium mpris implementation [\#319](https://gitlab.com/ColinDuquesnoy/MellowPlayer/merge_requests/319) ([t.clastres](https://gitlab.com/t.clastres))
+- Add Pandora integration [\#317](https://gitlab.com/ColinDuquesnoy/MellowPlayer/merge_requests/317) ([cautionoid](https://gitlab.com/cautionoid))
+
 ## [3.5.9](https://gitlab.com/ColinDuquesnoy/MellowPlayer/tree/3.5.9) (2020-1-18)
 [Full Changelog](https://gitlab.com/ColinDuquesnoy/MellowPlayer/compare/3.5.8...3.5.9)
 
