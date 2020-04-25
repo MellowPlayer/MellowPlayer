@@ -62,6 +62,8 @@ Page {
 
     WebEngineView {
         id: webView
+
+        property bool loadStatus: false
         
         anchors.fill: parent
 
@@ -136,10 +138,13 @@ Page {
         }
         onLoadingChanged: {
             if (loadRequest.status === WebEngineLoadRequest.LoadSucceededStatus) {
+                webView.loadStatus = true;
                 updateImage();
             }
-            else
+            else {
+                webView.loadStatus = false;
                 d.checkForCustomUrlRequired();
+            }
         }
         onFullScreenRequested: mainWindow.toggleFullScreen(request)
         onNewViewRequested: mainWindow.openWebPopup(request, profile)
@@ -181,7 +186,12 @@ Page {
             signal changeVolume(double newVolume)
 
             onUpdateResultsChanged: root.player.setUpdateResults(updateResults);
-            onBrokenChanged: root.service.broken = playerBridge.broken
+            onBrokenChanged: {
+                if (webView.loadStatus)
+                    root.service.broken = playerBridge.broken
+                else
+                    root.service.broken = false;
+            }
 
             WebChannel.id: "player"
         }
