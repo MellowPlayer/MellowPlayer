@@ -46,7 +46,7 @@ Make sure you have installed both the proprietary audio codecs (ffmpeg with extr
     sudo chmod 644 /usr/lib/chromium/libwidevinecdmadapter.so
 
 
-There is a message saying that the browser is not supported. What can I do?
+There is a message saying that the browser is not supported or outdated. What can I do?
 ----------------------------------------------------------------------------
 
 If you get the following (or similar) error message::
@@ -54,7 +54,9 @@ If you get the following (or similar) error message::
     You are trying to sign in from a browser or app that doesn't allow us to keep your account secure.
     Try using a different browser.
 
-You may want to try to `spoof your user agent`_ .
+.. note:: The message might a bit different (e.g. on Yandex, the message say the browser is outdated).
+
+You may want to try to `spoof your user agent`_  with the one from Firefox.
 
 To change the user agent in MellowPlayer: **Settings -> Privacy -> User Agent**.
 
