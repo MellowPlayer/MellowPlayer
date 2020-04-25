@@ -72,8 +72,8 @@ void Mpris2Player::setVolume(double value)
 QVariantMap Mpris2Player::metadata()
 {
     LOG_TRACE(_logger, "metadata()");
-    _lastMetadata = toXesam(*_player.currentSong());
-    return _lastMetadata;
+    _currentSongMetadata = toXesam(*_player.currentSong());
+    return _currentSongMetadata;
 }
 
 double Mpris2Player::minimumRate()
@@ -217,11 +217,8 @@ void Mpris2Player::onSongChanged(Song* song)
     LOG_TRACE(_logger, "onSongChanged()");
     if (song != nullptr)
     {
-        QVariantMap map;
-        map["Metadata"] = toXesam(*song);
-        if (map != _lastMetadata)
-            signalPlayerUpdate(map);
-        _lastMetadata = map;
+        _currentSongMetadata = toXesam(*song);
+        signalPlayerUpdate({});
         connect(song, &Song::durationChanged, this, &Mpris2Player::onDurationChanged, Qt::UniqueConnection);
         connect(song, &Song::isFavoriteChanged, this, &Mpris2Player::onFavoriteChanged, Qt::UniqueConnection);
     }
@@ -289,6 +286,7 @@ QMap<QString, QVariant> Mpris2Player::toXesam(const Song& song)
 {
     LOG_TRACE(_logger, "toXesam('" + song.toString() + "')");
     QMap<QString, QVariant> map;
+    map["origin"] = "MellowPlayer";
     if (song.isValid())
     {
         QStringList artist;
@@ -346,20 +344,20 @@ QString Mpris2Player::statusToString(PlaybackStatus status)
 
 void Mpris2Player::signalPlayerUpdate(const QVariantMap& map)
 {
-    signalUpdate(map, "org.mpris.MediaPlayer2.Player");
+    auto mapWithMetadata = map;
+    mapWithMetadata["Metadata"] = _currentSongMetadata;
+    signalUpdate(mapWithMetadata, "org.mpris.MediaPlayer2.Player");
 }
 
 void Mpris2Player::signalUpdate(const QVariantMap& map, const QString& interfaceName)
 {
-    QVariantMap mapWithOrigin = map;
-    mapWithOrigin["origin"] = "MellowPlayer";
-    if (!mapWithOrigin.isEmpty())
+    if (!map.isEmpty())
     {
         QDBusMessage signal = QDBusMessage::createSignal("/org/mpris/MediaPlayer2", "org.freedesktop.DBus.Properties", "PropertiesChanged");
-        QVariantList args = QVariantList() << interfaceName << mapWithOrigin << QStringList();
+        QVariantList args = QVariantList() << interfaceName << map << QStringList();
         signal.setArguments(args);
 
-        LOG_TRACE(_logger, "PropertiesChanged: {" + qMapToString(mapWithOrigin) + "\n}");
+        LOG_TRACE(_logger, "PropertiesChanged: {" + qMapToString(map) + "\n}");
         QDBusConnection::sessionBus().send(signal);
     }
 }

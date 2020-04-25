@@ -100,6 +100,6 @@ namespace MellowPlayer::Presentation
         Domain::ILogger& _logger;
         Domain::IPlayer& _player;
         Domain::ILocalAlbumArt& _localAlbumArt;
-        QMap<QString, QVariant> _lastMetadata;
+        QMap<QString, QVariant> _currentSongMetadata;
     };
 }
