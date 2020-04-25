@@ -60,6 +60,14 @@ Page {
         webView.reload();
     }
 
+    function getDefaultAcceptLanguage() {
+        var langAndCountry = Qt.locale().name.split(".")[0].replace("_", "-");
+        var lang = langlangAndCountry.split("-")[0];
+        var header = langAndCountry + ", " + lang + ";q=0.9, en;q=0.8, *;q=0.5";
+        return header;
+    }
+
+
     WebEngineView {
         id: webView
 
@@ -70,6 +78,7 @@ Page {
         url: service.url
         profile {
             httpUserAgent: userAgentSetting.value
+            httpAcceptLanguage: getDefaultAcceptLanguage()
         }
         settings {
             pluginsEnabled : true
