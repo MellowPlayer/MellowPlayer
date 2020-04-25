@@ -62,7 +62,7 @@ Page {
 
     function getDefaultAcceptLanguage() {
         var langAndCountry = Qt.locale().name.split(".")[0].replace("_", "-");
-        var lang = langlangAndCountry.split("-")[0];
+        var lang = langAndCountry.split("-")[0];
         var header = langAndCountry + ", " + lang + ";q=0.9, en;q=0.8, *;q=0.5";
         return header;
     }
