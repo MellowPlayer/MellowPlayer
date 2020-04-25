@@ -46,7 +46,10 @@ Item {
 
                     onTextChanged: _streamingServices.filteredServices.setSearchText(text)
 
-                    Component.onCompleted: forceActiveFocus()
+                    Component.onCompleted: {
+                        _streamingServices.filteredServices.setSearchText(text)
+                        forceActiveFocus()
+                    }
                     Layout.preferredWidth: 340
                 }
             }
