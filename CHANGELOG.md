@@ -1,5 +1,12 @@
 # Change log
 
+## [3.6.1](https://gitlab.com/ColinDuquesnoy/MellowPlayer/tree/3.6.0) (2020-4-25)
+[Full Changelog](https://gitlab.com/ColinDuquesnoy/MellowPlayer/compare/3.5.10...3.6.0)
+
+**Fixed bugs:**
+
+- Fix typo in Accept-Language patch.
+
 ## [3.6.0](https://gitlab.com/ColinDuquesnoy/MellowPlayer/tree/3.6.0) (2020-4-25)
 [Full Changelog](https://gitlab.com/ColinDuquesnoy/MellowPlayer/compare/3.5.10...3.6.0)
 
