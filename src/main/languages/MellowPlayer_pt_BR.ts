@@ -742,17 +742,17 @@ ouvir aparecerão aqui...</translation>
     <message>
         <location filename="../../lib/presentation/imports/MellowPlayer/SettingsPages/RemoteControl/RemoteControlState.qml" line="20"/>
         <source>&lt;a href=&quot;%3&quot;&gt;%1&lt;/a&gt; &lt;i&gt;%2&lt;/i&gt;</source>
-        <translation type="unfinished"/>
+        <translation>&lt;a href=&quot;%3&quot;&gt;%1&lt;/a&gt; &lt;i&gt;%2&lt;/i&gt;</translation>
     </message>
     <message>
         <location filename="../../lib/presentation/imports/MellowPlayer/SettingsPages/RemoteControl/RemoteControlState.qml" line="90"/>
         <source>Run at startup</source>
-        <translation type="unfinished"/>
+        <translation>Executar ao iniciar</translation>
     </message>
     <message>
         <location filename="../../lib/presentation/imports/MellowPlayer/SettingsPages/RemoteControl/RemoteControlState.qml" line="137"/>
         <source>Disable Remote Control</source>
-        <translation type="unfinished"/>
+        <translation>Desabilitar o Controle Remoto</translation>
     </message>
 </context>
 <context>
@@ -760,18 +760,19 @@ ouvir aparecerão aqui...</translation>
     <message>
         <location filename="../../lib/presentation/imports/MellowPlayer/SettingsPages/RemoteControl/RemoteControlState_Installing.qml" line="11"/>
         <source>Installing Remote Control Application</source>
-        <translation type="unfinished"/>
+        <translation>Instalando o aplicativo Controle Remoto</translation>
     </message>
     <message>
         <location filename="../../lib/presentation/imports/MellowPlayer/SettingsPages/RemoteControl/RemoteControlState_Installing.qml" line="12"/>
         <source>Installing &lt;b&gt;%1&lt;/b&gt;. Please wait,
 this may take a few minutes...</source>
-        <translation type="unfinished"/>
+        <translation>Instalando &lt;b&gt;%1&lt;/b&gt;. Por favor, aguarde,
+isso pode demorar alguns minutos...</translation>
     </message>
     <message>
         <location filename="../../lib/presentation/imports/MellowPlayer/SettingsPages/RemoteControl/RemoteControlState_Installing.qml" line="16"/>
         <source>Require &lt;a href=&quot;%3&quot;&gt;%1&lt;/a&gt; &lt;i&gt;%2&lt;/i&gt;</source>
-        <translation type="unfinished"/>
+        <translation>Depende de &lt;a href=&quot;%3&quot;&gt;%1&lt;/a&gt; &lt;i&gt;%2&lt;/i&gt;</translation>
     </message>
 </context>
 <context>
@@ -779,18 +780,19 @@ this may take a few minutes...</source>
     <message>
         <location filename="../../lib/presentation/imports/MellowPlayer/SettingsPages/RemoteControl/RemoteControlState_NotEnabled.qml" line="12"/>
         <source>Remote Control Disabled</source>
-        <translation type="unfinished"/>
+        <translation>Controle Remoto desabilitado</translation>
     </message>
     <message>
         <location filename="../../lib/presentation/imports/MellowPlayer/SettingsPages/RemoteControl/RemoteControlState_NotEnabled.qml" line="13"/>
         <source>Enable Remote Control to be able to control MellowPlayer playback
  from any device in your LAN!</source>
-        <translation type="unfinished"/>
+        <translation>Habilite o Controle Remoto para controlar o MellowPlayer
+a partir de qualquer dispositivo da sua rede!</translation>
     </message>
     <message>
         <location filename="../../lib/presentation/imports/MellowPlayer/SettingsPages/RemoteControl/RemoteControlState_NotEnabled.qml" line="16"/>
         <source>Enable Remote Control</source>
-        <translation type="unfinished"/>
+        <translation>Habilitar o Controle Remoto</translation>
     </message>
 </context>
 <context>
@@ -798,22 +800,22 @@ this may take a few minutes...</source>
     <message>
         <location filename="../../lib/presentation/imports/MellowPlayer/SettingsPages/RemoteControl/RemoteControlState_NotInstalled.qml" line="11"/>
         <source>Install Remote Control Application</source>
-        <translation type="unfinished"/>
+        <translation>Instalar o aplicativo Controle Remoto</translation>
     </message>
     <message>
         <location filename="../../lib/presentation/imports/MellowPlayer/SettingsPages/RemoteControl/RemoteControlState_NotInstalled.qml" line="12"/>
         <source>Install &lt;b&gt;%1&lt;/b&gt; to finish Remote Control Setup</source>
-        <translation type="unfinished"/>
+        <translation>Instale &lt;b&gt;%1&lt;/b&gt; para finalizar a configuração do Controle Remoto</translation>
     </message>
     <message>
         <location filename="../../lib/presentation/imports/MellowPlayer/SettingsPages/RemoteControl/RemoteControlState_NotInstalled.qml" line="14"/>
         <source>Install </source>
-        <translation type="unfinished"/>
+        <translation>Instalar</translation>
     </message>
     <message>
         <location filename="../../lib/presentation/imports/MellowPlayer/SettingsPages/RemoteControl/RemoteControlState_NotInstalled.qml" line="15"/>
         <source>Require &lt;a href=&quot;%3&quot;&gt;%1&lt;/a&gt; &lt;i&gt;%2&lt;/i&gt;</source>
-        <translation type="unfinished"/>
+        <translation>Depende de &lt;a href=&quot;%3&quot;&gt;%1&lt;/a&gt; &lt;i&gt;%2&lt;/i&gt;</translation>
     </message>
 </context>
 <context>
@@ -821,17 +823,17 @@ this may take a few minutes...</source>
     <message>
         <location filename="../../lib/presentation/imports/MellowPlayer/SettingsPages/RemoteControl/RemoteControlState_Running.qml" line="11"/>
         <source>Remote Control Application Running</source>
-        <translation type="unfinished"/>
+        <translation>Aplicativo Controle Remoto em execução</translation>
     </message>
     <message>
         <location filename="../../lib/presentation/imports/MellowPlayer/SettingsPages/RemoteControl/RemoteControlState_Running.qml" line="12"/>
         <source>&lt;b&gt;%1&lt;/b&gt; is listening on &lt;a href=&quot;%2&quot;&gt;%2&lt;/a&gt;</source>
-        <translation type="unfinished"/>
+        <translation>&lt;b&gt;%1&lt;/b&gt; está ouvindo em &lt;a href=&quot;%2&quot;&gt;%2&lt;/a&gt;</translation>
     </message>
     <message>
         <location filename="../../lib/presentation/imports/MellowPlayer/SettingsPages/RemoteControl/RemoteControlState_Running.qml" line="14"/>
         <source>Stop </source>
-        <translation type="unfinished"/>
+        <translation>Parar</translation>
     </message>
 </context>
 <context>
@@ -839,17 +841,17 @@ this may take a few minutes...</source>
     <message>
         <location filename="../../lib/presentation/imports/MellowPlayer/SettingsPages/RemoteControl/RemoteControlState_Stopped.qml" line="11"/>
         <source>Start Remote Control Application</source>
-        <translation type="unfinished"/>
+        <translation>Iniciar o aplicativo Controle Remoto</translation>
     </message>
     <message>
         <location filename="../../lib/presentation/imports/MellowPlayer/SettingsPages/RemoteControl/RemoteControlState_Stopped.qml" line="12"/>
         <source>Start &lt;b&gt;%1&lt;/b&gt; to be able to control MellowPlayer playback&lt;br&gt; from any device in your LAN!</source>
-        <translation type="unfinished"/>
+        <translation>Inicie &lt;b&gt;%1&lt;/b&gt; para controlar o MellowPlayer&lt;br&gt; a partir de qualquer dispositivo da sua rede!</translation>
     </message>
     <message>
         <location filename="../../lib/presentation/imports/MellowPlayer/SettingsPages/RemoteControl/RemoteControlState_Stopped.qml" line="14"/>
         <source>Start </source>
-        <translation type="unfinished"/>
+        <translation>Iniciar</translation>
     </message>
 </context>
 <context>
@@ -878,12 +880,12 @@ this may take a few minutes...</source>
     <message>
         <location filename="../../lib/presentation/imports/MellowPlayer/Dialogs/ReportIssueDialog.qml" line="146"/>
         <source>Please, read the contributing guidelines before submitting the bug report!</source>
-        <translation type="unfinished"/>
+        <translation>Por favor, leia as orientações de contribuição antes de submeter seu registro de erro!</translation>
     </message>
     <message>
         <location filename="../../lib/presentation/imports/MellowPlayer/Dialogs/ReportIssueDialog.qml" line="162"/>
         <source>Thank you for taking the time to report the issue!</source>
-        <translation type="unfinished"/>
+        <translation>Obrigado por ter dedicado seu tempo para informar esse problema!</translation>
     </message>
     <message>
         <location filename="../../lib/presentation/imports/MellowPlayer/Dialogs/ReportIssueDialog.qml" line="185"/>
@@ -1416,7 +1418,7 @@ this may take a few minutes...</source>
     <message>
         <location filename="../../lib/presentation/imports/MellowPlayer/SettingsTranslator.js" line="118"/>
         <source>Remote Control</source>
-        <translation type="unfinished"/>
+        <translation>Controle Remoto</translation>
     </message>
     <message>
         <location filename="../../lib/presentation/imports/MellowPlayer/SettingsTranslator.js" line="119"/>
@@ -1721,22 +1723,22 @@ this may take a few minutes...</source>
     <message>
         <location filename="../../lib/presentation/imports/MellowPlayer/Controls/WebView.qml" line="362"/>
         <source>This plugin is broken. We are aware of the issue, &lt;b&gt;your help is welcome&lt;/b&gt;!</source>
-        <translation type="unfinished"/>
+        <translation>Esse plugin não está funcionando. Estamos cientes desse problema e &lt;b&gt;sua ajuda é bem-vinda&lt;/b&gt;!</translation>
     </message>
     <message>
         <location filename="../../lib/presentation/imports/MellowPlayer/Controls/WebView.qml" line="362"/>
         <source>This plugin might be broken and it looks like we are not aware of it. &lt;b&gt;Please report the issue!&lt;/b&gt;</source>
-        <translation type="unfinished"/>
+        <translation>Esse plugin pode estar com problemas e parece que nós não estamos cientes disso. &lt;b&gt;Por favor, informe esse erro!&lt;/b&gt;</translation>
     </message>
     <message>
         <location filename="../../lib/presentation/imports/MellowPlayer/Controls/WebView.qml" line="370"/>
         <source>See issue on gitlab</source>
-        <translation type="unfinished"/>
+        <translation>Veja os problemas no gitlab</translation>
     </message>
     <message>
         <location filename="../../lib/presentation/imports/MellowPlayer/Controls/WebView.qml" line="377"/>
         <source>Report broken plugin</source>
-        <translation type="unfinished"/>
+        <translation>Informar plugin defeituoso</translation>
     </message>
 </context>
 <context>
