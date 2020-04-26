@@ -26,6 +26,12 @@ build:release:
             - build
             - appdir
 
+build:release:no-gold-linker:
+    extends: .linux
+    stage: build
+    script:
+        - ./scripts/ci/linux/build-release-no-gold-linker.sh
+
 build:debug:
     extends: .linux
     stage: build
