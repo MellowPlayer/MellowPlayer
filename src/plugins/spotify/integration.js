@@ -19,25 +19,19 @@
 
 function getButtons() {
     function getPlayPauseButton() {
-        var playButton = document.querySelector('button[title=Play]');
-        var pauseButton = document.querySelector('button[title=Pause]');
-
-        if (playButton === null)
-            return pauseButton;
-        else
-            return playButton;
+        return getElementByXpath('/html/body/div[3]/div/div[3]/div[3]/footer/div/div[2]/div/div[1]/div[3]/button');
     }
 
     function getSkipPreviousSongButton() {
-        return document.querySelector('button[title=Previous]');
+        return getElementByXpath('/html/body/div[3]/div/div[3]/div[3]/footer/div/div[2]/div/div[1]/div[2]/button');
     }
 
     function getSkipNextSongButton() {
-        return document.querySelector('button[title=Next]');
+        return getElementByXpath('/html/body/div[3]/div/div[3]/div[3]/footer/div/div[2]/div/div[1]/div[4]/button');
     }
 
     function getAddRemoveToMusicButton() {
-        return document.querySelector('.now-playing button[title~=Liked]');
+        return getElementByXpath('/html/body/div[3]/div/div[3]/div[3]/footer/div/div[1]/div/div[3]/button');
     }
 
     return {
@@ -59,7 +53,7 @@ function getPlaybackStatus() {
 
 function getArtist() {
     try {
-        return document.querySelector('.now-playing .track-info__artists').innerText;
+        return getElementByXpath('/html/body/div[3]/div/div[3]/div[3]/footer/div/div[1]/div/div[2]/div[2]').children[0].innerText
     } catch (e) {
         return ""
     }
@@ -67,7 +61,7 @@ function getArtist() {
 
 function getSongTitle() {
     try {
-        return document.querySelector('.now-playing .track-info__name').innerText;
+        return getElementByXpath('/html/body/div[3]/div/div[3]/div[3]/footer/div/div[1]/div/div[2]/div[1]/div/span/a').innerText;
     } catch (e) {
         return ""
     }
