@@ -17,6 +17,10 @@
 //
 //-----------------------------------------------------------------------------
 
+function isOnLoginPage() {
+    return document.getElementsByClassName("login").length !== 0
+}
+
 function getButtons() {
     function getPlayPauseButton() {
         return getElementByXpath('/html/body/div[3]/div/div[3]/div[3]/footer/div/div[2]/div/div[1]/div[3]/button');
@@ -150,18 +154,26 @@ function update() {
 }
 
 function play() {
+    if (isOnLoginPage())
+        return;
     getButtons().playPause.click();
 }
 
 function pause() {
+    if (isOnLoginPage())
+        return;
     getButtons().playPause.click();
 }
 
 function goNext() {
+    if (isOnLoginPage())
+        return;
     getButtons().next.click();
 }
 
 function goPrevious() {
+    if (isOnLoginPage())
+        return;
     getButtons().previous.click();
 }
 
@@ -170,13 +182,18 @@ function setVolume(volume) {
 }
 
 function addToFavorites() {
+    if (isOnLoginPage())
+        return;
     getButtons().addRemoveToMusic.click();
 }
 
 function removeFromFavorites() {
+    if (isOnLoginPage())
+        return;
     getButtons().addRemoveToMusic.click();
 }
 
 function seekToPosition(position) {
-    // not supported
+    if (isOnLoginPage())
+        return;
 }
