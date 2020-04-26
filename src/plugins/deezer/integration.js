@@ -16,6 +16,10 @@
 // along with MellowPlayer.  If not, see <http://www.gnu.org/licenses/>.
 //
 //-----------------------------------------------------------------------------
+function isOnLoginPage() {
+    return document.getElementsByClassName("unlogged-btn-label").length !== 0;
+}
+
 function update() {
     var playbackStatus = MellowPlayer.PlaybackStatus.STOPPED;
     if (dzPlayer.isPlaying())
@@ -63,22 +67,32 @@ function isFavorite() {
 }
 
 function play() {
+    if (isOnLoginPage())
+        return;
     dzPlayer.control.play();
 }
 
 function pause() {
+    if (isOnLoginPage())
+        return;
     dzPlayer.control.pause();
 }
 
 function goNext() {
+    if (isOnLoginPage())
+        return;
     dzPlayer.control.nextSong();
 }
 
 function goPrevious() {
+    if (isOnLoginPage())
+        return;
     dzPlayer.control.prevSong();
 }
 
 function setVolume(volume) {
+    if (isOnLoginPage())
+        return;
     dzPlayer.control.setVolume(volume);
 }
 
@@ -91,6 +105,9 @@ function removeFromFavorites() {
 }
 
 function seekToPosition(position) {
+    if (isOnLoginPage())
+        return;
+
     // (0 = beginning, 1 = end)
     var normalizedPos = position / dzPlayer.getDuration();
     dzPlayer.control.seek(normalizedPos)
