@@ -71,7 +71,7 @@ Page {
     WebEngineView {
         id: webView
 
-        property bool loadStatus: false
+        property bool loaded: false
         
         anchors.fill: parent
 
@@ -147,11 +147,11 @@ Page {
         }
         onLoadingChanged: {
             if (loadRequest.status === WebEngineLoadRequest.LoadSucceededStatus) {
-                webView.loadStatus = true;
+                webView.loaded = true;
                 updateImage();
             }
             else {
-                webView.loadStatus = false;
+                webView.loaded = false;
                 d.checkForCustomUrlRequired();
             }
         }
@@ -184,6 +184,7 @@ Page {
             property var updateResults
             property bool isRunning: root.visible
             property bool broken: root.service.broken
+            property bool loaded: webView.loaded
 
             signal play()
             signal pause()

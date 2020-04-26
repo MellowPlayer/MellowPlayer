@@ -9,8 +9,11 @@ function withExceptionHandler(func, ...args) {
     try {
         func(...args);
     } catch (e) {
-        MellowPlayer.player.broken = true;
-        console.error("Unhandled exception: " + e.stack);
+        if (MellowPlayer.player.loaded)
+        {
+            MellowPlayer.player.broken = true;
+            console.error("Unhandled exception: " + e.stack);
+        }
     }
 }
 
