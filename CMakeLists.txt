@@ -4,7 +4,7 @@ project(MellowPlayer)
 
 set(VERSION_MAJOR 3)
 set(VERSION_MINOR 6)
-set(VERSION_PATCH 1)
+set(VERSION_PATCH 2)
 
 if(EXISTS ${PROJECT_SOURCE_DIR}/.git/)
     execute_process(

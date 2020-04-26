@@ -1,5 +1,16 @@
 # Change log
 
+## [3.6.2](https://gitlab.com/ColinDuquesnoy/MellowPlayer/tree/3.6.2) (2020-4-26)
+[Full Changelog](https://gitlab.com/ColinDuquesnoy/MellowPlayer/compare/3.6.1...3.6.2)
+
+**Fixed bugs:**
+
+- Spotify plugin is broken when try to control it from KDE Plasma addon [\#419](https://gitlab.com/ColinDuquesnoy/MellowPlayer/issues/419)
+
+**Closed issues:**
+
+- Linking MellowPlayer 3.6.0 fails with bfd [\#420](https://gitlab.com/ColinDuquesnoy/MellowPlayer/issues/420)
+
 ## [3.6.1](https://gitlab.com/ColinDuquesnoy/MellowPlayer/tree/3.6.0) (2020-4-25)
 [Full Changelog](https://gitlab.com/ColinDuquesnoy/MellowPlayer/compare/3.6.0...3.6.1)
 
