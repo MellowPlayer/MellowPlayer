@@ -195,12 +195,7 @@ Page {
             signal changeVolume(double newVolume)
 
             onUpdateResultsChanged: root.player.setUpdateResults(updateResults);
-            onBrokenChanged: {
-                if (webView.loadStatus)
-                    root.service.broken = playerBridge.broken
-                else
-                    root.service.broken = false;
-            }
+            onBrokenChanged: root.service.broken = playerBridge.broken
 
             WebChannel.id: "player"
         }
