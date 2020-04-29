@@ -53,7 +53,11 @@ function update() {
         // Select the element containing the information about the track
         const infoTable = document.querySelector("div[class*='infoTable']");
 
-        progressState = progressIndicator ? parseFloat(progressIndicator.style.transform.split("(")[1].split("%")[0]) : -100;
+        try {
+            progressState = progressIndicator ? parseFloat(progressIndicator.style.transform.split("(")[1].split("%")[0]) : -100;
+        }catch (e) {
+            progressState = previousState;
+        }
 
         results.songTitle = getItemByTestID("footer-track-title", infoDiv).children[0].innerHTML;
         results.songId = getHashCode(getItemByTestID("footer-track-title", infoDiv).children[0].href);
