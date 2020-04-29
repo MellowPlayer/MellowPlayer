@@ -185,6 +185,7 @@ Page {
             property bool isRunning: root.visible
             property bool broken: root.service.broken
             property bool loaded: webView.loaded
+            property var exception
 
             signal play()
             signal pause()
@@ -196,7 +197,12 @@ Page {
             signal changeVolume(double newVolume)
 
             onUpdateResultsChanged: root.player.setUpdateResults(updateResults);
-            onBrokenChanged: root.service.broken = playerBridge.broken
+            onBrokenChanged: {
+                if (playerBridge.broken) {
+                    console.warn("Unhandled exception in plugin: " + playerBridge.exception)
+                }
+                root.service.broken = playerBridge.broken
+            }
 
             WebChannel.id: "player"
         }

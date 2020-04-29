@@ -11,8 +11,12 @@ function withExceptionHandler(func, ...args) {
     } catch (e) {
         if (MellowPlayer.player.loaded)
         {
+            MellowPlayer.player.exception = e.toString()
             MellowPlayer.player.broken = true;
-            console.error("Unhandled exception: " + e.stack);
+            if (e.stack)
+                console.error("Unhandled exception: " + e.stack);
+            else
+                console.error("Unhandled exception: " + e.toString())
         }
     }
 }
