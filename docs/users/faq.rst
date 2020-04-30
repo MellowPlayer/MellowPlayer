@@ -61,3 +61,15 @@ You may want to try to `spoof your user agent`_  with the one from Firefox.
 To change the user agent in MellowPlayer: **Settings -> Privacy -> User Agent**.
 
 .. _spoof your user agent: https://help.vivaldi.com/article/user-agent-spoofing/
+
+
+I have a warning about broken integration plugin. What can I do?
+----------------------------------------------------------------
+
+Since version 3.6.0, MellowPlayer tries to detect broken plugins and display a message to warn the user.
+
+Here are the circumstances under which such a warning may appear:
+
+- there are some unhandled exception in the intergation plugin.
+- there is a known open issue on our issue tracker with the "broken integration plugin" label.
+- [not yet implemented] the song information is empty but the web page is playing audio
