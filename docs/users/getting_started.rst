@@ -113,3 +113,16 @@ client interface:
 
 .. image:: ../_static/mpris-player-unity.png
     :align: center
+
+Passing chromium flags
+----------------------
+
+You can pass `chromium flags`_ using the **QTWEBENGINE_CHROMIUM_FLAGS** environemnt variable:
+
+.. code-block:: bash
+
+    export QTWEBENGIN_CHROMIUM_FLAGS=--no-sandbox --disable-logging
+    ./MellowPlayer
+
+
+.. _chromium flags: https://peter.sh/experiments/chromium-command-line-switches/

@@ -55,28 +55,7 @@ void CommandLineArguments::parse()
     _parser.addOption(_startMinimizedOption);
     _parser.addOption(_allowMultipleInstancesOption);
 
-    QStringList webEngineOptions = QStringList() << "--remote-debugging-port"
-                                                 << "--ppapi-flash-path"
-                                                 << "--ppapi-flash-version"
-                                                 << "--ppapi-widevine-path"
-                                                 << "--register-pepper-plugins"
-                                                 << "--touch-events";
-    QStringList args;
-    for (auto arg : qApp->arguments())
-    {
-        bool addArg = true;
-        for (auto webEngineOption : webEngineOptions)
-        {
-            if (arg.startsWith(webEngineOption))
-            {
-                addArg = false;
-                break;
-            }
-        }
-        if (addArg)
-            args << arg;
-    }
-    _parser.process(args);
+    _parser.process(qApp->arguments());
 
     _service = _parser.value(_serviceOption);
 

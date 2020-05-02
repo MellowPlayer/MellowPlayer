@@ -66,7 +66,8 @@ void configureEnvironment()
 {
     qputenv("QTWEBENGINE_DIALOG_SET", "QtQuickControls2");
     qputenv("QTWEBENGINE_REMOTE_DEBUGGING", "4242");
-    qputenv("QTWEBENGINE_CHROMIUM_FLAGS", "--disable-features=MediaSessionService");
+    auto chromiumFlags = qgetenv("QTWEBENGINE_CHROMIUM_FLAGS");
+    qputenv("QTWEBENGINE_CHROMIUM_FLAGS", chromiumFlags + " --disable-features=MediaSessionService");
 
     QCoreApplication::setApplicationName("MellowPlayer3");
     QCoreApplication::setApplicationVersion(BuildConfig::getVersion());
@@ -101,6 +102,7 @@ void logStart()
     LOG_INFO(logger, "Log directory: " + logDirectory);
     LOG_INFO(logger, "Args: [" << qApp->arguments().join(", ") << "]");
     LOG_INFO(logger, "Working directory: " << qApp->applicationDirPath());
+    LOG_INFO(logger, "Chromium flags: " << qgetenv("QTWEBENGINE_CHROMIUM_FLAGS").toStdString());
 
     QString appImagePath = qgetenv("APPIMAGE");
     if (!appImagePath.isEmpty())
