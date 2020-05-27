@@ -23,19 +23,19 @@ function isOnLoginPage() {
 
 function getButtons() {
     function getPlayPauseButton() {
-        return getElementByXpath('/html/body/div[3]/div/div[3]/div[3]/footer/div/div[2]/div/div[1]/div[3]/button');
+        return document.querySelector('.Root__now-playing-bar button.spoticon-pause-16, .Root__now-playing-bar button.spoticon-play-16');
     }
 
     function getSkipPreviousSongButton() {
-        return getElementByXpath('/html/body/div[3]/div/div[3]/div[3]/footer/div/div[2]/div/div[1]/div[2]/button');
+        return document.querySelector('.Root__now-playing-bar button.spoticon-skip-back-16');
     }
 
     function getSkipNextSongButton() {
-        return getElementByXpath('/html/body/div[3]/div/div[3]/div[3]/footer/div/div[2]/div/div[1]/div[4]/button');
+        return document.querySelector('.Root__now-playing-bar button.spoticon-skip-forward-16');
     }
 
     function getAddRemoveToMusicButton() {
-        return getElementByXpath('/html/body/div[3]/div/div[3]/div[3]/footer/div/div[1]/div/div[3]/button');
+        return document.querySelector('.Root__now-playing-bar button.spoticon-heart-16, .Root__now-playing-bar button.spoticon-heart-active-16');
     }
 
     return {
@@ -50,14 +50,14 @@ function getPlaybackStatus() {
     var button = getButtons().playPause;
     if (button === null)
         return MellowPlayer.PlaybackStatus.STOPPED;
-    else if (button.title === "Play")
+    else if (button.classList.contains("spoticon-play-16"))
         return MellowPlayer.PlaybackStatus.PAUSED;
     return MellowPlayer.PlaybackStatus.PLAYING;
 }
 
 function getArtist() {
     try {
-        return getElementByXpath('/html/body/div[3]/div/div[3]/div[3]/footer/div/div[1]/div/div[2]/div[2]').children[0].innerText
+        return document.querySelector('.Root__now-playing-bar .now-playing > div:nth-of-type(2) a[href^="/album/"]').innerText
     } catch (e) {
         return ""
     }
@@ -65,7 +65,7 @@ function getArtist() {
 
 function getSongTitle() {
     try {
-        return getElementByXpath('/html/body/div[3]/div/div[3]/div[3]/footer/div/div[1]/div/div[2]/div[1]/div/span/a').innerText;
+        return document.querySelector('.Root__now-playing-bar .now-playing a[href^="/artist/"]').innerText
     } catch (e) {
         return ""
     }
@@ -131,7 +131,7 @@ function isFavorite() {
     if (addRemoveToMusic === null) {
         return false;
     }
-    return addRemoveToMusic.attributes.class.value.match(".*active.*") !== null;
+    return addRemoveToMusic.classList.contains("spoticon-heart-active-16")
 }
 
 function update() {
