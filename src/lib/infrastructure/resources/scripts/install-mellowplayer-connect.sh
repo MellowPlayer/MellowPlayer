@@ -18,7 +18,7 @@ if [ -x "$(command -v wget)" ]; then
 else
     if [ -x "$(command -v curl)" ]; then
         echo "using curl";
-        curl $DOWNLOAD_URL -o $ARCHIVE_PATH --fail --silent --show-error
+        curl -L $DOWNLOAD_URL -o $ARCHIVE_PATH --fail --silent --show-error
     else
         echo "Could not find curl or wget. Please install one of them and try again..." >&2;
         exit -1
