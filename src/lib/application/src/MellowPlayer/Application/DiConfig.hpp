@@ -178,15 +178,15 @@ auto defaultInjector = [](di::extension::detail::scoped& scope, QApplication& qA
                 HotkeysSetup,
                 SystemTrayIconStartup,
                 NotificationsSetup,
+                RemoteControlCheckup,
+                RemoteControlStartup,
                 FontsSetup,
                 TranslationsSetup,
                 QmlTypesSetup,
                 QmlEngineStartup,
                 MainWindowStartup,
                 CacheCleanup,
-                ApplicationUpdatesCheckup,
-                RemoteControlCheckup,
-                RemoteControlStartup
+                ApplicationUpdatesCheckup
         >()
     );
 };

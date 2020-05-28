@@ -213,17 +213,15 @@ Page {
         }
 
         CustomUrlPane {
-            id: customUrlPane
-
             customUrl: service.url
             x: root.width / 2 - width / 2; y: -2; z: 1
             width: 500
+            state: service.url.match("(@.*@)") !== null ? "visible" : "hidden"
 
             onReloadRequested: root.reload()
             onCustomUrlChanged: {
                 if (customUrl !== service.url) {
                     service.url = customUrl
-                    start()
                 }
             }
         }
@@ -299,13 +297,6 @@ Page {
                 }
             }
 
-            function checkForCustomUrlRequired() {
-                var match = service.url.match("(@.*@)");
-                if (match !== null) {
-                    customUrlPane.open()
-                }
-            }
-
             function checkForProprietaryCodecs() {
                 runJavaScript("var a = document.createElement('audio'); !!(a.canPlayType && a.canPlayType('audio/mpeg;').replace(/no/, ''));", function(result) {
                     hasProprietaryCodecs = result;
@@ -326,7 +317,7 @@ Page {
                     scripts.push(createUserScriptFromCode(userScript.name, userScript.code));
                 }
 
-                reload();
+                // reload();
 
                 return scripts;
             }

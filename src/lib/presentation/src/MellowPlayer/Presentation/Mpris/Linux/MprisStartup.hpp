@@ -36,6 +36,9 @@ namespace MellowPlayer::Presentation
         std::unique_ptr<QObject> _parent;
         QObject* _mpris2Root;
         QObject* _mpris2Player;
+        Domain::IPlayer& _player;
+        Domain::ILocalAlbumArt& _localAlbumArt;
+        IMainWindow& _window;
         QString _serviceName;
     };
 }
