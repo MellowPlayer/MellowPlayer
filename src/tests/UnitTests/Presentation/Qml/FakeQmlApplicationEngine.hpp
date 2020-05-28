@@ -51,6 +51,11 @@ namespace MellowPlayer::Presentation::Tests
             return !_loadedUrl.isEmpty();
         }
 
+        void reset() override
+        {
+
+        }
+
     private:
         QMap<QString, QObject*> _contextProperties;
         QStringList _importPaths;
