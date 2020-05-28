@@ -70,7 +70,7 @@ void ShellScript::execute(const IProcess::ExecuteCallback& executeCallback)
 
 QString ShellScript::detectInterpreter(const QString& path)
 {
-    QMap<QString, QString> interpreters{{"sh", "/usr/bin/bash"}, {"bat", "cmd.exe"}, {"ps1", "powershell.exe"}};
+    QMap<QString, QString> interpreters{{"sh", "bash"}, {"bat", "cmd.exe"}, {"ps1", "powershell.exe"}};
     auto scriptExtension = QFileInfo(path).suffix();
 
     if (interpreters.contains(scriptExtension))
