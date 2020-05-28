@@ -10,6 +10,7 @@ Process::Process(const QString& name) : _logger(Loggers::logger(QString("Process
 {
     connect(&_qProcess, &QProcess::readyReadStandardOutput, this, &Process::onReadyReadStandardOutput);
     connect(&_qProcess, &QProcess::readyReadStandardError, this, &Process::onReadyReadErrorOutput);
+    connect(&_qProcess, &QProcess::errorOccurred, this, &Process::onErrorOccurred);
     connect(&_qProcess, QOverload<int, QProcess::ExitStatus>::of(&QProcess::finished), this, &Process::onFinished);
 }
 
@@ -97,6 +98,7 @@ void Process::onFinished(int exitCode, QProcess::ExitStatus exitStatus)
 
     _callback(exitCode, _standardOutput.join("\n"), _errorOutput.join("\n"));
 }
+
 void Process::stop()
 {
     if (_qProcess.isOpen())
@@ -107,4 +109,10 @@ void Process::stop()
 #endif
         _qProcess.waitForFinished();
     }
+}
+
+void Process::onErrorOccurred(QProcess::ProcessError)
+{
+    LOG_ERROR(_logger, _qProcess.errorString());
+    _callback(-1, "", _qProcess.program() + ": " + _qProcess.errorString());
 }

@@ -31,6 +31,7 @@ namespace MellowPlayer::Infrastructure
         void onReadyReadStandardOutput();
         void onReadyReadErrorOutput();
         void onFinished(int exitCode, QProcess::ExitStatus exitStatus);
+        void onErrorOccurred(QProcess::ProcessError error);
 
     private:
         void readOutput(const QProcess::ProcessChannel channel);
