@@ -133,6 +133,18 @@ Some services such as Spotify and Amazon Music requires the widevine ppapi plugi
     sudo mkdir -p /usr/lib/chromium
     sudo install -Dm644 $tmp_dir/WidevineCdm/_platform_specific/linux_x64/libwidevinecdm.so -t /usr/lib/chromium
 
+Widevine support in flatpak
+***************************
+
+Flatpak won't pick up the system widevine plugin. It must be moved to a place that can be accessed from flatpak (e.g. ``~/.var/app/com.gitlab.ColinDuquesnoy.MellowPlayer/``) and
+you must instruct QtWebEngine where to find the plugin (using a flatpak override):
+
+.. code-block:: bash
+
+    mkdir -p ~/.var/app/com.gitlab.ColinDuquesnoy.MellowPlayer/plugins/ppapi
+    cp /usr/lib/chromium/libwidevinecdm.so ~/.var/app/com.gitlab.ColinDuquesnoy.MellowPlayer/plugins/ppapi/
+    sudo flatpak override --env=QTWEBENGINE_CHROMIUM_FLAGS="--widevine-path=$HOME/.var/app/com.gitlab.ColinDuquesnoy.MellowPlayer/plugins/ppapi/libwidevinecdm.so --no-sandbox" com.gitlab.ColinDuquesnoy.MellowPlayer
+
 Windows
 -------
 
