@@ -45,7 +45,11 @@ void LocalSocket::initSignals()
     connect(_qLocalSocket, &QLocalSocket::connected, this, &LocalSocket::connected);
     connect(_qLocalSocket, &QLocalSocket::disconnected, this, &LocalSocket::disconnected);
     connect(_qLocalSocket, &QLocalSocket::readyRead, this, &LocalSocket::readyRead);
+#if QT_VERSION >= QT_VERSION_CHECK(5, 15, 0)
+    connect(_qLocalSocket, &QLocalSocket::errorOccurred, [=](QLocalSocket::LocalSocketError) { emit error(); });
+#else
     connect(_qLocalSocket, QNonConstOverload<QLocalSocket::LocalSocketError>::of(&QLocalSocket::error), [=](QLocalSocket::LocalSocketError) { emit error(); });
+#endif
 }
 
 std::shared_ptr<ILocalSocket> LocalSocketFactory::create()

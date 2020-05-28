@@ -34,7 +34,7 @@ void LinuxUpdater::doInstall(const QString& assetLocalPath)
     QFile::rename(dest, backupPath);
     QFile::copy(assetLocalPath, dest);
 
-    QProcess::startDetached("chmod +x " + dest);
+    QProcess::startDetached("chmod", {"+x", dest});
 
     emit installFinished(QFile::exists(dest));
 }
@@ -75,6 +75,6 @@ void LinuxUpdater::restart()
 {
     //    QFile file(destinationPath());
     //    QFile::setPermissions(destinationPath(), QFile::ExeUser | QFile::ExeOwner);
-    QProcess::startDetached(destinationPath());
+    QProcess::startDetached(destinationPath(), {});
     qApp->quit();
 }

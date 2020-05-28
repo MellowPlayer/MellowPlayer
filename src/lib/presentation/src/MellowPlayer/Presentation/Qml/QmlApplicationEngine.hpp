@@ -2,6 +2,7 @@
 
 #include "IQmlApplicationEngine.hpp"
 #include <QtQml/QQmlApplicationEngine>
+#include <memory>
 
 namespace MellowPlayer::Presentation
 {
@@ -11,14 +12,15 @@ namespace MellowPlayer::Presentation
     class QmlApplicationEngine : public IQmlApplicationEngine
     {
     public:
-        QmlApplicationEngine() = default;
+        QmlApplicationEngine();
 
         void setContextProperty(const QString& name, QObject* object) override;
         void setContextProperty(const QString& name, const QVariant& value) override;
         void addImportPath(const QString& path) override;
         bool load(const QUrl& url) override;
+        void reset() override;
 
     private:
-        QQmlApplicationEngine _engine;
+        std::shared_ptr<QQmlApplicationEngine> _engine;
     };
 }

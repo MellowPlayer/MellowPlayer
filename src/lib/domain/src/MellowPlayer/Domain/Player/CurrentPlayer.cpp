@@ -210,3 +210,7 @@ QString CurrentPlayer::serviceLogo() const
         return _currentPlayer->serviceLogo();
     return "";
 }
+CurrentPlayer::~CurrentPlayer()
+{
+
+}

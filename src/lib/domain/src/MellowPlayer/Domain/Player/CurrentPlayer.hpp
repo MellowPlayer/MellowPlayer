@@ -17,6 +17,7 @@ namespace MellowPlayer::Domain
         Q_OBJECT
     public:
         CurrentPlayer(Players& players, StreamingServices& streamingServices);
+        virtual ~CurrentPlayer();
 
         Q_INVOKABLE void togglePlayPause() override;
         Q_INVOKABLE void play() override;

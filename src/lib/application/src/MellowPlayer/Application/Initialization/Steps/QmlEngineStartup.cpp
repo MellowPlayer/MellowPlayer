@@ -17,3 +17,9 @@ void QmlEngineStartup::initialize(const ResultCallback& resultCallback)
 
     resultCallback(success);
 }
+
+void QmlEngineStartup::cleanUp()
+{
+    _qmlApplicationEngine.reset();
+    Initializable::cleanUp();
+}

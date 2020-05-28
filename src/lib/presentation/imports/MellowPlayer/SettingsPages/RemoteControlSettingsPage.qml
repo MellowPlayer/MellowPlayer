@@ -28,7 +28,8 @@ Item {
 
     Connections {
         target: _remoteControl
-        onError: {
+
+        function onError(title, message) {
             errorDialog.title = title
             errorDialog.message = message
             errorDialog.open()

@@ -51,6 +51,6 @@ void WindowsUpdater::setRelease(const Release* release)
 
 void WindowsUpdater::restart()
 {
-    QProcess::startDetached(_installerPath);
+    QProcess::startDetached(_installerPath, {});
     qApp->quit();
 }

@@ -44,6 +44,7 @@
         <file>MellowPlayer/Dialogs/MessageBoxDialog.qml</file>
         <file>MellowPlayer/Dialogs/Prompt.qml</file>
         <file>MellowPlayer/Dialogs/Reload.qml</file>
+        <file>MellowPlayer/Dialogs/FileDialog.qml</file>
         <file>MellowPlayer/Dialogs/StreamingServiceSettingsDialog.qml</file>
         <file>MellowPlayer/MainWindow.qml</file>
         <file>MellowPlayer/MaterialIcons.qml</file>

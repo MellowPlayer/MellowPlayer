@@ -77,7 +77,11 @@ InstallationState MellowPlayerConnect::checkInstallation()
     }
     else
     {
+#if QT_VERSION >= QT_VERSION_CHECK(5, 15, 0)
+        _version = QVersionNumber::fromString(versionFile->read().split(QRegExp("[\r\n]"), Qt::SkipEmptyParts).first());
+#else
         _version = QVersionNumber::fromString(versionFile->read().split(QRegExp("[\r\n]"), QString::SkipEmptyParts).first());
+#endif
         bool upToDate = _version >= _minimumRequiredVersion;
         LOG_DEBUG(
                 _logger,

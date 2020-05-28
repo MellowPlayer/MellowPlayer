@@ -17,6 +17,8 @@ Item {
 
     Connections {
         target: _devTools
-        onShowDevTools: devToolsWindowComponent.createObject(root)
+        function onShowDevTools() {
+            devToolsWindowComponent.createObject(root)
+        }
     }
 }

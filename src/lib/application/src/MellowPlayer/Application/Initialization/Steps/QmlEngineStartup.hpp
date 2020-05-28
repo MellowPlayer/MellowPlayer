@@ -16,6 +16,7 @@ namespace MellowPlayer::Application
         explicit QmlEngineStartup(Presentation::IQmlApplicationEngine& qmlApplicationEngine);
 
         void initialize(const ResultCallback& resultCallback) override;
+        void cleanUp() override;
 
     private:
         Presentation::IQmlApplicationEngine& _qmlApplicationEngine;

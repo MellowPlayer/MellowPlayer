@@ -38,5 +38,7 @@ namespace MellowPlayer::Presentation
          * @param url Url to the QML document to load.
          */
         virtual bool load(const QUrl& url) = 0;
+
+        virtual void reset() = 0;
     };
 }

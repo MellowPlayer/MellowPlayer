@@ -152,7 +152,6 @@ Page {
             }
             else {
                 webView.loaded = false;
-                d.checkForCustomUrlRequired();
             }
         }
         onFullScreenRequested: mainWindow.toggleFullScreen(request)
@@ -244,35 +243,35 @@ Page {
 
         Connections {
             target: userAgentSetting
-            onValueChanged: { console.log("new user agent: " + userAgentSetting.value); reload(); }
+            function onValueChanged() { console.log("new user agent: " + userAgentSetting.value); reload(); }
         }
 
         Connections {
             target: root.service.networkProxy
-            onChanged: reload()
+            function onChanged() { reload() }
         }
 
         Connections {
             target: root.player
 
-            onPlay: playerBridge.play()
-            onPause: playerBridge.pause()
-            onNext: playerBridge.next()
-            onPrevious: playerBridge.previous()
-            onAddToFavorites: playerBridge.addToFavorites()
-            onRemoveFromFavorites: playerBridge.removeFromFavorites()
-            onSeekToPositionRequest: playerBridge.seekToPosition(newPosition)
-            onChangeVolumeRequest: playerBridge.changeVolume(newVolume)
+            function onPlay() { playerBridge.play() }
+            function onPause() { playerBridge.pause() }
+            function onNext() { playerBridge.next() }
+            function onPrevious() { playerBridge.previous() }
+            function onAddToFavorites() { playerBridge.addToFavorites() }
+            function onRemoveFromFavorites() { playerBridge.removeFromFavorites() }
+            function onSeekToPositionRequest() { playerBridge.seekToPosition(newPosition) }
+            function onChangeVolumeRequest() { playerBridge.changeVolume(newVolume) }
         }
 
         Connections {
             target: _settings.get(SettingKey.MAIN_PLAYBACK_REQUIRES_USER_GESTURE)
-            onValueChanged: d.updatePlaybackRequiresUserGesture()
+            function onValueChanged() { d.updatePlaybackRequiresUserGesture() }
         }
 
         Connections {
             target: _settings.get(SettingKey.APPEARANCE_SHOW_SCROLLBARS)
-            onValueChanged: d.updateShowScrollBars()
+            function onValueChanged() { d.updateShowScrollBars() }
         }
 
         QtObject {

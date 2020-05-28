@@ -1,5 +1,6 @@
 #include <MellowPlayer/Presentation/Converters/DateTimeConverter.hpp>
 #include <QtCore/QDateTime>
+#include <QLocale>
 
 using namespace MellowPlayer::Presentation;
 
@@ -28,10 +29,10 @@ QString DateTimeConverter::dateToCategory(const QDateTime& dateTime) const
 
 QString DateTimeConverter::dateToString(const QDateTime& dateTime) const
 {
-    return dateTime.date().toString(Qt::DateFormat::SystemLocaleShortDate);
+    return QLocale::system().toString(dateTime.date(), QLocale::ShortFormat);
 }
 
 QString DateTimeConverter::timeToString(const QDateTime& dateTime) const
 {
-    return dateTime.time().toString(Qt::DateFormat::SystemLocaleShortDate);
+    return QLocale::system().toString(dateTime.time(), QLocale::ShortFormat);
 }
