@@ -252,6 +252,11 @@ Page {
         }
 
         Connections {
+            target: root.service.userScripts.model
+            onCountChanged: reload()
+        }
+
+        Connections {
             target: root.player
 
             onPlay: playerBridge.play()
@@ -315,8 +320,6 @@ Page {
                     var userScript = service.userScripts.model.get(i);
                     scripts.push(createUserScriptFromCode(userScript.name, userScript.code));
                 }
-
-                // reload();
 
                 return scripts;
             }
