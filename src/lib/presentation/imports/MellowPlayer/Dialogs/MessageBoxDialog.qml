@@ -16,8 +16,8 @@ Dialog {
     y: parent.height / 2 - height / 2
     modal: true
 
-//    onAccepted: dialogResult = dialogAccepted
-//    onRejected: dialogResult = dialogRejected
+    onAccepted: dialogResult = dialogAccepted
+    onRejected: dialogResult = dialogRejected
 
     Material.accent: _theme.accent === _theme.background ? _theme.foreground : _theme.accent
 
