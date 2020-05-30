@@ -252,23 +252,16 @@ ApplicationWindow {
     Connections {
         target: _window;
 
-        function onVisibleChanged() {
-            if (_window.visible)
-                d.restoreWindow()
-            else
-                d.hideWindow()
-        }
-        function onQuitRequest() { d.quit() }
-        function onForceQuitRequest() { d.forceQuit = true; _app.quit() }
-        function onRaiseRequested() { d.restoreWindow() }
+        onVisibleChanged: _window.visible ? d.restoreWindow() : d.hideWindow()
+        onQuitRequest: d.quit()
+        onForceQuitRequest: { d.forceQuit = true; _app.quit() }
+        onRaiseRequested: d.restoreWindow()
     }
 
     Connections {
         target: _streamingServices;
 
-        function onActivationRequested(service) {
-            mainWindow.activateService(service)
-        }
+        onActivationRequested: mainWindow.activateService(service)
     }
 
     Shortcut {

@@ -52,9 +52,7 @@ ItemDelegate {
 
             Connections {
                 target: _theme
-                function onAccentChanged() {
-                    spinBox.contentItem.selectionColor = _theme.accent
-                }
+                onAccentChanged: spinBox.contentItem.selectionColor = _theme.accent
             }
         }
     }

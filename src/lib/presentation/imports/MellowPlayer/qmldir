@@ -42,7 +42,6 @@ TextFieldDelegate 3.0 Delegates/TextFieldDelegate.qml
 DevToolsWindow 3.0 DevToolsWindow.qml
 Dialogs 3.0 Dialogs.js
 AboutDialog 3.0 Dialogs/AboutDialog.qml
-FileDialog 3.0 Dialogs/FileDialog.qml
 Alert 3.0 Dialogs/Alert.qml
 Authentication 3.0 Dialogs/Authentication.qml
 Confirmation 3.0 Dialogs/Confirmation.qml

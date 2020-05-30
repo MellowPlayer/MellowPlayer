@@ -34,10 +34,7 @@ Pane {
 
     Connections {
         target: _clipboard
-
-        function onTextCopied(text) {
-            root.text = text
-        }
+        onTextCopied: root.text = text
     }
 
     Column {

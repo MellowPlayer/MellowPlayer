@@ -120,7 +120,7 @@ Item {
                                 Connections {
                                     target: gridView
 
-                                    function onDropped() { item.index = delegateRoot.visualIndex }
+                                    onDropped: item.index = delegateRoot.visualIndex
                                 }
 
                                 states: State {

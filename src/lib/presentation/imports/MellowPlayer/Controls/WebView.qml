@@ -243,35 +243,35 @@ Page {
 
         Connections {
             target: userAgentSetting
-            function onValueChanged() { console.log("new user agent: " + userAgentSetting.value); reload(); }
+            onValueChanged: { console.log("new user agent: " + userAgentSetting.value); reload(); }
         }
 
         Connections {
             target: root.service.networkProxy
-            function onChanged() { reload() }
+            onChanged: reload()
         }
 
         Connections {
             target: root.player
 
-            function onPlay() { playerBridge.play() }
-            function onPause() { playerBridge.pause() }
-            function onNext() { playerBridge.next() }
-            function onPrevious() { playerBridge.previous() }
-            function onAddToFavorites() { playerBridge.addToFavorites() }
-            function onRemoveFromFavorites() { playerBridge.removeFromFavorites() }
-            function onSeekToPositionRequest() { playerBridge.seekToPosition(newPosition) }
-            function onChangeVolumeRequest() { playerBridge.changeVolume(newVolume) }
+            onPlay: playerBridge.play()
+            onPause: playerBridge.pause()
+            onNext: playerBridge.next()
+            onPrevious: playerBridge.previous()
+            onAddToFavorites: playerBridge.addToFavorites()
+            onRemoveFromFavorites: playerBridge.removeFromFavorites()
+            onSeekToPositionRequest: playerBridge.seekToPosition(newPosition)
+            onChangeVolumeRequest: playerBridge.changeVolume(newVolume)
         }
 
         Connections {
             target: _settings.get(SettingKey.MAIN_PLAYBACK_REQUIRES_USER_GESTURE)
-            function onValueChanged() { d.updatePlaybackRequiresUserGesture() }
+            onValueChanged: d.updatePlaybackRequiresUserGesture()
         }
 
         Connections {
             target: _settings.get(SettingKey.APPEARANCE_SHOW_SCROLLBARS)
-            function onValueChanged() { d.updateShowScrollBars() }
+            onValueChanged: d.updateShowScrollBars()
         }
 
         QtObject {

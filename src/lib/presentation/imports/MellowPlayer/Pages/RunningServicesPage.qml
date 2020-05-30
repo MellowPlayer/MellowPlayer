@@ -88,8 +88,7 @@ StackLayout {
 
     Connections {
         target: _streamingServices
-
-        function onCurrentServiceChanged() { currentIndex = indexOf(_streamingServices.currentService) }
+        onCurrentServiceChanged: currentIndex = indexOf(_streamingServices.currentService)
     }
 
     Component {

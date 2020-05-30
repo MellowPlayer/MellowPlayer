@@ -64,6 +64,11 @@ Pane {
                     Tooltip {
                         text: filter.checked ? qsTr("Click to remove songs from")  + model.name : qsTr("Click to add songs from ") + model.name
                     }
+
+                    Connections {
+                        target: filters
+                        onEnabledChanged: filter.checked = true;
+                    }
                 }
             }
         }

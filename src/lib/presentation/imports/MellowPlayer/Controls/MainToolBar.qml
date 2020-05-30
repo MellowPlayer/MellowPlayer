@@ -461,7 +461,7 @@ ToolBar {
                         Connections {
                             target: _player
 
-                            function onCanSeekChanged() { slider.updateHandleVisibility() }
+                            onCanSeekChanged: slider.updateHandleVisibility()
                         }
 
                     }

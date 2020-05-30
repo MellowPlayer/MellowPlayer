@@ -7,7 +7,10 @@ Window {
 
     function open(request, profile) {
         webView.profile = profile
-        request.openIn(webView)
+        if (_usePopupDialogWorkaround)
+            webView.url = request.requestedUrl
+        else
+            request.openIn(webView)
         showNormal()
     }
 
