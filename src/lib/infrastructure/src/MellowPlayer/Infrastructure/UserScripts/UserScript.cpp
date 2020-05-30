@@ -36,7 +36,7 @@ bool UserScript::import(const QString& sourcePath)
     {
         QString destinationPath = directory.generateFileName();
         _path = destinationPath;
-        qDebug() << "importing" << sourceUrl << " to " << destinationPath;
+        qInfo() << "importing" << sourceUrl << " to " << destinationPath;
         if (QFile::copy(sourceUrl, destinationPath))
             return load(destinationPath);
         return true;
