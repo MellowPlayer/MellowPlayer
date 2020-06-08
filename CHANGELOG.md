@@ -1,5 +1,24 @@
 # Change log
 
+## [3.6.3](https://gitlab.com/ColinDuquesnoy/MellowPlayer/tree/3.6.3) (2020-6-8)
+[Full Changelog](https://gitlab.com/ColinDuquesnoy/MellowPlayer/compare/3.6.2...3.6.3)
+
+**Implemented enhancements:**
+
+- Make MellowPlayer.Connect service plugin for control remote MellowPlayer with current app [\#430](https://gitlab.com/ColinDuquesnoy/MellowPlayer/issues/430)
+
+**Fixed bugs:**
+
+- MellowPlayer.Connect installer not working on Linux - infinite spinner [\#429](https://gitlab.com/ColinDuquesnoy/MellowPlayer/issues/429)
+- Unable to pass custom chromium flags [\#424](https://gitlab.com/ColinDuquesnoy/MellowPlayer/issues/424)
+
+
+**Closed issues:**
+
+- Widevine support in Flatpak [\#423](https://gitlab.com/ColinDuquesnoy/MellowPlayer/issues/423)
+- Update translations (fully translated in Italian)
+
+
 ## [3.6.2](https://gitlab.com/ColinDuquesnoy/MellowPlayer/tree/3.6.2) (2020-4-26)
 [Full Changelog](https://gitlab.com/ColinDuquesnoy/MellowPlayer/compare/3.6.1...3.6.2)
 
