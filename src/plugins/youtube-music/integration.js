@@ -88,12 +88,15 @@ function update() {
     if(songTitle == "")
 	    return defaultArray;
 
-    // Artist name
-    try {
-        var artistName = document.querySelector('.subtitle.ytmusic-player-bar .yt-formatted-string').innerText.trim();
-    } catch (e) {
-        var artistName = "";
+    var infos = document.querySelector('.subtitle.ytmusic-player-bar').children[0].children;
+    var artistName = infos[0].innerText;
+
+    var albumTitle = "";
+    if (infos.length >= 3) {
+        albumTitle = infos[2].innerText;
     }
+
+
 
     // Art URL
     try {
@@ -116,8 +119,7 @@ function update() {
         "canGoPrevious": true,
         "canAddToFavorites": true,
         "isFavorite": document.querySelector('.like.ytmusic-like-button-renderer').getAttribute("aria-pressed") == "true",
-
-        "albumTitle": ""
+        "albumTitle": albumTitle
     };
 }
 
