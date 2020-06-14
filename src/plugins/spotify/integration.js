@@ -57,17 +57,17 @@ function getPlaybackStatus() {
 
 function getArtist() {
     try {
-        return document.querySelector('.Root__now-playing-bar .now-playing > div:nth-of-type(2) a[href^="/album/"]').innerText
+        return document.querySelector('.Root__now-playing-bar .now-playing a[href^="/artist/"]').innerText
     } catch (e) {
-        return ""
+        return "";
     }
 }
 
 function getSongTitle() {
     try {
-        return document.querySelector('.Root__now-playing-bar .now-playing a[href^="/artist/"]').innerText
+        return document.querySelector('.Root__now-playing-bar .now-playing > div:nth-of-type(2) a[href^="/album/"]').innerText
     } catch (e) {
-        return ""
+        return "";
     }
 }
 
