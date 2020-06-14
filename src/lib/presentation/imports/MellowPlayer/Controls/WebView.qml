@@ -16,6 +16,7 @@ Page {
 
     property bool hasProprietaryCodecs: true
     property var userAgentSetting: _settings.get(SettingKey.PRIVACY_USER_AGENT)
+    property alias url: webView.url
 
     function updateImage() {
         if (!mainWindow.visible)
@@ -28,7 +29,7 @@ Page {
     }
 
     function exitFullScreen() {
-        root.triggerWebAction(WebEngineView.ExitFullScreen);
+        webView.triggerWebAction(WebEngineView.ExitFullScreen);
     }
 
     function zoomIn() {
@@ -228,17 +229,17 @@ Page {
         WebViewContextMenu {
             id: contextMenu
 
-            onCopyRequested: root.triggerWebAction(WebEngineView.Copy)
-            onPasteRequested: root.triggerWebAction(WebEngineView.Paste)
-            onUnselectRequested: root.triggerWebAction(WebEngineView.Unselect)
+            onCopyRequested: webView.triggerWebAction(WebEngineView.Copy)
+            onPasteRequested: webView.triggerWebAction(WebEngineView.Paste)
+            onUnselectRequested: webView.triggerWebAction(WebEngineView.Unselect)
 
-            onCopyLinkRequested: root.triggerWebAction(WebEngineView.CopyLinkToClipboard)
-            onOpenLinkRequested: root.triggerWebAction(WebEngineView.OpenLinkInNewTab)
+            onCopyLinkRequested: webView.triggerWebAction(WebEngineView.CopyLinkToClipboard)
+            onOpenLinkRequested: webView.triggerWebAction(WebEngineView.OpenLinkInNewTab)
 
             onGoBackRequested: root.goBack()
             onGoForwardRequested: root.goForward()
             onReloadRequested: root.reload()
-            onViewPageSourceRequested: root.triggerWebAction(WebEngineView.ViewSource)
+            onViewPageSourceRequested: webView.triggerWebAction(WebEngineView.ViewSource)
         }
 
         Connections {
