@@ -57,7 +57,10 @@ function getPlaybackStatus() {
 
 function getArtist() {
     try {
-        return document.querySelector('.Root__now-playing-bar .now-playing a[href^="/artist/"]').innerText
+        return Array.from(document.querySelectorAll('.Root__now-playing-bar .now-playing a[href^="/artist/"]'))
+          .map(e => e.innerText)
+          .filter(e => e !== "")
+          .join(", ");
     } catch (e) {
         return "";
     }
@@ -65,7 +68,7 @@ function getArtist() {
 
 function getSongTitle() {
     try {
-        return document.querySelector('.Root__now-playing-bar .now-playing > div:nth-of-type(2) a[href^="/album/"]').innerText
+        return document.querySelector('.Root__now-playing-bar .now-playing > div:nth-of-type(2) a[href^="/album/"]').innerText;
     } catch (e) {
         return "";
     }
