@@ -12,12 +12,15 @@ Item {
     }
 
     property Component devToolsWindowComponent: DevToolsWindow {
+        visible: true
         onClosing: destroy();
     }
 
     Connections {
         target: _devTools
-        function onShowDevTools() {
+
+        onShowDevTools: {
+            console.warn("ShowDevTools")
             devToolsWindowComponent.createObject(root)
         }
     }
