@@ -558,7 +558,7 @@ escuchado aparecerán aquí...</translation>
     <message>
         <location filename="../../lib/presentation/imports/MellowPlayer/Controls/MainToolBar.qml" line="390"/>
         <source>&lt;/b&gt;&lt;i&gt; by </source>
-        <translation>&lt;/b&gt;&lt;i&gt; por</translation>
+        <translation>&lt;/b&gt;&lt;i&gt; por </translation>
     </message>
 </context>
 <context>
