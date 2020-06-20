@@ -1,5 +1,21 @@
 # Change log
 
+## [3.6.4](https://gitlab.com/ColinDuquesnoy/MellowPlayer/tree/3.6.4) (2020-6-20)
+[Full Changelog](https://gitlab.com/ColinDuquesnoy/MellowPlayer/compare/3.6.3...3.6.4)
+
+**Fixed bugs:**
+
+- Song information unordered in Spotify at above menu bar ("Artist by Title" instead of "Title by Artist") [\#440](https://gitlab.com/ColinDuquesnoy/MellowPlayer/issues/440)
+- Can't log in to Yandex Music [\#439](https://gitlab.com/ColinDuquesnoy/MellowPlayer/issues/439)
+- MPRIS doesn't show correct Artist and Album sometimes while streaming with Youtube Music. [\#436](https://gitlab.com/ColinDuquesnoy/MellowPlayer/issues/436)
+- Tidal plugin broken [\#421](https://gitlab.com/ColinDuquesnoy/MellowPlayer/issues/421)
+- Fix some web action not working anymore (copy/past, go home, open dev tools)
+
+**Merged merge requests:**
+
+- add support for various service offered by Digitally Imported radio network [\#323](https://gitlab.com/ColinDuquesnoy/MellowPlayer/merge_requests/323) ([andyrtr](https://gitlab.com/andyrtr))
+- Spotify: handle multiple artists properly [\#322](https://gitlab.com/ColinDuquesnoy/MellowPlayer/merge_requests/322) ([b0o](https://gitlab.com/b0o))
+
 ## [3.6.3](https://gitlab.com/ColinDuquesnoy/MellowPlayer/tree/3.6.3) (2020-6-8)
 [Full Changelog](https://gitlab.com/ColinDuquesnoy/MellowPlayer/compare/3.6.2...3.6.3)
 
