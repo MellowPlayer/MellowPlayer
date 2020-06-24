@@ -38,6 +38,24 @@ function getArtUrl() {
     }
 }
 
+function getPosition() {
+    try {
+        position = document.querySelector('[data-test="current-time"]').innerText;
+    } catch(e) {
+        return 0
+    }
+    return toSeconds(position)
+}
+
+function getDuration() {
+    try {
+        var time = document.querySelector('[data-test="duration-time"]').innerText;
+    } catch(e) {
+        return 0
+    }
+    return toSeconds(time)
+}
+
 function getPlaybackStatus() {
     if (document.querySelector('[data-test="pause"]'))
       return MellowPlayer.PlaybackStatus.PLAYING;
@@ -57,8 +75,8 @@ function update() {
         "canGoPrevious": true,
         "canAddToFavorites": false,
         "volume": 1,
-        "duration": 0,
-        "position": 0,
+        "duration": getDuration(),
+        "position": getPosition(),
         "songId": getSongId(),
         "songTitle": getTitle(),
         "artistName": getArtist(),
