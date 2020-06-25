@@ -38,6 +38,33 @@ function getArtUrl() {
     }
 }
 
+function getPosition() {
+    try {
+        position = document.querySelector('[data-test="current-time"]').innerText;
+    } catch(e) {
+        return 0
+    }
+    return toSeconds(position)
+}
+
+function getDuration() {
+    try {
+        var time = document.querySelector('[data-test="duration-time"]').innerText;
+    } catch(e) {
+        return 0
+    }
+    return toSeconds(time)
+}
+
+// either "button--3UBtc gray--3WmQU" (no Fav) or "button--3UBtc favorite--2mE-8" (isFav)
+function isFavorite() {
+    try {
+        return document.querySelector('[data-test="footer-player"]').children[2].children[0].children[1].children[1].className === "button--3UBtc favorite--2mE-8";
+    } catch (e) {
+        return false;
+    }
+}
+
 function getPlaybackStatus() {
     if (document.querySelector('[data-test="pause"]'))
       return MellowPlayer.PlaybackStatus.PLAYING;
@@ -55,16 +82,16 @@ function update() {
         "canSeek": false,
         "canGoNext": true,
         "canGoPrevious": true,
-        "canAddToFavorites": false,
+        "canAddToFavorites": true,
         "volume": 1,
-        "duration": 0,
-        "position": 0,
+        "duration": getDuration(),
+        "position": getPosition(),
         "songId": getSongId(),
         "songTitle": getTitle(),
         "artistName": getArtist(),
         "albumTitle": getAlbumTitle(),
         "artUrl": getArtUrl(),
-        "isFavorite": false
+        "isFavorite": isFavorite()
     };
 }
 
@@ -89,11 +116,11 @@ function setVolume(volume) {
 }
 
 function addToFavorites() {
-
+  document.querySelector('[data-test="footer-player"]').children[2].children[0].children[1].children[1].click();
 }
 
 function removeFromFavorites() {
-
+  document.querySelector('[data-test="footer-player"]').children[2].children[0].children[1].children[1].click();
 }
 
 function seekToPosition(position) {
