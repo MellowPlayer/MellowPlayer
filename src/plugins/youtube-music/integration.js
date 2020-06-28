@@ -89,7 +89,12 @@ function update() {
 	    return defaultArray;
 
     var infos = document.querySelector('.subtitle.ytmusic-player-bar').children[0].children;
-    var artistName = infos[0].innerText;
+
+    var artistName = "";
+    if (infos.length >= 1) {
+        artistName = infos[0].innerText;
+    }
+
 
     var albumTitle = "";
     if (infos.length >= 3) {
