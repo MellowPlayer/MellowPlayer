@@ -15,6 +15,7 @@
 #endif
 
 #include <MellowPlayer/Application/Initialization/InitializationSequence.hpp>
+#include <MellowPlayer/Application/Initialization/Steps/AdBlockSetup.hpp>
 #include <MellowPlayer/Application/Initialization/Steps/ApplicationUpdatesCheckup.hpp>
 #include <MellowPlayer/Application/Initialization/Steps/CacheCleanup.hpp>
 #include <MellowPlayer/Application/Initialization/Steps/FontsSetup.hpp>
@@ -168,6 +169,7 @@ auto defaultInjector = [](di::extension::detail::scoped& scope, QApplication& qA
 #endif
 
         di::bind<Initializable* []>().to<
+                AdBlockSetup,
                 SingleInstanceCheckup,
                 RemoteControlSetup,
                 StreamingServicesSetup,
