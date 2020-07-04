@@ -10,6 +10,7 @@ namespace MellowPlayer::Domain
     public:
         enum Keys
         {
+            ADBLOCK_ENABLED,
             APPEARANCE_ACCENT,
             APPEARANCE_AUTO_HIDPI_SCALING,
             APPEARANCE_BACKGROUND,
@@ -70,6 +71,7 @@ namespace MellowPlayer::Domain
         {
             QStringList enumToString;
 
+            enumToString << "adblock/enabled";
             enumToString << "appearance/accent";
             enumToString << "appearance/auto-hidpi-scaling";
             enumToString << "appearance/background";

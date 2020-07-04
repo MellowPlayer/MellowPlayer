@@ -1,17 +1,23 @@
 #include "AdBlockRequestInterceptor.hpp"
 #include <MellowPlayer/Domain/Logging/Loggers.hpp>
 #include <MellowPlayer/Domain/Logging/ILogger.hpp>
+#include <MellowPlayer/Domain/Settings/Settings.hpp>
+#include <MellowPlayer/Domain/Settings/Setting.hpp>
 
 using namespace MellowPlayer::Presentation;
 using namespace MellowPlayer::Domain;
 
-AdBlockRequestInterceptor::AdBlockRequestInterceptor()
-    : _logger(Loggers::logger("AdBlockRequestInterceptor"))
+AdBlockRequestInterceptor::AdBlockRequestInterceptor(Settings& settings)
+    : _logger(Loggers::logger("AdBlockRequestInterceptor")),
+      _isAdBlockEnabled(settings.get(SettingKey::ADBLOCK_ENABLED))
 {
 }
 
 void AdBlockRequestInterceptor::interceptRequest(QWebEngineUrlRequestInfo &info)
 {
+    if (!_isAdBlockEnabled.value().toBool())
+        return;
+
     auto url = info.requestUrl().toString();
 
     for (int i = 0; i < 3483; i++) {
