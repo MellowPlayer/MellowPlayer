@@ -18,12 +18,12 @@ void AdBlockRequestInterceptor::interceptRequest(QWebEngineUrlRequestInfo &info)
     if (!_isAdBlockEnabled.value().toBool())
         return;
 
-    auto url = info.requestUrl().toString();
+    auto host = info.requestUrl().host();
 
     for (int i = 0; i < 3483; i++) {
         QString& hostname = blackList[i];
-        if (url.contains(hostname)) {
-            LOG_DEBUG(_logger, "Blocking: " + url);
+        if (host.contains(hostname)) {
+            LOG_DEBUG(_logger, "Blocking: " + host);
             info.block(true);
             break;
         }
