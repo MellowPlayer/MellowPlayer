@@ -50,7 +50,7 @@
       "key": "adblock",
       "settings": [
         {
-          "name": "Enable ad blocking",
+          "name": "Enable Ad Block",
           "tooltip": "Enable this option to block ads",
           "type": "bool",
           "default": false,
