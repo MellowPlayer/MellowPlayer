@@ -1,6 +1,7 @@
 #pragma once
 
 #include <QObject>
+#include <functional>
 
 namespace MellowPlayer::Domain {
     class IBlockListLoader : public QObject
