@@ -1,6 +1,7 @@
 #pragma once
 
 #include <QWebEngineUrlRequestInterceptor>
+#include <QSet>
 
 namespace MellowPlayer::Domain
 {
@@ -11,18 +12,26 @@ namespace MellowPlayer::Domain
 
 namespace MellowPlayer::Presentation
 {
-    class AdBlockRequestInterceptor : public QWebEngineUrlRequestInterceptor
+    class IAdBlockRequestInterceptor : public QWebEngineUrlRequestInterceptor
     {
     public:
-        AdBlockRequestInterceptor(Domain::Settings& settings);
+        virtual ~IAdBlockRequestInterceptor() = default;
+
+        virtual void block(QString hostname) = 0;
+    };
+
+    class AdBlockRequestInterceptor : public IAdBlockRequestInterceptor
+    {
+    public:
+        explicit AdBlockRequestInterceptor(Domain::Settings& settings);
 
         void interceptRequest(QWebEngineUrlRequestInfo &info) override;
+        void block(QString hostname) override;
 
     private:
-        static QString blackList[];
-
         Domain::ILogger& _logger;
         Domain::Setting& _isAdBlockEnabled;
+        QSet<QString> _blocklist;
     };
 }
 
