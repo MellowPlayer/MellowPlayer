@@ -33,7 +33,7 @@ namespace MellowPlayer::Presentation
         Domain::Setting& _isAdBlockEnabled;
         QSet<QString> _blocklist;
 
-        bool isBlocked(QString hostname) const;
+        bool isBlocked(QUrl url) const;
     };
 }
 

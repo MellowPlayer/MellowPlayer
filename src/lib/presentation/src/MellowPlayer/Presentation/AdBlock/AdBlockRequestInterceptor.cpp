@@ -15,14 +15,16 @@ AdBlockRequestInterceptor::AdBlockRequestInterceptor(Settings& settings)
 
 void AdBlockRequestInterceptor::interceptRequest(QWebEngineUrlRequestInfo &info)
 {
+    const auto url = info.requestUrl();
+    LOG_DEBUG(_logger, "Request: " + url.toString());
+
     if (!_isAdBlockEnabled.value().toBool())
         return;
 
-    auto host = info.requestUrl().host();
-    bool shouldBlock = isBlocked(host);
+    bool shouldBlock = isBlocked(url);
     info.block(shouldBlock);
 
-    LOG_DEBUG(_logger, (shouldBlock ? "Blocked: " : "Not blocked: ") + host);
+    LOG_DEBUG(_logger, (shouldBlock ? "Blocked: " : "Not blocked: ") + url.host());
 }
 
 void AdBlockRequestInterceptor::block(QString hostname)
@@ -32,8 +34,13 @@ void AdBlockRequestInterceptor::block(QString hostname)
     _blocklist.insert(hostname);
 }
 
-bool AdBlockRequestInterceptor::isBlocked(QString hostname) const
+bool AdBlockRequestInterceptor::isBlocked(QUrl url) const
 {
+    if (url.path().contains("ads") || url.query().contains("ads"))
+        return true;
+
+    const auto hostname = url.host();
+
     // find if the hostname is in the blocklist
     if (_blocklist.contains(hostname))
         return true;
