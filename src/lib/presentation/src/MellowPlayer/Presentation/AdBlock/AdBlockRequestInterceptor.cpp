@@ -20,14 +20,21 @@ void AdBlockRequestInterceptor::interceptRequest(QWebEngineUrlRequestInfo &info)
 
     auto host = info.requestUrl().host();
 
-    if (_blocklist.contains(host)) {
-        LOG_DEBUG(_logger, "Blocking: " + host);
-        info.block(true);
+    for (const auto &deniedHost : _blocklist) {
+        if (host.contains(deniedHost)) {
+            LOG_DEBUG(_logger, "Blocking " + host + " because denied host " + deniedHost);
+            info.block(true);
+            return;
+        }
     }
+
+    LOG_DEBUG(_logger, "Not blocking: " + host);
 }
 
 void AdBlockRequestInterceptor::block(QString hostname)
 {
+    if (hostname.isEmpty()) return;
+
     LOG_INFO(_logger, "Add block rule to hostname " + hostname)
     _blocklist.insert(hostname);
 }
