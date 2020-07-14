@@ -14,7 +14,7 @@ void FileBlockListLoader::load(QString path, const std::function<void (QList<QSt
     if (file.exists()) {
         QString content = file.read();
         QList<QString> blocklist;
-        for (const auto &hostname : content.split('\n')) {
+        for (const auto& hostname : content.split('\n')) {
             // if line starts with '#' it is a comment
             if (hostname.isEmpty() || hostname.startsWith("#"))
                 continue;

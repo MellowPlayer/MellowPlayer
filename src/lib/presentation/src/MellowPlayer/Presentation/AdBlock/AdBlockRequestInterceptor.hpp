@@ -32,6 +32,8 @@ namespace MellowPlayer::Presentation
         Domain::ILogger& _logger;
         Domain::Setting& _isAdBlockEnabled;
         QSet<QString> _blocklist;
+
+        bool isBlocked(QString hostname) const;
     };
 }
 

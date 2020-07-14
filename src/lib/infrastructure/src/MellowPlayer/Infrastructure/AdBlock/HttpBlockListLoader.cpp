@@ -16,7 +16,7 @@ void HttpBlockListLoader::load(QString source, const std::function<void (QList<Q
         QList<QString> blocklist;
         auto content = QString::fromUtf8(replyData);
 
-        for (const auto &hostname : content.split('\n')) {
+        for (const auto& hostname : content.split('\n')) {
             // if line starts with '#' it is a comment
             if (hostname.isEmpty() || hostname.startsWith("#"))
                 continue;

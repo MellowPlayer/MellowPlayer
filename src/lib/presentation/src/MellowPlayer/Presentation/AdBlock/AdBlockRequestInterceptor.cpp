@@ -19,22 +19,31 @@ void AdBlockRequestInterceptor::interceptRequest(QWebEngineUrlRequestInfo &info)
         return;
 
     auto host = info.requestUrl().host();
+    bool shouldBlock = isBlocked(host);
+    info.block(shouldBlock);
 
-    for (const auto &deniedHost : _blocklist) {
-        if (host.contains(deniedHost)) {
-            LOG_DEBUG(_logger, "Blocking " + host + " because denied host " + deniedHost);
-            info.block(true);
-            return;
-        }
-    }
-
-    LOG_DEBUG(_logger, "Not blocking: " + host);
+    LOG_DEBUG(_logger, (shouldBlock ? "Blocked: " : "Not blocked: ") + host);
 }
 
 void AdBlockRequestInterceptor::block(QString hostname)
 {
     if (hostname.isEmpty()) return;
 
-    LOG_INFO(_logger, "Add block rule to hostname " + hostname)
     _blocklist.insert(hostname);
+}
+
+bool AdBlockRequestInterceptor::isBlocked(QString hostname) const
+{
+    // find if the hostname is in the blocklist
+    if (_blocklist.contains(hostname))
+        return true;
+
+    for (const auto& blockedHost : _blocklist) {
+        // find if the hostname is a subdomain of a hostname in the blocklist
+        if (hostname.endsWith("." + blockedHost)) {
+            return true;
+        }
+    }
+
+    return false;
 }

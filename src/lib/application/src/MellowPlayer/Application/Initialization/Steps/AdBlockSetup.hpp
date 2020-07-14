@@ -25,7 +25,5 @@ namespace MellowPlayer::Application {
         std::unique_ptr<Presentation::IAdBlockRequestInterceptor> _interceptor;
         Infrastructure::IFileBlockListLoader& _fileLoader;
         Infrastructure::IHttpBlockListLoader& _httpLoader;
-
-        void insertHostnames(const QList<QString>& blocklist) const;
     };
 }

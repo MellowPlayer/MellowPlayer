@@ -18,28 +18,23 @@ AdBlockSetup::AdBlockSetup(
 
 void AdBlockSetup::initialize(const ResultCallback &resultCallback)
 {
+    const auto callback = [&](const auto blocklist) {
+        for (const auto& hostname : blocklist) {
+            _interceptor->block(hostname);
+        }
+    };
+
+    // Peter Lowe's adservers list, source: https://pgl.yoyo.org/adservers/
     const auto peterLoweListUrl =
             "https://pgl.yoyo.org/adservers/serverlist.php?hostformat=nohtml&showintro=0";
+    _httpLoader.load(peterLoweListUrl, callback);
 
-    _httpLoader.load(peterLoweListUrl, [this](const auto blocklist) {
-        insertHostnames(blocklist);
-    });
-
+    // User file's blocklist
     const auto userFilePath = QStandardPaths::locate(QStandardPaths::AppDataLocation,
                                                      "blocklist.txt");
-
-    _fileLoader.load(userFilePath, [this](const auto blocklist) {
-        insertHostnames(blocklist);
-    });
+    _fileLoader.load(userFilePath, callback);
 
     auto profile = QWebEngineProfile::defaultProfile();
     profile->setRequestInterceptor(_interceptor.get());
     resultCallback(true);
-}
-
-void AdBlockSetup::insertHostnames(const QList<QString>& blocklist) const
-{
-    for (const auto &hostname : blocklist) {
-        _interceptor->block(hostname);
-    }
 }
