@@ -5,11 +5,13 @@
 #include <MellowPlayer/Infrastructure/AdBlock/IHttpBlockListLoader.hpp>
 
 using namespace MellowPlayer::Application;
+using namespace MellowPlayer::Presentation;
+using namespace MellowPlayer::Infrastructure;
 
 AdBlockSetup::AdBlockSetup(
-        std::unique_ptr<Presentation::IAdBlockRequestInterceptor> interceptor,
-        Infrastructure::IFileBlockListLoader& fileLoader,
-        Infrastructure::IHttpBlockListLoader& httpLoader)
+        std::unique_ptr<IAdBlockRequestInterceptor> interceptor,
+        IFileBlockListLoader& fileLoader,
+        IHttpBlockListLoader& httpLoader)
     : _interceptor(std::move(interceptor)),
       _fileLoader(fileLoader),
       _httpLoader(httpLoader)

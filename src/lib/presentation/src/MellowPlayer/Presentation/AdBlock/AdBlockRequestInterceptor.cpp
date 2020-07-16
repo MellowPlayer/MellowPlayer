@@ -36,9 +36,6 @@ void AdBlockRequestInterceptor::block(QString hostname)
 
 bool AdBlockRequestInterceptor::isBlocked(QUrl url) const
 {
-    if (url.path().contains("pagead") || url.path().contains("ads"))
-        return true;
-
     const auto hostname = url.host();
 
     // find if the hostname is in the blocklist
