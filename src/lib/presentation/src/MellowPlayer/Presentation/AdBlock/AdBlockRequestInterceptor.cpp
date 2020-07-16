@@ -13,7 +13,7 @@ AdBlockRequestInterceptor::AdBlockRequestInterceptor(Settings& settings)
 {
 }
 
-void AdBlockRequestInterceptor::interceptRequest(QWebEngineUrlRequestInfo &info)
+void AdBlockRequestInterceptor::interceptRequest(QWebEngineUrlRequestInfo& info)
 {
     const auto url = info.requestUrl();
     LOG_DEBUG(_logger, "Request: " + url.toString());

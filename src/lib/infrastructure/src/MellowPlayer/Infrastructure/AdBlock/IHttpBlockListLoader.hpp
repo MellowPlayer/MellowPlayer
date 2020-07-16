@@ -3,7 +3,8 @@
 #include <QObject>
 #include <MellowPlayer/Domain/AdBlock/IBlockListLoader.hpp>
 
-namespace MellowPlayer::Infrastructure {
+namespace MellowPlayer::Infrastructure
+{
     class IHttpBlockListLoader : public Domain::IBlockListLoader
     {
         Q_OBJECT

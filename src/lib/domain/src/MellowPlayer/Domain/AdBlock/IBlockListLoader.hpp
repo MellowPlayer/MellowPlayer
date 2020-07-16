@@ -3,7 +3,8 @@
 #include <QObject>
 #include <functional>
 
-namespace MellowPlayer::Domain {
+namespace MellowPlayer::Domain
+{
     class IBlockListLoader : public QObject
     {
         Q_OBJECT

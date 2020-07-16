@@ -25,7 +25,7 @@ namespace MellowPlayer::Presentation
     public:
         explicit AdBlockRequestInterceptor(Domain::Settings& settings);
 
-        void interceptRequest(QWebEngineUrlRequestInfo &info) override;
+        void interceptRequest(QWebEngineUrlRequestInfo& info) override;
         void block(QString hostname) override;
 
     private:

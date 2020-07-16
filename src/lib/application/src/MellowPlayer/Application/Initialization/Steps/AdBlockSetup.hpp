@@ -10,7 +10,8 @@ namespace MellowPlayer::Infrastructure
     class IHttpBlockListLoader;
 }
 
-namespace MellowPlayer::Application {
+namespace MellowPlayer::Application
+{
     class AdBlockSetup : public Domain::Initializable
     {
         Q_OBJECT
