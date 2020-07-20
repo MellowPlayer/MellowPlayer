@@ -15,6 +15,7 @@
 #endif
 
 #include <MellowPlayer/Application/Initialization/InitializationSequence.hpp>
+#include <MellowPlayer/Application/Initialization/Steps/AdBlockSetup.hpp>
 #include <MellowPlayer/Application/Initialization/Steps/ApplicationUpdatesCheckup.hpp>
 #include <MellowPlayer/Application/Initialization/Steps/CacheCleanup.hpp>
 #include <MellowPlayer/Application/Initialization/Steps/FontsSetup.hpp>
@@ -48,6 +49,10 @@
 #include <MellowPlayer/Domain/StreamingServices/StreamingServices.hpp>
 #include <MellowPlayer/Domain/UserScripts/IUserScript.hpp>
 #include <MellowPlayer/Domain/UserScripts/IUserScriptFactory.hpp>
+#include <MellowPlayer/Infrastructure/AdBlock/IFileBlockListLoader.hpp>
+#include <MellowPlayer/Infrastructure/AdBlock/FileBlockListLoader.hpp>
+#include <MellowPlayer/Infrastructure/AdBlock/IHttpBlockListLoader.hpp>
+#include <MellowPlayer/Infrastructure/AdBlock/HttpBlockListLoader.hpp>
 #include <MellowPlayer/Infrastructure/AlbumArt/AlbumArtDownloader.hpp>
 #include <MellowPlayer/Infrastructure/AlbumArt/LocalAlbumArt.hpp>
 #include <MellowPlayer/Infrastructure/Application/Application.hpp>
@@ -82,6 +87,7 @@
 #include <MellowPlayer/Infrastructure/Updater/ILatestRelease.hpp>
 #include <MellowPlayer/Infrastructure/Updater/Updater.hpp>
 #include <MellowPlayer/Infrastructure/UserScripts/UserScriptFactory.hpp>
+#include <MellowPlayer/Presentation/AdBlock/AdBlockRequestInterceptor.hpp>
 #include <MellowPlayer/Presentation/Hotkeys/Hotkeys.hpp>
 #include <MellowPlayer/Presentation/Notifications/PlayerNotifications.hpp>
 #include <MellowPlayer/Presentation/Notifications/Presenters/SystemTrayIconPresenter.hpp>
@@ -155,6 +161,9 @@ auto defaultInjector = [](di::extension::detail::scoped& scope, QApplication& qA
         di::bind<IShellScriptFactory>().to<ShellScriptFactory>().in(di::singleton).in(scope),
         di::bind<IRemoteControl>().to<RemoteControl>().in(di::singleton).in(scope),
         di::bind<IRemoteControlApplication>().to<MellowPlayerConnect>().in(di::singleton).in(scope),
+        di::bind<IAdBlockRequestInterceptor>().to<AdBlockRequestInterceptor>().in(di::unique),
+        di::bind<IFileBlockListLoader>().to<FileBlockListLoader>().in(di::singleton).in(scope),
+        di::bind<IHttpBlockListLoader>().to<HttpBlockListLoader>(),
 
 #if defined(Q_OS_LINUX) || defined(Q_OS_FREEBSD)
         di::bind<AbstractPlatformUpdater>().to<LinuxUpdater>().in(di::singleton).in(scope),
@@ -168,6 +177,7 @@ auto defaultInjector = [](di::extension::detail::scoped& scope, QApplication& qA
 #endif
 
         di::bind<Initializable* []>().to<
+                AdBlockSetup,
                 SingleInstanceCheckup,
                 RemoteControlSetup,
                 StreamingServicesSetup,
