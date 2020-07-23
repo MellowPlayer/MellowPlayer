@@ -1,24 +1,69 @@
 function getButtons() {
-  return {
-    playpause: document.querySelector(".js-play-pause"),
-    next: document.querySelector(".js-next"),
-    back: document.querySelector(".js-next"),
-    favorite: document.querySelector(".js-love"),
-    // thumbUp: document.querySelector('#player .player-rating-container [icon^="sj:thumb-"][data-rating="5"]'),
-    // seekBar: document.getElementById('progressContainer')
-  };
+    return {
+        playpause: document.querySelector(".js-play-pause"),
+        next: document.querySelector(".js-next"),
+        previous: document.querySelector(".js-previous"),
+        favorite: document.querySelector(".js-love"),
+    };
 }
 
+function update() {
+    return {
+      playbackStatus: getPlaybackStatus(),
+      canSeek: false,
+      canGoNext: !getButtons().next.disabled,
+      canGoPrevious: !getButtons().previous.disabled,
+      canAddToFavorites: true,
+      volume: 1,
+      duration: getDuration(),
+      position: getPosition(),
+      songId: 0,
+      songTitle: getTitle() ? getTitle().innerText : "",
+      artistName: getArtist() ? getArtist().innerText : "",
+      albumTitle: "",
+      artUrl: getCover() ? getCover().src : undefined,
+      isFavorite: isFavorite(),
+    };
+  }
+
+function play() {
+    getButtons().playpause.click();
+}
+
+function pause() {
+    getButtons().playpause.click();
+}
+
+function goNext() {
+    getButtons().next.click();
+}
+
+function goPrevious() {
+    getButtons().previous.click();
+}
+
+function setVolume(volume) {}
+
+function addToFavorites() {
+    getButtons().favorite.click();
+}
+
+function removeFromFavorites() {
+    getButtons().favorite.click();
+}
+
+function seekToPosition(position) {}
+
 function getTitle() {
-  return document.querySelector(".player-bar-track-name");
+    return document.querySelector(".player-bar-track-name");
 }
 
 function getArtist() {
-  return document.querySelector(".player-bar-artist-name");
+    return document.querySelector(".player-bar-artist-name");
 }
 
 function getCover() {
-  return document.querySelector(".player-bar-artwork.js-artwork").children[0];
+    return document.querySelector(".player-bar-artwork.js-artwork").children[0];
 }
 
 function isFavorite() {
@@ -53,55 +98,12 @@ function getPosition() {
 }
 
 function getPlaybackStatus() {
-  var playbackStatus = MellowPlayer.PlaybackStatus.STOP;
-  if (getButtons().playpause.classList.contains("player-bar-btn--pause") === true) {
-    playbackStatus = MellowPlayer.PlaybackStatus.PLAYING;
-  } else if (getButtons().playpause.classList.contains("player-bar-btn--play") === true) {
-      playbackStatus = MellowPlayer.PlaybackStatus.PAUSED;
-  }
+    let playbackStatus = MellowPlayer.PlaybackStatus.STOP;
+    if (getButtons().playpause.classList.contains("player-bar-btn--pause") === true) {
+        playbackStatus = MellowPlayer.PlaybackStatus.PLAYING;
+    } else if (getButtons().playpause.classList.contains("player-bar-btn--play") === true) {
+        playbackStatus = MellowPlayer.PlaybackStatus.PAUSED;
+    }
 
-  return playbackStatus;
+    return playbackStatus;
 }
-
-function update() {
-  return {
-    playbackStatus: getPlaybackStatus(),
-    canSeek: false,
-    canGoNext: goNext(),
-    canGoPrevious: goPrevious(),
-    canAddToFavorites: false,
-    volume: 1,
-    duration: getDuration(),
-    position: getPosition(),
-    songId: 0,
-    songTitle: getTitle() ? getTitle().innerText : "",
-    artistName: getArtist() ? getArtist().innerText : "",
-    albumTitle: "",
-    artUrl: getCover() ? getCover().src : undefined,
-    isFavorite: isFavorite(),
-  };
-}
-
-function play() {
-  getButtons().playpause.click();
-}
-
-function pause() {
-  getButtons().playpause.click();
-}
-
-function goNext() {
-  getButtons().next.click();
-}
-
-function goPrevious() {
-  getButtons().back.click();
-}
-
-function setVolume(volume) {}
-
-function addToFavorites() {}
-
-function removeFromFavorites() {}
-
-function seekToPosition(position) {}
