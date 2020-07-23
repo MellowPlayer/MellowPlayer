@@ -45,6 +45,20 @@
       ]
     },
     {
+      "name": "AdBlock",
+      "icon": "block",
+      "key": "adblock",
+      "settings": [
+        {
+          "name": "Enable Ad Block",
+          "tooltip": "Enable this option to block ads",
+          "type": "bool",
+          "default": false,
+          "key": "enabled"
+        }
+      ]
+    },
+    {
       "name": "Appearance",
       "icon": "\ue40a",
       "key": "appearance",

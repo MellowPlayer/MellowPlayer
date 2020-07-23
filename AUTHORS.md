@@ -20,3 +20,4 @@ Contributors
 - [cautionoid](https://gitlab.com/cautionoid)
 - [AndyRTR](https://gitlab.com/andyrtr)
 - [Ady](https://gitlab.com/adynemo)
+- [Leandro Vianna](https://gitlab.com/leandrovianna)
