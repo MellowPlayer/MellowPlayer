@@ -20,6 +20,10 @@
 var player;
 
 function update() {
+    // If on sign in page
+    if (document.getElementsByTagName('ytd-app').length === 0)
+        return {}
+
     // If the player is not currently playing a video
     if(!document.getElementsByTagName('ytd-app')[0].attributes['is-watch-page']) {
         return {
