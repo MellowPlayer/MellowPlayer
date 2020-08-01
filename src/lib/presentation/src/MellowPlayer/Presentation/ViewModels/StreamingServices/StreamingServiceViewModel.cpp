@@ -248,26 +248,30 @@ QString StreamingServiceViewModel::getPreviewImageUrlForSave()
 
 void StreamingServiceViewModel::checkForKnownIssues()
 {
-    auto url = QUrl("https://gitlab.com/api/v4/projects/9602590/issues");
-    QUrlQuery query;
-    query.addQueryItem("state", "opened");
-    query.addQueryItem("labels", "broken integration plugin");
-    query.addQueryItem("search", name());
-    query.addQueryItem("in", "title");
-    url.setQuery(query);
+    auto envVar = qgetenv("MELLOWPLAYER_CHECK_PLUGIN_KNOWN_ISSUES");
+    if (envVar != "0")
+    {
+        auto url = QUrl("https://gitlab.com/api/v4/projects/9602590/issues");
+        QUrlQuery query;
+        query.addQueryItem("state", "opened");
+        query.addQueryItem("labels", "broken integration plugin");
+        query.addQueryItem("search", name());
+        query.addQueryItem("in", "title");
+        url.setQuery(query);
 
-    _httpClient->get(url, [=](const QByteArray& data) {
-        auto jsonDocument = QJsonDocument::fromJson(data);
-        auto issues = jsonDocument.array();
-        if (issues.count() == 1)
-        {
-            auto issue = issues.first().toObject();
-            _issueLink = issue["web_url"].toString();
-            emit hasKnownIssuesChanged();
-            setBroken(true);
-            LOG_WARN(_logger, "Known issue found: " << _issueLink);
-        }
-    });
+        _httpClient->get(url, [=](const QByteArray& data) {
+            auto jsonDocument = QJsonDocument::fromJson(data);
+            auto issues = jsonDocument.array();
+            if (issues.count() == 1)
+            {
+                auto issue = issues.first().toObject();
+                _issueLink = issue["web_url"].toString();
+                emit hasKnownIssuesChanged();
+                setBroken(true);
+                LOG_WARN(_logger, "Known issue found: " << _issueLink);
+            }
+        });
+    }
 }
 
 bool StreamingServiceViewModel::isBroken() const
