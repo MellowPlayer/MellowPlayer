@@ -285,9 +285,9 @@ Page {
 
             function updatePlaybackRequiresUserGesture() {
                 try {
-                    root.settings.playbackRequiresUserGesture = _settings.get(SettingKey.MAIN_PLAYBACK_REQUIRES_USER_GESTURE).value
-                    root.reload()
-                    console.log("playbackRequiresUserGesture: " + root.settings.playbackRequiresUserGesture)
+                    webView.settings.playbackRequiresUserGesture = _settings.get(SettingKey.MAIN_PLAYBACK_REQUIRES_USER_GESTURE).value
+                    webView.reload()
+                    console.log("playbackRequiresUserGesture: " + webView.settings.playbackRequiresUserGesture)
                 } catch(e) {
                     console.log("playbackRequiresUserGesture setting not supported with this version of Qt.")
                 }
@@ -295,8 +295,8 @@ Page {
 
             function updateShowScrollBars() {
                 try {
-                    root.settings.showScrollBars = _settings.get(SettingKey.APPEARANCE_SHOW_SCROLLBARS).value
-                    console.log("showScrollBars: " + root.settings.showScrollBars)
+                    webView.settings.showScrollBars = _settings.get(SettingKey.APPEARANCE_SHOW_SCROLLBARS).value
+                    console.log("showScrollBars: " + webView.settings.showScrollBars)
                 } catch(e) {
                     console.log("showScrollBars setting not supported with this version of Qt.")
                 }
