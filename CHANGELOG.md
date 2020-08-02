@@ -3,6 +3,10 @@
 ## [3.6.5](https://gitlab.com/ColinDuquesnoy/MellowPlayer/tree/3.6.5) (2020-8-2)
 [Full Changelog](https://gitlab.com/ColinDuquesnoy/MellowPlayer/compare/3.6.4...3.6.5)
 
+**Implemented enhancements:**
+
+- Adblock feature [\#426](https://gitlab.com/ColinDuquesnoy/MellowPlayer/issues/426)
+
 **Fixed bugs:**
 
 - Some WebView settings are not applied [\#453](https://gitlab.com/ColinDuquesnoy/MellowPlayer/issues/453)
@@ -14,6 +18,9 @@
 
 - Add last.fm integration [\#327](https://gitlab.com/ColinDuquesnoy/MellowPlayer/merge_requests/327) ([adynemo](https://gitlab.com/adynemo))
 - Add Adblock feature [\#326](https://gitlab.com/ColinDuquesnoy/MellowPlayer/merge_requests/326) ([leandrovianna](https://gitlab.com/leandrovianna))
+- Tidal - add timebar/support favorites [\#325](https://gitlab.com/ColinDuquesnoy/MellowPlayer/merge_requests/325) ([andyrtr](https://gitlab.com/andyrtr))
+- Add timebar + fix for ArtistName and remove FavIcon for Digitally Imported radio network [\#324](https://gitlab.com/ColinDuquesnoy/MellowPlayer/merge_requests/324) ([andyrtr](https://gitlab.com/andyrtr))
+- fix broken spotify integration [\#321](https://gitlab.com/ColinDuquesnoy/MellowPlayer/merge_requests/321) ([b0o](https://gitlab.com/b0o))
 
 ## [3.6.4](https://gitlab.com/ColinDuquesnoy/MellowPlayer/tree/3.6.4) (2020-6-20)
 [Full Changelog](https://gitlab.com/ColinDuquesnoy/MellowPlayer/compare/3.6.3...3.6.4)
