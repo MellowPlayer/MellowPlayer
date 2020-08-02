@@ -1,5 +1,20 @@
 # Change log
 
+## [3.6.5](https://gitlab.com/ColinDuquesnoy/MellowPlayer/tree/3.6.5) (2020-8-2)
+[Full Changelog](https://gitlab.com/ColinDuquesnoy/MellowPlayer/compare/3.6.4...3.6.5)
+
+**Fixed bugs:**
+
+- Some WebView settings are not applied [\#453](https://gitlab.com/ColinDuquesnoy/MellowPlayer/issues/453)
+- Mixcloud plugin looks broken [\#452](https://gitlab.com/ColinDuquesnoy/MellowPlayer/issues/452)
+- Youtube broken integration plugin warning on login page [\#451](https://gitlab.com/ColinDuquesnoy/MellowPlayer/issues/451)
+- Broken Plugin Youtube Music [\#442](https://gitlab.com/ColinDuquesnoy/MellowPlayer/issues/442)
+
+**Merged merge requests:**
+
+- Add last.fm integration [\#327](https://gitlab.com/ColinDuquesnoy/MellowPlayer/merge_requests/327) ([adynemo](https://gitlab.com/adynemo))
+- Add Adblock feature [\#326](https://gitlab.com/ColinDuquesnoy/MellowPlayer/merge_requests/326) ([leandrovianna](https://gitlab.com/leandrovianna))
+
 ## [3.6.4](https://gitlab.com/ColinDuquesnoy/MellowPlayer/tree/3.6.4) (2020-6-20)
 [Full Changelog](https://gitlab.com/ColinDuquesnoy/MellowPlayer/compare/3.6.3...3.6.4)
 
