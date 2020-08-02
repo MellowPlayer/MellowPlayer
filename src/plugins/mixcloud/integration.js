@@ -16,37 +16,33 @@
 // along with MellowPlayer.  If not, see <http://www.gnu.org/licenses/>.
 //
 //-----------------------------------------------------------------------------
-function getPlayPauseButton() {
-    return getElementByXpath('//*[@id="react-root"]/div/section/div[5]/div/div/div[1]/div[1]/div/span')
-}
-
 function getLoveButton() {
-    return getElementByXpath('//*[@id="react-root"]/div/section/div[5]/div/div/div[1]/div[4]/span/span');
+    var nodes = document.querySelectorAll("span[class*='PlayerActionsFavoriteButton__PlayerFavoriteIcon");
+    if (nodes) {
+        return nodes[0];
+    }
+    return null;
 }
 
 function isPlaying() {
-    let button = getPlayPauseButton();
-    if (!button)
-        return false;
-    let svgPath = button.childNodes[0].childNodes[0];
-    return !svgPath.getAttribute("d").endsWith("111z")
-}
-
-function getPlayInfoDiv() {
-    return getElementByXpath('//*[@id="react-root"]/div/section/div[5]/div/div/div[1]/div[3]');
+    var audio = document.querySelector("audio");
+    if (audio) {
+        return !audio.paused;
+    }
+    return false;
 }
 
 function getTitle() {
-    let label = getPlayInfoDiv().childNodes[0];
+    let label = document.querySelectorAll("p[class*='PlayerControls__ShowTitle']")[0]
     if (label)
-        return label.text;
+        return label.innerText;
     return "";
 }
 
 function getArtist() {
-    let label = getPlayInfoDiv().childNodes[1].childNodes[1];
+    let label = document.querySelectorAll("p[class*='PlayerControls__ShowOwner']")[0];
     if (label)
-        return label.text;
+        return label.childNodes[1].innerText;
     return "";
 }
 
@@ -59,35 +55,32 @@ function isFavorite() {
 }
 
 function getArtUrl() {
-    let artUrl = getElementByXpath('//*[@id="react-root"]/div/section/div[5]/div/div/div[1]/div[2]/img');
+    let artUrl = document.querySelectorAll("div[class^='PlayerControls__ShowPicture']")[0]
     if (artUrl)
-        return artUrl.src.replace("36x36", "512x512");
+        return artUrl.children[0].src.replace("36x36", "512x512");
     return "";
 }
 
 function getPosition() {
-    let label = getElementByXpath('//*[@id="react-root"]/div/section/div[5]/div/div/div[1]/div[6]/div/div[1]/div[1]');
-    if (label) {
-        let text = label.innerHTML;
-        return toSeconds(text);
+    var audio = document.querySelector("audio");
+    if (audio) {
+        return audio.currentTime;
     }
     return 0;
 }
 
 function getDuration() {
-    let label = getElementByXpath('//*[@id="react-root"]/div/section/div[5]/div/div/div[1]/div[6]/div/div[1]/div[2]');
-    if (label) {
-        let text = label.innerHTML.replace("-", "");
-        let remainingTime = toSeconds(text);
-        return remainingTime + getPosition();
+    var audio = document.querySelector("audio");
+    if (audio) {
+        return audio.duration;
     }
     return 0;
 }
 
 function getCloudCastQueue() {
-    let element = getElementByXpath('//*[@id="react-root"]/div/section/div[5]/div/div/div[2]');
-    if (element)
-        return element.childNodes;
+    let elements = document.querySelectorAll("div[class*='playerQueue__UpNextArea")
+    if (elements)
+        return elements[0].childNodes;
     return [];
 }
 
@@ -114,14 +107,15 @@ function isValidCloudCastIndex(cloudCastIndex) {
 }
 
 function update() {
-    if (getPlayInfoDiv()) {
+    var audio = document.querySelector("audio");
+    if (audio) {
         return {
             "playbackStatus": isPlaying() ? MellowPlayer.PlaybackStatus.PLAYING : MellowPlayer.PlaybackStatus.PAUSED,
             "canSeek": true,
             "canGoNext": isValidCloudCastIndex(getNextCloudCastIndex()),
             "canGoPrevious": isValidCloudCastIndex(getPreviousCloudCastIndex()),
             "canAddToFavorites": true,
-            "volume": 1,
+            "volume": audio.volume,
             "duration": getDuration(),
             "position": getPosition(),
             "songId": getTitle(),
@@ -136,18 +130,18 @@ function update() {
     return {}
 }
 
-function togglePlayPause() {
-    let button = getPlayPauseButton();
-    if (button)
-        button.click();
-}
-
 function play() {
-    togglePlayPause();
+    var audio = document.querySelector("audio");
+    if (audio) {
+        audio.play();
+    }
 }
 
 function pause() {
-    togglePlayPause();
+    var audio = document.querySelector("audio");
+    if (audio) {
+        audio.pause();
+    }
 }
 
 function goNext() {
@@ -159,11 +153,14 @@ function goPrevious() {
 }
 
 function setVolume(volume) {
-
+    var audio = document.querySelector("audio");
+    if (audio) {
+        audio.volume = volume;
+    }
 }
 
 function toggleFavorite() {
-    let button = getLoveButton();
+    var button = getLoveButton();
     if (button)
         button.click();
 }
@@ -177,7 +174,8 @@ function removeFromFavorites() {
 }
 
 function seekToPosition(position) {
-    let positionSlider = getElementByXpath('//*[@id="react-root"]/div/section/div[5]/div/div/div[1]/div[6]/div/div[1]/div[3]');
-    const duration = getDuration();
-    sendMouseClickToElement(positionSlider, position / duration, 0.5);
+    var audio = document.querySelector("audio");
+    if (audio) {
+        audio.currentTime = position;
+    }
 }
