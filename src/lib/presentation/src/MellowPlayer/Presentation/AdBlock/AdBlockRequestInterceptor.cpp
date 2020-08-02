@@ -16,7 +16,7 @@ AdBlockRequestInterceptor::AdBlockRequestInterceptor(Settings& settings)
 void AdBlockRequestInterceptor::interceptRequest(QWebEngineUrlRequestInfo& info)
 {
     const auto url = info.requestUrl();
-    LOG_DEBUG(_logger, "Request: " + url.toString());
+    LOG_TRACE(_logger, "Request: " + url.toString());
 
     if (!_isAdBlockEnabled.value().toBool())
         return;
