@@ -73,6 +73,9 @@ void configureEnvironment()
     QCoreApplication::setApplicationVersion(BuildConfig::getVersion());
     QCoreApplication::setOrganizationDomain("com.gitlab.ColinDuquesnoy");
     QCoreApplication::setOrganizationName("MellowPlayer");
+
+    // Customize the name of the application as it appears in PulseAudio
+    qputenv("PULSE_PROP_OVERRIDE_application.name", "MellowPlayer");
 }
 
 void configureHiDpiSupport()
