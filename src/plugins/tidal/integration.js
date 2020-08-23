@@ -32,7 +32,7 @@ function getAlbumTitle() {
 
 function getArtUrl() {
 	try {
-        return document.querySelector('[data-test="current-media-imagery"]').children[0].children[0].src;
+        return document.querySelector('[data-test="current-media-imagery"]').children[0].children[0].children[0].children[0].src;
     } catch(e) {
         return "";
     }
