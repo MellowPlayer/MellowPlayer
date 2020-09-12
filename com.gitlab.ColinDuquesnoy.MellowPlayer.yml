@@ -1,6 +1,8 @@
 app-id: com.gitlab.ColinDuquesnoy.MellowPlayer
 runtime: org.kde.Platform
-runtime-version: "5.12"
+runtime-version:  "5.15"
+base: io.qt.qtwebengine.BaseApp
+base-version: "5.15"
 sdk: org.kde.Sdk
 command: MellowPlayer
 finish-args:
@@ -17,16 +19,14 @@ rename-desktop-file: "mellowplayer.desktop"
 rename-icon: "mellowplayer"
 modules:
   - name: libnotify
-    cleanup:
-      - /bin
+    buildsystem: meson
     config-opts:
-      - --disable-static
-      - --disable-tests
-      - --disable-introspection
+      - -Dman=false
+      - -Ddocbook_docs=disabled
     sources:
       - type: archive
-        url: https://download.gnome.org/sources/libnotify/0.7/libnotify-0.7.7.tar.xz
-        sha256: 9cb4ce315b2655860c524d46b56010874214ec27e854086c1a1d0260137efc04
+        url: https://download.gnome.org/sources/libnotify/0.7/libnotify-0.7.9.tar.xz
+        sha256: 66c0517ed16df7af258e83208faaf5069727dfd66995c4bbc51c16954d674761
   - name: MellowPlayer
     buildsystem: cmake
     sources:
