@@ -21,7 +21,7 @@ MellowPlayerConnect::MellowPlayerConnect(ITextFileFactory& textFileFactory, IShe
           _shellScriptFactory(shellScriptFactory),
           _processFactory(processFactory),
           _logger(Loggers::logger("MellowPlayer.Connect")),
-          _minimumRequiredVersion(0, 2, 3),
+          _minimumRequiredVersion(0, 2, 4),
           _installationDirectory(QStandardPaths::standardLocations(QStandardPaths::AppDataLocation).first() + QDir::separator() + "RemoteControl" +
                                  QDir::separator() + "mellowplayer-connect")
 {
