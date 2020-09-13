@@ -16,6 +16,11 @@
             integrates online music services with your desktop.
         </p>
     </description>
+    <screenshots>
+        <screenshot type="default">
+            <image>https://gitlab.com/ColinDuquesnoy/MellowPlayer/-/raw/master/docs/_static/home-page.png</image>
+        </screenshot>
+    </screenshots>
     <url type="homepage">https://colinduquesnoy.gitlab.io/MellowPlayer/</url>
     <url type="bugtracker">https://gitlab.com/ColinDuquesnoy/MellowPlayer/issues/</url>
     <url type="help">https://media.readthedocs.org/pdf/mellowplayer/latest/mellowplayer.pdf</url>

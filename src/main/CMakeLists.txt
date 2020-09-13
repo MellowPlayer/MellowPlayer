@@ -84,5 +84,5 @@ install(DIRECTORY share/applications DESTINATION ${CMAKE_INSTALL_DATADIR})
 install(DIRECTORY share/icons DESTINATION ${CMAKE_INSTALL_DATADIR})
 
 string(TIMESTAMP _date "%Y-%m-%d")
-configure_file(share/metainfo/com.gitlab.ColinDuquesnoy.MellowPlayer.metainfo.xml.in ${CMAKE_BINARY_DIR}/com.gitlab.ColinDuquesnoy.MellowPlayer.metainfo.xml)
+configure_file(share/metainfo/com.gitlab.ColinDuquesnoy.MellowPlayer.metainfo.xml ${CMAKE_BINARY_DIR}/com.gitlab.ColinDuquesnoy.MellowPlayer.metainfo.xml)
 install(FILES ${CMAKE_BINARY_DIR}/com.gitlab.ColinDuquesnoy.MellowPlayer.metainfo.xml DESTINATION ${CMAKE_INSTALL_DATADIR}/metainfo)
