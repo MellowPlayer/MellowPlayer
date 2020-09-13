@@ -1,5 +1,24 @@
 # Change log
 
+## [3.6.6](https://gitlab.com/ColinDuquesnoy/MellowPlayer/tree/3.6.6) (2020-9-13)
+[Full Changelog](https://gitlab.com/ColinDuquesnoy/MellowPlayer/compare/3.6.5...3.6.6)
+
+**Implemented enhancements:**
+
+- Upgrade Qt runtime used in flatpak to 5.15
+
+
+**Fixed bugs:**
+
+- PocketCasts integration plugin is broken [\#347](https://gitlab.com/ColinDuquesnoy/MellowPlayer/issues/347)
+
+
+**Merged merge requests:**
+
+- Update PocketCasts plugin for their latest web player [\#330](https://gitlab.com/ColinDuquesnoy/MellowPlayer/merge_requests/330) ([highurtenflurst](https://gitlab.com/highurtenflurst))
+- fix ArtUrl for recent monthly Tidal update [\#329](https://gitlab.com/ColinDuquesnoy/MellowPlayer/merge_requests/329) ([andyrtr](https://gitlab.com/andyrtr))
+- Customize the name of the application as it appears in PulseAudio [\#328](https://gitlab.com/ColinDuquesnoy/MellowPlayer/merge_requests/328) ([kubrickfr](https://gitlab.com/kubrickfr))
+
 ## [3.6.5](https://gitlab.com/ColinDuquesnoy/MellowPlayer/tree/3.6.5) (2020-8-2)
 [Full Changelog](https://gitlab.com/ColinDuquesnoy/MellowPlayer/compare/3.6.4...3.6.5)
 
