@@ -12,9 +12,8 @@ finish-args:
   - --share=network
   - --socket=pulseaudio
   - --device=dri
-  - --socket=session-bus
-  - --socket=system-bus
-  - --filesystem=/tmp
+  - --talk-name=org.mpris.MediaPlayer2.Player
+  - --own-name=org.mpris.MediaPlayer2.MellowPlayer3.*
 rename-desktop-file: "mellowplayer.desktop"
 rename-icon: "mellowplayer"
 modules:

@@ -82,4 +82,7 @@ install(TARGETS ${PROJECT_NAME}
         ARCHIVE DESTINATION ${CMAKE_INSTALL_LIBDIR}/static)
 install(DIRECTORY share/applications DESTINATION ${CMAKE_INSTALL_DATADIR})
 install(DIRECTORY share/icons DESTINATION ${CMAKE_INSTALL_DATADIR})
-install(DIRECTORY share/metainfo DESTINATION ${CMAKE_INSTALL_DATADIR})
+
+string(TIMESTAMP _date "%Y-%m-%d")
+configure_file(share/metainfo/com.gitlab.ColinDuquesnoy.MellowPlayer.metainfo.xml.in ${CMAKE_BINARY_DIR}/com.gitlab.ColinDuquesnoy.MellowPlayer.metainfo.xml)
+install(FILES ${CMAKE_BINARY_DIR}/com.gitlab.ColinDuquesnoy.MellowPlayer.metainfo.xml DESTINATION ${CMAKE_INSTALL_DATADIR}/metainfo)
