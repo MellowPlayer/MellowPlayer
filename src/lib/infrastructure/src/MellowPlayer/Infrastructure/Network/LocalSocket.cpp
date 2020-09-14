@@ -1,4 +1,6 @@
 #include <MellowPlayer/Infrastructure/Network/LocalSocket.hpp>
+#include <QtCore/QDir>
+#include <QtCore/QStandardPaths>
 
 using namespace MellowPlayer::Infrastructure;
 
@@ -7,9 +9,14 @@ LocalSocket::LocalSocket() : _qLocalSocket(new QLocalSocket(this))
     initSignals();
 }
 
-void LocalSocket::connectToServer(const QString& name, QIODevice::OpenMode openMode)
+void LocalSocket::connectToServer(const QString& serverName, QIODevice::OpenMode openMode)
 {
-    _qLocalSocket->connectToServer(name, openMode);
+#ifndef Q_OS_WIN
+    auto fullServerName = QStandardPaths::standardLocations(QStandardPaths::AppDataLocation).first() + QDir::separator() + serverName;
+    _qLocalSocket->connectToServer(fullServerName, openMode);
+#else
+    _qLocalSocket->connectToServer(serverName, openMode);
+#endif
 }
 
 void LocalSocket::disconnectFromServer()

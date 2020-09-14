@@ -1,13 +1,14 @@
 #include <MellowPlayer/Infrastructure/Network/LocalServer.hpp>
 #include <MellowPlayer/Infrastructure/Network/LocalSocket.hpp>
+#include <QDebug>
+#include <QtCore/QDir>
+#include <QtCore/QStandardPaths>
 
 using namespace std;
 using namespace MellowPlayer::Infrastructure;
 
-LocalServer::LocalServer(ILocalSocketFactory& localSocketFactory, const QString& serverName)
-        : _localSocketFactory(localSocketFactory), _serverName(serverName)
+LocalServer::LocalServer(ILocalSocketFactory& localSocketFactory, const QString& serverName) : _localSocketFactory(localSocketFactory), _serverName(serverName)
 {
-    QLocalServer::removeServer(serverName);
     _qLocalServer.setSocketOptions(QLocalServer::UserAccessOption);
     connect(&_qLocalServer, &QLocalServer::newConnection, this, &ILocalServer::newConnection);
 }
@@ -19,7 +20,16 @@ void LocalServer::close()
 
 bool LocalServer::listen()
 {
-    return _qLocalServer.listen(_serverName);
+#ifndef Q_OS_WIN
+    auto fullServerName = QStandardPaths::standardLocations(QStandardPaths::AppDataLocation).first() + QDir::separator() + _serverName;
+#else
+    auto fullServerName = _serverName;
+#endif
+    if (!QLocalServer::removeServer(fullServerName))
+        qWarning("LocalServer: could not cleanup socket");
+    auto status = _qLocalServer.listen(fullServerName);
+    qDebug() << "LocalServer: socket created at " << _qLocalServer.fullServerName();
+    return status;
 }
 
 bool LocalServer::isListening() const
