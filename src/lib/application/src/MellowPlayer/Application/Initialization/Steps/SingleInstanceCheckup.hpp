@@ -7,6 +7,7 @@
 #include <QTimer>
 #include <QtCore/QLockFile>
 #include <boost-di-extensions/Factory.hpp>
+#include <MellowPlayer/Infrastructure/LockedFiled/qtlockedfile.hpp>
 
 namespace MellowPlayer::Domain
 {
@@ -41,14 +42,13 @@ namespace MellowPlayer::Application
 
         static bool IsAnotherInstanceRunning();
 
-    private slots:
-        void pollState();
-
     private:
         static QString GetLockFilePath();
         void initializePrimaryApplication();
         void onSecondaryApplicationConnected();
         void onSecondaryApplicationActionRequest();
+        QString appSessionId(const QString &appId);
+        bool isClient();
 
         void initializeSecondaryApplication();
         void onConnectedToPrimaryApplication();
@@ -64,9 +64,8 @@ namespace MellowPlayer::Application
         std::shared_ptr<Infrastructure::ILocalServer> _localServer;
         std::shared_ptr<Infrastructure::ILocalSocket> _localSocket;
         QString _lockFilePath;
-        QLockFile _lockFile;
+        Infrastructure::QtLockedFile _lockFile;
         bool _isPrimary;
-        QTimer _pollStateTimer;
         ResultCallback _resultCallback;
 
         static const QString _playPauseAction;

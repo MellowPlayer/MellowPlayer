@@ -12,6 +12,17 @@
 #include <QtCore/QStandardPaths>
 #include <QtCore/QTimer>
 
+#if defined(Q_OS_WIN)
+#include <QLibrary>
+#include <qt_windows.h>
+using PProcessIdToSessionId = BOOL (WINAPI*)(DWORD, DWORD*);
+static PProcessIdToSessionId pProcessIdToSessionId = 0;
+#endif
+#if defined(Q_OS_UNIX)
+#include <ctime>
+#include <unistd.h>
+#endif
+
 using namespace std;
 using namespace MellowPlayer::Application;
 using namespace MellowPlayer::Infrastructure;
@@ -22,6 +33,30 @@ const QString SingleInstanceCheckup::_nextAction = "next";
 const QString SingleInstanceCheckup::_previousAction = "previous";
 const QString SingleInstanceCheckup::_restoreWindowAction = "restore-window";
 const QString SingleInstanceCheckup::_toggleFavoriteAction = "toggle-favorite";
+
+QString SingleInstanceCheckup::appSessionId(const QString &appId)
+{
+    QByteArray idc = appId.toUtf8();
+    quint16 idNum = qChecksum(idc.constData(), idc.size());
+    //### could do: two 16bit checksums over separate halves of id, for a 32bit result - improved uniqeness probability. Every-other-char split would be best.
+
+    QString res = QLatin1String("mellowplayer-")
+                  + QString::number(idNum, 16);
+#if defined(Q_OS_WIN)
+    if (!pProcessIdToSessionId) {
+        QLibrary lib(QLatin1String("kernel32"));
+        pProcessIdToSessionId = (PProcessIdToSessionId)lib.resolve("ProcessIdToSessionId");
+    }
+    if (pProcessIdToSessionId) {
+        DWORD sessionId = 0;
+        pProcessIdToSessionId(GetCurrentProcessId(), &sessionId);
+        res += QLatin1Char('-') + QString::number(sessionId, 16);
+    }
+#else
+    res += QLatin1Char('-') + QString::number(::getuid(), 16);
+#endif
+    return res;
+}
 
 SingleInstanceCheckup::SingleInstanceCheckup(IApplication& application,
                                          IPlayer& currentPlayer,
@@ -35,12 +70,13 @@ SingleInstanceCheckup::SingleInstanceCheckup(IApplication& application,
           _localServerFactory(localServerFactory),
           _localSocketFactory(localSocketFactory),
           _lockFilePath(GetLockFilePath()),
-          _lockFile(_lockFilePath),
           _isPrimary(false)
 {
     auto lockFileDirectory = QFileInfo(_lockFilePath).dir().path();
     QDir().mkpath(lockFileDirectory);
-    _lockFile.setStaleLockTime(0);
+
+    _lockFile.setFileName(_lockFilePath);
+    _lockFile.open(QIODevice::ReadWrite);
 }
 
 void SingleInstanceCheckup::initialize(const ResultCallback& resultCallback)
@@ -48,10 +84,10 @@ void SingleInstanceCheckup::initialize(const ResultCallback& resultCallback)
     _resultCallback = resultCallback;
 
     LOG_INFO(_logger, "Lock file: " << _lockFilePath)
-    if (_lockFile.tryLock(100))
-        initializePrimaryApplication();
-    else
+    if (isClient())
         initializeSecondaryApplication();
+    else
+        initializePrimaryApplication();
 }
 
 QString SingleInstanceCheckup::errorMessage() const
@@ -61,16 +97,12 @@ QString SingleInstanceCheckup::errorMessage() const
 
 void SingleInstanceCheckup::initializePrimaryApplication()
 {
-    _isPrimary = true;
     LOG_DEBUG(_logger, "Initializing primary application");
 
     _localServer = _localServerFactory.create(qApp->applicationName());
     connect(_localServer.get(), &ILocalServer::newConnection, this, &SingleInstanceCheckup::onSecondaryApplicationConnected);
     _localServer->listen();
-
-    connect(&_pollStateTimer, &QTimer::timeout, this, &SingleInstanceCheckup::pollState);
-    _pollStateTimer.setInterval(1000);
-    _pollStateTimer.start();
+    _isPrimary = true;
 
     _resultCallback(true);
 }
@@ -108,6 +140,7 @@ void SingleInstanceCheckup::onSecondaryApplicationActionRequest()
 
 void SingleInstanceCheckup::initializeSecondaryApplication()
 {
+    LOG_DEBUG(_logger, "Initializing secondary application");
     _isPrimary = false;
     LOG_DEBUG(_logger, "Another instance is already running, transmitting command line arguments...");
 
@@ -158,27 +191,6 @@ void SingleInstanceCheckup::cleanUp()
     }
 }
 
-void SingleInstanceCheckup::pollState()
-{
-    QFileInfo lockFile(_lockFilePath);
-    if (!lockFile.exists())
-    {
-        LOG_WARN(_logger, "lock file disappeared, trying to restore lock");
-        if (_lockFile.tryLock(100))
-        LOG_DEBUG(_logger, "lock restored");
-    }
-
-    QFileInfo serverFile(_localServer->serverSocketFilePath());
-    if (!serverFile.exists())
-    {
-        LOG_WARN(_logger, "server file disappeared trying to restore local server");
-        _localServer->close();
-        if (_localServer->listen())
-        LOG_DEBUG(_logger, "local server restored");
-        ;
-    }
-}
-
 bool SingleInstanceCheckup::IsAnotherInstanceRunning()
 {
     QLockFile lock(GetLockFilePath());
@@ -198,4 +210,15 @@ QString SingleInstanceCheckup::GetLockFilePath()
 bool SingleInstanceCheckup::isEnabled() const
 {
     return !_commandLineArguments.allowMultipleInstances();
+}
+
+bool SingleInstanceCheckup::isClient()
+{
+    if (_lockFile.isLocked())
+        return false;
+
+    if (!_lockFile.lock(QtLockedFile::WriteLock, false))
+        return true;
+
+    return false;
 }
