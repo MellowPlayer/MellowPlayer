@@ -202,7 +202,7 @@ namespace MellowPlayer::Infrastructure
             QFileInfo fi(*this);
             QString sem_name = QString::fromLatin1(SEMAPHORE_PREFIX) + fi.absoluteFilePath().toLower();
 
-            m_semaphore_hnd = CreateSemaphoreW(0, SEMAPHORE_MAX, SEMAPHORE_MAX, (TCHAR *) sem_name.utf16());
+            m_semaphore_hnd = CreateSemaphoreW(0, SEMAPHORE_MAX, SEMAPHORE_MAX, (WCHAR *) sem_name.utf16());
 
             if (m_semaphore_hnd == 0)
             {
@@ -225,7 +225,7 @@ namespace MellowPlayer::Infrastructure
                 QFileInfo fi(*this);
                 QString mut_name = QString::fromLatin1(MUTEX_PREFIX) + fi.absoluteFilePath().toLower();
 
-                m_mutex_hnd = CreateMutexW(nullptr, FALSE, (TCHAR *) mut_name.utf16());
+                m_mutex_hnd = CreateMutexW(nullptr, FALSE, (WCHAR *) mut_name.utf16());
 
                 if (m_mutex_hnd == 0)
                 {
