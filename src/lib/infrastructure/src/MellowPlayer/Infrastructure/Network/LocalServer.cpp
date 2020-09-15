@@ -21,15 +21,25 @@ void LocalServer::close()
 bool LocalServer::listen()
 {
 #ifndef Q_OS_WIN
-    auto fullServerName = QStandardPaths::standardLocations(QStandardPaths::AppDataLocation).first() + QDir::separator() + _serverName;
+    auto fullServerName = QStandardPaths::standardLocations(QStandardPaths::GenericCacheLocation).first() + QDir::separator() + "." + _serverName;
 #else
     auto fullServerName = _serverName;
 #endif
     if (!QLocalServer::removeServer(fullServerName))
         qWarning("LocalServer: could not cleanup socket");
-    auto status = _qLocalServer.listen(fullServerName);
-    qDebug() << "LocalServer: socket created at " << _qLocalServer.fullServerName();
-    return status;
+
+    qDebug() << "Creating LocalServer at: " << fullServerName;
+
+    if (!_qLocalServer.listen(fullServerName))
+    {
+        qWarning() << "Failed to create LocalServer: " << _qLocalServer.errorString();
+        return false;
+    }
+    else
+    {
+        qDebug() << "LocalServer socket created: " << _qLocalServer.fullServerName();
+        return true;
+    }
 }
 
 bool LocalServer::isListening() const
