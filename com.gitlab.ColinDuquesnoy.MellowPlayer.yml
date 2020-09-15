@@ -7,13 +7,17 @@ sdk: org.kde.Sdk
 command: MellowPlayer
 finish-args:
   - --share=ipc
-  - --socket=x11
+  - --socket=fallback-x11
   - --socket=wayland
   - --share=network
   - --socket=pulseaudio
   - --device=dri
   - --talk-name=org.mpris.MediaPlayer2.Player
   - --own-name=org.mpris.MediaPlayer2.MellowPlayer3.*
+  - --env=TMPDIR=/var/rpk
+  - --talk-name=org.kde.StatusNotifierWatcher
+  - --own-name=org.kde.*
+  - --talk-name=org.freedesktop.Notifications
 rename-desktop-file: "mellowplayer.desktop"
 rename-icon: "mellowplayer"
 modules:
@@ -31,3 +35,4 @@ modules:
     sources:
       - type: dir
         path: .
+
