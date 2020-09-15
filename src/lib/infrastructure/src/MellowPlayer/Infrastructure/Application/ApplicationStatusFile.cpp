@@ -19,6 +19,7 @@ ApplicationStatusFile::ApplicationStatusFile(IPlayer& currentPlayer) : _currentP
 
 void ApplicationStatusFile::create()
 {
+#ifdef Q_OS_WIN
     connect(&_currentPlayer, &IPlayer::currentSongChanged, this, &ApplicationStatusFile::onCurrentPlayerUpdated);
     connect(&_currentPlayer, &IPlayer::playbackStatusChanged, this, &ApplicationStatusFile::onCurrentPlayerUpdated);
 
@@ -26,16 +27,19 @@ void ApplicationStatusFile::create()
 
     LOG_DEBUG(_logger, "Writing player status changes to " << fileName());
     LOG_INFO(_logger, "Application Status File: " << fileName());
+#endif
 }
 
 void ApplicationStatusFile::remove()
 {
+#ifdef Q_OS_WIN
     QFile::remove(fileName());
 
     disconnect(&_currentPlayer, &IPlayer::currentSongChanged, this, &ApplicationStatusFile::onCurrentPlayerUpdated);
     disconnect(&_currentPlayer, &IPlayer::playbackStatusChanged, this, &ApplicationStatusFile::onCurrentPlayerUpdated);
 
     LOG_DEBUG(_logger, fileName() << " removed and player status monitoring disabled");
+#endif
 }
 
 QString ApplicationStatusFile::fileName() const
