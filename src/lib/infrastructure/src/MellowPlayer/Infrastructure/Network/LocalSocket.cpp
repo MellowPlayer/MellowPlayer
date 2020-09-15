@@ -12,11 +12,12 @@ LocalSocket::LocalSocket() : _qLocalSocket(new QLocalSocket(this))
 void LocalSocket::connectToServer(const QString& serverName, QIODevice::OpenMode openMode)
 {
 #ifndef Q_OS_WIN
-    auto fullServerName = QStandardPaths::standardLocations(QStandardPaths::AppDataLocation).first() + QDir::separator() + serverName;
+    auto fullServerName = QStandardPaths::standardLocations(QStandardPaths::GenericCacheLocation).first() + QDir::separator() + "." + serverName;
     _qLocalSocket->connectToServer(fullServerName, openMode);
 #else
     _qLocalSocket->connectToServer(serverName, openMode);
 #endif
+    qDebug() << "Trying to connect to socket: " << _qLocalSocket->fullServerName();
 }
 
 void LocalSocket::disconnectFromServer()
