@@ -23,18 +23,33 @@ wget $url1 -P $tmp_dir
 #extract the files
 ar -vx $tmp_dir/$file1
 tar -xvf $tmp_dir/data.tar.xz --strip-components 4 ./opt/google/chrome/WidevineCdm/_platform_specific/linux_x64/libwidevinecdm.so
+libwidevinecdm_path="$tmp_dir/WidevineCdm/_platform_specific/linux_x64/libwidevinecdm.so"
 
-#install the files
-echo "Installing libwidevinecdm.so to /usr/lib/chromium"
-sudo mkdir -p /usr/lib/chromium
-sudo install -Dm644 $tmp_dir/WidevineCdm/_platform_specific/linux_x64/libwidevinecdm.so -t /usr/lib/chromium
+flatpak_installation=$(flatpak list | grep MellowPlayer)
 
-if [ -d "/var/lib/flatpak/app/com.gitlab.ColinDuquesnoy.MellowPlayer/current/active/files/bin" ]; then
-  echo "Installing libwidevinecdm.so for use in flatpak system directory"
-  sudo cp /usr/lib/chromium/libwidevinecdm.so /var/lib/flatpak/app/com.gitlab.ColinDuquesnoy.MellowPlayer/current/active/files/bin
+if [ -z "$flatpak_installation" ]; then
+  # Install the files
+  echo "Installing libwidevinecdm.so to /usr/lib/chromium"
+  sudo mkdir -p /usr/lib/chromium
+  sudo install -Dm644 "$libwidevinecdm_path" -t /usr/lib/chromium
+else
+  # Prepare for use in flatpak: copy to app plugins dir
+  mkdir -p ~/.var/app/com.gitlab.ColinDuquesnoy.MellowPlayer/plugins/ppapi
+  cp "$libwidevinecdm_path" ~/.var/app/com.gitlab.ColinDuquesnoy.MellowPlayer/plugins/ppapi/
+
+  # Override widevine-path
+  flatpak_env_override="--widevine-path=$HOME/.var/app/com.gitlab.ColinDuquesnoy.MellowPlayer/plugins/ppapi/libwidevinecdm.so --no-sandbox"
+
+  # Flatpak system installation
+  if [ -d "/var/lib/flatpak/app/com.gitlab.ColinDuquesnoy.MellowPlayer/current/active/files/bin" ]; then
+    echo "Installing libwidevinecdm.so for use in flatpak --system installation"
+    sudo flatpak override --system --env=QTWEBENGINE_CHROMIUM_FLAGS="$flatpak_env_override" com.gitlab.ColinDuquesnoy.MellowPlayer
+  fi
+
+  # Flatpak user installation
+  if [ -d "$HOME/.local/share/flatpak/app/com.gitlab.ColinDuquesnoy.MellowPlayer/current/active/files/bin" ]; then
+    echo "Installing libwidevinecdm.so for use in flatpak --user installation"
+    flatpak override --user --env=QTWEBENGINE_CHROMIUM_FLAGS="$flatpak_env_override" com.gitlab.ColinDuquesnoy.MellowPlayer
+  fi
 fi
 
-if [ -d "$HOME/.local/share/flatpak/app/com.gitlab.ColinDuquesnoy.MellowPlayer/current/active/files/bin" ]; then
-  echo "Installing libwidevinecdm.so for use in flatpak user directory"
-  cp /usr/lib/chromium/libwidevinecdm.so "$HOME/.local/share/flatpak/app/com.gitlab.ColinDuquesnoy.MellowPlayer/current/active/files/bin"
-fi
