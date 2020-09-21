@@ -71,11 +71,14 @@ Pre-compiled packages for other distributions (Ubuntu, openSUSE,...) can be foun
 Flatpak
 +++++++
 
-MellowPlayer's flatpak is not yet available on flathub but you can download and install a single file bundle:
+MellowPlayer is available on `flathub`_:
 
-1. Download the flatpak from our `bintray repository`_
-2. Install the flatpak: ``flatpak install ./MellowPlayer.flatpak``
-3. Run the flatpak from your application menu or from command line: ``flatpak run com.gitlab.ColinDuquesnoy.MellowPlayer``
+.. code-block:: bash
+
+    flatpak install flathub com.gitlab.ColinDuquesnoy.MellowPlayer
+
+
+.. _flathub: https://flathub.org/apps/details/com.gitlab.ColinDuquesnoy.MellowPlayer
 
 
 AppImage
@@ -97,53 +100,14 @@ See the `README`_ for build instructions.
 Widevine Support
 ++++++++++++++++
 
-Some services such as Spotify and Amazon Music requires the widevine ppapi plugin to work, you can install it by running the below script (Tested on Ubuntu 20.04):
+Many services like Spotify, Tidal and Amazon Music requires the widevine DRM plugin to work.
+
+You can install it on GNU/Linux by running the below script:
 
 .. code-block:: bash
 
-    #!/bin/bash
-    #script to download and extract widevine compements, tested on unbutu 20.04
+    curl "https://gitlab.com/ColinDuquesnoy/MellowPlayer/-/raw/master/scripts/install-widevine.sh" | bash
 
-    #Uninstall the files
-    if [ "$1" == "uninstall" ]; then
-        echo "Uninstalling libwidevinecdm.so"
-        sudo rm /usr/lib/chromium/libwidevinecdm.so
-        exit
-    fi
-
-    #Create temp directory
-    tmp_dir=$(mktemp -d)
-    echo $tmp_dir
-    cd $tmp_dir
-
-    #set urls and checksums
-    url1="https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb"
-    file1=$(basename "$url1")
-    sha256_1=("229b35f0d41bbb6edd98ce4ab8305994a0f5cd1ac4d9817571f07365b2d1ad80")
-
-    #Download Files
-    wget $url1 -P $tmp_dir
-
-    #extract the files
-    ar -vx $tmp_dir/$file1
-    tar -xvf $tmp_dir/data.tar.xz --strip-components 4 ./opt/google/chrome/WidevineCdm/_platform_specific/linux_x64/libwidevinecdm.so
-
-    #install the files
-    echo "Installing libwidevinecdm.so to /usr/lib/chromium"
-    sudo mkdir -p /usr/lib/chromium
-    sudo install -Dm644 $tmp_dir/WidevineCdm/_platform_specific/linux_x64/libwidevinecdm.so -t /usr/lib/chromium
-
-Widevine support in flatpak
-***************************
-
-Flatpak won't pick up the system widevine plugin. It must be moved to a place that can be accessed from flatpak (e.g. ``~/.var/app/com.gitlab.ColinDuquesnoy.MellowPlayer/``) and
-you must instruct QtWebEngine where to find the plugin (using a flatpak override):
-
-.. code-block:: bash
-
-    mkdir -p ~/.var/app/com.gitlab.ColinDuquesnoy.MellowPlayer/plugins/ppapi
-    cp /usr/lib/chromium/libwidevinecdm.so ~/.var/app/com.gitlab.ColinDuquesnoy.MellowPlayer/plugins/ppapi/
-    sudo flatpak override --env=QTWEBENGINE_CHROMIUM_FLAGS="--widevine-path=$HOME/.var/app/com.gitlab.ColinDuquesnoy.MellowPlayer/plugins/ppapi/libwidevinecdm.so --no-sandbox" com.gitlab.ColinDuquesnoy.MellowPlayer
 
 Windows
 -------
