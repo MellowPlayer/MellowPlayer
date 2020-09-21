@@ -21,7 +21,7 @@ MellowPlayerConnect::MellowPlayerConnect(ITextFileFactory& textFileFactory, IShe
           _shellScriptFactory(shellScriptFactory),
           _processFactory(processFactory),
           _logger(Loggers::logger("MellowPlayer.Connect")),
-          _minimumRequiredVersion(0, 2, 4),
+          _minimumRequiredVersion(0, 2, 6),
           _installationDirectory(QStandardPaths::standardLocations(QStandardPaths::AppDataLocation).first() + QDir::separator() + "RemoteControl" +
                                  QDir::separator() + "mellowplayer-connect")
 {
@@ -127,10 +127,6 @@ void MellowPlayerConnect::install(const IRemoteControlApplication::InstallCallba
         setInstalling(false);
         installCallback(exitCode == 0, errorOutput);
     });
-
-    QTimer::singleShot(5000, [=]() {
-
-    });
 }
 
 bool MellowPlayerConnect::isInstalling() const
@@ -157,7 +153,10 @@ void MellowPlayerConnect::start()
     _process->setProgram(_installationDirectory + QDir::separator() + "MellowPlayer.Connect" + extension);
     _process->setArguments(arguments);
     _process->setWorkingDirectory(_installationDirectory);
-    _process->execute([=](int, const QString&, const QString&) { LOG_DEBUG(_logger, "Process finished"); });
+    _process->execute([=](int, const QString&, const QString&) {
+        LOG_DEBUG(_logger, "Process finished");
+        setRunning(false);
+    });
     setRunning(true);
 }
 
