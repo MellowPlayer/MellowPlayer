@@ -30,6 +30,11 @@ sudo mkdir -p /usr/lib/chromium
 sudo install -Dm644 $tmp_dir/WidevineCdm/_platform_specific/linux_x64/libwidevinecdm.so -t /usr/lib/chromium
 
 if [ -d "/var/lib/flatpak/app/com.gitlab.ColinDuquesnoy.MellowPlayer/current/active/files/bin" ]; then
-  echo "Installing libwidevinecdm.so for use in flatpak"
+  echo "Installing libwidevinecdm.so for use in flatpak system directory"
   sudo cp /usr/lib/chromium/libwidevinecdm.so /var/lib/flatpak/app/com.gitlab.ColinDuquesnoy.MellowPlayer/current/active/files/bin
+fi
+
+if [ -d "$HOME/.local/share/flatpak/app/com.gitlab.ColinDuquesnoy.MellowPlayer/current/active/files/bin" ]; then
+  echo "Installing libwidevinecdm.so for use in flatpak user directory"
+  cp /usr/lib/chromium/libwidevinecdm.so "$HOME/.local/share/flatpak/app/com.gitlab.ColinDuquesnoy.MellowPlayer/current/active/files/bin"
 fi
