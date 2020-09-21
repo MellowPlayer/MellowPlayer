@@ -106,7 +106,7 @@ You can install it on GNU/Linux by running the below script:
 
 .. code-block:: bash
 
-    curl "https://gitlab.com/ColinDuquesnoy/MellowPlayer/-/raw/master/scripts/install-widevine.sh" | bash
+    curl -s "https://gitlab.com/ColinDuquesnoy/MellowPlayer/-/raw/master/scripts/install-widevine.sh" | bash
 
 
 Windows
