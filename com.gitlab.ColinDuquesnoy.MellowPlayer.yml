@@ -14,7 +14,7 @@ finish-args:
   - --device=dri
   - --talk-name=org.mpris.MediaPlayer2.Player
   - --own-name=org.mpris.MediaPlayer2.MellowPlayer3.*
-  - --env=TMPDIR=/var/rpk
+  - --env=TMPDIR=/var/tmp
   - --talk-name=org.kde.StatusNotifierWatcher
   - --own-name=org.kde.*
   - --talk-name=org.freedesktop.Notifications
