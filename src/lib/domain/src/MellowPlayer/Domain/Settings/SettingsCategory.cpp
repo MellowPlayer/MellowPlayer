@@ -3,6 +3,7 @@
 #include <MellowPlayer/Domain/Settings/SettingsCategory.hpp>
 #include <QJsonDocument>
 #include <QJsonObject>
+#include <stdexcept>
 
 using namespace std;
 using namespace MellowPlayer::Domain;
