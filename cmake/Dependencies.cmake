@@ -1,4 +1,4 @@
-set(QT_MIN_VERSION 5.9)
+set(QT_MIN_VERSION 5.15)
 
 find_package(Qt5 ${QT_MIN_VERSION} CONFIG REQUIRED COMPONENTS
         Concurrent
