@@ -9,4 +9,5 @@ target_link_libraries(${LIB_NAME}
         Qt5::Concurrent Qt5::Core Qt5::Gui Qt5::Network Qt5::Qml Qt5::Quick Qt5::QuickControls2
         Qt5::Sql Qt5::Svg Qt5::WebEngine Qt5::WebEngineWidgets Qt5::Widgets Qt5::Test
         qxtglobalshortcut)
+target_precompile_headers(${LIB_NAME} PUBLIC stdafx.h)
 target_include_directories(${LIB_NAME} PUBLIC ${CMAKE_CURRENT_SOURCE_DIR} ${CMAKE_SOURCE_DIR}/src/tests)
