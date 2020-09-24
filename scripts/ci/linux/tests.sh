@@ -4,4 +4,4 @@ set -e
 
 cd build
 
-catchsegv ctest --verbose
+ctest --verbose

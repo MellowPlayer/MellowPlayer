@@ -6,3 +6,4 @@ COPY env-setup.sh /
 RUN sudo chmod +x /env-setup.sh
 RUN /env-setup.sh
 RUN sudo apt -y install lcov
+RUN sudo dbus-uuidgen --ensure=/etc/machine-id
