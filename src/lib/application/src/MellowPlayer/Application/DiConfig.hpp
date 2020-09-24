@@ -108,7 +108,6 @@
 #include <QGuiApplication>
 #include <QQmlApplicationEngine>
 #include <QtWebEngine>
-#include <boost-di-extensions/Factory.hpp>
 #include <boost/di.hpp>
 #include <boost/di/extension/scopes/scoped.hpp>
 

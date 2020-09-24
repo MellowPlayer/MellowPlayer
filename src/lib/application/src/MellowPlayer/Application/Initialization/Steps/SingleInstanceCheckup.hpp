@@ -6,7 +6,6 @@
 #include <QString>
 #include <QTimer>
 #include <QLockFile>
-#include <boost-di-extensions/Factory.hpp>
 #include <MellowPlayer/Infrastructure/LockedFiled/qtlockedfile.hpp>
 
 namespace MellowPlayer::Domain

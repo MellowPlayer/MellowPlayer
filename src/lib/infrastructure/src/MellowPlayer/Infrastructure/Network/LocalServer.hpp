@@ -2,7 +2,6 @@
 
 #include <QObject>
 #include <QtNetwork/QLocalServer>
-#include <boost-di-extensions/Factory.hpp>
 #include <memory>
 
 namespace MellowPlayer::Infrastructure

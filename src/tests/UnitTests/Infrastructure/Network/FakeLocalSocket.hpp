@@ -1,7 +1,6 @@
 #pragma once
 
 #include <MellowPlayer/Infrastructure/Network/LocalSocket.hpp>
-#include <boost-di-extensions/Factory.hpp>
 
 namespace MellowPlayer::Infrastructure::Tests
 {
