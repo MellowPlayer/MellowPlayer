@@ -25,7 +25,7 @@ macro(add_test_type layer type)
         target_link_libraries(${TEST_NAME} ${LIBNOTIFY_LIBRARIES})
     endif()
 
-    add_test (NAME ${TEST_NAME} COMMAND $<TARGET_FILE:${TEST_NAME}> -s)
+    add_test (NAME ${TEST_NAME} COMMAND $<TARGET_FILE:${TEST_NAME}>)
     set(ALL_TESTS ${ALL_TESTS} ${TEST_NAME})
 endmacro()
 

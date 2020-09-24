@@ -1,6 +1,6 @@
 ![MellowPlayer banner](docs/_static/banner.png)
 
-![Flathub](https://img.shields.io/flathub/v/com.gitlab.ColinDuquesnoy.MellowPlayer)
+[![Flathub](https://img.shields.io/flathub/v/com.gitlab.ColinDuquesnoy.MellowPlayer)](https://flathub.org/apps/details/com.gitlab.ColinDuquesnoy.MellowPlayer)
 [![pipeline status](https://gitlab.com/ColinDuquesnoy/MellowPlayer/badges/master/pipeline.svg)](https://gitlab.com/ColinDuquesnoy/MellowPlayer/commits/master)
 [![codecov](https://codecov.io/gl/ColinDuquesnoy/MellowPlayer/branch/master/graph/badge.svg)](https://codecov.io/gl/ColinDuquesnoy/MellowPlayer)
 [![Join the chat at https://gitter.im/ColinDuquesnoy-MellowPlayer/Lobby](https://badges.gitter.im/ColinDuquesnoy-MellowPlayer/Lobby.svg)](https://gitter.im/ColinDuquesnoy-MellowPlayer/Lobby?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)

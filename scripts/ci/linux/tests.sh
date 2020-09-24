@@ -4,4 +4,4 @@ set -e
 
 cd build
 
-ctest --verbose
+ctest --output-on-failure
