@@ -20,13 +20,13 @@ int TestsRunner::runTests(int argc, char** argv)
     Q_INIT_RESOURCE(infrastructure);
     Q_INIT_RESOURCE(presentation);
 
+    QtWebEngine::initialize();
+
     QApplication application(argc, argv);
     application.setApplicationName("MellowPlayer.Tests");
     application.setApplicationDisplayName("MellowPlayer.Tests");
     application.setOrganizationName("MellowPlayer.Tests");
     application.setOrganizationDomain("org.mellowplayer.tests");
-
-    QtWebEngine::initialize();
 
     auto loggerFactory = std::make_shared<SpdLoggerFactory>();
     LoggerConfig loggerConfig;
