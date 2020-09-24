@@ -25,7 +25,7 @@ test_script:
     - tests.bat
 
 deploy_script:
-    - cd C:\projects\MellowPlayer\scripts\packaging\windows
+    - cd C:\projects\MellowPlayer\scripts\ci\windows
     - make_installer.bat
     - cd C:\projects\MellowPlayer\scripts\ci\windows
     - if defined APPVEYOR_REPO_TAG_NAME (upload-stable.bat) else (upload-continuous.bat)

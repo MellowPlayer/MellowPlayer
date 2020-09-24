@@ -1,2 +1,2 @@
 #!/usr/bin/env bash
-docker build -t registry.gitlab.com/colinduquesnoy/mellowplayer/build-images/linux:latest .
+docker build -t registry.gitlab.com/colinduquesnoy/mellowplayer/build-images/linux:qt515 .

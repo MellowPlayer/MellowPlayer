@@ -45,9 +45,9 @@ Name: vcredist; Description: "MSVC 2017 Redist";  Types: full; Flags: disablenou
 
 [Files]
 Source: "bin\*"; DestDir: "{app}"; Flags: recursesubdirs createallsubdirs; Components: app
-Source: "..\scripts\packaging\windows\libcrypto-1_1-x64.dll"; DestDir: "{app}"; Components: app
-Source: "..\scripts\packaging\windows\libssl-1_1-x64.dll"; DestDir: "{app}"; Components: app
-Source: "..\scripts\packaging\windows\vc_redist.x64.exe"; DestDir: "{tmp}"; Components: vcredist
+Source: "..\scripts\ci\windows\libcrypto-1_1-x64.dll"; DestDir: "{app}"; Components: app
+Source: "..\scripts\ci\windows\libssl-1_1-x64.dll"; DestDir: "{app}"; Components: app
+Source: "..\scripts\ci\windows\vc_redist.x64.exe"; DestDir: "{tmp}"; Components: vcredist
 
 [Tasks]
 Name: "desktopicon"; Description: "{cm:CreateDesktopIcon}"; GroupDescription: "{cm:AdditionalIcons}"; Flags: unchecked; Components: app;
