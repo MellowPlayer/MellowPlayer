@@ -1,5 +1,6 @@
 #include <Fakes/FakeCommnandLineArguments.hpp>
 #include <Fakes/FakeHttpClientFactory.hpp>
+#include <Fakes/FakeStreamingServiceCreator.hpp>
 #include <MellowPlayer/Domain/Player/Player.hpp>
 #include <MellowPlayer/Domain/Player/Players.hpp>
 #include <MellowPlayer/Domain/Settings/Setting.hpp>
@@ -7,7 +8,6 @@
 #include <MellowPlayer/Domain/StreamingServices/StreamingService.hpp>
 #include <MellowPlayer/Domain/StreamingServices/StreamingServices.hpp>
 #include <MellowPlayer/Presentation/ViewModels/StreamingServices/StreamingServicesViewModel.hpp>
-#include <Mocks/StreamingServiceCreatorMock.hpp>
 #include <QtTest/QSignalSpy>
 #include <Utils/DependencyPool.hpp>
 #include <catch/catch.hpp>
@@ -17,7 +17,6 @@ using namespace MellowPlayer::Presentation;
 using namespace MellowPlayer::Infrastructure;
 using namespace MellowPlayer::Infrastructure::Tests;
 using namespace MellowPlayer::Tests;
-using namespace fakeit;
 
 TEST_CASE("StreamingServicesControllerViewModel", "[UnitTest]")
 {
@@ -27,14 +26,14 @@ TEST_CASE("StreamingServicesControllerViewModel", "[UnitTest]")
     Players& players = pool.getPlayers();
     Settings& settings = pool.getSettings();
     IWorkDispatcher& workDispatcher = pool.getWorkDispatcher();
-    auto creatorMock = StreamingServiceCreatorMock::get();
+    FakeStreamingServiceCreator streamingServiceCreator;
     FakeCommandLineArguments commandLineArguments;
     FakeHttpClientFactory httpClientFactory;
     StreamingServicesViewModel viewModel(streamingServices,
                                          players,
                                          settings,
                                          workDispatcher,
-                                         creatorMock.get(),
+                                         streamingServiceCreator,
                                          commandLineArguments,
                                          pool.getUserScriptFactory(),
                                          pool.getContextProperties(),
@@ -112,7 +111,7 @@ TEST_CASE("StreamingServicesControllerViewModel", "[UnitTest]")
     {
         QSignalSpy spy(&viewModel, &StreamingServicesViewModel::serviceCreated);
         viewModel.createService("svName", "svUrl", "authorName", "authorUrl", true, false, false, false, false);
-        Verify(Method(creatorMock, create));
+        REQUIRE(streamingServiceCreator.count() == 1);
         REQUIRE(spy.count() == 1);
     }
 
@@ -125,7 +124,7 @@ TEST_CASE("StreamingServicesControllerViewModel", "[UnitTest]")
                                                         players,
                                                         settings,
                                                         workDispatcher,
-                                                        creatorMock.get(),
+                                                        streamingServiceCreator,
                                                         commandLineArguments,
                                                         pool.getUserScriptFactory(),
                                                         pool.getContextProperties(),

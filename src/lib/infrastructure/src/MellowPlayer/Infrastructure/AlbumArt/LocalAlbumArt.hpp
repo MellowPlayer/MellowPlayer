@@ -18,7 +18,7 @@ namespace MellowPlayer::Infrastructure
     public:
         LocalAlbumArt(Domain::IPlayer& player, Domain::IAlbumArtDownloader& downloader, int timeout = 5000);
 
-        const QString& url() const override;
+        QString url() const override;
         bool isReady(const Domain::Song& song) override;
 
         QString fallbackUrl() const;

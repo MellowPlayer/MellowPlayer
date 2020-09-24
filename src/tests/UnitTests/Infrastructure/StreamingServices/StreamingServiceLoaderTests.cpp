@@ -3,7 +3,6 @@
 #include <UnitTests/Domain/Settings/FakeSettingsStore.hpp>
 #include <Utils/DependencyPool.hpp>
 #include <catch/catch.hpp>
-#include <fakeit/fakeit.hpp>
 
 using namespace MellowPlayer::Tests;
 using namespace MellowPlayer::Domain;

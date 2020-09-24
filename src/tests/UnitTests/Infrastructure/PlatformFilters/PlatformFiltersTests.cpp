@@ -2,7 +2,6 @@
 #include <MellowPlayer/Infrastructure/PlatformFilters/PlatformFilters.hpp>
 #include <QObject>
 #include <catch/catch.hpp>
-#include <fakeit/fakeit.hpp>
 
 using namespace MellowPlayer::Infrastructure;
 

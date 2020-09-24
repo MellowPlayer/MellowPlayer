@@ -18,7 +18,7 @@ QString StreamingServiceCreator::create(const QString& serviceName,
                                         const QString& serviceUrl,
                                         const QString& authorName,
                                         const QString& authorWebsite,
-                                        const QString& supportedPlatforms) const
+                                        const QString& supportedPlatforms)
 {
     auto dir = pluginDir(serviceName);
     QDir().mkpath(dir);

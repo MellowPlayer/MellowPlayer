@@ -1,12 +1,13 @@
+#include <Fakes/FakePlayer.hpp>
 #include <MellowPlayer/Domain/Settings/Settings.hpp>
 #include <MellowPlayer/Infrastructure/Settings/SettingsSchemaLoader.hpp>
 #include <MellowPlayer/Presentation/Notifications/SystemTrayIcon.hpp>
-#include <Mocks/PlayerMock.hpp>
 #include <UnitTests/Domain/Settings/FakeSettingsStore.hpp>
 #include <UnitTests/Presentation/FakeMainWindow.hpp>
 #include <Utils/DependencyPool.hpp>
 #include <catch/catch.hpp>
 
+using namespace MellowPlayer::Domain;
 using namespace MellowPlayer::Domain::Tests;
 using namespace MellowPlayer::Presentation;
 using namespace MellowPlayer::Presentation::Tests;
@@ -15,11 +16,12 @@ using namespace MellowPlayer::Tests;
 
 TEST_CASE("SystemTrayIconTests")
 {
-    auto playerMock = PlayerMock::get();
+    FakePlayer player;
     DependencyPool pool;
     FakeMainWindow mainWindow;
 
-    SystemTrayIcon systemTrayIcon(playerMock.get(), mainWindow, pool.getSettings(), pool.getStreamingServicesViewModel());
+    SystemTrayIcon systemTrayIcon(player, mainWindow, pool.getSettings(), pool.getStreamingServicesViewModel());
+    player.play();
 
     SECTION("don't show window onActivated with context menu")
     {
@@ -42,19 +44,19 @@ TEST_CASE("SystemTrayIconTests")
     SECTION("togglePlayPause call player")
     {
         systemTrayIcon.togglePlayPause();
-        Verify(Method(playerMock, togglePlayPause)).Exactly(1);
+        REQUIRE(player.playbackStatus() == PlaybackStatus::Paused);
     }
 
     SECTION("next call player")
     {
         systemTrayIcon.next();
-        Verify(Method(playerMock, next)).Exactly(1);
+        REQUIRE(player.trackIndex() == 1);
     }
 
     SECTION("previous call player")
     {
         systemTrayIcon.previous();
-        Verify(Method(playerMock, previous)).Exactly(1);
+        REQUIRE(player.trackIndex() == -1);
     }
 
     SECTION("restoreWindow show window")

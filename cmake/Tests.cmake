@@ -11,8 +11,7 @@ macro(add_test_type layer type)
     target_include_directories(${TEST_NAME} PRIVATE lib ${CMAKE_CURRENT_SOURCE_DIR} )
     target_include_directories(${TEST_NAME} SYSTEM PRIVATE
             ${CMAKE_SOURCE_DIR}/src/3rdparty
-            ${CMAKE_SOURCE_DIR}/src/3rdparty/catch
-            ${CMAKE_SOURCE_DIR}/src/3rdparty/fakeit)
+            ${CMAKE_SOURCE_DIR}/src/3rdparty/catch)
     if (APPLE)
         add_framework(Carbon ${TEST_NAME})
         add_framework(Cocoa ${TEST_NAME})

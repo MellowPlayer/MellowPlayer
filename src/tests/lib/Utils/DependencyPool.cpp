@@ -23,24 +23,22 @@
 #include <MellowPlayer/Presentation/ViewModels/ThemeViewModel.hpp>
 #include <MellowPlayer/Presentation/ViewModels/UpdaterViewModel.hpp>
 
-#include <Fakes/AlbumArtDownloaderMock.hpp>
+#include <Fakes/FakeAlbumArtDownloader.hpp>
 #include <Fakes/FakeBinTrayHttpClient.hpp>
 #include <Fakes/FakeCommnandLineArguments.hpp>
 #include <Fakes/FakeFileDownloader.hpp>
 #include <Fakes/FakeHttpClient.hpp>
 #include <Fakes/FakeListeningHistoryDatabase.hpp>
+#include <Fakes/FakeNotificationPresenter.hpp>
 #include <Fakes/FakePlatformUpdater.hpp>
+#include <Fakes/FakeThemeLoader.hpp>
 #include <Fakes/FakeUserScript.hpp>
 #include <Fakes/FakeWorkDispatcher.hpp>
-#include <Mocks/NotificationPresenterMock.hpp>
-#include <Mocks/StreamingServiceCreatorMock.hpp>
-#include <Mocks/ThemeLoaderMock.hpp>
 #include <UnitTests/Domain/Settings/FakeSettingsStore.hpp>
 #include <UnitTests/Domain/StreamingServices/FakeStreamingServiceLoader.hpp>
 #include <UnitTests/Domain/StreamingServices/FakeStreamingServiceWatcher.hpp>
 
 using namespace std;
-using namespace fakeit;
 using namespace MellowPlayer::Domain;
 using namespace MellowPlayer::Domain::Tests;
 using namespace MellowPlayer::Presentation;
@@ -51,12 +49,10 @@ using namespace MellowPlayer::Tests;
 
 DependencyPool::DependencyPool()
         : _commandLineArgs(make_unique<FakeCommandLineArguments>()),
-          _streamingServiceCreator(StreamingServiceCreatorMock::get()),
-          _notificationPresenter(NotificationPresenterMock::get()),
           _dataProvider(make_unique<FakeListeningHistoryDatabase>()),
           _contextProperties(std::make_shared<FakeContextProperties>())
 {
-    When(Method(_userScriptsFactoryMock, create)).AlwaysDo([]() -> IUserScript* { return new FakeUserScript; });
+
 }
 
 DependencyPool::~DependencyPool() = default;
@@ -99,7 +95,7 @@ Players& DependencyPool::getPlayers()
 
 IStreamingServiceCreator& DependencyPool::getStreamingServicesCreator()
 {
-    return _streamingServiceCreator.get();
+    return _streamingServiceCreator;
 }
 
 ISettingsStore& DependencyPool::getSettingsStore()
@@ -149,9 +145,9 @@ IPlayer& DependencyPool::getCurrentPlayer()
 
 ThemeViewModel& DependencyPool::getThemeViewModel()
 {
-    static auto mock = ThemeLoaderMock::get();
+    static auto themeLoader = FakeThemeLoader();
     if (_themeViewModel == nullptr)
-        _themeViewModel = make_unique<ThemeViewModel>(getStreamingServices(), getSettings(), mock.get(), *_contextProperties);
+        _themeViewModel = make_unique<ThemeViewModel>(getStreamingServices(), getSettings(), themeLoader, *_contextProperties);
     return *_themeViewModel;
 }
 
@@ -179,7 +175,7 @@ IPlayerNotifications& DependencyPool::playerNotifications()
 
 INotificationPresenter& DependencyPool::getNotificationPresenter()
 {
-    return _notificationPresenter.get();
+    return _notificationPresenter;
 }
 
 LocalAlbumArt& DependencyPool::getLocalAlbumArt()
@@ -191,7 +187,7 @@ LocalAlbumArt& DependencyPool::getLocalAlbumArt()
     return *_localAlbumArt;
 }
 
-Mock<INotificationPresenter>& DependencyPool::getNotificationPresenterMock()
+FakeNotificationPresenter& DependencyPool::getFakeNotificationPresenter()
 {
     return _notificationPresenter;
 }
@@ -206,7 +202,7 @@ AbstractPlatformUpdater& DependencyPool::getPlatformUpdater()
 
 IUserScriptFactory& DependencyPool::getUserScriptFactory()
 {
-    return _userScriptsFactoryMock.get();
+    return _userScriptsFactory;
 }
 
 IContextProperties& DependencyPool::getContextProperties()

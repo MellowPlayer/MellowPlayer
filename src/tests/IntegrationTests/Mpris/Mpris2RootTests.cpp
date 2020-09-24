@@ -1,6 +1,5 @@
 #include <QtCore>
 #include <catch/catch.hpp>
-#include <fakeit/fakeit.hpp>
 #if defined(Q_OS_LINUX) || defined(Q_OS_FREEBSD)
 #    include <MellowPlayer/Presentation/Mpris/Linux/Mpris2Root.hpp>
 #    include <UnitTests/Presentation/FakeMainWindow.hpp>
@@ -8,7 +7,6 @@
 using namespace MellowPlayer::Domain;
 using namespace MellowPlayer::Presentation;
 using namespace MellowPlayer::Presentation::Tests;
-using namespace fakeit;
 
 TEST_CASE("Mpris2RootTests", "[IntegrationTest]")
 {

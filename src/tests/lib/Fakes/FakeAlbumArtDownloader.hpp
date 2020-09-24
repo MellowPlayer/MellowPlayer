@@ -9,12 +9,27 @@ using namespace MellowPlayer::Domain;
 class FakeAlbumArtDownloader : public IAlbumArtDownloader
 {
 public:
+    void block()
+    {
+        _blocked = true;
+        if (!_localArtUrl.isEmpty())
+            emit downloadFinished(_localArtUrl);
+    }
+
+    void unblock()
+    {
+        _blocked = false;
+    }
+
     bool download(const QString& artUrl, const QString& songId) override
     {
         _artUrl = artUrl;
         _localArtUrl = LOCAL_URL + songId;
-        emit downloadFinished(_localArtUrl);
-        return true;
+
+        if (!_blocked)
+            emit downloadFinished(_localArtUrl);
+
+        return !_blocked;
     }
 
     QFileInfo localArtUrl(const QString&) override
@@ -35,4 +50,5 @@ public:
 private:
     QString _artUrl;
     QString _localArtUrl;
+    bool _blocked = true;
 };

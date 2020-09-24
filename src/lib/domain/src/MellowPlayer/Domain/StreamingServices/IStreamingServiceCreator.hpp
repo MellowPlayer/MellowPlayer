@@ -13,6 +13,6 @@ namespace MellowPlayer::Domain
                                const QString& serviceUrl,
                                const QString& authorName,
                                const QString& authorWebsite,
-                               const QString& supportedPlatforms) const = 0;
+                               const QString& supportedPlatforms) = 0;
     };
 }

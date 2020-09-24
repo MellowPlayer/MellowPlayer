@@ -4,12 +4,10 @@
 #include <MellowPlayer/Presentation/IconProvider.hpp>
 #include <QtCore>
 #include <catch/catch.hpp>
-#include <fakeit/fakeit.hpp>
 
 using namespace MellowPlayer::Domain;
 using namespace MellowPlayer::Presentation;
 using namespace MellowPlayer::Infrastructure;
-using namespace fakeit;
 
 bool isNullIcon(QIcon icon)
 {

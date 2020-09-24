@@ -1,9 +1,9 @@
 #pragma once
 
-#include <fakeit/fakeit.hpp>
-#include <memory>
-
 #include <Fakes/FakeHttpClientFactory.hpp>
+#include <Fakes/FakeNotificationPresenter.hpp>
+#include <Fakes/FakeStreamingServiceCreator.hpp>
+#include <Fakes/FakeUserScriptFactory.hpp>
 #include <MellowPlayer/Domain/Settings/ISettingsStore.hpp>
 #include <MellowPlayer/Domain/StreamingServices/IStreamingServiceCreator.hpp>
 #include <MellowPlayer/Domain/UserScripts/IUserScriptFactory.hpp>
@@ -12,6 +12,7 @@
 #include <UnitTests/Domain/Settings/FakeSettingsStore.hpp>
 #include <UnitTests/Infrastructure/Network/FakeNetworkProxies.hpp>
 #include <UnitTests/Presentation/Qml/FakeContextProperties.hpp>
+#include <memory>
 
 class FakeListeningHistoryDatabase;
 
@@ -52,9 +53,6 @@ namespace MellowPlayer::Tests
         DependencyPool();
         ~DependencyPool();
 
-        // Mock Objects
-        fakeit::Mock<Presentation::INotificationPresenter>& getNotificationPresenterMock();
-
         // Domain Layer
         Domain::StreamingServices& getStreamingServices();
         Domain::IPlayer& getCurrentPlayer();
@@ -81,14 +79,14 @@ namespace MellowPlayer::Tests
         Presentation::UpdaterViewModel& getUpdaterViewModel();
         Presentation::INotificationPresenter& getNotificationPresenter();
         Presentation::IContextProperties& getContextProperties();
+        Presentation::FakeNotificationPresenter& getFakeNotificationPresenter();
 
     private:
-        // mocks
         std::unique_ptr<Infrastructure::ICommandLineArguments> _commandLineArgs;
         Domain::Tests::FakeSettingsStore _settingsStore;
-        fakeit::Mock<Domain::IStreamingServiceCreator> _streamingServiceCreator;
-        fakeit::Mock<Presentation::INotificationPresenter> _notificationPresenter;
-        fakeit::Mock<Domain::IUserScriptFactory> _userScriptsFactoryMock;
+        Domain::FakeStreamingServiceCreator _streamingServiceCreator;
+        Presentation::FakeNotificationPresenter _notificationPresenter;
+        Domain::Tests::FakeUserScriptFactory _userScriptsFactory;
 
         // app
         std::unique_ptr<Domain::CurrentPlayer> _currentPlayer;

@@ -6,9 +6,7 @@
 #include <MellowPlayer/Presentation/ViewModels/UserScripts/UserScriptsViewModel.hpp>
 #include <UnitTests/Domain/Settings/FakeSettingsStore.hpp>
 #include <catch/catch.hpp>
-#include <fakeit/fakeit.hpp>
 
-using namespace fakeit;
 using namespace MellowPlayer::Domain;
 using namespace MellowPlayer::Domain::Tests;
 using namespace MellowPlayer::Presentation;

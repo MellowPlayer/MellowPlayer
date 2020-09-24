@@ -13,5 +13,4 @@ target_precompile_headers(${LIB_NAME} PUBLIC stdafx.h)
 target_include_directories(${LIB_NAME} PUBLIC ${CMAKE_CURRENT_SOURCE_DIR} ${CMAKE_SOURCE_DIR}/src/tests)
 target_include_directories(${LIB_NAME} SYSTEM PRIVATE
         ${CMAKE_SOURCE_DIR}/src/3rdparty
-        ${CMAKE_SOURCE_DIR}/src/3rdparty/catch
-        ${CMAKE_SOURCE_DIR}/src/3rdparty/fakeit)
+        ${CMAKE_SOURCE_DIR}/src/3rdparty/catch)

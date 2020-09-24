@@ -1,7 +1,6 @@
 #pragma once
 
 #include <memory>
-#include <fakeit.hpp>
 #include <MellowPlayer/Domain/Logging/LoggerConfig.hpp>
 #include <MellowPlayer/Infrastructure/CommandLineArguments/ICommandLineArguments.hpp>
 

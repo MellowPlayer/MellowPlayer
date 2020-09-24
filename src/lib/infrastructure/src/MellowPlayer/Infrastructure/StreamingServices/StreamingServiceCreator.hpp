@@ -13,7 +13,7 @@ namespace MellowPlayer::Infrastructure
                        const QString& serviceUrl,
                        const QString& authorName,
                        const QString& authorWebsite,
-                       const QString& supportedPlatforms) const override;
+                       const QString& supportedPlatforms) override;
 
     private:
         void createScript(const QString& pluginDir) const;

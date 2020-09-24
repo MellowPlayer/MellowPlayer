@@ -25,7 +25,7 @@ void LocalAlbumArt::useFallbackUrl()
     emit urlChanged();
 }
 
-const QString& LocalAlbumArt::url() const
+QString LocalAlbumArt::url() const
 {
     return _url;
 }

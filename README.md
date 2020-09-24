@@ -79,7 +79,6 @@ You can download official binaries from [BinTray](https://bintray.com/colinduque
 ### Testing
 
 - [catch](https://github.com/philsquared/Catch)
-- [fakeit](https://github.com/eranpeer/FakeIt)
 - [lcov](https://github.com/linux-test-project/lcov)
 
 # Compilation

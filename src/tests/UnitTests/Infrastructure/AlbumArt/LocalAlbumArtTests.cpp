@@ -1,4 +1,4 @@
-#include <Fakes/AlbumArtDownloaderMock.hpp>
+#include <Fakes/FakeAlbumArtDownloader.hpp>
 #include <MellowPlayer/Domain/Player/CurrentPlayer.hpp>
 #include <MellowPlayer/Domain/Player/Players.hpp>
 #include <MellowPlayer/Domain/StreamingServices/StreamingServices.hpp>
@@ -21,6 +21,7 @@ SCENARIO("LocalAlbumArt download current song art url when it changed")
     Players players(streamingServices);
     CurrentPlayer player(players, streamingServices);
     FakeAlbumArtDownloader albumArtDownloader;
+    albumArtDownloader.unblock();
     int timeout = 1;
     LocalAlbumArt localAlbumArt(player, albumArtDownloader, timeout);
 
