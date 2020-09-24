@@ -1,7 +1,7 @@
 #pragma once
 
-#include "../../../../../../../../../usr/include/x86_64-linux-gnu/qt5/QtCore/QString"
-#include "../../../lib/domain/src/MellowPlayer/Domain/UserScripts/UserScriptBase.hpp"
+#include <MellowPlayer/Domain/UserScripts/UserScriptBase.hpp>
+#include <QString>
 
 #define FAKE_USER_SCRIPT_CODE "foo"
 
