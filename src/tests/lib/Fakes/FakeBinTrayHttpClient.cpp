@@ -1,5 +1,5 @@
 #include "FakeBinTrayHttpClient.hpp"
-#include <QtCore/QDate>
+#include <QDate>
 #include <QUrl>
 
 using namespace MellowPlayer::Infrastructure;

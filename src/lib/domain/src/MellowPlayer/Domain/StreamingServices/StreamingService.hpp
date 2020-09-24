@@ -2,8 +2,8 @@
 
 #include "StreamingServiceMetadata.hpp"
 #include <MellowPlayer/Domain/Theme/Theme.hpp>
-#include <QtCore/QString>
-#include <QtGui/QImage>
+#include <QString>
+#include <QImage>
 #include <memory>
 
 namespace MellowPlayer::Domain

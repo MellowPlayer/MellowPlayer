@@ -1,6 +1,6 @@
 #include <MellowPlayer/Infrastructure/Helpers/FileHelper.hpp>
-#include <QtCore/QDir>
-#include <QtCore/QStandardPaths>
+#include <QDir>
+#include <QStandardPaths>
 
 using namespace MellowPlayer::Infrastructure;
 using namespace std;

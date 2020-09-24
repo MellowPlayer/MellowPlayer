@@ -3,7 +3,7 @@
 #include <MellowPlayer/Domain/Settings/Settings.hpp>
 #include <MellowPlayer/Presentation/HiDPISupport.h>
 #include <QtCore>
-#include <QtGui/QGuiApplication>
+#include <QGuiApplication>
 
 using namespace MellowPlayer::Domain;
 using namespace MellowPlayer::Presentation;

@@ -1,7 +1,7 @@
 #pragma once
 
 #include "UpdateChannel.hpp"
-#include <QtCore/QObject>
+#include <QObject>
 
 namespace MellowPlayer::Domain
 {

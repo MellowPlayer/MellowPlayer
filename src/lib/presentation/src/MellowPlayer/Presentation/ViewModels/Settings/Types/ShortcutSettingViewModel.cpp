@@ -1,6 +1,6 @@
 #include <MellowPlayer/Domain/Settings/Setting.hpp>
 #include <MellowPlayer/Presentation/ViewModels/Settings/Types/ShortcutSettingViewModel.hpp>
-#include <QtGui/QKeySequence>
+#include <QKeySequence>
 
 using namespace MellowPlayer::Presentation;
 using namespace MellowPlayer::Domain;

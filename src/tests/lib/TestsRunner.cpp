@@ -7,7 +7,7 @@
 #include <MellowPlayer/Infrastructure/BuildConfig.hpp>
 #include <MellowPlayer/Infrastructure/Logging/SpdLoggerFactory.hpp>
 #include <QDebug>
-#include <QtCore/QSettings>
+#include <QSettings>
 #include <QtWebEngine/qtwebengineglobal.h>
 #include <catch/catch.hpp>
 

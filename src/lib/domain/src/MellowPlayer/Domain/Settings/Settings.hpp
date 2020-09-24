@@ -1,8 +1,8 @@
 #pragma once
 
 #include <MellowPlayer/Domain/Settings/SettingKey.hpp>
-#include <QtCore/QList>
-#include <QtCore/QObject>
+#include <QList>
+#include <QObject>
 
 namespace MellowPlayer::Domain
 {

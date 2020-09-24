@@ -1,6 +1,6 @@
 #pragma once
 
-#include <QtCore/QObject>
+#include <QObject>
 #include <functional>
 
 namespace MellowPlayer::Infrastructure

@@ -1,10 +1,10 @@
 #include <MellowPlayer/Infrastructure/Network/IHttpClient.hpp>
 #include <MellowPlayer/Infrastructure/Updater/BinTray/LatestBinTrayRelease.hpp>
 #include <MellowPlayer/Infrastructure/Updater/Release.hpp>
-#include <QtCore/QJsonArray>
-#include <QtCore/QJsonDocument>
-#include <QtCore/QJsonObject>
-#include <QtCore/QVersionNumber>
+#include <QJsonArray>
+#include <QJsonDocument>
+#include <QJsonObject>
+#include <QVersionNumber>
 #include <QUrl>
 
 using namespace MellowPlayer::Infrastructure;

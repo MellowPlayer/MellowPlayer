@@ -1,5 +1,5 @@
 #include <MellowPlayer/Infrastructure/Updater/Asset.hpp>
-#include <QtCore/QUrl>
+#include <QUrl>
 
 using namespace MellowPlayer::Infrastructure;
 

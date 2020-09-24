@@ -4,7 +4,7 @@
 #include <QObject>
 #include <QString>
 #include <QUrl>
-#include <QtCore/QMap>
+#include <QMap>
 
 namespace MellowPlayer::Presentation::Tests
 {

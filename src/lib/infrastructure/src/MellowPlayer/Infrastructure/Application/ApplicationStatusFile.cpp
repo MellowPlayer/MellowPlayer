@@ -5,9 +5,9 @@
 #include <MellowPlayer/Domain/Player/IPlayer.hpp>
 #include <MellowPlayer/Domain/Player/Song.hpp>
 #include <MellowPlayer/Infrastructure/Application/ApplicationStatusFile.hpp>
-#include <QtCore/QDir>
-#include <QtCore/QJsonDocument>
-#include <QtCore/QJsonObject>
+#include <QDir>
+#include <QJsonDocument>
+#include <QJsonObject>
 
 using namespace MellowPlayer::Infrastructure;
 using namespace MellowPlayer::Domain;

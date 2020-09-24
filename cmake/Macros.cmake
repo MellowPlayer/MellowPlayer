@@ -41,7 +41,7 @@ endmacro()
 
 
 macro(glob_recurse_excl SOURCE_FILES FILE_EXT EXCLUDE_DIRS)
-    file (GLOB_RECURSE SOURCE_FILES_LIST ${FILE_EXT})
+    file (GLOB_RECURSE SOURCE_FILES_LIST CONFIGURE_DEPENDS ${FILE_EXT})
     separate_arguments(EXCLUDE_DIRS)
     foreach (TMP_PATH ${SOURCE_FILES_LIST})
         foreach(EXCLUDE_DIR ${EXCLUDE_DIRS})

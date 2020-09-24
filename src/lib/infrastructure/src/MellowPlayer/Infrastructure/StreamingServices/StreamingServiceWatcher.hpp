@@ -1,8 +1,8 @@
 #pragma once
 
 #include <MellowPlayer/Domain/StreamingServices/IStreamingServiceWatcher.hpp>
-#include <QtCore/QFileSystemWatcher>
-#include <QtCore/QMap>
+#include <QFileSystemWatcher>
+#include <QMap>
 
 namespace MellowPlayer::Domain
 {

@@ -1,7 +1,7 @@
 #pragma once
 
 #include <MellowPlayer/Domain/UserScripts/UserScriptBase.hpp>
-#include <QtCore/QString>
+#include <QString>
 
 #define FAKE_USER_SCRIPT_CODE "foo"
 

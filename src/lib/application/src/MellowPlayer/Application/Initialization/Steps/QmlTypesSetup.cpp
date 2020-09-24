@@ -3,7 +3,7 @@
 #include <MellowPlayer/Domain/Player/Song.hpp>
 #include <MellowPlayer/Domain/StreamingServices/StreamingService.hpp>
 #include <MellowPlayer/Presentation/ViewModels/Settings/Types/SettingViewModel.hpp>
-#include <QtCore/QThread>
+#include <QThread>
 
 using namespace MellowPlayer::Domain;
 using namespace MellowPlayer::Infrastructure;

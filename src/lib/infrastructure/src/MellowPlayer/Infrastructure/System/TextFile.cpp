@@ -1,7 +1,7 @@
 #include "TextFile.hpp"
 #include <QFile>
 #include <QTextStream>
-#include <QtCore/QFileInfo>
+#include <QFileInfo>
 
 using namespace MellowPlayer::Infrastructure;
 

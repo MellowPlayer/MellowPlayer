@@ -1,7 +1,7 @@
 #pragma once
 
-#include <QtCore/QObject>
-#include <QtCore/QVariant>
+#include <QObject>
+#include <QVariant>
 
 namespace MellowPlayer::Domain
 {

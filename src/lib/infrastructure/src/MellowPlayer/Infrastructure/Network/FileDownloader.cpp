@@ -2,8 +2,8 @@
 #include <MellowPlayer/Domain/Logging/Loggers.hpp>
 #include <MellowPlayer/Domain/Logging/LoggingMacros.hpp>
 #include <MellowPlayer/Infrastructure/Network/FileDownloader.hpp>
-#include <QtNetwork/QNetworkReply>
-#include <QtNetwork/QNetworkRequest>
+#include <QNetworkReply>
+#include <QNetworkRequest>
 
 using namespace MellowPlayer::Domain;
 using namespace MellowPlayer::Infrastructure;

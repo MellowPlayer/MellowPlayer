@@ -3,7 +3,7 @@
 #include <MellowPlayer/Domain/RemoteControl/IRemoteControl.hpp>
 #include <MellowPlayer/Presentation/Models/QQmlObjectListModel.hpp>
 #include <MellowPlayer/Presentation/Qml/ContextProperty.hpp>
-#include <QtCore/QObject>
+#include <QObject>
 
 namespace MellowPlayer::Presentation
 {

@@ -1,7 +1,7 @@
 #pragma once
 
 #include "StreamingServiceListModel.hpp"
-#include <QtCore/QSortFilterProxyModel>
+#include <QSortFilterProxyModel>
 
 namespace MellowPlayer::Domain
 {

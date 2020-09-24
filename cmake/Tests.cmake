@@ -1,8 +1,9 @@
 macro(add_test_type layer type)
-    file(GLOB_RECURSE SOURCE_FILES ${type}/${layer}/*.cpp)
-    file(GLOB_RECURSE HEADER_FILES ${type}/${layer}/*.hpp)
+    file(GLOB_RECURSE SOURCE_FILES CONFIGURE_DEPENDS ${type}/${layer}/*.cpp)
+    file(GLOB_RECURSE HEADER_FILES CONFIGURE_DEPENDS ${type}/${layer}/*.hpp)
     set(TEST_NAME ${PROJECT_NAME}.${layer}.${type})
     add_executable(${TEST_NAME} main.cpp ${SOURCE_FILES} ${HEADER_FILES})
+    target_precompile_headers(${TEST_NAME} REUSE_FROM ${PROJECT_NAME}.Domain)
     target_link_libraries(${TEST_NAME} MellowPlayer.Domain MellowPlayer.Presentation MellowPlayer.Infrastructure
             Qt5::Concurrent Qt5::Core Qt5::Gui Qt5::Network Qt5::Qml Qt5::Quick Qt5::QuickControls2
             Qt5::Sql Qt5::Svg Qt5::WebEngine Qt5::WebEngineWidgets Qt5::Widgets Qt5::Test

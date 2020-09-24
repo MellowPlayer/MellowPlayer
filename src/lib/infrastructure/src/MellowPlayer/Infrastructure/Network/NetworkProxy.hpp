@@ -2,7 +2,7 @@
 
 #include <MellowPlayer/Domain/Properties.hpp>
 #include <QVariantMap>
-#include <QtNetwork/QNetworkProxy>
+#include <QNetworkProxy>
 
 namespace MellowPlayer::Infrastructure
 {

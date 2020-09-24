@@ -1,8 +1,8 @@
 #pragma once
 
 #include <MellowPlayer/Infrastructure/Network/IFileDownloader.hpp>
-#include <QtCore/QFileInfo>
-#include <QtNetwork/QNetworkAccessManager>
+#include <QFileInfo>
+#include <QNetworkAccessManager>
 
 class QNetworkReply;
 

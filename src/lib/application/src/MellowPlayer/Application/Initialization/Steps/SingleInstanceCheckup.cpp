@@ -8,9 +8,9 @@
 #include <MellowPlayer/Infrastructure/CommandLineArguments/ICommandLineArguments.hpp>
 #include <MellowPlayer/Infrastructure/Network/LocalServer.hpp>
 #include <MellowPlayer/Infrastructure/Network/LocalSocket.hpp>
-#include <QtCore/QDir>
-#include <QtCore/QStandardPaths>
-#include <QtCore/QTimer>
+#include <QDir>
+#include <QStandardPaths>
+#include <QTimer>
 
 #if defined(Q_OS_WIN)
 #include <QLibrary>

@@ -1,7 +1,7 @@
 #pragma once
 
 #include <MellowPlayer/Domain/ListeningHistory/IListeningHistoryDatabase.hpp>
-#include <QtSql/QSqlDatabase>
+#include <QSqlDatabase>
 
 namespace MellowPlayer::Domain
 {

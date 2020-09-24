@@ -1,5 +1,5 @@
 #include <MellowPlayer/Presentation/Notifications/Presenters/Linux/LibnotifyStrings.hpp>
-#include <QtCore/QObject>
+#include <QObject>
 
 using namespace std;
 

@@ -1,5 +1,5 @@
 #include <MellowPlayer/Presentation/Converters/DateTimeConverter.hpp>
-#include <QtCore/QDateTime>
+#include <QDateTime>
 #include <QLocale>
 
 using namespace MellowPlayer::Presentation;

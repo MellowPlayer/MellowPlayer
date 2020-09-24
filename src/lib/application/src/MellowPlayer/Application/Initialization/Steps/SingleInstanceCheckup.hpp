@@ -5,7 +5,7 @@
 #include <MellowPlayer/Infrastructure/Network/LocalSocket.hpp>
 #include <QString>
 #include <QTimer>
-#include <QtCore/QLockFile>
+#include <QLockFile>
 #include <boost-di-extensions/Factory.hpp>
 #include <MellowPlayer/Infrastructure/LockedFiled/qtlockedfile.hpp>
 

@@ -1,7 +1,7 @@
 #pragma once
 
 #include <MellowPlayer/Domain/RemoteControl/IRemoteControlApplication.hpp>
-#include <QtCore/QVersionNumber>
+#include <QVersionNumber>
 #include <memory>
 
 namespace MellowPlayer::Domain

@@ -1,7 +1,7 @@
 #pragma once
 
 #include <MellowPlayer/Domain/StreamingServices/IStreamingServiceCreator.hpp>
-#include <QtCore/QString>
+#include <QString>
 #include <functional>
 
 namespace MellowPlayer::Infrastructure

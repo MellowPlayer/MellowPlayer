@@ -1,6 +1,6 @@
 #include <MellowPlayer/Infrastructure/Network/LocalSocket.hpp>
-#include <QtCore/QDir>
-#include <QtCore/QStandardPaths>
+#include <QDir>
+#include <QStandardPaths>
 
 using namespace MellowPlayer::Infrastructure;
 

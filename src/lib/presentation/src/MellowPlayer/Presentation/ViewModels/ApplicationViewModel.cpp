@@ -7,8 +7,8 @@
 #include <MellowPlayer/Presentation/ViewModels/ApplicationViewModel.hpp>
 
 #include <QDesktopServices>
-#include <QtCore/QDebug>
-#include <QtGui/QFontDatabase>
+#include <QDebug>
+#include <QFontDatabase>
 #include <QProcess>
 
 using namespace MellowPlayer::Domain;

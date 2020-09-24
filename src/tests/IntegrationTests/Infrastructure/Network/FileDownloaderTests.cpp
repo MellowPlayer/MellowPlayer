@@ -1,6 +1,6 @@
 #include <MellowPlayer/Infrastructure/Network/FileDownloader.hpp>
 #include <QSignalSpy>
-#include <QtCore/QTemporaryDir>
+#include <QTemporaryDir>
 #include <QtTest/qtestsystem.h>
 #include <catch/catch.hpp>
 

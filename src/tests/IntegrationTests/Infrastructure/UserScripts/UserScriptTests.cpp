@@ -1,6 +1,6 @@
 #include <MellowPlayer/Infrastructure/Helpers/FileHelper.hpp>
 #include <MellowPlayer/Infrastructure/UserScripts/UserScript.hpp>
-#include <QtCore/QDir>
+#include <QDir>
 #include <catch/catch.hpp>
 
 using namespace MellowPlayer::Infrastructure;

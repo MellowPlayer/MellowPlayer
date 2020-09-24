@@ -1,7 +1,6 @@
 #include <MellowPlayer/Domain/Player/IPlayer.hpp>
 #include <MellowPlayer/Domain/StreamingServices/StreamingService.hpp>
 #include <MellowPlayer/Domain/StreamingServices/StreamingServiceScript.hpp>
-#include <QtGui/QIcon>
 
 using namespace MellowPlayer::Domain;
 using namespace std;

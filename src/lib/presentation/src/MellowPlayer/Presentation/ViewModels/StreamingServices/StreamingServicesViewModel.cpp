@@ -12,7 +12,7 @@
 #include <MellowPlayer/Presentation/ViewModels/StreamingServices/StreamingServicesViewModel.hpp>
 #include <QQmlApplicationEngine>
 #include <QQmlContext>
-#include <QtWebEngine/QtWebEngine>
+#include <QtWebEngine>
 
 using namespace MellowPlayer;
 using namespace MellowPlayer::Domain;

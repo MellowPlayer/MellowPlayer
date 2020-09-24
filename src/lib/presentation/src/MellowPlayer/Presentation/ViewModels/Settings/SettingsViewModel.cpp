@@ -1,7 +1,7 @@
 #include <MellowPlayer/Domain/Settings/Settings.hpp>
 #include <MellowPlayer/Domain/Settings/SettingsCategory.hpp>
 #include <MellowPlayer/Presentation/ViewModels/Settings/SettingsViewModel.hpp>
-#include <QtQml/QtQml>
+#include <QtQml>
 
 using namespace MellowPlayer::Domain;
 using namespace MellowPlayer::Presentation;

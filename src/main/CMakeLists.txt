@@ -1,7 +1,7 @@
 add_definitions(-DBUILD_QXT_CORE -DBUILD_QXT_GUI -DQXT_STATIC)
 
 # Translation files
-file(GLOB_RECURSE TS_FILES languages/*.ts)
+file(GLOB_RECURSE TS_FILES CONFIGURE_DEPENDS languages/*.ts)
 qt5_add_translation(QM_FILES ${TS_FILES})
 add_custom_target(translations DEPENDS ${QM_FILES} ${TS_FILES})
 
@@ -18,7 +18,7 @@ file(APPEND ${CMAKE_CURRENT_BINARY_DIR}/languages.qrc "</RCC>\n")
 set_property(SOURCE ${CMAKE_CURRENT_BINARY_DIR}/qrc_languages.cpp PROPERTY SKIP_AUTOMOC ON)
 
 # Create main executable
-file(GLOB_RECURSE HEADER_FILES ${CMAKE_SOURCE_DIR}/lib/*.hpp)
+file(GLOB_RECURSE HEADER_FILES CONFIGURE_DEPENDS ${CMAKE_SOURCE_DIR}/lib/*.hpp)
 set(SOURCE_FILES main.cpp)
 if(WIN32)
     set(SOURCE_FILES ${SOURCE_FILES} MellowPlayer.rc)
@@ -26,6 +26,7 @@ if(WIN32)
 endif()
 add_executable(${PROJECT_NAME} MACOSX_BUNDLE WIN32 ${SOURCE_FILES} ${QM_FILES} ${CMAKE_CURRENT_BINARY_DIR}/languages.qrc qml.qrc)
 add_dependencies(${PROJECT_NAME} translations)
+target_precompile_headers(${PROJECT_NAME} REUSE_FROM ${PROJECT_NAME}.Domain)
 target_link_libraries(${PROJECT_NAME}
         MellowPlayer.Domain
         MellowPlayer.Presentation
@@ -63,6 +64,7 @@ endif()
 # add a console based executable for easier debugging
 if (WIN32)
     add_executable(MellowPlayer.Console MACOSX_BUNDLE ${SOURCE_FILES})
+    target_precompile_headers(MellowPlayer.Console REUSE_FROM ${PROJECT_NAME}.Domain)
     target_link_libraries(MellowPlayer.Console
             MellowPlayer.Domain
             MellowPlayer.Presentation

@@ -1,7 +1,7 @@
 #pragma once
 
-#include <QtCore/QObject>
-#include <QtCore/QString>
+#include <QObject>
+#include <QString>
 
 namespace MellowPlayer::Infrastructure
 {

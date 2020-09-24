@@ -1,7 +1,7 @@
 #pragma once
 
 #include <MellowPlayer/Infrastructure/System/IProcess.hpp>
-#include <QtCore/QProcess>
+#include <QProcess>
 
 namespace MellowPlayer::Domain
 {

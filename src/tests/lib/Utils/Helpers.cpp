@@ -1,7 +1,7 @@
 #include "Helpers.hpp"
 #include <MellowPlayer/Domain/Player/IPlayer.hpp>
 #include <QDebug>
-#include <QtCore/QFile>
+#include <QFile>
 
 using namespace MellowPlayer::Domain;
 

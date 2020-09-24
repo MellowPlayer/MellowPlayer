@@ -1,7 +1,7 @@
 #include <MellowPlayer/Presentation/ViewModels/CookiesViewModel.hpp>
-#include <QtCore/QDebug>
-#include <QtCore/QDir>
-#include <QtWebEngineWidgets/QWebEngineProfile>
+#include <QDebug>
+#include <QDir>
+#include <QWebEngineProfile>
 
 using namespace MellowPlayer::Presentation;
 

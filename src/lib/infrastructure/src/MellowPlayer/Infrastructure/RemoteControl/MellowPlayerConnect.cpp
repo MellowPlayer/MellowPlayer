@@ -6,11 +6,11 @@
 #include <MellowPlayer/Infrastructure/System/IShellScriptFactory.hpp>
 #include <MellowPlayer/Infrastructure/System/ITextFile.hpp>
 #include <MellowPlayer/Infrastructure/System/ITextFileFactory.hpp>
-#include <QtCore/QDir>
-#include <QtCore/QStandardPaths>
-#include <QtCore/QTimer>
-#include <QtNetwork/QHostAddress>
-#include <QtNetwork/QNetworkInterface>
+#include <QDir>
+#include <QStandardPaths>
+#include <QTimer>
+#include <QHostAddress>
+#include <QNetworkInterface>
 #include <QApplication>
 
 using namespace MellowPlayer::Domain;

@@ -1,6 +1,6 @@
 #pragma once
 
-#include <QtNetwork/QNetworkProxy>
+#include <QNetworkProxy>
 #include <memory>
 
 namespace MellowPlayer::Domain

@@ -12,8 +12,8 @@
 #include <MellowPlayer/Infrastructure/Network/NetworkProxy.hpp>
 #include <MellowPlayer/Presentation/ViewModels/StreamingServices/StreamingServiceViewModel.hpp>
 #include <QUrlQuery>
-#include <QtCore/QDir>
-#include <QtCore/QStandardPaths>
+#include <QDir>
+#include <QStandardPaths>
 #include <QFile>
 #include <QJsonDocument>
 #include <QJsonArray>

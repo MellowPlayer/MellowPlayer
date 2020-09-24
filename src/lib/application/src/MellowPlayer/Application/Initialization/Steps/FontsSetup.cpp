@@ -1,6 +1,6 @@
 #include "FontsSetup.hpp"
 #include <MellowPlayer/Infrastructure/Application/QtApplication.hpp>
-#include <QtGui/QFontDatabase>
+#include <QFontDatabase>
 
 using namespace MellowPlayer::Application;
 using namespace MellowPlayer::Infrastructure;

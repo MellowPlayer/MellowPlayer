@@ -4,10 +4,10 @@
 #include <MellowPlayer/Domain/Logging/LoggingMacros.hpp>
 #include <MellowPlayer/Infrastructure/Helpers/FileHelper.hpp>
 #include <MellowPlayer/Infrastructure/ListeningHistory/SqlLiteListeningHistoryDatabase.hpp>
-#include <QtCore/QVariant>
-#include <QtSql/QSqlError>
-#include <QtSql/QSqlQuery>
-#include <QtSql/QSqlRecord>
+#include <QVariant>
+#include <QSqlError>
+#include <QSqlQuery>
+#include <QSqlRecord>
 
 using namespace MellowPlayer::Domain;
 using namespace MellowPlayer::Domain;

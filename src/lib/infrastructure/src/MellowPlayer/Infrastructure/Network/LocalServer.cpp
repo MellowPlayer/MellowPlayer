@@ -1,8 +1,8 @@
 #include <MellowPlayer/Infrastructure/Network/LocalServer.hpp>
 #include <MellowPlayer/Infrastructure/Network/LocalSocket.hpp>
 #include <QDebug>
-#include <QtCore/QDir>
-#include <QtCore/QStandardPaths>
+#include <QDir>
+#include <QStandardPaths>
 
 using namespace std;
 using namespace MellowPlayer::Infrastructure;

@@ -1,7 +1,7 @@
 #pragma once
 
 #include <MellowPlayer/Infrastructure/Network/IHttpClient.hpp>
-#include <QtNetwork/QNetworkAccessManager>
+#include <QNetworkAccessManager>
 
 class QNetworkReply;
 

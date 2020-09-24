@@ -1,8 +1,8 @@
 #pragma once
 
 #include <MellowPlayer/Infrastructure/Application/QtApplication.hpp>
-#include <QtGui/QFont>
-#include <QtGui/QIcon>
+#include <QFont>
+#include <QIcon>
 
 namespace MellowPlayer::Infrastructure::Tests
 {

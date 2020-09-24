@@ -1,5 +1,5 @@
 #include <MellowPlayer/Presentation/Converters/UpdaterStatusConverter.hpp>
-#include <QtCore/QMap>
+#include <QMap>
 
 using namespace MellowPlayer::Infrastructure;
 using namespace MellowPlayer::Presentation;

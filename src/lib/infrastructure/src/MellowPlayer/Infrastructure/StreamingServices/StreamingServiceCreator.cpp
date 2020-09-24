@@ -2,7 +2,7 @@
 #include <MellowPlayer/Infrastructure/StreamingServices/StreamingServiceCreator.hpp>
 #include <MellowPlayer/Infrastructure/StreamingServices/StreamingServiceLoader.hpp>
 #include <QDebug>
-#include <QtCore/QDir>
+#include <QDir>
 
 using namespace std;
 using namespace MellowPlayer::Domain;

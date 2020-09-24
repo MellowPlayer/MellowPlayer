@@ -2,8 +2,8 @@
 #include <MellowPlayer/Infrastructure/Updater/Release.hpp>
 #include <QApplication>
 #include <QDebug>
-#include <QtCore/QDir>
-#include <QtCore/QProcessEnvironment>
+#include <QDir>
+#include <QProcessEnvironment>
 
 using namespace MellowPlayer::Infrastructure;
 

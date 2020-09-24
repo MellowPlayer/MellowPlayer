@@ -4,7 +4,7 @@
 #include <MellowPlayer/Infrastructure/Network/IHttpClient.hpp>
 #include <MellowPlayer/Presentation/ViewModels/Settings/SettingsCategoryViewModel.hpp>
 #include <MellowPlayer/Presentation/ViewModels/UserScripts/UserScriptsViewModel.hpp>
-#include <QtCore/QObject>
+#include <QObject>
 #include <memory>
 
 namespace MellowPlayer::Domain

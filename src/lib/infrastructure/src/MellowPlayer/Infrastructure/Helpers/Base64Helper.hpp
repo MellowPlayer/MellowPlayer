@@ -1,6 +1,6 @@
 #pragma once
 
-#include <QtGui/QImage>
+#include <QImage>
 
 namespace MellowPlayer::Domain
 {

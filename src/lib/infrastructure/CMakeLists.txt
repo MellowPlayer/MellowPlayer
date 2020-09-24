@@ -1,7 +1,7 @@
 set(LIB_NAME "${PROJECT_NAME}.Infrastructure")
 
-file(GLOB_RECURSE SOURCE_FILES src/*.cpp)
-file(GLOB_RECURSE HEADER_FILES src/*.hpp)
+file(GLOB_RECURSE SOURCE_FILES CONFIGURE_DEPENDS src/*.cpp)
+file(GLOB_RECURSE HEADER_FILES CONFIGURE_DEPENDS src/*.hpp)
 
 configure_file(${CMAKE_SOURCE_DIR}/scripts/settings/settings-schema.json ${CMAKE_CURRENT_BINARY_DIR}/resources/Settings/settings-schema.json )
 configure_file(resources/infrastructure.qrc ${CMAKE_CURRENT_BINARY_DIR}/resources/infrastructure.qrc)
@@ -16,6 +16,7 @@ configure_file(resources/scripts/install-mellowplayer-connect.ps1 ${CMAKE_CURREN
 configure_file(src/MellowPlayer/Infrastructure/BuildConfig.cpp.in ${CMAKE_BINARY_DIR}/BuildConfig.cpp)
 
 add_library(${LIB_NAME} STATIC ${SOURCE_FILES} ${HEADER_FILES} ${CMAKE_CURRENT_BINARY_DIR}/resources/infrastructure.qrc ${CMAKE_BINARY_DIR}/BuildConfig.cpp)
+target_precompile_headers(${LIB_NAME} REUSE_FROM ${PROJECT_NAME}.Domain)
 target_include_directories(${LIB_NAME} PUBLIC ${CMAKE_CURRENT_SOURCE_DIR}/src)
 target_include_directories(${LIB_NAME} PRIVATE ${CMAKE_SOURCE_DIR}/src/3rdparty/spdlog-0.16.3/include)
 target_link_libraries(${LIB_NAME} Qt5::Core Qt5::Gui Qt5::Concurrent Qt5::Network Qt5::Widgets Qt5::Sql ${PROJECT_NAME}.Domain)

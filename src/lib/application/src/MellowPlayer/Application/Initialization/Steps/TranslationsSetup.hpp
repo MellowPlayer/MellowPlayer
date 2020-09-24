@@ -1,7 +1,7 @@
 #pragma once
 
 #include <MellowPlayer/Domain/Initializable.hpp>
-#include <QtCore/QTranslator>
+#include <QTranslator>
 
 namespace MellowPlayer::Infrastructure
 {

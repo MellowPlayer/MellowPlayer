@@ -3,7 +3,7 @@
 #include <MellowPlayer/Presentation/Qml/ContextProperties.hpp>
 #include <MellowPlayer/Presentation/Qml/IContextProperty.hpp>
 #include <MellowPlayer/Presentation/Qml/IQmlApplicationEngine.hpp>
-#include <QtQml/QtQml>
+#include <QtQml>
 
 using namespace MellowPlayer::Domain;
 using namespace MellowPlayer::Presentation;

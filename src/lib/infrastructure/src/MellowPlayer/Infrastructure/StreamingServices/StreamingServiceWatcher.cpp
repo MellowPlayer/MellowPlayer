@@ -4,7 +4,7 @@
 #include <MellowPlayer/Domain/StreamingServices/StreamingService.hpp>
 #include <MellowPlayer/Infrastructure/StreamingServices/StreamingServiceLoader.hpp>
 #include <MellowPlayer/Infrastructure/StreamingServices/StreamingServiceWatcher.hpp>
-#include <QtCore/QDir>
+#include <QDir>
 
 using namespace std;
 using namespace MellowPlayer::Domain;

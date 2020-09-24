@@ -1,8 +1,8 @@
 #pragma once
 
-#include <QtCore/QJsonArray>
-#include <QtCore/QList>
-#include <QtCore/QObject>
+#include <QJsonArray>
+#include <QList>
+#include <QObject>
 
 namespace MellowPlayer::Domain
 {

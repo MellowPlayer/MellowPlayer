@@ -1,6 +1,6 @@
 #pragma once
 
-#include <QtWidgets/QApplication>
+#include <QApplication>
 
 class QTranslator;
 class QIcon;

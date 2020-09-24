@@ -1,8 +1,8 @@
 #include <MellowPlayer/Infrastructure/Application/Application.hpp>
 #include <MellowPlayer/Infrastructure/Application/QtApplication.hpp>
 #include <MellowPlayer/Infrastructure/BuildConfig.hpp>
-#include <QtCore/QDebug>
-#include <QtCore/QProcess>
+#include <QDebug>
+#include <QProcess>
 
 using namespace std;
 using namespace MellowPlayer::Infrastructure;

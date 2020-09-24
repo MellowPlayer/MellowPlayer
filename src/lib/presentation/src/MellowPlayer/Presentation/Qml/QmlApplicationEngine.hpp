@@ -1,7 +1,7 @@
 #pragma once
 
 #include "IQmlApplicationEngine.hpp"
-#include <QtQml/QQmlApplicationEngine>
+#include <QQmlApplicationEngine>
 #include <memory>
 
 namespace MellowPlayer::Presentation

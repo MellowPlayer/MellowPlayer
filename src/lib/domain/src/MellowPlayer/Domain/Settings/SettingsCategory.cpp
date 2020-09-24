@@ -1,8 +1,8 @@
 #include <MellowPlayer/Domain/Settings/Setting.hpp>
 #include <MellowPlayer/Domain/Settings/Settings.hpp>
 #include <MellowPlayer/Domain/Settings/SettingsCategory.hpp>
-#include <QtCore/QJsonDocument>
-#include <QtCore/QJsonObject>
+#include <QJsonDocument>
+#include <QJsonObject>
 
 using namespace std;
 using namespace MellowPlayer::Domain;

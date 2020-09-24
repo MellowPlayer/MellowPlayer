@@ -1,9 +1,9 @@
 #pragma once
 
 #include <MellowPlayer/Domain/Initializable.hpp>
-#include <QtCore/QElapsedTimer>
-#include <QtCore/QList>
-#include <QtCore/QString>
+#include <QElapsedTimer>
+#include <QList>
+#include <QString>
 #include <memory>
 #include <vector>
 

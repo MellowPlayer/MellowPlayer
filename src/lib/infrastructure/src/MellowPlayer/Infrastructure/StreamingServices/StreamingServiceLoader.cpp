@@ -8,12 +8,13 @@
 #include <MellowPlayer/Infrastructure/StreamingServices/StreamingServiceLoader.hpp>
 #include <MellowPlayer/Infrastructure/Theme/ThemeLoader.hpp>
 #include <QDebug>
-#include <QtCore/QCoreApplication>
-#include <QtCore/QDir>
-#include <QtCore/QJsonDocument>
-#include <QtCore/QSettings>
-#include <QtCore/QStandardPaths>
-#include <QtGui/QIcon>
+#include <QIcon>
+#include <QDir>
+#include <QJsonDocument>
+#include <QSettings>
+#include <QStandardPaths>
+#include <QIcon>
+#include <QCoreApplication>
 
 using namespace MellowPlayer::Domain;
 using namespace MellowPlayer::Domain;

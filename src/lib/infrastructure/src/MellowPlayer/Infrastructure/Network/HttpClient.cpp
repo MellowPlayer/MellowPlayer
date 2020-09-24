@@ -1,5 +1,5 @@
 #include <MellowPlayer/Infrastructure/Network/HttpClient.hpp>
-#include <QtNetwork/QNetworkReply>
+#include <QNetworkReply>
 
 using namespace MellowPlayer::Infrastructure;
 

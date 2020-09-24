@@ -23,7 +23,7 @@ void RemoteControlCheckup::initialize(const ResultCallback& resultCallback)
         break;
     case InstallationState::Outdated:
         LOG_DEBUG(_logger, _remoteControlApplication.name() << " is outdated");
-        _remoteControlApplication.install([=](bool success, const QString& errorMessage) {
+        _remoteControlApplication.install([=](bool, const QString& errorMessage) {
             _errorMessage = "Failed to install " + _remoteControlApplication.name() + ": " + errorMessage;
             resultCallback(true);
         });

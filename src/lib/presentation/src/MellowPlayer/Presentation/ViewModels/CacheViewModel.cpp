@@ -1,8 +1,8 @@
 #include <MellowPlayer/Presentation/ViewModels/CacheViewModel.hpp>
-#include <QtCore/QDebug>
-#include <QtCore/QDir>
-#include <QtCore/QStandardPaths>
-#include <QtWebEngineWidgets/QWebEngineProfile>
+#include <QDebug>
+#include <QDir>
+#include <QStandardPaths>
+#include <QWebEngineProfile>
 
 using namespace MellowPlayer::Presentation;
 

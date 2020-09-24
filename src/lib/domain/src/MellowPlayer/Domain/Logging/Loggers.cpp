@@ -1,7 +1,7 @@
 #include <MellowPlayer/Domain/Logging/ILogger.hpp>
 #include <MellowPlayer/Domain/Logging/ILoggerFactory.hpp>
 #include <MellowPlayer/Domain/Logging/Loggers.hpp>
-#include <QtCore/QLoggingCategory>
+#include <QLoggingCategory>
 
 using namespace MellowPlayer::Domain;
 using namespace std;

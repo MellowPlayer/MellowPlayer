@@ -1,8 +1,8 @@
 #include <MellowPlayer/Infrastructure/Helpers/FileHelper.hpp>
 #include <MellowPlayer/Infrastructure/UserScripts/UserScript.hpp>
 #include <QDebug>
-#include <QtCore/QDir>
-#include <QtCore/QUuid>
+#include <QDir>
+#include <QUuid>
 
 using namespace MellowPlayer::Domain;
 using namespace MellowPlayer::Infrastructure;

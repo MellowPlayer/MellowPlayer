@@ -1,8 +1,8 @@
 #pragma once
 
 #include "Asset.hpp"
-#include <QtCore/QDate>
-#include <QtCore/QObject>
+#include <QDate>
+#include <QObject>
 
 namespace MellowPlayer::Infrastructure
 {

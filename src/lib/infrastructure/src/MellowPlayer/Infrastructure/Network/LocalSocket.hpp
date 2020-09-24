@@ -1,7 +1,7 @@
 #pragma once
 
-#include <QtCore/QIODevice>
-#include <QtCore/QObject>
+#include <QIODevice>
+#include <QObject>
 #include <QtNetwork/QLocalSocket>
 #include <memory>
 
