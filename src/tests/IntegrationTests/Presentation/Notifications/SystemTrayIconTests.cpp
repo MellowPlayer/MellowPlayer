@@ -5,7 +5,7 @@
 #include <UnitTests/Domain/Settings/FakeSettingsStore.hpp>
 #include <UnitTests/Presentation/FakeMainWindow.hpp>
 #include <Utils/DependencyPool.hpp>
-#include <catch/catch.hpp>
+#include <catch2/catch.hpp>
 
 using namespace MellowPlayer::Domain;
 using namespace MellowPlayer::Domain::Tests;

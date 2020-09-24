@@ -15,9 +15,7 @@ find_package(Qt5 ${QT_MIN_VERSION} CONFIG REQUIRED COMPONENTS
         WebChannel
         WebEngineWidgets
         Widgets)
-
 find_package(Qt5LinguistTools REQUIRED)
-
 if (UNIX AND NOT APPLE)
     find_package(Qt5 ${QT_MIN_VERSION} REQUIRED COMPONENTS DBus)
 endif()
@@ -42,4 +40,14 @@ if (qxtglobalshortcut_FOUND)
     message(STATUS "Found qxtglobalshortcut")
 else()
     add_subdirectory(${CMAKE_SOURCE_DIR}/src/3rdparty/libqxt)
+endif()
+
+Include(FetchContent)
+
+if (BUILD_TESTS)
+    FetchContent_Declare(
+            Catch2
+            GIT_REPOSITORY https://github.com/catchorg/Catch2.git
+            GIT_TAG        v2.13.1)
+    FetchContent_MakeAvailable(Catch2)
 endif()

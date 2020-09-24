@@ -2,7 +2,7 @@
 #include <MellowPlayer/Infrastructure/Updater/Updater.hpp>
 #include <MellowPlayer/Presentation/ViewModels/UpdaterViewModel.hpp>
 #include <Utils/DependencyPool.hpp>
-#include <catch/catch.hpp>
+#include <catch2/catch.hpp>
 
 using namespace MellowPlayer::Infrastructure;
 using namespace MellowPlayer::Presentation;

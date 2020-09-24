@@ -8,7 +8,7 @@
 #include <MellowPlayer/Presentation/ViewModels/Settings/Types/StringSettingViewModel.hpp>
 #include <MellowPlayer/Presentation/ViewModels/Settings/Types/ThemeSettingViewModel.hpp>
 #include <Utils/DependencyPool.hpp>
-#include <catch/catch.hpp>
+#include <catch2/catch.hpp>
 
 using namespace MellowPlayer::Domain;
 using namespace MellowPlayer::Presentation;

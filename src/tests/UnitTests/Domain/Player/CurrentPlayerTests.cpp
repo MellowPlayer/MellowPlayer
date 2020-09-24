@@ -5,7 +5,7 @@
 #include <QtTest/QSignalSpy>
 #include <UnitTests/Domain/StreamingServices/FakeStreamingServiceLoader.hpp>
 #include <UnitTests/Domain/StreamingServices/FakeStreamingServiceWatcher.hpp>
-#include <catch/catch.hpp>
+#include <catch2/catch.hpp>
 
 using namespace MellowPlayer::Domain;
 using namespace MellowPlayer::Domain::Tests;

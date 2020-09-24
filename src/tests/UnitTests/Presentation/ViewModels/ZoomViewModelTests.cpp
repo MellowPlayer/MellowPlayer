@@ -1,7 +1,7 @@
 #include <MellowPlayer/Presentation/ViewModels/ZoomViewModel.hpp>
 #include <UnitTests/Domain/Settings/FakeSettingsStore.hpp>
 #include <UnitTests/Presentation/Qml/FakeContextProperties.hpp>
-#include <catch.hpp>
+#include <catch2/catch.hpp>
 
 using namespace MellowPlayer::Domain;
 using namespace MellowPlayer::Domain::Tests;

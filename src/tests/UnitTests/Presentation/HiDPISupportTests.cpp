@@ -4,7 +4,7 @@
 #include <MellowPlayer/Presentation/HiDPISupport.h>
 #include <QSettings>
 #include <Utils/DependencyPool.hpp>
-#include <catch.hpp>
+#include <catch2/catch.hpp>
 
 using namespace MellowPlayer::Domain;
 using namespace MellowPlayer::Presentation;

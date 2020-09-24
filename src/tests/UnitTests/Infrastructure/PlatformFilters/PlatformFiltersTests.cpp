@@ -1,7 +1,7 @@
 #include <MellowPlayer/Infrastructure/PlatformFilters/PlatformFilterFactory.hpp>
 #include <MellowPlayer/Infrastructure/PlatformFilters/PlatformFilters.hpp>
 #include <QObject>
-#include <catch/catch.hpp>
+#include <catch2/catch.hpp>
 
 using namespace MellowPlayer::Infrastructure;
 

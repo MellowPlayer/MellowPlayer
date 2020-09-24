@@ -4,7 +4,7 @@
 #include <QVersionNumber>
 #include <QtTest/QSignalSpy>
 #include <Utils/DependencyPool.hpp>
-#include <catch/catch.hpp>
+#include <catch2/catch.hpp>
 
 using namespace std;
 using namespace MellowPlayer::Domain;

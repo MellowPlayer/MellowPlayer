@@ -3,7 +3,7 @@
 #include <MellowPlayer/Domain/Settings/ISettingsStore.hpp>
 #include <MellowPlayer/Domain/UserScripts/UserScripts.hpp>
 #include <UnitTests/Domain/Settings/FakeSettingsStore.hpp>
-#include <catch/catch.hpp>
+#include <catch2/catch.hpp>
 
 using namespace MellowPlayer::Domain;
 using namespace MellowPlayer::Domain::Tests;

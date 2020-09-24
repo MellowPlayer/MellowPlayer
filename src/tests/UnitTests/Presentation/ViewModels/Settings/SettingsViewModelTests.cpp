@@ -6,7 +6,7 @@
 #include <UnitTests/Presentation/FakeMainWindow.hpp>
 #include <UnitTests/Presentation/Qml/FakeContextProperties.hpp>
 #include <Utils/DependencyPool.hpp>
-#include <catch/catch.hpp>
+#include <catch2/catch.hpp>
 
 using namespace MellowPlayer::Domain;
 using namespace MellowPlayer::Presentation;

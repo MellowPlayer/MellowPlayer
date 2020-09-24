@@ -1,5 +1,5 @@
 #include <QtCore>
-#include <catch/catch.hpp>
+#include <catch2/catch.hpp>
 #if defined(Q_OS_LINUX) || defined(Q_OS_FREEBSD)
 #    include <MellowPlayer/Presentation/Mpris/Linux/Mpris2Root.hpp>
 #    include <UnitTests/Presentation/FakeMainWindow.hpp>

@@ -2,7 +2,7 @@
 #include <QtTest/QSignalSpy>
 #include <UnitTests/Presentation/Qml/FakeContextProperties.hpp>
 #include <UnitTests/Presentation/Qml/FakeQmlApplicationEngine.hpp>
-#include <catch/catch.hpp>
+#include <catch2/catch.hpp>
 
 using namespace MellowPlayer::Presentation;
 using namespace MellowPlayer::Presentation::Tests;

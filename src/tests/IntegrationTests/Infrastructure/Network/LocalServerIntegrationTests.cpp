@@ -1,7 +1,7 @@
 #include <MellowPlayer/Infrastructure/Network/LocalServer.hpp>
 #include <MellowPlayer/Infrastructure/Network/LocalSocket.hpp>
 #include <QtTest/qtestsystem.h>
-#include <catch/catch.hpp>
+#include <catch2/catch.hpp>
 
 using namespace std;
 using namespace MellowPlayer::Infrastructure;
@@ -26,7 +26,7 @@ SCENARIO("LocalServer and LocalSocket integration tests")
         {
             socket.connectToServer(serverName, QIODevice::WriteOnly);
 
-            QTest::qWait(1000);
+            QTest::qWait(100);
 
             THEN("a new connection has been received")
             {
@@ -40,7 +40,7 @@ SCENARIO("LocalServer and LocalSocket integration tests")
                 QObject::connect(newConnection.get(), &ILocalSocket::readyRead, [&]() { receivedData = newConnection->readAll(); });
                 socket.write("foo\n");
 
-                QTest::qWait(1000);
+                QTest::qWait(100);
 
                 THEN("data is received on the server")
                 {

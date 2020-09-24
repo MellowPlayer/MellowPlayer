@@ -7,7 +7,7 @@
 #include <MellowPlayer/Domain/StreamingServices/StreamingServices.hpp>
 #include <Utils/DependencyPool.hpp>
 #include <Utils/Helpers.hpp>
-#include <catch/catch.hpp>
+#include <catch2/catch.hpp>
 
 using namespace MellowPlayer;
 using namespace MellowPlayer::Domain;

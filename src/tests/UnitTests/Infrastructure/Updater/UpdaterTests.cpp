@@ -8,7 +8,7 @@
 #include <MellowPlayer/Infrastructure/Updater/UpdateChannel.hpp>
 #include <MellowPlayer/Infrastructure/Updater/Updater.hpp>
 #include <QtTest/QSignalSpy>
-#include <catch/catch.hpp>
+#include <catch2/catch.hpp>
 
 using namespace MellowPlayer;
 using namespace MellowPlayer::Domain;

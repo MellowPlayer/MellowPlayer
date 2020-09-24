@@ -1,6 +1,6 @@
 #include <MellowPlayer/Infrastructure/System/QtConcurrentWorkDispatcher.hpp>
 #include <QtTest/qtestsystem.h>
-#include <catch/catch.hpp>
+#include <catch2/catch.hpp>
 #include <thread>
 
 using namespace std::this_thread;
@@ -15,15 +15,15 @@ TEST_CASE("QtConcurrentWorkDispatcherTests")
     {
         bool finished = false;
         workDispatcher.invoke([&]() { finished = true; });
-        sleep_for(milliseconds(500));
+        sleep_for(milliseconds(100));
         REQUIRE(finished);
     }
 
     SECTION("delayInvoke")
     {
         bool finished = false;
-        workDispatcher.delayInvoke(100, [&]() { finished = true; });
-        QTest::qWait(1000);
+        workDispatcher.delayInvoke(10, [&]() { finished = true; });
+        QTest::qWait(100);
         REQUIRE(finished);
     }
 }

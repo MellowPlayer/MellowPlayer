@@ -1,7 +1,7 @@
 #include <MellowPlayer/Infrastructure/Network/HttpClient.hpp>
 #include <QSignalSpy>
 #include <QtTest/qtestsystem.h>
-#include <catch/catch.hpp>
+#include <catch2/catch.hpp>
 
 using namespace MellowPlayer::Infrastructure;
 

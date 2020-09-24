@@ -4,7 +4,7 @@
 #include <UnitTests/Infrastructure/Application/FakeQtApplication.hpp>
 #include <UnitTests/Presentation/FakeMainWindow.hpp>
 #include <UnitTests/Presentation/Qml/FakeContextProperties.hpp>
-#include <catch/catch.hpp>
+#include <catch2/catch.hpp>
 
 using namespace MellowPlayer::Infrastructure;
 using namespace MellowPlayer::Presentation;

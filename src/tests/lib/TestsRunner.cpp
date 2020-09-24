@@ -9,7 +9,7 @@
 #include <QDebug>
 #include <QSettings>
 #include <QtWebEngine/qtwebengineglobal.h>
-#include <catch/catch.hpp>
+#include <catch2/catch.hpp>
 
 using namespace MellowPlayer::Domain;
 using namespace MellowPlayer::Infrastructure;

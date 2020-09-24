@@ -1,7 +1,7 @@
 #include <MellowPlayer/Infrastructure/AlbumArt/AlbumArtDownloader.hpp>
 #include <QTemporaryDir>
 #include <QtTest/QSignalSpy>
-#include <catch/catch.hpp>
+#include <catch2/catch.hpp>
 #include <iostream>
 
 using namespace MellowPlayer::Infrastructure;
@@ -18,7 +18,7 @@ TEST_CASE("AlbumArtDownloaderTests", "[!mayfail]")
         QString url = "http://github.com/ColinDuquesnoy/MellowPlayer/blob/develop/docs/_static/banner.png";
         QString name = "banner.png";
         REQUIRE(albumArtDownloader.download(url, name));
-        if (downloadFinishedSpy.wait(2000))
+        if (downloadFinishedSpy.wait(250))
         {
             REQUIRE(downloadFinishedSpy.count() == 1);
             auto path = downloadFinishedSpy[0][0].toString();

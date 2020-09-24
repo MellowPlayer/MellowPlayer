@@ -1,7 +1,7 @@
 #include <Fakes/FakeUserScript.hpp>
 #include <MellowPlayer/Presentation/ViewModels/UserScripts/UserScriptViewModel.hpp>
 #include <QtTest/QSignalSpy>
-#include <catch/catch.hpp>
+#include <catch2/catch.hpp>
 
 using namespace MellowPlayer::Domain;
 using namespace MellowPlayer::Domain::Tests;

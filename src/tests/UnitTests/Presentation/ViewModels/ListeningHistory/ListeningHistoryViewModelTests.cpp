@@ -11,7 +11,7 @@
 #include <UnitTests/Domain/StreamingServices/FakeStreamingServiceLoader.hpp>
 #include <Utils/DependencyPool.hpp>
 #include <Utils/Helpers.hpp>
-#include <catch/catch.hpp>
+#include <catch2/catch.hpp>
 
 using namespace MellowPlayer::Domain;
 using namespace MellowPlayer::Domain;

@@ -1,6 +1,6 @@
 #include <MellowPlayer/Infrastructure/PlatformFilters/TokenizedFilters.hpp>
 #include <QList>
-#include <catch/catch.hpp>
+#include <catch2/catch.hpp>
 
 using namespace MellowPlayer::Infrastructure;
 

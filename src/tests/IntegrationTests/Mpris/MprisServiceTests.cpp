@@ -1,5 +1,5 @@
 #include <QtCore>
-#include <catch/catch.hpp>
+#include <catch2/catch.hpp>
 #if defined(Q_OS_LINUX) || defined(Q_OS_FREEBSD)
 #    include <Fakes/FakeAlbumArtDownloader.hpp>
 #    include <MellowPlayer/Domain/Player/CurrentPlayer.hpp>

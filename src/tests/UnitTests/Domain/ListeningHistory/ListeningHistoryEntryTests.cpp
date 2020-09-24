@@ -1,5 +1,5 @@
 #include <MellowPlayer/Domain/ListeningHistory/ListeningHistoryEntry.hpp>
-#include <catch/catch.hpp>
+#include <catch2/catch.hpp>
 
 using namespace MellowPlayer::Domain;
 

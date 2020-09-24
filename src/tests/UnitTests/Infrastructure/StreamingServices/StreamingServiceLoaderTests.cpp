@@ -2,7 +2,7 @@
 #include <MellowPlayer/Infrastructure/StreamingServices/StreamingServiceLoader.hpp>
 #include <UnitTests/Domain/Settings/FakeSettingsStore.hpp>
 #include <Utils/DependencyPool.hpp>
-#include <catch/catch.hpp>
+#include <catch2/catch.hpp>
 
 using namespace MellowPlayer::Tests;
 using namespace MellowPlayer::Domain;

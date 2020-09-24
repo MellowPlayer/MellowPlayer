@@ -2,7 +2,7 @@
 #include <QSignalSpy>
 #include <QTemporaryDir>
 #include <QtTest/qtestsystem.h>
-#include <catch/catch.hpp>
+#include <catch2/catch.hpp>
 
 using namespace MellowPlayer::Infrastructure;
 

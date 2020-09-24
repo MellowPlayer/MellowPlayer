@@ -20,4 +20,4 @@ if(${ENABLE_COVERAGE} AND ${ENABLE_LCOV_REPORT})
     setup_target_for_coverage(coverage "ctest" coverage)
 endif()
 
-add_custom_target(AllTests COMMAND ctest --output-on-failure DEPENDS ${ALL_TESTS})
+add_custom_target(AllTests COMMAND ctest DEPENDS ${ALL_TESTS})

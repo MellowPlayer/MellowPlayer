@@ -2,7 +2,7 @@
 #include <MellowPlayer/Presentation/ViewModels/Settings/Types/ColorSettingViewModel.hpp>
 #include <QtTest/QSignalSpy>
 #include <Utils/DependencyPool.hpp>
-#include <catch/catch.hpp>
+#include <catch2/catch.hpp>
 
 using namespace MellowPlayer::Domain;
 using namespace MellowPlayer::Presentation;

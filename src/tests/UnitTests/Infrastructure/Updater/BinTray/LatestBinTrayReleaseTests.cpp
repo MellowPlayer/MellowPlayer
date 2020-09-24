@@ -1,7 +1,7 @@
 #include "Fakes/FakeBinTrayHttpClient.hpp"
 #include <MellowPlayer/Infrastructure/Updater/BinTray/LatestBinTrayRelease.hpp>
 #include <MellowPlayer/Infrastructure/Updater/Release.hpp>
-#include <catch.hpp>
+#include <catch2/catch.hpp>
 
 using namespace MellowPlayer::Infrastructure;
 using namespace MellowPlayer::Infrastructure::Tests;

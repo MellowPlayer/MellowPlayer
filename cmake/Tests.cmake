@@ -4,14 +4,15 @@ macro(add_test_type layer type)
     set(TEST_NAME ${PROJECT_NAME}.${layer}.${type})
     add_executable(${TEST_NAME} main.cpp ${SOURCE_FILES} ${HEADER_FILES})
     target_precompile_headers(${TEST_NAME} REUSE_FROM MellowPlayer.TestsLib)
-    target_link_libraries(${TEST_NAME} MellowPlayer.Domain MellowPlayer.Presentation MellowPlayer.Infrastructure
+    target_link_libraries(${TEST_NAME}
+            MellowPlayer.Domain
+            MellowPlayer.Presentation
+            MellowPlayer.Infrastructure
+            Catch2::Catch2
             Qt5::Concurrent Qt5::Core Qt5::Gui Qt5::Network Qt5::Qml Qt5::Quick Qt5::QuickControls2
             Qt5::Sql Qt5::Svg Qt5::WebEngine Qt5::WebEngineWidgets Qt5::Widgets Qt5::Test
             qxtglobalshortcut MellowPlayer.TestsLib)
-    target_include_directories(${TEST_NAME} PRIVATE lib ${CMAKE_CURRENT_SOURCE_DIR} )
-    target_include_directories(${TEST_NAME} SYSTEM PRIVATE
-            ${CMAKE_SOURCE_DIR}/src/3rdparty
-            ${CMAKE_SOURCE_DIR}/src/3rdparty/catch)
+    target_include_directories(${TEST_NAME} PRIVATE lib ${CMAKE_CURRENT_SOURCE_DIR})
     if (APPLE)
         add_framework(Carbon ${TEST_NAME})
         add_framework(Cocoa ${TEST_NAME})
@@ -24,7 +25,7 @@ macro(add_test_type layer type)
         target_link_libraries(${TEST_NAME} ${LIBNOTIFY_LIBRARIES})
     endif()
 
-    add_test (NAME ${TEST_NAME} COMMAND $<TARGET_FILE:${TEST_NAME}>)
+    catch_discover_tests(${TEST_NAME})
     set(ALL_TESTS ${ALL_TESTS} ${TEST_NAME})
 endmacro()
 

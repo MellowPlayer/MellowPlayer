@@ -1,7 +1,7 @@
 #include <MellowPlayer/Infrastructure/Helpers/FileHelper.hpp>
 #include <MellowPlayer/Infrastructure/UserScripts/UserScript.hpp>
 #include <QDir>
-#include <catch/catch.hpp>
+#include <catch2/catch.hpp>
 
 using namespace MellowPlayer::Infrastructure;
 

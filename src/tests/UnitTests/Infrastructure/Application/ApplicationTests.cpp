@@ -3,7 +3,7 @@
 #include <MellowPlayer/Infrastructure/BuildConfig.hpp>
 #include <QtTest/QSignalSpy>
 #include <UnitTests/Presentation/Qml/FakeContextProperties.hpp>
-#include <catch/catch.hpp>
+#include <catch2/catch.hpp>
 
 using namespace MellowPlayer::Infrastructure;
 using namespace MellowPlayer::Infrastructure::Tests;

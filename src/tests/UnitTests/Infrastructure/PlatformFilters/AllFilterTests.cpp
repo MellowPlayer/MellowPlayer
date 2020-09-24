@@ -1,5 +1,5 @@
 #include <MellowPlayer/Infrastructure/PlatformFilters/AllFilter.hpp>
-#include <catch/catch.hpp>
+#include <catch2/catch.hpp>
 
 using namespace MellowPlayer::Infrastructure;
 
