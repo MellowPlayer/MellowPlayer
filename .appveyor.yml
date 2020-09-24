@@ -1,4 +1,4 @@
-version: 3.6.6.{build}
+version: 3.7.0.{build}
 
 os: Visual Studio 2019
 
@@ -7,7 +7,7 @@ platform:
 
 environment:
     QTDIR: C:\Qt\5.15.0\msvc2019_64
-    APP_VERSION: 3.6.6
+    APP_VERSION: 3.7.0
     BINTRAY_API_KEY:
         secure: 5JxFMiIEPLEzENmBD2AV6eOfA7+9kTfh276P91CoijHfboWrdgvpvci9vuiOxXRa
 
@@ -19,15 +19,14 @@ clone_folder: C:\projects\MellowPlayer
 build_script:
     - cd C:\projects\MellowPlayer\scripts\ci\windows
     - build.bat
-    - cd C:\projects\MellowPlayer\scripts\packaging\windows
-    - make_installer.bat
 
 test_script:
     - cd C:\projects\MellowPlayer\scripts\ci\windows
     - tests.bat
 
-
 deploy_script:
+    - cd C:\projects\MellowPlayer\scripts\packaging\windows
+    - make_installer.bat
     - cd C:\projects\MellowPlayer\scripts\ci\windows
     - if defined APPVEYOR_REPO_TAG_NAME (upload-stable.bat) else (upload-continuous.bat)
 
