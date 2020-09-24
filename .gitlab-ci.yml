@@ -55,7 +55,6 @@ coverage:
     script:
         - ./scripts/ci/linux/coverage.sh
     after_script:
-        - yum -y install curl
         - bash <(curl -s https://codecov.io/bash) -t "${CODECOV_TOKEN}" -f build/coverage.info.cleaned
 
 pages:
