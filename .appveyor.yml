@@ -29,7 +29,3 @@ deploy_script:
     - make_installer.bat
     - cd C:\projects\MellowPlayer\scripts\ci\windows
     - if defined APPVEYOR_REPO_TAG_NAME (upload-stable.bat) else (upload-continuous.bat)
-
-artifacts:
-    - path: MellowPlayer_Setup.exe
-      name: WindowsInstaller
