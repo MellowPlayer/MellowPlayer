@@ -16,6 +16,7 @@ variables:
 build:debug:
     extends: .linux
     stage: build
+    needs: []
     script:
         - ./scripts/ci/linux/build-debug.sh
     artifacts:
@@ -26,6 +27,7 @@ build:debug:
 build:release:
     extends: .linux
     stage: build
+    needs: []
     script:
         - ./scripts/ci/linux/build-release.sh
     artifacts:
@@ -36,12 +38,14 @@ build:release:
 build:release:no-gold-linker:
     extends: .linux
     stage: build
+    needs: []
     script:
         - ./scripts/ci/linux/build-release-no-gold-linker.sh
 
 tests:
     extends: .linux
     stage: tests
+    needs: ["build:release"]
     dependencies:
         - build:release
     script:
@@ -50,6 +54,7 @@ tests:
 coverage:
     extends: .linux
     stage: tests
+    needs: ["build:debug"]
     dependencies:
         - build:debug
     script:
@@ -60,6 +65,7 @@ coverage:
 pages:
     image: alpine:latest
     stage: deploy
+    needs: []
     script:
         - echo 'Nothing to do...'
     artifacts:
