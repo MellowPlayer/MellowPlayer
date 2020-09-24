@@ -16,6 +16,6 @@ namespace MellowPlayer::Domain
 
         virtual bool import(const QString& path) = 0;
         virtual bool load(const QString& path) = 0;
-        virtual void removeFile() const = 0;
+        virtual void removeFile() = 0;
     };
 }

@@ -4,7 +4,7 @@
 using namespace MellowPlayer::Domain;
 using namespace MellowPlayer::Infrastructure;
 
-IUserScript* MellowPlayer::Infrastructure::UserScriptFactory::create() const
+IUserScript* UserScriptFactory::create()
 {
     return new UserScript;
 }

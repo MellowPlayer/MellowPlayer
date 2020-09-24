@@ -5,7 +5,6 @@
 #include <QtTest/QSignalSpy>
 #include <QtTest/qtestsystem.h>
 #include <catch/catch.hpp>
-#include <fakeit/fakeit.hpp>
 
 using namespace MellowPlayer::Domain;
 using namespace MellowPlayer::Infrastructure;

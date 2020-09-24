@@ -9,7 +9,7 @@
 //
 #if !defined(SPDLOG_FMT_EXTERNAL)
 #include "fmt.h"
-#include "spdlog-0.16.3/include/spdlog/fmt/bundled/ostream.h"
+#include <spdlog/fmt/bundled/ostream.h>
 #else
 #include <fmt/ostream.h>
 #endif

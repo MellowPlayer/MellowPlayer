@@ -8,7 +8,11 @@ macro(add_test_type layer type)
             Qt5::Concurrent Qt5::Core Qt5::Gui Qt5::Network Qt5::Qml Qt5::Quick Qt5::QuickControls2
             Qt5::Sql Qt5::Svg Qt5::WebEngine Qt5::WebEngineWidgets Qt5::Widgets Qt5::Test
             qxtglobalshortcut MellowPlayer.TestsLib)
-    target_include_directories(${TEST_NAME} PRIVATE lib ${CMAKE_CURRENT_SOURCE_DIR})
+    target_include_directories(${TEST_NAME} PRIVATE lib ${CMAKE_CURRENT_SOURCE_DIR} )
+    target_include_directories(${TEST_NAME} SYSTEM PRIVATE
+            ${CMAKE_SOURCE_DIR}/src/3rdparty
+            ${CMAKE_SOURCE_DIR}/src/3rdparty/catch
+            ${CMAKE_SOURCE_DIR}/src/3rdparty/fakeit)
     if (APPLE)
         add_framework(Carbon ${TEST_NAME})
         add_framework(Cocoa ${TEST_NAME})

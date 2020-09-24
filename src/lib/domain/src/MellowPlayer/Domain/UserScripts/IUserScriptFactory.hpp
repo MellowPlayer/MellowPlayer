@@ -8,6 +8,6 @@ namespace MellowPlayer::Domain
     {
     public:
         virtual ~IUserScriptFactory() = default;
-        virtual IUserScript* create() const = 0;
+        virtual IUserScript* create() = 0;
     };
 }

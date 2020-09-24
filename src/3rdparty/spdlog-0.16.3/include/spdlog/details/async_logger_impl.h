@@ -9,7 +9,7 @@
 // Use an async_sink (queue per logger) to perform the logging in a worker thread
 
 #include "async_log_helper.h"
-#include "spdlog-0.16.3/include/spdlog/async_logger.h"
+#include <spdlog/async_logger.h>
 
 #include <string>
 #include <functional>

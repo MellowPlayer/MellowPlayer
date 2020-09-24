@@ -1,39 +1,24 @@
+#include <Fakes/FakeUserScript.hpp>
+#include <Fakes/FakeUserScriptFactory.hpp>
 #include <MellowPlayer/Domain/Settings/ISettingsStore.hpp>
-#include <MellowPlayer/Domain/UserScripts/IUserScript.hpp>
-#include <MellowPlayer/Domain/UserScripts/IUserScriptFactory.hpp>
 #include <MellowPlayer/Domain/UserScripts/UserScripts.hpp>
 #include <UnitTests/Domain/Settings/FakeSettingsStore.hpp>
 #include <catch/catch.hpp>
-#include <fakeit/fakeit.hpp>
 
-using namespace fakeit;
 using namespace MellowPlayer::Domain;
 using namespace MellowPlayer::Domain::Tests;
 
 #ifdef QT_DEBUG
 SCENARIO("UserScriptsTests")
 {
-    Mock<IUserScript> userScriptMock;
-    When(Method(userScriptMock, path)).AlwaysReturn("/path");
-    When(Method(userScriptMock, code)).AlwaysReturn("code");
-    When(Method(userScriptMock, name)).AlwaysReturn("name");
-    Fake(Method(userScriptMock, setName));
-    Fake(Method(userScriptMock, removeFile));
-    When(Method(userScriptMock, load)).AlwaysReturn(true);
-    When(Method(userScriptMock, import)).AlwaysReturn(true);
-    Fake(Dtor(userScriptMock));
-    IUserScript& userScript = userScriptMock.get();
-
-    Mock<IUserScriptFactory> factoryMock;
-    When(Method(factoryMock, create)).AlwaysReturn(&userScript);
-
+    FakeUserScriptFactory userScriptFactory { "code", "/path", "name" };
     QString serviceName = "fakeService";
     FakeSettingsStore settingsStore;
     settingsStore.clear();
 
     GIVEN("empty settings")
     {
-        UserScripts userScripts(serviceName, factoryMock.get(), settingsStore);
+        UserScripts userScripts(serviceName, userScriptFactory, settingsStore);
 
         WHEN("get count")
         {
@@ -47,29 +32,14 @@ SCENARIO("UserScriptsTests")
         {
             userScripts.add("name", "/path");
 
-            THEN("factory is called")
+            THEN("count is 1")
             {
-                Verify(Method(factoryMock, create)).Exactly(1);
+                REQUIRE(userScripts.count() == 1);
 
-                AND_THEN("name is set")
+                AND_THEN("settings are saved")
                 {
-                    Verify(Method(userScriptMock, setName)).Exactly(1);
-
-                    AND_THEN("import is called")
-                    {
-                        Verify(Method(userScriptMock, import)).Exactly(1);
-
-                        AND_THEN("count is 1")
-                        {
-                            REQUIRE(userScripts.count() == 1);
-
-                            AND_THEN("settings are saved")
-                            {
-                                REQUIRE(settingsStore.value("fakeService/userScriptPaths", QStringList()).toStringList().count() == 1);
-                                REQUIRE(settingsStore.value("fakeService/userScriptNames", QStringList()).toStringList().count() == 1);
-                            }
-                        }
-                    }
+                    REQUIRE(settingsStore.value("fakeService/userScriptPaths", QStringList()).toStringList().count() == 1);
+                    REQUIRE(settingsStore.value("fakeService/userScriptNames", QStringList()).toStringList().count() == 1);
                 }
             }
 
@@ -79,7 +49,7 @@ SCENARIO("UserScriptsTests")
 
                 THEN("file is removed")
                 {
-                    Verify(Method(userScriptMock, removeFile)).Exactly(1);
+                    REQUIRE(userScriptFactory.lastCreated()->removed());
                 }
 
                 THEN("count is zero")
@@ -114,26 +84,11 @@ SCENARIO("UserScriptsTests")
 
         WHEN("creating a UserScripts instance")
         {
-            UserScripts userScripts(serviceName, factoryMock.get(), settingsStore);
+            UserScripts userScripts(serviceName, userScriptFactory, settingsStore);
 
-            THEN("factory called once")
+            THEN("Two user scripts are available")
             {
-                Verify(Method(factoryMock, create)).Exactly(2);
-
-                AND_THEN("name is set")
-                {
-                    Verify(Method(userScriptMock, setName)).Exactly(2);
-
-                    AND_THEN("load is called")
-                    {
-                        Verify(Method(userScriptMock, load)).Exactly(2);
-
-                        AND_THEN("count is 2")
-                        {
-                            REQUIRE(userScripts.count() == 2);
-                        }
-                    }
-                }
+                REQUIRE(userScripts.count() == 2);
             }
         }
     }

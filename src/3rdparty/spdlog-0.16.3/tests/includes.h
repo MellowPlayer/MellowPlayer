@@ -12,7 +12,7 @@
 #define SPDLOG_TRACE_ON
 #define SPDLOG_DEBUG_ON
 
-#include "spdlog-0.16.3/include/spdlog/spdlog.h"
-#include "spdlog-0.16.3/include/spdlog/sinks/null_sink.h"
-#include "spdlog-0.16.3/include/spdlog/sinks/ostream_sink.h"
+#include <spdlog/spdlog.h>
+#include <spdlog/sinks/null_sink.h>
+#include <spdlog/sinks/ostream_sink.h>
 

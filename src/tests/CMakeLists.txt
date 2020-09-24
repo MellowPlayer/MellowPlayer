@@ -1,11 +1,8 @@
-include_directories(SYSTEM ${CMAKE_SOURCE_DIR}/src/3rdparty/catch)
-include_directories(SYSTEM ${CMAKE_SOURCE_DIR}/src/3rdparty/fakeit)
-include_directories(SYSTEM ${CMAKE_SOURCE_DIR}/src/3rdparty/gtest-gmock)
-
 add_definitions(-DPLUGINS_DIR=\"${CMAKE_SOURCE_DIR}/plugins\")
-add_definitions(-DTEST_SUITE=1)
+
 set(CMAKE_CXX_FLAGS ${TESTS_CMAKE_CXX_FLAGS})
 set(CMAKE_AUTOMOC OFF)
+set(CMAKE_AUTORCC OFF)
 
 add_subdirectory(lib)
 

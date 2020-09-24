@@ -8,6 +8,8 @@ namespace MellowPlayer::Domain
     class UserScriptBase : public QObject, public IUserScript
     {
     public:
+        UserScriptBase(const QString& code="", const QString& path="", const QString& name="");
+
         QString path() const override;
         QString code() const override;
         QString name() const override;

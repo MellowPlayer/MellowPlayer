@@ -1,5 +1,3 @@
-add_definitions(-DBUILD_QXT_CORE -DBUILD_QXT_GUI -DQXT_STATIC)
-
 # Translation files
 file(GLOB_RECURSE TS_FILES CONFIGURE_DEPENDS languages/*.ts)
 qt5_add_translation(QM_FILES ${TS_FILES})
@@ -22,7 +20,7 @@ file(GLOB_RECURSE HEADER_FILES CONFIGURE_DEPENDS ${CMAKE_SOURCE_DIR}/lib/*.hpp)
 set(SOURCE_FILES main.cpp)
 if(WIN32)
     set(SOURCE_FILES ${SOURCE_FILES} MellowPlayer.rc)
-    configure_file(../../scripts/packaging/windows/setup_templ.iss ${CMAKE_BINARY_DIR}/setup.iss)
+    configure_file(../../scripts/ci/windows/setup_templ.iss ${CMAKE_BINARY_DIR}/setup.iss)
 endif()
 add_executable(${PROJECT_NAME} MACOSX_BUNDLE WIN32 ${SOURCE_FILES} ${QM_FILES} ${CMAKE_CURRENT_BINARY_DIR}/languages.qrc qml.qrc)
 add_dependencies(${PROJECT_NAME} translations)
@@ -34,12 +32,7 @@ target_link_libraries(${PROJECT_NAME}
         MellowPlayer.Application
         Qt5::Concurrent Qt5::Core Qt5::Gui Qt5::Network Qt5::Qml Qt5::Quick Qt5::QuickControls2
         Qt5::Sql Qt5::Svg Qt5::WebEngine Qt5::WebEngineWidgets Qt5::Widgets Qt5::WebChannel qxtglobalshortcut)
-
-IF(USE_QML_IMPORT_LIB)
-    target_link_libraries(${PROJECT_NAME} MellowPlayer.QmlImports)
-elseif(QMLLINT)
-    add_dependencies(MellowPlayer check_qml_syntax)
-ENDIF()
+target_compile_definitions(${PROJECT_NAME} PRIVATE -DBUILD_QXT_CORE -DBUILD_QXT_GUI -DQXT_STATIC)
 
 if (APPLE)
     add_framework(Carbon ${PROJECT_NAME})
@@ -53,12 +46,9 @@ elseif(UNIX)
     endif()
     if(USE_LIBNOTIFY)
         target_link_libraries(${PROJECT_NAME} ${LIBNOTIFY_LIBRARIES})
+        target_link_directories(${PROJECT_NAME} PRIVATE ${LIBNOTIFY_LIBDIR})
+        target_compile_definitions(${PROJECT_NAME} PUBLIC -DUSE_LIBNOTIFY)
     endif()
-endif()
-if (USE_PRECOMPILED_HEADER)
-    set_target_properties(${PROJECT_NAME} PROPERTIES COTIRE_CXX_PREFIX_HEADER_INIT "stdafx.hpp")
-    set_target_properties(${PROJECT_NAME} PROPERTIES COTIRE_ADD_UNITY_BUILD FALSE)
-    cotire(${LIB_NAME})
 endif()
 
 # add a console based executable for easier debugging
@@ -72,9 +62,7 @@ if (WIN32)
             MellowPlayer.Application
             Qt5::Concurrent Qt5::Core Qt5::Gui Qt5::Network Qt5::Qml Qt5::Quick Qt5::QuickControls2
             Qt5::Sql Qt5::Svg Qt5::WebEngine Qt5::WebEngineWidgets Qt5::Widgets qxtglobalshortcut)
-    IF(USE_QML_IMPORT_LIB)
-        target_link_libraries(MellowPlayer.Console MellowPlayer.QmlImports)
-    ENDIF()
+    target_compile_definitions(MellowPlayer.Console PRIVATE -DBUILD_QXT_CORE -DBUILD_QXT_GUI -DQXT_STATIC)
 endif()
 
 install(TARGETS ${PROJECT_NAME}

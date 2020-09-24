@@ -1,6 +1,6 @@
+#include <Fakes/FakeUserScript.hpp>
 #include <MellowPlayer/Presentation/ViewModels/UserScripts/UserScriptViewModel.hpp>
 #include <QtTest/QSignalSpy>
-#include <UnitTests/Domain/UserScripts/FakeUserScript.hpp>
 #include <catch/catch.hpp>
 
 using namespace MellowPlayer::Domain;

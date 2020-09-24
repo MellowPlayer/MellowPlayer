@@ -8,10 +8,10 @@
 //
 // Global registry functions
 //
-#include "spdlog-0.16.3/include/spdlog/spdlog.h"
+#include <spdlog/spdlog.h>
 #include "registry.h"
-#include "spdlog-0.16.3/include/spdlog/sinks/file_sinks.h"
-#include "spdlog-0.16.3/include/spdlog/sinks/stdout_sinks.h"
+#include <spdlog/sinks/file_sinks.h>
+#include <spdlog/sinks/stdout_sinks.h>
 #ifdef SPDLOG_ENABLE_SYSLOG
 #include "../sinks/syslog_sink.h"
 #endif
@@ -19,7 +19,7 @@
 #ifdef _WIN32
 #include "../sinks/wincolor_sink.h"
 #else
-#include "spdlog-0.16.3/include/spdlog/sinks/ansicolor_sink.h"
+#include <spdlog/sinks/ansicolor_sink.h>
 #endif
 
 

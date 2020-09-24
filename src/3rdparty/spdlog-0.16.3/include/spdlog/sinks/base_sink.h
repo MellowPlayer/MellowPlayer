@@ -11,9 +11,9 @@
 //
 
 #include "sink.h"
-#include "spdlog-0.16.3/include/spdlog/formatter.h"
-#include "spdlog-0.16.3/include/spdlog/common.h"
-#include "spdlog-0.16.3/include/spdlog/details/log_msg.h"
+#include <spdlog/formatter.h>
+#include <spdlog/common.h>
+#include <spdlog/details/log_msg.h>
 
 #include <mutex>
 

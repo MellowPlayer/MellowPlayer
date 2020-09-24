@@ -12,12 +12,12 @@
 
 #pragma once
 
-#include "spdlog-0.16.3/include/spdlog/common.h"
-#include "spdlog-0.16.3/include/spdlog/sinks/sink.h"
+#include <spdlog/common.h>
+#include <spdlog/sinks/sink.h>
 #include "mpmc_bounded_q.h"
 #include "log_msg.h"
 #include "os.h"
-#include "spdlog-0.16.3/include/spdlog/formatter.h"
+#include <spdlog/formatter.h>
 
 #include <chrono>
 #include <exception>

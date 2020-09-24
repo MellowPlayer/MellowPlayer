@@ -18,7 +18,7 @@
 #ifndef FMT_USE_WINDOWS_H
 #define FMT_USE_WINDOWS_H 0
 #endif
-#include "spdlog-0.16.3/include/spdlog/fmt/bundled/format.h"
+#include <spdlog/fmt/bundled/format.h>
 #if defined(SPDLOG_FMT_PRINTF)
 #include "bundled/printf.h"
 #endif

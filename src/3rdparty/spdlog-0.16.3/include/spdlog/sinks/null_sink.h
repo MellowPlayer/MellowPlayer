@@ -6,7 +6,7 @@
 #pragma once
 
 #include "base_sink.h"
-#include "spdlog-0.16.3/include/spdlog/details/null_mutex.h"
+#include <spdlog/details/null_mutex.h>
 
 #include <mutex>
 

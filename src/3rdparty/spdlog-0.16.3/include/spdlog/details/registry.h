@@ -11,9 +11,9 @@
 // This class is thread safe
 
 #include "null_mutex.h"
-#include "spdlog-0.16.3/include/spdlog/logger.h"
-#include "spdlog-0.16.3/include/spdlog/async_logger.h"
-#include "spdlog-0.16.3/include/spdlog/common.h"
+#include <spdlog/logger.h>
+#include <spdlog/async_logger.h>
+#include <spdlog/common.h>
 
 #include <chrono>
 #include <functional>

@@ -15,7 +15,6 @@ if(UNIX AND NOT APPLE)
     set(SOURCE_FILES ${SOURCE_FILES} ${MPRIS_SOURCE_FILES})
     set(HEADER_FILES ${HEADER_FILES} ${MPRIS_HEADER_FILES})
     if(USE_LIBNOTIFY)
-        include_directories(SYSTEM ${LIBNOTIFY_INCLUDE_DIRS})
         glob_recurse_excl(LIBNOTIFY_PRESENTER_HEADER_FILES src/MellowPlayer/Presentation/Notifications/Presenters/Linux/*.hpp "")
         glob_recurse_excl(LIBNOTIFY_PRESENTER_SOURCE_FILES src/MellowPlayer/Presentation/Notifications/Presenters/Linux/*.cpp "")
         set(SOURCE_FILES ${SOURCE_FILES} ${LIBNOTIFY_PRESENTER_SOURCE_FILES})
@@ -29,6 +28,10 @@ target_link_libraries(${LIB_NAME} ${PROJECT_NAME}.Domain ${PROJECT_NAME}.Infrast
                       Qt5::Core Qt5::Qml Qt5::Quick Qt5::QuickControls2 Qt5::Svg
                       Qt5::WebEngine Qt5::WebEngineWidgets Qt5::Widgets qxtglobalshortcut)
 target_include_directories(${LIB_NAME} PUBLIC src)
+if(USE_LIBNOTIFY)
+    target_include_directories(${LIB_NAME} SYSTEM PRIVATE ${LIBNOTIFY_INCLUDE_DIRS})
+endif()
+
 if(UNIX AND NOT APPLE)
     target_link_libraries(${LIB_NAME} Qt5::DBus)
     if(USE_LIBNOTIFY)

@@ -59,7 +59,7 @@ bool UserScript::load(const QString& path)
     return false;
 }
 
-void UserScript::removeFile() const
+void UserScript::removeFile()
 {
     QFile::remove(_path);
 }

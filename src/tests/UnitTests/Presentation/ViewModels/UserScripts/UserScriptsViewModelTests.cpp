@@ -1,10 +1,10 @@
+#include <Fakes/FakeUserScript.hpp>
 #include <MellowPlayer/Domain/Settings/ISettingsStore.hpp>
 #include <MellowPlayer/Domain/UserScripts/IUserScript.hpp>
-#include <MellowPlayer/Domain/UserScripts/IUserScriptFactory.hpp>
+#include <Fakes/FakeUserScriptFactory.hpp>
 #include <MellowPlayer/Domain/UserScripts/UserScripts.hpp>
 #include <MellowPlayer/Presentation/ViewModels/UserScripts/UserScriptsViewModel.hpp>
 #include <UnitTests/Domain/Settings/FakeSettingsStore.hpp>
-#include <UnitTests/Domain/UserScripts/FakeUserScript.hpp>
 #include <catch/catch.hpp>
 #include <fakeit/fakeit.hpp>
 
@@ -15,36 +15,20 @@ using namespace MellowPlayer::Presentation;
 
 SCENARIO("UserScriptsViewModelTests")
 {
-    Mock<IUserScriptFactory> factoryMock;
-    When(Method(factoryMock, create)).AlwaysDo([]() -> IUserScript* { return new FakeUserScript; });
+    FakeUserScriptFactory userScriptFactory;
     QString serviceName = "fakeService";
     FakeSettingsStore settingsStore;
 
     GIVEN("settings are empty")
     {
         settingsStore.clear();
-        UserScriptsViewModel viewModel(serviceName, factoryMock.get(), settingsStore);
+        UserScriptsViewModel viewModel(serviceName, userScriptFactory, settingsStore);
 
         WHEN("creating a new UserScriptsViewModel")
         {
             THEN("list model count is 0")
             {
                 REQUIRE(viewModel.model()->rowCount() == 0);
-            }
-        }
-
-        AND_WHEN("add a new user script")
-        {
-            viewModel.add("name", "/path1");
-
-            THEN("factory is called")
-            {
-                Verify(Method(factoryMock, create)).Exactly(1);
-
-                AND_THEN("list model count is 1")
-                {
-                    REQUIRE(viewModel.model()->rowCount() == 1);
-                }
             }
         }
     }
@@ -61,7 +45,7 @@ SCENARIO("UserScriptsViewModelTests")
         names << "AdBlocker";
         settingsStore.setValue("fakeService/userScriptNames", names);
 
-        UserScriptsViewModel viewModel(serviceName, factoryMock.get(), settingsStore);
+        UserScriptsViewModel viewModel(serviceName, userScriptFactory, settingsStore);
 
         WHEN("creating a new UserScriptsViewModel")
         {

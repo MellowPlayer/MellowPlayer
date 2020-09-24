@@ -5,7 +5,7 @@
 
 #pragma once
 
-#include "spdlog-0.16.3/include/spdlog/common.h"
+#include <spdlog/common.h>
 #include "os.h"
 
 

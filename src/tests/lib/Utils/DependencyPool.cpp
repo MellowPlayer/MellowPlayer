@@ -29,6 +29,7 @@
 #include <Fakes/FakeHttpClient.hpp>
 #include <Fakes/FakeListeningHistoryDatabase.hpp>
 #include <Fakes/FakePlatformUpdater.hpp>
+#include <Fakes/FakeUserScript.hpp>
 #include <Fakes/FakeWorkDispatcher.hpp>
 #include <Mocks/AlbumArtDownloaderMock.hpp>
 #include <Mocks/NotificationPresenterMock.hpp>
@@ -37,7 +38,6 @@
 #include <UnitTests/Domain/Settings/FakeSettingsStore.hpp>
 #include <UnitTests/Domain/StreamingServices/FakeStreamingServiceLoader.hpp>
 #include <UnitTests/Domain/StreamingServices/FakeStreamingServiceWatcher.hpp>
-#include <UnitTests/Domain/UserScripts/FakeUserScript.hpp>
 
 using namespace std;
 using namespace fakeit;

@@ -6,8 +6,8 @@
 #pragma once
 
 #include "base_sink.h"
-#include "spdlog-0.16.3/include/spdlog/common.h"
-#include "spdlog-0.16.3/include/spdlog/details/os.h"
+#include <spdlog/common.h>
+#include <spdlog/details/os.h>
 
 #include <string>
 #include <map>

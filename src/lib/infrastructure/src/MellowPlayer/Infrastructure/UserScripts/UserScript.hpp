@@ -15,8 +15,10 @@ namespace MellowPlayer::Infrastructure
     class UserScript : public Domain::UserScriptBase
     {
     public:
+        using Domain::UserScriptBase::UserScriptBase;
+
         bool import(const QString& sourcePath) override;
         bool load(const QString& path) override;
-        void removeFile() const override;
+        void removeFile() override;
     };
 }

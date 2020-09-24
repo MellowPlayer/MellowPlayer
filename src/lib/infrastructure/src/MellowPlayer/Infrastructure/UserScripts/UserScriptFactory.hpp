@@ -8,6 +8,6 @@ namespace MellowPlayer::Infrastructure
     {
     public:
         // todo why a raw pointer ???
-        Domain::IUserScript* create() const override;
+        Domain::IUserScript* create() override;
     };
 }

@@ -18,7 +18,7 @@
 #include <locale>
 #endif
 
-#include "spdlog-0.16.3/include/spdlog/details/null_mutex.h"
+#include <spdlog/details/null_mutex.h>
 
 //visual studio upto 2013 does not support noexcept nor constexpr
 #if defined(_MSC_VER) && (_MSC_VER < 1900)
@@ -44,7 +44,7 @@
 #define SPDLOG_DEPRECATED
 #endif
 
-#include "spdlog-0.16.3/include/spdlog/fmt/fmt.h"
+#include <spdlog/fmt/fmt.h>
 
 namespace spdlog
 {

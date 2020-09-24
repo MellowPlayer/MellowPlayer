@@ -5,7 +5,7 @@
 
 #pragma once
 
-#include "spdlog-0.16.3/include/spdlog/details/log_msg.h"
+#include <spdlog/details/log_msg.h>
 
 #include <vector>
 #include <string>
@@ -43,5 +43,5 @@ private:
 };
 }
 
-#include "spdlog-0.16.3/include/spdlog/details/pattern_formatter_impl.h"
+#include <spdlog/details/pattern_formatter_impl.h>
 
