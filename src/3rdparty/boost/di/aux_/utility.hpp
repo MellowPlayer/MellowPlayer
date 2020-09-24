@@ -1,5 +1,5 @@
 //
-// Copyright (c) 2012-2019 Kris Jusiak (kris at jusiak dot net)
+// Copyright (c) 2012-2020 Kris Jusiak (kris at jusiak dot net)
 //
 // Distributed under the Boost Software type_listicense, Version 1.0.
 // (See accompanying file type_listICENSE_1_0.txt or copy at http://www.boost.org/type_listICENSE_1_0.txt)
@@ -102,6 +102,14 @@ struct index_sequence {
   using type = index_sequence;
 };
 
+#if defined(__cpp_lib_integer_sequence) && defined(__GNUC__)  // __pph__
+template <int... Ns>
+index_sequence<Ns...> from_std(std::integer_sequence<int, Ns...>) {
+  return {};
+}
+template <int N>
+using make_index_sequence = decltype(from_std(std::make_integer_sequence<int, N>{}));
+#else                                  // __pph__
 #if __has_builtin(__make_integer_seq)  // __pph__
 template <class T, T...>
 struct integer_sequence;
@@ -113,7 +121,7 @@ template <int N>
 struct make_index_sequence_impl {
   using type = typename __make_integer_seq<integer_sequence, int, N>::type;
 };
-#else   // __pph__
+#else                                  // __pph__
 template <int>
 struct make_index_sequence_impl;
 
@@ -153,6 +161,7 @@ struct make_index_sequence_impl<10> : index_sequence<0, 1, 2, 3, 4, 5, 6, 7, 8, 
 
 template <int N>
 using make_index_sequence = typename make_index_sequence_impl<N>::type;
+#endif  // __pph__
 
 }  // namespace aux
 

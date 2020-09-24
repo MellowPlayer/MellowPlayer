@@ -1,5 +1,5 @@
 //
-// Copyright (c) 2012-2019 Kris Jusiak (kris at jusiak dot net)
+// Copyright (c) 2012-2020 Kris Jusiak (kris at jusiak dot net)
 //
 // Distributed under the Boost Software License, Version 1.0.
 // (See accompanying file LICENSE_1_0.txt or copy at http://www.boost.org/LICENSE_1_0.txt)
@@ -28,7 +28,9 @@
   {}
 #elif defined(_MSC_VER)  // msvc
 #define __MSVC__
+#if !defined(__has_include)
 #define __has_include(...) 0
+#endif
 #define __BOOST_DI_UNUSED
 #define __BOOST_DI_DEPRECATED(...) __declspec(deprecated(__VA_ARGS__))  // error C2059: syntax error: '<L_ATTRIBUTE_SPECIFIER>'
 #define __BOOST_DI_TYPE_WKND(T) (T &&)
