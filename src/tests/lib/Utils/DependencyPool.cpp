@@ -23,6 +23,7 @@
 #include <MellowPlayer/Presentation/ViewModels/ThemeViewModel.hpp>
 #include <MellowPlayer/Presentation/ViewModels/UpdaterViewModel.hpp>
 
+#include <Fakes/AlbumArtDownloaderMock.hpp>
 #include <Fakes/FakeBinTrayHttpClient.hpp>
 #include <Fakes/FakeCommnandLineArguments.hpp>
 #include <Fakes/FakeFileDownloader.hpp>
@@ -31,7 +32,6 @@
 #include <Fakes/FakePlatformUpdater.hpp>
 #include <Fakes/FakeUserScript.hpp>
 #include <Fakes/FakeWorkDispatcher.hpp>
-#include <Mocks/AlbumArtDownloaderMock.hpp>
 #include <Mocks/NotificationPresenterMock.hpp>
 #include <Mocks/StreamingServiceCreatorMock.hpp>
 #include <Mocks/ThemeLoaderMock.hpp>

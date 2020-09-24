@@ -1,8 +1,8 @@
+#include <Fakes/AlbumArtDownloaderMock.hpp>
 #include <MellowPlayer/Domain/Player/CurrentPlayer.hpp>
 #include <MellowPlayer/Domain/Player/Players.hpp>
 #include <MellowPlayer/Domain/StreamingServices/StreamingServices.hpp>
 #include <MellowPlayer/Infrastructure/AlbumArt/LocalAlbumArt.hpp>
-#include <Mocks/AlbumArtDownloaderMock.hpp>
 #include <QTest>
 #include <QtTest/QSignalSpy>
 #include <UnitTests/Domain/StreamingServices/FakeStreamingServiceLoader.hpp>

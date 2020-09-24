@@ -1,12 +1,12 @@
 #include <QtCore>
 #include <catch/catch.hpp>
 #if defined(Q_OS_LINUX) || defined(Q_OS_FREEBSD)
+#    include <Fakes/AlbumArtDownloaderMock.hpp>
 #    include <MellowPlayer/Domain/Player/CurrentPlayer.hpp>
 #    include <MellowPlayer/Domain/Player/Players.hpp>
 #    include <MellowPlayer/Domain/StreamingServices/StreamingServices.hpp>
 #    include <MellowPlayer/Infrastructure/AlbumArt/LocalAlbumArt.hpp>
 #    include <MellowPlayer/Presentation/Mpris/Linux/MprisStartup.hpp>
-#    include <Mocks/AlbumArtDownloaderMock.hpp>
 #    include <QtDBus/QDBusConnection>
 #    include <UnitTests/Domain/StreamingServices/FakeStreamingServiceLoader.hpp>
 #    include <UnitTests/Domain/StreamingServices/FakeStreamingServiceWatcher.hpp>

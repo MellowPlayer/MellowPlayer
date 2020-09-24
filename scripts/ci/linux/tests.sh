@@ -4,4 +4,4 @@ set -e
 
 cd build
 
-catchsegv ctest --output-on-failure
+catchsegv ctest --verbose
