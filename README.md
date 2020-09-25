@@ -15,49 +15,23 @@ notifications and more).
 *MellowPlayer is a Qt based alternative to* [NuvolaPlayer](https://tiliado.eu/nuvolaplayer/)
 *initially crafted for* [KaOS](http://kaosx.us/). *MellowPlayer is written in C++ and QML.*
 
-# Supported services:
-
-See the [list of supported services](https://gitlab.com/ColinDuquesnoy/MellowPlayer/wikis/Supported-Services) on our wiki.
-
-# Limitations:
-
-- For licensing reason, we do not ship the flash player plugin and the widevine DRM plugins in our official releases.
-- Some services (e.g. Spotify, Soundcloud and Mixcloud) also requires QtWebEngine to be compiled with proprietary codecs, which is not the case in our official releases.
-- Tidal HiFi does not work because there is no MQA plugin available for chromium based browsers.
 
 # Resources
 
 - [Official website](https://colinduquesnoy.gitlab.io/MellowPlayer)
 - [Documentation](http://mellowplayer.readthedocs.org/en/latest/)
-- [Wiki on GitLab](https://gitlab.com/ColinDuquesnoy/MellowPlayer/wikis/home)
+- [Wiki](https://gitlab.com/ColinDuquesnoy/MellowPlayer/wikis/home)
 
 # License
 
 MellowPlayer is licensed under the GPL license.
-
-# Download
-
-You can download official binaries from [BinTray](https://bintray.com/colinduquesnoy/MellowPlayer)
-
-- [Stable](https://bintray.com/colinduquesnoy/MellowPlayer/Stable/_latestVersion)
-- [Continuous](https://bintray.com/colinduquesnoy/MellowPlayer/Continuous/_latestVersion)
-
-
-
-## GNU/Linux Packages
-
-- [Fedora](http://mellowplayer.readthedocs.io/en/latest/users/install.html#fedora)
-- [Ubuntu](http://mellowplayer.readthedocs.io/en/latest/users/install.html#ubuntu-17-10)
-- [openSUSE](http://mellowplayer.readthedocs.io/en/latest/users/install.html#opensuse-tumbleweed)
-- [ArchLinux](http://mellowplayer.readthedocs.io/en/latest/users/install.html#archlinux)
-- [KaOS](http://mellowplayer.readthedocs.io/en/latest/users/install.html#kaos)
 
 # Requirements
 
 ## Build dependencies
 
 - CMake >= 3.16
-- a c++17 compiler (gcc9, msvc 2019 or clang)
+- a c++17 compiler (at least GCC 9 or msvc 2019)
 - Qt5 >= 5.15.0:
   - QtConcurrent
   - QtDBus
@@ -82,14 +56,6 @@ You can download official binaries from [BinTray](https://bintray.com/colinduque
 - [lcov](https://github.com/linux-test-project/lcov)
 
 # Compilation
-
-Building MellowPlayer requires [CMake](https://cmake.org/) >= 3.10 and a **C++17** compiler (GCC >= 6.x or Clang >= 3.5 or MSVC 2015 Update 2).
-
-## From QtCreator
-
-Open up `CMakeLists.txt` with QtCreator, hit build and run.
-
-## From Command Line
 
 ```bash
 mkdir build && cd build
