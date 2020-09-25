@@ -56,9 +56,9 @@ You can download official binaries from [BinTray](https://bintray.com/colinduque
 
 ## Build dependencies
 
-- CMake >= 3.10
-- a c++17 compiler (gcc6, msvc 2015 or clang)
-- Qt5 >= 5.9.0:
+- CMake >= 3.16
+- a c++17 compiler (gcc9, msvc 2019 or clang)
+- Qt5 >= 5.15.0:
   - QtConcurrent
   - QtDBus
   - QtLinguisticTools
