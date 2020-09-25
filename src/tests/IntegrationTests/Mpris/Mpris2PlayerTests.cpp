@@ -1,6 +1,8 @@
 #include <QtCore>
 #if defined(Q_OS_LINUX) || defined(Q_OS_FREEBSD)
 #    include <Fakes/FakeAlbumArtDownloader.hpp>
+#    include <Fakes/FakeStreamingServiceLoader.hpp>
+#    include <Fakes/FakeStreamingServiceWatcher.hpp>
 #    include <MellowPlayer/Domain/Player/CurrentPlayer.hpp>
 #    include <MellowPlayer/Domain/Player/Player.hpp>
 #    include <MellowPlayer/Domain/Player/Players.hpp>
@@ -8,8 +10,6 @@
 #    include <MellowPlayer/Infrastructure/AlbumArt/LocalAlbumArt.hpp>
 #    include <MellowPlayer/Presentation/Mpris/Linux/Mpris2Player.hpp>
 #    include <QtTest/QSignalSpy>
-#    include <UnitTests/Domain/StreamingServices/FakeStreamingServiceLoader.hpp>
-#    include <UnitTests/Domain/StreamingServices/FakeStreamingServiceWatcher.hpp>
 
 using namespace MellowPlayer::Domain;
 using namespace MellowPlayer::Domain::Tests;

@@ -1,12 +1,11 @@
 #pragma once
 
+#include <QList>
+#include <catch2/catch.hpp>
 #include <MellowPlayer/Domain/StreamingServices/IStreamingServiceLoader.hpp>
 #include <MellowPlayer/Domain/StreamingServices/StreamingService.hpp>
 #include <MellowPlayer/Domain/StreamingServices/StreamingServiceMetadata.hpp>
 #include <MellowPlayer/Domain/Theme/Theme.hpp>
-#include <QList>
-#include <catch2/catch.hpp>
-#include <memory>
 
 namespace MellowPlayer::Domain::Tests
 {

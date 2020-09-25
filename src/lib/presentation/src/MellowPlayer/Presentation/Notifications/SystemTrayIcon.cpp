@@ -14,7 +14,7 @@ using namespace MellowPlayer::Domain;
 using namespace MellowPlayer::Infrastructure;
 using namespace MellowPlayer::Presentation;
 
-SystemTrayIcon::SystemTrayIcon(IPlayer& player, IMainWindow& mainWindow, Settings& settings, StreamingServicesViewModel& streamingServices)
+SystemTrayIcon::SystemTrayIcon(IPlayer& player, IMainWindow& mainWindow, Settings& settings, IStreamingServicesViewModel& streamingServices)
         : _logger(Loggers::logger("SystemTrayIcon")),
           _player(player),
           _mainWindow(mainWindow),
@@ -27,7 +27,7 @@ SystemTrayIcon::SystemTrayIcon(IPlayer& player, IMainWindow& mainWindow, Setting
     connect(&_qSystemTrayIcon, &QSystemTrayIcon::activated, this, &SystemTrayIcon::onActivated);
     connect(&_showTrayIconSetting, &Setting::valueChanged, this, &SystemTrayIcon::onShowTrayIconSettingValueChanged);
     connect(&_customTrayIconSetting, &Setting::valueChanged, this, &SystemTrayIcon::updateIcon);
-    connect(&_streamingServices, &StreamingServicesViewModel::currentServiceChanged, this, &SystemTrayIcon::setupFavoritesMenu);
+    connect(&_streamingServices, &IStreamingServicesViewModel::currentServiceChanged, this, &SystemTrayIcon::setupFavoritesMenu);
     setUpMenu();
     updateIcon();
 }

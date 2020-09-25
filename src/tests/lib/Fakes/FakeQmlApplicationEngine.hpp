@@ -1,10 +1,10 @@
 #pragma once
 
-#include <MellowPlayer/Presentation/Qml/IQmlApplicationEngine.hpp>
+#include <QMap>
 #include <QObject>
 #include <QString>
 #include <QUrl>
-#include <QMap>
+#include <MellowPlayer/Presentation/Qml/IQmlApplicationEngine.hpp>
 
 namespace MellowPlayer::Presentation::Tests
 {

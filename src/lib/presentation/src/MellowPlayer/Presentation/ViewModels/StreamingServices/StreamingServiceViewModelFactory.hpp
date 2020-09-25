@@ -1,0 +1,51 @@
+#pragma once
+
+namespace MellowPlayer::Domain
+{
+    class ISettingsStore;
+    class IUserScriptFactory;
+    class StreamingService;
+    class Players;
+}
+
+namespace MellowPlayer::Infrastructure
+{
+    class IHttpClientFactory;
+    class INetworkProxies;
+}
+
+namespace MellowPlayer::Presentation
+{
+    class StreamingServiceViewModel;
+    class ThemeViewModel;
+
+    class IStreamingServiceViewModelFactory
+    {
+    public:
+        virtual ~IStreamingServiceViewModelFactory() = default;
+
+        virtual StreamingServiceViewModel* create(Domain::StreamingService& streamingService, QObject* parent) = 0;
+    };
+
+    class StreamingServiceViewModelFactory : public IStreamingServiceViewModelFactory
+    {
+    public:
+        StreamingServiceViewModelFactory(Domain::ISettingsStore& settingsStore,
+                                         Domain::IUserScriptFactory& userScriptFactory,
+                                         Domain::Players& players,
+                                         Infrastructure::INetworkProxies& networkProxies,
+                                         ThemeViewModel& themeViewModel,
+                                         Infrastructure::IHttpClientFactory& httpClientFactory);
+
+        StreamingServiceViewModel* create(Domain::StreamingService& streamingService, QObject* parent) override;
+
+    private:
+        Domain::ISettingsStore& _settingsStore;
+        Domain::IUserScriptFactory& _userScriptFactory;
+        Domain::Players& _players;
+        Infrastructure::INetworkProxies& _networkProxies;
+        ThemeViewModel& _themeViewModel;
+        Infrastructure::IHttpClientFactory& _httpClientFactory;
+    };
+}
+

@@ -1,6 +1,7 @@
 #pragma once
-#include <MellowPlayer/Domain/StreamingServices/IStreamingServiceWatcher.hpp>
+
 #include <memory>
+#include <MellowPlayer/Domain/StreamingServices/IStreamingServiceWatcher.hpp>
 
 namespace MellowPlayer::Domain::Tests
 {

@@ -2,14 +2,14 @@
 #include <catch2/catch.hpp>
 #if defined(Q_OS_LINUX) || defined(Q_OS_FREEBSD)
 #    include <Fakes/FakeAlbumArtDownloader.hpp>
+#    include <Fakes/FakeStreamingServiceLoader.hpp>
+#    include <Fakes/FakeStreamingServiceWatcher.hpp>
 #    include <MellowPlayer/Domain/Player/CurrentPlayer.hpp>
 #    include <MellowPlayer/Domain/Player/Players.hpp>
 #    include <MellowPlayer/Domain/StreamingServices/StreamingServices.hpp>
 #    include <MellowPlayer/Infrastructure/AlbumArt/LocalAlbumArt.hpp>
 #    include <MellowPlayer/Presentation/Mpris/Linux/MprisStartup.hpp>
 #    include <QtDBus/QDBusConnection>
-#    include <UnitTests/Domain/StreamingServices/FakeStreamingServiceLoader.hpp>
-#    include <UnitTests/Domain/StreamingServices/FakeStreamingServiceWatcher.hpp>
 #    include <UnitTests/Presentation/FakeMainWindow.hpp>
 
 using namespace MellowPlayer::Domain;

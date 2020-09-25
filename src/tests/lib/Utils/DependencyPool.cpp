@@ -31,12 +31,12 @@
 #include <Fakes/FakeListeningHistoryDatabase.hpp>
 #include <Fakes/FakeNotificationPresenter.hpp>
 #include <Fakes/FakePlatformUpdater.hpp>
+#include <Fakes/FakeSettingsStore.hpp>
+#include <Fakes/FakeStreamingServiceLoader.hpp>
+#include <Fakes/FakeStreamingServiceWatcher.hpp>
 #include <Fakes/FakeThemeLoader.hpp>
 #include <Fakes/FakeUserScript.hpp>
 #include <Fakes/FakeWorkDispatcher.hpp>
-#include <UnitTests/Domain/Settings/FakeSettingsStore.hpp>
-#include <UnitTests/Domain/StreamingServices/FakeStreamingServiceLoader.hpp>
-#include <UnitTests/Domain/StreamingServices/FakeStreamingServiceWatcher.hpp>
 
 using namespace std;
 using namespace MellowPlayer::Domain;
@@ -52,7 +52,6 @@ DependencyPool::DependencyPool()
           _dataProvider(make_unique<FakeListeningHistoryDatabase>()),
           _contextProperties(std::make_shared<FakeContextProperties>())
 {
-
 }
 
 DependencyPool::~DependencyPool() = default;
@@ -69,20 +68,16 @@ StreamingServices& DependencyPool::getStreamingServices()
     return *_streamingServices;
 }
 
-StreamingServicesViewModel& DependencyPool::getStreamingServicesViewModel()
+IStreamingServicesViewModel& DependencyPool::getStreamingServicesViewModel()
 {
     if (_streamingServicesViewModel == nullptr)
         _streamingServicesViewModel = make_unique<StreamingServicesViewModel>(getStreamingServices(),
-                                                                                        getPlayers(),
-                                                                                        getSettings(),
-                                                                                        getWorkDispatcher(),
-                                                                                        getStreamingServicesCreator(),
-                                                                                        getCommandLineArguments(),
-                                                                                        getUserScriptFactory(),
-                                                                                        *_contextProperties,
-                                                                                        _networkProxies,
-                                                                                        getThemeViewModel(),
-                                                                                        _httpClientFactory);
+                                                                              getSettings(),
+                                                                              getWorkDispatcher(),
+                                                                              getStreamingServicesCreator(),
+                                                                              getCommandLineArguments(),
+                                                                              *_contextProperties,
+                                                                              getStreamingServiceViewModelFactory());
     return *_streamingServicesViewModel;
 }
 
@@ -169,7 +164,8 @@ Updater& DependencyPool::getUpdater()
 IPlayerNotifications& DependencyPool::playerNotifications()
 {
     if (_notifications == nullptr)
-        _notifications = make_unique<PlayerNotifications>(getCurrentPlayer(), getLocalAlbumArt(), getNotificationPresenter(), getStreamingServices(), getSettings());
+        _notifications =
+                make_unique<PlayerNotifications>(getCurrentPlayer(), getLocalAlbumArt(), getNotificationPresenter(), getStreamingServices(), getSettings());
     return *_notifications;
 }
 
@@ -213,4 +209,14 @@ IContextProperties& DependencyPool::getContextProperties()
 INetworkProxies& DependencyPool::getNetworkProxies()
 {
     return _networkProxies;
+}
+
+IStreamingServiceViewModelFactory& DependencyPool::getStreamingServiceViewModelFactory()
+{
+    if (_streamingServiceViewModelFactory == nullptr)
+    {
+        _streamingServiceViewModelFactory = std::make_unique<StreamingServiceViewModelFactory>(
+                getSettingsStore(), getUserScriptFactory(), getPlayers(), getNetworkProxies(), getThemeViewModel(), _httpClientFactory);
+    }
+    return *_streamingServiceViewModelFactory;
 }

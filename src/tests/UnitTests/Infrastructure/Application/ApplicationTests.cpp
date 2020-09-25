@@ -1,8 +1,8 @@
 #include "UnitTests/Infrastructure/Application/FakeQtApplication.hpp"
+#include <Fakes/FakeContextProperties.hpp>
 #include <MellowPlayer/Infrastructure/Application/Application.hpp>
 #include <MellowPlayer/Infrastructure/BuildConfig.hpp>
 #include <QtTest/QSignalSpy>
-#include <UnitTests/Presentation/Qml/FakeContextProperties.hpp>
 #include <catch2/catch.hpp>
 
 using namespace MellowPlayer::Infrastructure;

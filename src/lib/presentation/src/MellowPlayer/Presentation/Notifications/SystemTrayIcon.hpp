@@ -32,13 +32,13 @@ namespace MellowPlayer::Infrastructure
 namespace MellowPlayer::Presentation
 {
     class IMainWindow;
-    class StreamingServicesViewModel;
+    class IStreamingServicesViewModel;
 
     class SystemTrayIcon : public ISystemTrayIcon
     {
         Q_OBJECT
     public:
-        SystemTrayIcon(Domain::IPlayer& player, IMainWindow& mainWindow, Domain::Settings& settings, StreamingServicesViewModel& streamingServices);
+        SystemTrayIcon(Domain::IPlayer& player, IMainWindow& mainWindow, Domain::Settings& settings, IStreamingServicesViewModel& streamingServices);
 
         void setupFavoritesMenu() override;
 
@@ -68,7 +68,7 @@ namespace MellowPlayer::Presentation
         Domain::Settings& _settings;
         Domain::Setting& _showTrayIconSetting;
         Domain::Setting& _customTrayIconSetting;
-        StreamingServicesViewModel& _streamingServices;
+        IStreamingServicesViewModel& _streamingServices;
 
         QSystemTrayIcon _qSystemTrayIcon;
         QMenu _menu;

@@ -1,6 +1,3 @@
-#define BOOST_DI_CFG_DIAGNOSTICS_LEVEL 2
-#define BOOST_DI_CFG_CTOR_LIMIT_SIZE 20
-
 void logStart();
 #include "Program.hpp"
 #include <MellowPlayer/Application/DiConfig.hpp>
@@ -125,10 +122,6 @@ void logStop()
 void configureForQmlAndWebEngine(QApplication& qApplication)
 {
     qApplication.setApplicationDisplayName("MellowPlayer");
-#if QT_VERSION < QT_VERSION_CHECK(5, 14, 0)
-    // With Qt < 5.14 it is recommended to initialize QtWebEngine AFTER creating QApplication
-    QtWebEngine::initialize();
-#endif
     QQuickStyle::setStyle("Material");
 }
 
@@ -143,10 +136,8 @@ int exec(QApplication& qApplication, CommandLineArguments& commandLineArguments)
 
 int Program::main(int argc, char** argv)
 {
-#if QT_VERSION >= QT_VERSION_CHECK(5, 14, 0)
-    // With Qt >= 5.14 it is recommended to initialize QtWebEngine BEFORE creating QApplication
     QtWebEngine::initialize();
-#endif
+
     configureEnvironment();
     configureHiDpiSupport();
     configureLogging();

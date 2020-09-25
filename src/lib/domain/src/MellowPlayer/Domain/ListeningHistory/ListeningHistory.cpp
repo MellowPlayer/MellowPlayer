@@ -107,13 +107,10 @@ void ListeningHistory::addSong(const Song* song, ListeningHistoryEntry& newEntry
 
 void ListeningHistory::updateRemovedEntries()
 {
-#if QT_VERSION < QT_VERSION_CHECK(5, 14, 0)
-    auto removedEntries = _entries.toSet().subtract(_database.toList().toSet()).values();
-#else
     auto db = _database.toList();
     auto dbSet = QSet(db.begin(), db.end());
     auto removedEntries = QSet(_entries.begin(), _entries.end()).subtract(dbSet).values();
-#endif
+
     for (const auto& entry : removedEntries)
     {
         int index = _entries.indexOf(entry);

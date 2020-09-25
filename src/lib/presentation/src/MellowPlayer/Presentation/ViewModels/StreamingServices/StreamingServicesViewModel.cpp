@@ -10,6 +10,7 @@
 #include <MellowPlayer/Infrastructure/Network/NetworkProxy.hpp>
 #include <MellowPlayer/Infrastructure/PlatformFilters/TokenizedFilters.hpp>
 #include <MellowPlayer/Presentation/ViewModels/StreamingServices/StreamingServicesViewModel.hpp>
+#include <MellowPlayer/Presentation/ViewModels/StreamingServices/StreamingServiceViewModelFactory.hpp>
 #include <QQmlApplicationEngine>
 #include <QQmlContext>
 #include <QtWebEngine>
@@ -21,30 +22,22 @@ using namespace MellowPlayer::Presentation;
 using namespace MellowPlayer::Infrastructure;
 
 StreamingServicesViewModel::StreamingServicesViewModel(StreamingServices& streamingServices,
-                                                       Players& players,
                                                        Settings& settings,
                                                        IWorkDispatcher& workDispatcher,
                                                        IStreamingServiceCreator& streamingServiceCreator,
                                                        ICommandLineArguments& commandLineArguments,
-                                                       IUserScriptFactory& userScriptFactory,
                                                        IContextProperties& contextProperties,
-                                                       INetworkProxies& networkProxies,
-                                                       ThemeViewModel& themeViewModel,
-                                                       IHttpClientFactory& httpClientFactory)
-        : ContextProperty("_streamingServices", this, contextProperties),
+                                                       IStreamingServiceViewModelFactory& streamingServiceViewModelFactory)
+        : IStreamingServicesViewModel("_streamingServices", this, contextProperties),
           _streamingServices(streamingServices),
-          _players(players),
           _settings(settings),
           _currentServiceSetting(settings.get(SettingKey::PRIVATE_CURRENT_SERVICE)),
           _workDispatcher(workDispatcher),
           _streamingServiceCreator(streamingServiceCreator),
           _commandLineArguments(commandLineArguments),
-          _userScriptFactory(userScriptFactory),
-          _networkProxies(networkProxies),
+          _streamingServiceViewModelFactory(streamingServiceViewModelFactory),
           _services(new StreamingServiceListModel(this, QByteArray(), "name")),
-          _filteredServices(_services, settings),
-          _themeViewModel(themeViewModel),
-          _httpClientFactory(httpClientFactory)
+          _filteredServices(_services, settings)
 {
 }
 
@@ -109,8 +102,7 @@ void StreamingServicesViewModel::reload()
 
 void StreamingServicesViewModel::onServiceAdded(StreamingService* streamingService)
 {
-    auto* sv = new StreamingServiceViewModel(
-            *streamingService, _settings.store(), _userScriptFactory, _players, _networkProxies, _themeViewModel, _httpClientFactory.create(), this);
+    auto* sv = _streamingServiceViewModelFactory.create(*streamingService, this);
     sv->checkForKnownIssues();
     _services->append(sv);
 }
@@ -213,7 +205,7 @@ StreamingServiceProxyListModel* StreamingServicesViewModel::filteredServices()
 void StreamingServicesViewModel::registerTo(IQmlApplicationEngine& qmlApplicationEngine)
 {
     qRegisterMetaType<Infrastructure::NetworkProxy*>("Infrastructure::NetworkProxy*");
-    ContextProperty::registerTo(qmlApplicationEngine);
+    IStreamingServicesViewModel::registerTo(qmlApplicationEngine);
 }
 
 void StreamingServicesViewModel::activate(QObject* service)

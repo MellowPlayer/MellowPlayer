@@ -4,7 +4,7 @@
 
 namespace MellowPlayer::Presentation
 {
-    class StreamingServicesViewModel;
+    class IStreamingServicesViewModel;
 }
 
 namespace MellowPlayer::Application
@@ -13,11 +13,11 @@ namespace MellowPlayer::Application
     {
         Q_OBJECT
     public:
-        explicit StreamingServicesSetup(Presentation::StreamingServicesViewModel& streamingServices);
+        explicit StreamingServicesSetup(Presentation::IStreamingServicesViewModel& streamingServices);
 
         void initialize(const ResultCallback& resultCallback) override;
 
     private:
-        Presentation::StreamingServicesViewModel& _streamingServices;
+        Presentation::IStreamingServicesViewModel& _streamingServices;
     };
 }

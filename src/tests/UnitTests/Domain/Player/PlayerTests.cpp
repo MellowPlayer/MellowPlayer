@@ -1,8 +1,8 @@
+#include <Fakes/FakeSettingsStore.hpp>
 #include <MellowPlayer/Domain/Player/Player.hpp>
 #include <MellowPlayer/Domain/Player/Song.hpp>
 #include <MellowPlayer/Domain/StreamingServices/StreamingService.hpp>
 #include <QtTest/QSignalSpy>
-#include <UnitTests/Domain/Settings/FakeSettingsStore.hpp>
 #include <catch2/catch.hpp>
 
 using namespace MellowPlayer::Domain;

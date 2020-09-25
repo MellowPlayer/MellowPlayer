@@ -5,7 +5,7 @@ using namespace MellowPlayer::Application;
 using namespace MellowPlayer::Presentation;
 
 
-StreamingServicesSetup::StreamingServicesSetup(StreamingServicesViewModel& streamingServices) : _streamingServices(streamingServices)
+StreamingServicesSetup::StreamingServicesSetup(IStreamingServicesViewModel& streamingServices) : _streamingServices(streamingServices)
 {
 
 }

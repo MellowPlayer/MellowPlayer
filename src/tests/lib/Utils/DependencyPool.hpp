@@ -1,7 +1,10 @@
 #pragma once
 
+#include <Fakes/FakeContextProperties.hpp>
 #include <Fakes/FakeHttpClientFactory.hpp>
+#include <Fakes/FakeNetworkProxies.hpp>
 #include <Fakes/FakeNotificationPresenter.hpp>
+#include <Fakes/FakeSettingsStore.hpp>
 #include <Fakes/FakeStreamingServiceCreator.hpp>
 #include <Fakes/FakeUserScriptFactory.hpp>
 #include <MellowPlayer/Domain/Settings/ISettingsStore.hpp>
@@ -9,9 +12,7 @@
 #include <MellowPlayer/Domain/UserScripts/IUserScriptFactory.hpp>
 #include <MellowPlayer/Infrastructure/CommandLineArguments/ICommandLineArguments.hpp>
 #include <MellowPlayer/Presentation/Notifications/Presenters/INotificationPresenter.hpp>
-#include <UnitTests/Domain/Settings/FakeSettingsStore.hpp>
-#include <UnitTests/Infrastructure/Network/FakeNetworkProxies.hpp>
-#include <UnitTests/Presentation/Qml/FakeContextProperties.hpp>
+#include <MellowPlayer/Presentation/ViewModels/StreamingServices/StreamingServiceViewModelFactory.hpp>
 #include <memory>
 
 class FakeListeningHistoryDatabase;
@@ -38,7 +39,7 @@ namespace MellowPlayer::Infrastructure
 namespace MellowPlayer::Presentation
 {
     class ListeningHistoryViewModel;
-    class StreamingServicesViewModel;
+    class IStreamingServicesViewModel;
     class ThemeViewModel;
     class UpdaterViewModel;
     class IPlayerNotifications;
@@ -73,7 +74,8 @@ namespace MellowPlayer::Tests
 
         // Presentation Layer
         Presentation::IPlayerNotifications& playerNotifications();
-        Presentation::StreamingServicesViewModel& getStreamingServicesViewModel();
+        Presentation::IStreamingServiceViewModelFactory& getStreamingServiceViewModelFactory();
+        Presentation::IStreamingServicesViewModel& getStreamingServicesViewModel();
         Presentation::ListeningHistoryViewModel& getListeningHistoryViewModel();
         Presentation::ThemeViewModel& getThemeViewModel();
         Presentation::UpdaterViewModel& getUpdaterViewModel();
@@ -103,7 +105,8 @@ namespace MellowPlayer::Tests
         // presentation
         std::unique_ptr<Presentation::ListeningHistoryViewModel> _listeningHistoryViewModel;
         FakeHttpClientFactory _httpClientFactory;
-        std::unique_ptr<Presentation::StreamingServicesViewModel> _streamingServicesViewModel;
+        std::unique_ptr<Presentation::StreamingServiceViewModelFactory> _streamingServiceViewModelFactory;
+        std::unique_ptr<Presentation::IStreamingServicesViewModel> _streamingServicesViewModel;
         std::unique_ptr<Presentation::ThemeViewModel> _themeViewModel;
         std::unique_ptr<Presentation::UpdaterViewModel> _updaterViewModel;
         std::unique_ptr<Presentation::IPlayerNotifications> _notifications;

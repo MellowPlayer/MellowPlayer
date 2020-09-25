@@ -7,6 +7,7 @@
 #include <MellowPlayer/Domain/Settings/Settings.hpp>
 #include <MellowPlayer/Domain/StreamingServices/StreamingService.hpp>
 #include <MellowPlayer/Domain/StreamingServices/StreamingServices.hpp>
+#include <MellowPlayer/Presentation/ViewModels/StreamingServices/StreamingServiceViewModelFactory.hpp>
 #include <MellowPlayer/Presentation/ViewModels/StreamingServices/StreamingServicesViewModel.hpp>
 #include <QtTest/QSignalSpy>
 #include <Utils/DependencyPool.hpp>
@@ -29,17 +30,19 @@ TEST_CASE("StreamingServicesControllerViewModel", "[UnitTest]")
     FakeStreamingServiceCreator streamingServiceCreator;
     FakeCommandLineArguments commandLineArguments;
     FakeHttpClientFactory httpClientFactory;
+    StreamingServiceViewModelFactory streamingServiceViewModelFactory(pool.getSettingsStore(),
+                                                                      pool.getUserScriptFactory(),
+                                                                      players,
+                                                                      pool.getNetworkProxies(),
+                                                                      pool.getThemeViewModel(),
+                                                                      httpClientFactory);
     StreamingServicesViewModel viewModel(streamingServices,
-                                         players,
                                          settings,
                                          workDispatcher,
                                          streamingServiceCreator,
                                          commandLineArguments,
-                                         pool.getUserScriptFactory(),
                                          pool.getContextProperties(),
-                                         pool.getNetworkProxies(),
-                                         pool.getThemeViewModel(),
-                                         httpClientFactory);
+                                         streamingServiceViewModelFactory);
     viewModel.initialize();
     viewModel.reload();
 
@@ -121,16 +124,12 @@ TEST_CASE("StreamingServicesControllerViewModel", "[UnitTest]")
         settings.get(SettingKey::PRIVATE_CURRENT_SERVICE).setValue("");
 
         StreamingServicesViewModel viewModelWithCmdLine(streamingServices,
-                                                        players,
                                                         settings,
                                                         workDispatcher,
                                                         streamingServiceCreator,
                                                         commandLineArguments,
-                                                        pool.getUserScriptFactory(),
                                                         pool.getContextProperties(),
-                                                        pool.getNetworkProxies(),
-                                                        pool.getThemeViewModel(),
-                                                        httpClientFactory);
+                                                        streamingServiceViewModelFactory);
         REQUIRE(viewModelWithCmdLine.currentService() == nullptr);
         viewModelWithCmdLine.initialize();
         viewModelWithCmdLine.reload();

@@ -1,8 +1,8 @@
 #include <Fakes/FakePlayer.hpp>
+#include <Fakes/FakeSettingsStore.hpp>
 #include <MellowPlayer/Domain/Settings/Settings.hpp>
 #include <MellowPlayer/Infrastructure/Settings/SettingsSchemaLoader.hpp>
 #include <MellowPlayer/Presentation/Notifications/SystemTrayIcon.hpp>
-#include <UnitTests/Domain/Settings/FakeSettingsStore.hpp>
 #include <UnitTests/Presentation/FakeMainWindow.hpp>
 #include <Utils/DependencyPool.hpp>
 #include <catch2/catch.hpp>

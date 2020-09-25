@@ -11,20 +11,17 @@ using namespace MellowPlayer::Presentation;
 using namespace MellowPlayer::Application;
 
 QmlTypesSetup::QmlTypesSetup(ApplicationViewModel&,
-                             IMainWindow&,
                              SettingsViewModel&,
-                             ThemeViewModel&,
                              UpdaterViewModel&,
                              ListeningHistoryViewModel&,
-                             StreamingServicesViewModel&,
                              ZoomViewModel&,
-                             CacheViewModel&,
-                             CookiesViewModel&,
-                             ClipBoardViewModel&,
-                             DevToolsWindowViewModel&,
                              RemoteControlViewModel&,
                              IContextProperties& contextProperties)
-        : _contextProperties(contextProperties)
+        : _cacheViewModel(contextProperties),
+          _cookiesViewModel(contextProperties),
+          _clipBoardViewModel(contextProperties),
+          _devToolWindowViewModel(contextProperties),
+          _contextProperties(contextProperties)
 {
 }
 

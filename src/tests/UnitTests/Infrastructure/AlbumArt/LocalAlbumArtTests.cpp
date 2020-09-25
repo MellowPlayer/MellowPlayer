@@ -1,12 +1,12 @@
 #include <Fakes/FakeAlbumArtDownloader.hpp>
+#include <Fakes/FakeStreamingServiceLoader.hpp>
+#include <Fakes/FakeStreamingServiceWatcher.hpp>
 #include <MellowPlayer/Domain/Player/CurrentPlayer.hpp>
 #include <MellowPlayer/Domain/Player/Players.hpp>
 #include <MellowPlayer/Domain/StreamingServices/StreamingServices.hpp>
 #include <MellowPlayer/Infrastructure/AlbumArt/LocalAlbumArt.hpp>
 #include <QTest>
 #include <QtTest/QSignalSpy>
-#include <UnitTests/Domain/StreamingServices/FakeStreamingServiceLoader.hpp>
-#include <UnitTests/Domain/StreamingServices/FakeStreamingServiceWatcher.hpp>
 #include <catch2/catch.hpp>
 
 using namespace MellowPlayer::Domain;

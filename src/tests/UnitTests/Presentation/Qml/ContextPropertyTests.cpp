@@ -1,5 +1,5 @@
-#include "FakeContextProperties.hpp"
-#include "FakeQmlApplicationEngine.hpp"
+#include "Fakes/FakeContextProperties.hpp"
+#include "Fakes/FakeQmlApplicationEngine.hpp"
 #include <MellowPlayer/Presentation/Qml/ContextProperty.hpp>
 #include <catch2/catch.hpp>
 

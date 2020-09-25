@@ -1,9 +1,9 @@
+#include <Fakes/FakeNetworkProxies.hpp>
+#include <Fakes/FakeStreamingServiceLoader.hpp>
+#include <Fakes/FakeStreamingServiceWatcher.hpp>
 #include <MellowPlayer/Domain/StreamingServices/StreamingServices.hpp>
 #include <MellowPlayer/Infrastructure/Network/ApplicationNetworkProxy.hpp>
 #include <MellowPlayer/Infrastructure/Network/NetworkProxy.hpp>
-#include <UnitTests/Domain/StreamingServices/FakeStreamingServiceLoader.hpp>
-#include <UnitTests/Domain/StreamingServices/FakeStreamingServiceWatcher.hpp>
-#include <UnitTests/Infrastructure/Network/FakeNetworkProxies.hpp>
 #include <catch2/catch.hpp>
 
 using namespace std;

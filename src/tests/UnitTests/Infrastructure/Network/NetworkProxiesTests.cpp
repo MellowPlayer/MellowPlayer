@@ -1,10 +1,10 @@
+#include <Fakes/FakeSettingsStore.hpp>
+#include <Fakes/FakeStreamingServiceLoader.hpp>
+#include <Fakes/FakeStreamingServiceWatcher.hpp>
 #include <MellowPlayer/Domain/StreamingServices/StreamingServices.hpp>
 #include <MellowPlayer/Infrastructure/Network/NetworkProxies.hpp>
 #include <MellowPlayer/Infrastructure/Network/NetworkProxy.hpp>
 #include <QtTest/QSignalSpy>
-#include <UnitTests/Domain/Settings/FakeSettingsStore.hpp>
-#include <UnitTests/Domain/StreamingServices/FakeStreamingServiceLoader.hpp>
-#include <UnitTests/Domain/StreamingServices/FakeStreamingServiceWatcher.hpp>
 #include <UnitTests/Infrastructure/Application/FakeQtApplication.hpp>
 #include <catch2/catch.hpp>
 

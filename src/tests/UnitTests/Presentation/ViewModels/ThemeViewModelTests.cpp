@@ -1,8 +1,8 @@
+#include <Fakes/FakeStreamingServiceLoader.hpp>
 #include <MellowPlayer/Domain/Settings/Setting.hpp>
 #include <MellowPlayer/Domain/Settings/Settings.hpp>
 #include <MellowPlayer/Domain/StreamingServices/StreamingServices.hpp>
 #include <MellowPlayer/Presentation/ViewModels/ThemeViewModel.hpp>
-#include <UnitTests/Domain/StreamingServices/FakeStreamingServiceLoader.hpp>
 #include <Utils/DependencyPool.hpp>
 #include <catch2/catch.hpp>
 

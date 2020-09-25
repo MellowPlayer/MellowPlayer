@@ -16,7 +16,6 @@
 #include <MellowPlayer/Presentation/ViewModels/MainWindowViewModel.hpp>
 #include <MellowPlayer/Presentation/ViewModels/RemoteControlViewModel.hpp>
 #include <MellowPlayer/Presentation/ViewModels/Settings/SettingsViewModel.hpp>
-#include <MellowPlayer/Presentation/ViewModels/StreamingServices/StreamingServicesViewModel.hpp>
 #include <MellowPlayer/Presentation/ViewModels/ThemeViewModel.hpp>
 #include <MellowPlayer/Presentation/ViewModels/UpdaterViewModel.hpp>
 #include <MellowPlayer/Presentation/ViewModels/ZoomViewModel.hpp>
@@ -28,23 +27,20 @@ namespace MellowPlayer::Application
         Q_OBJECT
     public:
         QmlTypesSetup(Presentation::ApplicationViewModel&,
-                      Presentation::IMainWindow&,
                       Presentation::SettingsViewModel&,
-                      Presentation::ThemeViewModel&,
                       Presentation::UpdaterViewModel&,
                       Presentation::ListeningHistoryViewModel&,
-                      Presentation::StreamingServicesViewModel&,
                       Presentation::ZoomViewModel&,
-                      Presentation::CacheViewModel&,
-                      Presentation::CookiesViewModel&,
-                      Presentation::ClipBoardViewModel&,
-                      Presentation::DevToolsWindowViewModel&,
                       Presentation::RemoteControlViewModel&,
                       Presentation::IContextProperties& contextProperties);
 
         void initialize(const ResultCallback& resultCallback) override;
 
     private:
+        Presentation::CacheViewModel _cacheViewModel;
+        Presentation::CookiesViewModel _cookiesViewModel;
+        Presentation::ClipBoardViewModel _clipBoardViewModel;
+        Presentation::DevToolsWindowViewModel _devToolWindowViewModel;
         Presentation::IContextProperties& _contextProperties;
     };
 }

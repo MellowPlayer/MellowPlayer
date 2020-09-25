@@ -1,8 +1,8 @@
+#include <Fakes/FakeSettingsStore.hpp>
 #include <Fakes/FakeUserScript.hpp>
 #include <Fakes/FakeUserScriptFactory.hpp>
 #include <MellowPlayer/Domain/Settings/ISettingsStore.hpp>
 #include <MellowPlayer/Domain/UserScripts/UserScripts.hpp>
-#include <UnitTests/Domain/Settings/FakeSettingsStore.hpp>
 #include <catch2/catch.hpp>
 
 using namespace MellowPlayer::Domain;

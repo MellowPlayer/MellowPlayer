@@ -102,6 +102,7 @@
 #include <MellowPlayer/Presentation/ViewModels/ListeningHistory/ListeningHistoryViewModel.hpp>
 #include <MellowPlayer/Presentation/ViewModels/MainWindowViewModel.hpp>
 #include <MellowPlayer/Presentation/ViewModels/Settings/SettingsViewModel.hpp>
+#include <MellowPlayer/Presentation/ViewModels/StreamingServices/StreamingServiceViewModelFactory.hpp>
 #include <MellowPlayer/Presentation/ViewModels/StreamingServices/StreamingServicesViewModel.hpp>
 #include <MellowPlayer/Presentation/ViewModels/ThemeViewModel.hpp>
 #include <MellowPlayer/Presentation/ViewModels/UpdaterViewModel.hpp>
@@ -163,6 +164,8 @@ auto defaultInjector = [](di::extension::detail::scoped& scope, QApplication& qA
         di::bind<IAdBlockRequestInterceptor>().to<AdBlockRequestInterceptor>().in(di::unique),
         di::bind<IFileBlockListLoader>().to<FileBlockListLoader>().in(di::singleton).in(scope),
         di::bind<IHttpBlockListLoader>().to<HttpBlockListLoader>(),
+        di::bind<IStreamingServiceViewModelFactory>().to<StreamingServiceViewModelFactory>(),
+        di::bind<IStreamingServicesViewModel>().to<StreamingServicesViewModel>(),
 
 #if defined(Q_OS_LINUX) || defined(Q_OS_FREEBSD)
         di::bind<AbstractPlatformUpdater>().to<LinuxUpdater>().in(di::singleton).in(scope),
