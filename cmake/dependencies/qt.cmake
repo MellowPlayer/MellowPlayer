@@ -16,7 +16,7 @@ find_package(Qt5 ${QT_MIN_VERSION} CONFIG REQUIRED COMPONENTS
         Widgets)
 find_package(Qt5LinguistTools REQUIRED)
 if (UNIX AND NOT APPLE)
-    find_package(Qt5 ${QT_MIN_VERSION} REQUIRED COMPONENTS DBus)
+    find_package(Qt5 ${QT_MIN_VERSION} REQUIRED COMPONENTS DBus X11Extras)
 endif()
 
 set(CMAKE_AUTOMOC ON)
