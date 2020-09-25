@@ -2,6 +2,12 @@
 #include <MellowPlayer/Infrastructure/Logging/SpdLogger.hpp>
 #include <QDebug>
 #include <iostream>
+#include <spdlog/details/os.h>
+#include <spdlog/sinks/ansicolor_sink.h>
+#include <spdlog/sinks/rotating_file_sink.h>
+#ifdef Q_OS_WIN
+#include <spdlog/sinks/wincolor_sink.h>
+#endif
 
 using namespace std;
 using namespace spdlog;
@@ -23,9 +29,16 @@ shared_ptr<logger> SpdLogger::createLogger(const string& name, const LoggerConfi
             if (SpdLogger::_consoleSink == nullptr)
             {
 #ifdef Q_OS_WIN
-                SpdLogger::_consoleSink = make_shared<sinks::stdout_sink_mt>();
+                SpdLogger::_consoleSink = make_shared<sinks::wincolor_stdout_sink_mt>();
 #else
-                SpdLogger::_consoleSink = make_shared<sinks::ansicolor_stdout_sink_mt>();
+                auto colorSink = make_shared<sinks::ansicolor_stdout_sink_mt>();
+                colorSink->set_color_mode(color_mode::always);
+                colorSink->set_color(level::debug, colorSink->cyan);
+                colorSink->set_color(level::info, colorSink->reset);
+                colorSink->set_color(level::warn, colorSink->yellow);
+                colorSink->set_color(level::err, colorSink->red);
+                colorSink->set_color(level::err, colorSink->red_bold);
+                SpdLogger::_consoleSink = colorSink;
 #endif
                 SpdLogger::_consoleSink->set_level(static_cast<level::level_enum>(config.logLevel));
             }

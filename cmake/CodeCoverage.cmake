@@ -112,57 +112,5 @@ IF ( NOT (CMAKE_BUILD_TYPE STREQUAL "Debug" OR CMAKE_BUILD_TYPE STREQUAL "Covera
 ENDIF() # NOT CMAKE_BUILD_TYPE STREQUAL "Debug"
 
 
-# Param _targetname     The name of new the custom make target
-# Param _testrunner     The name of the target which runs the tests.
-#						MUST return ZERO always, even on errors.
-#						If not, no coverage report will be created!
-# Param _outputname     lcov output is generated as _outputname.info
-#                       HTML report is generated in _outputname/index.html
-# Optional fourth parameter is passed as arguments to _testrunner
-#   Pass them in list form, e.g.: "-j;2" for -j 2
-FUNCTION(SETUP_TARGET_FOR_COVERAGE _targetname _testrunner _outputname)
-
-    IF(NOT LCOV_PATH)
-        MESSAGE(FATAL_ERROR "lcov not found! Aborting...")
-    ELSE()
-        MESSAGE(STATUS "Found lcov: ${LCOV_PATH}")
-    ENDIF() # NOT LCOV_PATH
-
-    IF(NOT GENHTML_PATH)
-        MESSAGE(FATAL_ERROR "genhtml not found! Aborting...")
-    ENDIF() # NOT GENHTML_PATH
-
-    SET(coverage_info "${CMAKE_BINARY_DIR}/${_outputname}.info")
-    SET(coverage_cleaned "${coverage_info}.cleaned")
-
-    SEPARATE_ARGUMENTS(test_command UNIX_COMMAND "${_testrunner}")
-
-    # Setup target
-    ADD_CUSTOM_TARGET(${_targetname}
-
-            # Cleanup lcov
-            ${LCOV_PATH} --directory . --zerocounters
-            COMMAND ${CMAKE_COMMAND} -E remove ${coverage_info} ${coverage_cleaned}
-
-            # Run tests
-            COMMAND ${test_command} ${ARGV3}
-
-            # Capturing lcov counters and generating report
-            COMMAND ${LCOV_PATH} --directory . --capture --output-file ${coverage_info}
-            COMMAND ${LCOV_PATH} --remove ${coverage_info} '*tests/*' '*.local/*' '*QQmlObjectListModel*' '*Qt5*/*' '*I*.hpp' '*Qt/5.*' '*catch.hpp' '*3rdparty/*' '*qrc_*' '*moc_*' '/usr/*' '/opt/*' --output-file ${coverage_cleaned}
-            COMMAND ${GENHTML_PATH} -o ${_outputname} ${coverage_cleaned}
-
-            WORKING_DIRECTORY ${CMAKE_BINARY_DIR}
-            COMMENT "Resetting code coverage counters to zero.\nProcessing code coverage counters and generating report."
-            )
-
-    # Show info where to find the report
-    ADD_CUSTOM_COMMAND(TARGET ${_targetname} POST_BUILD
-            COMMAND ;
-            COMMENT "Open ${CMAKE_BINARY_DIR}}/${_outputname}/index.html in your browser to view the coverage report."
-            )
-
-ENDFUNCTION() # SETUP_TARGET_FOR_COVERAGE
-
 set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -g -O0")        # debug, no optimisation
 set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} --coverage")    # enabling coverage

@@ -8,4 +8,5 @@ include(cmake/dependencies/libnotify.cmake)
 include(cmake/dependencies/qxt.cmake)
 include(cmake/dependencies/catch.cmake)
 include(cmake/dependencies/boost-di.cmake)
+include(cmake/dependencies/spdlog.cmake)
 

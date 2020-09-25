@@ -46,13 +46,13 @@ MellowPlayer is licensed under the GPL license.
 
 ### Frameworks
 
-- [Boost.DI](http://boost-experimental.github.io/di/)
+- [Boost.DI](https://github.com/boost-ext/di)
 - [spdlog](https://github.com/gabime/spdlog)
 - [libqxt](https://bitbucket.org/libqxt/libqxt/wiki/Home) *(QxtGlobalShortcut)*
 
 ### Testing
 
-- [catch](https://github.com/philsquared/Catch)
+- [catch](https://github.com/catchorg/Catch2)
 - [lcov](https://github.com/linux-test-project/lcov)
 
 # Compilation

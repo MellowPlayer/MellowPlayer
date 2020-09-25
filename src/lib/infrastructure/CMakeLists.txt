@@ -18,5 +18,4 @@ configure_file(src/MellowPlayer/Infrastructure/BuildConfig.cpp.in ${CMAKE_BINARY
 add_library(${LIB_NAME} STATIC ${SOURCE_FILES} ${HEADER_FILES} ${CMAKE_CURRENT_BINARY_DIR}/resources/infrastructure.qrc ${CMAKE_BINARY_DIR}/BuildConfig.cpp)
 target_precompile_headers(${LIB_NAME} REUSE_FROM ${PROJECT_NAME}.Domain)
 target_include_directories(${LIB_NAME} PUBLIC ${CMAKE_CURRENT_SOURCE_DIR}/src)
-target_include_directories(${LIB_NAME} PRIVATE ${CMAKE_SOURCE_DIR}/src/3rdparty/spdlog-0.16.3/include)
-target_link_libraries(${LIB_NAME} Qt5::Core Qt5::Gui Qt5::Concurrent Qt5::Network Qt5::Widgets Qt5::Sql ${PROJECT_NAME}.Domain)
+target_link_libraries(${LIB_NAME} spdlog Qt5::Core Qt5::Gui Qt5::Concurrent Qt5::Network Qt5::Widgets Qt5::Sql ${PROJECT_NAME}.Domain)
