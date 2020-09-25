@@ -1,8 +1,8 @@
-import QtQuick 2.9
-import QtQuick.Layouts 1.3
-import QtQuick.Controls 2.2
-import QtQuick.Controls.Material 2.2
-import QtQml.Models 2.1
+import QtQuick 2.15
+import QtQuick.Layouts 1.15
+import QtQuick.Controls 2.15
+import QtQuick.Controls.Material 2.15
+import QtQml.Models 2.15
 
 import MellowPlayer 3.0
 
@@ -120,7 +120,7 @@ Item {
                                 Connections {
                                     target: gridView
 
-                                    onDropped: item.index = delegateRoot.visualIndex
+                                    function onDropped () { item.index = delegateRoot.visualIndex }
                                 }
 
                                 states: State {

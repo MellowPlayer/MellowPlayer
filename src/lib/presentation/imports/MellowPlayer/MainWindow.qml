@@ -1,8 +1,7 @@
-import QtQuick 2.9
-import QtQuick.Layouts 1.3
-import QtQuick.Controls 2.2
-import QtQuick.Controls.Material 2.2
-import Qt.labs.platform 1.0 as Platform
+import QtQuick 2.15
+import QtQuick.Layouts 1.15
+import QtQuick.Controls 2.15
+import QtQuick.Controls.Material 2.15
 
 import MellowPlayer 3.0
 
@@ -222,13 +221,6 @@ ApplicationWindow {
         y: mainWindow.height / 2 - height / 2 - 48;
     }
 
-    NativeMenuBar {
-        onGoHomeRequested: runningServices.goHome()
-        onGoBackRequested: runningServices.goBack()
-        onGoForwardRequested: runningServices.goForward()
-        onReloadRequested: runningServices.reload()
-    }
-
     FullScreenNotification {
         id: fullScreenNotification
 
@@ -252,16 +244,16 @@ ApplicationWindow {
     Connections {
         target: _window;
 
-        onVisibleChanged: _window.visible ? d.restoreWindow() : d.hideWindow()
-        onQuitRequest: d.quit()
-        onForceQuitRequest: { d.forceQuit = true; _app.quit() }
-        onRaiseRequested: d.restoreWindow()
+        function onVisibleChanged() { _window.visible ? d.restoreWindow() : d.hideWindow() }
+        function onQuitRequest() { d.quit() }
+        function onForceQuitRequest() { d.forceQuit = true; _app.quit() }
+        function onRaiseRequested() { d.restoreWindow() }
     }
 
     Connections {
         target: _streamingServices;
 
-        onActivationRequested: mainWindow.activateService(service)
+        function onActivationRequested(service) { mainWindow.activateService(service) }
     }
 
     Shortcut {

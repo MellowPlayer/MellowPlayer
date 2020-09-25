@@ -1,5 +1,5 @@
-import QtQuick 2.9
-import QtWebEngine 1.5
+import QtQuick 2.15
+import QtWebEngine 1.10
 
 import MellowPlayer 3.0
 

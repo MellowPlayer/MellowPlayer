@@ -1,7 +1,7 @@
-import QtQuick 2.9
-import QtQuick.Layouts 1.3
-import QtQuick.Controls 2.2
-import QtQuick.Controls.Material 2.2
+import QtQuick 2.15
+import QtQuick.Layouts 1.15
+import QtQuick.Controls 2.15
+import QtQuick.Controls.Material 2.15
 
 import MellowPlayer 3.0
 
@@ -57,17 +57,13 @@ Pane {
                     checkable: true; checked: true
                     hoverEnabled: true
                     text: model.name
+
                     onCheckedChanged: {
                         _listeningHistory.disableService(model.name, !checked)
                     }
 
                     Tooltip {
                         text: filter.checked ? qsTr("Click to remove songs from")  + model.name : qsTr("Click to add songs from ") + model.name
-                    }
-
-                    Connections {
-                        target: filters
-                        onEnabledChanged: filter.checked = true;
                     }
                 }
             }

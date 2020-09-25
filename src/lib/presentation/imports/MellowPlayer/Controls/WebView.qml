@@ -1,10 +1,10 @@
 
-import QtQuick 2.9
-import QtQuick.Layouts 1.3
-import QtQuick.Controls 2.2
-import QtQuick.Controls.Material 2.2
-import QtWebEngine 1.5
-import QtWebChannel 1.0
+import QtQuick 2.15
+import QtQuick.Layouts 1.15
+import QtQuick.Controls 2.15
+import QtQuick.Controls.Material 2.15
+import QtWebEngine 1.10
+import QtWebChannel 1.15
 
 import MellowPlayer 3.0
 
@@ -244,40 +244,45 @@ Page {
 
         Connections {
             target: userAgentSetting
-            onValueChanged: { console.log("new user agent: " + userAgentSetting.value); reload(); }
+
+            function onValueChanged() { console.log("new user agent: " + userAgentSetting.value); reload(); }
         }
 
         Connections {
             target: root.service.networkProxy
-            onChanged: reload()
+
+             function onChanged() { reload() }
         }
 
         Connections {
             target: root.service.userScripts.model
-            onCountChanged: reload()
+
+            function onCountChanged() { reload() }
         }
 
         Connections {
             target: root.player
 
-            onPlay: playerBridge.play()
-            onPause: playerBridge.pause()
-            onNext: playerBridge.next()
-            onPrevious: playerBridge.previous()
-            onAddToFavorites: playerBridge.addToFavorites()
-            onRemoveFromFavorites: playerBridge.removeFromFavorites()
-            onSeekToPositionRequest: playerBridge.seekToPosition(newPosition)
-            onChangeVolumeRequest: playerBridge.changeVolume(newVolume)
+            function onPlay() { playerBridge.play() }
+            function onPause() { playerBridge.pause() }
+            function onNext() { playerBridge.next() }
+            function onPrevious() { playerBridge.previous() }
+            function onAddToFavorites() { playerBridge.addToFavorites() }
+            function onRemoveFromFavorites() { playerBridge.removeFromFavorites() }
+            function onSeekToPositionRequest(newPosition) { playerBridge.seekToPosition(newPosition) }
+            function onChangeVolumeRequest() { playerBridge.changeVolume(newVolume) }
         }
 
         Connections {
             target: _settings.get(SettingKey.MAIN_PLAYBACK_REQUIRES_USER_GESTURE)
-            onValueChanged: d.updatePlaybackRequiresUserGesture()
+
+            function onValueChanged() { d.updatePlaybackRequiresUserGesture() }
         }
 
         Connections {
             target: _settings.get(SettingKey.APPEARANCE_SHOW_SCROLLBARS)
-            onValueChanged: d.updateShowScrollBars()
+
+            function onValueChanged() { d.updateShowScrollBars() }
         }
 
         QtObject {
@@ -326,7 +331,7 @@ Page {
             }
 
             function createUserScriptFromCode(name, sourceCode) {
-                var webEngineScript = Qt.createQmlObject("import QtWebEngine 1.5; WebEngineScript {}", root, "webEngineScript.js");
+                var webEngineScript = Qt.createQmlObject("import QtWebEngine 1.10; WebEngineScript {}", root, "webEngineScript.js");
                 webEngineScript.name = name;
                 webEngineScript.sourceCode = sourceCode;
                 webEngineScript.injectionPoint = WebEngineScript.DocumentReady;
@@ -334,7 +339,7 @@ Page {
             }
 
             function createMellowPlayerScript(name) {
-                var webEngineScript = Qt.createQmlObject("import QtWebEngine 1.5; WebEngineScript {}", root, "webEngineScript.js");
+                var webEngineScript = Qt.createQmlObject("import QtWebEngine 1.10; WebEngineScript {}", root, "webEngineScript.js");
                 webEngineScript.name = name;
                 webEngineScript.injectionPoint = WebEngineScript.DocumentReady;
                 webEngineScript.worldId = WebEngineScript.MainWorld;

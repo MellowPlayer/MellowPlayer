@@ -1,6 +1,6 @@
-import QtQuick 2.9
-import QtQuick.Layouts 1.3
-import QtQuick.Controls 2.2
+import QtQuick 2.15
+import QtQuick.Layouts 1.15
+import QtQuick.Controls 2.15
 
 import MellowPlayer 3.0
 
@@ -88,7 +88,8 @@ StackLayout {
 
     Connections {
         target: _streamingServices
-        onCurrentServiceChanged: currentIndex = indexOf(_streamingServices.currentService)
+
+        function onCurrentServiceChanged() { currentIndex = indexOf(_streamingServices.currentService) }
     }
 
     Component {

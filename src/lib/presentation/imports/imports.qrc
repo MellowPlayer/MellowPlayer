@@ -16,7 +16,6 @@
         <file>MellowPlayer/Controls/ListeningHistorySearchPane.qml</file>
         <file>MellowPlayer/Controls/ListeningHistoryToolBar.qml</file>
         <file>MellowPlayer/Controls/MainToolBar.qml</file>
-        <file>MellowPlayer/Controls/NativeMenuBar.qml</file>
         <file>MellowPlayer/Controls/ServicesOverview.qml</file>
         <file>MellowPlayer/Controls/SettingsDrawer.qml</file>
         <file>MellowPlayer/Controls/Tooltip.qml</file>

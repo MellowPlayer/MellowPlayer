@@ -10,6 +10,7 @@ namespace MellowPlayer::Presentation
         Q_OBJECT
     public:
         DevToolsWindowViewModel(IContextProperties& contextProperties);
+
     signals:
         void showDevTools();
     };

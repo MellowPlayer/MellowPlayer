@@ -1,8 +1,8 @@
-import QtQuick 2.9
-import QtQuick.Layouts 1.3
-import QtQuick.Controls 2.2
-import QtQuick.Controls.Material 2.2
-import QtQml 2.2
+import QtQuick 2.15
+import QtQuick.Layouts 1.15
+import QtQuick.Controls 2.15
+import QtQuick.Controls.Material 2.15
+import QtQml 2.15
 
 import MellowPlayer 3.0
 
@@ -92,7 +92,7 @@ Popup {
                     Label {
                         font.pixelSize: 12
                         onLinkActivated: Qt.openUrlExternally(link)
-                        text: qsTr('See the <a href="https://www.gnu.org/licenses/old-licenses/lgpl-2.1">GNU Lesser General Public License</a>,')
+                        text: qsTr('See the <a href="https://www.gnu.org/licenses/old-licenses/lgpl-2.15">GNU Lesser General Public License</a>,')
 
                         MouseArea {
                             anchors.fill: parent
@@ -105,7 +105,7 @@ Popup {
 
                     Label {
                         font.pixelSize: 12
-                        text: qsTr('version 2.1 or later for details.')
+                        text: qsTr('version 2.15 or later for details.')
 
                         Layout.alignment: Qt.AlignCenter
                     }

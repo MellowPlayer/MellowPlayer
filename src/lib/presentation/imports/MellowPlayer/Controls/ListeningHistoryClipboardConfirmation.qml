@@ -1,7 +1,7 @@
-import QtQuick 2.9
-import QtQuick.Layouts 1.3
-import QtQuick.Controls 2.2
-import QtQuick.Controls.Material 2.2
+import QtQuick 2.15
+import QtQuick.Layouts 1.15
+import QtQuick.Controls 2.15
+import QtQuick.Controls.Material 2.15
 
 import MellowPlayer 3.0
 
@@ -34,7 +34,8 @@ Pane {
 
     Connections {
         target: _clipboard
-        onTextCopied: root.text = text
+
+        function onTextCopied(text) { root.text = text }
     }
 
     Column {

@@ -1,8 +1,8 @@
-import QtQuick 2.9
-import QtQuick.Layouts 1.3
-import QtQuick.Controls 2.2
-import QtQuick.Controls.Material 2.2
-import QtQuick.Controls.Material.impl 2.2
+import QtQuick 2.15
+import QtQuick.Layouts 1.15
+import QtQuick.Controls 2.15
+import QtQuick.Controls.Material 2.15
+import QtQuick.Controls.Material.impl 2.15
 
 ItemDelegate {
     id: root
@@ -52,7 +52,8 @@ ItemDelegate {
 
             Connections {
                 target: _theme
-                onAccentChanged: spinBox.contentItem.selectionColor = _theme.accent
+
+                function onAccentChanged() { spinBox.contentItem.selectionColor = _theme.accent }
             }
         }
     }

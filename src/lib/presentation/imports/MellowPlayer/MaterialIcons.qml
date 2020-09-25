@@ -1,5 +1,5 @@
 pragma Singleton
-import QtQuick 2.9
+import QtQuick 2.15
 
 Item {
     readonly property string family: "Material Icons, Regular"

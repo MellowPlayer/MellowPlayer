@@ -1,4 +1,4 @@
-import QtQuick 2.9
+import QtQuick 2.15
 
 import MellowPlayer 3.0
 
@@ -19,7 +19,7 @@ Item {
     Connections {
         target: _devTools
 
-        onShowDevTools: {
+        function onShowDevTools() {
             console.warn("ShowDevTools")
             devToolsWindowComponent.createObject(root)
         }
