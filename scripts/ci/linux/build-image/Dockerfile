@@ -9,3 +9,4 @@ RUN sudo apt -y install lcov
 RUN sudo dbus-uuidgen --ensure=/etc/machine-id
 RUN sudo apt -y install libqt5sql5-sqlite
 RUN sudo apt -y install git
+RUN sudo apt -y install libqt5x11extras5-dev

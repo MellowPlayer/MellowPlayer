@@ -4,7 +4,7 @@
 #include <QObject>
 #include <memory>
 
-class QxtGlobalShortcut;
+class QHotkey;
 
 namespace MellowPlayer::Domain
 {
@@ -54,14 +54,14 @@ namespace MellowPlayer::Presentation
         Domain::IPlayer& _player;
         IMainWindow& _mainWindow;
 
-        std::shared_ptr<QxtGlobalShortcut> _playShortcut;
-        std::shared_ptr<QxtGlobalShortcut> _nextShortcut;
-        std::shared_ptr<QxtGlobalShortcut> _previousShortcut;
-        std::shared_ptr<QxtGlobalShortcut> _favoriteShortcut;
-        std::shared_ptr<QxtGlobalShortcut> _restoreWindowShortcut;
-        std::shared_ptr<QxtGlobalShortcut> _mediaPlayShortcut;
-        std::shared_ptr<QxtGlobalShortcut> _mediaNextShortcut;
-        std::shared_ptr<QxtGlobalShortcut> _mediaPreviousShortcut;
+        std::shared_ptr<QHotkey> _playShortcut;
+        std::shared_ptr<QHotkey> _nextShortcut;
+        std::shared_ptr<QHotkey> _previousShortcut;
+        std::shared_ptr<QHotkey> _favoriteShortcut;
+        std::shared_ptr<QHotkey> _restoreWindowShortcut;
+        std::shared_ptr<QHotkey> _mediaPlayShortcut;
+        std::shared_ptr<QHotkey> _mediaNextShortcut;
+        std::shared_ptr<QHotkey> _mediaPreviousShortcut;
 
         Domain::Setting& _playShortcutSetting;
         Domain::Setting& _nextShortcutSetting;

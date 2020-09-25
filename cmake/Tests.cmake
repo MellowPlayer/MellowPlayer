@@ -11,7 +11,7 @@ macro(add_test_type layer type)
             Catch2::Catch2
             Qt5::Concurrent Qt5::Core Qt5::Gui Qt5::Network Qt5::Qml Qt5::Quick Qt5::QuickControls2
             Qt5::Sql Qt5::Svg Qt5::WebEngine Qt5::WebEngineWidgets Qt5::Widgets Qt5::Test
-            qxtglobalshortcut MellowPlayer.TestsLib)
+            qhotkey MellowPlayer.TestsLib)
     target_include_directories(${TEST_NAME} PRIVATE lib ${CMAKE_CURRENT_SOURCE_DIR})
     if (APPLE)
         add_framework(Carbon ${TEST_NAME})

@@ -6,7 +6,7 @@
 #include <MellowPlayer/Domain/Settings/Settings.hpp>
 #include <MellowPlayer/Presentation/Hotkeys/Hotkeys.hpp>
 #include <MellowPlayer/Presentation/IMainWindow.hpp>
-#include <qxtglobalshortcut.h>
+#include <qhotkey.h>
 
 using namespace MellowPlayer::Domain;
 using namespace MellowPlayer::Presentation;
@@ -80,38 +80,38 @@ void Hotkeys::updateRestoreWindowShortcut() const
 
 void Hotkeys::grab()
 {
-    _playShortcut = std::make_shared<QxtGlobalShortcut>();
+    _playShortcut = std::make_shared<QHotkey>();
     updatePlayShortcut();
-    connect(_playShortcut.get(), &QxtGlobalShortcut::activated, this, &Hotkeys::togglePlayPause);
+    connect(_playShortcut.get(), &QHotkey::activated, this, &Hotkeys::togglePlayPause);
 
-    _nextShortcut = std::make_shared<QxtGlobalShortcut>();
+    _nextShortcut = std::make_shared<QHotkey>();
     updateNextShortcut();
-    connect(_nextShortcut.get(), &QxtGlobalShortcut::activated, this, &Hotkeys::next);
+    connect(_nextShortcut.get(), &QHotkey::activated, this, &Hotkeys::next);
 
-    _previousShortcut = std::make_shared<QxtGlobalShortcut>();
+    _previousShortcut = std::make_shared<QHotkey>();
     updatePreviousShorcut();
-    connect(_previousShortcut.get(), &QxtGlobalShortcut::activated, this, &Hotkeys::previous);
+    connect(_previousShortcut.get(), &QHotkey::activated, this, &Hotkeys::previous);
 
-    _favoriteShortcut = std::make_shared<QxtGlobalShortcut>();
+    _favoriteShortcut = std::make_shared<QHotkey>();
     updateFavoriteShortcut();
-    connect(_favoriteShortcut.get(), &QxtGlobalShortcut::activated, this, &Hotkeys::toggleFavoriteSong);
+    connect(_favoriteShortcut.get(), &QHotkey::activated, this, &Hotkeys::toggleFavoriteSong);
 
-    _restoreWindowShortcut = std::make_shared<QxtGlobalShortcut>();
+    _restoreWindowShortcut = std::make_shared<QHotkey>();
     updateRestoreWindowShortcut();
-    connect(_restoreWindowShortcut.get(), &QxtGlobalShortcut::activated, this, &Hotkeys::restoreWindow);
+    connect(_restoreWindowShortcut.get(), &QHotkey::activated, this, &Hotkeys::restoreWindow);
 
 #ifdef Q_OS_WIN
-    _mediaPlayShortcut = std::make_shared<QxtGlobalShortcut>();
+    _mediaPlayShortcut = std::make_shared<QHotkey>();
     _mediaPlayShortcut->setShortcut(QKeySequence(Qt::Key_MediaPlay));
-    connect(_mediaPlayShortcut.get(), &QxtGlobalShortcut::activated, this, &Hotkeys::togglePlayPause);
+    connect(_mediaPlayShortcut.get(), &QHotkey::activated, this, &Hotkeys::togglePlayPause);
 
-    _mediaNextShortcut = std::make_shared<QxtGlobalShortcut>();
+    _mediaNextShortcut = std::make_shared<QHotkey>();
     _mediaNextShortcut->setShortcut(QKeySequence(Qt::Key_MediaNext));
-    connect(_mediaNextShortcut.get(), &QxtGlobalShortcut::activated, this, &Hotkeys::next);
+    connect(_mediaNextShortcut.get(), &QHotkey::activated, this, &Hotkeys::next);
 
-    _mediaPreviousShortcut = std::make_shared<QxtGlobalShortcut>();
+    _mediaPreviousShortcut = std::make_shared<QHotkey>();
     _mediaPreviousShortcut->setShortcut(QKeySequence(Qt::Key_MediaPrevious));
-    connect(_mediaPreviousShortcut.get(), &QxtGlobalShortcut::activated, this, &Hotkeys::previous);
+    connect(_mediaPreviousShortcut.get(), &QHotkey::activated, this, &Hotkeys::previous);
 #endif
 
     LOG_DEBUG(_logger, "hotkeys grabbed");

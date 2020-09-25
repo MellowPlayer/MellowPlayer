@@ -36,6 +36,7 @@ packages=(
   qml-module-qtqml-models2
   qml-module-qt-labs-settings
   qml-module-qt-labs-folderlistmodel
+  libqt5x11extras5-dev
 
   # Codecs
   libavcodec-extra

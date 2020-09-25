@@ -1,3 +1,5 @@
+message(STATUS "Using FetchContent to retrieve Boost.DI")
+
 FetchContent_Declare(
         Boost.DI
         GIT_REPOSITORY https://github.com/boost-ext/di.git

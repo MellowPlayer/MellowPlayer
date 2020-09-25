@@ -1,6 +1,0 @@
-find_package(qxtglobalshortcut QUIET)
-if (qxtglobalshortcut_FOUND)
-    message(STATUS "Found qxtglobalshortcut")
-else()
-    add_subdirectory(${CMAKE_SOURCE_DIR}/src/3rdparty/libqxt)
-endif()
