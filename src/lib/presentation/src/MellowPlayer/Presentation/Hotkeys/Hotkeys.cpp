@@ -50,22 +50,22 @@ void Hotkeys::toggleFavoriteSong()
 
 void Hotkeys::updatePlayShortcut() const
 {
-    _playShortcut->setShortcut(QKeySequence(_playShortcutSetting.value().toString()));
+    _playShortcut->setShortcut(QKeySequence(_playShortcutSetting.value().toString()), true);
 }
 
 void Hotkeys::updateNextShortcut() const
 {
-    _nextShortcut->setShortcut(QKeySequence(_nextShortcutSetting.value().toString()));
+    _nextShortcut->setShortcut(QKeySequence(_nextShortcutSetting.value().toString()), true);
 }
 
 void Hotkeys::updatePreviousShorcut() const
 {
-    _previousShortcut->setShortcut(QKeySequence(_previousShortcutSetting.value().toString()));
+    _previousShortcut->setShortcut(QKeySequence(_previousShortcutSetting.value().toString()), true);
 }
 
 void Hotkeys::updateFavoriteShortcut() const
 {
-    _favoriteShortcut->setShortcut(QKeySequence(_favoriteShortcutSetting.value().toString()));
+    _favoriteShortcut->setShortcut(QKeySequence(_favoriteShortcutSetting.value().toString()), true);
 }
 
 void Hotkeys::restoreWindow()
@@ -102,15 +102,15 @@ void Hotkeys::grab()
 
 #ifdef Q_OS_WIN
     _mediaPlayShortcut = std::make_shared<QHotkey>();
-    _mediaPlayShortcut->setShortcut(QKeySequence(Qt::Key_MediaPlay));
+    _mediaPlayShortcut->setShortcut(QKeySequence(Qt::Key_MediaPlay), true);
     connect(_mediaPlayShortcut.get(), &QHotkey::activated, this, &Hotkeys::togglePlayPause);
 
     _mediaNextShortcut = std::make_shared<QHotkey>();
-    _mediaNextShortcut->setShortcut(QKeySequence(Qt::Key_MediaNext));
+    _mediaNextShortcut->setShortcut(QKeySequence(Qt::Key_MediaNext), true);
     connect(_mediaNextShortcut.get(), &QHotkey::activated, this, &Hotkeys::next);
 
     _mediaPreviousShortcut = std::make_shared<QHotkey>();
-    _mediaPreviousShortcut->setShortcut(QKeySequence(Qt::Key_MediaPrevious));
+    _mediaPreviousShortcut->setShortcut(QKeySequence(Qt::Key_MediaPrevious), true);
     connect(_mediaPreviousShortcut.get(), &QHotkey::activated, this, &Hotkeys::previous);
 #endif
 
