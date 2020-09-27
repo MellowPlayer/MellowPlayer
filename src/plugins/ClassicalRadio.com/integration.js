@@ -18,7 +18,7 @@ function getArtist() {
 
 function getArtUrl() {
 	try {
-        return document.getElementsByClassName('wrap')[2].children[0].children[0].children[0].src;
+        return document.getElementsByClassName('wrap')[2].children[0].children[0].children[0].children[0].src;
     } catch(e) {
         return "";
     }
