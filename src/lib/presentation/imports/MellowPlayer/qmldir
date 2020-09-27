@@ -33,7 +33,6 @@ IconSettingDelegate 3.0 Delegates/IconSettingDelegate.qml
 ListeningHistoryEntryDelegate 3.0 Delegates/ListeningHistoryEntryDelegate.qml
 ListeningHistorySectionDelegate 3.0 Delegates/ListeningHistorySectionDelegate.qml
 ServiceOverviewDelegate 3.0 Delegates/ServiceOverviewDelegate.qml
-ServiceSettingDelegate 3.0 Delegates/ServiceSettingDelegate.qml
 ShortcutSettingDelegate 3.0 Delegates/ShortcutSettingDelegate.qml
 SpinBoxDelegate 3.0 Delegates/SpinBoxDelegate.qml
 StringSettingDelegate 3.0 Delegates/StringSettingDelegate.qml
@@ -69,3 +68,4 @@ RemoteControlState_Running 3.0 SettingsPages/RemoteControl/RemoteControlState_Ru
 RemoteControlState_Stopped 3.0 SettingsPages/RemoteControl/RemoteControlState_Stopped.qml
 SettingsTranslator 3.0 SettingsTranslator.js
 ReportIssueDialog 3.0 Dialogs/ReportIssueDialog.qml
+NativeFileDialog 3.0 Dialogs/NativeFileDialog.qml

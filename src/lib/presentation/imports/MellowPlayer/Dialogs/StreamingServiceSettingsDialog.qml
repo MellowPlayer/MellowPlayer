@@ -481,7 +481,7 @@ Dialog {
         y: parent.height / 2 - height / 2
     }
 
-    NativeDialogs.FileDialog {
+    NativeFileDialog {
         id: fileDialog
 
         nameFilters: [ qsTr("Javascript files") + " (*.js)" ]
