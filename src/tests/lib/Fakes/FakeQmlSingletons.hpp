@@ -14,11 +14,6 @@ namespace MellowPlayer::Presentation::Tests
             qmlApplicationEngine_ = qmlApplicationEngine;
         }
 
-        void add(IQmlSingleton& qmlSingleton) override
-        {
-            _items.append(&qmlSingleton);
-        }
-
         bool contains(IQmlSingleton& qmlSingleton)
         {
             return _items.contains(&qmlSingleton);

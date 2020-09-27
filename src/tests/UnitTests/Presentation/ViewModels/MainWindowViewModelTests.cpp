@@ -13,17 +13,11 @@ SCENARIO("MainWindowViewModelTests")
 {
     GIVEN("A main window instance")
     {
-        auto qmlSingletons = std::make_shared<FakeQmlSingletons>();
         FakeSettingsStore settingsStore;
-        MainWindowViewModel mainWindow(*qmlSingletons, settingsStore);
+        MainWindowViewModel mainWindow(settingsStore);
 
         WHEN("Creating main window")
         {
-            THEN("it is added to the qml singleton")
-            {
-                qmlSingletons->contains(mainWindow);
-            }
-
             AND_THEN("window is not yet visible")
             {
                 REQUIRE(!mainWindow.isVisible());

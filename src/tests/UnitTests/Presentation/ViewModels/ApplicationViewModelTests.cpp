@@ -21,22 +21,16 @@ SCENARIO("ApplicationViewModelTests")
     {
         FakeQtApplication qtApplication;
         FakeApplication application;
-        auto qmlSingletons = std::make_shared<FakeQmlSingletons>();
         FakeMainWindow mainWindow;
         DependencyPool pool;
         SettingsViewModel settingsViewModel(pool.getSettings(), pool.getThemeViewModel());
-        ApplicationViewModel applicationViewModel(application, qtApplication, mainWindow, settingsViewModel, *qmlSingletons);
+        ApplicationViewModel applicationViewModel(application, qtApplication, mainWindow, settingsViewModel);
 
         WHEN("Application is created")
         {
             THEN("windowIcon is set")
             {
                 REQUIRE(qtApplication.isIconSet);
-            }
-
-            AND_THEN("qml singleton has been added")
-            {
-                qmlSingletons->contains(applicationViewModel);
             }
         }
 

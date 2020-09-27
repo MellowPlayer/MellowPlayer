@@ -14,11 +14,8 @@ SCENARIO("ContextPropertiesTests")
     {
         FakeQmlApplicationEngine qmlApplicationEngine;
         FakePlayer player;
-        QmlSingletons qmlSingletons(qmlApplicationEngine, player);
-        FakeQmlSingleton qmlSingleton;
-        qmlSingleton.name = "Foo";
-        qmlSingleton.propertyObject = &qmlSingleton;
-        qmlSingletons.add(qmlSingleton);
+        auto qmlSingleton = std::make_shared<FakeQmlSingleton>("Foo");
+        QmlSingletons qmlSingletons(qmlApplicationEngine, player, {qmlSingleton});
 
         WHEN("I call initialize")
         {
@@ -36,12 +33,12 @@ SCENARIO("ContextPropertiesTests")
 
             AND_THEN("property name exists in qmlApplicationEngine")
             {
-                REQUIRE(qmlApplicationEngine.hasContextProperty(qmlSingleton.name));
+                REQUIRE(qmlApplicationEngine.hasContextProperty(qmlSingleton->name()));
             }
 
             AND_THEN("the correct property object has been added to qmlApplicationEngine")
             {
-                REQUIRE(qmlApplicationEngine.qmlSingleton(qmlSingleton.name) == &qmlSingleton);
+                REQUIRE(qmlApplicationEngine.qmlSingleton(qmlSingleton->name()) == qmlSingleton.get());
             }
         }
     }

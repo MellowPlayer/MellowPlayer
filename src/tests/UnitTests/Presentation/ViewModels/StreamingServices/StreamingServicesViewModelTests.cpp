@@ -41,7 +41,6 @@ TEST_CASE("StreamingServicesControllerViewModel", "[UnitTest]")
                                          workDispatcher,
                                          streamingServiceCreator,
                                          commandLineArguments,
-                                         pool.getContextProperties(),
                                          streamingServiceViewModelFactory);
     viewModel.initialize();
     viewModel.reload();
@@ -128,7 +127,6 @@ TEST_CASE("StreamingServicesControllerViewModel", "[UnitTest]")
                                                         workDispatcher,
                                                         streamingServiceCreator,
                                                         commandLineArguments,
-                                                        pool.getContextProperties(),
                                                         streamingServiceViewModelFactory);
         REQUIRE(viewModelWithCmdLine.currentService() == nullptr);
         viewModelWithCmdLine.initialize();

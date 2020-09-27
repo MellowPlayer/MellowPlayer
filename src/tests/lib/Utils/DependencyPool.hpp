@@ -80,7 +80,6 @@ namespace MellowPlayer::Tests
         Presentation::ActiveThemeViewModel& getThemeViewModel();
         Presentation::UpdaterViewModel& getUpdaterViewModel();
         Presentation::INotificationPresenter& getNotificationPresenter();
-        Presentation::IQmlSingletons& getContextProperties();
         Presentation::FakeNotificationPresenter& getFakeNotificationPresenter();
 
     private:
@@ -113,7 +112,6 @@ namespace MellowPlayer::Tests
 
         std::unique_ptr<FakeListeningHistoryDatabase> _dataProvider;
 
-        std::shared_ptr<Presentation::Tests::FakeQmlSingletons> _qmlSingletons;
         Infrastructure::Tests::FakeNetworkProxies _networkProxies;
     };
 }

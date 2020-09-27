@@ -12,26 +12,15 @@ SCENARIO("ContextPropertyTests")
     {
         FakeQmlApplicationEngine qmlApplicationEngine;
         QObject propertyObject;
-        auto qmlSingletons = std::make_shared<FakeQmlSingletons>();
-        qmlSingletons->setQmlApplicationEngine(&qmlApplicationEngine);
+        QmlSingleton qmlSingleton("SingletonName", &propertyObject);
 
-        WHEN("I create a qml singleton")
+        WHEN("I call initialize on qmlSingletons")
         {
-            QmlSingleton qmlSingleton("ContextPropertyName", &propertyObject, *qmlSingletons);
+            qmlSingleton.registerTo(qmlApplicationEngine);
 
-            THEN("propertyObject has been added to the qml singletons")
+            THEN("qml singleton was added to the qmlApplicationEngine")
             {
-                REQUIRE(qmlSingletons->contains(qmlSingleton));
-            }
-
-            AND_WHEN("I call initialize on qmlSingletons")
-            {
-                qmlSingletons->registerToQml();
-
-                THEN("qml singleton was added to the qmlApplicationEngine")
-                {
-                    REQUIRE(qmlApplicationEngine.qmlSingleton("ContextPropertyName") == &propertyObject);
-                }
+                REQUIRE(qmlApplicationEngine.qmlSingleton("SingletonName") == &propertyObject);
             }
         }
     }

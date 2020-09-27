@@ -7,12 +7,19 @@ namespace MellowPlayer::Presentation::Tests
     class FakeQmlSingleton : public QObject, public IQmlSingleton
     {
     public:
-        void registerTo(IQmlApplicationEngine& qmlApplicationEngine) override
+        FakeQmlSingleton(const QString& name) : _name(name)
         {
-            qmlApplicationEngine.registerSingletonInstance(name, propertyObject);
+
         }
 
-        QString name;
-        QObject* propertyObject = nullptr;
+        QString name() const { return _name; }
+
+        void registerTo(IQmlApplicationEngine& qmlApplicationEngine) override
+        {
+            qmlApplicationEngine.registerSingletonInstance(_name, this);
+        }
+
+    private:
+        QString _name;
     };
 }

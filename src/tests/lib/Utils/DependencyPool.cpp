@@ -49,8 +49,7 @@ using namespace MellowPlayer::Tests;
 
 DependencyPool::DependencyPool()
         : _commandLineArgs(make_unique<FakeCommandLineArguments>()),
-          _dataProvider(make_unique<FakeListeningHistoryDatabase>()),
-          _qmlSingletons(std::make_shared<FakeQmlSingletons>())
+          _dataProvider(make_unique<FakeListeningHistoryDatabase>())
 {
 }
 
@@ -76,7 +75,6 @@ IStreamingServicesViewModel& DependencyPool::getStreamingServicesViewModel()
                                                                               getWorkDispatcher(),
                                                                               getStreamingServicesCreator(),
                                                                               getCommandLineArguments(),
-                                                                              *_qmlSingletons,
                                                                               getStreamingServiceViewModelFactory());
     return *_streamingServicesViewModel;
 }
@@ -120,7 +118,7 @@ IWorkDispatcher& DependencyPool::getWorkDispatcher()
 ListeningHistoryViewModel& DependencyPool::getListeningHistoryViewModel()
 {
     if (_listeningHistoryViewModel == nullptr)
-        _listeningHistoryViewModel = make_unique<ListeningHistoryViewModel>(getListeningHistory(), *_qmlSingletons);
+        _listeningHistoryViewModel = make_unique<ListeningHistoryViewModel>(getListeningHistory());
     return *_listeningHistoryViewModel;
 }
 
@@ -142,14 +140,14 @@ ActiveThemeViewModel& DependencyPool::getThemeViewModel()
 {
     static auto themeLoader = FakeThemeLoader();
     if (_themeViewModel == nullptr)
-        _themeViewModel = make_unique<ActiveThemeViewModel>(getStreamingServices(), getSettings(), themeLoader, *_qmlSingletons);
+        _themeViewModel = make_unique<ActiveThemeViewModel>(getStreamingServices(), getSettings(), themeLoader);
     return *_themeViewModel;
 }
 
 UpdaterViewModel& DependencyPool::getUpdaterViewModel()
 {
     if (_updaterViewModel == nullptr)
-        _updaterViewModel = make_unique<UpdaterViewModel>(getUpdater(), *_qmlSingletons);
+        _updaterViewModel = make_unique<UpdaterViewModel>(getUpdater());
     return *_updaterViewModel;
 }
 
@@ -199,11 +197,6 @@ AbstractPlatformUpdater& DependencyPool::getPlatformUpdater()
 IUserScriptFactory& DependencyPool::getUserScriptFactory()
 {
     return _userScriptsFactory;
-}
-
-IQmlSingletons& DependencyPool::getContextProperties()
-{
-    return *_qmlSingletons;
 }
 
 INetworkProxies& DependencyPool::getNetworkProxies()
