@@ -89,7 +89,7 @@ function pause() {
 }
 
 function goNext() {
-    document.querySelector("a[class*='skip-btn']").click();
+    document.querySelector("div[class*='skip-button']").click();
 }
 
 function goPrevious() {
