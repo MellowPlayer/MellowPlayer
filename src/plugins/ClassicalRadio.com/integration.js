@@ -55,7 +55,7 @@ function getPlaybackStatus() {
       return MellowPlayer.PlaybackStatus.PLAYING;
     else if (document.querySelector('[data-state="paused"]'))
       return MellowPlayer.PlaybackStatus.PAUSED;
-    else if (document.querySelector('[data-state="connecting"]'))
+    else if (document.querySelector('[data-state="loading"]'))
       return MellowPlayer.PlaybackStatus.BUFFERING;
     else
       return MellowPlayer.PlaybackStatus.STOPPED;
@@ -81,15 +81,15 @@ function update() {
 }
 
 function play() {
-    document.querySelector("div[class*='ctl']").click();
+    document.querySelector("span[class*='play-button']").click();
 }
 
 function pause() {
-    document.querySelector("div[class*='ctl']").click();
+    document.querySelector("span[class*='play-button']").click();
 }
 
 function goNext() {
-    document.querySelector("a[class*='skip-btn']").click();
+    document.querySelector("div[class*='skip-button']").click();
 }
 
 function goPrevious() {
