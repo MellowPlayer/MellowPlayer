@@ -15,6 +15,13 @@ find_package(Qt5 ${QT_MIN_VERSION} CONFIG REQUIRED COMPONENTS
         WebEngineWidgets
         Widgets)
 find_package(Qt5LinguistTools REQUIRED)
+if (ENABLE_QUICK_COMPILER)
+    find_package(Qt5QuickCompiler REQUIRED)
+endif()
+if (ENABLE_QML_LINT)
+    find_package(QmlLint)
+endif()
+
 if (UNIX AND NOT APPLE)
     find_package(Qt5 ${QT_MIN_VERSION} REQUIRED COMPONENTS DBus X11Extras)
 endif()

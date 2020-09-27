@@ -1,12 +1,17 @@
 set(LIB_NAME "${PROJECT_NAME}.Presentation")
 
+set(CMAKE_AUTORCC OFF)
+
 set(EXCLUDE_DIRS "Linux")
 glob_recurse_excl(HEADER_FILES src/*.hpp "${EXCLUDE_DIRS}")
 glob_recurse_excl(SOURCE_FILES src/*.cpp "${EXCLUDE_DIRS}")
-
-file(GLOB_RECURSE QML_FILES CONFIGURE_DEPENDS imports/*.qml)
-file(GLOB_RECURSE QRC_FILES CONFIGURE_DEPENDS *.qrc)
 file(GLOB_RECURSE CONF_FILES CONFIGURE_DEPENDS *.conf)
+file(GLOB_RECURSE QML_FILES CONFIGURE_DEPENDS imports/*.qml)
+
+if (ENABLE_QML_LINT)
+    message(STATUS "Using qmllint")
+    qml_lint(${QML_FILES})
+endif()
 
 set(QML_FILES ${QML_FILES} imports/MellowPlayer/qmldir)
 if(UNIX AND NOT APPLE)
@@ -22,7 +27,16 @@ if(UNIX AND NOT APPLE)
     endif()
 endif()
 
-add_library(${LIB_NAME} STATIC ${SOURCE_FILES} ${HEADER_FILES} ${QRC_FILES} ${CONF_FILES})
+qt5_add_resources(RESOURCES resources/presentation.qrc)
+if (ENABLE_QUICK_COMPILER)
+    message(STATUS "Using Qt Quick Compiler")
+    qtquick_compiler_add_resources(QML_RESOURCES imports/imports.qrc)
+else()
+    qt5_add_resources(QML_RESOURCES imports/imports.qrc)
+endif()
+
+
+add_library(${LIB_NAME} STATIC ${SOURCE_FILES} ${HEADER_FILES} ${CONF_FILES} ${RESOURCES} ${QML_RESOURCES})
 target_precompile_headers(${LIB_NAME} REUSE_FROM ${PROJECT_NAME}.Domain)
 target_link_libraries(${LIB_NAME} ${PROJECT_NAME}.Domain ${PROJECT_NAME}.Infrastructure
                       qhotkey Qt5::Core Qt5::Qml Qt5::Quick Qt5::QuickControls2 Qt5::Svg
@@ -38,4 +52,3 @@ if(UNIX AND NOT APPLE)
         target_link_libraries(${LIB_NAME} ${LIBNOTIFY_LIBRARIES})
     endif()
 endif()
-

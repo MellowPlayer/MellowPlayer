@@ -71,6 +71,8 @@ You can append the following command line options when running cmake:
 - ``-DBUILD_TESTS``: Set this option to ON to build tests. Default is OFF.
 - ``-DDEFAULT_THEME``: Set this option to specify the default theme. Default is Adaptive.
 - ``-DUSE_LD_GOLD``: Set this option to ON to use GNU Gold Linker. Default is ON.
+- ``-DENABLE_QUICK_COMPILER``: Set this option to OFF to avoid using the Qt Quick Compiler. Default is ON.
+- ``-DENABLE_QML_LINT``: Set this option to ON to use qmllint on all QML files. Default is OFF.
 
 
 # Contributing
