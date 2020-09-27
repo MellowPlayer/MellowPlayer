@@ -91,7 +91,7 @@ function pause() {
 }
 
 function goNext() {
-    document.querySelector("a[class*='ico icon-skip']").click();
+    document.querySelector("div[class*='skip-button-layout']").click();
 }
 
 function goPrevious() {
