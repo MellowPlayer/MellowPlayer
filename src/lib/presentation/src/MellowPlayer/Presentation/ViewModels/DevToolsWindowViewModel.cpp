@@ -2,6 +2,6 @@
 
 using namespace MellowPlayer::Presentation;
 
-DevToolsWindowViewModel::DevToolsWindowViewModel(IContextProperties& contextProperties) : ContextProperty("_devTools", this, contextProperties)
+DevToolsWindowViewModel::DevToolsWindowViewModel(IQmlSingletons& qmlSingletons) : QmlSingleton("DevToolsWindow", this, qmlSingletons)
 {
 }

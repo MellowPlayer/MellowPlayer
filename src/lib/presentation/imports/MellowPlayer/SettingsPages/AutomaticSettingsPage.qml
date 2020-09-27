@@ -43,7 +43,7 @@ ColumnLayout {
                 }
 
                 Rectangle {
-                    color: _theme.isDark(_theme.background) ? Qt.lighter(_theme.background) : Qt.darker(_theme.background, 1.1)
+                    color: ActiveTheme.isDark(ActiveTheme.background) ? Qt.lighter(ActiveTheme.background) : Qt.darker(ActiveTheme.background, 1.1)
                     visible: model.index !== parent.ListView.view.count - 1
 
                     Layout.preferredHeight: 1
@@ -62,7 +62,7 @@ ColumnLayout {
         RowLayout {
             anchors.fill: parent
 
-            Material.foreground: _theme.isDark(_theme.accent) ? "white" : "#303030"
+            Material.foreground: ActiveTheme.isDark(ActiveTheme.accent) ? "white" : "#303030"
 
             Item { Layout.fillWidth: true }
 

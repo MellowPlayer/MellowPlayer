@@ -33,11 +33,11 @@ WizardPage {
     }
 
     Component.onCompleted: {
-        _streamingServices.createService(svName, svUrl, authorName, authorUrl, allPlatforms, linuxPlatform, appImagePlatform, osxPlatform, windowsPlatform)
+        StreamingServices.createService(svName, svUrl, authorName, authorUrl, allPlatforms, linuxPlatform, appImagePlatform, osxPlatform, windowsPlatform)
     }
 
     Connections {
-        target: _streamingServices
+        target: StreamingServices
         onServiceCreated: {
             root.directory = directory
             root.goNextRequested()

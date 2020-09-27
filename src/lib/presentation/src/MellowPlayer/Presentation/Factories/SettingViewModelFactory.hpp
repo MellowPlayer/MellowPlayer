@@ -9,16 +9,16 @@ namespace MellowPlayer::Domain
 
 namespace MellowPlayer::Presentation
 {
-    class ThemeViewModel;
+    class ActiveThemeViewModel;
     class SettingViewModel;
 
     class SettingViewModelFactory
     {
     public:
-        explicit SettingViewModelFactory(ThemeViewModel& themeViewModel);
+        explicit SettingViewModelFactory(ActiveThemeViewModel& themeViewModel);
         SettingViewModel* create(Domain::Setting& setting, QObject* parent = nullptr) const;
 
     private:
-        ThemeViewModel& _themeViewModel;
+        ActiveThemeViewModel& _themeViewModel;
     };
 }

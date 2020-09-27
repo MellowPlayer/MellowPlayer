@@ -1,7 +1,7 @@
-#include "Fakes/FakeContextProperty.hpp"
 #include "Fakes/FakeQmlApplicationEngine.hpp"
+#include "Fakes/FakeQmlSingleton.hpp"
 #include <Fakes/FakePlayer.hpp>
-#include <MellowPlayer/Presentation/Qml/ContextProperties.hpp>
+#include <MellowPlayer/Presentation/Qml/QmlSingletons.hpp>
 #include <catch2/catch.hpp>
 
 using namespace MellowPlayer::Domain;
@@ -10,38 +10,38 @@ using namespace MellowPlayer::Presentation::Tests;
 
 SCENARIO("ContextPropertiesTests")
 {
-    GIVEN("A context properties instance with a fake qml application engine and one property")
+    GIVEN("A QmlSingletons instance with a fake qml application engine and one property")
     {
         FakeQmlApplicationEngine qmlApplicationEngine;
         FakePlayer player;
-        ContextProperties contextProperties(qmlApplicationEngine, player);
-        FakeContextProperty contextProperty;
-        contextProperty.name = "foo";
-        contextProperty.propertyObject = &contextProperty;
-        contextProperties.add(contextProperty);
+        QmlSingletons qmlSingletons(qmlApplicationEngine, player);
+        FakeQmlSingleton qmlSingleton;
+        qmlSingleton.name = "Foo";
+        qmlSingleton.propertyObject = &qmlSingleton;
+        qmlSingletons.add(qmlSingleton);
 
         WHEN("I call initialize")
         {
-            contextProperties.registerToQml();
+            qmlSingletons.registerToQml();
 
             THEN("player name exists in qmlApplicationEngine")
             {
-                REQUIRE(qmlApplicationEngine.hasContextProperty("_player"));
+                REQUIRE(qmlApplicationEngine.hasContextProperty("Player"));
             }
 
             AND_THEN("the correct player property object has been added to qmlApplicationEngine")
             {
-                REQUIRE(qmlApplicationEngine.contextProperty("_player") == &player);
+                REQUIRE(qmlApplicationEngine.qmlSingleton("Player") == &player);
             }
 
             AND_THEN("property name exists in qmlApplicationEngine")
             {
-                REQUIRE(qmlApplicationEngine.hasContextProperty(contextProperty.name));
+                REQUIRE(qmlApplicationEngine.hasContextProperty(qmlSingleton.name));
             }
 
             AND_THEN("the correct property object has been added to qmlApplicationEngine")
             {
-                REQUIRE(qmlApplicationEngine.contextProperty(contextProperty.name) == &contextProperty);
+                REQUIRE(qmlApplicationEngine.qmlSingleton(qmlSingleton.name) == &qmlSingleton);
             }
         }
     }

@@ -4,6 +4,8 @@ import QtQuick.Controls 2.15
 import QtQuick.Controls 2.15
 import QtQuick.Controls.Material 2.15
 
+import MellowPlayer 3.0
+
 Dialog {
     id: root
     readonly property int dialogAccepted: 0
@@ -19,7 +21,7 @@ Dialog {
     onAccepted: dialogResult = dialogAccepted
     onRejected: dialogResult = dialogRejected
 
-    Material.accent: _theme.accent === _theme.background ? _theme.foreground : _theme.accent
+    Material.accent: ActiveTheme.accent === ActiveTheme.background ? ActiveTheme.foreground : ActiveTheme.accent
 
     Label {
         text: root.message

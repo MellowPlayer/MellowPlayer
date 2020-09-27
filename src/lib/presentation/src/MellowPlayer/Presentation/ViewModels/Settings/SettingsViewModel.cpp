@@ -6,9 +6,8 @@
 using namespace MellowPlayer::Domain;
 using namespace MellowPlayer::Presentation;
 
-SettingsViewModel::SettingsViewModel(Settings& settings, ThemeViewModel& themeViewModel, IContextProperties& contextProperties)
-        : ContextProperty("_settings", this, contextProperties),
-          _settings(settings),
+SettingsViewModel::SettingsViewModel(Settings& settings, ActiveThemeViewModel& themeViewModel)
+        : _settings(settings),
           _factory(themeViewModel),
           _categories(new SettingsCategoryListModel(this, "name"))
 {
@@ -36,10 +35,4 @@ SettingsCategoryListModel* SettingsViewModel::categories() const
 void SettingsViewModel::restoreDefaults()
 {
     _settings.restoreDefaults();
-}
-
-void SettingsViewModel::registerTo(IQmlApplicationEngine& qmlApplicationEngine)
-{
-    qmlRegisterUncreatableType<SettingKey>("MellowPlayer", 3, 0, "SettingKey", "SettingKey cannot be instantiated from QML");
-    ContextProperty::registerTo(qmlApplicationEngine);
 }

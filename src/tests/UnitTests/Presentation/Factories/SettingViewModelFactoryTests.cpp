@@ -17,7 +17,7 @@ TEST_CASE("SettingModelFactoryTests")
 {
     MellowPlayer::Tests::DependencyPool pool;
     Settings& settings = pool.getSettings();
-    ThemeViewModel& themeViewModel = pool.getThemeViewModel();
+    ActiveThemeViewModel& themeViewModel = pool.getThemeViewModel();
     SettingViewModelFactory factory(themeViewModel);
 
     SECTION("createBoolSettingModel")

@@ -35,7 +35,6 @@
         <file>MellowPlayer/Delegates/SpinBoxDelegate.qml</file>
         <file>MellowPlayer/Delegates/StringSettingDelegate.qml</file>
         <file>MellowPlayer/Delegates/TextFieldDelegate.qml</file>
-        <file>MellowPlayer/DevToolsWindow.qml</file>
         <file>MellowPlayer/Dialogs/NativeFileDialog.qml</file>
         <file>MellowPlayer/Dialogs/AboutDialog.qml</file>
         <file>MellowPlayer/Dialogs/Alert.qml</file>
@@ -45,7 +44,7 @@
         <file>MellowPlayer/Dialogs/Prompt.qml</file>
         <file>MellowPlayer/Dialogs/Reload.qml</file>
         <file>MellowPlayer/Dialogs/StreamingServiceSettingsDialog.qml</file>
-        <file>MellowPlayer/MainWindow.qml</file>
+        <file>MellowPlayer/MainAppWindow.qml</file>
         <file>MellowPlayer/MaterialIcons.qml</file>
         <file>MellowPlayer/NewPluginWizard/CreatingPage.qml</file>
         <file>MellowPlayer/NewPluginWizard/DetailsPage.qml</file>

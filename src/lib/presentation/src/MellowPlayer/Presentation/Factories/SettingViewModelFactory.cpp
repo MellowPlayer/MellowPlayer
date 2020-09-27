@@ -15,7 +15,7 @@
 using namespace MellowPlayer::Presentation;
 using namespace MellowPlayer::Domain;
 
-SettingViewModelFactory::SettingViewModelFactory(ThemeViewModel& themeViewModel) : _themeViewModel(themeViewModel)
+SettingViewModelFactory::SettingViewModelFactory(ActiveThemeViewModel& themeViewModel) : _themeViewModel(themeViewModel)
 {
 }
 

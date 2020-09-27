@@ -18,9 +18,9 @@
 #include <MellowPlayer/Infrastructure/Updater/BinTray/LatestBinTrayRelease.hpp>
 
 #include <MellowPlayer/Presentation/Notifications/PlayerNotifications.hpp>
+#include <MellowPlayer/Presentation/ViewModels/ActiveThemeViewModel.hpp>
 #include <MellowPlayer/Presentation/ViewModels/ListeningHistory/ListeningHistoryViewModel.hpp>
 #include <MellowPlayer/Presentation/ViewModels/StreamingServices/StreamingServicesViewModel.hpp>
-#include <MellowPlayer/Presentation/ViewModels/ThemeViewModel.hpp>
 #include <MellowPlayer/Presentation/ViewModels/UpdaterViewModel.hpp>
 
 #include <Fakes/FakeAlbumArtDownloader.hpp>
@@ -50,7 +50,7 @@ using namespace MellowPlayer::Tests;
 DependencyPool::DependencyPool()
         : _commandLineArgs(make_unique<FakeCommandLineArguments>()),
           _dataProvider(make_unique<FakeListeningHistoryDatabase>()),
-          _contextProperties(std::make_shared<FakeContextProperties>())
+          _qmlSingletons(std::make_shared<FakeQmlSingletons>())
 {
 }
 
@@ -76,7 +76,7 @@ IStreamingServicesViewModel& DependencyPool::getStreamingServicesViewModel()
                                                                               getWorkDispatcher(),
                                                                               getStreamingServicesCreator(),
                                                                               getCommandLineArguments(),
-                                                                              *_contextProperties,
+                                                                              *_qmlSingletons,
                                                                               getStreamingServiceViewModelFactory());
     return *_streamingServicesViewModel;
 }
@@ -120,7 +120,7 @@ IWorkDispatcher& DependencyPool::getWorkDispatcher()
 ListeningHistoryViewModel& DependencyPool::getListeningHistoryViewModel()
 {
     if (_listeningHistoryViewModel == nullptr)
-        _listeningHistoryViewModel = make_unique<ListeningHistoryViewModel>(getListeningHistory(), *_contextProperties);
+        _listeningHistoryViewModel = make_unique<ListeningHistoryViewModel>(getListeningHistory(), *_qmlSingletons);
     return *_listeningHistoryViewModel;
 }
 
@@ -138,18 +138,18 @@ IPlayer& DependencyPool::getCurrentPlayer()
     return *_currentPlayer;
 }
 
-ThemeViewModel& DependencyPool::getThemeViewModel()
+ActiveThemeViewModel& DependencyPool::getThemeViewModel()
 {
     static auto themeLoader = FakeThemeLoader();
     if (_themeViewModel == nullptr)
-        _themeViewModel = make_unique<ThemeViewModel>(getStreamingServices(), getSettings(), themeLoader, *_contextProperties);
+        _themeViewModel = make_unique<ActiveThemeViewModel>(getStreamingServices(), getSettings(), themeLoader, *_qmlSingletons);
     return *_themeViewModel;
 }
 
 UpdaterViewModel& DependencyPool::getUpdaterViewModel()
 {
     if (_updaterViewModel == nullptr)
-        _updaterViewModel = make_unique<UpdaterViewModel>(getUpdater(), *_contextProperties);
+        _updaterViewModel = make_unique<UpdaterViewModel>(getUpdater(), *_qmlSingletons);
     return *_updaterViewModel;
 }
 
@@ -201,9 +201,9 @@ IUserScriptFactory& DependencyPool::getUserScriptFactory()
     return _userScriptsFactory;
 }
 
-IContextProperties& DependencyPool::getContextProperties()
+IQmlSingletons& DependencyPool::getContextProperties()
 {
-    return *_contextProperties;
+    return *_qmlSingletons;
 }
 
 INetworkProxies& DependencyPool::getNetworkProxies()

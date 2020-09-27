@@ -1,24 +1,27 @@
 #pragma once
 
 #include <MellowPlayer/Presentation/IMainWindow.hpp>
-#include <MellowPlayer/Presentation/Qml/ContextProperty.hpp>
+#include <MellowPlayer/Presentation/Qml/QmlSingleton.hpp>
+#include <MellowPlayer/Presentation/ViewModels/ZoomViewModel.hpp>
 #include <QObject>
 
 namespace MellowPlayer::Domain
 {
     class ILogger;
+    class ISettingsStore;
 }
 
 namespace MellowPlayer::Presentation
 {
     class IQmlApplicationEngine;
 
-    class MainWindowViewModel : public IMainWindow, public ContextProperty
+    class MainWindowViewModel : public IMainWindow, public QmlSingleton
     {
         Q_OBJECT
         Q_PROPERTY(bool visible READ isVisible WRITE setVisible NOTIFY visibleChanged)
+        Q_PROPERTY(ZoomViewModel* zoom READ zoom CONSTANT)
     public:
-        MainWindowViewModel(IContextProperties& contextProperties);
+        MainWindowViewModel(IQmlSingletons& qmlSingletons, Domain::ISettingsStore& settingsStore);
 
         // IMainWindow implementation
         void show() override;
@@ -27,6 +30,7 @@ namespace MellowPlayer::Presentation
 
         // Properties for QML
         bool isVisible() const;
+        ZoomViewModel* zoom();
 
         Q_INVOKABLE void requestQuit() override;
 
@@ -43,5 +47,6 @@ namespace MellowPlayer::Presentation
     private:
         bool _visible;
         Domain::ILogger& _logger;
+        ZoomViewModel _zoom;
     };
 }

@@ -10,9 +10,9 @@ ToolBar {
 
     property bool isCurrentServiceRunning: false
 
-    Material.primary: _theme.primary
-    Material.foreground: _theme.primaryForeground
-    Material.theme: _theme.isDark(_theme.primary) ? Material.Dark : Material.Light
+    Material.primary: ActiveTheme.primary
+    Material.foreground: ActiveTheme.primaryForeground
+    Material.theme: ActiveTheme.isDark(ActiveTheme.primary) ? Material.Dark : Material.Light
 
     RowLayout {
         anchors.fill: parent
@@ -22,7 +22,7 @@ ToolBar {
             iconChar: mainWindow.isOnRunningServicesPage ? MaterialIcons.icon_apps : MaterialIcons.icon_keyboard_arrow_left
             tooltip: mainWindow.isOnRunningServicesPage ?
                          qsTr("Select another service") :
-                         mainWindow.hasRunningServices ? qsTr("Go back to ") + _streamingServices.currentService.name : ""
+                         mainWindow.hasRunningServices ? qsTr("Go back to ") + StreamingServices.currentService.name : ""
             visible: mainWindow.hasRunningServices
 
             onClicked: {
@@ -37,7 +37,7 @@ ToolBar {
         Item {
             Layout.preferredWidth: 1
             Layout.fillHeight: true
-            visible: mainWindow.isOnRunningServicesPage && _settings.get(SettingKey.APPEARANCE_WEBPAGE_CONTROLS_VISIBLE).value
+            visible: mainWindow.isOnRunningServicesPage && App.settings.get(SettingKey.APPEARANCE_WEBPAGE_CONTROLS_VISIBLE).value
 
             Rectangle {
                 anchors.centerIn: parent
@@ -50,7 +50,7 @@ ToolBar {
         IconToolButton {
             iconChar: MaterialIcons.icon_chevron_left
             tooltip: qsTr("Go back")
-            visible: mainWindow.isOnRunningServicesPage && _settings.get(SettingKey.APPEARANCE_WEBPAGE_CONTROLS_VISIBLE).value
+            visible: mainWindow.isOnRunningServicesPage && App.settings.get(SettingKey.APPEARANCE_WEBPAGE_CONTROLS_VISIBLE).value
 
             onTriggered: mainWindow.runningServices.goBack()
         }
@@ -58,7 +58,7 @@ ToolBar {
         IconToolButton {
             iconChar: MaterialIcons.icon_chevron_right
             tooltip: qsTr("Go forward")
-            visible: mainWindow.isOnRunningServicesPage && _settings.get(SettingKey.APPEARANCE_WEBPAGE_CONTROLS_VISIBLE).value
+            visible: mainWindow.isOnRunningServicesPage && App.settings.get(SettingKey.APPEARANCE_WEBPAGE_CONTROLS_VISIBLE).value
 
             onTriggered: mainWindow.runningServices.goForward()
         }
@@ -66,8 +66,8 @@ ToolBar {
         IconToolButton {
             iconChar: MaterialIcons.icon_refresh
             tooltip: qsTr("Reload page")
-            visible: mainWindow.isOnRunningServicesPage && _settings.get(SettingKey.APPEARANCE_WEBPAGE_CONTROLS_VISIBLE).value
-            shortcut: _settings.get(SettingKey.SHORTCUTS_RELOAD).value
+            visible: mainWindow.isOnRunningServicesPage && App.settings.get(SettingKey.APPEARANCE_WEBPAGE_CONTROLS_VISIBLE).value
+            shortcut: App.settings.get(SettingKey.SHORTCUTS_RELOAD).value
 
             onTriggered: mainWindow.runningServices.reload()
         }
@@ -75,7 +75,7 @@ ToolBar {
         IconToolButton {
             iconChar: MaterialIcons.icon_home
             tooltip: qsTr("Go to home page")
-            visible: mainWindow.isOnRunningServicesPage && _settings.get(SettingKey.APPEARANCE_WEBPAGE_CONTROLS_VISIBLE).value
+            visible: mainWindow.isOnRunningServicesPage && App.settings.get(SettingKey.APPEARANCE_WEBPAGE_CONTROLS_VISIBLE).value
 
             onTriggered: mainWindow.runningServices.goHome()
         }
@@ -83,7 +83,7 @@ ToolBar {
         Item {
             Layout.preferredWidth: 1
             Layout.fillHeight: true
-            visible:  mainWindow.isOnRunningServicesPage && _player.canAddToFavorites && _settings.get(SettingKey.APPEARANCE_PLAYER_CONTROLS_VISIBLE).value
+            visible:  mainWindow.isOnRunningServicesPage && Player.canAddToFavorites && App.settings.get(SettingKey.APPEARANCE_PLAYER_CONTROLS_VISIBLE).value
 
             Rectangle {
                 anchors.centerIn: parent
@@ -94,12 +94,12 @@ ToolBar {
         }
 
         IconToolButton {
-            visible: mainWindow.isOnRunningServicesPage && _player.canAddToFavorites && _settings.get(SettingKey.APPEARANCE_PLAYER_CONTROLS_VISIBLE).value
-            iconChar: _player.currentSong.isFavorite ? MaterialIcons.icon_favorite : MaterialIcons.icon_favorite_border
-            tooltip: _player.currentSong.isFavorite ? qsTr("Remove current song from your favorites") : qsTr("Add current song to your favorites")
-            shortcut: _settings.get(SettingKey.SHORTCUTS_FAVORITE).value
+            visible: mainWindow.isOnRunningServicesPage && Player.canAddToFavorites && App.settings.get(SettingKey.APPEARANCE_PLAYER_CONTROLS_VISIBLE).value
+            iconChar: Player.currentSong.isFavorite ? MaterialIcons.icon_favorite : MaterialIcons.icon_favorite_border
+            tooltip: Player.currentSong.isFavorite ? qsTr("Remove current song from your favorites") : qsTr("Add current song to your favorites")
+            shortcut: App.settings.get(SettingKey.SHORTCUTS_FAVORITE).value
 
-            onTriggered: _player.toggleFavoriteSong()
+            onTriggered: Player.toggleFavoriteSong()
         }
 
         Item {
@@ -107,48 +107,48 @@ ToolBar {
         }
 
         IconToolButton {
-            enabled: _player.canGoPrevious && d.isPlayerActive()
+            enabled: Player.canGoPrevious && d.isPlayerActive()
             iconChar: MaterialIcons.icon_fast_rewind
             tooltip: qsTr("Skip to previous song")
-            visible: mainWindow.isOnRunningServicesPage && _settings.get(SettingKey.APPEARANCE_PLAYER_CONTROLS_VISIBLE).value
-            shortcut: _settings.get(SettingKey.SHORTCUTS_PREVIOUS).value
+            visible: mainWindow.isOnRunningServicesPage && App.settings.get(SettingKey.APPEARANCE_PLAYER_CONTROLS_VISIBLE).value
+            shortcut: App.settings.get(SettingKey.SHORTCUTS_PREVIOUS).value
 
-            onTriggered: _player.previous()
+            onTriggered: Player.previous()
         }
 
         IconToolButton {
-            enabled: !_player.isStopped || d.isPlayerActive()
-            iconChar: _player.isPlaying ? MaterialIcons.icon_pause: MaterialIcons.icon_play_arrow
-            tooltip: _player.isPlaying ? qsTr("Pause") : qsTr("Play")
-            visible: mainWindow.isOnRunningServicesPage && _settings.get(SettingKey.APPEARANCE_PLAYER_CONTROLS_VISIBLE).value
-            shortcut: _settings.get(SettingKey.SHORTCUTS_PLAY).value
+            enabled: !Player.isStopped || d.isPlayerActive()
+            iconChar: Player.isPlaying ? MaterialIcons.icon_pause: MaterialIcons.icon_play_arrow
+            tooltip: Player.isPlaying ? qsTr("Pause") : qsTr("Play")
+            visible: mainWindow.isOnRunningServicesPage && App.settings.get(SettingKey.APPEARANCE_PLAYER_CONTROLS_VISIBLE).value
+            shortcut: App.settings.get(SettingKey.SHORTCUTS_PLAY).value
 
-            onTriggered: _player.togglePlayPause()
+            onTriggered: Player.togglePlayPause()
         }
 
         IconToolButton {
-            enabled: _player.canGoNext && d.isPlayerActive()
+            enabled: Player.canGoNext && d.isPlayerActive()
             iconChar: MaterialIcons.icon_fast_forward
             tooltip: qsTr("Skip to next song")
-            visible: mainWindow.isOnRunningServicesPage && _settings.get(SettingKey.APPEARANCE_PLAYER_CONTROLS_VISIBLE).value
-            shortcut: _settings.get(SettingKey.SHORTCUTS_NEXT).value
+            visible: mainWindow.isOnRunningServicesPage && App.settings.get(SettingKey.APPEARANCE_PLAYER_CONTROLS_VISIBLE).value
+            shortcut: App.settings.get(SettingKey.SHORTCUTS_NEXT).value
 
-            onTriggered: _player.next()
+            onTriggered: Player.next()
         }
 
         IconToolButton {
-            property var setting: _settings.get(SettingKey.NOTIFICATIONS_ENABLED)
+            property var setting: App.settings.get(SettingKey.NOTIFICATIONS_ENABLED)
 
             checkable: true
             checked: setting.value
             iconChar: checked ? MaterialIcons.icon_notifications_active : MaterialIcons.icon_notifications_off
             tooltip: checked ? qsTr("Disable notifications") : qsTr("Enable notifications")
-            shortcut: _settings.get(SettingKey.SHORTCUTS_NOTIFICATIONS).value
+            shortcut: App.settings.get(SettingKey.SHORTCUTS_NOTIFICATIONS).value
 
             onCheckedChanged: setting.value = checked;
             onTriggered: checked = !checked;
 
-            Material.accent: _theme.accent === _theme.primary ? _theme.primaryForeground : _theme.accent
+            Material.accent: ActiveTheme.accent === ActiveTheme.primary ? ActiveTheme.primaryForeground : ActiveTheme.accent
         }
 
         Item {
@@ -168,7 +168,7 @@ ToolBar {
         IconToolButton {
             iconChar: MaterialIcons.icon_history
             tooltip: qsTr("Open listening history")
-            shortcut: _settings.get(SettingKey.SHORTCUTS_LISTENING_HISTORY).value
+            shortcut: App.settings.get(SettingKey.SHORTCUTS_LISTENING_HISTORY).value
 
             onTriggered: listeningHistoryDrawer.open()
         }
@@ -182,7 +182,7 @@ ToolBar {
             Shortcut {
                 id: shortcutSettings
 
-                sequence: _settings.get(SettingKey.SHORTCUTS_SETTINGS).value
+                sequence: App.settings.get(SettingKey.SHORTCUTS_SETTINGS).value
 
                 onActivated: settingsDrawer.open()
             }
@@ -190,7 +190,7 @@ ToolBar {
             Shortcut {
                 id: shortcutCreatePlugin
 
-                sequence: _settings.get(SettingKey.SHORTCUTS_CREATE_PLUGIN).value
+                sequence: App.settings.get(SettingKey.SHORTCUTS_CREATE_PLUGIN).value
 
                 onActivated: newPluginWizard.open()
             }
@@ -198,7 +198,7 @@ ToolBar {
             Shortcut {
                 id: shortcutReportIssue
 
-                sequence: _settings.get(SettingKey.SHORTCUTS_REPORT_ISSUE).value
+                sequence: App.settings.get(SettingKey.SHORTCUTS_REPORT_ISSUE).value
 
                 onActivated: reportIssueDialog.open()
             }
@@ -207,16 +207,16 @@ ToolBar {
             Shortcut {
                 id: shortcutCheckForUpdates
 
-                enabled: !_updater.busy
-                sequence: _settings.get(SettingKey.SHORTCUTS_CHECK_FOR_UPDATE).value
+                enabled: !Updater.busy
+                sequence: App.settings.get(SettingKey.SHORTCUTS_CHECK_FOR_UPDATE).value
 
-                onActivated: _updater.check()
+                onActivated: Updater.check()
             }
 
             Shortcut {
                 id: shortcutAbout
 
-                sequence: _settings.get(SettingKey.SHORTCUTS_ABOUT).value
+                sequence: App.settings.get(SettingKey.SHORTCUTS_ABOUT).value
 
                 onActivated: aboutDialog.open()
             }
@@ -224,9 +224,9 @@ ToolBar {
             Shortcut {
                 id: shortcutQuit
 
-                sequence: _settings.get(SettingKey.SHORTCUTS_QUIT).value
+                sequence: App.settings.get(SettingKey.SHORTCUTS_QUIT).value
 
-                onActivated: _window.requestQuit()
+                onActivated: MainWindow.requestQuit()
             }
 
             Menu {
@@ -277,9 +277,9 @@ ToolBar {
                             from: 50
                             to: 300
                             stepSize: 25
-                            value: _zoom.value * 100
+                            value: MainWindow.zoom.value * 100
 
-                            onValueChanged: _zoom.value = value / 100.0
+                            onValueChanged: MainWindow.zoom.value = value / 100.0
 
                             textFromValue:  function(value, locale) {
                                 return Number(value).toLocaleString(locale, 'f', 0) + "%";
@@ -297,7 +297,7 @@ ToolBar {
                             implicitWidth: 48
                             flat: true
 
-                            onClicked: _zoom.reset()
+                            onClicked: MainWindow.zoom.reset()
 
                             Layout.rightMargin: 16
                         }
@@ -327,17 +327,17 @@ ToolBar {
                 IconMenuItem {
                     iconChar: MaterialIcons.icon_update
                     text: qsTr("Check for update")
-                    enabled: !_updater.busy
+                    enabled: !Updater.busy
                     shortcut: shortcutCheckForUpdates.sequence
 
-                    onClicked: _updater.check()
+                    onClicked: Updater.check()
 
                     ProgressBar {
                         anchors{ bottom: parent.bottom; horizontalCenter: parent.left; right: parent.right }
-                        indeterminate: _updater.progress === -1
+                        indeterminate: Updater.progress === -1
                         from: 0; to: 100
-                        value: _updater.progress
-                        visible: _updater.busy
+                        value: Updater.progress
+                        visible: Updater.busy
                     }
                 }
 
@@ -358,7 +358,7 @@ ToolBar {
                     shortcut: shortcutQuit.sequence
                     text: qsTr("Quit")
 
-                    onClicked: _window.requestQuit()
+                    onClicked: MainWindow.requestQuit()
                 }
             }
         }
@@ -383,7 +383,7 @@ ToolBar {
             anchors.fill: parent
             anchors.margins: 9
             spacing: 0
-            visible: mainWindow.isOnRunningServicesPage && _settings.get(SettingKey.APPEARANCE_PLAYER_CONTROLS_VISIBLE).value
+            visible: mainWindow.isOnRunningServicesPage && App.settings.get(SettingKey.APPEARANCE_PLAYER_CONTROLS_VISIBLE).value
 
             Label {
                 Layout.fillHeight: true
@@ -395,13 +395,13 @@ ToolBar {
                 font.pixelSize: sliderGroup.visible ? 12 : 14
 
                 function getText() {
-                    var currentSong = _player.currentSong;
+                    var currentSong = Player.currentSong;
                     if (currentSong.title && currentSong.artist)
                         return "<b>" + currentSong.title + qsTr("</b><i> by ") + currentSong.artist;
                     else if (currentSong.title)
                         return "<b>" + currentSong.title + "</b>";
-                    else if (_streamingServices.currentService !== null)
-                        return _streamingServices.currentService.name;
+                    else if (StreamingServices.currentService !== null)
+                        return StreamingServices.currentService.name;
                     return "";
                 }
             }
@@ -414,7 +414,7 @@ ToolBar {
                 Layout.preferredHeight: visible ? slider.implicitHeight : 0
                 Layout.margins: 0
 
-                visible: _player.canSeek || _player.currentSong.duration !== 0
+                visible: Player.canSeek || Player.currentSong.duration !== 0
 
                 RowLayout {
                     id: layout
@@ -424,7 +424,7 @@ ToolBar {
                     Label {
                         text: {
                             var date = new Date(null);
-                            date.setSeconds(_player.position); // specify value for SECONDS here
+                            date.setSeconds(Player.position); // specify value for SECONDS here
                             var text = date.toISOString().substr(11, 8);
                             try {
                                 if (text.startsWith("00:"))
@@ -442,24 +442,24 @@ ToolBar {
                         id: slider
 
                         function updateHandleVisibility() {
-                            slider.handle.visible = _player.canSeek
+                            slider.handle.visible = Player.canSeek
                         }
 
                         hoverEnabled: true
-                        from: 0; to: _player.currentSong.duration
-                        value: _player.position
+                        from: 0; to: Player.currentSong.duration
+                        value: Player.position
 
                         onMoved: {
-                            if (_player.position !== value && _player.position < _player.currentSong.duration)
-                                _player.seekToPosition(value)
+                            if (Player.position !== value && Player.position < Player.currentSong.duration)
+                                Player.seekToPosition(value)
                         }
 
                         Component.onCompleted: slider.updateHandleVisibility()
                         Layout.fillWidth: true
-                        Material.accent: _theme.accent === _theme.primary ? _theme.primaryForeground : _theme.accent
+                        Material.accent: ActiveTheme.accent === ActiveTheme.primary ? ActiveTheme.primaryForeground : ActiveTheme.accent
 
                         Connections {
-                            target: _player
+                            target: Player
 
                             function onCanSeekChanged() { slider.updateHandleVisibility() }
                         }
@@ -469,7 +469,7 @@ ToolBar {
                     Label {
                         text: {
                             var date = new Date(null);
-                            date.setSeconds(_player.currentSong.duration - _player.position); // specify value for SECONDS here
+                            date.setSeconds(Player.currentSong.duration - Player.position); // specify value for SECONDS here
                             var text = date.toISOString().substr(11, 8);
                             try {
                                 if (text.startsWith("00:"))
@@ -492,7 +492,7 @@ ToolBar {
         property int iconSize: 22
 
         function isPlayerActive() {
-            return _player.currentSong !== null && _player.currentSong.isValid()
+            return Player.currentSong !== null && Player.currentSong.isValid()
         }
     }
 

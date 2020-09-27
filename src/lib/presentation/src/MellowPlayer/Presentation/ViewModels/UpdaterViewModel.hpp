@@ -1,6 +1,6 @@
 #pragma once
 
-#include <MellowPlayer/Presentation/Qml/ContextProperty.hpp>
+#include <MellowPlayer/Presentation/Qml/QmlSingleton.hpp>
 #include <QObject>
 
 namespace MellowPlayer::Infrastructure
@@ -10,7 +10,7 @@ namespace MellowPlayer::Infrastructure
 
 namespace MellowPlayer::Presentation
 {
-    class UpdaterViewModel : public QObject, public ContextProperty
+    class UpdaterViewModel : public QObject, public QmlSingleton
     {
         Q_OBJECT
         Q_PROPERTY(QString url READ url CONSTANT)
@@ -21,7 +21,7 @@ namespace MellowPlayer::Presentation
         Q_PROPERTY(bool restartEnabled READ restartEnabled NOTIFY restartEnabledChanged)
         Q_PROPERTY(double progress READ progress NOTIFY progressChanged)
     public:
-        UpdaterViewModel(Infrastructure::Updater& updater, IContextProperties& contextProperties);
+        UpdaterViewModel(Infrastructure::Updater& updater, IQmlSingletons& qmlSingletons);
 
         QString url() const;
         QString status() const;

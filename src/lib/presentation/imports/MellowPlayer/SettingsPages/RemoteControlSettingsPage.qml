@@ -8,14 +8,14 @@ import MellowPlayer 3.0
 Item {
     clip: true
 
-    Material.theme: _theme.isDark(_theme.primary) ? Material.Dark : Material.Light
+    Material.theme: ActiveTheme.isDark(ActiveTheme.primary) ? Material.Dark : Material.Light
 
     StackLayout {
         anchors.fill: parent
-        currentIndex: _remoteControl.currentStateIndex
+        currentIndex: RemoteControl.currentStateIndex
 
         Repeater {
-            model: _remoteControl.states
+            model: RemoteControl.states
 
             Loader {
                 source: model.qmlComponent
@@ -27,7 +27,7 @@ Item {
     }
 
     Connections {
-        target: _remoteControl
+        target: RemoteControl
 
         function onError(title, message) {
             errorDialog.title = title

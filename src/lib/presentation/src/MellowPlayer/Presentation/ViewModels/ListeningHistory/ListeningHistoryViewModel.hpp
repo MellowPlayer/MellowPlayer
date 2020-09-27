@@ -1,7 +1,7 @@
 #pragma once
 
 #include <MellowPlayer/Presentation/Models/ListeningHistoryProxyListModel.hpp>
-#include <MellowPlayer/Presentation/Qml/ContextProperty.hpp>
+#include <MellowPlayer/Presentation/Qml/QmlSingleton.hpp>
 
 namespace MellowPlayer::Domain
 {
@@ -10,14 +10,14 @@ namespace MellowPlayer::Domain
 
 namespace MellowPlayer::Presentation
 {
-    class ListeningHistoryViewModel : public QObject, public ContextProperty
+    class ListeningHistoryViewModel : public QObject, public QmlSingleton
     {
         Q_OBJECT
         Q_PROPERTY(QAbstractItemModel* model READ model CONSTANT)
     public:
-        ListeningHistoryViewModel(Domain::IListeningHistory& listeningHistory, IContextProperties& contextProperties);
+        ListeningHistoryViewModel(Domain::IListeningHistory& listeningHistory, IQmlSingletons& qmlSingletons);
 
-        using ContextProperty::registerTo;
+        using QmlSingleton::registerTo;
         void load();
         ListeningHistoryProxyListModel* model();
         Q_INVOKABLE void disableService(const QString& serviceName, bool disable);

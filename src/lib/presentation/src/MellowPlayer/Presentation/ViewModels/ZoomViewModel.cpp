@@ -5,8 +5,8 @@
 using namespace MellowPlayer::Domain;
 using namespace MellowPlayer::Presentation;
 
-ZoomViewModel::ZoomViewModel(IContextProperties& contextProperties, ISettingsStore& settingsStore)
-        : ContextProperty("_zoom", this, contextProperties), _settingsStore(settingsStore)
+ZoomViewModel::ZoomViewModel(ISettingsStore& settingsStore)
+        : _settingsStore(settingsStore)
 {
     setValue(settingsStore.value("zoom", 1.0).toDouble());
 }

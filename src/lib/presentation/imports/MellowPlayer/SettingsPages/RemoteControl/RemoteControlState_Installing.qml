@@ -9,9 +9,9 @@ RemoteControlState {
     id: root
 
     title: qsTr("Installing Remote Control Application")
-    message: qsTr("Installing <b>%1</b>. Please wait,\nthis may take a few minutes...").arg(_remoteControl.appInfo.name)
+    message: qsTr("Installing <b>%1</b>. Please wait,\nthis may take a few minutes...").arg(RemoteControl.appInfo.name)
     icon: MaterialIcons.icon_get_app
     buttonVisible: false
     busyIndicatorVisible: true
-    versionMessage: qsTr("Require <a href=\"%3\">%1</a> <i>%2</i>").arg(_remoteControl.appInfo.name).arg(_remoteControl.appInfo.minimumRequiredVersion).arg(_remoteControl.appInfo.homePage)
+    versionMessage: qsTr("Require <a href=\"%3\">%1</a> <i>%2</i>").arg(RemoteControl.appInfo.name).arg(RemoteControl.appInfo.minimumRequiredVersion).arg(RemoteControl.appInfo.homePage)
 }

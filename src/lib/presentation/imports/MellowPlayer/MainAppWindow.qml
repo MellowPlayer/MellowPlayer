@@ -13,6 +13,7 @@ ApplicationWindow {
     property string runningServicesPage: "running"
     property var runningServices: null
     property string page
+
     property bool isOnRunningServicesPage: page === runningServicesPage
     property bool hasRunningServices: runningServices !== null && runningServices.currentIndex !== -1
 
@@ -45,7 +46,7 @@ ApplicationWindow {
     }
 
     function activateService(service) {
-        _streamingServices.currentService = service;
+        StreamingServices.currentService = service;
         page = runningServicesPage;
         var index = runningServices.indexOf(service);
         if (index === -1) {
@@ -56,9 +57,9 @@ ApplicationWindow {
     }
 
     minimumWidth: 960; minimumHeight: 540
-    width: _settings.get(SettingKey.PRIVATE_WINDOW_WIDTH).value;
-    height: _settings.get(SettingKey.PRIVATE_WINDOW_HEIGHT).value;
-    title: _streamingServices.currentService !== null ? _streamingServices.currentService.name : ""
+    width: App.settings.get(SettingKey.PRIVATE_WINDOW_WIDTH).value;
+    height: App.settings.get(SettingKey.PRIVATE_WINDOW_HEIGHT).value;
+    title: StreamingServices.currentService !== null ? StreamingServices.currentService.name : ""
 
     onClosing: d.handleCloseEvent(close);
     onPageChanged: {
@@ -82,21 +83,21 @@ ApplicationWindow {
     }
 
     Component.onCompleted: {
-        if (_streamingServices.currentService !== null)
-            activateService(_streamingServices.currentService)
+        if (StreamingServices.currentService !== null)
+            activateService(StreamingServices.currentService)
         else
             page = selectServicePage;
     }
-    Material.accent: _theme.accent
-    Material.background: _theme.background
-    Material.foreground: _theme.foreground
-    Material.primary: _theme.primary
-    Material.theme: _theme.dark ? Material.Dark : Material.Light
+    Material.accent: ActiveTheme.accent
+    Material.background: ActiveTheme.background
+    Material.foreground: ActiveTheme.foreground
+    Material.primary: ActiveTheme.primary
+    Material.theme: ActiveTheme.dark ? Material.Dark : Material.Light
 
     header: MainToolBar {
         id: mainToolBar
 
-        visible: _settings.get(SettingKey.APPEARANCE_TOOLBAR_VISIBLE).value && mainWindow.visibility !== ApplicationWindow.FullScreen
+        visible: App.settings.get(SettingKey.APPEARANCE_TOOLBAR_VISIBLE).value && mainWindow.visibility !== ApplicationWindow.FullScreen
     }
 
     footer: UpdateToolBar { }
@@ -205,7 +206,7 @@ ApplicationWindow {
         standardButtons: Dialog.Ok
 
         onAccepted: {
-            _window.visible = false;
+            MainWindow.visible = false;
             mainWindow.visible = false;
         }
     }
@@ -242,22 +243,22 @@ ApplicationWindow {
     }
 
     Connections {
-        target: _window;
+        target: MainWindow;
 
-        function onVisibleChanged() { _window.visible ? d.restoreWindow() : d.hideWindow() }
+        function onVisibleChanged() { MainWindow.visible ? d.restoreWindow() : d.hideWindow() }
         function onQuitRequest() { d.quit() }
-        function onForceQuitRequest() { d.forceQuit = true; _app.quit() }
+        function onForceQuitRequest() { d.forceQuit = true; App.quit() }
         function onRaiseRequested() { d.restoreWindow() }
     }
 
     Connections {
-        target: _streamingServices;
+        target: StreamingServices;
 
         function onActivationRequested(service) { mainWindow.activateService(service) }
     }
 
     Shortcut {
-        sequence: _settings.get(SettingKey.SHORTCUTS_SELECT_SERVICE).value
+        sequence: App.settings.get(SettingKey.SHORTCUTS_SELECT_SERVICE).value
         onActivated: {
             stack.slideTransitions = false;
             toggleActivePage();
@@ -265,10 +266,10 @@ ApplicationWindow {
     }
 
     Shortcut {
-        sequence: _settings.get(SettingKey.SHORTCUTS_SHOW_TOOLBAR).value
+        sequence: App.settings.get(SettingKey.SHORTCUTS_SHOW_TOOLBAR).value
         onActivated: {
             console.warn("CTRL+T")
-            _settings.get(SettingKey.APPEARANCE_TOOLBAR_VISIBLE).value = !_settings.get(SettingKey.APPEARANCE_TOOLBAR_VISIBLE).value
+            App.settings.get(SettingKey.APPEARANCE_TOOLBAR_VISIBLE).value = !App.settings.get(SettingKey.APPEARANCE_TOOLBAR_VISIBLE).value
         }
     }
 
@@ -290,21 +291,21 @@ ApplicationWindow {
         }
 
         function saveGeometry() {
-            _settings.get(SettingKey.PRIVATE_WINDOW_WIDTH).value = mainWindow.width;
-            _settings.get(SettingKey.PRIVATE_WINDOW_HEIGHT).value = mainWindow.height;
+            App.settings.get(SettingKey.PRIVATE_WINDOW_WIDTH).value = mainWindow.width;
+            App.settings.get(SettingKey.PRIVATE_WINDOW_HEIGHT).value = mainWindow.height;
         }
 
         function handleCloseEvent(close) {
             saveGeometry();
-            var closeToTray = _settings.get(SettingKey.MAIN_CLOSE_TO_TRAY).value
+            var closeToTray = App.settings.get(SettingKey.MAIN_CLOSE_TO_TRAY).value
             if (closeToTray && !forceQuit) {
-                var showMessageSetting = _settings.get(SettingKey.PRIVATE_SHOW_CLOSE_TO_TRAY_MESSAGE)
+                var showMessageSetting = App.settings.get(SettingKey.PRIVATE_SHOW_CLOSE_TO_TRAY_MESSAGE)
                 if (showMessageSetting.value) {
                     showMessageSetting.value = false;
                     exitToTrayMsgBox.open();
                 }
                 else {
-                    _window.visible = false;
+                    MainWindow.visible = false;
                     mainWindow.visible = false;
                 }
                 close.accepted = false;
@@ -313,14 +314,14 @@ ApplicationWindow {
 
         function quit() {
             saveGeometry();
-            var confirmExit = _settings.get(SettingKey.MAIN_CONFIRM_EXIT).value;
+            var confirmExit = App.settings.get(SettingKey.MAIN_CONFIRM_EXIT).value;
             if (confirmExit) {
                 d.restoreWindow();
                 confirmQuitMsgBox.open();
                 confirmQuitMsgBox.forceActiveFocus();
             }
             else {
-                _app.quit();
+                App.quit();
             }
         }
     }

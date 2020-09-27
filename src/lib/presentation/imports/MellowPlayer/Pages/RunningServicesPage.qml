@@ -28,7 +28,7 @@ StackLayout {
         var index = indexOf(service);
         if (index === currentIndex) {
             currentIndex = -1;
-            _streamingServices.currentService = null;
+            StreamingServices.currentService = null;
             mainWindow.page = mainWindow.selectServicePage;
         }
         itemAt(index).destroy();
@@ -73,23 +73,23 @@ StackLayout {
 
 
     Shortcut {
-        property var setting: _settings.get(SettingKey.SHORTCUTS_SELECT_NEXT_SERVICE)
+        property var setting: App.settings.get(SettingKey.SHORTCUTS_SELECT_NEXT_SERVICE)
 
         sequence: setting.value
-        onActivated: _streamingServices.next()
+        onActivated: StreamingServices.next()
     }
 
     Shortcut {
-        property var setting: _settings.get(SettingKey.SHORTCUTS_SELECT_PREVIOUS_SERVICE)
+        property var setting: App.settings.get(SettingKey.SHORTCUTS_SELECT_PREVIOUS_SERVICE)
 
         sequence: setting.value
-        onActivated: _streamingServices.previous()
+        onActivated: StreamingServices.previous()
     }
 
     Connections {
-        target: _streamingServices
+        target: StreamingServices
 
-        function onCurrentServiceChanged() { currentIndex = indexOf(_streamingServices.currentService) }
+        function onCurrentServiceChanged() { currentIndex = indexOf(StreamingServices.currentService) }
     }
 
     Component {

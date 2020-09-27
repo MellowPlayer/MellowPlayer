@@ -16,14 +16,12 @@ namespace MellowPlayer::Presentation
         virtual ~IQmlApplicationEngine() = default;
 
         /**
-         * Sets a context property on the root QQmlContext.
+         * Sets a qml singleton for use in the QML application
          *
          * @param name Name of the property to set
          * @param object QObject property
          */
-        virtual void setContextProperty(const QString& name, QObject* object) = 0;
-
-        virtual void setContextProperty(const QString& name, const QVariant& value) = 0;
+        virtual void registerSingletonInstance(const QString& name, QObject* object) = 0;
 
         /**
          * Adds a path to the QML import path list.

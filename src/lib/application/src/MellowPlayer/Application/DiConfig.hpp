@@ -49,10 +49,10 @@
 #include <MellowPlayer/Domain/StreamingServices/StreamingServices.hpp>
 #include <MellowPlayer/Domain/UserScripts/IUserScript.hpp>
 #include <MellowPlayer/Domain/UserScripts/IUserScriptFactory.hpp>
-#include <MellowPlayer/Infrastructure/AdBlock/IFileBlockListLoader.hpp>
 #include <MellowPlayer/Infrastructure/AdBlock/FileBlockListLoader.hpp>
-#include <MellowPlayer/Infrastructure/AdBlock/IHttpBlockListLoader.hpp>
 #include <MellowPlayer/Infrastructure/AdBlock/HttpBlockListLoader.hpp>
+#include <MellowPlayer/Infrastructure/AdBlock/IFileBlockListLoader.hpp>
+#include <MellowPlayer/Infrastructure/AdBlock/IHttpBlockListLoader.hpp>
 #include <MellowPlayer/Infrastructure/AlbumArt/AlbumArtDownloader.hpp>
 #include <MellowPlayer/Infrastructure/AlbumArt/LocalAlbumArt.hpp>
 #include <MellowPlayer/Infrastructure/Application/Application.hpp>
@@ -92,19 +92,17 @@
 #include <MellowPlayer/Presentation/Notifications/PlayerNotifications.hpp>
 #include <MellowPlayer/Presentation/Notifications/Presenters/SystemTrayIconPresenter.hpp>
 #include <MellowPlayer/Presentation/Notifications/SystemTrayIcon.hpp>
-#include <MellowPlayer/Presentation/Qml/ContextProperties.hpp>
-#include <MellowPlayer/Presentation/Qml/IContextProperties.hpp>
 #include <MellowPlayer/Presentation/Qml/IQmlApplicationEngine.hpp>
+#include <MellowPlayer/Presentation/Qml/IQmlSingletons.hpp>
 #include <MellowPlayer/Presentation/Qml/QmlApplicationEngine.hpp>
+#include <MellowPlayer/Presentation/Qml/QmlSingletons.hpp>
+#include <MellowPlayer/Presentation/ViewModels/ActiveThemeViewModel.hpp>
 #include <MellowPlayer/Presentation/ViewModels/ApplicationViewModel.hpp>
-#include <MellowPlayer/Presentation/ViewModels/CacheViewModel.hpp>
-#include <MellowPlayer/Presentation/ViewModels/CookiesViewModel.hpp>
 #include <MellowPlayer/Presentation/ViewModels/ListeningHistory/ListeningHistoryViewModel.hpp>
 #include <MellowPlayer/Presentation/ViewModels/MainWindowViewModel.hpp>
 #include <MellowPlayer/Presentation/ViewModels/Settings/SettingsViewModel.hpp>
 #include <MellowPlayer/Presentation/ViewModels/StreamingServices/StreamingServiceViewModelFactory.hpp>
 #include <MellowPlayer/Presentation/ViewModels/StreamingServices/StreamingServicesViewModel.hpp>
-#include <MellowPlayer/Presentation/ViewModels/ThemeViewModel.hpp>
 #include <MellowPlayer/Presentation/ViewModels/UpdaterViewModel.hpp>
 #include <QGuiApplication>
 #include <QQmlApplicationEngine>
@@ -128,7 +126,7 @@ auto defaultInjector = [](di::extension::detail::scoped& scope, QApplication& qA
         di::bind<IApplication>().to<Application>().in(di::singleton).in(scope),
         di::bind<IQtApplication>().to<QtApplication>().in(scope),
         di::bind<IQmlApplicationEngine>().to<QmlApplicationEngine>().in(scope),
-        di::bind<IContextProperties>().to<ContextProperties>().in(di::singleton).in(scope),
+        di::bind<IQmlSingletons>().to<QmlSingletons>().in(di::singleton).in(scope),
         di::bind<IPlayer>().to<CurrentPlayer>().in(di::singleton).in(scope),
         di::bind<ILocalSocketFactory>().to<LocalSocketFactory>().in(scope),
         di::bind<ILocalServerFactory>().to<LocalServerFactory>().in(scope),

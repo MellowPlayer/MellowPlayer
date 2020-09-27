@@ -1,15 +1,15 @@
 #pragma once
 
-#include <MellowPlayer/Presentation/Qml/IContextProperty.hpp>
+#include <MellowPlayer/Presentation/Qml/IQmlSingleton.hpp>
 
 namespace MellowPlayer::Presentation::Tests
 {
-    class FakeContextProperty : public QObject, public IContextProperty
+    class FakeQmlSingleton : public QObject, public IQmlSingleton
     {
     public:
         void registerTo(IQmlApplicationEngine& qmlApplicationEngine) override
         {
-            qmlApplicationEngine.setContextProperty(name, propertyObject);
+            qmlApplicationEngine.registerSingletonInstance(name, propertyObject);
         }
 
         QString name;

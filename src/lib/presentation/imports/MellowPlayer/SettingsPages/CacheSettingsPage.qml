@@ -19,14 +19,14 @@ Item {
             text: qsTr("Clear cookies")
             onClicked: {
                 paneRestart.state = "visible"
-                _cookies.clear();
+                App.clearCookies();
             }
 
             Layout.fillWidth: true
         }
 
         Rectangle {
-            color: _theme.isDark(_theme.background) ? Qt.lighter(_theme.background) : Qt.darker(_theme.background, 1.1)
+            color: ActiveTheme.isDark(ActiveTheme.background) ? Qt.lighter(ActiveTheme.background) : Qt.darker(ActiveTheme.background, 1.1)
             height: 1
             Layout.fillWidth: true
         }
@@ -37,7 +37,7 @@ Item {
             text: qsTr("Clear cache")
             onClicked: {
                 paneRestart.state = "visible"
-                _cache.clear();
+                App.clearCache();
             }
 
             Layout.fillWidth: true
@@ -55,10 +55,10 @@ Item {
         clip: true
         width: parent.width
 
-        Material.background: _theme.primary
+        Material.background: ActiveTheme.primary
         Material.elevation: 8
-        Material.foreground: _theme.primaryForeground
-        Material.theme: _theme.isDark(_theme.primary) ? Material.Dark : Material.Light
+        Material.foreground: ActiveTheme.primaryForeground
+        Material.theme: ActiveTheme.isDark(ActiveTheme.primary) ? Material.Dark : Material.Light
 
         RowLayout {
             id: rowLayout
@@ -85,7 +85,7 @@ Item {
             ToolButton {
                 highlighted: true
                 text: qsTr("Restart now")
-                onClicked: _app.restart()
+                onClicked: App.restart()
             }
         }
 

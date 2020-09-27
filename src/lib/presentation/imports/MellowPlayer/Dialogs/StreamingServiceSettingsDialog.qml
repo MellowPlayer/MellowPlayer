@@ -34,7 +34,7 @@ Dialog {
             spacing: 0
 
             Layout.alignment: Qt.AlignCenter
-            Material.accent: _theme.accent === "#ffc107" ? _theme.primary : _theme.accent
+            Material.accent: ActiveTheme.accent === "#ffc107" ? ActiveTheme.primary : ActiveTheme.accent
 
             Label {
                 font.italic: true
@@ -110,7 +110,7 @@ Dialog {
                     width: parent.width / 2
                     height: parent.height * 0.75
 
-                    Material.background: _theme.isDark(_theme.background) ? Qt.lighter(_theme.background, 1.05) : Qt.darker(_theme.background, 1.05)
+                    Material.background: ActiveTheme.isDark(ActiveTheme.background) ? Qt.lighter(ActiveTheme.background, 1.05) : Qt.darker(ActiveTheme.background, 1.05)
                     Material.elevation: 2
 
                     ColumnLayout {
@@ -213,7 +213,7 @@ Dialog {
                         width: parent.width / 2
                         height: parent.height * 0.75
 
-                        Material.background: _theme.isDark(_theme.background) ? Qt.lighter(_theme.background, 1.05) : Qt.darker(_theme.background, 1.05)
+                        Material.background: ActiveTheme.isDark(ActiveTheme.background) ? Qt.lighter(ActiveTheme.background, 1.05) : Qt.darker(ActiveTheme.background, 1.05)
                         Material.elevation: 2
 
                         ScrollView {
@@ -270,7 +270,7 @@ Dialog {
                                             font.pixelSize: 22
                                             font.family: MaterialIcons.family
 
-                                            Material.foreground: _theme.accent
+                                            Material.foreground: ActiveTheme.accent
                                         }
 
                                         Label {
@@ -338,7 +338,7 @@ Dialog {
                     width: parent.width / 2
                     height: parent.height * 0.75
 
-                    Material.background: _theme.isDark(_theme.background) ? Qt.lighter(_theme.background, 1.05) : Qt.darker(_theme.background, 1.05)
+                    Material.background: ActiveTheme.isDark(ActiveTheme.background) ? Qt.lighter(ActiveTheme.background, 1.05) : Qt.darker(ActiveTheme.background, 1.05)
                     Material.elevation: 2
 
                     ColumnLayout {
@@ -428,7 +428,7 @@ Dialog {
                     width: parent.width / 2
                     height: parent.height * 0.75
 
-                    Material.background: _theme.isDark(_theme.background) ? Qt.lighter(_theme.background, 1.05) : Qt.darker(_theme.background, 1.05)
+                    Material.background: ActiveTheme.isDark(ActiveTheme.background) ? Qt.lighter(ActiveTheme.background, 1.05) : Qt.darker(ActiveTheme.background, 1.05)
                     Material.elevation: 2
 
                     ListView {
@@ -449,7 +449,7 @@ Dialog {
                             }
 
                             Rectangle {
-                                color: _theme.isDark(_theme.background) ? Qt.lighter(_theme.background) : Qt.darker(_theme.background, 1.1)
+                                color: ActiveTheme.isDark(ActiveTheme.background) ? Qt.lighter(ActiveTheme.background) : Qt.darker(ActiveTheme.background, 1.1)
                                 visible: model.index !== parent.ListView.view.count - 1
 
                                 Layout.preferredHeight: 1
@@ -464,7 +464,7 @@ Dialog {
         }
 
         Rectangle {
-            color: _theme.isDark(_theme.background) ? Qt.lighter(_theme.background) : Qt.darker(_theme.background, 1.1)
+            color: ActiveTheme.isDark(ActiveTheme.background) ? Qt.lighter(ActiveTheme.background) : Qt.darker(ActiveTheme.background, 1.1)
             Layout.alignment: Qt.AlignCenter
             Layout.preferredHeight: 1
             Layout.fillWidth: true

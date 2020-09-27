@@ -10,6 +10,9 @@
 #include <QDebug>
 #include <QFontDatabase>
 #include <QProcess>
+#include <QDir>
+#include <QStandardPaths>
+#include <QWebEngineProfile>
 
 using namespace MellowPlayer::Domain;
 using namespace MellowPlayer::Presentation;
@@ -18,11 +21,13 @@ using namespace MellowPlayer::Infrastructure;
 ApplicationViewModel::ApplicationViewModel(IApplication& application,
                                            IQtApplication& qtApplication,
                                            IMainWindow& mainWindow,
-                                           IContextProperties& contextProperties)
-        : ContextProperty("_app", this, contextProperties),
+                                           SettingsViewModel& settingsViewModel,
+                                           IQmlSingletons& qmlSingletons)
+        : QmlSingleton("App", this, qmlSingletons),
           _application(application),
           _qtApplication(qtApplication),
           _mainWindow(mainWindow),
+          _settingsViewModel(settingsViewModel),
           _restartRequested(false)
 {
     _qtApplication.setWindowIcon(IconProvider::windowIcon());
@@ -56,4 +61,32 @@ void ApplicationViewModel::showLogs()
 QString ApplicationViewModel::buildInfo() const
 {
     return BuildConfig::buildInfo();
+}
+
+void ApplicationViewModel::clearCache()
+{
+    // clear http cache
+    auto& profile = *QWebEngineProfile::defaultProfile();
+    profile.clearHttpCache();
+
+    // clear mellowplayer cache (covers,...)
+    for (auto dir : QStandardPaths::standardLocations(QStandardPaths::CacheLocation))
+    {
+        QDir cacheDir(dir);
+        qDebug() << "removing cache directory: " << dir;
+        cacheDir.removeRecursively();
+    }
+}
+
+void ApplicationViewModel::clearCookies()
+{
+    auto& profile = *QWebEngineProfile::defaultProfile();
+    QDir storageDir(profile.persistentStoragePath());
+    qDebug() << "removing persistent storage directory: " << storageDir;
+    storageDir.removeRecursively();
+}
+
+SettingsViewModel* ApplicationViewModel::settings()
+{
+    return &_settingsViewModel;
 }

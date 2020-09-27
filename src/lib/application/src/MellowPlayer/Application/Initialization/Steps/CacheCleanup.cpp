@@ -1,14 +1,14 @@
 #include "CacheCleanup.hpp"
-#include <MellowPlayer/Presentation/ViewModels/CacheViewModel.hpp>
+#include <MellowPlayer/Presentation/ViewModels/ApplicationViewModel.hpp>
 
 using namespace MellowPlayer::Application;
 using namespace MellowPlayer::Presentation;
 
-CacheCleanup::CacheCleanup(CacheViewModel& cache) : _cache(cache)
+CacheCleanup::CacheCleanup(ApplicationViewModel& applicationViewModel) : _applicationViewModel(applicationViewModel)
 {
 
 }
 void CacheCleanup::cleanUp()
 {
-    _cache.clear();
+    _applicationViewModel.clearCache();
 }

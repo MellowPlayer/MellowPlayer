@@ -2,7 +2,7 @@
 
 #include <MellowPlayer/Presentation/Models/StreamingServiceListModel.hpp>
 #include <MellowPlayer/Presentation/Models/StreamingServiceProxyListModel.hpp>
-#include <MellowPlayer/Presentation/Qml/ContextProperty.hpp>
+#include <MellowPlayer/Presentation/Qml/QmlSingleton.hpp>
 #include <QObject>
 
 class QQmlApplicationEngine;
@@ -30,13 +30,13 @@ namespace MellowPlayer::Presentation
 {
     class IStreamingServiceViewModelFactory;
 
-    class IStreamingServicesViewModel : public QObject, public ContextProperty
+    class IStreamingServicesViewModel : public QObject, public QmlSingleton
     {
         Q_OBJECT
         Q_PROPERTY(QAbstractItemModel* filteredServices READ filteredServices CONSTANT)
         Q_PROPERTY(QObject* currentService READ currentService WRITE setCurrentService NOTIFY currentServiceChanged)
     public:
-        using ContextProperty::ContextProperty;
+        using QmlSingleton::QmlSingleton;
 
         virtual void initialize() = 0;
         virtual void activate(QObject* service) = 0;
@@ -74,7 +74,7 @@ namespace MellowPlayer::Presentation
                                    Domain::IWorkDispatcher& workDispatcher,
                                    Domain::IStreamingServiceCreator& streamingServiceCreator,
                                    Infrastructure::ICommandLineArguments& commandLineArguments,
-                                   IContextProperties& contextProperties,
+                                   IQmlSingletons& qmlSingletons,
                                    IStreamingServiceViewModelFactory& streamingServiceViewModelFactory);
 
         void initialize() override;

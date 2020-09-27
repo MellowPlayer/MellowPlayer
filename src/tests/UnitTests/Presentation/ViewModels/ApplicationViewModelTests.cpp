@@ -1,11 +1,14 @@
-#include <Fakes/FakeContextProperties.hpp>
+#include <Fakes/FakeQmlSingletons.hpp>
 #include <MellowPlayer/Presentation/ViewModels/ApplicationViewModel.hpp>
+#include <MellowPlayer/Presentation/ViewModels/Settings/SettingsViewModel.hpp>
 #include <QtTest/QSignalSpy>
 #include <UnitTests/Infrastructure/Application/FakeApplication.hpp>
 #include <UnitTests/Infrastructure/Application/FakeQtApplication.hpp>
 #include <UnitTests/Presentation/FakeMainWindow.hpp>
+#include <Utils/DependencyPool.hpp>
 #include <catch2/catch.hpp>
 
+using namespace MellowPlayer::Tests;
 using namespace MellowPlayer::Infrastructure;
 using namespace MellowPlayer::Presentation;
 
@@ -18,9 +21,11 @@ SCENARIO("ApplicationViewModelTests")
     {
         FakeQtApplication qtApplication;
         FakeApplication application;
-        auto contextProperties = std::make_shared<FakeContextProperties>();
+        auto qmlSingletons = std::make_shared<FakeQmlSingletons>();
         FakeMainWindow mainWindow;
-        ApplicationViewModel applicationViewModel(application, qtApplication, mainWindow, *contextProperties);
+        DependencyPool pool;
+        SettingsViewModel settingsViewModel(pool.getSettings(), pool.getThemeViewModel());
+        ApplicationViewModel applicationViewModel(application, qtApplication, mainWindow, settingsViewModel, *qmlSingletons);
 
         WHEN("Application is created")
         {
@@ -29,9 +34,9 @@ SCENARIO("ApplicationViewModelTests")
                 REQUIRE(qtApplication.isIconSet);
             }
 
-            AND_THEN("context property has been added")
+            AND_THEN("qml singleton has been added")
             {
-                contextProperties->contains(applicationViewModel);
+                qmlSingletons->contains(applicationViewModel);
             }
         }
 

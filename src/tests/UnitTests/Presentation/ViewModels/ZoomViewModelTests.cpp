@@ -1,4 +1,4 @@
-#include <Fakes/FakeContextProperties.hpp>
+#include <Fakes/FakeQmlSingletons.hpp>
 #include <Fakes/FakeSettingsStore.hpp>
 #include <MellowPlayer/Presentation/ViewModels/ZoomViewModel.hpp>
 #include <catch2/catch.hpp>
@@ -10,9 +10,8 @@ using namespace MellowPlayer::Presentation::Tests;
 
 SCENARIO("ZoomViewModel tests")
 {
-    auto contextProperties = std::make_shared<FakeContextProperties>();
     FakeSettingsStore settingsStore;
-    ZoomViewModel sut(*contextProperties, settingsStore);
+    ZoomViewModel sut(settingsStore);
 
     double defaultValue = 1;
 

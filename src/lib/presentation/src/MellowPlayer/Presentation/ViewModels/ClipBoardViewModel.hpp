@@ -1,15 +1,15 @@
 #pragma once
 
-#include <MellowPlayer/Presentation/Qml/ContextProperty.hpp>
+#include <MellowPlayer/Presentation/Qml/QmlSingleton.hpp>
 #include <QObject>
 
 namespace MellowPlayer::Presentation
 {
-    class ClipBoardViewModel : public QObject, public ContextProperty
+    class ClipBoardViewModel : public QObject, public QmlSingleton
     {
         Q_OBJECT
     public:
-        explicit ClipBoardViewModel(IContextProperties& contextProperties);
+        explicit ClipBoardViewModel(IQmlSingletons& qmlSingletons);
 
         Q_INVOKABLE void setText(const QString& text);
         Q_INVOKABLE bool canPaste() const;

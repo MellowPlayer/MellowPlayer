@@ -10,16 +10,16 @@ namespace MellowPlayer::Presentation
     class IQmlApplicationEngine;
 
     /**
-     * Represents a qml context property. If added to IContextProperties, it will be automatically registered in
-     * the qml context as a named context property.
+     * Represents a qml singleton. If added to IQmlSingletons, it will be automatically registered in
+     * the qml context as qml singleton instance.
      */
-    class IContextProperty
+    class IQmlSingleton
     {
     public:
-        virtual ~IContextProperty() = default;
+        virtual ~IQmlSingleton() = default;
 
         /**
-         * Initialize the context property
+         * Register the singleton to qml
          *
          * @param qmlApplicationEngine
          */

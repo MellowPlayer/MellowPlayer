@@ -26,14 +26,14 @@ Pane {
             state = "hidden"
     }
 
-    Material.background: _theme.primary
-    Material.foreground: _theme.primaryForeground
+    Material.background: ActiveTheme.primary
+    Material.foreground: ActiveTheme.primaryForeground
     Material.elevation: 4
 
     Component.onCompleted: { background.opacity = 0.98 }
 
     Connections {
-        target: _clipboard
+        target: ClipBoard
 
         function onTextCopied(text) { root.text = text }
     }

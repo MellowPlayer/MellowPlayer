@@ -1,9 +1,9 @@
 #pragma once
 
-#include <Fakes/FakeContextProperties.hpp>
 #include <Fakes/FakeHttpClientFactory.hpp>
 #include <Fakes/FakeNetworkProxies.hpp>
 #include <Fakes/FakeNotificationPresenter.hpp>
+#include <Fakes/FakeQmlSingletons.hpp>
 #include <Fakes/FakeSettingsStore.hpp>
 #include <Fakes/FakeStreamingServiceCreator.hpp>
 #include <Fakes/FakeUserScriptFactory.hpp>
@@ -40,7 +40,7 @@ namespace MellowPlayer::Presentation
 {
     class ListeningHistoryViewModel;
     class IStreamingServicesViewModel;
-    class ThemeViewModel;
+    class ActiveThemeViewModel;
     class UpdaterViewModel;
     class IPlayerNotifications;
     class INotificationPresenter;
@@ -77,10 +77,10 @@ namespace MellowPlayer::Tests
         Presentation::IStreamingServiceViewModelFactory& getStreamingServiceViewModelFactory();
         Presentation::IStreamingServicesViewModel& getStreamingServicesViewModel();
         Presentation::ListeningHistoryViewModel& getListeningHistoryViewModel();
-        Presentation::ThemeViewModel& getThemeViewModel();
+        Presentation::ActiveThemeViewModel& getThemeViewModel();
         Presentation::UpdaterViewModel& getUpdaterViewModel();
         Presentation::INotificationPresenter& getNotificationPresenter();
-        Presentation::IContextProperties& getContextProperties();
+        Presentation::IQmlSingletons& getContextProperties();
         Presentation::FakeNotificationPresenter& getFakeNotificationPresenter();
 
     private:
@@ -107,13 +107,13 @@ namespace MellowPlayer::Tests
         FakeHttpClientFactory _httpClientFactory;
         std::unique_ptr<Presentation::StreamingServiceViewModelFactory> _streamingServiceViewModelFactory;
         std::unique_ptr<Presentation::IStreamingServicesViewModel> _streamingServicesViewModel;
-        std::unique_ptr<Presentation::ThemeViewModel> _themeViewModel;
+        std::unique_ptr<Presentation::ActiveThemeViewModel> _themeViewModel;
         std::unique_ptr<Presentation::UpdaterViewModel> _updaterViewModel;
         std::unique_ptr<Presentation::IPlayerNotifications> _notifications;
 
         std::unique_ptr<FakeListeningHistoryDatabase> _dataProvider;
 
-        std::shared_ptr<Presentation::Tests::FakeContextProperties> _contextProperties;
+        std::shared_ptr<Presentation::Tests::FakeQmlSingletons> _qmlSingletons;
         Infrastructure::Tests::FakeNetworkProxies _networkProxies;
     };
 }

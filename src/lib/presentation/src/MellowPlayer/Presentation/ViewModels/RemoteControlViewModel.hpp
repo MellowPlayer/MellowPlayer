@@ -2,7 +2,7 @@
 
 #include <MellowPlayer/Domain/RemoteControl/IRemoteControl.hpp>
 #include <MellowPlayer/Presentation/Models/QQmlObjectListModel.hpp>
-#include <MellowPlayer/Presentation/Qml/ContextProperty.hpp>
+#include <MellowPlayer/Presentation/Qml/QmlSingleton.hpp>
 #include <QObject>
 
 namespace MellowPlayer::Presentation
@@ -49,7 +49,7 @@ namespace MellowPlayer::Presentation
         Domain::IRemoteControlApplication& _remoteControlApplication;
     };
 
-    class RemoteControlViewModel : public QObject, public ContextProperty
+    class RemoteControlViewModel : public QObject, public QmlSingleton
     {
         Q_OBJECT
         Q_PROPERTY(QAbstractListModel* states READ states CONSTANT)
@@ -57,7 +57,7 @@ namespace MellowPlayer::Presentation
         Q_PROPERTY(int currentStateIndex READ currentStateIndex NOTIFY currentStateIndexChanged)
         Q_PROPERTY(bool autoStartEnabled READ isAutoStartEnabled WRITE setAutoStartEnabled NOTIFY autoStartEnabledChanged)
     public:
-        explicit RemoteControlViewModel(Domain::IRemoteControl& remoteControl, IContextProperties& contextProperties);
+        explicit RemoteControlViewModel(Domain::IRemoteControl& remoteControl, IQmlSingletons& qmlSingletons);
 
         QQmlObjectListModel<RemoteControlStateViewModel>* states();
         RemoteControlApplicationInfoViewModel* appInfo();

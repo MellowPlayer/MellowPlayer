@@ -165,7 +165,7 @@ Item {
                     iconChar: MaterialIcons.icon_settings
                     font.pixelSize: 16
 
-                    tooltip: qsTr("Settings")
+                    tooltip: qsTr("App.settings")
 
                     onClicked: {
                         settingsDialog.service = model;

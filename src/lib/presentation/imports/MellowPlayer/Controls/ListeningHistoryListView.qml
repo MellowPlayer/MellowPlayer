@@ -28,7 +28,7 @@ ScrollView {
         }
         clip: true
         cacheBuffer: 500 * 72
-        model: _listeningHistory.model
+        model: ListeningHistory.model
         delegate: ListeningHistoryEntryDelegate { expanded: listView.isSectionExpanded(model.dateCategory) }
         section.criteria: ViewSection.FullString
         section.delegate: ListeningHistorySectionDelegate { expanded: listView.isSectionExpanded(section) }

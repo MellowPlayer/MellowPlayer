@@ -17,7 +17,7 @@ namespace MellowPlayer::Infrastructure
 namespace MellowPlayer::Presentation
 {
     class StreamingServiceViewModel;
-    class ThemeViewModel;
+    class ActiveThemeViewModel;
 
     class IStreamingServiceViewModelFactory
     {
@@ -34,7 +34,7 @@ namespace MellowPlayer::Presentation
                                          Domain::IUserScriptFactory& userScriptFactory,
                                          Domain::Players& players,
                                          Infrastructure::INetworkProxies& networkProxies,
-                                         ThemeViewModel& themeViewModel,
+                                         ActiveThemeViewModel& themeViewModel,
                                          Infrastructure::IHttpClientFactory& httpClientFactory);
 
         StreamingServiceViewModel* create(Domain::StreamingService& streamingService, QObject* parent) override;
@@ -44,7 +44,7 @@ namespace MellowPlayer::Presentation
         Domain::IUserScriptFactory& _userScriptFactory;
         Domain::Players& _players;
         Infrastructure::INetworkProxies& _networkProxies;
-        ThemeViewModel& _themeViewModel;
+        ActiveThemeViewModel& _themeViewModel;
         Infrastructure::IHttpClientFactory& _httpClientFactory;
     };
 }

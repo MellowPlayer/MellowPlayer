@@ -4,7 +4,7 @@
 
 using namespace MellowPlayer::Presentation;
 
-ClipBoardViewModel::ClipBoardViewModel(IContextProperties& contextProperties) : ContextProperty("_clipboard", this, contextProperties)
+ClipBoardViewModel::ClipBoardViewModel(IQmlSingletons& qmlSingletons) : QmlSingleton("ClipBoard", this, qmlSingletons)
 {
 }
 

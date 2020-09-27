@@ -86,7 +86,7 @@ namespace MellowPlayer.Presentation {
         + restart()
     }
     MellowPlayer.Infrastructure.IApplication <|.. Application
-    ContextProperty <|- Application
+    QmlSingleton <|- Application
     Application -> MellowPlayer.Infrastructure.IQtApplication
 
     interface IQmlApplicationEngine #PaleGreen {
@@ -102,26 +102,26 @@ namespace MellowPlayer.Presentation {
     }
     IQmlApplicationEngine <|.. QmlApplicationEngine
 
-    interface IContextProperty #PaleGreen {
+    interface IQmlSingleton #PaleGreen {
         void initialize(IQmlApplicationEngine&)
     }
 
-    class ContextProperty #PaleGreen {
+    class QmlSingleton #PaleGreen {
         - name: QString
         - propertyObject: QObject*
         void initialize(IQmlApplicationEngine&)
     }
-    IContextProperty <|.. ContextProperty
-    ContextProperty .up.> IContextProperties
+    IQmlSingleton <|.. QmlSingleton
+    QmlSingleton .up.> IQmlSingletons
 
-    interface IContextProperties #PaleGreen {
-        add(IContextProperty)
+    interface IQmlSingletons #PaleGreen {
+        add(IQmlSingleton)
     }
 
     class ContextProperties #PaleGreen {
-        + add(IContextProperty)
+        + add(IQmlSingleton)
     }
-    IContextProperties <|.. ContextProperties
+    IQmlSingletons <|.. ContextProperties
     ContextProperties --> IQmlApplicationEngine
 
     interface IMainWindow #PaleGreen {
@@ -136,7 +136,7 @@ namespace MellowPlayer.Presentation {
         + hide()
     }
     IMainWindow <|.up.. MainWindow
-    ContextProperty <|-- MainWindow
+    QmlSingleton <|-- MainWindow
 
     interface IMprisPlayer {
         start()
@@ -151,40 +151,5 @@ namespace MellowPlayer.Presentation {
     }
     IMprisPlayer <|-- NullMprisPlayer
 }
-
-
-'note bottom
-'Refactoring steps:
-'
-'- [ ] implement new classes
-'    - [x] IApplication
-'    - [x] ApplicationDecorator
-'    - [x] WithLogging
-'    - [x] WithCommandLineArguments
-'    - [x] Application
-'    - [x] IContextProperties
-'    - [x] ContextProperties
-'    - [x] IContextProperty
-'    - [x] ContextProperty
-'    - [x] IQtApplication
-'    - [x] QtApplication
-'    - [x] IMainWindow
-'    - [x] MainWindow
-'    - [x] IQmlApplicationEngine
-'    - [x] QmlApplicationEngine
-'    - [x] SingleInstance
-'
-'- [ ] bind IContextProperties and use them in all existing context properties, remove registration in MainWindowViewModel
-'
-'- [ ] Copy some classes from infrastructure to presentation (and rename old one with a Deprecated prefix) and make them use IMainWindow instead of IDeprecatedMainWindow
-'    - [ ] Hotkeys
-'    - [ ] Mpris
-'- [ ] bind IApplication to a fully decorated instance
-'- [ ] Create Program class and use it in main
-'- [ ] Delete all deprecated classes, the application should now work as before but with a brand new internal design :-)
-'- [ ] Improve SingleInstance to fix some issues appearing sometime on linux (initial issue that motivated this refactoring)
-'
-'
-'end note
 
 @enduml

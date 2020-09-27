@@ -1,9 +1,11 @@
 #include "QmlTypesSetup.hpp"
 #include <MellowPlayer/Domain/Player/Player.hpp>
 #include <MellowPlayer/Domain/Player/Song.hpp>
+#include <MellowPlayer/Domain/Settings/SettingKey.hpp>
 #include <MellowPlayer/Domain/StreamingServices/StreamingService.hpp>
 #include <MellowPlayer/Presentation/ViewModels/Settings/Types/SettingViewModel.hpp>
 #include <QThread>
+#include <QtQml/qqml.h>
 
 using namespace MellowPlayer::Domain;
 using namespace MellowPlayer::Infrastructure;
@@ -16,12 +18,10 @@ QmlTypesSetup::QmlTypesSetup(ApplicationViewModel&,
                              ListeningHistoryViewModel&,
                              ZoomViewModel&,
                              RemoteControlViewModel&,
-                             IContextProperties& contextProperties)
-        : _cacheViewModel(contextProperties),
-          _cookiesViewModel(contextProperties),
-          _clipBoardViewModel(contextProperties),
-          _devToolWindowViewModel(contextProperties),
-          _contextProperties(contextProperties)
+                             IQmlSingletons& qmlSingletons)
+        : _clipBoardViewModel(qmlSingletons),
+          _devToolWindowViewModel(qmlSingletons),
+          _qmlSingletons(qmlSingletons)
 {
 }
 
@@ -37,8 +37,14 @@ void QmlTypesSetup::initialize(const ResultCallback& resultCallback)
     qRegisterMetaType<Player*>("Player*");
     qRegisterMetaType<SettingViewModel*>("Presentation::SettingViewModel*");
     qRegisterMetaType<SettingViewModel*>("SettingViewModel*");
+    qRegisterMetaType<SettingsViewModel*>("SettingsViewModel*");
 
-    _contextProperties.registerToQml();
+    qmlRegisterUncreatableType<Player>("MellowPlayer", 3, 0, "Player", "Player cannot be instantiated from QML");
+    qmlRegisterUncreatableType<SettingKey>("MellowPlayer", 3, 0, "SettingKey", "SettingKey cannot be instantiated from QML");
+    qmlRegisterUncreatableType<SettingViewModel>("MellowPlayer", 3, 0, "SettingViewModel", "SettingsViewModel cannot be instantiated from QML");
+    qmlRegisterUncreatableType<SettingsViewModel>("MellowPlayer", 3, 0, "SettingsViewModel", "SettingsViewModel cannot be instantiated from QML");
+
+    _qmlSingletons.registerToQml();
 
     resultCallback(true);
 }

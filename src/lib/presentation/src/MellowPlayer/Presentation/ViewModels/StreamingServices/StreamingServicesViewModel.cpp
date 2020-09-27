@@ -26,9 +26,9 @@ StreamingServicesViewModel::StreamingServicesViewModel(StreamingServices& stream
                                                        IWorkDispatcher& workDispatcher,
                                                        IStreamingServiceCreator& streamingServiceCreator,
                                                        ICommandLineArguments& commandLineArguments,
-                                                       IContextProperties& contextProperties,
+                                                       IQmlSingletons& qmlSingletons,
                                                        IStreamingServiceViewModelFactory& streamingServiceViewModelFactory)
-        : IStreamingServicesViewModel("_streamingServices", this, contextProperties),
+        : IStreamingServicesViewModel("StreamingServices", this, qmlSingletons),
           _streamingServices(streamingServices),
           _settings(settings),
           _currentServiceSetting(settings.get(SettingKey::PRIVATE_CURRENT_SERVICE)),

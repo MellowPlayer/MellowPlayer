@@ -1,7 +1,9 @@
 import QtQuick 2.15
 import QtQuick.Layouts 1.15
 
+import MellowPlayer 3.0
+
 Rectangle {
-    color: _theme.isDark(_theme.background) ? Qt.lighter(_theme.background) : Qt.darker(_theme.background, 1.1)
+    color: ActiveTheme.isDark(ActiveTheme.background) ? Qt.lighter(ActiveTheme.background) : Qt.darker(ActiveTheme.background, 1.1)
     height: 1
 }

@@ -1,9 +1,11 @@
-#include <Fakes/FakeContextProperties.hpp>
 #include <Fakes/FakeQmlApplicationEngine.hpp>
+#include <Fakes/FakeQmlSingletons.hpp>
+#include <Fakes/FakeSettingsStore.hpp>
 #include <MellowPlayer/Presentation/ViewModels/MainWindowViewModel.hpp>
 #include <QtTest/QSignalSpy>
 #include <catch2/catch.hpp>
 
+using namespace MellowPlayer::Domain::Tests;
 using namespace MellowPlayer::Presentation;
 using namespace MellowPlayer::Presentation::Tests;
 
@@ -11,14 +13,15 @@ SCENARIO("MainWindowViewModelTests")
 {
     GIVEN("A main window instance")
     {
-        auto contextProperties = std::make_shared<FakeContextProperties>();
-        MainWindowViewModel mainWindow(*contextProperties);
+        auto qmlSingletons = std::make_shared<FakeQmlSingletons>();
+        FakeSettingsStore settingsStore;
+        MainWindowViewModel mainWindow(*qmlSingletons, settingsStore);
 
         WHEN("Creating main window")
         {
-            THEN("it is added to the context properties")
+            THEN("it is added to the qml singleton")
             {
-                contextProperties->contains(mainWindow);
+                qmlSingletons->contains(mainWindow);
             }
 
             AND_THEN("window is not yet visible")

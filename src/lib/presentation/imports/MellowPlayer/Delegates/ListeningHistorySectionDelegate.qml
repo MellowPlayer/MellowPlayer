@@ -15,8 +15,8 @@ Pane {
     padding: 0
 
     Material.elevation: 2
-    Material.background: _theme.background
-    Material.theme: _theme.isDark(_theme.background) ? Material.Dark : Material.Light
+    Material.background: ActiveTheme.background
+    Material.theme: ActiveTheme.isDark(ActiveTheme.background) ? Material.Dark : Material.Light
 
     ItemDelegate {
        anchors.fill: parent
@@ -58,7 +58,7 @@ Pane {
                            verticalAlignment: "AlignVCenter"
 
                            Layout.fillHeight: true
-                           Material.foreground: _theme.accent
+                           Material.foreground: ActiveTheme.accent
                        }
 
                        Item {
@@ -83,7 +83,7 @@ Pane {
                    function onActivated() {
                        messageBoxConfirmDelete.closed.disconnect(onActivated);
                        if (messageBoxConfirmDelete.dialogResult === messageBoxConfirmDelete.dialogAccepted)
-                           _listeningHistory.removeByDateCategory(section)
+                           ListeningHistory.removeByDateCategory(section)
                    }
 
                    Layout.fillHeight: true
@@ -91,7 +91,7 @@ Pane {
            }
 
            Rectangle {
-               color: _theme.accent
+               color: ActiveTheme.accent
                width: parent.width
                height: 3
 

@@ -10,14 +10,14 @@ Page {
 
     signal closeRequested()
 
-    Material.accent: _theme.accent === _theme.background ? _theme.foreground : _theme.accent
+    Material.accent: ActiveTheme.accent === ActiveTheme.background ? ActiveTheme.foreground : ActiveTheme.accent
 
     header: ToolBar {
         id: toolBar
 
-        Material.primary: _theme.primary
-        Material.foreground: _theme.primaryForeground
-        Material.theme: _theme.isDark(_theme.primary) ? Material.Dark : Material.Light
+        Material.primary: ActiveTheme.primary
+        Material.foreground: ActiveTheme.primaryForeground
+        Material.theme: ActiveTheme.isDark(ActiveTheme.primary) ? Material.Dark : Material.Light
 
         RowLayout {
             anchors.fill: parent
@@ -40,7 +40,7 @@ Page {
                 }
 
                 Shortcut {
-                    sequence: _settings.get(SettingKey.SHORTCUTS_SETTINGS)
+                    sequence: App.settings.get(SettingKey.SHORTCUTS_SETTINGS)
                     onActivated: settingsPage.closeRequested()
                 }
             }
@@ -58,7 +58,7 @@ Page {
         spacing: 0
 
         Rectangle {
-            color: _theme.secondary
+            color: ActiveTheme.secondary
 
             Layout.fillHeight: true
             Layout.maximumWidth: 324
@@ -68,11 +68,11 @@ Page {
                 padding: 0
                 anchors.fill: parent
 
-                Material.background: _theme.secondary
-                Material.foreground: _theme.secondaryForeground
+                Material.background: ActiveTheme.secondary
+                Material.foreground: ActiveTheme.secondaryForeground
                 Material.elevation: 4
-                Material.accent: _theme.accent
-                Material.theme: _theme.isDark(_theme.secondary) ? Material.Dark : Material.Light
+                Material.accent: ActiveTheme.accent
+                Material.theme: ActiveTheme.isDark(ActiveTheme.secondary) ? Material.Dark : Material.Light
 
                 ColumnLayout {
                     anchors.fill: parent
@@ -118,7 +118,7 @@ Page {
                         id: settingsPageList
 
                         highlight: Rectangle {
-                            color: _theme.isDark(_theme.secondary) ? "#10ffffff" : "#10000000"
+                            color: ActiveTheme.isDark(ActiveTheme.secondary) ? "#10ffffff" : "#10000000"
 
                             Rectangle {
                                 anchors.top: parent.top
@@ -126,11 +126,11 @@ Page {
                                 anchors.bottom: parent.bottom
 
                                 width: 4
-                                color: _theme.accent
+                                color: ActiveTheme.accent
                             }
                         }
                         highlightMoveDuration: 200
-                        model: _settings.categories
+                        model: App.settings.categories
                         delegate: settingsCategoryDelegate
                         interactive: false
 
@@ -167,7 +167,7 @@ Page {
             Layout.fillWidth: true
 
             Repeater {
-                model: _settings.categories
+                model: App.settings.categories
 
                 Loader {
                     source: Qt.resolvedUrl("../" + model.qmlComponent)
@@ -177,13 +177,6 @@ Page {
                 }
             }
         }
-    }  
-
-    StreamingServiceSettingsDialog {
-        id: settingsDialog
-
-        height: 540; width: 960
-        x: parent.width / 2 - width / 2; y: parent.height / 2 - height / 2
     }
 
     MessageBoxDialog {
@@ -195,13 +188,6 @@ Page {
         x: settingsPage.width / 2 - width / 2
         y: settingsPage.height / 2 - height / 2
 
-        onAccepted: _settings.restoreDefaults()
-    }
-
-    NewPluginWizard {
-        id: wizardNewPlugin
-
-        height: 540; width: 960
-        x: parent.width / 2 - width / 2; y: parent.height / 2 - height / 2
+        onAccepted: App.settings.restoreDefaults()
     }
 }

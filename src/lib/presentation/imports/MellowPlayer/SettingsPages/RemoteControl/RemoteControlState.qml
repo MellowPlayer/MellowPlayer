@@ -12,12 +12,12 @@ Item {
     property string message: ""
     property string icon: ""
     property bool buttonVisible: true
-    property string buttonColor: Material.color(Material.Green, _theme.isDark(_theme.primary) ? Material.Shade600 : Material.Shade300)
+    property string buttonColor: Material.color(Material.Green, ActiveTheme.isDark(ActiveTheme.primary) ? Material.Shade600 : Material.Shade300)
     property string buttonText: ""
     property bool busyIndicatorVisible: false
     property bool autoStartCheckBoxVisible: false
     property bool footerVisible: true
-    property string versionMessage:  qsTr("<a href=\"%3\">%1</a> <i>%2</i>").arg(_remoteControl.appInfo.name).arg(_remoteControl.appInfo.version).arg(_remoteControl.appInfo.homePage)
+    property string versionMessage:  qsTr("<a href=\"%3\">%1</a> <i>%2</i>").arg(RemoteControl.appInfo.name).arg(RemoteControl.appInfo.version).arg(RemoteControl.appInfo.homePage)
 
     signal buttonClicked()
 
@@ -85,11 +85,11 @@ Item {
             }
 
             CheckBox {
-                checked: _remoteControl.autoStartEnabled
+                checked: RemoteControl.autoStartEnabled
                 visible: root.autoStartCheckBoxVisible
                 text: qsTr("Run at startup")
 
-                onToggled: _remoteControl.autoStartEnabled = checked
+                onToggled: RemoteControl.autoStartEnabled = checked
 
                 Layout.alignment: Qt.AlignHCenter
             }
@@ -110,7 +110,7 @@ Item {
                 spacing: 12
 
                 Image {
-                    source: _remoteControl.appInfo.logo
+                    source: RemoteControl.appInfo.logo
 
                     Layout.alignment: Qt.AlignHCenter
                     Layout.preferredHeight: 38
@@ -121,7 +121,7 @@ Item {
                         cursorShape: containsMouse ? Qt.PointingHandCursor : Qt.ArrowCursor
                         hoverEnabled: true
 
-                        onClicked: Qt.openUrlExternally(_remoteControl.appInfo.homePage)
+                        onClicked: Qt.openUrlExternally(RemoteControl.appInfo.homePage)
                     }
                 }
 
@@ -138,7 +138,7 @@ Item {
                     flat: true
                     highlighted: true
 
-                    onClicked: _remoteControl.deactivate()
+                    onClicked: RemoteControl.deactivate()
                 }
             }
         }

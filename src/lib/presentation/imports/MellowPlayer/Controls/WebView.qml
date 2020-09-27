@@ -15,7 +15,7 @@ Page {
     property QtObject player: service.player
 
     property bool hasProprietaryCodecs: true
-    property var userAgentSetting: _settings.get(SettingKey.PRIVACY_USER_AGENT)
+    property var userAgentSetting: App.settings.get(SettingKey.PRIVACY_USER_AGENT)
     property alias url: webView.url
 
     function updateImage() {
@@ -33,15 +33,15 @@ Page {
     }
 
     function zoomIn() {
-        _zoom.increment();
+        MainWindow.zoom.increment();
     }
 
     function zoomOut() {
-        _zoom.decrement()
+        MainWindow.zoom.decrement()
     }
 
     function resetZoom() {
-        _zoom.reset();
+        MainWindow.zoom.reset();
     }
     
     function goBack() {
@@ -78,7 +78,7 @@ Page {
 
         url: service.url
         profile {
-            httpUserAgent: userAgentSetting.value
+            httpUserAgent: root.userAgentSetting.value
             httpAcceptLanguage: getDefaultAcceptLanguage()
         }
         settings {
@@ -90,23 +90,23 @@ Page {
             javascriptCanPaste: true
             errorPageEnabled: true
             autoLoadIconsForPage: true
-            showScrollBars: _settings.get(SettingKey.APPEARANCE_SHOW_SCROLLBARS).value
-            playbackRequiresUserGesture: _settings.get(SettingKey.MAIN_PLAYBACK_REQUIRES_USER_GESTURE).value
+            showScrollBars: App.settings.get(SettingKey.APPEARANCE_SHOW_SCROLLBARS).value
+            playbackRequiresUserGesture: App.settings.get(SettingKey.MAIN_PLAYBACK_REQUIRES_USER_GESTURE).value
 
             onShowScrollBarsChanged: reload()
             onPlaybackRequiresUserGestureChanged: reload()
         }
         userScripts: d.getUserScripts()
-        zoomFactor: _zoom.value
+        zoomFactor: MainWindow.zoom.value
         webChannel: webChannel
-        audioMuted: _streamingServices.currentService !== null && _streamingServices.currentService.name !== root.service.name
+        audioMuted: StreamingServices.currentService !== null && StreamingServices.currentService.name !== root.service.name
 
         onContextMenuRequested: {
             request.accepted = true;
             contextMenu.x = request.x;
             contextMenu.y = request.y;
             contextMenu.canCopy = request.selectedText !== "";
-            contextMenu.canPaste = request.isContentEditable && _clipboard.canPaste();
+            contextMenu.canPaste = request.isContentEditable && ClipBoard.canPaste();
             contextMenu.canUnselect = request.selectedText !== "";
             contextMenu.canGoBack = webView.canGoBack;
             contextMenu.canGoForward = webView.canGoForward;
@@ -245,7 +245,7 @@ Page {
         }
 
         Connections {
-            target: userAgentSetting
+            target: root.userAgentSetting
 
             function onValueChanged() { console.log("new user agent: " + userAgentSetting.value); reload(); }
         }

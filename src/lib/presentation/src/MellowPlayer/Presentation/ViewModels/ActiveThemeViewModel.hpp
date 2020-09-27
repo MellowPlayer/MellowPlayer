@@ -1,7 +1,7 @@
 #pragma once
 
 #include <MellowPlayer/Domain/Theme/Theme.hpp>
-#include <MellowPlayer/Presentation/Qml/ContextProperty.hpp>
+#include <MellowPlayer/Presentation/Qml/QmlSingleton.hpp>
 #include <QMap>
 #include <QObject>
 
@@ -16,7 +16,7 @@ namespace MellowPlayer::Domain
 
 namespace MellowPlayer::Presentation
 {
-    class ThemeViewModel : public QObject, public ContextProperty
+    class ActiveThemeViewModel : public QObject, public QmlSingleton
     {
         Q_OBJECT
         Q_PROPERTY(bool dark READ isDark NOTIFY isDarkChanged)
@@ -28,10 +28,10 @@ namespace MellowPlayer::Presentation
         Q_PROPERTY(QString secondary READ secondary NOTIFY secondaryChanged)
         Q_PROPERTY(QString secondaryForeground READ secondaryForeground NOTIFY secondaryForegroundChanged)
     public:
-        ThemeViewModel(Domain::StreamingServices& streamingServices,
+        ActiveThemeViewModel(Domain::StreamingServices& streamingServices,
                        Domain::Settings& settings,
                        Domain::IThemeLoader& themeLoader,
-                       IContextProperties& contextProperties);
+                             IQmlSingletons& qmlSingletons);
 
         bool isDark() const;
         QString accent() const;

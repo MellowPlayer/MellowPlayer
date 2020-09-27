@@ -26,7 +26,7 @@ Item {
                 implicitWidth: gridView.width
 
                 Switch {
-                    property var setting: _settings.get(SettingKey.PRIVATE_SHOW_FAVORITE_SERVICES)
+                    property var setting: App.settings.get(SettingKey.PRIVATE_SHOW_FAVORITE_SERVICES)
 
                     text: qsTr("Show only favorite services")
                     font.bold: true
@@ -44,10 +44,10 @@ Item {
                     placeholderText: qsTr("Search within available services")
                     selectByMouse: true
 
-                    onTextChanged: _streamingServices.filteredServices.setSearchText(text)
+                    onTextChanged: StreamingServices.filteredServices.setSearchText(text)
 
                     Component.onCompleted: {
-                        _streamingServices.filteredServices.setSearchText(text)
+                        StreamingServices.filteredServices.setSearchText(text)
                         forceActiveFocus()
                     }
                     Layout.preferredWidth: 340
@@ -87,8 +87,8 @@ Item {
                         id: visualModel
 
                         Component.onCompleted: {
-                            _streamingServices.filteredServices.update()
-                            model = _streamingServices.filteredServices
+                            StreamingServices.filteredServices.update()
+                            model = StreamingServices.filteredServices
                         }
 
                         delegate: Item {

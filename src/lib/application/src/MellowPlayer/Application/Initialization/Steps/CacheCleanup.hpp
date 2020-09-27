@@ -4,7 +4,7 @@
 
 namespace MellowPlayer::Presentation
 {
-    class CacheViewModel;
+    class ApplicationViewModel;
 }
 
 namespace MellowPlayer::Application
@@ -13,11 +13,11 @@ namespace MellowPlayer::Application
     {
         Q_OBJECT
     public:
-        explicit CacheCleanup(Presentation::CacheViewModel& cache);
+        explicit CacheCleanup(Presentation::ApplicationViewModel& applicationViewModel);
 
         void cleanUp() override;
 
     private:
-        Presentation::CacheViewModel& _cache;
+        Presentation::ApplicationViewModel& _applicationViewModel;
     };
 }

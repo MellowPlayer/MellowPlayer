@@ -33,7 +33,7 @@ StreamingServiceViewModel::StreamingServiceViewModel(StreamingService& streaming
                                                      IUserScriptFactory& factory,
                                                      Players& players,
                                                      INetworkProxies& networkProxies,
-                                                     ThemeViewModel& themeViewModel,
+                                                     ActiveThemeViewModel& themeViewModel,
                                                      std::unique_ptr<IHttpClient> httpClient,
                                                      QObject* parent)
         : QObject(parent),

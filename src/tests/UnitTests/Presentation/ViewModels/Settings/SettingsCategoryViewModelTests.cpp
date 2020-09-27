@@ -1,7 +1,7 @@
 #include <MellowPlayer/Domain/Settings/Setting.hpp>
 #include <MellowPlayer/Domain/Settings/Settings.hpp>
+#include <MellowPlayer/Presentation/ViewModels/ActiveThemeViewModel.hpp>
 #include <MellowPlayer/Presentation/ViewModels/Settings/SettingsCategoryViewModel.hpp>
-#include <MellowPlayer/Presentation/ViewModels/ThemeViewModel.hpp>
 #include <Utils/DependencyPool.hpp>
 #include <catch2/catch.hpp>
 
@@ -13,7 +13,7 @@ TEST_CASE("SettingsCategoryViewModelTests")
 {
     DependencyPool pool;
     Settings& settings = pool.getSettings();
-    ThemeViewModel& themeViewModel = pool.getThemeViewModel();
+    ActiveThemeViewModel& themeViewModel = pool.getThemeViewModel();
     SettingsCategoryViewModel categoryViewModel(themeViewModel, &settings.category("main"));
 
     REQUIRE(categoryViewModel.name().toStdString() == "General");
@@ -41,7 +41,7 @@ TEST_CASE("SettingsCategoryViewModelTests")
 TEST_CASE("CustomSettingsCategoryViewModelTests")
 {
     DependencyPool pool;
-    ThemeViewModel& themeViewModel = pool.getThemeViewModel();
+    ActiveThemeViewModel& themeViewModel = pool.getThemeViewModel();
     CustomSettingsCategoryViewModel model("CategoryName", "CategoryIcon", "CategoryQmlComponent", themeViewModel);
 
     REQUIRE(model.name() == "CategoryName");

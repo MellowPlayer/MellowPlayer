@@ -39,7 +39,7 @@ Menu {
 
     MenuItem {
         text: qsTr("Toggle main toolbar")
-        onClicked: _settings.get(SettingKey.APPEARANCE_TOOLBAR_VISIBLE).value = !_settings.get(SettingKey.APPEARANCE_TOOLBAR_VISIBLE).value
+        onClicked: App.settings.get(SettingKey.APPEARANCE_TOOLBAR_VISIBLE).value = !App.settings.get(SettingKey.APPEARANCE_TOOLBAR_VISIBLE).value
     }
 
     MenuSeparator { }
@@ -116,6 +116,6 @@ Menu {
 
     MenuItem {
         text: qsTr("Open web developer tools")
-        onClicked: _devTools.showDevTools()
+        onClicked: DevToolsWindow.show()
     }
 }

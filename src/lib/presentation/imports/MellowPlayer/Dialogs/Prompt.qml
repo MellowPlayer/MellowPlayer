@@ -16,7 +16,7 @@ Dialog {
     onAccepted: request.dialogAccept(textField.text)
     onRejected: request.dialogReject()
 
-    Material.accent: _theme.accent === _theme.background ? _theme.foreground : _theme.accent
+    Material.accent: ActiveTheme.accent === ActiveTheme.background ? ActiveTheme.foreground : ActiveTheme.accent
 
     TextField {
         id: textField

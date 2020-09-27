@@ -1,4 +1,4 @@
-#include <Fakes/FakeContextProperties.hpp>
+#include <Fakes/FakeQmlSingletons.hpp>
 #include <MellowPlayer/Domain/Settings/Setting.hpp>
 #include <MellowPlayer/Domain/Settings/Settings.hpp>
 #include <MellowPlayer/Presentation/ViewModels/Settings/SettingsViewModel.hpp>
@@ -17,9 +17,8 @@ TEST_CASE("SettingsViewModelTests")
 {
     DependencyPool pool;
     Settings& settings = pool.getSettings();
-    ThemeViewModel& themeViewModel = pool.getThemeViewModel();
-    auto contextProperties = std::make_shared<FakeContextProperties>();
-    SettingsViewModel settingsViewModel(settings, themeViewModel, *contextProperties);
+    ActiveThemeViewModel& themeViewModel = pool.getThemeViewModel();
+    SettingsViewModel settingsViewModel(settings, themeViewModel);
 
     SECTION("get")
     {

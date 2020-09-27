@@ -1,17 +1,17 @@
 #pragma once
 
-#include <MellowPlayer/Presentation/Qml/ContextProperty.hpp>
+#include <MellowPlayer/Presentation/Qml/QmlSingleton.hpp>
 #include <QObject>
 
 namespace MellowPlayer::Presentation
 {
-    class DevToolsWindowViewModel : public QObject, public ContextProperty
+    class DevToolsWindowViewModel : public QObject, public QmlSingleton
     {
         Q_OBJECT
     public:
-        DevToolsWindowViewModel(IContextProperties& contextProperties);
+        DevToolsWindowViewModel(IQmlSingletons& qmlSingletons);
 
     signals:
-        void showDevTools();
+        void show();
     };
 }

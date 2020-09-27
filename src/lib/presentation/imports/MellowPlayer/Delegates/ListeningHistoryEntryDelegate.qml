@@ -20,7 +20,7 @@ Frame {
             anchors.bottom: parent.bottom
             anchors.left: parent.left
             anchors.right: parent.right
-            color: _theme.isDark(_theme.background) ? Qt.lighter(_theme.background) : Qt.darker(_theme.background, 1.1)
+            color: ActiveTheme.isDark(ActiveTheme.background) ? Qt.lighter(ActiveTheme.background) : Qt.darker(ActiveTheme.background, 1.1)
             height: 1
             visible: expanded
         }
@@ -144,7 +144,7 @@ Frame {
                 function onActivated() {
                     messageBoxConfirmDelete.closed.disconnect(onActivated);
                     if (messageBoxConfirmDelete.dialogResult === messageBoxConfirmDelete.dialogAccepted)
-                        _listeningHistory.removeById(model.entryId)
+                        ListeningHistory.removeById(model.entryId)
                 }
 
                 Layout.fillHeight: true
@@ -155,7 +155,7 @@ Frame {
                 hoverEnabled: true
                 text: MaterialIcons.icon_content_copy
                 font { family: MaterialIcons.family; pixelSize: 16 }
-                onClicked: _clipboard.setText(model.title)
+                onClicked: ClipBoard.setText(model.title)
 
                 Layout.fillHeight: true
             }

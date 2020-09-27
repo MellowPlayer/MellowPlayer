@@ -1,5 +1,5 @@
 #include "UnitTests/Infrastructure/Application/FakeQtApplication.hpp"
-#include <Fakes/FakeContextProperties.hpp>
+#include <Fakes/FakeQmlSingletons.hpp>
 #include <MellowPlayer/Infrastructure/Application/Application.hpp>
 #include <MellowPlayer/Infrastructure/BuildConfig.hpp>
 #include <QtTest/QSignalSpy>

@@ -4,6 +4,8 @@ import QtQuick.Controls 2.15
 import QtQuick.Controls.Material 2.15
 import QtQuick.Controls.Material.impl 2.15
 
+import MellowPlayer 3.0
+
 ItemDelegate {
     id: root
 
@@ -46,14 +48,14 @@ ItemDelegate {
 
             Component.onCompleted: {
                 contentItem.selectByMouse = true;
-                contentItem.selectionColor = _theme.accent;
+                contentItem.selectionColor = ActiveTheme.accent;
                 contentItem.selectedTextColor = Material.primaryHighlightedTextColor;
             }
 
             Connections {
-                target: _theme
+                target: ActiveTheme
 
-                function onAccentChanged() { spinBox.contentItem.selectionColor = _theme.accent }
+                function onAccentChanged() { spinBox.contentItem.selectionColor = ActiveTheme.accent }
             }
         }
     }

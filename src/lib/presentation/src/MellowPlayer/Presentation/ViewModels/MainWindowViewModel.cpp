@@ -6,8 +6,11 @@ using namespace MellowPlayer::Domain;
 using namespace MellowPlayer::Infrastructure;
 using namespace MellowPlayer::Presentation;
 
-MainWindowViewModel::MainWindowViewModel(IContextProperties& contextProperties)
-        : ContextProperty("_window", this, contextProperties), _visible(false), _logger(Loggers::logger("MainWindow"))
+MainWindowViewModel::MainWindowViewModel(IQmlSingletons& qmlSingletons, ISettingsStore& settingsStore)
+        : QmlSingleton("MainWindow", this, qmlSingletons),
+          _visible(false),
+          _logger(Loggers::logger("MainWindow")),
+          _zoom(settingsStore)
 {
 }
 
@@ -51,4 +54,9 @@ void MainWindowViewModel::raise()
     LOG_DEBUG(_logger, "raise");
 
     emit raiseRequested();
+}
+
+ZoomViewModel* MainWindowViewModel::zoom()
+{
+    return &_zoom;
 }
