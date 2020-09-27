@@ -86,8 +86,15 @@ Page {
             fullScreenSupportEnabled: true
             autoLoadImages: true
             javascriptEnabled: true
+            javascriptCanAccessClipboard: true
+            javascriptCanPaste: true
             errorPageEnabled: true
             autoLoadIconsForPage: true
+            showScrollBars: _settings.get(SettingKey.APPEARANCE_SHOW_SCROLLBARS).value
+            playbackRequiresUserGesture: _settings.get(SettingKey.MAIN_PLAYBACK_REQUIRES_USER_GESTURE).value
+
+            onShowScrollBarsChanged: reload()
+            onPlaybackRequiresUserGestureChanged: reload()
         }
         userScripts: d.getUserScripts()
         zoomFactor: _zoom.value
@@ -157,11 +164,6 @@ Page {
         }
         onFullScreenRequested: mainWindow.toggleFullScreen(request)
         onNewViewRequested: mainWindow.openWebPopup(request, profile)
-
-        Component.onCompleted: {
-            d.updatePlaybackRequiresUserGesture()
-            d.updateShowScrollBars()
-        }
 
         Component.onDestruction: {
             webView.url = "about:blank"
@@ -273,39 +275,8 @@ Page {
             function onChangeVolumeRequest() { playerBridge.changeVolume(newVolume) }
         }
 
-        Connections {
-            target: _settings.get(SettingKey.MAIN_PLAYBACK_REQUIRES_USER_GESTURE)
-
-            function onValueChanged() { d.updatePlaybackRequiresUserGesture() }
-        }
-
-        Connections {
-            target: _settings.get(SettingKey.APPEARANCE_SHOW_SCROLLBARS)
-
-            function onValueChanged() { d.updateShowScrollBars() }
-        }
-
         QtObject {
             id: d
-
-            function updatePlaybackRequiresUserGesture() {
-                try {
-                    webView.settings.playbackRequiresUserGesture = _settings.get(SettingKey.MAIN_PLAYBACK_REQUIRES_USER_GESTURE).value
-                    webView.reload()
-                    console.log("playbackRequiresUserGesture: " + webView.settings.playbackRequiresUserGesture)
-                } catch(e) {
-                    console.log("playbackRequiresUserGesture setting not supported with this version of Qt.")
-                }
-            }
-
-            function updateShowScrollBars() {
-                try {
-                    webView.settings.showScrollBars = _settings.get(SettingKey.APPEARANCE_SHOW_SCROLLBARS).value
-                    console.log("showScrollBars: " + webView.settings.showScrollBars)
-                } catch(e) {
-                    console.log("showScrollBars setting not supported with this version of Qt.")
-                }
-            }
 
             function checkForProprietaryCodecs() {
                 runJavaScript("var a = document.createElement('audio'); !!(a.canPlayType && a.canPlayType('audio/mpeg;').replace(/no/, ''));", function(result) {

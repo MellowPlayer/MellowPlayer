@@ -39,8 +39,7 @@
           "tooltip": "Inhibits playback of media content until the user interacts with the page.",
           "type": "bool",
           "default": false,
-          "key": "playback-requires-user-gesture",
-          "enabled": "qtVersion >= 5.11"
+          "key": "playback-requires-user-gesture"
         }
       ]
     },
@@ -84,8 +83,7 @@
           "tooltip": "Show/Hide web page scrollbars",
           "type": "bool",
           "default": true,
-          "key": "show-scrollbars",
-          "enabled": "qtVersion >= 5.10"
+          "key": "show-scrollbars"
         },
         {
           "name": "Automatic HiDPI scaling",
