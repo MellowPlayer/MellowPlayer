@@ -18,19 +18,13 @@ namespace MellowPlayer::Presentation
     class QmlSingletons : public IQmlSingletons
     {
     public:
-        /**
-         * Ctor
-         * @param qmlApplicationEngine Qml application engine used to register qml singletons.
-         */
-        QmlSingletons(IQmlApplicationEngine& qmlApplicationEngine, Domain::IPlayer& player);
-
-        void add(IQmlSingleton& qmlSingleton) override;
+        QmlSingletons(IQmlApplicationEngine& qmlApplicationEngine, Domain::IPlayer& player, const std::vector<std::shared_ptr<IQmlSingleton>>& items);
 
         void registerToQml() override;
 
     private:
         IQmlApplicationEngine& _qmlApplicationEngine;
-        QList<IQmlSingleton*> _qmlSingletons;
         Domain::IPlayer& _player;
+        std::vector<std::shared_ptr<IQmlSingleton>> _items;
     };
 }

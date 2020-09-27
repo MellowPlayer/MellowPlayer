@@ -49,7 +49,7 @@ namespace MellowPlayer::Presentation
         Domain::IRemoteControlApplication& _remoteControlApplication;
     };
 
-    class RemoteControlViewModel : public QObject, public QmlSingleton
+    class RemoteControlViewModel : public QmlSingleton
     {
         Q_OBJECT
         Q_PROPERTY(QAbstractListModel* states READ states CONSTANT)
@@ -57,7 +57,7 @@ namespace MellowPlayer::Presentation
         Q_PROPERTY(int currentStateIndex READ currentStateIndex NOTIFY currentStateIndexChanged)
         Q_PROPERTY(bool autoStartEnabled READ isAutoStartEnabled WRITE setAutoStartEnabled NOTIFY autoStartEnabledChanged)
     public:
-        explicit RemoteControlViewModel(Domain::IRemoteControl& remoteControl, IQmlSingletons& qmlSingletons);
+        explicit RemoteControlViewModel(Domain::IRemoteControl& remoteControl);
 
         QQmlObjectListModel<RemoteControlStateViewModel>* states();
         RemoteControlApplicationInfoViewModel* appInfo();

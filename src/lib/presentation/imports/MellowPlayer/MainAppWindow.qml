@@ -243,16 +243,20 @@ ApplicationWindow {
     }
 
     Connections {
-        target: MainWindow;
+        target: MainWindow
 
-        function onVisibleChanged() { MainWindow.visible ? d.restoreWindow() : d.hideWindow() }
+        function onVisibleChanged() {
+            MainWindow.visible ? d.restoreWindow() : d.hideWindow()
+        }
         function onQuitRequest() { d.quit() }
         function onForceQuitRequest() { d.forceQuit = true; App.quit() }
-        function onRaiseRequested() { d.restoreWindow() }
+        function onRaiseRequested() {
+            d.restoreWindow()
+        }
     }
 
     Connections {
-        target: StreamingServices;
+        target: StreamingServices
 
         function onActivationRequested(service) { mainWindow.activateService(service) }
     }

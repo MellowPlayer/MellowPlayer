@@ -24,19 +24,11 @@ namespace MellowPlayer::Application
     {
         Q_OBJECT
     public:
-        QmlTypesSetup(Presentation::ApplicationViewModel&,
-                      Presentation::SettingsViewModel&,
-                      Presentation::UpdaterViewModel&,
-                      Presentation::ListeningHistoryViewModel&,
-                      Presentation::ZoomViewModel&,
-                      Presentation::RemoteControlViewModel&,
-                      Presentation::IQmlSingletons& qmlSingletons);
+        explicit QmlTypesSetup(Presentation::IQmlSingletons& qmlSingletons);
 
         void initialize(const ResultCallback& resultCallback) override;
 
     private:
-        Presentation::ClipBoardViewModel _clipBoardViewModel;
-        Presentation::DevToolsWindowViewModel _devToolWindowViewModel;
         Presentation::IQmlSingletons& _qmlSingletons;
     };
 }

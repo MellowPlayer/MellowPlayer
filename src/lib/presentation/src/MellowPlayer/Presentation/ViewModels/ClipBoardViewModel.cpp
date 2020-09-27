@@ -4,8 +4,9 @@
 
 using namespace MellowPlayer::Presentation;
 
-ClipBoardViewModel::ClipBoardViewModel(IQmlSingletons& qmlSingletons) : QmlSingleton("ClipBoard", this, qmlSingletons)
+ClipBoardViewModel::ClipBoardViewModel() : QmlSingleton("ClipBoard", this)
 {
+
 }
 
 void ClipBoardViewModel::setText(const QString& text)

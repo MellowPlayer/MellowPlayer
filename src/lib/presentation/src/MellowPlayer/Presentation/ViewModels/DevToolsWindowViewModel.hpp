@@ -5,11 +5,11 @@
 
 namespace MellowPlayer::Presentation
 {
-    class DevToolsWindowViewModel : public QObject, public QmlSingleton
+    class DevToolsWindowViewModel : public QmlSingleton
     {
         Q_OBJECT
     public:
-        DevToolsWindowViewModel(IQmlSingletons& qmlSingletons);
+        DevToolsWindowViewModel();
 
     signals:
         void show();

@@ -6,8 +6,8 @@ using namespace MellowPlayer::Domain;
 using namespace MellowPlayer::Infrastructure;
 using namespace MellowPlayer::Presentation;
 
-MainWindowViewModel::MainWindowViewModel(IQmlSingletons& qmlSingletons, ISettingsStore& settingsStore)
-        : QmlSingleton("MainWindow", this, qmlSingletons),
+MainWindowViewModel::MainWindowViewModel(ISettingsStore& settingsStore)
+        : IMainWindow("MainWindow", this),
           _visible(false),
           _logger(Loggers::logger("MainWindow")),
           _zoom(settingsStore)

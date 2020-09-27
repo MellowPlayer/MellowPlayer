@@ -12,16 +12,7 @@ using namespace MellowPlayer::Infrastructure;
 using namespace MellowPlayer::Presentation;
 using namespace MellowPlayer::Application;
 
-QmlTypesSetup::QmlTypesSetup(ApplicationViewModel&,
-                             SettingsViewModel&,
-                             UpdaterViewModel&,
-                             ListeningHistoryViewModel&,
-                             ZoomViewModel&,
-                             RemoteControlViewModel&,
-                             IQmlSingletons& qmlSingletons)
-        : _clipBoardViewModel(qmlSingletons),
-          _devToolWindowViewModel(qmlSingletons),
-          _qmlSingletons(qmlSingletons)
+QmlTypesSetup::QmlTypesSetup(IQmlSingletons& qmlSingletons) : _qmlSingletons(qmlSingletons)
 {
 }
 

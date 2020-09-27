@@ -30,7 +30,7 @@ namespace MellowPlayer::Presentation
 {
     class IStreamingServiceViewModelFactory;
 
-    class IStreamingServicesViewModel : public QObject, public QmlSingleton
+    class IStreamingServicesViewModel : public QmlSingleton
     {
         Q_OBJECT
         Q_PROPERTY(QAbstractItemModel* filteredServices READ filteredServices CONSTANT)
@@ -74,7 +74,6 @@ namespace MellowPlayer::Presentation
                                    Domain::IWorkDispatcher& workDispatcher,
                                    Domain::IStreamingServiceCreator& streamingServiceCreator,
                                    Infrastructure::ICommandLineArguments& commandLineArguments,
-                                   IQmlSingletons& qmlSingletons,
                                    IStreamingServiceViewModelFactory& streamingServiceViewModelFactory);
 
         void initialize() override;

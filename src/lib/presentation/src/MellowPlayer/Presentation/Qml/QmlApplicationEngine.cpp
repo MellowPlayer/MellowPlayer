@@ -12,7 +12,7 @@ QmlApplicationEngine::QmlApplicationEngine()
 
 void QmlApplicationEngine::registerSingletonInstance(const QString& name, QObject* object)
 {
-    LOG_DEBUG(_logger, "Registering singleton: " << name << ":" << object->metaObject()->className());
+    LOG_DEBUG(_logger, "Registering singleton: " << name << " [" << object->metaObject()->className() << "]");
     qmlRegisterSingletonInstance("MellowPlayer", 3, 0, name.toStdString().c_str(), object);
 }
 

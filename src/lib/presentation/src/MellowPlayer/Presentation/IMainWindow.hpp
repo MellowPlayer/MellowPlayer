@@ -1,14 +1,15 @@
 #pragma once
 
+#include <MellowPlayer/Presentation/Qml/QmlSingleton.hpp>
 #include <QObject>
 
 namespace MellowPlayer::Presentation
 {
-    class IMainWindow : public QObject
+    class IMainWindow : public QmlSingleton
     {
         Q_OBJECT
     public:
-        virtual ~IMainWindow() override;
+        using QmlSingleton::QmlSingleton;
 
         virtual void show() = 0;
         virtual void hide() = 0;

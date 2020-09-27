@@ -21,9 +21,8 @@ using namespace MellowPlayer::Infrastructure;
 ApplicationViewModel::ApplicationViewModel(IApplication& application,
                                            IQtApplication& qtApplication,
                                            IMainWindow& mainWindow,
-                                           SettingsViewModel& settingsViewModel,
-                                           IQmlSingletons& qmlSingletons)
-        : QmlSingleton("App", this, qmlSingletons),
+                                           SettingsViewModel& settingsViewModel)
+        : QmlSingleton("App", this),
           _application(application),
           _qtApplication(qtApplication),
           _mainWindow(mainWindow),

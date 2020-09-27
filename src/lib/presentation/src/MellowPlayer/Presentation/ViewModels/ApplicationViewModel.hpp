@@ -11,7 +11,7 @@ namespace MellowPlayer::Presentation
     class IMainWindow;
     class SettingsViewModel;
 
-    class ApplicationViewModel : public QObject, public QmlSingleton
+    class ApplicationViewModel : public QmlSingleton
     {
         Q_OBJECT
         Q_PROPERTY(QString buildInfo READ buildInfo CONSTANT)
@@ -20,8 +20,7 @@ namespace MellowPlayer::Presentation
         ApplicationViewModel(Infrastructure::IApplication& application,
                              Infrastructure::IQtApplication& qtApplication,
                              IMainWindow& mainWindow,
-                             SettingsViewModel& settingsViewModel,
-                             IQmlSingletons& qmlSingletons);
+                             SettingsViewModel& settingsViewModel);
 
         Q_INVOKABLE void quit();
         Q_INVOKABLE void restart();

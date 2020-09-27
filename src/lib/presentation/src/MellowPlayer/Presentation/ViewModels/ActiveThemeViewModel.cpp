@@ -14,10 +14,9 @@ using namespace MellowPlayer::Infrastructure;
 using namespace MellowPlayer::Presentation;
 
 ActiveThemeViewModel::ActiveThemeViewModel(StreamingServices& streamingServices,
-                               Settings& settings,
-                               IThemeLoader& themeLoader,
-                                           IQmlSingletons& qmlSingletons)
-        : QmlSingleton("ActiveTheme", this, qmlSingletons),
+                                           Settings& settings,
+                                           IThemeLoader& themeLoader)
+        : QmlSingleton("ActiveTheme", this),
           _streamingServices(streamingServices),
           _loader(themeLoader),
           _accentColorSetting(settings.get(SettingKey::APPEARANCE_ACCENT)),

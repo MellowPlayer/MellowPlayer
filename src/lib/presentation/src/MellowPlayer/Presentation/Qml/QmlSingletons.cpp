@@ -8,20 +8,15 @@
 using namespace MellowPlayer::Domain;
 using namespace MellowPlayer::Presentation;
 
-QmlSingletons::QmlSingletons(IQmlApplicationEngine& qmlApplicationEngine, IPlayer& player)
-        : _qmlApplicationEngine(qmlApplicationEngine), _player(player)
+QmlSingletons::QmlSingletons(IQmlApplicationEngine& qmlApplicationEngine, IPlayer& player, const std::vector<std::shared_ptr<IQmlSingleton>>& items)
+        : _qmlApplicationEngine(qmlApplicationEngine), _player(player), _items(items)
 {
-}
-
-void QmlSingletons::add(IQmlSingleton& qmlSingleton)
-{
-    _qmlSingletons.append(&qmlSingleton);
 }
 
 void QmlSingletons::registerToQml()
 {
     _qmlApplicationEngine.registerSingletonInstance("Player", &_player);
 
-    for (auto* qmlSingleton : _qmlSingletons)
+    for (auto& qmlSingleton : _items)
         qmlSingleton->registerTo(_qmlApplicationEngine);
 }

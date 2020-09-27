@@ -15,13 +15,13 @@ namespace MellowPlayer::Presentation
 {
     class IQmlApplicationEngine;
 
-    class MainWindowViewModel : public IMainWindow, public QmlSingleton
+    class MainWindowViewModel : public IMainWindow
     {
         Q_OBJECT
         Q_PROPERTY(bool visible READ isVisible WRITE setVisible NOTIFY visibleChanged)
         Q_PROPERTY(ZoomViewModel* zoom READ zoom CONSTANT)
     public:
-        MainWindowViewModel(IQmlSingletons& qmlSingletons, Domain::ISettingsStore& settingsStore);
+        MainWindowViewModel(Domain::ISettingsStore& settingsStore);
 
         // IMainWindow implementation
         void show() override;

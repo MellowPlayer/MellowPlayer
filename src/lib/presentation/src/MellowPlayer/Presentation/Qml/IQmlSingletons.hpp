@@ -14,12 +14,6 @@ namespace MellowPlayer::Presentation
     public:
         virtual ~IQmlSingletons() = default;
 
-        /**
-         * Add a qml singleton for use in QML
-         *
-         * @param qmlSingleton
-         */
-        virtual void add(IQmlSingleton& qmlSingleton) = 0;
         virtual void registerToQml() = 0;
     };
 }

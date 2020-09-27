@@ -5,11 +5,11 @@
 
 namespace MellowPlayer::Presentation
 {
-    class ClipBoardViewModel : public QObject, public QmlSingleton
+    class ClipBoardViewModel : public QmlSingleton
     {
         Q_OBJECT
     public:
-        explicit ClipBoardViewModel(IQmlSingletons& qmlSingletons);
+        ClipBoardViewModel();
 
         Q_INVOKABLE void setText(const QString& text);
         Q_INVOKABLE bool canPaste() const;

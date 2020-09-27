@@ -10,12 +10,12 @@ namespace MellowPlayer::Domain
 
 namespace MellowPlayer::Presentation
 {
-    class ListeningHistoryViewModel : public QObject, public QmlSingleton
+    class ListeningHistoryViewModel : public QmlSingleton
     {
         Q_OBJECT
         Q_PROPERTY(QAbstractItemModel* model READ model CONSTANT)
     public:
-        ListeningHistoryViewModel(Domain::IListeningHistory& listeningHistory, IQmlSingletons& qmlSingletons);
+        ListeningHistoryViewModel(Domain::IListeningHistory& listeningHistory);
 
         using QmlSingleton::registerTo;
         void load();

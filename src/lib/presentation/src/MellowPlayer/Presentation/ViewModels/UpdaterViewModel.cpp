@@ -7,8 +7,8 @@ using namespace MellowPlayer::Domain;
 using namespace MellowPlayer::Infrastructure;
 using namespace MellowPlayer::Presentation;
 
-UpdaterViewModel::UpdaterViewModel(Updater& updater, IQmlSingletons& qmlSingletons)
-        : QmlSingleton("Updater", this, qmlSingletons), _updater(updater)
+UpdaterViewModel::UpdaterViewModel(Updater& updater)
+        : QmlSingleton("Updater", this), _updater(updater)
 {
     connect(&updater, &Updater::updateAvailable, this, &UpdaterViewModel::onUpdateAvailable);
     connect(&updater, &Updater::noUpdateAvailable, this, &UpdaterViewModel::onNoUpdateAvailable);
