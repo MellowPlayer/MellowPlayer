@@ -42,6 +42,29 @@ if (QMLLINT_EXECUTABLE)
     endif()
 endif()
 
+macro(qml_find_plugin_dir)
+    find_package(Qt5Core)
+    get_target_property(QT_QMAKE_EXECUTABLE ${Qt5Core_QMAKE_EXECUTABLE} IMPORTED_LOCATION)
+    if(NOT QT_QMAKE_EXECUTABLE)
+        message(FATAL_ERROR "qmake is not found.")
+    endif()
+
+    # execute the command "qmake -query QT_INSTALL_PLUGINS" to get the path of plugins dir.
+    execute_process(COMMAND ${QT_QMAKE_EXECUTABLE} -query QT_INSTALL_QML/raw
+            OUTPUT_VARIABLE QML_PLUGIN_DIR_RAW
+            OUTPUT_STRIP_TRAILING_WHITESPACE
+            )
+    if(NOT QML_PLUGIN_DIR_RAW)
+        message(FATAL_ERROR "Qt5 plugin directory cannot be detected.")
+    endif()
+    set(QML_PLUGIN_INSTALL_DIR ${CMAKE_INSTALL_PREFIX}${QML_PLUGIN_DIR_RAW})
+    string(REPLACE /usr/usr /usr QML_PLUGIN_INSTALL_DIR ${QML_PLUGIN_INSTALL_DIR})
+    string(REPLACE /usr/local/usr /usr QML_PLUGIN_INSTALL_DIR ${QML_PLUGIN_INSTALL_DIR})
+    message(STATUS "QML Plugin Directory ${QML_PLUGIN_INSTALL_DIR}")
+endmacro()
+
+qml_find_plugin_dir()
+
 # validate a list of qml files
 function(qml_lint)
     if (NOT QMLLINT_EXECUTABLE OR NOT QmlLint_FOUND)
@@ -53,8 +76,7 @@ function(qml_lint)
         get_filename_component(_file_name ${_file} NAME)
         add_custom_command(
                 OUTPUT ${CMAKE_CURRENT_BINARY_DIR}/${_file_name}.qmllint
-                COMMAND ${QMLLINT_EXECUTABLE} ${_file_abs}
-                # -U -i ${QML_IMPORT_PATH}/cpp.qmltypes -I ${QML_IMPORT_PATH} -I /usr/lib/x86_64-linux-gnu/qt5/qml/
+                COMMAND ${QMLLINT_EXECUTABLE} ${_file_abs} -U -i ${QML_IMPORT_PATH}/MellowPlayer/cpp.qmltypes -I ${QML_IMPORT_PATH} -I ${QML_PLUGIN_INSTALL_DIR}
                 COMMAND ${CMAKE_COMMAND} -E touch ${CMAKE_CURRENT_BINARY_DIR}/${_file_name}.qmllint
                 MAIN_DEPENDENCY ${_file_abs}
         )

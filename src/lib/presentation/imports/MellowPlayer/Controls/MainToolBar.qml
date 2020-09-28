@@ -83,7 +83,7 @@ ToolBar {
         Item {
             Layout.preferredWidth: 1
             Layout.fillHeight: true
-            visible:  mainWindow.isOnRunningServicesPage && Player.canAddToFavorites && App.settings.get(SettingKey.APPEARANCE_PLAYER_CONTROLS_VISIBLE).value
+            visible:  mainWindow.isOnRunningServicesPage && CurrentPlayer.canAddToFavorites && App.settings.get(SettingKey.APPEARANCE_PLAYER_CONTROLS_VISIBLE).value
 
             Rectangle {
                 anchors.centerIn: parent
@@ -94,12 +94,12 @@ ToolBar {
         }
 
         IconToolButton {
-            visible: mainWindow.isOnRunningServicesPage && Player.canAddToFavorites && App.settings.get(SettingKey.APPEARANCE_PLAYER_CONTROLS_VISIBLE).value
-            iconChar: Player.currentSong.isFavorite ? MaterialIcons.icon_favorite : MaterialIcons.icon_favorite_border
-            tooltip: Player.currentSong.isFavorite ? qsTr("Remove current song from your favorites") : qsTr("Add current song to your favorites")
+            visible: mainWindow.isOnRunningServicesPage && CurrentPlayer.canAddToFavorites && App.settings.get(SettingKey.APPEARANCE_PLAYER_CONTROLS_VISIBLE).value
+            iconChar: CurrentPlayer.currentSong.isFavorite ? MaterialIcons.icon_favorite : MaterialIcons.icon_favorite_border
+            tooltip: CurrentPlayer.currentSong.isFavorite ? qsTr("Remove current song from your favorites") : qsTr("Add current song to your favorites")
             shortcut: App.settings.get(SettingKey.SHORTCUTS_FAVORITE).value
 
-            onTriggered: Player.toggleFavoriteSong()
+            onTriggered: CurrentPlayer.toggleFavoriteSong()
         }
 
         Item {
@@ -107,33 +107,33 @@ ToolBar {
         }
 
         IconToolButton {
-            enabled: Player.canGoPrevious && d.isPlayerActive()
+            enabled: CurrentPlayer.canGoPrevious && d.isPlayerActive()
             iconChar: MaterialIcons.icon_fast_rewind
             tooltip: qsTr("Skip to previous song")
             visible: mainWindow.isOnRunningServicesPage && App.settings.get(SettingKey.APPEARANCE_PLAYER_CONTROLS_VISIBLE).value
             shortcut: App.settings.get(SettingKey.SHORTCUTS_PREVIOUS).value
 
-            onTriggered: Player.previous()
+            onTriggered: CurrentPlayer.previous()
         }
 
         IconToolButton {
-            enabled: !Player.isStopped || d.isPlayerActive()
-            iconChar: Player.isPlaying ? MaterialIcons.icon_pause: MaterialIcons.icon_play_arrow
-            tooltip: Player.isPlaying ? qsTr("Pause") : qsTr("Play")
+            enabled: !CurrentPlayer.isStopped || d.isPlayerActive()
+            iconChar: CurrentPlayer.isPlaying ? MaterialIcons.icon_pause: MaterialIcons.icon_play_arrow
+            tooltip: CurrentPlayer.isPlaying ? qsTr("Pause") : qsTr("Play")
             visible: mainWindow.isOnRunningServicesPage && App.settings.get(SettingKey.APPEARANCE_PLAYER_CONTROLS_VISIBLE).value
             shortcut: App.settings.get(SettingKey.SHORTCUTS_PLAY).value
 
-            onTriggered: Player.togglePlayPause()
+            onTriggered: CurrentPlayer.togglePlayPause()
         }
 
         IconToolButton {
-            enabled: Player.canGoNext && d.isPlayerActive()
+            enabled: CurrentPlayer.canGoNext && d.isPlayerActive()
             iconChar: MaterialIcons.icon_fast_forward
             tooltip: qsTr("Skip to next song")
             visible: mainWindow.isOnRunningServicesPage && App.settings.get(SettingKey.APPEARANCE_PLAYER_CONTROLS_VISIBLE).value
             shortcut: App.settings.get(SettingKey.SHORTCUTS_NEXT).value
 
-            onTriggered: Player.next()
+            onTriggered: CurrentPlayer.next()
         }
 
         IconToolButton {
@@ -395,7 +395,7 @@ ToolBar {
                 font.pixelSize: sliderGroup.visible ? 12 : 14
 
                 function getText() {
-                    var currentSong = Player.currentSong;
+                    var currentSong = CurrentPlayer.currentSong;
                     if (currentSong.title && currentSong.artist)
                         return "<b>" + currentSong.title + qsTr("</b><i> by ") + currentSong.artist;
                     else if (currentSong.title)
@@ -414,7 +414,7 @@ ToolBar {
                 Layout.preferredHeight: visible ? slider.implicitHeight : 0
                 Layout.margins: 0
 
-                visible: Player.canSeek || Player.currentSong.duration !== 0
+                visible: CurrentPlayer.canSeek || CurrentPlayer.currentSong.duration !== 0
 
                 RowLayout {
                     id: layout
@@ -424,7 +424,7 @@ ToolBar {
                     Label {
                         text: {
                             var date = new Date(null);
-                            date.setSeconds(Player.position); // specify value for SECONDS here
+                            date.setSeconds(CurrentPlayer.position); // specify value for SECONDS here
                             var text = date.toISOString().substr(11, 8);
                             try {
                                 if (text.startsWith("00:"))
@@ -442,16 +442,16 @@ ToolBar {
                         id: slider
 
                         function updateHandleVisibility() {
-                            slider.handle.visible = Player.canSeek
+                            slider.handle.visible = CurrentPlayer.canSeek
                         }
 
                         hoverEnabled: true
-                        from: 0; to: Player.currentSong.duration
-                        value: Player.position
+                        from: 0; to: CurrentPlayer.currentSong.duration
+                        value: CurrentPlayer.position
 
                         onMoved: {
-                            if (Player.position !== value && Player.position < Player.currentSong.duration)
-                                Player.seekToPosition(value)
+                            if (CurrentPlayer.position !== value && CurrentPlayer.position < CurrentPlayer.currentSong.duration)
+                                CurrentPlayer.seekToPosition(value)
                         }
 
                         Component.onCompleted: slider.updateHandleVisibility()
@@ -459,7 +459,7 @@ ToolBar {
                         Material.accent: ActiveTheme.accent === ActiveTheme.primary ? ActiveTheme.primaryForeground : ActiveTheme.accent
 
                         Connections {
-                            target: Player
+                            target: CurrentPlayer
 
                             function onCanSeekChanged() { slider.updateHandleVisibility() }
                         }
@@ -469,7 +469,7 @@ ToolBar {
                     Label {
                         text: {
                             var date = new Date(null);
-                            date.setSeconds(Player.currentSong.duration - Player.position); // specify value for SECONDS here
+                            date.setSeconds(CurrentPlayer.currentSong.duration - CurrentPlayer.position); // specify value for SECONDS here
                             var text = date.toISOString().substr(11, 8);
                             try {
                                 if (text.startsWith("00:"))
@@ -492,7 +492,7 @@ ToolBar {
         property int iconSize: 22
 
         function isPlayerActive() {
-            return Player.currentSong !== null && Player.currentSong.isValid()
+            return CurrentPlayer.currentSong !== null && CurrentPlayer.currentSong.isValid()
         }
     }
 

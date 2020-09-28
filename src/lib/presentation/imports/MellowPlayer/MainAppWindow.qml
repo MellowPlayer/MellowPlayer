@@ -83,6 +83,8 @@ ApplicationWindow {
     }
 
     Component.onCompleted: {
+        Dialogs.mainWindow = mainWindow;
+        console.log("MainWindow in dialogs", Dialogs.mainWindow)
         if (StreamingServices.currentService !== null)
             activateService(StreamingServices.currentService)
         else

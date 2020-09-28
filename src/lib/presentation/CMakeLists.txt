@@ -7,7 +7,7 @@ glob_recurse_excl(HEADER_FILES src/*.hpp "${EXCLUDE_DIRS}")
 glob_recurse_excl(SOURCE_FILES src/*.cpp "${EXCLUDE_DIRS}")
 file(GLOB_RECURSE CONF_FILES CONFIGURE_DEPENDS *.conf)
 file(GLOB_RECURSE QML_FILES CONFIGURE_DEPENDS imports/*.qml)
-
+list(SORT QML_FILES)
 if (ENABLE_QML_LINT)
     message(STATUS "Using qmllint")
     qml_lint(${QML_FILES})

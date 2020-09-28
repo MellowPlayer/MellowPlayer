@@ -96,7 +96,7 @@ Item {
         }
 
         footer: Pane {
-            visible: footerVisible
+            visible: root.footerVisible
             padding: 17
             implicitHeight: layout.implicitHeight + padding * 2
             implicitWidth: layout.implicitWidth

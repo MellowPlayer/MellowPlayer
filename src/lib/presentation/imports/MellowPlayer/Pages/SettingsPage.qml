@@ -5,6 +5,9 @@ import QtQuick.Controls.Material 2.15
 
 import MellowPlayer 3.0
 
+import "../Dialogs.js" as Dialogs
+import "../SettingsTranslator.js" as SettingsTranslator
+
 Page {
     id: settingsPage
 
@@ -49,7 +52,7 @@ Page {
         Label {
             anchors.centerIn: parent
             font.pixelSize: 16
-            text: settingsPageList.currentItem.category
+            text: settingsPageList.currentCategory
         }
     }
 
@@ -77,45 +80,10 @@ Page {
                 ColumnLayout {
                     anchors.fill: parent
 
-                    Component {
-                        id: settingsCategoryDelegate
-
-                        ItemDelegate {
-                            id: delegate
-
-                            property string category: SettingsTranslator.translateCategory(model.name)
-
-                            height: 60; width: parent.width
-                            hoverEnabled: true
-
-                            RowLayout {
-                                anchors.fill: parent
-                                anchors.leftMargin: parent.leftPadding
-                                anchors.rightMargin: parent.rightPadding
-                                anchors.topMargin: parent.topPadding
-                                anchors.bottomMargin: parent.bottomPadding
-
-                                Label {
-                                    text: model.icon
-                                    font.family: MaterialIcons.family
-                                    font.pixelSize: 24
-                                }
-
-                                Label {
-                                    verticalAlignment: "AlignVCenter"
-                                    text: delegate.category
-                                    font.pixelSize: 20
-                                }
-
-                                Item { Layout.fillWidth: true; }
-                            }
-
-                            onClicked: settingsPageList.currentIndex = index
-                        }
-                    }
-
                     ListView {
                         id: settingsPageList
+
+                        property string currentCategory
 
                         highlight: Rectangle {
                             color: ActiveTheme.isDark(ActiveTheme.secondary) ? "#10ffffff" : "#10000000"
@@ -131,7 +99,44 @@ Page {
                         }
                         highlightMoveDuration: 200
                         model: App.settings.categories
-                        delegate: settingsCategoryDelegate
+                        delegate: ItemDelegate {
+                            id: delegate
+
+                            required property string name
+                            required property int index
+                            required property string iconName
+
+                            property string category: SettingsTranslator.translateCategory(name)
+                            property bool isCurrentItem: index === settingsPageList.currentIndex
+
+                            height: 60; width: parent.width
+                            hoverEnabled: true
+
+                            onClicked: settingsPageList.currentIndex = index
+                            onIsCurrentItemChanged: if (isCurrentItem) settingsPageList.currentCategory = category
+
+                            RowLayout {
+                                anchors.fill: parent
+                                anchors.leftMargin: parent.leftPadding
+                                anchors.rightMargin: parent.rightPadding
+                                anchors.topMargin: parent.topPadding
+                                anchors.bottomMargin: parent.bottomPadding
+
+                                Label {
+                                    text: delegate.iconName
+                                    font.family: MaterialIcons.family
+                                    font.pixelSize: 24
+                                }
+
+                                Label {
+                                    verticalAlignment: "AlignVCenter"
+                                    text: delegate.category
+                                    font.pixelSize: 20
+                                }
+
+                                Item { Layout.fillWidth: true; }
+                            }
+                        }
                         interactive: false
 
                         Layout.fillHeight: true
@@ -145,7 +150,17 @@ Page {
                         highlighted: true
                         hoverEnabled: true
                         text: qsTr("Restore all to defaults")
-                        onClicked: messageBoxConfirmRestore.open()
+                        onClicked: {
+                            Dialogs.askConfirmation(
+                                qsTr("Confirm restore defaults"),
+                                qsTr("Are you sure you want to restore all settings to their default values?"),
+                                (confirmed) => {
+                                    if (confirmed) {
+                                        App.settings.restoreDefaults();
+                                    }
+                                }
+                            )
+                        }
 
                         Layout.fillWidth: true
                         Layout.leftMargin: 4
@@ -170,24 +185,25 @@ Page {
                 model: App.settings.categories
 
                 Loader {
-                    source: Qt.resolvedUrl("../" + model.qmlComponent)
+                    id: settingsPageLoader
+
+                    required property string qmlComponent
+                    required property SettingListModel settings
+                    required property string name
 
                     width: parent.width
                     height: parent.height
+
+                    Component.onCompleted: {
+                        var url = Qt.resolvedUrl("../" + qmlComponent)
+                        var properties = {
+                            "categoryName": name,
+                            "settings": settings
+                        }
+                        setSource(url, properties)
+                    }
                 }
             }
         }
-    }
-
-    MessageBoxDialog {
-        id: messageBoxConfirmRestore
-
-        standardButtons: Dialog.Yes | Dialog.No
-        message: qsTr("Are you sure you want to restore all settings to their default values?")
-        title: qsTr("Confirm restore defaults")
-        x: settingsPage.width / 2 - width / 2
-        y: settingsPage.height / 2 - height / 2
-
-        onAccepted: App.settings.restoreDefaults()
     }
 }

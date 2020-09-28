@@ -26,6 +26,7 @@ namespace MellowPlayer::Presentation
 
         Q_INVOKABLE SettingViewModel* get(int key);
         Q_INVOKABLE void restoreDefaults();
+        Q_INVOKABLE void restoreCategoryDefaults(const QString& category);
 
     private:
         Domain::Settings& _settings;

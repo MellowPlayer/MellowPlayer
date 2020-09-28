@@ -94,12 +94,13 @@ Item {
             State {
                 name: "hidden"
 
-                PropertyChanges { target: paneRestart; y: parent.height }
+                PropertyChanges { target: paneRestart; y: paneRestart.parent.height }
             },
+
             State {
                 name: "visible"
 
-                PropertyChanges { target: paneRestart; y: parent.height - paneRestart.implicitHeight }
+                PropertyChanges { target: paneRestart; y: paneRestart.parent.height - paneRestart.implicitHeight }
             }
         ]
         transitions: Transition {

@@ -2,6 +2,7 @@
 #include <MellowPlayer/Domain/Settings/SettingsCategory.hpp>
 #include <MellowPlayer/Presentation/ViewModels/Settings/SettingsViewModel.hpp>
 #include <QtQml>
+#include <stdexcept>
 
 using namespace MellowPlayer::Domain;
 using namespace MellowPlayer::Presentation;
@@ -35,4 +36,13 @@ SettingsCategoryListModel* SettingsViewModel::categories() const
 void SettingsViewModel::restoreDefaults()
 {
     _settings.restoreDefaults();
+}
+
+void SettingsViewModel::restoreCategoryDefaults(const QString& categoryName)
+{
+    for (auto& category: _settings.categories())
+    {
+        if (category->name() == categoryName)
+            category->restoreDefaults();
+    }
 }

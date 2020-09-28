@@ -7,7 +7,9 @@ import MellowPlayer 3.0
 StackLayout {
     id: root
 
-    property WebView currentWebView: itemAt(currentIndex)
+    property WebView currentWebView
+
+    currentIndex: indexOf(StreamingServices.currentService)
 
     function indexOf(service) {
         if (service !== null) {
@@ -20,7 +22,7 @@ StackLayout {
     }
 
     function add(service) {
-        webViewComponent.createObject(root, {"service": service} );
+        webViewComponent.createObject(root, {"service": service, "index": root.count });
         service.isActive = true;
     }
 
@@ -36,65 +38,66 @@ StackLayout {
     }
 
     function exitFullScreen() {
-        currentWebView.exitFullScreen();
+        root.currentWebView.exitFullScreen();
     }
 
     function goBack() {
-        currentWebView.goBack();
+        root.currentWebView.goBack();
     }
 
     function goHome() {
-        currentWebView.url = currentWebView.service.url;
-        currentWebView.reload();
+        root.currentWebView.url = root.currentWebView.service.url;
+        root.currentWebView.reload();
     }
 
     function goForward() {
-        currentWebView.goForward();
+        root.currentWebView.goForward();
     }
 
     function reload() {
-        currentWebView.reload();
+        root.currentWebView.reload();
     }
 
     Shortcut {
         sequence: "Ctrl++"
-        onActivated: currentWebView.zoomIn()
+        onActivated: root.currentWebView.zoomIn()
     }
 
     Shortcut {
         sequence: "Ctrl+-"
-        onActivated: currentWebView.zoomOut()
+        onActivated: root.currentWebView.zoomOut()
     }
 
     Shortcut {
         sequence: "Ctrl+0"
-        onActivated: currentWebView.resetZoom()
+        onActivated: root.currentWebView.resetZoom()
     }
 
 
     Shortcut {
-        property var setting: App.settings.get(SettingKey.SHORTCUTS_SELECT_NEXT_SERVICE)
+        property Setting setting: App.settings.get(SettingKey.SHORTCUTS_SELECT_NEXT_SERVICE)
 
         sequence: setting.value
         onActivated: StreamingServices.next()
     }
 
     Shortcut {
-        property var setting: App.settings.get(SettingKey.SHORTCUTS_SELECT_PREVIOUS_SERVICE)
+        property Setting setting: App.settings.get(SettingKey.SHORTCUTS_SELECT_PREVIOUS_SERVICE)
 
         sequence: setting.value
         onActivated: StreamingServices.previous()
     }
 
-    Connections {
-        target: StreamingServices
-
-        function onCurrentServiceChanged() { currentIndex = indexOf(StreamingServices.currentService) }
-    }
-
     Component {
-        id: webViewComponent;
+        id: webViewComponent
 
-        WebView { }
+        WebView {
+            id: webView
+
+            required property int index
+            property bool isCurrent: index === root.currentIndex
+
+            onIsCurrentChanged: root.currentWebView = webView
+        }
     }
 }

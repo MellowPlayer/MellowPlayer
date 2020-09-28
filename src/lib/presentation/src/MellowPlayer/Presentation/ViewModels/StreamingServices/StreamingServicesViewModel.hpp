@@ -34,7 +34,7 @@ namespace MellowPlayer::Presentation
     {
         Q_OBJECT
         Q_PROPERTY(QAbstractItemModel* filteredServices READ filteredServices CONSTANT)
-        Q_PROPERTY(QObject* currentService READ currentService WRITE setCurrentService NOTIFY currentServiceChanged)
+        Q_PROPERTY(StreamingServiceViewModel* currentService READ currentService WRITE setCurrentService NOTIFY currentServiceChanged)
     public:
         using QmlSingleton::QmlSingleton;
 
@@ -60,7 +60,6 @@ namespace MellowPlayer::Presentation
 
     signals:
         void currentServiceChanged(QObject* currentService);
-        void currentIndexChanged(int currentIndex);
         void serviceCreated(const QString& directory);
         void activationRequested(QObject* service);
     };

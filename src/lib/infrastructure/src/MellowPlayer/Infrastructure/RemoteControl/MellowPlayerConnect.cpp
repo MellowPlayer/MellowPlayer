@@ -150,9 +150,11 @@ void MellowPlayerConnect::start()
     _process->setProgram(_installationDirectory + QDir::separator() + "MellowPlayer.Connect" + extension);
     _process->setArguments(arguments);
     _process->setWorkingDirectory(_installationDirectory);
-    _process->execute([=](int, const QString&, const QString&) {
+    _process->execute([=](int returnCode, const QString&, const QString&) {
         LOG_DEBUG(_logger, "Process finished");
         setRunning(false);
+        if (returnCode != 0)
+            emit failedToStart();
     });
     setRunning(true);
 }

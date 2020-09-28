@@ -45,5 +45,6 @@ namespace MellowPlayer::Domain
         void installationStateChanged();
         void installingChanged();
         void runningChanged();
+        void failedToStart();
     };
 }

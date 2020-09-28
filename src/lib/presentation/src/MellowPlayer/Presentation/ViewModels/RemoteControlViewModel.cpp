@@ -83,6 +83,7 @@ RemoteControlViewModel::RemoteControlViewModel(IRemoteControl& remoteControl)
     connect(&_remoteControlApplication, &IRemoteControlApplication::installationStateChanged, this, &RemoteControlViewModel::currentStateIndexChanged);
     connect(&_remoteControlApplication, &IRemoteControlApplication::installingChanged, this, &RemoteControlViewModel::currentStateIndexChanged);
     connect(&_remoteControlApplication, &IRemoteControlApplication::runningChanged, this, &RemoteControlViewModel::currentStateIndexChanged);
+    connect(&_remoteControlApplication, &IRemoteControlApplication::failedToStart, this, &RemoteControlViewModel::onFailedToStart);
 }
 
 void RemoteControlViewModel::addState(RemoteControlStateViewModel* state)
@@ -136,7 +137,7 @@ void RemoteControlViewModel::install()
 {
     _remoteControlApplication.install([=](bool success, const QString& errorMessage) {
         if (!success)
-            emit error("Installation failed", errorMessage);
+            onError("Installation failed", errorMessage);
     });
 }
 
@@ -158,4 +159,20 @@ bool RemoteControlViewModel::isAutoStartEnabled() const
 void RemoteControlViewModel::setAutoStartEnabled(bool value)
 {
     _remoteControl.setAutoStartEnabled(value);
+}
+
+void RemoteControlViewModel::onFailedToStart()
+{
+    onError("Failed to start", "MellowPlayer.Connect failed to start.");
+}
+
+void RemoteControlViewModel::onError(const QString& title, const QString& message)
+{
+    _error = new RemoteControlErrorViewModel(title, message, this);
+    emit errorChanged();
+}
+
+RemoteControlErrorViewModel* RemoteControlViewModel::error() const
+{
+    return _error;
 }

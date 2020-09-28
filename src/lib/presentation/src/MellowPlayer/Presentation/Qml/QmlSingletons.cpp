@@ -15,7 +15,7 @@ QmlSingletons::QmlSingletons(IQmlApplicationEngine& qmlApplicationEngine, IPlaye
 
 void QmlSingletons::registerToQml()
 {
-    _qmlApplicationEngine.registerSingletonInstance("Player", &_player);
+    _qmlApplicationEngine.registerSingletonInstance("CurrentPlayer", &_player);
 
     for (auto& qmlSingleton : _items)
         qmlSingleton->registerTo(_qmlApplicationEngine);

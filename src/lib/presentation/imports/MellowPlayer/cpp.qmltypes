@@ -1,0 +1,350 @@
+import QtQuick.tooling 1.2
+
+Module {
+    dependencies: [ "QtQuick 2.15" ]
+
+    Component {
+        name: "RemoteControl"
+        prototype: "QObject"
+        isCreatabke: false
+        exports : ["MellowPlayer 3.0"]
+
+        Property { name: "appInfo"; type: "RemoteControlAppInfo"; isPointer: true }
+        Property { name: "currentStateIndex"; type: "int" }
+        Property { name: "states"; type: "QAbstractListModel" }
+        Property { name: "error"; type: "RemoteControlError" }
+        Property { name: "autoStartEnabled"; type: "bool" }
+
+        Method { name: "install" }
+        Method { name: "stop"}
+        Method { name: "start" }
+        Method { name: "activate" }
+        Method { name: "deactivate" }
+    }
+
+    Component {
+        name: "RemoteControlError"
+        prototype: "QObject"
+        isCreatabke: false
+        exports : ["MellowPlayer 3.0"]
+
+        Property { name: "title"; type: "QString" }
+        Property { name: "message"; type: "QString" }
+    }
+
+    Component {
+        name: "RemoteControlAppInfo"
+        prototype: "QObject"
+        isCreatabke: false
+        exports : ["MellowPlayer 3.0"]
+
+        Property { name: "name"; type: "QString" }
+        Property { name: "version"; type: "QString" }
+        Property { name: "homePage"; type: "QString" }
+        Property { name: "logo"; type: "QString" }
+        Property { name: "url"; type: "QString" }
+        Property { name: "minimumRequiredVersion"; type: "QString" }
+    }
+
+    Component {
+        name: "App"
+        isCreatabke: false
+        exports : ["MellowPlayer 3.0"]
+
+        Property { name: "settings"; type: "SettingsViewModel" }
+
+        Method { name: "clearCache"; type: "void" }
+        Method { name: "clearCookies"; type: "void" }
+        Method { name: "quit"; type: "void" }
+        Method { name: "restart"; type: "void" }
+    }
+
+    Component {
+        name: "SettingsViewModel"
+        isCreatabke: false
+        exports : ["MellowPlayer 3.0"]
+
+        Property { name: "categories"; type: "QAbstractItemModel" }
+
+        Method {
+            name: "get"
+            type: "Setting"
+            isPointer: true
+
+            Parameter { name: "key"; type: "int" }
+        }
+
+        Method { name: "restoreDefaults" }
+        Method {
+            name: "restoreCategoryDefaults"
+
+            Parameter {
+                name: "categoryName"
+                type: "QString"
+            }
+        }
+    }
+
+    Component {
+        name: "Setting"
+        isCreatabke: false
+        exports : ["MellowPlayer 3.0"]
+
+        Method { name: "value"; type: "QVariant" }
+    }
+
+    Component {
+        name: "SettingKey"
+        prototype: "QObject"
+        isCreatabke: false
+        exports : ["MellowPlayer 3.0"]
+
+        Enum {
+            name: "Values"
+            values: {
+                "ADBLOCK_ENABLED": 0,
+                "APPEARANCE_ACCENT": 1,
+                "APPEARANCE_AUTO_HIDPI_SCALING": 2,
+                "APPEARANCE_BACKGROUND": 3,
+                "APPEARANCE_CUSTOM_TRAY_ICON": 4,
+                "APPEARANCE_FOREGROUND": 5,
+                "APPEARANCE_HIDPI_SCALING_FACTOR": 6,
+                "APPEARANCE_PLAYER_CONTROLS_VISIBLE": 7,
+                "APPEARANCE_PRIMARY_BACKGROUND": 8,
+                "APPEARANCE_PRIMARY_FOREGROUND": 9,
+                "APPEARANCE_SECONDARY_BACKGROUND": 10,
+                "APPEARANCE_SECONDARY_FOREGROUND": 11,
+                "APPEARANCE_SHOW_SCROLLBARS": 12,
+                "APPEARANCE_SHOW_TRAY_ICON": 13,
+                "APPEARANCE_THEME": 14,
+                "APPEARANCE_TOOLBAR_VISIBLE": 15,
+                "APPEARANCE_WEBPAGE_CONTROLS_VISIBLE": 16,
+                "MAIN_CHECK_FOR_UPDATES": 17,
+                "MAIN_CLOSE_TO_TRAY": 18,
+                "MAIN_CONFIRM_EXIT": 19,
+                "MAIN_PLAYBACK_REQUIRES_USER_GESTURE": 20,
+                "MAIN_UPDATE_CHANNEL": 21,
+                "NOTIFICATIONS_ENABLED": 22,
+                "NOTIFICATIONS_NEW_SONG": 23,
+                "NOTIFICATIONS_PAUSED": 24,
+                "NOTIFICATIONS_RESUMED": 25,
+                "PRIVACY_ENABLE_LISTENING_HISTORY": 26,
+                "PRIVACY_LISTENING_HISTORY_LIMIT": 27,
+                "PRIVACY_USER_AGENT": 28,
+                "PRIVATE_CURRENT_SERVICE": 29,
+                "PRIVATE_REMOTE_CONTROL_AUTO_START": 30,
+                "PRIVATE_REMOTE_CONTROL_ENABLED": 31,
+                "PRIVATE_SHOW_CLOSE_TO_TRAY_MESSAGE": 32,
+                "PRIVATE_SHOW_FAVORITE_SERVICES": 33,
+                "PRIVATE_WINDOW_HEIGHT": 34,
+                "PRIVATE_WINDOW_WIDTH": 35,
+                "SHORTCUTS_ABOUT": 36,
+                "SHORTCUTS_CHECK_FOR_UPDATE": 37,
+                "SHORTCUTS_CREATE_PLUGIN": 38,
+                "SHORTCUTS_FAVORITE": 39,
+                "SHORTCUTS_LISTENING_HISTORY": 40,
+                "SHORTCUTS_NEXT": 41,
+                "SHORTCUTS_NOTIFICATIONS": 42,
+                "SHORTCUTS_PLAY": 43,
+                "SHORTCUTS_PREVIOUS": 44,
+                "SHORTCUTS_QUIT": 45,
+                "SHORTCUTS_RELOAD": 46,
+                "SHORTCUTS_REPORT_ISSUE": 47,
+                "SHORTCUTS_RESTORE_WINDOW": 48,
+                "SHORTCUTS_SELECT_NEXT_SERVICE": 49,
+                "SHORTCUTS_SELECT_PREVIOUS_SERVICE": 50,
+                "SHORTCUTS_SELECT_SERVICE": 51,
+                "SHORTCUTS_SETTINGS": 52,
+                "SHORTCUTS_SHOW_TOOLBA": 53
+            }
+        }
+    }
+
+    Component {
+        name: "ActiveTheme"
+        prototype: "QObject"
+        isCreatabke: false
+        exports : [
+            "MellowPlayer 3.0"
+        ]
+
+        Property { name: "dark"; type: "bool" }
+        Property { name: "accent"; type: "QString" }
+        Property { name: "background"; type: "QString" }
+        Property { name: "foreground"; type: "QString" }
+        Property { name: "primary"; type: "QString" }
+        Property { name: "primaryForeground"; type: "QString" }
+        Property { name: "secondary"; type: "QString" }
+        Property { name: "secondaryForeground"; type: "QString" }
+
+        Method {
+            name: "colorScaleFactor"
+            type: "double"
+
+            Parameter { name: "color"; type: "QString" }
+        }
+
+        Method {
+            name: "isDark"
+            type: "bool"
+
+            Parameter { name: "color"; type: "QString" }
+        }
+    }
+
+    Component {
+        name: "StreamingServices"
+        prototype: "QObject"
+        isCreatabke: false
+        exports : [
+            "MellowPlayer 3.0"
+        ]
+
+        Property { name: "currentService"; type: "StreamingService"; isPointer: true }
+        Property { name: "filteredServices"; type: "QAbstractItemModel"; isPointer: true }
+
+        Signal {
+            name: "serviceCreated"
+
+            Parameter {
+                name: "directory"
+                type: "QString"
+            }
+        }
+
+        Signal {
+            name: "activationRequested"
+
+            Parameter {
+                name: "service"
+                type: "QObject"
+            }
+        }
+
+        Method { name: "reload" }
+        Method { name: "next" }
+        Method { name: "previous" }
+        Method {
+            name: "setCurrentService"
+
+            Parameter {
+                name: "value"
+                tyep: "QObject"
+            }
+        }
+
+        Method {
+            name: "createService"
+
+            Parameter {
+                name: "serviceName"
+                tyep: "SString"
+            }
+
+            Parameter {
+                name: "serviceUrl"
+                tyep: "QString"
+            }
+
+            Parameter {
+                name: "authorName"
+                tyep: "QString"
+            }
+
+            Parameter {
+                name: "authorWebsite"
+                tyep: "QString"
+            }
+
+            Parameter {
+                name: "allPlatforms"
+                tyep: "bool"
+            }
+
+            Parameter {
+                name: "linuxPlatform"
+                tyep: "bool"
+            }
+
+            Parameter {
+                name: "appImagePlatform"
+                tyep: "bool"
+            }
+
+            Parameter {
+                name: "osxPlatform"
+                tyep: "bool"
+            }
+
+            Parameter {
+                name: "windowsPlatform"
+                tyep: "bool"
+            }
+
+        }
+    }
+
+    Component {
+        name: "StreamingService"
+        prototype: "QObject"
+        isCreatabke: false
+        exports : [
+            "MellowPlayer 3.0"
+        ]
+
+        Property { name: "logo"; type: "QString" }
+        Property { name: "name"; type: "QString" }
+        Property { name: "player"; type: "Player"; isPointer: true }
+        Property { name: "url"; type: "QString" }
+        Property { name: "version"; type: "QString" }
+        Property { name: "authorName"; type: "QString" }
+        Property { name: "authorWebsite"; type: "QString" }
+        Property { name: "sortIndex"; type: "int" }
+        Property { name: "userScripts"; type: "UserScripts"; isPointer: true }
+        Property { name: "zoomFactor"; type: "int" }
+        Property { name: "notificationsEnabled"; type: "bool" }
+        Property { name: "isActive"; type: "bool" }
+        Property { name: "previewImageUrl"; type: "QString" }
+        Property { name: "sourceCode"; type: "QString" }
+        Property { name: "settings"; type: "SettingsCategory" }
+        Property { name: "broken"; type: "bool" }
+        Property { name: "hasKnownIssues"; type: "bool" }
+        Property { name: "favorite"; type: "favorite" }
+        Property { name: "networkProxy"; type: "NetworkProxy"; isPointer: true }
+
+        Method { name: "getPreviewImageUrlForSave"; type: "QString" }
+        Method { name: "openKnownIssue" }
+        Method {
+            name: "setPreviewImageUrl"
+
+            Parameter { name: "previewImagerUrl"; type: "QString" }
+         }
+    }
+
+    Component {
+        name: "Player"
+        prototype: "QObject"
+        isCreatabke: false
+        exports : [
+            "MellowPlayer 3.0"
+        ]
+    }
+
+    Component {
+        name: "UserScripts"
+        prototype: "QObject"
+        isCreatabke: false
+        exports : [
+            "MellowPlayer 3.0"
+        ]
+    }
+
+    Component {
+        name: "NetworkProxy"
+        prototype: "QObject"
+        isCreatabke: false
+        exports : [
+            "MellowPlayer 3.0"
+        ]
+    }
+}

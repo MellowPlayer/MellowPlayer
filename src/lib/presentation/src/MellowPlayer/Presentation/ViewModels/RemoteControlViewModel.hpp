@@ -49,6 +49,30 @@ namespace MellowPlayer::Presentation
         Domain::IRemoteControlApplication& _remoteControlApplication;
     };
 
+    class RemoteControlErrorViewModel : public QObject
+    {
+        Q_OBJECT
+        Q_PROPERTY(QString title READ title CONSTANT)
+        Q_PROPERTY(QString message READ message CONSTANT)
+    public:
+        RemoteControlErrorViewModel(const QString& title, const QString& message, QObject* parent = nullptr) : QObject(parent), _title(title), _message(message)
+        {
+        }
+
+        QString title() const
+        {
+            return _title;
+        }
+        QString message() const
+        {
+            return _message;
+        }
+
+    private:
+        QString _title;
+        QString _message;
+    };
+
     class RemoteControlViewModel : public QmlSingleton
     {
         Q_OBJECT
@@ -56,6 +80,7 @@ namespace MellowPlayer::Presentation
         Q_PROPERTY(QObject* appInfo READ appInfo CONSTANT)
         Q_PROPERTY(int currentStateIndex READ currentStateIndex NOTIFY currentStateIndexChanged)
         Q_PROPERTY(bool autoStartEnabled READ isAutoStartEnabled WRITE setAutoStartEnabled NOTIFY autoStartEnabledChanged)
+        Q_PROPERTY(RemoteControlErrorViewModel* error READ error NOTIFY errorChanged)
     public:
         explicit RemoteControlViewModel(Domain::IRemoteControl& remoteControl);
 
@@ -64,6 +89,7 @@ namespace MellowPlayer::Presentation
         int currentStateIndex() const;
         bool isAutoStartEnabled() const;
         void setAutoStartEnabled(bool value);
+        RemoteControlErrorViewModel* error() const;
 
         Q_INVOKABLE void activate();
         Q_INVOKABLE void deactivate();
@@ -73,17 +99,20 @@ namespace MellowPlayer::Presentation
 
     signals:
         void currentStateIndexChanged();
-        void error(const QString& title, const QString& message);
+        void errorChanged();
         void autoStartEnabledChanged();
 
     private:
         void addState(RemoteControlStateViewModel* state);
         QString currentStateName() const;
+        void onFailedToStart();
+        void onError(const QString& title, const QString& message);
 
         Domain::IRemoteControl& _remoteControl;
         Domain::IRemoteControlApplication& _remoteControlApplication;
         RemoteControlApplicationInfoViewModel _appInfo;
         QMap<QString, RemoteControlStateViewModel*> _stateByName;
         QQmlObjectListModel<RemoteControlStateViewModel> _states;
+        RemoteControlErrorViewModel* _error{nullptr};
     };
 }

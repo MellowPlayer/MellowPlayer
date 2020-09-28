@@ -36,7 +36,7 @@ namespace MellowPlayer::Presentation
         Q_PROPERTY(QString authorName READ authorName CONSTANT)
         Q_PROPERTY(QString authorWebsite READ authorWebsite CONSTANT)
         Q_PROPERTY(int sortIndex READ sortIndex WRITE setSortIndex NOTIFY sortIndexChanged)
-        Q_PROPERTY(QObject* userScripts READ userScripts CONSTANT)
+        Q_PROPERTY(UserScriptsViewModel* userScripts READ userScripts CONSTANT)
         Q_PROPERTY(int zoomFactor READ zoomFactor WRITE setZoomFactor NOTIFY zoomFactorChanged)
         Q_PROPERTY(bool notificationsEnabled READ notificationsEnabled WRITE setNotificationsEnabled NOTIFY notificationsEnabledChanged)
         Q_PROPERTY(bool isActive READ isActive WRITE setActive NOTIFY isActiveChanged)

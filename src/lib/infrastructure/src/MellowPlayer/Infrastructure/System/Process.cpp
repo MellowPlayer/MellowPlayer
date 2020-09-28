@@ -87,16 +87,20 @@ void Process::readOutput(const QProcess::ProcessChannel channel)
 
 void Process::onFinished(int exitCode, QProcess::ExitStatus exitStatus)
 {
-    if (exitStatus == QProcess::CrashExit)
+    if (_callback)
     {
-        LOG_WARN(_logger, "Process crashed, exit code = " << exitCode);
-    }
-    else
-    {
-        LOG_DEBUG(_logger, "process finished normally, exit code = " << exitCode);
-    }
+        if (exitStatus == QProcess::CrashExit)
+        {
+            LOG_WARN(_logger, "Process crashed, exit code = " << exitCode);
+        }
+        else
+        {
+            LOG_DEBUG(_logger, "process finished normally, exit code = " << exitCode);
+        }
 
-    _callback(exitCode, _standardOutput.join("\n"), _errorOutput.join("\n"));
+        _callback(exitCode, _standardOutput.join("\n"), _errorOutput.join("\n"));
+        _callback = {};
+    }
 }
 
 void Process::stop()
@@ -113,6 +117,10 @@ void Process::stop()
 
 void Process::onErrorOccurred(QProcess::ProcessError)
 {
-    LOG_ERROR(_logger, _qProcess.errorString());
-    _callback(-1, "", _qProcess.program() + ": " + _qProcess.errorString());
+    if (_callback)
+    {
+        LOG_ERROR(_logger, _qProcess.errorString());
+        _callback(-1, "", _qProcess.program() + ": " + _qProcess.errorString());
+        _callback = {};
+    }
 }

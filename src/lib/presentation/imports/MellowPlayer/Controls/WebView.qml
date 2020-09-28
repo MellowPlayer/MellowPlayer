@@ -11,8 +11,8 @@ import MellowPlayer 3.0
 Page {
     id: root
 
-    property QtObject service
-    property QtObject player: service.player
+    property StreamingService service
+    property Player player: service.player
 
     property bool hasProprietaryCodecs: true
     property var userAgentSetting: App.settings.get(SettingKey.PRIVACY_USER_AGENT)

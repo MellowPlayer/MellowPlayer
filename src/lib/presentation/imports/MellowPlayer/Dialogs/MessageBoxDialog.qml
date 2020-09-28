@@ -8,6 +8,7 @@ import MellowPlayer 3.0
 
 Dialog {
     id: root
+
     readonly property int dialogAccepted: 0
     readonly property int dialogRejected: 1
 
@@ -20,6 +21,7 @@ Dialog {
 
     onAccepted: dialogResult = dialogAccepted
     onRejected: dialogResult = dialogRejected
+
 
     Material.accent: ActiveTheme.accent === ActiveTheme.background ? ActiveTheme.foreground : ActiveTheme.accent
 

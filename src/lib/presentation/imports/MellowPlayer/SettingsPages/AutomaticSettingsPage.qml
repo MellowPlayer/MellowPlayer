@@ -6,13 +6,12 @@ import QtQuick.Controls.Material 2.15
 import MellowPlayer 3.0
 
 ColumnLayout {
-    id: page
+    id: root
+
+    required property SettingListModel settings
+    required property string categoryName
 
     ScrollView {
-        id: root
-
-        property var settingsModel: model.settings
-
         contentHeight: listView.contentHeight
         contentWidth: width
         clip: true
@@ -50,7 +49,7 @@ ColumnLayout {
                     Layout.fillWidth: true
                 }
             }
-            model: root.settingsModel
+            model: root.settings
             spacing: 0
         }
     }
@@ -70,25 +69,23 @@ ColumnLayout {
                 highlighted: true
                 hoverEnabled: true
                 text: qsTr("Restore defaults")
-                onClicked: messageBoxConfirmRestore.open()
 
+                onClicked: {
+                    Dialogs.askConfirmation(
+                        qsTr("Confirm restore defaults"),
+                        qsTr("Are you sure you want to restore all %1 settings to their default values?").arg(root.categoryName.toLowerCase()),
+                        (confirmed) => {
+                            if (confirmed) {
+                                App.settings.restoreCategoryDefaults(root.categoryName);
+                            }
+                        }
+                    )
+                }
 
                 Tooltip {
-                    text: qsTr('Restore <b>') + model.name.toLowerCase() + qsTr('</b> settings to their <b>default values</b>.')
+                    text: qsTr('Restore <b>%1</b> settings to their <b>default values</b>.').arg(root.categoryName.toLowerCase())
                 }
             }
         }
-    }
-
-    MessageBoxDialog {
-        id: messageBoxConfirmRestore
-
-        standardButtons: Dialog.Yes | Dialog.No
-        message: qsTr("Are you sure you want to restore all ") + model.name.toLowerCase() + qsTr(" settings to their default values?")
-        title: qsTr("Confirm restore defaults")
-        x: page.width / 2 - width / 2
-        y: page.height / 2 - height / 2
-
-        onAccepted: model.qtObject.restoreDefaults()
     }
 }

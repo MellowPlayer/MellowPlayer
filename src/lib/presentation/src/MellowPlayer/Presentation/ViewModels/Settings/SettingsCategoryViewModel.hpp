@@ -16,7 +16,7 @@ namespace MellowPlayer::Presentation
     {
         Q_OBJECT
         Q_PROPERTY(QString name READ name CONSTANT)
-        Q_PROPERTY(QString icon READ icon CONSTANT)
+        Q_PROPERTY(QString iconName READ icon CONSTANT)
         Q_PROPERTY(QString qmlComponent READ qmlComponent CONSTANT)
         Q_PROPERTY(QAbstractItemModel* settings READ settingsModel CONSTANT)
     public:
