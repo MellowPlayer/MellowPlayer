@@ -17,9 +17,9 @@ namespace MellowPlayer::Presentation
     public:
         ListeningHistoryViewModel(Domain::IListeningHistory& listeningHistory);
 
-        using QmlSingleton::registerTo;
         void load();
         ListeningHistoryProxyListModel* model();
+
         Q_INVOKABLE void disableService(const QString& serviceName, bool disable);
         Q_INVOKABLE void setSearchFilter(const QString& searchFilter);
         Q_INVOKABLE void removeById(int entryId);

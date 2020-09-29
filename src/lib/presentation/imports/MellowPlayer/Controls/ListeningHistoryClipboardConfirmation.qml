@@ -8,7 +8,7 @@ import MellowPlayer 3.0
 Pane {
     id: root
 
-    property string text: ""
+    property string text: ClipBoard.copiedText
 
     anchors.right: parent.right
     anchors.bottom: parent.bottom
@@ -31,12 +31,6 @@ Pane {
     Material.elevation: 4
 
     Component.onCompleted: { background.opacity = 0.98 }
-
-    Connections {
-        target: ClipBoard
-
-        function onTextCopied(text) { root.text = text }
-    }
 
     Column {
         anchors.fill: parent

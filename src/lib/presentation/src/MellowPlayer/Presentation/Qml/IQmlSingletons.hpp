@@ -15,5 +15,10 @@ namespace MellowPlayer::Presentation
         virtual ~IQmlSingletons() = default;
 
         virtual void registerToQml() = 0;
+
+        static IQmlSingletons* instance();
+
+    protected:
+        static IQmlSingletons* _instance;
     };
 }

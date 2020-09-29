@@ -8,23 +8,28 @@ import QtWebChannel 1.15
 
 import MellowPlayer 3.0
 
+import "../Dialogs.js" as Dialogs
+
+// TODO QMLLINT
+
 Page {
     id: root
 
-    property StreamingService service
-    property Player player: service.player
+    required property StreamingService service
 
     property bool hasProprietaryCodecs: true
     property var userAgentSetting: App.settings.get(SettingKey.PRIVACY_USER_AGENT)
     property alias url: webView.url
 
     function updateImage() {
-        if (!mainWindow.visible)
+        if (!MainWindow.visible)
             return;
-        root.grabToImage(function(result) {
-            var path = service.getPreviewImageUrlForSave();
-            if (result.saveToFile(path))
-                service.previewImageUrl = "file://" + path;
+        webView.grabToImage(function(result) {
+            var path = root.service.getPreviewImageUrlForSave();
+            if (result.saveToFile(path)) {
+                console.debug("image grabbed: ", path)
+                root.service.previewImageUrl = "file://" + path;
+            }
         }, Qt.size(root.width, root.height));
     }
 
@@ -49,7 +54,7 @@ Page {
     }
 
     function goHome() {
-        webView.url = webView.service.url;
+        webView.url = root.service.url;
         webView.reload();
     }
 
@@ -68,18 +73,31 @@ Page {
         return header;
     }
 
+    Shortcut {
+        enabled: MainWindow.fullScreen
+        sequence: "Escape"
+
+        onActivated: webView.fullScreenCancelled()
+    }
 
     WebEngineView {
         id: webView
 
         property bool loaded: false
-        
+        property var networkProxy: root.service.networkProxy
+        property var allUserScripts: d.getUserScripts()
+
         anchors.fill: parent
 
-        url: service.url
+        url: root.service.url
         profile {
             httpUserAgent: root.userAgentSetting.value
             httpAcceptLanguage: getDefaultAcceptLanguage()
+
+            onHttpUserAgentChanged: {
+                console.log("new user agent: " + root.userAgentSetting.value);
+                reload();
+            }
         }
         settings {
             pluginsEnabled : true
@@ -96,12 +114,12 @@ Page {
             onShowScrollBarsChanged: reload()
             onPlaybackRequiresUserGestureChanged: reload()
         }
-        userScripts: d.getUserScripts()
+        userScripts: allUserScripts
         zoomFactor: MainWindow.zoom.value
         webChannel: webChannel
-        audioMuted: StreamingServices.currentService !== null && StreamingServices.currentService.name !== root.service.name
+        audioMuted: StreamingServices.currentService !== root.service
 
-        onContextMenuRequested: {
+        onContextMenuRequested: (request) => {
             request.accepted = true;
             contextMenu.x = request.x;
             contextMenu.y = request.y;
@@ -113,11 +131,12 @@ Page {
             contextMenu.hasLink = request.linkText !== "";
             contextMenu.show();
         }
-        onAuthenticationDialogRequested: function(request) {
+        onAuthenticationDialogRequested: (request) => {
             request.accepted = true;
-            Dialogs.open("Authentication.qml", mainWindow, {"request": request});
+            Dialogs.open("Authentication.qml", {"request": request});
         }
-        onJavaScriptDialogRequested: function(request){
+
+        onJavaScriptDialogRequested: (request) => {
             var component = "";
             switch (request.type) {
                 case JavaScriptDialogRequest.DialogTypeAlert:
@@ -129,15 +148,14 @@ Page {
                 case JavaScriptDialogRequest.DialogTypePrompt:
                     component = "Prompt.qml"
                     break;
-                case JavaScriptDialogRequest.DialogTypeUnload:
                 default:
                     component = "Reload.qml"
                     break;
             }
-            Dialogs.open(component, mainWindow, {"request": request});
+            Dialogs.open(component, {"request": request});
             request.accepted = true;
         }
-        onFormValidationMessageRequested: function(request) {
+        onFormValidationMessageRequested: (request) => {
             switch (request.type) {
                 case FormValidationMessageRequest.Show:
                     request.accepted = true;
@@ -153,27 +171,38 @@ Page {
                     break;
             }
         }
-        onLoadingChanged: {
-            if (loadRequest.status === WebEngineLoadRequest.LoadSucceededStatus) {
+        onLoadingChanged: (loadRequest) => {
+            if (loadRequest.status === 1) {
                 webView.loaded = true;
-                updateImage();
+                root.updateImage();
             }
             else {
                 webView.loaded = false;
             }
         }
-        onFullScreenRequested: mainWindow.toggleFullScreen(request)
-        onNewViewRequested: mainWindow.openWebPopup(request, profile)
+        onFullScreenRequested: (request) => {
+            MainWindow.fullScreen = request.toggleOn
+            request.accept()
 
-        Component.onDestruction: {
-            webView.url = "about:blank"
         }
+        onNewViewRequested: (request) => {
+            if (request.userInitiated) {
+                console.log("opening web popup", request.requestedUrl)
+                Dialogs.openWebPopup(request, webView.profile)
+            }
+        }
+        onNetworkProxyChanged: reload()
+        onAllUserScriptsChanged: reload()
 
-
-        Shortcut {
-            enabled: mainWindow.visibility === ApplicationWindow.FullScreen
-            sequence: "Escape"
-            onActivated: root.fullScreenCancelled()
+        Component.onCompleted: {
+           root.service.player.play.connect(() => { playerBridge.play() });
+           root.service.player.pause.connect(() => { playerBridge.pause() });
+           root.service.player.next.connect(() => { playerBridge.next() });
+           root.service.player.previous.connect(() => { playerBridge.previous() });
+           root.service.player.addToFavorites.connect(() => { playerBridge.addToFavorites() });
+           root.service.player.removeFromFavorites.connect(() => { playerBridge.removeFromFavorites() });
+           root.service.player.seekToPositionRequest.connect((newPosition) => { playerBridge.seekToPosition(newPosition) });
+           root.service.player.changeVolumeRequest.connect((newVolume) => { playerBridge.changeVolume(newVolume) });
         }
 
         ValidationMessage {
@@ -198,7 +227,7 @@ Page {
             signal seekToPosition(var position)
             signal changeVolume(double newVolume)
 
-            onUpdateResultsChanged: root.player.setUpdateResults(updateResults);
+            onUpdateResultsChanged: root.service.player.setUpdateResults(updateResults);
             onBrokenChanged: {
                 if (playerBridge.broken) {
                     console.warn("Unhandled exception in plugin: " + playerBridge.exception)
@@ -215,15 +244,15 @@ Page {
         }
 
         CustomUrlPane {
-            customUrl: service.url
+            customUrl: root.service.url
             x: root.width / 2 - width / 2; y: -2; z: 1
             width: 500
-            state: service.url.match("(@.*@)") !== null ? "visible" : "hidden"
+            // state: root.service.url.match("(@.*@)") !== null ? "visible" : "hidden"
 
             onReloadRequested: root.reload()
             onCustomUrlChanged: {
-                if (customUrl !== service.url) {
-                    service.url = customUrl
+                if (customUrl !== root.service.url) {
+                    root.service.url = customUrl
                 }
             }
         }
@@ -244,42 +273,12 @@ Page {
             onViewPageSourceRequested: webView.triggerWebAction(WebEngineView.ViewSource)
         }
 
-        Connections {
-            target: root.userAgentSetting
-
-            function onValueChanged() { console.log("new user agent: " + userAgentSetting.value); reload(); }
-        }
-
-        Connections {
-            target: root.service.networkProxy
-
-             function onChanged() { reload() }
-        }
-
-        Connections {
-            target: root.service.userScripts.model
-
-            function onCountChanged() { reload() }
-        }
-
-        Connections {
-            target: root.player
-
-            function onPlay() { playerBridge.play() }
-            function onPause() { playerBridge.pause() }
-            function onNext() { playerBridge.next() }
-            function onPrevious() { playerBridge.previous() }
-            function onAddToFavorites() { playerBridge.addToFavorites() }
-            function onRemoveFromFavorites() { playerBridge.removeFromFavorites() }
-            function onSeekToPositionRequest(newPosition) { playerBridge.seekToPosition(newPosition) }
-            function onChangeVolumeRequest() { playerBridge.changeVolume(newVolume) }
-        }
-
         QtObject {
             id: d
+            property bool hasProprietaryCodecs: false
 
             function checkForProprietaryCodecs() {
-                runJavaScript("var a = document.createElement('audio'); !!(a.canPlayType && a.canPlayType('audio/mpeg;').replace(/no/, ''));", function(result) {
+                webView.runJavaScript("var a = document.createElement('audio'); !!(a.canPlayType && a.canPlayType('audio/mpeg;').replace(/no/, ''));", function(result) {
                     hasProprietaryCodecs = result;
                 })
             }
@@ -293,8 +292,8 @@ Page {
                 scripts.push(createMellowPlayerScriptFromSourceUrl("MellowPlayerAPI", "qrc:/MellowPlayer/Presentation/mellowplayer.js"));
                 scripts.push(createMellowPlayerScriptFromSourceCode("IntegrationPlugin", root.service.sourceCode));
 
-                for (var i = 0; i < service.userScripts.model.count; i++) {
-                    var userScript = service.userScripts.model.get(i);
+                for (var i = 0; i < root.service.userScripts.model.count; i++) {
+                    var userScript = root.service.userScripts.model.get(i);
                     scripts.push(createUserScriptFromCode(userScript.name, userScript.code));
                 }
 
@@ -368,7 +367,7 @@ Page {
                 text: qsTr("Report broken plugin")
                 visible: !root.service.hasKnownIssues
 
-                onClicked: reportIssueDialog.open()
+                onClicked: Dialogs.reportIssue()
             }
 
             ToolButton {

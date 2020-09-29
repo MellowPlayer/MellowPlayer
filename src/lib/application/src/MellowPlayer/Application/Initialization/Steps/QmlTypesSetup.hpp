@@ -7,6 +7,7 @@
 #include <MellowPlayer/Presentation/Notifications/ISystemTrayIcon.hpp>
 #include <MellowPlayer/Presentation/Qml/IQmlApplicationEngine.hpp>
 #include <MellowPlayer/Presentation/Qml/IQmlSingletons.hpp>
+#include <MellowPlayer/Presentation/Qml/MellowPlayerQmlPlugin.hpp>
 #include <MellowPlayer/Presentation/ViewModels/ActiveThemeViewModel.hpp>
 #include <MellowPlayer/Presentation/ViewModels/ApplicationViewModel.hpp>
 #include <MellowPlayer/Presentation/ViewModels/ClipBoardViewModel.hpp>
@@ -24,11 +25,13 @@ namespace MellowPlayer::Application
     {
         Q_OBJECT
     public:
-        explicit QmlTypesSetup(Presentation::IQmlSingletons& qmlSingletons);
+        explicit QmlTypesSetup(MellowPlayerQmlPlugin& qmlPlugin,
+                               Presentation::IQmlSingletons& qmlSingletons);
 
         void initialize(const ResultCallback& resultCallback) override;
 
     private:
+        MellowPlayerQmlPlugin& _qmlPlugin;
         Presentation::IQmlSingletons& _qmlSingletons;
     };
 }

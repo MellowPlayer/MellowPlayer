@@ -14,6 +14,7 @@ Window {
     flags: Qt.Dialog
     width: 1280
     height: 720
+
     // @disable-check M16
     onClosing: destroy()
 

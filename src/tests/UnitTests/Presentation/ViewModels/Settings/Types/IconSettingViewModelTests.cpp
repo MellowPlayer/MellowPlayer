@@ -18,10 +18,10 @@ TEST_CASE("IconSettingViewModelTests")
 
     SECTION("setValue")
     {
-        REQUIRE(model.getValue().toStdString() == "");
+        REQUIRE(model.value().toString() == "");
         REQUIRE(spy.count() == 0);
         model.setValue("/path/to/icon1");
-        REQUIRE(model.getValue() == "/path/to/icon1");
+        REQUIRE(model.value() == "/path/to/icon1");
         REQUIRE(spy.count() == 1);
     }
 

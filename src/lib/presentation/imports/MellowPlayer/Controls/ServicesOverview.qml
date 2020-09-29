@@ -6,6 +6,8 @@ import QtQml.Models 2.15
 
 import MellowPlayer 3.0
 
+// TODO QMLLINT
+
 Item {
     id: root
 
@@ -26,7 +28,7 @@ Item {
                 implicitWidth: gridView.width
 
                 Switch {
-                    property var setting: App.settings.get(SettingKey.PRIVATE_SHOW_FAVORITE_SERVICES)
+                    property Setting setting: App.settings.get(SettingKey.PRIVATE_SHOW_FAVORITE_SERVICES)
 
                     text: qsTr("Show only favorite services")
                     font.bold: true
@@ -94,8 +96,9 @@ Item {
                         delegate: Item {
                             id: delegateRoot
 
-                            property int visualIndex: DelegateModel.itemsIndex
-                            property var service: model.qtObject
+                            required property StreamingService qtObject
+
+                            property int visualIndex // : delegateRoot.DelegateModel.itemsIndex
 
                             width: gridView.cellWidth - gridView.itemSpacing / 2;
                             height: gridView.cellHeight - gridView.itemSpacing / 2
@@ -107,6 +110,7 @@ Item {
 
                                 anchors { horizontalCenter: parent.horizontalCenter; verticalCenter: parent.verticalCenter }
                                 height: gridView.cellHeight - 4; width: gridView.cellWidth - 4
+                                service: delegateRoot.qtObject
 
                                 Drag.source: delegateRoot
                                 Drag.hotSpot.x: gridView.cellWidth / 2
@@ -148,7 +152,7 @@ Item {
                                 anchors { fill: parent; margins: 15 }
 
                                 onEntered: {
-                                    visualModel.items.move(drag.source.visualIndex, delegateRoot.visualIndex)
+                                    // visualModel.items.move(drag.source.visualIndex, delegateRoot.visualIndex)
                                 }
                             }
                         }
@@ -158,11 +162,7 @@ Item {
                         NumberAnimation { properties: "x,y"; easing.type: Easing.OutQuad }
                     }
 
-                    ScrollBar.vertical: ScrollBar {
-                        id: scrollBar
-                        policy: size != 1 ? "AlwaysOn" : "AlwaysOff"
-                        hoverEnabled: true
-                    }
+                    ScrollBar.vertical: ScrollBar { hoverEnabled: true }
                 }
             }
         }

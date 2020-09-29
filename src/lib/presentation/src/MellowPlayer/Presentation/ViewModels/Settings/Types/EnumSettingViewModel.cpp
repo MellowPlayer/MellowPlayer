@@ -8,21 +8,6 @@ EnumSettingViewModel::EnumSettingViewModel(Setting& setting, QObject* parent) : 
 {
 }
 
-QString EnumSettingViewModel::getValue() const
-{
-    return _setting.value().toString();
-}
-
-void EnumSettingViewModel::setValue(QString value)
-{
-    _setting.setValue(value);
-}
-
-void EnumSettingViewModel::onValueChanged()
-{
-    emit valueChanged();
-}
-
 QString EnumSettingViewModel::qmlComponent()
 {
     return "Delegates/EnumSettingDelegate.qml";

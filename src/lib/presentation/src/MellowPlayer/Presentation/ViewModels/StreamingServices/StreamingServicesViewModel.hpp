@@ -33,21 +33,22 @@ namespace MellowPlayer::Presentation
     class IStreamingServicesViewModel : public QmlSingleton
     {
         Q_OBJECT
-        Q_PROPERTY(QAbstractItemModel* filteredServices READ filteredServices CONSTANT)
+        Q_PROPERTY(StreamingServiceProxyListModel* filteredServices READ filteredServices CONSTANT)
         Q_PROPERTY(StreamingServiceViewModel* currentService READ currentService WRITE setCurrentService NOTIFY currentServiceChanged)
+        Q_PROPERTY(QString currentServiceName READ currentServiceName NOTIFY currentServiceNameChanged)
     public:
         using QmlSingleton::QmlSingleton;
 
         virtual void initialize() = 0;
-        virtual void activate(QObject* service) = 0;
         virtual QList<StreamingServiceViewModel*> services() const = 0;
         virtual StreamingServiceProxyListModel* filteredServices() = 0;
         virtual StreamingServiceViewModel* currentService() const = 0;
 
+        virtual QString currentServiceName() const = 0;
         virtual Q_INVOKABLE void reload() = 0;
         virtual Q_INVOKABLE void next() = 0;
         virtual Q_INVOKABLE void previous() = 0;
-        virtual Q_INVOKABLE void setCurrentService(QObject* value) = 0;
+        virtual Q_INVOKABLE void setCurrentService(StreamingServiceViewModel* value) = 0;
         virtual Q_INVOKABLE void createService(const QString& serviceName,
                                                const QString& serviceUrl,
                                                const QString& authorName,
@@ -59,9 +60,9 @@ namespace MellowPlayer::Presentation
                                                bool windowsPlatform) = 0;
 
     signals:
-        void currentServiceChanged(QObject* currentService);
+        void currentServiceChanged();
+        void currentServiceNameChanged();
         void serviceCreated(const QString& directory);
-        void activationRequested(QObject* service);
     };
 
     class StreamingServicesViewModel : public IStreamingServicesViewModel
@@ -77,16 +78,16 @@ namespace MellowPlayer::Presentation
 
         void initialize() override;
 
-        void activate(QObject* service) override;
-
         QList<StreamingServiceViewModel*> services() const override;
         StreamingServiceProxyListModel* filteredServices() override;
         StreamingServiceViewModel* currentService() const override;
 
+        QString currentServiceName() const override;
+
         Q_INVOKABLE void reload() override;
         Q_INVOKABLE void next() override;
         Q_INVOKABLE void previous() override;
-        Q_INVOKABLE void setCurrentService(QObject* value) override;
+        Q_INVOKABLE void setCurrentService(StreamingServiceViewModel* value) override;
         Q_INVOKABLE void createService(const QString& serviceName,
                                        const QString& serviceUrl,
                                        const QString& authorName,
@@ -99,8 +100,12 @@ namespace MellowPlayer::Presentation
 
         void registerTo(IQmlApplicationEngine& qmlApplicationEngine) override;
 
+    signals:
+        void serviceCreated(const QString& directory);
+
     private slots:
         void onServiceAdded(Domain::StreamingService* streamingService);
+        void onCurrentServiceChanged(Domain::StreamingService* value);
 
     private:
         int nextIndex(int index) const;

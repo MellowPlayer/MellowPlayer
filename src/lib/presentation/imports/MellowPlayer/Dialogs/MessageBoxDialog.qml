@@ -22,7 +22,6 @@ Dialog {
     onAccepted: dialogResult = dialogAccepted
     onRejected: dialogResult = dialogRejected
 
-
     Material.accent: ActiveTheme.accent === ActiveTheme.background ? ActiveTheme.foreground : ActiveTheme.accent
 
     Label {

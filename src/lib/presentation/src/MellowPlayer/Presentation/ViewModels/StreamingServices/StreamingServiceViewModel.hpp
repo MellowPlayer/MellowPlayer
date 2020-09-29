@@ -12,7 +12,7 @@ namespace MellowPlayer::Domain
     class ISettingsStore;
     class IUserScriptFactory;
     class StreamingService;
-    class Player;
+    class IPlayerBase;
     class Players;
     class ILogger;
 }
@@ -25,12 +25,14 @@ namespace MellowPlayer::Infrastructure
 
 namespace MellowPlayer::Presentation
 {
+    using IPlayerBase = Domain::IPlayerBase;
+
     class StreamingServiceViewModel : public QObject
     {
         Q_OBJECT
         Q_PROPERTY(QString logo READ logo CONSTANT)
         Q_PROPERTY(QString name READ name CONSTANT)
-        Q_PROPERTY(Domain::Player* player READ player CONSTANT)
+        Q_PROPERTY(IPlayerBase* player READ player CONSTANT)
         Q_PROPERTY(QString url READ url WRITE setUrl NOTIFY urlChanged)
         Q_PROPERTY(QString version READ version CONSTANT)
         Q_PROPERTY(QString authorName READ authorName CONSTANT)
@@ -61,7 +63,7 @@ namespace MellowPlayer::Presentation
 
         QString logo() const;
         QString name() const;
-        Domain::Player* player();
+        Domain::IPlayerBase* player();
         QString url() const;
         QString version() const;
         QString authorName() const;
@@ -75,7 +77,7 @@ namespace MellowPlayer::Presentation
         int sortIndex() const;
         void setSortIndex(int newOrder);
 
-        QObject* userScripts();
+        UserScriptsViewModel* userScripts();
 
         int zoomFactor() const;
         void setZoomFactor(int zoomFactor);
@@ -127,7 +129,7 @@ namespace MellowPlayer::Presentation
 
         Domain::StreamingService& _streamingService;
         Domain::ISettingsStore& _settingsStore;
-        std::shared_ptr<Domain::Player> _player;
+        std::shared_ptr<Domain::IPlayerBase> _player;
         UserScriptsViewModel _userScriptsViewModel;
         int _zoomFactor;
         bool _isActive;

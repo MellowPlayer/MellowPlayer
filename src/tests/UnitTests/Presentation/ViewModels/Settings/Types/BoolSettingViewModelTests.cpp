@@ -19,10 +19,10 @@ TEST_CASE("BoolSettingViewModelTests")
 
     SECTION("setValue")
     {
-        REQUIRE(model.getValue());
+        REQUIRE(model.value().toBool());
         REQUIRE(spy.count() == 0);
         model.setValue(false);
-        REQUIRE(!model.getValue());
+        REQUIRE(!model.value().toBool());
         REQUIRE(spy.count() == 1);
         model.setValue(true);
     }

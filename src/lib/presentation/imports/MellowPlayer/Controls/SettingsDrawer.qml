@@ -18,6 +18,7 @@ Drawer {
 
     SettingsPage {
         anchors.fill: parent
-        onCloseRequested: close()
+
+        onCloseRequested: root.close()
     }
 }

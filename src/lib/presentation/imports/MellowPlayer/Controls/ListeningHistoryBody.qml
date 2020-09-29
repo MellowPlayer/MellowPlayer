@@ -6,6 +6,9 @@ import QtQuick.Controls.Material 2.15
 import MellowPlayer 3.0
 
 StackLayout {
+    id: root
+
+    required property Drawer drawer
     property bool searching: toolBar.searchChecked
 
     currentIndex: {
@@ -23,6 +26,8 @@ StackLayout {
 
     ListeningHistoryListView {
         id: listView
+
+        drawer: root.drawer
 
         Layout.fillHeight: true
         Layout.fillWidth: true

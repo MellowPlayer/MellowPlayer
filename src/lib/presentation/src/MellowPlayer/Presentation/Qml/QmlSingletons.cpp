@@ -11,6 +11,7 @@ using namespace MellowPlayer::Presentation;
 QmlSingletons::QmlSingletons(IQmlApplicationEngine& qmlApplicationEngine, IPlayer& player, const std::vector<std::shared_ptr<IQmlSingleton>>& items)
         : _qmlApplicationEngine(qmlApplicationEngine), _player(player), _items(items)
 {
+    IQmlSingletons::_instance = this;
 }
 
 void QmlSingletons::registerToQml()

@@ -53,17 +53,19 @@ Pane {
                 Button {
                     id: filter
 
+                    required property string name
+
                     flat: true
                     checkable: true; checked: true
                     hoverEnabled: true
-                    text: model.name
+                    text: filter.name
 
                     onCheckedChanged: {
-                        ListeningHistory.disableService(model.name, !checked)
+                        ListeningHistory.disableService(filter.name, !checked)
                     }
 
                     Tooltip {
-                        text: filter.checked ? qsTr("Click to remove songs from")  + model.name : qsTr("Click to add songs from ") + model.name
+                        text: filter.checked ? qsTr("Click to remove songs from")  + filter.name : qsTr("Click to add songs from ") + filter.name
                     }
                 }
             }

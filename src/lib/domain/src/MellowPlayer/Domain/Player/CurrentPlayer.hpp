@@ -7,7 +7,7 @@
 
 namespace MellowPlayer::Domain
 {
-    class Player;
+    class IPlayerBase;
     class Players;
     class StreamingServices;
     class StreamingService;
@@ -51,6 +51,6 @@ namespace MellowPlayer::Domain
         StreamingServices& _streamingServices;
         Domain::Song _nullSong;
 
-        std::shared_ptr<Player> _currentPlayer;
+        std::shared_ptr<IPlayerBase> _currentPlayer;
     };
 }

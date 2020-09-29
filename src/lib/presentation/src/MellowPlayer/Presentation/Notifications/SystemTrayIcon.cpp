@@ -46,7 +46,7 @@ void SystemTrayIcon::setupFavoritesMenu()
             action->setCheckable(true);
             action->setChecked(_streamingServices.currentService() == service);
             connect(action, &QAction::triggered, [=]() {
-                _streamingServices.activate(service);
+                _streamingServices.setCurrentService(service);
             });
         }
     }

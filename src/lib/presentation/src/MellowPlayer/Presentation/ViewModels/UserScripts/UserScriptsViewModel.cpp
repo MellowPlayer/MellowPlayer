@@ -14,7 +14,7 @@ UserScriptsViewModel::UserScriptsViewModel(const QString& serviceName, IUserScri
     }
 }
 
-QAbstractListModel* UserScriptsViewModel::model()
+QQmlObjectListModelBase* UserScriptsViewModel::model()
 {
     return &_model;
 }

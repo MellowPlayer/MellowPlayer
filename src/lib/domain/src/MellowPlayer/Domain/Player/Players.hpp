@@ -17,12 +17,12 @@ namespace MellowPlayer::Domain
     public:
         explicit Players(StreamingServices& streamingServices);
 
-        std::shared_ptr<Player> get(const QString& serviceName) const;
+        std::shared_ptr<IPlayerBase> get(const QString& serviceName) const;
 
     private slots:
         void onServiceAdded(Domain::StreamingService* service);
 
     private:
-        QMap<QString, std::shared_ptr<Player>> _players;
+        QMap<QString, std::shared_ptr<IPlayerBase>> _players;
     };
 }

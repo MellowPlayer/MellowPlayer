@@ -1,8 +1,7 @@
 <RCC>
     <qresource prefix="/MellowPlayer/imports">
         <file>MellowPlayer/qmldir</file>
-        <file>MellowPlayer/ApplicationRoot.qml</file>
-        <file>MellowPlayer/Controls/BrowserDialog.qml</file>
+        <file>MellowPlayer/Dialogs/BrowserDialog.qml</file>
         <file>MellowPlayer/Controls/CustomUrlPane.qml</file>
         <file>MellowPlayer/Controls/FullScreenNotification.qml</file>
         <file>MellowPlayer/Controls/IconMenuItem.qml</file>

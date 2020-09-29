@@ -27,10 +27,10 @@ TEST_CASE("EnumSettingViewModelTests")
 
     SECTION("setValue")
     {
-        REQUIRE(model.getValue() == "Light");
+        REQUIRE(model.value() == "Light");
         REQUIRE(spy.count() == 0);
         model.setValue("Dark");
-        REQUIRE(model.getValue() == "Dark");
+        REQUIRE(model.value() == "Dark");
         REQUIRE(spy.count() == 1);
         model.setValue("Light");
     }

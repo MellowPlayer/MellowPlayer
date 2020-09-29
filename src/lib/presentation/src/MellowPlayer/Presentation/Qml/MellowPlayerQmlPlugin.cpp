@@ -1,0 +1,80 @@
+#include "MellowPlayerQmlPlugin.hpp"
+#include <MellowPlayer/Domain/ListeningHistory/ListeningHistoryEntry.hpp>
+#include <MellowPlayer/Domain/Player/Player.hpp>
+#include <MellowPlayer/Domain/Player/Song.hpp>
+#include <MellowPlayer/Domain/Settings/SettingKey.hpp>
+#include <MellowPlayer/Domain/StreamingServices/StreamingService.hpp>
+#include <MellowPlayer/Presentation/Models/ListeningHistoryProxyListModel.hpp>
+#include <MellowPlayer/Presentation/Models/StreamingServiceProxyListModel.hpp>
+#include <MellowPlayer/Presentation/ViewModels/ActiveThemeViewModel.hpp>
+#include <MellowPlayer/Presentation/ViewModels/ApplicationViewModel.hpp>
+#include <MellowPlayer/Presentation/ViewModels/ClipBoardViewModel.hpp>
+#include <MellowPlayer/Presentation/ViewModels/ListeningHistory/ListeningHistoryViewModel.hpp>
+#include <MellowPlayer/Presentation/ViewModels/MainWindowViewModel.hpp>
+#include <MellowPlayer/Presentation/ViewModels/RemoteControlViewModel.hpp>
+#include <MellowPlayer/Presentation/ViewModels/Settings/SettingsViewModel.hpp>
+#include <MellowPlayer/Presentation/ViewModels/Settings/Types/SettingViewModel.hpp>
+#include <MellowPlayer/Presentation/ViewModels/StreamingServices/StreamingServiceViewModel.hpp>
+#include <MellowPlayer/Presentation/ViewModels/StreamingServices/StreamingServicesViewModel.hpp>
+#include <MellowPlayer/Presentation/ViewModels/UpdaterViewModel.hpp>
+#include <QtQml/qqml.h>
+
+using namespace MellowPlayer::Domain;
+using namespace MellowPlayer::Presentation;
+
+
+void MellowPlayerQmlPlugin::registerTypes(const char *uri)
+{
+    Q_ASSERT(uri == QString("MellowPlayer"));
+
+    qRegisterMetaType<Song*>("Domain::Song*");
+    qRegisterMetaType<Song*>("Song*");
+    qRegisterMetaType<StreamingService*>("Domain::StreamingService*");
+    qRegisterMetaType<StreamingService*>("StreamingService*");
+    qRegisterMetaType<ListeningHistoryEntry>("Domain::ListeningHistoryEntry");
+    qRegisterMetaType<ListeningHistoryEntry>("ListeningHistoryEntry");
+    qRegisterMetaType<Player*>("Domain::Player*");
+    qRegisterMetaType<Player*>("Player*");
+    qRegisterMetaType<IPlayerBase*>("Domain::IPlayerBase*");
+    qRegisterMetaType<IPlayerBase*>("IPlayerBase*");
+    qRegisterMetaType<SettingViewModel*>("Presentation::SettingViewModel*");
+    qRegisterMetaType<SettingViewModel*>("SettingViewModel*");
+    qRegisterMetaType<SettingsViewModel*>("SettingsViewModel*");
+    qRegisterMetaType<SettingsViewModel*>("SettingsViewModel*");
+    qRegisterMetaType<StreamingServiceViewModel*>("StreamingServiceViewModel*");
+    qRegisterMetaType<StreamingServiceProxyListModel*>("StreamingServiceProxyListModel*");
+    qRegisterMetaType<StreamingServiceListModel*>("StreamingServiceListModel*");
+
+    qmlRegisterUncreatableType<Player>(uri, 3, 0, "Player", "Player cannot be instantiated from QML");
+    qmlRegisterUncreatableType<SettingKey>(uri, 3, 0, "SettingKey", "SettingKey cannot be instantiated from QML");
+    qmlRegisterUncreatableType<SettingViewModel>(uri, 3, 0, "Setting", "SettingsViewModel cannot be instantiated from QML");
+    qmlRegisterUncreatableType<SettingsViewModel>(uri, 3, 0, "SettingsViewModel", "SettingsViewModel cannot be instantiated from QML");
+    qmlRegisterUncreatableType<SettingsCategoryViewModel>(uri, 3, 0, "SettingsCategory", "SettingsCategoryViewModel cannot be instantiated from QML");
+    qmlRegisterUncreatableType<SettingListModel>(uri, 3, 0, "SettingListModel", "SettingListModel cannot be instantiated from QML");
+    qmlRegisterUncreatableType<RemoteControlErrorViewModel>(uri, 3, 0, "RemoteControlError", "RemoteControlError cannot be instantiated from QML");
+    qmlRegisterUncreatableType<QQmlObjectListModelBase>(uri, 3, 0, "QQmlObjectListModelBase", "UserScriptsViewModel cannot be instantiated from QML");
+    qmlRegisterUncreatableType<UserScriptsViewModel>(uri, 3, 0, "UserScriptsViewModel", "UserScriptsViewModel cannot be instantiated from QML");
+    qmlRegisterUncreatableType<StreamingServiceViewModel>(uri, 3, 0, "StreamingService", "StreamingService cannot be instantiated from QML");
+    qmlRegisterUncreatableType<StreamingServicesViewModel>(uri, 3, 0, "StreamingServices", "StreamingServices cannot be instantiated from QML");
+    qmlRegisterUncreatableType<IPlayerBase>(uri, 3, 0, "IPlayerBase", "Player cannot be instantiated from QML");
+    qmlRegisterUncreatableType<StreamingServiceProxyListModel>(uri, 3, 0, "StreamingServiceProxyListModel", "StreamingServiceProxyListModel cannot be instantiated from QML");
+    qmlRegisterUncreatableType<StreamingServiceListModel>(uri, 3, 0, "StreamingServiceListModel", "StreamingServiceListModel cannot be instantiated from QML");
+    qmlRegisterUncreatableType<ListeningHistoryViewModel>(uri, 3, 0, "ListeningHistory", "ListeningHistoryViewModel cannot be instantiated from QML");
+    qmlRegisterUncreatableType<ListeningHistoryProxyListModel>(uri, 3, 0, "ListeningHistoryProxyListModel", "ListeningHistoryProxyListModel cannot be instantiated from QML");
+    qmlRegisterUncreatableType<ActiveThemeViewModel>(uri, 3, 0, "ActiveTheme", "ActiveTheme cannot be instantiated from QML");
+    qmlRegisterUncreatableType<RemoteControlViewModel>(uri, 3, 0, "RemoteControl", "RemoteControl cannot be instantiated from QML");
+    qmlRegisterUncreatableType<RemoteControlApplicationInfoViewModel>(uri, 3, 0, "RemoteControlApplicationInfoViewModel", "RemoteControlApplicationInfo cannot be instantiated from QML");
+    qmlRegisterUncreatableType<ApplicationViewModel>(uri, 3, 0, "App", "ApplicationViewModel cannot be instantiated from QML");
+    qmlRegisterUncreatableType<ZoomViewModel>(uri, 3, 0, "ZoomViewModel", "ZoomViewModel cannot be instantiated from QML");
+    qmlRegisterUncreatableType<RunningServicesViewModel>(uri, 3, 0, "RunningServicesViewModel", "ZoomViewModel cannot be instantiated from QML");
+    qmlRegisterUncreatableType<MainWindowViewModel>(uri, 3, 0, "MainWindow", "ApplicationViewModel cannot be instantiated from QML");
+    qmlRegisterUncreatableType<ClipBoardViewModel>(uri, 3, 0, "ClipBoard", "ApplicationViewModel cannot be instantiated from QML");
+    qmlRegisterUncreatableType<UpdaterViewModel>(uri, 3, 0, "Updater", "Updater cannot be instantiated from QML");
+}
+
+void MellowPlayerQmlPlugin::initializeEngine(QQmlEngine*, const char*)
+{
+    auto qmlSingletons = IQmlSingletons::instance();
+    if (qmlSingletons != nullptr)
+        qmlSingletons->registerToQml();
+}

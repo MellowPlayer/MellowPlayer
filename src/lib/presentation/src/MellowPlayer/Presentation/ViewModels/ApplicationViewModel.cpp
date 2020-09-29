@@ -54,7 +54,6 @@ void ApplicationViewModel::showLogs()
 #else
     QDesktopServices::openUrl(logFile);
 #endif
-
 }
 
 QString ApplicationViewModel::buildInfo() const

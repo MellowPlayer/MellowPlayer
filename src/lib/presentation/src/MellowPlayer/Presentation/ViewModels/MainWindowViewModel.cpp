@@ -6,12 +6,16 @@ using namespace MellowPlayer::Domain;
 using namespace MellowPlayer::Infrastructure;
 using namespace MellowPlayer::Presentation;
 
-MainWindowViewModel::MainWindowViewModel(ISettingsStore& settingsStore)
+MainWindowViewModel::MainWindowViewModel(ISettingsStore& settingsStore, RunningServicesViewModel& runningServicesViewModel)
         : IMainWindow("MainWindow", this),
           _visible(false),
           _logger(Loggers::logger("MainWindow")),
-          _zoom(settingsStore)
+          _zoom(settingsStore),
+          _runningServices(runningServicesViewModel)
 {
+    connect(&_runningServices, &RunningServicesViewModel::currentIndexChanged, [=](){
+        setCurrentPage(_runningServices.currentIndex() != -1 ? runningServicesPage() : selectServicePage());
+    });
 }
 
 void MainWindowViewModel::show()
@@ -59,4 +63,57 @@ void MainWindowViewModel::raise()
 ZoomViewModel* MainWindowViewModel::zoom()
 {
     return &_zoom;
+}
+
+QString MainWindowViewModel::currentPage() const
+{
+    return _currentPage;
+}
+
+void MainWindowViewModel::setCurrentPage(const QString& value)
+{
+    if (_currentPage != value)
+    {
+        _currentPage = value;
+        emit currentPageChanged();
+    }
+}
+
+QString MainWindowViewModel::selectServicePage() const
+{
+    return "select";
+}
+
+QString MainWindowViewModel::runningServicesPage() const
+{
+    return "running";
+}
+
+bool MainWindowViewModel::isOnRunningServicesPage() const
+{
+    return currentPage() == runningServicesPage();
+}
+
+void MainWindowViewModel::toggleActivePage()
+{
+    setCurrentPage(currentPage() == selectServicePage() ? runningServicesPage(): selectServicePage());
+}
+
+RunningServicesViewModel* MainWindowViewModel::runningServices()
+{
+    return &_runningServices;
+}
+
+void MainWindowViewModel::setFullScreen(bool value)
+{
+    if (_fullScreen != value)
+    {
+        _fullScreen = value;
+        emit fullScreenChanged();
+    }
+}
+
+bool MainWindowViewModel::isFullScreen() const
+{
+    return _fullScreen;
 }

@@ -38,6 +38,7 @@ StreamingServicesViewModel::StreamingServicesViewModel(StreamingServices& stream
           _services(new StreamingServiceListModel(this, QByteArray(), "name")),
           _filteredServices(_services, settings)
 {
+    connect(&_streamingServices, &StreamingServices::currentChanged, this, &StreamingServicesViewModel::onCurrentServiceChanged);
 }
 
 void StreamingServicesViewModel::initialize()
@@ -74,12 +75,12 @@ StreamingServiceViewModel* StreamingServicesViewModel::currentService() const
     return _currentService;
 }
 
-void StreamingServicesViewModel::setCurrentService(QObject* value)
+void StreamingServicesViewModel::setCurrentService(StreamingServiceViewModel* value)
 {
     if (_currentService == value)
         return;
 
-    _currentService = static_cast<StreamingServiceViewModel*>(value);
+    _currentService = value;
     if (_currentService == nullptr)
     {
         _currentServiceSetting.setValue("");
@@ -90,8 +91,6 @@ void StreamingServicesViewModel::setCurrentService(QObject* value)
         _currentServiceSetting.setValue(_currentService->name());
         _streamingServices.setCurrent(_currentService->streamingService());
     }
-
-    emit currentServiceChanged(_currentService);
 }
 
 void StreamingServicesViewModel::reload()
@@ -207,7 +206,21 @@ void StreamingServicesViewModel::registerTo(IQmlApplicationEngine& qmlApplicatio
     IStreamingServicesViewModel::registerTo(qmlApplicationEngine);
 }
 
-void StreamingServicesViewModel::activate(QObject* service)
+void StreamingServicesViewModel::onCurrentServiceChanged(Domain::StreamingService* value)
 {
-    emit activationRequested(service);
+    for (auto* service: *_services)
+    {
+        if (service->streamingService() == value)
+        {
+            _currentService = service;
+            emit currentServiceChanged();
+            emit currentServiceNameChanged();
+            return;
+        }
+    }
+}
+
+QString StreamingServicesViewModel::currentServiceName() const
+{
+    return _currentService != nullptr ? _currentService->name() : "";
 }

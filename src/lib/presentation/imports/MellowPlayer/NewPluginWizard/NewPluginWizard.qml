@@ -9,7 +9,7 @@ import MellowPlayer 3.0
 Dialog {
     id: wizard
 
-    property Item currentPage: stackView.currentItem
+    property WizardPage currentPage: stackView.currentItem
     property string svName
     property string svUrl
     property string authorName
@@ -21,9 +21,7 @@ Dialog {
     property bool osxPlatform
     property bool windowsPlatform
 
-    title: currentPage.title
-    onAccepted: restart()
-    onRejected: restart()
+    title: wizard.currentPage.title
 
     function restart() {
         while (stackView.depth > 1)
@@ -31,7 +29,7 @@ Dialog {
     }
 
     function next() {
-        stackView.push(currentPage.next)
+        stackView.push(wizard.currentPage.next)
     }
 
     function previous() {
@@ -102,7 +100,7 @@ Dialog {
         anchors.fill: parent
 
         Label {
-            text: currentPage.description
+            text: wizard.currentPage.description
             font.italic: true
 
             Layout.leftMargin: 24
@@ -146,7 +144,7 @@ Dialog {
 
                 highlighted: true
                 text: qsTr("Open plugin directory")
-                visible: currentPage.openPluginDirectoryVisible
+                visible: wizard.currentPage.openPluginDirectoryVisible
                 flat: true
 
                 onClicked: Qt.openUrlExternally("file://" + wizard.directory)
@@ -170,7 +168,7 @@ Dialog {
 
                 highlighted: true
                 text: qsTr("Previous")
-                visible: currentPage.goBackVisible
+                visible: wizard.currentPage.goBackVisible
                 flat: true
 
                 onClicked: wizard.previous()
@@ -181,29 +179,32 @@ Dialog {
                 highlighted: true
                 flat: true
                 text: qsTr("Next")
-                enabled: currentPage.goNextEnabled
-                visible: currentPage.goNextVisible
+                enabled: wizard.currentPage.goNextEnabled
+                visible: wizard.currentPage.goNextVisible
 
                 onClicked: wizard.next()
             }
+
             Button {
                 id: cancelButton
 
                 highlighted: true
                 flat: true
                 text: qsTr("Cancel")
-                visible: !currentPage.finishVisible
+                visible: !wizard.currentPage.finishVisible
 
-                onClicked: wizard.reject()
+                onClicked: wizard.close()
             }
+
             Button {
                 id: finishButton
 
                 highlighted: true
                 flat: true
                 text: qsTr("Finish")
-                visible: currentPage.finishVisible
-                onClicked: wizard.accept()
+                visible: wizard.currentPage.finishVisible
+
+                onClicked: wizard.close()
             }
         }
     }

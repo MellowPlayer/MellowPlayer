@@ -1,20 +1,35 @@
-import QtQuick 2.15
 import QtQuick.Layouts 1.15
 import QtQuick.Controls 2.15
 import QtQuick.Controls.Material 2.15
+import QtQuick 2.15
 
 import MellowPlayer 3.0
+
+import "../Dialogs.js" as Dialogs
+import "../DateCategoryTranslator.js" as DateCategoryTranslator
 
 Frame {
     id: root
 
+    required property ListView view
+    required property int index
+    required property string artUrl
+    required property string title
+    required property string artist
+    required property string service
+    required property string dateCategory
+    required property string date
+    required property string time
+    required property string entryId
+    required property Drawer drawer
+
     property bool expanded: false
 
-    height: expanded ? 72 : 0; width: ListView.view.width
+    height: expanded ? 72 : 0; width: view.width
 
     background: Rectangle {
         color: "transparent"
-        visible: index != listView.count - 1
+        visible: root.index != root.view.count - 1
 
         Rectangle {
             anchors.bottom: parent.bottom
@@ -22,7 +37,7 @@ Frame {
             anchors.right: parent.right
             color: ActiveTheme.isDark(ActiveTheme.background) ? Qt.lighter(ActiveTheme.background) : Qt.darker(ActiveTheme.background, 1.1)
             height: 1
-            visible: expanded
+            visible: root.expanded
         }
     }
     clip: true
@@ -65,7 +80,7 @@ Frame {
             spacing: 8
 
             Image {
-                source: model.artUrl
+                source: root.artUrl
                 antialiasing: true
                 mipmap: true
                 smooth: true
@@ -76,21 +91,21 @@ Frame {
 
             Column {
                 Label {
-                    text: model.title
+                    text: root.title
                     elide: "ElideMiddle"
                     font.bold: true
                     width: 250
                 }
 
                 Label {
-                    text: qsTr("by") + " " + model.artist
+                    text: qsTr("by") + " " + root.artist
                     font.italic: true
                     elide: "ElideMiddle"
                     width: 250
                 }
 
                 Label {
-                    text: qsTr("on") + " " + model.service
+                    text: qsTr("on") + " " + root.service
                     font.italic: true
                     elide: "ElideMiddle"
                     width: 250
@@ -103,10 +118,10 @@ Frame {
 
             Label {
                 text: {
-                    if (model.dateCategory === "Today" || model.dateCategory === "Yesterday")
-                        return DateCategoryTranslator.translate(model.dateCategory) + "\n" + model.time
+                    if (root.dateCategory === "Today" || root.dateCategory === "Yesterday")
+                        return DateCategoryTranslator.translate(root.dateCategory) + "\n" + root.time
                     else
-                        return model.date + "\n" + model.time
+                        return root.date + "\n" + root.time
                 }
                 verticalAlignment: "AlignVCenter"
                 horizontalAlignment:"AlignRight"
@@ -135,16 +150,14 @@ Frame {
                 text: MaterialIcons.icon_delete
                 font { family: MaterialIcons.family; pixelSize: 16 }
                 onClicked: {
-                    messageBoxConfirmDelete.message = qsTr('Are you sure you want to remove that song from the history?')
-                    messageBoxConfirmDelete.title = qsTr("Confirm remove")
-                    messageBoxConfirmDelete.closed.connect(onActivated);
-                    messageBoxConfirmDelete.open()
-                }
-
-                function onActivated() {
-                    messageBoxConfirmDelete.closed.disconnect(onActivated);
-                    if (messageBoxConfirmDelete.dialogResult === messageBoxConfirmDelete.dialogAccepted)
-                        ListeningHistory.removeById(model.entryId)
+                    Dialogs.askConfirmation(
+                        qsTr("Confirm remove"),
+                        qsTr('Are you sure you want to remove that song from the history?'),
+                        (confirmed) => {
+                            if (confirmed)
+                                ListeningHistory.removeById(root.entryId)
+                        }
+                    )
                 }
 
                 Layout.fillHeight: true
@@ -155,7 +168,7 @@ Frame {
                 hoverEnabled: true
                 text: MaterialIcons.icon_content_copy
                 font { family: MaterialIcons.family; pixelSize: 16 }
-                onClicked: ClipBoard.setText(model.title)
+                onClicked: ClipBoard.setText(root.title)
 
                 Layout.fillHeight: true
             }

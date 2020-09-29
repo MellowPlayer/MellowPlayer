@@ -1,20 +1,22 @@
 import QtQuick 2.15
 import QtQuick.Controls 2.15
 
+// TODO QMLLINT
+
 ToolTip {
-    id: tooltip
+    id: root
 
     property string shortcut: ""
 
-    visible: parent !== undefined ? parent.hovered : false
+    // visible: parent !== undefined ? root.parent.hovered : false
     delay: 1000
     timeout: 5000
     y: parent.implicitHeight
     x: 0
 
     contentItem: Text {
-        text: tooltip.text + (shortcut != "" ? " (" + shortcut + ")" : "")
-        font: tooltip.font
+        text: root.text + (root.shortcut != "" ? " (" + root.shortcut + ")" : "")
+        font: root.font
         color: "white"
     }
 

@@ -39,12 +39,11 @@ namespace MellowPlayer::Presentation
     class TimeLimitSettingViewModel : public SettingViewModel
     {
         Q_OBJECT
-        Q_PROPERTY(QString value READ value WRITE setValue NOTIFY valueChanged)
         Q_PROPERTY(QStringList values READ values CONSTANT)
     public:
         TimeLimitSettingViewModel(Domain::Setting& setting, QObject* parent = nullptr);
 
-        QString value() const;
+        QVariant value() const override;
         QStringList values() const;
         QString qmlComponent() override;
 
@@ -52,10 +51,7 @@ namespace MellowPlayer::Presentation
         void valueChanged();
 
     public slots:
-        void setValue(QString value);
-
-    protected slots:
-        void onValueChanged() override;
+        virtual void setValue(QVariant value);
 
     private:
         void registerEnumTranslation(Domain::TimeLimits value, const QString& translation);

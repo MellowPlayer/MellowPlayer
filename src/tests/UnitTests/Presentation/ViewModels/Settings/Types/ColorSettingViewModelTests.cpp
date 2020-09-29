@@ -18,10 +18,10 @@ TEST_CASE("ColorSettingViewModelTests")
 
     SECTION("setValue")
     {
-        REQUIRE(model.getValue() != "red");
+        REQUIRE(model.value().toString() != "red");
         REQUIRE(spy.count() == 0);
         model.setValue("red");
-        REQUIRE(model.getValue() == "red");
+        REQUIRE(model.value().toString() == "red");
         REQUIRE(spy.count() == 1);
     }
 

@@ -2,6 +2,8 @@ import QtQuick 2.15
 import QtQuick.Layouts 1.15
 import QtQuick.Controls 2.15
 
+import MellowPlayer 3.0
+
 WizardPage {
     id: root
 
@@ -26,21 +28,17 @@ WizardPage {
     finishVisible: false
     goNextEnabled: !busyIndicator.running
 
+    Component.onCompleted: {
+        StreamingServices.serviceCreated.connect((directory) => {
+            root.directory = directory;
+            root.goNextRequested();
+        })
+        StreamingServices.createService(svName, svUrl, authorName, authorUrl, allPlatforms, linuxPlatform, appImagePlatform, osxPlatform, windowsPlatform)
+    }
+
     BusyIndicator {
         id: busyIndicator
         anchors.centerIn: parent
         running: root.directory == ""
-    }
-
-    Component.onCompleted: {
-        StreamingServices.createService(svName, svUrl, authorName, authorUrl, allPlatforms, linuxPlatform, appImagePlatform, osxPlatform, windowsPlatform)
-    }
-
-    Connections {
-        target: StreamingServices
-        onServiceCreated: {
-            root.directory = directory
-            root.goNextRequested()
-        }
     }
 }

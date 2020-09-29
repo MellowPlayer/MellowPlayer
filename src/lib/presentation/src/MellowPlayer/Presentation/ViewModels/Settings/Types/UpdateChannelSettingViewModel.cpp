@@ -9,7 +9,7 @@ UpdateChannelSettingViewModel::UpdateChannelSettingViewModel(Setting& setting, Q
 {
 }
 
-QString UpdateChannelSettingViewModel::value() const
+QVariant UpdateChannelSettingViewModel::value() const
 {
     UpdateChannel channel = static_cast<UpdateChannel>(_setting.value().toInt());
     return _stringer.toTranslatedString(channel);
@@ -25,12 +25,7 @@ QString UpdateChannelSettingViewModel::qmlComponent()
     return "Delegates/EnumSettingDelegate.qml";
 }
 
-void UpdateChannelSettingViewModel::setValue(QString value)
+void UpdateChannelSettingViewModel::setValue(const QVariant& value)
 {
-    _setting.setValue(static_cast<int>(_stringer.fromString(value)));
-}
-
-void UpdateChannelSettingViewModel::onValueChanged()
-{
-    emit valueChanged();
+    _setting.setValue(static_cast<int>(_stringer.fromString(value.toString())));
 }

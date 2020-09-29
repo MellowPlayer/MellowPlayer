@@ -77,7 +77,7 @@ namespace MellowPlayer::Presentation
     {
         Q_OBJECT
         Q_PROPERTY(QAbstractListModel* states READ states CONSTANT)
-        Q_PROPERTY(QObject* appInfo READ appInfo CONSTANT)
+        Q_PROPERTY(RemoteControlApplicationInfoViewModel* appInfo READ appInfo CONSTANT)
         Q_PROPERTY(int currentStateIndex READ currentStateIndex NOTIFY currentStateIndexChanged)
         Q_PROPERTY(bool autoStartEnabled READ isAutoStartEnabled WRITE setAutoStartEnabled NOTIFY autoStartEnabledChanged)
         Q_PROPERTY(RemoteControlErrorViewModel* error READ error NOTIFY errorChanged)

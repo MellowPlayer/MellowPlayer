@@ -10,14 +10,14 @@ namespace MellowPlayer::Presentation
     {
         Q_OBJECT
         Q_PROPERTY(bool hasScripts READ hasScripts NOTIFY hasScriptsChanged)
-        Q_PROPERTY(QAbstractListModel* model READ model CONSTANT)
+        Q_PROPERTY(QQmlObjectListModelBase* model READ model CONSTANT)
     public:
         UserScriptsViewModel(const QString& serviceName,
                              Domain::IUserScriptFactory& userScriptFactory,
                              Domain::ISettingsStore& settingsStore,
                              QObject* parent = nullptr);
 
-        QAbstractListModel* model();
+        QQmlObjectListModelBase* model();
         bool hasScripts() const;
 
         Q_INVOKABLE QString generateUniqueName(const QString& path) const;

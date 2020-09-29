@@ -2,8 +2,7 @@ module MellowPlayer
 
 singleton MaterialIcons 3.0 MaterialIcons.qml
 
-ApplicationRoot 3.0 ApplicationRoot.qml
-BrowserDialog 3.0 Controls/BrowserDialog.qml
+BrowserDialog 3.0 Dialogs/BrowserDialog.qml
 CustomUrlPane 3.0 Controls/CustomUrlPane.qml
 FullScreenNotification 3.0 Controls/FullScreenNotification.qml
 IconMenuItem 3.0 Controls/IconMenuItem.qml

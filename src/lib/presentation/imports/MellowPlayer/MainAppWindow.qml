@@ -9,26 +9,9 @@ import MellowPlayer 3.0
 ApplicationWindow {
     id: mainWindow
 
-    property string selectServicePage: "select"
-    property string runningServicesPage: "running"
     property var runningServices: null
-    property string page
-
-    property bool isOnRunningServicesPage: page === runningServicesPage
     property bool hasRunningServices: runningServices !== null && runningServices.currentIndex !== -1
-
-    function toggleActivePage() {
-        if (page === selectServicePage)
-            page = runningServicesPage;
-        else
-            page = selectServicePage;
-    }
-
-    function openWebPopup(request, profile) {
-        if (request.userInitiated) {
-            d.applicationRoot.createDialog(profile).open(request, profile)
-        }
-    }
+    property string currentServiceName: StreamingServices.currentServiceName
 
     function toggleFullScreen(request) {
         if (request.toggleOn) {
@@ -45,50 +28,15 @@ ApplicationWindow {
         request.accept();
     }
 
-    function activateService(service) {
-        StreamingServices.currentService = service;
-        page = runningServicesPage;
-        var index = runningServices.indexOf(service);
-        if (index === -1) {
-            runningServices.add(service);
-            index = runningServices.count - 1;
-        }
-        runningServices.currentIndex = index;
-    }
-
-    minimumWidth: 960; minimumHeight: 540
+    minimumWidth: 800; minimumHeight: 480
     width: App.settings.get(SettingKey.PRIVATE_WINDOW_WIDTH).value;
     height: App.settings.get(SettingKey.PRIVATE_WINDOW_HEIGHT).value;
-    title: StreamingServices.currentService !== null ? StreamingServices.currentService.name : ""
+    title: StreamingServices.currentService !== null ? StreamingServices.currentServiceName : ""
 
     onClosing: d.handleCloseEvent(close);
-    onPageChanged: {
-        if (page === selectServicePage) {
-            if (runningServices !== null && runningServices.currentWebView !== null)
-                runningServices.currentWebView.updateImage();
-            var selectServices = stack.push(selectServicePageComponent);
-            selectServices.quitRequested.connect(function() {
-                stack.slideTransitions = false;
-                mainWindow.toggleActivePage()
-            });
-        }
-        else if (page === runningServicesPage) {
-            if (stack.depth <= 1) {
-                runningServices = stack.push(runningServicesPageComponent)
-            }
-            else {
-                stack.pop();
-            }
-        }
-    }
 
     Component.onCompleted: {
-        Dialogs.mainWindow = mainWindow;
-        console.log("MainWindow in dialogs", Dialogs.mainWindow)
-        if (StreamingServices.currentService !== null)
-            activateService(StreamingServices.currentService)
-        else
-            page = selectServicePage;
+        Dialogs.mainWindow = mainWindow
     }
     Material.accent: ActiveTheme.accent
     Material.background: ActiveTheme.background
@@ -233,10 +181,6 @@ ApplicationWindow {
         visible: false
     }
 
-    ReportIssueDialog {
-        id: reportIssueDialog
-    }
-
     StreamingServiceSettingsDialog {
         id: settingsDialog
 
@@ -257,17 +201,11 @@ ApplicationWindow {
         }
     }
 
-    Connections {
-        target: StreamingServices
-
-        function onActivationRequested(service) { mainWindow.activateService(service) }
-    }
-
     Shortcut {
         sequence: App.settings.get(SettingKey.SHORTCUTS_SELECT_SERVICE).value
         onActivated: {
             stack.slideTransitions = false;
-            toggleActivePage();
+            MainWindow.toggleActivePage();
         }
     }
 
@@ -283,8 +221,43 @@ ApplicationWindow {
         id: d
 
         property int previousVisibility: ApplicationWindow.Windowed
-        property QtObject applicationRoot: ApplicationRoot { }
         property bool forceQuit: false;
+        property string page: MainWindow.currentPage
+
+        property bool fullScreen: MainWindow.fullScreen
+        onFullScreenChanged: {
+            if (fullScreen) {
+                d.previousVisibility = mainWindow.visibility
+                mainWindow.showFullScreen();
+                fullScreenNotification.visible = true;
+            }
+            else {
+                mainWindow.visibility = d.previousVisibility
+                mainWindow.showNormal()
+                if (d.previousVisibility === ApplicationWindow.Maximized)
+                    mainWindow.showMaximized()
+            }
+        }
+
+        onPageChanged: {
+                if (MainWindow.currentPage === MainWindow.selectServicePage) {
+                    if (runningServices !== null && runningServices.currentWebView !== null)
+                        runningServices.currentWebView.updateImage();
+                    var selectServices = stack.push(selectServicePageComponent);
+                    selectServices.quitRequested.connect(function() {
+                        stack.slideTransitions = false;
+                        MainWindow.toggleActivePage()
+                    });
+                }
+                else if (MainWindow.currentPage === MainWindow.runningServicesPage) {
+                    if (stack.depth <= 1) {
+                        runningServices = stack.push(runningServicesPageComponent)
+                    }
+                    else {
+                        stack.pop();
+                    }
+                }
+            }
 
         function hideWindow() {
             mainWindow.hide();

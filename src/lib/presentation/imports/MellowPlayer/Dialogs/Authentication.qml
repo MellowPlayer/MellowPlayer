@@ -6,13 +6,15 @@ import QtWebEngine 1.10
 
 import MellowPlayer 3.0
 
+// TODO QMLLINT
+
 Dialog {
     id: dialog
 
     property AuthenticationDialogRequest request
 
     modal: true
-    standardButtons: Dialog.Ok | Dialog.Cancel
+    // standardButtons: Dialog.Ok | Dialog.Cancel
     padding: 0
 
     ColumnLayout {
@@ -53,24 +55,24 @@ Dialog {
                 placeholderText: qsTr("User name")
                 selectByMouse: true
 
-                Keys.onPressed: {
-                    if (event.key === Qt.Key_Return || event.key === Qt.Key_Enter)
-                        dialog.accept();
-                }
+//                Keys.onPressed: (event) => {
+//                    if (event.key === Qt.Key_Return || event.key === Qt.Key_Enter)
+//                        dialog.accept();
+//                }
                 Layout.fillWidth: true
             }
 
             TextField {
                 id: passwordTextField
 
-                echoMode: showPasswordButton.checked ? TextField.Normal : TextField.Password
+//                echoMode: showPasswordButton.checked ? TextField.Normal : TextField.Password
                 placeholderText: qsTr("Password")
                 selectByMouse: true
 
-                Keys.onPressed: {
-                    if (event.key === Qt.Key_Return || event.key === Qt.Key_Enter)
-                        dialog.accept();
-                }
+//                Keys.onPressed: (event) => {
+//                    if (event.key === Qt.Key_Return || event.key === Qt.Key_Enter)
+//                        dialog.accept();
+//                }
                 Layout.fillWidth: true
 
                 ToolButton {
@@ -109,11 +111,11 @@ Dialog {
                 break;
         }
 
-        try {
-            dialog.standardButton(Dialog.Ok).text = qsTr("Login");
-        }
-        catch (e) {
-        }
+//        try {
+//            dialog.standardButton(Dialog.Ok).text = qsTr("Login");
+//        }
+//        catch (e) {
+//        }
 
         userNameTextField.forceActiveFocus();
     }

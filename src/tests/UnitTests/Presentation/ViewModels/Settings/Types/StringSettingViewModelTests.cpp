@@ -18,10 +18,10 @@ TEST_CASE("StringSettingViewModelTests")
 
     SECTION("setValue")
     {
-        REQUIRE(model.getValue() == "Ctrl+Alt+P");
+        REQUIRE(model.value() == "Ctrl+Alt+P");
         REQUIRE(spy.count() == 0);
         model.setValue("Ctrl+P");
-        REQUIRE(model.getValue() == "Ctrl+P");
+        REQUIRE(model.value() == "Ctrl+P");
         REQUIRE(spy.count() == 1);
     }
 

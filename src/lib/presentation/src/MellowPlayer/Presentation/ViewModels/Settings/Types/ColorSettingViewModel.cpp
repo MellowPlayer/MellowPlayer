@@ -8,20 +8,6 @@ ColorSettingViewModel::ColorSettingViewModel(Setting& setting, QObject* parent) 
 {
 }
 
-QColor ColorSettingViewModel::getValue() const
-{
-    return QColor(_setting.value().toString());
-}
-
-void ColorSettingViewModel::setValue(QColor value)
-{
-    _setting.setValue(value.name());
-}
-
-void ColorSettingViewModel::onValueChanged()
-{
-    emit valueChanged();
-}
 
 QString ColorSettingViewModel::qmlComponent()
 {

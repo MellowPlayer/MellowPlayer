@@ -10,15 +10,16 @@ import MellowPlayer 3.0
 Item {
     id: root
 
-    property int index: model.sortIndex
+    required property StreamingService service
+
+    property int index: service.sortIndex
     property string backgroundColor: Material.background
     property bool hovered: mouseArea.containsMouse
-    property var service: model.qtObject
 
-    onIndexChanged: model.sortIndex = root.index
+    onIndexChanged: service.sortIndex = root.index
     Drag.active: mouseArea.drag.active
 
-    Component.onCompleted: model.sortIndex = root.index
+    Component.onCompleted: service.sortIndex = root.index
 
     Item {
         id: pane
@@ -47,7 +48,7 @@ Item {
                 property bool adapt: true
 
                 anchors.fill: parent
-                source: model.previewImageUrl
+                source: root.service.previewImageUrl
             }
 
             FastBlur {
@@ -86,7 +87,7 @@ Item {
                 antialiasing: true
                 height: 64; width: 64
                 mipmap: true
-                source: model.logo
+                source: root.service.logo
             }
         }
 
@@ -110,14 +111,14 @@ Item {
                 top: parent.top
                 right: parent.right
             }
-            visible: model.isActive
+            visible: root.service.isActive
             padding: 0
             iconChar: MaterialIcons.icon_power_settings_new
             font.bold: true
             font.pixelSize: 16
             tooltip: qsTr("Stop")
 
-            onClicked: mainWindow.runningServices.remove(model)
+            onClicked: MainWindow.runningServices.remove(root.service)
 
             Material.foreground: Material.Red
         }
@@ -148,10 +149,10 @@ Item {
                     font.bold: true
                     font.pixelSize: 16
                     checkable: true
-                    checked: model.favorite
-                    tooltip: checked ? qsTr("Remove service from favorites") : qsTr("Add service to favorites")
+                    checked: root.service.favorite
+                    tooltip: checked ? qsTr("Remove root.service from favorites") : qsTr("Add root.service to favorites")
 
-                    onCheckedChanged: model.favorite = checked
+                    onCheckedChanged: root.service.favorite = checked
 
                     Material.accent: Material.color(Material.Amber, Material.Shade600)
                 }
@@ -165,10 +166,10 @@ Item {
                     iconChar: MaterialIcons.icon_settings
                     font.pixelSize: 16
 
-                    tooltip: qsTr("App.settings")
+                    tooltip: qsTr("Settings")
 
                     onClicked: {
-                        settingsDialog.service = model;
+                        settingsDialog.service = root.service;
                         settingsDialog.open()
                     }
                 }
@@ -179,13 +180,14 @@ Item {
 
                 anchors.centerIn: parent
                 color: "white"
-                text: model.name
+                text: root.service.name
                 font.bold: true
             }
         }
     }
 
     function activate() {
-        mainWindow.activateService(service);
+        StreamingServices.currentService = root.service;
+        MainWindow.currentPage = MainWindow.runningServicesPage;
     }
 }

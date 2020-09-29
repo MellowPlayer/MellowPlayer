@@ -16,6 +16,7 @@ namespace MellowPlayer::Presentation
         Q_OBJECT
     public:
         explicit StreamingServiceProxyListModel(StreamingServiceListModel* sourceListModel, Domain::Settings& settings);
+
         Q_INVOKABLE void update();
         Q_INVOKABLE void setSearchText(const QString& searchText);
 

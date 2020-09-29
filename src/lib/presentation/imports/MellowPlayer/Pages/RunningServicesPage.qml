@@ -9,33 +9,7 @@ StackLayout {
 
     property WebView currentWebView
 
-    currentIndex: indexOf(StreamingServices.currentService)
-
-    function indexOf(service) {
-        if (service !== null) {
-            for(var i = 0; i < count; i++) {
-                if (itemAt(i).service.name === service.name)
-                    return i;
-            }
-        }
-        return -1;
-    }
-
-    function add(service) {
-        webViewComponent.createObject(root, {"service": service, "index": root.count });
-        service.isActive = true;
-    }
-
-    function remove(service) {
-        var index = indexOf(service);
-        if (index === currentIndex) {
-            currentIndex = -1;
-            StreamingServices.currentService = null;
-            mainWindow.page = mainWindow.selectServicePage;
-        }
-        itemAt(index).destroy();
-        service.isActive = false;
-    }
+    currentIndex: MainWindow.runningServices.currentIndex
 
     function exitFullScreen() {
         root.currentWebView.exitFullScreen();
@@ -73,7 +47,6 @@ StackLayout {
         onActivated: root.currentWebView.resetZoom()
     }
 
-
     Shortcut {
         property Setting setting: App.settings.get(SettingKey.SHORTCUTS_SELECT_NEXT_SERVICE)
 
@@ -88,16 +61,20 @@ StackLayout {
         onActivated: StreamingServices.previous()
     }
 
-    Component {
-        id: webViewComponent
-
-        WebView {
+    Repeater {
+        model: MainWindow.runningServices.model
+        delegate: WebView {
             id: webView
 
             required property int index
+            required property StreamingService qtObject
             property bool isCurrent: index === root.currentIndex
 
+            service: qtObject
             onIsCurrentChanged: root.currentWebView = webView
+
+            Layout.fillWidth: true
+            Layout.fillHeight: true
         }
     }
 }

@@ -5,6 +5,8 @@ import QtQuick.Controls.Material 2.15
 
 import MellowPlayer 3.0
 
+import "../Dialogs.js" as Dialogs
+
 ToolBar {
     id: root
 
@@ -19,25 +21,25 @@ ToolBar {
         spacing: 0
 
         IconToolButton {
-            iconChar: mainWindow.isOnRunningServicesPage ? MaterialIcons.icon_apps : MaterialIcons.icon_keyboard_arrow_left
-            tooltip: mainWindow.isOnRunningServicesPage ?
+            iconChar: MainWindow.isOnRunningServicesPage ? MaterialIcons.icon_apps : MaterialIcons.icon_keyboard_arrow_left
+            tooltip: MainWindow.isOnRunningServicesPage ?
                          qsTr("Select another service") :
                          mainWindow.hasRunningServices ? qsTr("Go back to ") + StreamingServices.currentService.name : ""
             visible: mainWindow.hasRunningServices
 
             onClicked: {
-                if (!mainWindow.isOnRunningServicesPage && mainWindow.hasRunningServices)
+                if (!MainWindow.isOnRunningServicesPage && mainWindow.hasRunningServices)
                     stack.slideTransitions = true;
                 else
                     stack.slideTransitions = false;
-                mainWindow.toggleActivePage();
+                MainWindow.toggleActivePage();
             }
         }
 
         Item {
             Layout.preferredWidth: 1
             Layout.fillHeight: true
-            visible: mainWindow.isOnRunningServicesPage && App.settings.get(SettingKey.APPEARANCE_WEBPAGE_CONTROLS_VISIBLE).value
+            visible: MainWindow.isOnRunningServicesPage && App.settings.get(SettingKey.APPEARANCE_WEBPAGE_CONTROLS_VISIBLE).value
 
             Rectangle {
                 anchors.centerIn: parent
@@ -50,7 +52,7 @@ ToolBar {
         IconToolButton {
             iconChar: MaterialIcons.icon_chevron_left
             tooltip: qsTr("Go back")
-            visible: mainWindow.isOnRunningServicesPage && App.settings.get(SettingKey.APPEARANCE_WEBPAGE_CONTROLS_VISIBLE).value
+            visible: MainWindow.isOnRunningServicesPage && App.settings.get(SettingKey.APPEARANCE_WEBPAGE_CONTROLS_VISIBLE).value
 
             onTriggered: mainWindow.runningServices.goBack()
         }
@@ -58,7 +60,7 @@ ToolBar {
         IconToolButton {
             iconChar: MaterialIcons.icon_chevron_right
             tooltip: qsTr("Go forward")
-            visible: mainWindow.isOnRunningServicesPage && App.settings.get(SettingKey.APPEARANCE_WEBPAGE_CONTROLS_VISIBLE).value
+            visible: MainWindow.isOnRunningServicesPage && App.settings.get(SettingKey.APPEARANCE_WEBPAGE_CONTROLS_VISIBLE).value
 
             onTriggered: mainWindow.runningServices.goForward()
         }
@@ -66,7 +68,7 @@ ToolBar {
         IconToolButton {
             iconChar: MaterialIcons.icon_refresh
             tooltip: qsTr("Reload page")
-            visible: mainWindow.isOnRunningServicesPage && App.settings.get(SettingKey.APPEARANCE_WEBPAGE_CONTROLS_VISIBLE).value
+            visible: MainWindow.isOnRunningServicesPage && App.settings.get(SettingKey.APPEARANCE_WEBPAGE_CONTROLS_VISIBLE).value
             shortcut: App.settings.get(SettingKey.SHORTCUTS_RELOAD).value
 
             onTriggered: mainWindow.runningServices.reload()
@@ -75,7 +77,7 @@ ToolBar {
         IconToolButton {
             iconChar: MaterialIcons.icon_home
             tooltip: qsTr("Go to home page")
-            visible: mainWindow.isOnRunningServicesPage && App.settings.get(SettingKey.APPEARANCE_WEBPAGE_CONTROLS_VISIBLE).value
+            visible: MainWindow.isOnRunningServicesPage && App.settings.get(SettingKey.APPEARANCE_WEBPAGE_CONTROLS_VISIBLE).value
 
             onTriggered: mainWindow.runningServices.goHome()
         }
@@ -83,7 +85,7 @@ ToolBar {
         Item {
             Layout.preferredWidth: 1
             Layout.fillHeight: true
-            visible:  mainWindow.isOnRunningServicesPage && CurrentPlayer.canAddToFavorites && App.settings.get(SettingKey.APPEARANCE_PLAYER_CONTROLS_VISIBLE).value
+            visible:  MainWindow.isOnRunningServicesPage && CurrentPlayer.canAddToFavorites && App.settings.get(SettingKey.APPEARANCE_PLAYER_CONTROLS_VISIBLE).value
 
             Rectangle {
                 anchors.centerIn: parent
@@ -94,7 +96,7 @@ ToolBar {
         }
 
         IconToolButton {
-            visible: mainWindow.isOnRunningServicesPage && CurrentPlayer.canAddToFavorites && App.settings.get(SettingKey.APPEARANCE_PLAYER_CONTROLS_VISIBLE).value
+            visible: MainWindow.isOnRunningServicesPage && CurrentPlayer.canAddToFavorites && App.settings.get(SettingKey.APPEARANCE_PLAYER_CONTROLS_VISIBLE).value
             iconChar: CurrentPlayer.currentSong.isFavorite ? MaterialIcons.icon_favorite : MaterialIcons.icon_favorite_border
             tooltip: CurrentPlayer.currentSong.isFavorite ? qsTr("Remove current song from your favorites") : qsTr("Add current song to your favorites")
             shortcut: App.settings.get(SettingKey.SHORTCUTS_FAVORITE).value
@@ -110,7 +112,7 @@ ToolBar {
             enabled: CurrentPlayer.canGoPrevious && d.isPlayerActive()
             iconChar: MaterialIcons.icon_fast_rewind
             tooltip: qsTr("Skip to previous song")
-            visible: mainWindow.isOnRunningServicesPage && App.settings.get(SettingKey.APPEARANCE_PLAYER_CONTROLS_VISIBLE).value
+            visible: MainWindow.isOnRunningServicesPage && App.settings.get(SettingKey.APPEARANCE_PLAYER_CONTROLS_VISIBLE).value
             shortcut: App.settings.get(SettingKey.SHORTCUTS_PREVIOUS).value
 
             onTriggered: CurrentPlayer.previous()
@@ -120,7 +122,7 @@ ToolBar {
             enabled: !CurrentPlayer.isStopped || d.isPlayerActive()
             iconChar: CurrentPlayer.isPlaying ? MaterialIcons.icon_pause: MaterialIcons.icon_play_arrow
             tooltip: CurrentPlayer.isPlaying ? qsTr("Pause") : qsTr("Play")
-            visible: mainWindow.isOnRunningServicesPage && App.settings.get(SettingKey.APPEARANCE_PLAYER_CONTROLS_VISIBLE).value
+            visible: MainWindow.isOnRunningServicesPage && App.settings.get(SettingKey.APPEARANCE_PLAYER_CONTROLS_VISIBLE).value
             shortcut: App.settings.get(SettingKey.SHORTCUTS_PLAY).value
 
             onTriggered: CurrentPlayer.togglePlayPause()
@@ -130,7 +132,7 @@ ToolBar {
             enabled: CurrentPlayer.canGoNext && d.isPlayerActive()
             iconChar: MaterialIcons.icon_fast_forward
             tooltip: qsTr("Skip to next song")
-            visible: mainWindow.isOnRunningServicesPage && App.settings.get(SettingKey.APPEARANCE_PLAYER_CONTROLS_VISIBLE).value
+            visible: MainWindow.isOnRunningServicesPage && App.settings.get(SettingKey.APPEARANCE_PLAYER_CONTROLS_VISIBLE).value
             shortcut: App.settings.get(SettingKey.SHORTCUTS_NEXT).value
 
             onTriggered: CurrentPlayer.next()
@@ -162,7 +164,7 @@ ToolBar {
                 color: Material.color(Material.Grey)
             }
 
-            visible: mainWindow.isOnRunningServicesPage
+            visible: MainWindow.isOnRunningServicesPage
         }
 
         IconToolButton {
@@ -200,7 +202,7 @@ ToolBar {
 
                 sequence: App.settings.get(SettingKey.SHORTCUTS_REPORT_ISSUE).value
 
-                onActivated: reportIssueDialog.open()
+                onActivated: Dialogs.reportIssue()
             }
 
 
@@ -321,7 +323,7 @@ ToolBar {
                     shortcut: shortcutReportIssue.sequence
                     text: qsTr("Report issue")
 
-                    onClicked: reportIssueDialog.open()
+                    onClicked: Dialogs.reportIssue()
                 }
 
                 IconMenuItem {
@@ -383,7 +385,7 @@ ToolBar {
             anchors.fill: parent
             anchors.margins: 9
             spacing: 0
-            visible: mainWindow.isOnRunningServicesPage && App.settings.get(SettingKey.APPEARANCE_PLAYER_CONTROLS_VISIBLE).value
+            visible: MainWindow.isOnRunningServicesPage && App.settings.get(SettingKey.APPEARANCE_PLAYER_CONTROLS_VISIBLE).value
 
             Label {
                 Layout.fillHeight: true

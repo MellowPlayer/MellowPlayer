@@ -8,22 +8,7 @@ IconSettingViewModel::IconSettingViewModel(Setting &setting, QObject *parent) : 
 {
 }
 
-QString IconSettingViewModel::getValue() const
-{
-    return _setting.value().toString();
-}
-
 QString IconSettingViewModel::qmlComponent()
 {
     return "Delegates/IconSettingDelegate.qml";
-}
-
-void IconSettingViewModel::setValue(QString value)
-{
-    _setting.setValue(value);
-}
-
-void IconSettingViewModel::onValueChanged()
-{
-    emit valueChanged();
 }

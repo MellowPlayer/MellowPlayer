@@ -8,9 +8,9 @@ UserAgentStringSettingViewModel::UserAgentStringSettingViewModel(Setting& settin
 {
 }
 
-QString UserAgentStringSettingViewModel::getValue() const
+QVariant UserAgentStringSettingViewModel::value() const
 {
-    QString value = StringSettingViewModel::getValue();
+    QString value = StringSettingViewModel::value().toString();
 
     if (value.isEmpty())
     {

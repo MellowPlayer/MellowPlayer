@@ -8,21 +8,6 @@ StringSettingViewModel::StringSettingViewModel(Setting& setting, QObject* parent
 {
 }
 
-QString StringSettingViewModel::getValue() const
-{
-    return _setting.value().toString();
-}
-
-void StringSettingViewModel::setValue(QString value)
-{
-    _setting.setValue(value);
-}
-
-void StringSettingViewModel::onValueChanged()
-{
-    emit valueChanged();
-}
-
 QString StringSettingViewModel::qmlComponent()
 {
     return "Delegates/StringSettingDelegate.qml";

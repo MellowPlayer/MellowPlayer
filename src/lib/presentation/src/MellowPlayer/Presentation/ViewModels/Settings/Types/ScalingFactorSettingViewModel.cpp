@@ -8,25 +8,10 @@ ScalingFactorSettingViewModel::ScalingFactorSettingViewModel(Setting &setting, Q
 {
 }
 
-int ScalingFactorSettingViewModel::getValue() const
-{
-    int value = _setting.value().toInt();
-    return value;
-}
-
-void ScalingFactorSettingViewModel::setValue(int value)
-{
-    _setting.setValue(value);
-}
 
 QString ScalingFactorSettingViewModel::qmlComponent()
 {
     return "Delegates/IntSettingDelegate.qml";
-}
-
-void ScalingFactorSettingViewModel::onValueChanged()
-{
-    emit valueChanged();
 }
 
 int ScalingFactorSettingViewModel::minValue() const

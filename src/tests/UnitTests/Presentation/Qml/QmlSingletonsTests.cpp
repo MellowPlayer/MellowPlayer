@@ -8,7 +8,7 @@ using namespace MellowPlayer::Domain;
 using namespace MellowPlayer::Presentation;
 using namespace MellowPlayer::Presentation::Tests;
 
-SCENARIO("ContextPropertiesTests")
+SCENARIO("QmlSingletonsTests")
 {
     GIVEN("A QmlSingletons instance with a fake qml application engine and one property")
     {
@@ -23,12 +23,12 @@ SCENARIO("ContextPropertiesTests")
 
             THEN("player name exists in qmlApplicationEngine")
             {
-                REQUIRE(qmlApplicationEngine.hasContextProperty("Player"));
+                REQUIRE(qmlApplicationEngine.hasContextProperty("CurrentPlayer"));
             }
 
             AND_THEN("the correct player property object has been added to qmlApplicationEngine")
             {
-                REQUIRE(qmlApplicationEngine.qmlSingleton("Player") == &player);
+                REQUIRE(qmlApplicationEngine.qmlSingleton("CurrentPlayer") == &player);
             }
 
             AND_THEN("property name exists in qmlApplicationEngine")

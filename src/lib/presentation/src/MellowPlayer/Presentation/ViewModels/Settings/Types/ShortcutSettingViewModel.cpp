@@ -9,21 +9,6 @@ ShortcutSettingViewModel::ShortcutSettingViewModel(Setting& setting, QObject* pa
 {
 }
 
-QString ShortcutSettingViewModel::getValue() const
-{
-    return _setting.value().toString();
-}
-
-void ShortcutSettingViewModel::setValue(QString value)
-{
-    _setting.setValue(value);
-}
-
-void ShortcutSettingViewModel::onValueChanged()
-{
-    emit valueChanged();
-}
-
 QString ShortcutSettingViewModel::qmlComponent()
 {
     return "Delegates/ShortcutSettingDelegate.qml";

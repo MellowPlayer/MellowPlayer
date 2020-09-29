@@ -16,7 +16,7 @@ Players::Players(StreamingServices& streamingServices)
     }
 }
 
-shared_ptr<Player> Players::get(const QString& serviceName) const
+shared_ptr<IPlayerBase> Players::get(const QString& serviceName) const
 {
     return _players[serviceName];
 }

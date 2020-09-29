@@ -6,16 +6,13 @@ import QtQuick.Controls.Material 2.15
 import MellowPlayer 3.0
 
 ScrollView {
-    id: scrollView
+    id: root
 
+    required property Drawer drawer
     property alias count: listView.count
 
     contentHeight: listView.contentHeight
     contentWidth: listView.contentWidth
-
-    ScrollBar.horizontal.policy: ScrollBar.AlwaysOff
-    ScrollBar.vertical.policy: ScrollBar.vertical.size !== 1 ? ScrollBar.AlwaysOn : ScrollBar.AsNeeded
-    ScrollBar.vertical.visible: ScrollBar.vertical.size !== 1
 
     ListView {
         id: listView
@@ -24,14 +21,21 @@ ScrollView {
 
         anchors {
             fill: parent
-            rightMargin: scrollView.ScrollBar.vertical.size != 1 ? 16 : 0
+            rightMargin: root.ScrollBar.vertical.size != 1 ? 16 : 0
         }
         clip: true
         cacheBuffer: 500 * 72
         model: ListeningHistory.model
-        delegate: ListeningHistoryEntryDelegate { expanded: listView.isSectionExpanded(model.dateCategory) }
+        delegate: ListeningHistoryEntryDelegate {
+            view: listView
+            expanded: listView.isSectionExpanded(dateCategory)
+            drawer: root.drawer
+        }
         section.criteria: ViewSection.FullString
-        section.delegate: ListeningHistorySectionDelegate { expanded: listView.isSectionExpanded(section) }
+        section.delegate: ListeningHistorySectionDelegate {
+            required property string section
+            expanded: listView.isSectionExpanded(section)
+        }
         section.property: "dateCategory"
         add: Transition {
             SequentialAnimation {

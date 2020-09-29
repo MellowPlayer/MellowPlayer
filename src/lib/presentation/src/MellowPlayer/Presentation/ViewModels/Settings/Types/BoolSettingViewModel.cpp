@@ -8,21 +8,6 @@ BoolSettingViewModel::BoolSettingViewModel(Setting& setting, QObject* parent) : 
 {
 }
 
-bool BoolSettingViewModel::getValue() const
-{
-    return _setting.value().toBool();
-}
-
-void BoolSettingViewModel::setValue(bool value)
-{
-    _setting.setValue(value);
-}
-
-void BoolSettingViewModel::onValueChanged()
-{
-    emit valueChanged();
-}
-
 QString BoolSettingViewModel::qmlComponent()
 {
     return "Delegates/BoolSettingDelegate.qml";

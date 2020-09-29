@@ -15,7 +15,17 @@ configure_file(resources/scripts/install-mellowplayer-connect.ps1 ${CMAKE_CURREN
 
 configure_file(src/MellowPlayer/Infrastructure/BuildConfig.cpp.in ${CMAKE_BINARY_DIR}/BuildConfig.cpp)
 
-add_library(${LIB_NAME} STATIC ${SOURCE_FILES} ${HEADER_FILES} ${CMAKE_CURRENT_BINARY_DIR}/resources/infrastructure.qrc ${CMAKE_BINARY_DIR}/BuildConfig.cpp)
+if (MSVC_COMPILER)
+    add_library(${LIB_NAME} STATIC ${SOURCE_FILES} ${HEADER_FILES} ${CMAKE_CURRENT_BINARY_DIR}/resources/infrastructure.qrc ${CMAKE_BINARY_DIR}/BuildConfig.cpp)
+else()
+    add_library(${LIB_NAME} SHARED ${SOURCE_FILES} ${HEADER_FILES} ${CMAKE_CURRENT_BINARY_DIR}/resources/infrastructure.qrc ${CMAKE_BINARY_DIR}/BuildConfig.cpp)
+    install(TARGETS ${LIB_NAME}
+            BUNDLE DESTINATION MacOS
+            RUNTIME DESTINATION ${CMAKE_INSTALL_BINDIR}
+            LIBRARY DESTINATION ${CMAKE_INSTALL_LIBDIR}
+            ARCHIVE DESTINATION ${CMAKE_INSTALL_LIBDIR}/static)
+endif()
+
 target_precompile_headers(${LIB_NAME} REUSE_FROM ${PROJECT_NAME}.Domain)
 target_include_directories(${LIB_NAME} PUBLIC ${CMAKE_CURRENT_SOURCE_DIR}/src)
 target_link_libraries(${LIB_NAME} spdlog Qt5::Core Qt5::Gui Qt5::Concurrent Qt5::Network Qt5::Widgets Qt5::Sql ${PROJECT_NAME}.Domain)

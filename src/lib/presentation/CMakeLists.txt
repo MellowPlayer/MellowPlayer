@@ -36,7 +36,17 @@ else()
 endif()
 
 
-add_library(${LIB_NAME} STATIC ${SOURCE_FILES} ${HEADER_FILES} ${CONF_FILES} ${RESOURCES} ${QML_RESOURCES})
+if (MSVC_COMPILER)
+    add_library(${LIB_NAME} STATIC ${SOURCE_FILES} ${HEADER_FILES} ${CONF_FILES} ${RESOURCES} ${QML_RESOURCES})
+else()
+    add_library(${LIB_NAME} SHARED ${SOURCE_FILES} ${HEADER_FILES} ${CONF_FILES} ${RESOURCES} ${QML_RESOURCES})
+    install(TARGETS ${LIB_NAME}
+            BUNDLE DESTINATION MacOS
+            RUNTIME DESTINATION ${CMAKE_INSTALL_BINDIR}
+            LIBRARY DESTINATION ${CMAKE_INSTALL_LIBDIR}
+            ARCHIVE DESTINATION ${CMAKE_INSTALL_LIBDIR}/static)
+endif()
+
 target_precompile_headers(${LIB_NAME} REUSE_FROM ${PROJECT_NAME}.Domain)
 target_link_libraries(${LIB_NAME} ${PROJECT_NAME}.Domain ${PROJECT_NAME}.Infrastructure
                       qhotkey Qt5::Core Qt5::Qml Qt5::Quick Qt5::QuickControls2 Qt5::Svg

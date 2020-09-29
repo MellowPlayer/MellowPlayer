@@ -65,7 +65,7 @@ QString StreamingServiceViewModel::name() const
     return _streamingService.name();
 }
 
-Player* StreamingServiceViewModel::player()
+IPlayerBase* StreamingServiceViewModel::player()
 {
     return _player.get();
 }
@@ -165,7 +165,7 @@ QString StreamingServiceViewModel::favoriteSettingKey() const
     return _streamingService.name() + "/favorite";
 }
 
-QObject* StreamingServiceViewModel::userScripts()
+UserScriptsViewModel* StreamingServiceViewModel::userScripts()
 {
     return &_userScriptsViewModel;
 }

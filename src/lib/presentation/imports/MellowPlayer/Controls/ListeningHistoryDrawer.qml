@@ -6,7 +6,7 @@ import QtQuick.Layouts 1.15
 import MellowPlayer 3.0
 
 Drawer {
-    id: drawer
+    id: root
 
     clip: true
     edge: Qt.RightEdge
@@ -18,7 +18,7 @@ Drawer {
         anchors.fill: parent
         padding: 0
 
-        header: ListeningHistoryToolBar { id: toolBar; onQuitRequested: drawer.close() }
+        header: ListeningHistoryToolBar { id: toolBar; onQuitRequested: root.close() }
 
         Item {
             anchors.fill: parent
@@ -40,6 +40,7 @@ Drawer {
                     id: mainPane
 
                     searching: toolBar.searchChecked
+                    drawer: root
 
                     Layout.fillHeight: true
                     Layout.fillWidth: true
@@ -55,14 +56,6 @@ Drawer {
                 anchors.bottomMargin: 4
             }
         }
-    }
-
-    MessageBoxDialog {
-        id: messageBoxConfirmDelete
-
-        standardButtons: Dialog.Yes | Dialog.No
-        x: drawer.width / 2 - width / 2
-        y: drawer.height / 2 - height / 2
     }
 }
 

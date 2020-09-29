@@ -44,6 +44,8 @@ set(CMAKE_POSITION_INDEPENDENT_CODE ON)
 # find common packages
 find_package(Threads)
 
+set(CMAKE_INSTALL_RPATH "${CMAKE_INSTALL_PREFIX}/${CMAKE_INSTALL_LIBDIR}")
+
 # add uninstall target
 configure_file("${CMAKE_SOURCE_DIR}/cmake/uninstall.cmake.in" "${CMAKE_CURRENT_BINARY_DIR}/uninstall.cmake" IMMEDIATE @ONLY)
 add_custom_target(uninstall COMMAND ${CMAKE_COMMAND} -P ${CMAKE_CURRENT_BINARY_DIR}/uninstall.cmake)

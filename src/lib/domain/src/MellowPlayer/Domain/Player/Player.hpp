@@ -12,7 +12,29 @@ namespace MellowPlayer::Domain
     class StreamingService;
     class StreamingServiceScript;
 
-    class Player : public IPlayer
+    // TODO Replace by PlayerViewModel
+    class IPlayerBase : public IPlayer
+    {
+        Q_OBJECT
+    public:
+        // invoked by WebView (QML)
+        virtual Q_INVOKABLE void setUpdateResults(const QVariant& results) = 0;
+
+        virtual void suspend() = 0;
+        virtual void resume() = 0;
+
+    signals:
+        void play() override;
+        void pause() override;
+        void next() override;
+        void previous() override;
+        void addToFavorites() override;
+        void removeFromFavorites() override;
+        void seekToPositionRequest(double newPosition);
+        void changeVolumeRequest(double newVolume);
+    };
+
+    class Player : public IPlayerBase
     {
         Q_OBJECT
     public:
@@ -37,8 +59,8 @@ namespace MellowPlayer::Domain
         bool isPlaying() const override;
         bool isStopped() const override;
 
-        // invoked by WebView (QML)
-        Q_INVOKABLE void setUpdateResults(const QVariant& results);
+
+        Q_INVOKABLE void setUpdateResults(const QVariant& results) override;
 
         // invoked by CurrentPlayer
         void suspend();
@@ -48,16 +70,6 @@ namespace MellowPlayer::Domain
         bool operator!=(const Player& other) const;
 
         void setPlaybackStatus(PlaybackStatus value);
-
-    signals:
-        void play() override;
-        void pause() override;
-        void next() override;
-        void previous() override;
-        void addToFavorites() override;
-        void removeFromFavorites() override;
-        void seekToPositionRequest(double newPosition);
-        void changeVolumeRequest(double newVolume);
 
     private:
         void setCurrentSong(std::unique_ptr<Domain::Song>& song);

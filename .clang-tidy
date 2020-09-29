@@ -1,0 +1,1 @@
+Checks: '*,-modernize-use-nodiscard,-modernize-use-trailing-return-type,-fuchsia*,-readability-convert-member-functions-to-static,-google-build-using-namespace,-llvm-namespace-comment,-google-readability-namespace-comments,-google-runtime-references,-cppcoreguidelines*,-misc*,-readability-redundant-access-specifiers,-*llvmlibc-callee-namespace'
