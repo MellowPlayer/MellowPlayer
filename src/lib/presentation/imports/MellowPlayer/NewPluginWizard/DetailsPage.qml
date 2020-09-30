@@ -9,8 +9,8 @@ WizardPage {
     property alias authorUrl: fieldAuthorWebsite.text
     property alias allPlatforms: cbAllPlatforms.checked
     property alias linuxPlatform: cbLinuxPlatform.checked
-    property alias appImagePlatform: cbAppImagePlatform.checked
-    property alias osxPlatform: cbOsxPlatform.checked
+    property bool appImagePlatform: false
+    property bool osxPlatform: false
     property alias windowsPlatform: cbWindowsPlatform.checked
 
     title: qsTr("Details")
@@ -25,12 +25,6 @@ WizardPage {
             return true;
 
         if (linuxPlatform)
-            return true;
-
-        if (appImagePlatform)
-            return true;
-
-        if (osxPlatform)
             return true;
 
         if (windowsPlatform)
@@ -111,7 +105,7 @@ WizardPage {
                 }
             }
 
-            ColumnLayout {
+            Flow {
                 CheckBox {
                     id: cbAllPlatforms
 
@@ -122,20 +116,6 @@ WizardPage {
                     id: cbLinuxPlatform
 
                     text: "GNU/Linux"
-                    enabled: !cbAllPlatforms.checked
-                }
-
-                CheckBox {
-                    id: cbAppImagePlatform
-
-                    text: "AppImage"
-                    enabled: !cbAllPlatforms.checked
-                }
-
-                CheckBox {
-                    id: cbOsxPlatform
-
-                    text: "Mac OSX"
                     enabled: !cbAllPlatforms.checked
                 }
 

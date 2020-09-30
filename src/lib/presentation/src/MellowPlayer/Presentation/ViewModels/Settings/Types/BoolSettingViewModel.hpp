@@ -15,6 +15,9 @@ namespace MellowPlayer::Presentation
     public:
         BoolSettingViewModel(Domain::Setting& setting, QObject* parent = nullptr);
 
+        QVariant value() const override;
+        void setValue(const QVariant& value) override;
+
         QString qmlComponent() override;
     };
 }

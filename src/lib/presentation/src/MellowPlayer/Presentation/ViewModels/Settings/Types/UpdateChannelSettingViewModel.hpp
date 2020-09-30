@@ -1,11 +1,11 @@
 #pragma once
 
-#include "SettingViewModel.hpp"
+#include "EnumSettingViewModel.hpp"
 #include <MellowPlayer/Infrastructure/Updater/UpdateChannel.hpp>
 
 namespace MellowPlayer::Presentation
 {
-    class UpdateChannelSettingViewModel : public SettingViewModel
+    class UpdateChannelSettingViewModel : public EnumSettingViewModel
     {
         Q_OBJECT
         Q_PROPERTY(QStringList values READ values CONSTANT)
@@ -13,7 +13,7 @@ namespace MellowPlayer::Presentation
         UpdateChannelSettingViewModel(Domain::Setting& setting, QObject* parent = nullptr);
 
         QVariant value() const override;
-        QStringList values() const;
+        QStringList values() const override;
         QString qmlComponent() override;
 
     public slots:

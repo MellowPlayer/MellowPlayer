@@ -5,10 +5,12 @@ import QtQuick.Controls.Material 2.15
 import MellowPlayer 3.0
 
 Label {
+    id: root
+
     property string url: ""
     property string name: ""
 
-    onLinkActivated: {
+    onLinkActivated: (link) => {
         console.log("opening external link: " + link);
         Qt.openUrlExternally(link)
     }

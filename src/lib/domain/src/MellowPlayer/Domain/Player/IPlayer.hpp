@@ -17,7 +17,7 @@ namespace MellowPlayer::Domain
     class IPlayer : public QObject
     {
         Q_OBJECT
-        Q_PROPERTY(Domain::Song* currentSong READ currentSong NOTIFY currentSongChanged)
+        Q_PROPERTY(Song* currentSong READ currentSong NOTIFY currentSongChanged)
         Q_PROPERTY(double position READ position NOTIFY positionChanged)
         Q_PROPERTY(PlaybackStatus playbackStatus READ playbackStatus NOTIFY playbackStatusChanged)
         Q_PROPERTY(bool canSeek READ canSeek NOTIFY canSeekChanged)
@@ -40,7 +40,7 @@ namespace MellowPlayer::Domain
         virtual void previous() = 0;
         virtual void seekToPosition(double position) = 0;
         virtual void setVolume(double volume) = 0;
-        virtual Domain::Song* currentSong() = 0;
+        virtual Song* currentSong() = 0;
         virtual void toggleFavoriteSong() = 0;
         virtual void addToFavorites() = 0;
         virtual void removeFromFavorites() = 0;
@@ -58,7 +58,7 @@ namespace MellowPlayer::Domain
         virtual bool isStopped() const = 0;
 
     signals:
-        void currentSongChanged(Domain::Song* song);
+        void currentSongChanged(Song* song);
         void positionChanged();
         void playbackStatusChanged();
         void canSeekChanged();

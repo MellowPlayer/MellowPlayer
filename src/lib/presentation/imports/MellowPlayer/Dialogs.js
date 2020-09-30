@@ -16,8 +16,8 @@ function create(qmlComponent, properties) {
     if (dialog == null)
         throw "Error creating dialog object";
 
-    dialog.x = mainWindow.width / 2 - dialog.width / 2;
-    dialog.y = mainWindow.height / 2 - dialog.height / 2 - 48;
+    dialog.x = Qt.binding(() => (mainWindow.width - dialog.width) / 2);
+    dialog.y = Qt.binding(() => (mainWindow.height - dialog.height) / 2);
 
     return dialog;
 }

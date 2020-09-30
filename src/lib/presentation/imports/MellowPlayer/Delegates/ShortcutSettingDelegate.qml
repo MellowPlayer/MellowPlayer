@@ -5,9 +5,18 @@ import QtQuick.Controls 2.15
 import MellowPlayer 3.0
 
 ItemDelegate {
+    id: root
+
     bottomPadding: 3; topPadding: 3
-    enabled: model.enabled
+    enabled: root.enabled
     hoverEnabled: true
+    
+    required property bool isEnabled
+    required property string name
+    required property string toolTip
+    required property string type
+    required property string qmlComponent
+    required property Setting qtObject
 
     onClicked: keySequenceEdit.forceActiveFocus()
 
@@ -19,8 +28,7 @@ ItemDelegate {
         anchors.bottomMargin: parent.bottomPadding
 
         Label {
-            text: SettingsTranslator.translateName(model.name)
-            font.pixelSize: 16
+            text: SettingsTranslator.translateName(root.name)
 
             Layout.fillWidth: true
         }
@@ -34,8 +42,8 @@ ItemDelegate {
             property int newMofifiers: 0
             property string memText: text
 
-            onTextChanged: model.qtObject.value = text
-            text: model.qtObject.value
+            onTextChanged: root.qtObject.value = text
+            text: root.qtObject.value
 
             Keys.onPressed: {
                 if (event.key === Qt.Key_Backspace|| event.key === Qt.Key_Delete) {
@@ -54,7 +62,7 @@ ItemDelegate {
                 if( nbKeyPressed == 1) {
                     startRecording()
                 }
-                placeholderText = model.qtObject.keySequenceToString(event.key, event.modifiers);
+                placeholderText = root.qtObject.keySequenceToString(event.key, event.modifiers);
                 newKey = event.key;
                 newMofifiers = event.modifiers
                 event.accepted = true;
@@ -83,7 +91,7 @@ ItemDelegate {
             }
 
             function finishRecording() {
-                if (model.qtObject.isValidKeySequence(newKey, newMofifiers))
+                if (root.qtObject.isValidKeySequence(newKey, newMofifiers))
                     text = placeholderText
                 else
                     text = memText;
@@ -93,7 +101,7 @@ ItemDelegate {
             }
 
             Tooltip {
-                text: SettingsTranslator.translateToolTip(model.toolTip)
+                text: SettingsTranslator.translateToolTip(root.toolTip)
             }
 
 

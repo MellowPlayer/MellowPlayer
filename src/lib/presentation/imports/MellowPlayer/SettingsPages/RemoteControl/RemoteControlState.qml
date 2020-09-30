@@ -35,7 +35,7 @@ Item {
 
             Label {
                 text: root.icon
-                font.pixelSize: 96
+                font.pixelSize: 64
                 font.family: MaterialIcons.family
 
                 horizontalAlignment: "AlignHCenter"
@@ -46,7 +46,7 @@ Item {
             Label {
                 text: root.title
                 font.bold: true
-                font.pixelSize: 32
+                font.pixelSize: 24
 
                 horizontalAlignment: "AlignHCenter"
 

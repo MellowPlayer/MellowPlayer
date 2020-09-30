@@ -12,6 +12,7 @@ namespace MellowPlayer::Presentation
         EnumSettingViewModel(Domain::Setting& setting, QObject* parent = nullptr);
 
         virtual QStringList values() const;
+
         QString qmlComponent() override;
     };
 }

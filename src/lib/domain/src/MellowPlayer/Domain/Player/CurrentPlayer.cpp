@@ -143,6 +143,7 @@ void CurrentPlayer::onCurrentServiceChanged(StreamingService* streamingService)
     {
         if (_currentPlayer != nullptr)
         {
+            disconnect(_currentPlayer.get(), &Player::currentSongChanged, this, &CurrentPlayer::activeChanged);
             disconnect(_currentPlayer.get(), &Player::currentSongChanged, this, &CurrentPlayer::currentSongChanged);
             disconnect(_currentPlayer.get(), &Player::positionChanged, this, &CurrentPlayer::positionChanged);
             disconnect(_currentPlayer.get(), &Player::playbackStatusChanged, this, &CurrentPlayer::playbackStatusChanged);
@@ -158,6 +159,7 @@ void CurrentPlayer::onCurrentServiceChanged(StreamingService* streamingService)
 
         _currentPlayer = player;
 
+        connect(_currentPlayer.get(), &Player::currentSongChanged, this, &CurrentPlayer::activeChanged);
         connect(_currentPlayer.get(), &Player::currentSongChanged, this, &CurrentPlayer::currentSongChanged);
         connect(_currentPlayer.get(), &Player::positionChanged, this, &CurrentPlayer::positionChanged);
         connect(_currentPlayer.get(), &Player::playbackStatusChanged, this, &CurrentPlayer::playbackStatusChanged);
@@ -170,6 +172,7 @@ void CurrentPlayer::onCurrentServiceChanged(StreamingService* streamingService)
         connect(_currentPlayer.get(), &Player::isStoppedChanged, this, &CurrentPlayer::isStoppedChanged);
         _currentPlayer->resume();
 
+        emit activeChanged();
         emit currentSongChanged(_currentPlayer->currentSong());
         emit positionChanged();
         emit playbackStatusChanged();
@@ -213,4 +216,9 @@ QString CurrentPlayer::serviceLogo() const
 CurrentPlayer::~CurrentPlayer()
 {
 
+}
+
+bool CurrentPlayer::isActive()
+{
+    return currentSong() != nullptr && currentSong()->isValid();
 }

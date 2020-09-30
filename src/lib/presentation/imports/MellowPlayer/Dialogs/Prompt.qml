@@ -4,13 +4,14 @@ import QtQuick.Controls 2.15
 import QtQuick.Controls.Material 2.15
 import QtWebEngine 1.10
 
+// TODO QMLLINT
+
 Dialog {
     id: root
 
     property JavaScriptDialogRequest request
 
     modal: true
-    standardButtons: Dialog.Ok | Dialog.Cancel
     title: request.message
 
     onAccepted: request.dialogAccept(textField.text)
@@ -21,17 +22,17 @@ Dialog {
     TextField {
         id: textField
         anchors.fill: parent
-        text: request.defaultText
+        text: root.request.defaultText
         selectByMouse: true
     }
 
-    Shortcut {
-        sequence: "Return"
-        onActivated: accept()
-    }
-
-    Shortcut {
-        sequence: "Enter"
-        onActivated: accept()
-    }
+//    Shortcut {
+//        sequence: "Return"
+//        onActivated: root.accept()
+//    }
+//
+//    Shortcut {
+//        sequence: "Enter"
+//        onActivated: root.accept()
+//    }
 }

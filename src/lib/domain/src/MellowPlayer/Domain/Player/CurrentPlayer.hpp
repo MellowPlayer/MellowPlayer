@@ -15,10 +15,12 @@ namespace MellowPlayer::Domain
     class CurrentPlayer : public IPlayer
     {
         Q_OBJECT
+        Q_PROPERTY(bool active READ isActive NOTIFY activeChanged)
     public:
         CurrentPlayer(Players& players, StreamingServices& streamingServices);
         virtual ~CurrentPlayer();
 
+        Q_INVOKABLE bool isActive();
         Q_INVOKABLE void togglePlayPause() override;
         Q_INVOKABLE void play() override;
         Q_INVOKABLE void pause() override;
@@ -42,6 +44,9 @@ namespace MellowPlayer::Domain
         QString serviceLogo() const override;
         bool isPlaying() const override;
         bool isStopped() const override;
+
+    signals:
+        void activeChanged();
 
     private slots:
         void onCurrentServiceChanged(Domain::StreamingService* streamingService);

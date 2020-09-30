@@ -9,9 +9,34 @@ import QtQuick.tooling 1.2
 Module {
     dependencies: ["QtQuick 2.0"]
     Component {
+        name: "MellowPlayer::Domain::CurrentPlayer"
+        prototype: "MellowPlayer::Domain::IPlayer"
+        exports: ["CurrentPlayer 3.0"]
+        isCreatable: false
+        exportMetaObjectRevisions: [0]
+        Property { name: "active"; type: "bool"; isReadonly: true }
+        Method { name: "isActive"; type: "bool" }
+        Method { name: "togglePlayPause" }
+        Method { name: "play" }
+        Method { name: "pause" }
+        Method { name: "next" }
+        Method { name: "previous" }
+        Method {
+            name: "seekToPosition"
+            Parameter { name: "position"; type: "double" }
+        }
+        Method {
+            name: "setVolume"
+            Parameter { name: "volume"; type: "double" }
+        }
+        Method { name: "toggleFavoriteSong" }
+        Method { name: "addToFavorites" }
+        Method { name: "removeFromFavorites" }
+    }
+    Component {
         name: "MellowPlayer::Domain::IPlayer"
         prototype: "QObject"
-        Property { name: "currentSong"; type: "Domain::Song"; isReadonly: true; isPointer: true }
+        Property { name: "currentSong"; type: "Song"; isReadonly: true; isPointer: true }
         Property { name: "position"; type: "double"; isReadonly: true }
         Property { name: "playbackStatus"; type: "PlaybackStatus"; isReadonly: true }
         Property { name: "canSeek"; type: "bool"; isReadonly: true }
@@ -24,7 +49,7 @@ Module {
         Property { name: "isStopped"; type: "bool"; isReadonly: true }
         Signal {
             name: "currentSongChanged"
-            Parameter { name: "song"; type: "Domain::Song"; isPointer: true }
+            Parameter { name: "song"; type: "Song"; isPointer: true }
         }
     }
     Component {
@@ -47,27 +72,6 @@ Module {
             name: "changeVolumeRequest"
             Parameter { name: "newVolume"; type: "double" }
         }
-        Method {
-            name: "setUpdateResults"
-            Parameter { name: "results"; type: "QVariant" }
-        }
-    }
-    Component {
-        name: "MellowPlayer::Domain::Player"
-        prototype: "MellowPlayer::Domain::IPlayerBase"
-        exports: ["Player 3.0"]
-        isCreatable: false
-        exportMetaObjectRevisions: [0]
-        Method {
-            name: "seekToPosition"
-            Parameter { name: "value"; type: "double" }
-        }
-        Method {
-            name: "setVolume"
-            Parameter { name: "volume"; type: "double" }
-        }
-        Method { name: "togglePlayPause" }
-        Method { name: "toggleFavoriteSong" }
         Method {
             name: "setUpdateResults"
             Parameter { name: "results"; type: "QVariant" }
@@ -140,6 +144,21 @@ Module {
         }
     }
     Component {
+        name: "MellowPlayer::Domain::Song"
+        prototype: "QObject"
+        exports: ["Song 3.0"]
+        isCreatable: false
+        exportMetaObjectRevisions: [0]
+        Property { name: "uniqueId"; type: "string"; isReadonly: true }
+        Property { name: "title"; type: "string"; isReadonly: true }
+        Property { name: "artist"; type: "string"; isReadonly: true }
+        Property { name: "album"; type: "string"; isReadonly: true }
+        Property { name: "artUrl"; type: "string"; isReadonly: true }
+        Property { name: "duration"; type: "double"; isReadonly: true }
+        Property { name: "isFavorite"; type: "bool"; isReadonly: true }
+        Method { name: "isValid"; type: "bool" }
+    }
+    Component {
         name: "MellowPlayer::Presentation::ActiveThemeViewModel"
         prototype: "MellowPlayer::Presentation::QmlSingleton"
         exports: ["ActiveTheme 3.0"]
@@ -191,6 +210,29 @@ Module {
             Parameter { name: "text"; type: "string" }
         }
         Method { name: "canPaste"; type: "bool" }
+    }
+    Component {
+        name: "MellowPlayer::Presentation::ColorSettingViewModel"
+        prototype: "MellowPlayer::Presentation::SettingViewModel"
+        exports: ["ColorSetting 3.0"]
+        isCreatable: false
+        exportMetaObjectRevisions: [0]
+    }
+    Component {
+        name: "MellowPlayer::Presentation::DevToolsWindowViewModel"
+        prototype: "MellowPlayer::Presentation::QmlSingleton"
+        exports: ["DevToolsWindow 3.0"]
+        isCreatable: false
+        exportMetaObjectRevisions: [0]
+        Signal { name: "show" }
+    }
+    Component {
+        name: "MellowPlayer::Presentation::EnumSettingViewModel"
+        prototype: "MellowPlayer::Presentation::SettingViewModel"
+        exports: ["EnumSetting 3.0"]
+        isCreatable: false
+        exportMetaObjectRevisions: [0]
+        Property { name: "values"; type: "QStringList"; isReadonly: true }
     }
     Component {
         name: "MellowPlayer::Presentation::IMainWindow"
@@ -352,6 +394,17 @@ Module {
         }
     }
     Component {
+        name: "MellowPlayer::Presentation::ScalingFactorSettingViewModel"
+        prototype: "MellowPlayer::Presentation::SettingViewModel"
+        exports: ["ScalingFactorSetting 3.0"]
+        isCreatable: false
+        exportMetaObjectRevisions: [0]
+        Property { name: "minValue"; type: "int"; isReadonly: true }
+        Property { name: "maxValue"; type: "int"; isReadonly: true }
+        Property { name: "step"; type: "int"; isReadonly: true }
+        Property { name: "suffix"; type: "string"; isReadonly: true }
+    }
+    Component {
         name: "MellowPlayer::Presentation::SettingViewModel"
         prototype: "QObject"
         exports: ["Setting 3.0"]
@@ -361,8 +414,9 @@ Module {
         Property { name: "toolTip"; type: "string"; isReadonly: true }
         Property { name: "type"; type: "string"; isReadonly: true }
         Property { name: "qmlComponent"; type: "string"; isReadonly: true }
-        Property { name: "enabled"; type: "bool"; isReadonly: true }
+        Property { name: "isEnabled"; type: "bool"; isReadonly: true }
         Property { name: "value"; type: "QVariant" }
+        Signal { name: "enabledChanged" }
         Method {
             name: "setValue"
             Parameter { name: "value"; type: "QVariant" }
@@ -496,6 +550,31 @@ Module {
             Parameter { name: "appImagePlatform"; type: "bool" }
             Parameter { name: "osxPlatform"; type: "bool" }
             Parameter { name: "windowsPlatform"; type: "bool" }
+        }
+    }
+    Component {
+        name: "MellowPlayer::Presentation::TimeLimitSettingViewModel"
+        prototype: "MellowPlayer::Presentation::EnumSettingViewModel"
+        exports: ["TimeLimitSetting 3.0"]
+        isCreatable: false
+        exportMetaObjectRevisions: [0]
+        Property { name: "values"; type: "QStringList"; isReadonly: true }
+        Signal { name: "valueChanged" }
+        Method {
+            name: "setValue"
+            Parameter { name: "value"; type: "QVariant" }
+        }
+    }
+    Component {
+        name: "MellowPlayer::Presentation::UpdateChannelSettingViewModel"
+        prototype: "MellowPlayer::Presentation::EnumSettingViewModel"
+        exports: ["UpdateChannelSetting 3.0"]
+        isCreatable: false
+        exportMetaObjectRevisions: [0]
+        Property { name: "values"; type: "QStringList"; isReadonly: true }
+        Method {
+            name: "setValue"
+            Parameter { name: "value"; type: "QVariant" }
         }
     }
     Component {

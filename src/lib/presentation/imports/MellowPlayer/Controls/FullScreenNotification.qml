@@ -16,7 +16,7 @@ Pane {
 
     Label {
         text: qsTr("<p>You are now in <b>fullscreen</b> mode.</p>Press <b>ESC</b> to quit!")
-        font.pixelSize: 16
+        font.pixelSize: 14
         horizontalAlignment: "AlignHCenter"
     }
 

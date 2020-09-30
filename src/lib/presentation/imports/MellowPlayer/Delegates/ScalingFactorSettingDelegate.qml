@@ -3,10 +3,15 @@ import QtQuick.Layouts 1.15
 import QtQuick.Controls 2.15
 
 import MellowPlayer 3.0
+import "../SettingsTranslator.js" as SettingsTranslator
 
 ItemDelegate {
     id: root
 
+    bottomPadding: 3; topPadding: 3
+    hoverEnabled: true
+    enabled: root.enabled
+    
     required property bool isEnabled
     required property string name
     required property string toolTip
@@ -14,13 +19,7 @@ ItemDelegate {
     required property string qmlComponent
     required property Setting qtObject
 
-    property EnumSetting enumSetting: qtObject
-    property var values: enumSetting.values
-
-    bottomPadding: 3; topPadding: 3
-    hoverEnabled: true
-    enabled: root.enabled
-    onClicked: comboBox.popup.open()
+    property ScalingFactorSetting intSetting: qtObject
 
     RowLayout {
         anchors.fill: parent
@@ -35,15 +34,17 @@ ItemDelegate {
             Layout.fillWidth: true
         }
 
-        ComboBox {
-            id: comboBox
+        SpinBox {
+            value: root.qtObject.value
+            from: root.intSetting.minValue
+            to: root.intSetting.maxValue
+            stepSize: root.qtObject.step
 
-            hoverEnabled: true
-            model: values
-            currentIndex: root.values.indexOf(root.qtObject.value)
-            onCurrentTextChanged: qtObject.value = currentText
+            textFromValue:  function(value, locale) {
+                return Number(value).toLocaleString(locale, 'f', 0) + root.qtObject.suffix;
+            }
 
-            Layout.preferredWidth: 250
+            onValueChanged: root.qtObject.value = value
 
             Tooltip {
                 text: SettingsTranslator.translateToolTip(root.toolTip)

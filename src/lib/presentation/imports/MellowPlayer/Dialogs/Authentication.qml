@@ -39,7 +39,6 @@ Dialog {
 
             Label {
                 id: messageLabel
-                font.pixelSize: 16
 
                 Layout.fillWidth: true
                 Layout.alignment: Qt.AlignVCenter

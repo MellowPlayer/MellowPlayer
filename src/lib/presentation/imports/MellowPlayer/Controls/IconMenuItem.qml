@@ -29,11 +29,12 @@ MenuItem {
 
         Label {
             horizontalAlignment: "AlignRight"
-            text: shortcut
+            text: root.action.shortcut ?? ""
             font.italic: true
 
             Layout.minimumWidth: 64
             Layout.maximumWidth: 64
+            Layout.alignment: Qt.AlignRight
         }
     }
 }

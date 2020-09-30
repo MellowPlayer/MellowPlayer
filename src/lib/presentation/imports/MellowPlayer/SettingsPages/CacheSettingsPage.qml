@@ -75,7 +75,7 @@ Item {
 
             Label {
                 text: qsTr("You need to restart MellowPlayer for the change to be applied.")
-                font.pixelSize: 16
+                font.pixelSize: 14
             }
 
             Item {

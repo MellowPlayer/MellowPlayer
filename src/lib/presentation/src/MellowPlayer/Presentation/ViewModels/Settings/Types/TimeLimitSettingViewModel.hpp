@@ -1,6 +1,6 @@
 #pragma once
 
-#include "SettingViewModel.hpp"
+#include "EnumSettingViewModel.hpp"
 #include <MellowPlayer/Domain/ListeningHistory/TimeLimits.hpp>
 #include <MellowPlayer/Domain/Settings/Setting.hpp>
 
@@ -36,7 +36,7 @@ public:
 
 namespace MellowPlayer::Presentation
 {
-    class TimeLimitSettingViewModel : public SettingViewModel
+    class TimeLimitSettingViewModel : public EnumSettingViewModel
     {
         Q_OBJECT
         Q_PROPERTY(QStringList values READ values CONSTANT)
@@ -44,7 +44,7 @@ namespace MellowPlayer::Presentation
         TimeLimitSettingViewModel(Domain::Setting& setting, QObject* parent = nullptr);
 
         QVariant value() const override;
-        QStringList values() const;
+        QStringList values() const override;
         QString qmlComponent() override;
 
     signals:

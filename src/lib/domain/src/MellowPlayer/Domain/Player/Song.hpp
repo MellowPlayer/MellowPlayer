@@ -15,7 +15,6 @@ namespace MellowPlayer::Domain
         Q_PROPERTY(QString artUrl READ artUrl CONSTANT)
         Q_PROPERTY(double duration READ duration NOTIFY durationChanged)
         Q_PROPERTY(bool isFavorite READ isFavorite NOTIFY isFavoriteChanged)
-
     public:
         Song();
         Song(const QString& uniqueId,

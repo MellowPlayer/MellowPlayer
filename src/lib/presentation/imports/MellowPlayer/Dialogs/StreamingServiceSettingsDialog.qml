@@ -38,13 +38,11 @@ Dialog {
 
             Label {
                 font.italic: true
-                font.pixelSize: 12
                 text: qsTr("Version ") + service.version + qsTr(" by ")
             }
 
             Link {
                 font.italic: true
-                font.pixelSize: 12
                 name: service.authorName
                 url: service.authorWebsite
             }
@@ -405,7 +403,6 @@ Dialog {
                                 Label {
                                     font.pixelSize: 12
                                     text: qsTr("QtWebEngine does not support attaching a network proxy to a particular web view. The network proxy settings of the current streaming service are used globally, this may lead to some HTTP requests failurefor previously active services and you might need to reload them when you switch back.")
-                                    width: parent.width
                                     wrapMode: Text.Wrap
 
                                     Layout.fillWidth: true

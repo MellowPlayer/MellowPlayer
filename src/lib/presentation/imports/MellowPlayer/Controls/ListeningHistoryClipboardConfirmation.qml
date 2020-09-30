@@ -47,7 +47,6 @@ Pane {
 
         Label {
             height: implicitHeight; width: parent.width
-            font.pixelSize: 14
             horizontalAlignment: "AlignHCenter"
             text: qsTr('copied to clipboard')
         }

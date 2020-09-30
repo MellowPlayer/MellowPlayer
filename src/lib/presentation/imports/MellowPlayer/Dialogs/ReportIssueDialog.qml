@@ -28,9 +28,7 @@ Dialog {
                     Layout.fillWidth: true
                     Layout.fillHeight: true
 
-                    padding: 32
-                    leftPadding: 64
-                    rightPadding: 64
+                    padding: 16
 
                     ColumnLayout {
                         anchors.fill: parent
@@ -88,9 +86,7 @@ Dialog {
                     Layout.fillWidth: true
                     Layout.fillHeight: true
 
-                    padding: 32
-                    leftPadding: 64
-                    rightPadding: 64
+                    padding: 16
 
                     ColumnLayout {
                         anchors.fill: parent

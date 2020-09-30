@@ -3,7 +3,6 @@ import QtQuick.Controls 2.15
 
 import MellowPlayer 3.0
 
-
 Menu {
     id: root
 
@@ -37,81 +36,78 @@ Menu {
         onTriggered: root.open()
     }
 
-    MenuItem {
-        text: qsTr("Toggle main toolbar")
-        onClicked: App.settings.get(SettingKey.APPEARANCE_TOOLBAR_VISIBLE).value = !App.settings.get(SettingKey.APPEARANCE_TOOLBAR_VISIBLE).value
-    }
+    MenuItem { action: Actions.toggleToolBar }
 
     MenuSeparator { }
 
     MenuItem {
         height: visible ? implicitHeight : 0
-        visible: canCopy
+        visible: root.canCopy
         text: qsTr("Copy")
-        onClicked: copyRequested()
+        onClicked: root.copyRequested()
     }
 
     MenuItem {
         height: visible ? implicitHeight : 0
         text: qsTr("Paste")
-        visible: canPaste
-        onClicked: pasteRequested()
+        visible: root.canPaste
+        onClicked: root.pasteRequested()
     }
 
     MenuItem {
         height: visible ? implicitHeight : 0
         text: qsTr("Unselect")
-        visible: canUnselect
-        onClicked: unselectRequested()
+        visible: root.canUnselect
+        onClicked: root.unselectRequested()
     }
 
     MenuSeparator {
-        visible: canCopy || canPaste || canUnselect
+        visible: root.canCopy || root.canPaste || root.canUnselect
         height: visible ? implicitHeight : 0
     }
 
     MenuItem {
         height: visible ? implicitHeight : 0
         text: qsTr("Copy link")
-        visible: hasLink
-        onClicked: copyLinkRequested()
+        visible: root.hasLink
+        onClicked: root.copyLinkRequested()
     }
 
     MenuItem {
         height: visible ? implicitHeight : 0
         text: qsTr("Open link")
-        visible: hasLink
-        onClicked: openLinkRequested()
+        visible: root.hasLink
+        onClicked: root.openLinkRequested()
     }
 
     MenuSeparator {
-        visible: hasLink
+        visible: root.hasLink
         height: visible ? implicitHeight : 0
     }
 
     MenuItem {
         height: visible ? implicitHeight : 0
         text: qsTr("Back")
-        visible: canGoBack
-        onClicked: goBackRequested()
+        visible: root.canGoBack
+        onClicked: root.goBackRequested()
     }
 
     MenuItem {
         height: visible ? implicitHeight : 0
         text: qsTr("Forward")
-        visible: canGoForward
-        onClicked: goForwardRequested()
+        visible: root.canGoForward
+        onClicked: root.goForwardRequested()
     }
 
     MenuItem {
         height: visible ? implicitHeight : 0
         text: qsTr("Reload")
-        onClicked: reloadRequested()
+        onClicked: root.reloadRequested()
     }
 
     MenuItem {
         text: qsTr("View Page Source")
-        onClicked: viewPageSourceRequested()
+        onClicked: root.viewPageSourceRequested()
     }
 
     MenuItem {

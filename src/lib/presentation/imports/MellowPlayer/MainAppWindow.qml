@@ -11,37 +11,20 @@ ApplicationWindow {
 
     property var runningServices: null
     property bool hasRunningServices: runningServices !== null && runningServices.currentIndex !== -1
-    property string currentServiceName: StreamingServices.currentServiceName
 
-    function toggleFullScreen(request) {
-        if (request.toggleOn) {
-            d.previousVisibility = mainWindow.visibility
-            mainWindow.showFullScreen();
-            fullScreenNotification.visible = true;
-        }
-        else {
-            mainWindow.visibility = d.previousVisibility
-            mainWindow.showNormal()
-            if (d.previousVisibility === ApplicationWindow.Maximized)
-                mainWindow.showMaximized()
-        }
-        request.accept();
-    }
-
-    minimumWidth: 800; minimumHeight: 480
+//    minimumWidth: 800; minimumHeight: 480
     width: App.settings.get(SettingKey.PRIVATE_WINDOW_WIDTH).value;
     height: App.settings.get(SettingKey.PRIVATE_WINDOW_HEIGHT).value;
     title: StreamingServices.currentService !== null ? StreamingServices.currentServiceName : ""
+    font.pixelSize: width < 960 ? 12 : 14
 
     onClosing: d.handleCloseEvent(close);
 
-    Component.onCompleted: {
-        Dialogs.mainWindow = mainWindow
-    }
+    Component.onCompleted: { Dialogs.mainWindow = mainWindow }
     Material.accent: ActiveTheme.accent
     Material.background: ActiveTheme.background
     Material.foreground: ActiveTheme.foreground
-    Material.primary: ActiveTheme.primary
+    Material.primary: ActiveTheme.primaryI
     Material.theme: ActiveTheme.dark ? Material.Dark : Material.Light
 
     header: MainToolBar {
@@ -53,61 +36,12 @@ ApplicationWindow {
     footer: UpdateToolBar { }
 
     StackView {
-       id: stack
+        id: stack
 
-       property bool slideTransitions: false
+        anchors.fill: parent
 
-       anchors.fill: parent
-
-       pushEnter: Transition {
-           PropertyAnimation {
-               property: "opacity"
-               from: 0
-               to:1
-               duration: 200
-           }
-       }
-       pushExit: Transition {
-           PropertyAnimation {
-               property: "opacity"
-               from: 1
-               to:0
-               duration: 200
-           }
-       }
-
-       popEnter: slideTransitions ? slideInLeft : fadeIn
-       popExit: slideTransitions ? slideOutRight : fadeOut
-
-       property Transition slideInLeft: Transition {
-           NumberAnimation { property: "x"; from: (stack.mirrored ? -0.5 : 0.5) *  -stack.width; to: 0; duration: 200; easing.type: Easing.OutCubic }
-           NumberAnimation { property: "opacity"; from: 0.0; to: 1.0; duration: 200; easing.type: Easing.OutCubic }
-       }
-
-       property Transition slideOutRight: Transition {
-           NumberAnimation { property: "x"; from: 0; to: (stack.mirrored ? -0.5 : 0.5) * stack.width; duration: 200; easing.type: Easing.OutCubic }
-           NumberAnimation { property: "opacity"; from: 1.0; to: 0.0; duration: 200; easing.type: Easing.OutCubic }
-       }
-
-       property Transition fadeIn: Transition {
-           PropertyAnimation {
-               property: "opacity"
-               from: 0
-               to:1
-               duration: 200
-           }
-       }
-       property Transition fadeOut: Transition {
-           PropertyAnimation {
-               property: "opacity"
-               from: 1
-               to:0
-               duration: 200
-           }
-       }
-
-       Component { id: selectServicePageComponent; SelectServicePage { id: selectServicePage } }
-       Component { id: runningServicesPageComponent; RunningServicesPage { id: runningServicesPage } }
+        Component { id: selectServicePageComponent; SelectServicePage {} }
+        Component { id: runningServicesPageComponent;  RunningServicesPage {} }
     }
 
     SettingsDrawer {
@@ -167,7 +101,7 @@ ApplicationWindow {
         property real scaleFactor: 0.9
 
         modal: true
-        width: 1152; height: 648
+        width: 600; height: 440
         x: mainWindow.width / 2 - width / 2;
         y: mainWindow.height / 2 - height / 2 - 48;
     }
@@ -201,21 +135,77 @@ ApplicationWindow {
         }
     }
 
-    Shortcut {
-        sequence: App.settings.get(SettingKey.SHORTCUTS_SELECT_SERVICE).value
-        onActivated: {
-            stack.slideTransitions = false;
-            MainWindow.toggleActivePage();
-        }
+    Action {
+        id: toggleCurrentPageAction
+        shortcut: App.settings.get(SettingKey.SHORTCUTS_SELECT_SERVICE).value
+        onTriggered: MainWindow.toggleActivePage()
+        Component.onCompleted: Actions.toggleCurrentPage = toggleCurrentPageAction
     }
 
-    Shortcut {
-        sequence: App.settings.get(SettingKey.SHORTCUTS_SHOW_TOOLBAR).value
-        onActivated: {
-            console.warn("CTRL+T")
-            App.settings.get(SettingKey.APPEARANCE_TOOLBAR_VISIBLE).value = !App.settings.get(SettingKey.APPEARANCE_TOOLBAR_VISIBLE).value
-        }
+    Action {
+        id: openListeningHistoryAction
+        shortcut: App.settings.get(SettingKey.SHORTCUTS_LISTENING_HISTORY).value
+        onTriggered:  listeningHistoryDrawer.open()
+        Component.onCompleted: Actions.openListeningHistory = openListeningHistoryAction
     }
+
+    Action {
+        id: openSettingsAction
+        shortcut: App.settings.get(SettingKey.SHORTCUTS_SETTINGS).value
+        text: qsTr("Settings")
+        onTriggered: settingsDrawer.open()
+        Component.onCompleted: Actions.openSettings = openSettingsAction
+    }
+
+    Action {
+        id: createNewPluginAction
+        shortcut: App.settings.get(SettingKey.SHORTCUTS_CREATE_PLUGIN).value
+        text: qsTr("Create plugin")
+        onTriggered: newPluginWizard.open()
+        Component.onCompleted: Actions.createNewPlugin = createNewPluginAction
+    }
+
+    Action {
+        id: reportIssueAction
+        shortcut: App.settings.get(SettingKey.SHORTCUTS_REPORT_ISSUE).value
+        text: qsTr("Report issue")
+        onTriggered: Dialogs.reportIssue()
+        Component.onCompleted: Actions.reportIssue = reportIssueAction
+    }
+
+    Action {
+        id: toggleToolBarAction
+        shortcut: App.settings.get(SettingKey.SHORTCUTS_SHOW_TOOLBAR).value
+        text: qsTr("Toggle main toolbar")
+        onTriggered: App.settings.get(SettingKey.APPEARANCE_TOOLBAR_VISIBLE).value = !App.settings.get(SettingKey.APPEARANCE_TOOLBAR_VISIBLE).value
+        Component.onCompleted: Actions.toggleToolBar = toggleToolBarAction
+    }
+
+    Action {
+        id: checkForUpdatesAction
+        enabled: !Updater.busy
+        shortcut: App.settings.get(SettingKey.SHORTCUTS_CHECK_FOR_UPDATE).valu
+        text: qsTr("Check for update")
+        onTriggered: Updater.check()
+        Component.onCompleted: Actions.checkForUpdates = checkForUpdatesAction
+    }
+
+    Action {
+        id: showAboutAction
+        shortcut: App.settings.get(SettingKey.SHORTCUTS_ABOUT).value
+        text: qsTr("About")
+        onTriggered: aboutDialog.open()
+        Component.onCompleted: Actions.showAbout = showAboutAction
+    }
+
+    Action {
+        id: quitAction
+        shortcut: App.settings.get(SettingKey.SHORTCUTS_QUIT).value
+        text: qsTr("Quit")
+        onTriggered: MainWindow.requestQuit()
+        Component.onCompleted: Actions.quit = quitAction
+    }
+
 
     QtObject {
         id: d
@@ -240,24 +230,23 @@ ApplicationWindow {
         }
 
         onPageChanged: {
-                if (MainWindow.currentPage === MainWindow.selectServicePage) {
-                    if (runningServices !== null && runningServices.currentWebView !== null)
-                        runningServices.currentWebView.updateImage();
-                    var selectServices = stack.push(selectServicePageComponent);
-                    selectServices.quitRequested.connect(function() {
-                        stack.slideTransitions = false;
-                        MainWindow.toggleActivePage()
-                    });
+            if (MainWindow.currentPage === MainWindow.selectServicePage) {
+                if (runningServices !== null && runningServices.currentWebView !== null)
+                    runningServices.currentWebView.updateImage();
+                var selectServices = stack.push(selectServicePageComponent);
+                selectServices.quitRequested.connect(function() {
+                    MainWindow.toggleActivePage()
+                });
+            }
+            else if (MainWindow.currentPage === MainWindow.runningServicesPage) {
+                if (stack.depth <= 1) {
+                    runningServices = stack.push(runningServicesPageComponent)
                 }
-                else if (MainWindow.currentPage === MainWindow.runningServicesPage) {
-                    if (stack.depth <= 1) {
-                        runningServices = stack.push(runningServicesPageComponent)
-                    }
-                    else {
-                        stack.pop();
-                    }
+                else {
+                    stack.pop();
                 }
             }
+        }
 
         function hideWindow() {
             mainWindow.hide();
@@ -285,7 +274,6 @@ ApplicationWindow {
                 }
                 else {
                     MainWindow.visible = false;
-                    mainWindow.visible = false;
                 }
                 close.accepted = false;
             }

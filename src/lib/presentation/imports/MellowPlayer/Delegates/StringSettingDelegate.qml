@@ -5,9 +5,19 @@ import QtQuick.Controls 2.15
 import MellowPlayer 3.0
 
 ItemDelegate {
+    id: root
+
     bottomPadding: 3; topPadding: 3
-    enabled: model.enabled
+    enabled: root.enabled
     hoverEnabled: true
+    
+    required property bool isEnabled
+    required property string name
+    required property string toolTip
+    required property string type
+    required property string qmlComponent
+    required property Setting qtObject
+    
 
     onClicked: textField.forceActiveFocus()
 
@@ -24,24 +34,23 @@ ItemDelegate {
         spacing: 16
 
         Label {
-            text: SettingsTranslator.translateName(model.name)
-            font.pixelSize: 16
+            text: SettingsTranslator.translateName(root.name)
         }
 
         TextField {
             id: textField
 
             hoverEnabled: true
-            placeholderText: model.name
-            text: model.qtObject.value
+            placeholderText: root.name
+            text: root.qtObject.value
             selectByMouse: true
 
             Layout.fillWidth: true
 
-            onEditingFinished: model.qtObject.value = text
+            onEditingFinished: root.qtObject.value = text
 
             Tooltip {
-                text: SettingsTranslator.translateToolTip(model.toolTip)
+                text: SettingsTranslator.translateToolTip(root.toolTip)
             }
         }
     }

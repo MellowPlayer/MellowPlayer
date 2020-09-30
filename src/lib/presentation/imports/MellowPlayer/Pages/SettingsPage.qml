@@ -51,7 +51,7 @@ Page {
 
         Label {
             anchors.centerIn: parent
-            font.pixelSize: 16
+            font.pixelSize: 14
             text: settingsPageList.currentCategory
         }
     }
@@ -80,94 +80,103 @@ Page {
                 ColumnLayout {
                     anchors.fill: parent
 
-                    ListView {
-                        id: settingsPageList
-
-                        property string currentCategory
-
-                        highlight: Rectangle {
-                            color: ActiveTheme.isDark(ActiveTheme.secondary) ? "#10ffffff" : "#10000000"
-
-                            Rectangle {
-                                anchors.top: parent.top
-                                anchors.left: parent.left
-                                anchors.bottom: parent.bottom
-
-                                width: 4
-                                color: ActiveTheme.accent
-                            }
-                        }
-                        highlightMoveDuration: 200
-                        model: App.settings.categories
-                        delegate: ItemDelegate {
-                            id: delegate
-
-                            required property string name
-                            required property int index
-                            required property string iconName
-
-                            property string category: SettingsTranslator.translateCategory(name)
-                            property bool isCurrentItem: index === settingsPageList.currentIndex
-
-                            height: 60; width: parent.width
-                            hoverEnabled: true
-
-                            onClicked: settingsPageList.currentIndex = index
-                            onIsCurrentItemChanged: if (isCurrentItem) settingsPageList.currentCategory = category
-
-                            RowLayout {
-                                anchors.fill: parent
-                                anchors.leftMargin: parent.leftPadding
-                                anchors.rightMargin: parent.rightPadding
-                                anchors.topMargin: parent.topPadding
-                                anchors.bottomMargin: parent.bottomPadding
-
-                                Label {
-                                    text: delegate.iconName
-                                    font.family: MaterialIcons.family
-                                    font.pixelSize: 24
-                                }
-
-                                Label {
-                                    verticalAlignment: "AlignVCenter"
-                                    text: delegate.category
-                                    font.pixelSize: 20
-                                }
-
-                                Item { Layout.fillWidth: true; }
-                            }
-                        }
-                        interactive: false
-
-                        Layout.fillHeight: true
+                    ScrollView {
                         Layout.fillWidth: true
+                        Layout.fillHeight: true
+
+                        ListView {
+                            id: settingsPageList
+
+                            property string currentCategory
+
+                            highlight: Rectangle {
+                                color: ActiveTheme.isDark(ActiveTheme.secondary) ? "#10ffffff" : "#10000000"
+
+                                Rectangle {
+                                    anchors.top: parent.top
+                                    anchors.left: parent.left
+                                    anchors.bottom: parent.bottom
+
+                                    width: 4
+                                    color: ActiveTheme.accent
+                                }
+                            }
+                            highlightMoveDuration: 200
+                            model: App.settings.categories
+                            delegate: ItemDelegate {
+                                id: delegate
+
+                                required property string name
+                                required property int index
+                                required property string iconName
+
+                                property string category: SettingsTranslator.translateCategory(name)
+                                property bool isCurrentItem: index === settingsPageList.currentIndex
+
+                                height: 60; width: parent.width
+                                hoverEnabled: true
+
+                                onClicked: settingsPageList.currentIndex = index
+                                onIsCurrentItemChanged: if (isCurrentItem) settingsPageList.currentCategory = category
+
+                                RowLayout {
+                                    anchors.fill: parent
+                                    anchors.leftMargin: parent.leftPadding
+                                    anchors.rightMargin: parent.rightPadding
+                                    anchors.topMargin: parent.topPadding
+                                    anchors.bottomMargin: parent.bottomPadding
+
+                                    Label {
+                                        text: delegate.iconName
+                                        font.family: MaterialIcons.family
+                                        font.pixelSize: 20
+                                    }
+
+                                    Label {
+                                        verticalAlignment: "AlignVCenter"
+                                        text: delegate.category
+                                        font.pixelSize: 14
+                                    }
+
+                                    Item { Layout.fillWidth: true; }
+                                }
+                            }
+                        }
                     }
 
-                    Button {
-                        id: btRestoreDefaults
-
-                        flat: true
-                        highlighted: true
-                        hoverEnabled: true
-                        text: qsTr("Restore all to defaults")
-                        onClicked: {
-                            Dialogs.askConfirmation(
-                                qsTr("Confirm restore defaults"),
-                                qsTr("Are you sure you want to restore all settings to their default values?"),
-                                (confirmed) => {
-                                    if (confirmed) {
-                                        App.settings.restoreDefaults();
-                                    }
-                                }
-                            )
-                        }
+                    Pane {
+                        padding: 0
 
                         Layout.fillWidth: true
-                        Layout.leftMargin: 4
-                        Layout.rightMargin: 4
+                        Material.elevation: 2
 
-                        Tooltip {
-                            text: qsTr('Restore all settings to their <b>default value</b>.')
+                        Button {
+                            id: btRestoreDefaults
+
+                            anchors.fill: parent
+                            flat: true
+                            highlighted: true
+                            hoverEnabled: true
+                            text: qsTr("Restore all to defaults")
+                            onClicked: {
+                                Dialogs.askConfirmation(
+                                    qsTr("Confirm restore defaults"),
+                                    qsTr("Are you sure you want to restore all settings to their default values?"),
+                                    (confirmed) => {
+                                        if (confirmed) {
+                                            App.settings.restoreDefaults();
+                                        }
+                                    }
+                                )
+                            }
+
+                            Layout.fillWidth: true
+                            Layout.leftMargin: 4
+                            Layout.rightMargin: 4
+
+                            Tooltip {
+                                text: qsTr('Restore all settings to their <b>default value</b>.')
+                            }
                         }
                     }
                 }

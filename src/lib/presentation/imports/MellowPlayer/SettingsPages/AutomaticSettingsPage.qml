@@ -29,13 +29,23 @@ ColumnLayout {
                 rightMargin: parent.ScrollBar.vertical.size != 1 ? 16 : 0
             }
             clip: true
+            model: root.settings
             delegate: ColumnLayout {
+                id: delegateRoot
+
                 width: ListView.view.width
                 spacing: 0
 
+                required property string qmlComponent
+                required property bool isEnabled
+                required property string name
+                required property string toolTip
+                required property string type
+                required property var model
+                required property int index
+
                 Loader {
                     id: loader
-                    source: Qt.resolvedUrl("../" + model.qmlComponent)
 
                     Layout.fillWidth: true
                     Layout.preferredHeight: 56
@@ -43,18 +53,32 @@ ColumnLayout {
 
                 Rectangle {
                     color: ActiveTheme.isDark(ActiveTheme.background) ? Qt.lighter(ActiveTheme.background) : Qt.darker(ActiveTheme.background, 1.1)
-                    visible: model.index !== parent.ListView.view.count - 1
+                    visible: delegateRoot.index !== parent.ListView.view.count - 1
 
                     Layout.preferredHeight: 1
                     Layout.fillWidth: true
                 }
+
+                Component.onCompleted: {
+                    var url = Qt.resolvedUrl("../" + qmlComponent)
+                    var properties = {
+                        "isEnabled": isEnabled,
+                        "name": name,
+                        "toolTip": toolTip,
+                        "type": type,
+                        "qmlComponent": qmlComponent,
+                        "qtObject": model.qtObject
+                    }
+
+                    loader.setSource(url, properties)
+                }
             }
-            model: root.settings
             spacing: 0
         }
     }
 
     Pane {
+        padding: 0
         Layout.fillWidth: true
         Material.elevation: 2
 

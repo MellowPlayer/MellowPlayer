@@ -11,7 +11,7 @@ ScalingFactorSettingViewModel::ScalingFactorSettingViewModel(Setting &setting, Q
 
 QString ScalingFactorSettingViewModel::qmlComponent()
 {
-    return "Delegates/IntSettingDelegate.qml";
+    return "Delegates/ScalingFactorSettingDelegate.qml";
 }
 
 int ScalingFactorSettingViewModel::minValue() const

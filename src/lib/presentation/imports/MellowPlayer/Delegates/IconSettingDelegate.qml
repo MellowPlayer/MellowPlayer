@@ -6,9 +6,18 @@ import QtQuick.Dialogs 1.3
 import MellowPlayer 3.0
 
 ItemDelegate {
+    id: root
+
     bottomPadding: 3; topPadding: 3
-    enabled: model.enabled
+    enabled: root.enabled
     hoverEnabled: true
+    
+    required property bool isEnabled
+    required property string name
+    required property string toolTip
+    required property string type
+    required property string qmlComponent
+    required property Setting qtObject
 
     onClicked: fileDialog.open()
 
@@ -20,8 +29,7 @@ ItemDelegate {
         anchors.bottomMargin: parent.bottomPadding
 
         Label {
-            text: SettingsTranslator.translateName(model.name)
-            font.pixelSize: 16
+            text: SettingsTranslator.translateName(root.name)
         }
 
         Item { width: 16 }
@@ -30,8 +38,8 @@ ItemDelegate {
             id: pathField
 
             placeholderText: "Custom icon path"
-            text:  model.qtObject.value
-            onTextChanged:  model.qtObject.value = text
+            text:  root.qtObject.value
+            onTextChanged:  root.qtObject.value = text
             selectByMouse: true
 
             Layout.fillWidth: true

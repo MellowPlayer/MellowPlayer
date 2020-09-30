@@ -1,5 +1,6 @@
 #include "MellowPlayerQmlPlugin.hpp"
 #include <MellowPlayer/Domain/ListeningHistory/ListeningHistoryEntry.hpp>
+#include <MellowPlayer/Domain/Player/CurrentPlayer.hpp>
 #include <MellowPlayer/Domain/Player/Player.hpp>
 #include <MellowPlayer/Domain/Player/Song.hpp>
 #include <MellowPlayer/Domain/Settings/SettingKey.hpp>
@@ -9,11 +10,17 @@
 #include <MellowPlayer/Presentation/ViewModels/ActiveThemeViewModel.hpp>
 #include <MellowPlayer/Presentation/ViewModels/ApplicationViewModel.hpp>
 #include <MellowPlayer/Presentation/ViewModels/ClipBoardViewModel.hpp>
+#include <MellowPlayer/Presentation/ViewModels/DevToolsWindowViewModel.hpp>
 #include <MellowPlayer/Presentation/ViewModels/ListeningHistory/ListeningHistoryViewModel.hpp>
 #include <MellowPlayer/Presentation/ViewModels/MainWindowViewModel.hpp>
 #include <MellowPlayer/Presentation/ViewModels/RemoteControlViewModel.hpp>
 #include <MellowPlayer/Presentation/ViewModels/Settings/SettingsViewModel.hpp>
+#include <MellowPlayer/Presentation/ViewModels/Settings/Types/ColorSettingViewModel.hpp>
+#include <MellowPlayer/Presentation/ViewModels/Settings/Types/EnumSettingViewModel.hpp>
+#include <MellowPlayer/Presentation/ViewModels/Settings/Types/ScalingFactorSettingViewModel.hpp>
 #include <MellowPlayer/Presentation/ViewModels/Settings/Types/SettingViewModel.hpp>
+#include <MellowPlayer/Presentation/ViewModels/Settings/Types/TimeLimitSettingViewModel.hpp>
+#include <MellowPlayer/Presentation/ViewModels/Settings/Types/UpdateChannelSettingViewModel.hpp>
 #include <MellowPlayer/Presentation/ViewModels/StreamingServices/StreamingServiceViewModel.hpp>
 #include <MellowPlayer/Presentation/ViewModels/StreamingServices/StreamingServicesViewModel.hpp>
 #include <MellowPlayer/Presentation/ViewModels/UpdaterViewModel.hpp>
@@ -45,9 +52,16 @@ void MellowPlayerQmlPlugin::registerTypes(const char *uri)
     qRegisterMetaType<StreamingServiceProxyListModel*>("StreamingServiceProxyListModel*");
     qRegisterMetaType<StreamingServiceListModel*>("StreamingServiceListModel*");
 
-    qmlRegisterUncreatableType<Player>(uri, 3, 0, "Player", "Player cannot be instantiated from QML");
+    qmlRegisterUncreatableType<Song>(uri, 3, 0, "Song", "Song cannot be instantiated from QML");
+    qmlRegisterUncreatableType<CurrentPlayer>(uri, 3, 0, "CurrentPlayer", "CurrentPlayer cannot be instantiated from QML");
     qmlRegisterUncreatableType<SettingKey>(uri, 3, 0, "SettingKey", "SettingKey cannot be instantiated from QML");
-    qmlRegisterUncreatableType<SettingViewModel>(uri, 3, 0, "Setting", "SettingsViewModel cannot be instantiated from QML");
+    qmlRegisterUncreatableType<SettingViewModel>(uri, 3, 0, "Setting", "Setting cannot be instantiated from QML");
+    qmlRegisterUncreatableType<ColorSettingViewModel>(uri, 3, 0, "ColorSetting", "ColorSetting cannot be instantiated from QML");
+    qmlRegisterUncreatableType<EnumSettingViewModel>(uri, 3, 0, "EnumSetting", "EnumSetting cannot be instantiated from QML");
+    qmlRegisterUncreatableType<TimeLimitSettingViewModel>(uri, 3, 0, "TimeLimitSetting", "TimeLimitSetting cannot be instantiated from QML");
+    qmlRegisterUncreatableType<UpdateChannelSettingViewModel>(uri, 3, 0, "UpdateChannelSetting", "UpdateChannelSetting cannot be instantiated from QML");
+    qmlRegisterUncreatableType<ScalingFactorSettingViewModel>(uri, 3, 0, "ScalingFactorSetting", "ScalingFactorSetting cannot be instantiated from QML");
+
     qmlRegisterUncreatableType<SettingsViewModel>(uri, 3, 0, "SettingsViewModel", "SettingsViewModel cannot be instantiated from QML");
     qmlRegisterUncreatableType<SettingsCategoryViewModel>(uri, 3, 0, "SettingsCategory", "SettingsCategoryViewModel cannot be instantiated from QML");
     qmlRegisterUncreatableType<SettingListModel>(uri, 3, 0, "SettingListModel", "SettingListModel cannot be instantiated from QML");
@@ -70,6 +84,7 @@ void MellowPlayerQmlPlugin::registerTypes(const char *uri)
     qmlRegisterUncreatableType<MainWindowViewModel>(uri, 3, 0, "MainWindow", "ApplicationViewModel cannot be instantiated from QML");
     qmlRegisterUncreatableType<ClipBoardViewModel>(uri, 3, 0, "ClipBoard", "ApplicationViewModel cannot be instantiated from QML");
     qmlRegisterUncreatableType<UpdaterViewModel>(uri, 3, 0, "Updater", "Updater cannot be instantiated from QML");
+    qmlRegisterUncreatableType<DevToolsWindowViewModel>(uri, 3, 0, "DevToolsWindow", "DevToolsWindow cannot be instantiated from QML");
 }
 
 void MellowPlayerQmlPlugin::initializeEngine(QQmlEngine*, const char*)

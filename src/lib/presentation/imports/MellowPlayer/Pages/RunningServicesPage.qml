@@ -11,25 +11,38 @@ StackLayout {
 
     currentIndex: MainWindow.runningServices.currentIndex
 
-    function exitFullScreen() {
-        root.currentWebView.exitFullScreen();
+    Action {
+        id: goBack
+
+        onTriggered: root.currentWebView.goBack()
+        Component.onCompleted: Actions.goBack = goBack
     }
 
-    function goBack() {
-        root.currentWebView.goBack();
+    Action {
+        id: goForward
+
+        onTriggered: root.currentWebView.goForward()
+        Component.onCompleted: Actions.goForward = goForward
     }
 
-    function goHome() {
-        root.currentWebView.url = root.currentWebView.service.url;
-        root.currentWebView.reload();
+    Action {
+        id: goHome
+
+        onTriggered: {
+            console.warn("GoHome", root.currentWebView.url, root.currentWebView.service.url);
+            root.currentWebView.url = "";
+            root.currentWebView.url = root.currentWebView.service.url;
+        }
+        Component.onCompleted: Actions.goHome = goHome
     }
 
-    function goForward() {
-        root.currentWebView.goForward();
-    }
+    Action {
+        id: reload
 
-    function reload() {
-        root.currentWebView.reload();
+        shortcut: App.settings.get(SettingKey.SHORTCUTS_RELOAD).value
+
+        onTriggered: root.currentWebView.reload()
+        Component.onCompleted: Actions.reload = reload
     }
 
     Shortcut {

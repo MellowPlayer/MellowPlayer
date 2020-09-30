@@ -44,7 +44,7 @@ ToolBar {
 
             Label {
                 text: Updater.status
-                font.pixelSize: 16
+                font.pixelSize: 14
             }
 
             Item {

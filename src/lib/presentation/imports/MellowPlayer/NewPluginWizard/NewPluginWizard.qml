@@ -22,6 +22,7 @@ Dialog {
     property bool windowsPlatform
 
     title: wizard.currentPage.title
+    onVisibleChanged: restart()
 
     function restart() {
         while (stackView.depth > 1)

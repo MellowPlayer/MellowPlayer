@@ -17,6 +17,7 @@ WizardPage {
     Label {
         anchors.fill: parent
         textFormat: "RichText"
+        wrapMode: "WordWrap"
         text: qsTr("
 <html>
     <head>

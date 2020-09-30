@@ -16,7 +16,7 @@ namespace MellowPlayer::Presentation
         Q_PROPERTY(QString toolTip READ toolTip CONSTANT)
         Q_PROPERTY(QString type READ type CONSTANT)
         Q_PROPERTY(QString qmlComponent READ qmlComponent CONSTANT)
-        Q_PROPERTY(bool enabled READ enabled NOTIFY enabledChanged)
+        Q_PROPERTY(bool isEnabled READ enabled NOTIFY enabledChanged)
         Q_PROPERTY(QVariant value READ value WRITE setValue NOTIFY valueChanged)
     public:
         SettingViewModel(Domain::Setting& setting, QObject* parent = nullptr);
@@ -24,10 +24,9 @@ namespace MellowPlayer::Presentation
         QString name() const;
         QString toolTip() const;
         QString type() const;
+        virtual QString qmlComponent() = 0;
 
         virtual QVariant value() const;
-
-        virtual QString qmlComponent() = 0;
         bool enabled() const;
 
     public slots:
@@ -39,8 +38,5 @@ namespace MellowPlayer::Presentation
 
     protected:
         Domain::Setting& _setting;
-
-    private slots:
-        void onEnabledChanged();
     };
 }

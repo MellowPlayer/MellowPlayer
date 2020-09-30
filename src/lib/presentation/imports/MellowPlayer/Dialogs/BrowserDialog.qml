@@ -2,6 +2,9 @@ import QtQuick 2.15
 import QtQuick.Window 2.15
 import QtWebEngine 1.10
 
+import MellowPlayer 3.0
+import "../Dialogs.js" as Dialogs
+
 Window {
     id: window
 
@@ -16,7 +19,7 @@ Window {
     height: 720
 
     // @disable-check M16
-    onClosing: destroy()
+    onClosing: window.destroy()
 
     WebEngineView {
         id: webView
@@ -25,6 +28,11 @@ Window {
         visible: window.visible
 
         onWindowCloseRequested: window.close();
-        onNewViewRequested: mainWindow.openWebPopup(request, profile)
+        onNewViewRequested: (request) => {
+            if (request.userInitiated) {
+                console.log("opening web popup", request.requestedUrl)
+                Dialogs.openWebPopup(request, webView.profile)
+            }
+        }
     }
 }

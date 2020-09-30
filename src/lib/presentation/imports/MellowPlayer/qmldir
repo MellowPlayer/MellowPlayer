@@ -1,6 +1,7 @@
 module MellowPlayer
 
 singleton MaterialIcons 3.0 MaterialIcons.qml
+singleton Actions 3.0 Actions.qml
 
 BrowserDialog 3.0 Dialogs/BrowserDialog.qml
 CustomUrlPane 3.0 Controls/CustomUrlPane.qml
@@ -15,6 +16,7 @@ ListeningHistoryDrawer 3.0 Controls/ListeningHistoryDrawer.qml
 ListeningHistoryListView 3.0 Controls/ListeningHistoryListView.qml
 ListeningHistorySearchPane 3.0 Controls/ListeningHistorySearchPane.qml
 ListeningHistoryToolBar 3.0 Controls/ListeningHistoryToolBar.qml
+MainMenu 3.0 Controls/MainMenu.qml
 MainToolBar 3.0 Controls/MainToolBar.qml
 ServicesOverview 3.0 Controls/ServicesOverview.qml
 SettingsDrawer 3.0 Controls/SettingsDrawer.qml
@@ -25,7 +27,7 @@ WebView 3.0 Controls/WebView.qml
 WebViewContextMenu 3.0 Controls/WebViewContextMenu.qml
 DateCategoryTranslator 3.0 DateCategoryTranslator.js
 BoolSettingDelegate 3.0 Delegates/BoolSettingDelegate.qml
-IntSettingDelegate 3.0 Delegates/IntSettingDelegate.qml
+ScalingFactorSettingDelegate 3.0 Delegates/ScalingFactorSettingDelegate.qml
 ColorSettingDelegate 3.0 Delegates/ColorSettingDelegate.qml
 EnumSettingDelegate 3.0 Delegates/EnumSettingDelegate.qml
 IconSettingDelegate 3.0 Delegates/IconSettingDelegate.qml
@@ -67,3 +69,6 @@ RemoteControlState_Stopped 3.0 SettingsPages/RemoteControl/RemoteControlState_St
 SettingsTranslator 3.0 SettingsTranslator.js
 ReportIssueDialog 3.0 Dialogs/ReportIssueDialog.qml
 NativeFileDialog 3.0 Dialogs/NativeFileDialog.qml
+
+WebViewToolBar 3.0 Controls/WebViewToolBar.qml
+PlayerToolBar 3.0 Controls/PlayerToolBar.qml

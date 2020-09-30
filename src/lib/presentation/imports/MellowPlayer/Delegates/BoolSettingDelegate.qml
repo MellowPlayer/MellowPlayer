@@ -4,15 +4,30 @@ import QtQuick.Controls 2.15
 import MellowPlayer 3.0
 
 SwitchDelegate {
+    id: root
+
+    required property bool isEnabled
+    required property string name
+    required property string toolTip
+    required property string type
+    required property string qmlComponent
+    required property Setting qtObject
+
     bottomPadding: 3; topPadding: 3
     anchors.fill: parent
-    checked: model.qtObject.value
-    enabled: model.enabled
+    enabled: root.enabled
+    checkable: true
+    checked: root.qtObject.value
     hoverEnabled: true
-    onCheckedChanged: model.qtObject.value = checked
-    text: SettingsTranslator.translateName(model.name)
+    text: SettingsTranslator.translateName(root.name)
 
-    Tooltip {
-        text: SettingsTranslator.translateToolTip(model.toolTip)
+    onToggled: {
+        console.warn("onToggled", root.name, checked, root.qtObject.value)
+        root.qtObject.value = checked
+    }
+
+    Tooltip
+    {
+        text: SettingsTranslator.translateToolTip(root.toolTip)
     }
 }

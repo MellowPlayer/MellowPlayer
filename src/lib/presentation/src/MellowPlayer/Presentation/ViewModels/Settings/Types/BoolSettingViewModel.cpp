@@ -12,3 +12,13 @@ QString BoolSettingViewModel::qmlComponent()
 {
     return "Delegates/BoolSettingDelegate.qml";
 }
+
+QVariant BoolSettingViewModel::value() const
+{
+    return SettingViewModel::value().toBool();
+}
+
+void BoolSettingViewModel::setValue(const QVariant& value)
+{
+    SettingViewModel::setValue(value.toBool());
+}

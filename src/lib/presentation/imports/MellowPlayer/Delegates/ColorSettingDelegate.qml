@@ -5,10 +5,20 @@ import QtQuick.Controls.Material 2.15
 import QtQuick.Layouts 1.15
 
 import MellowPlayer 3.0
+import "../SettingsTranslator.js" as SettingsTranslator
 
 ItemDelegate {
+    id: root
+
+    required property bool isEnabled
+    required property string name
+    required property string toolTip
+    required property string type
+    required property string qmlComponent
+    required property Setting qtObject
+
     bottomPadding: 3; topPadding: 3
-    enabled: model.enabled
+    enabled: isEnabled
     hoverEnabled: true
     onClicked: colorDialog.open()
 
@@ -20,30 +30,29 @@ ItemDelegate {
         anchors.bottomMargin: parent.bottomPadding
 
         Label {
-            text: SettingsTranslator.translateName(model.name)
-            font.pixelSize: 16
+            text: SettingsTranslator.translateName(root.name)
             Layout.fillWidth: true
         }
 
         Button {
             hoverEnabled: true
-            text: model.qtObject.value
-            onTextChanged: model.qtObject.value = text
+            text: root.qtObject.value
+            onTextChanged: root.qtObject.value = text
             onClicked: colorDialog.open()
 
-            Material.background: model.qtObject.value
-            Material.foreground: ActiveTheme.isDark(model.qtObject.value) ? "white" : "#303030"
+            Material.background: root.qtObject.value
+            Material.foreground: ActiveTheme.isDark(root.qtObject.value) ? "white" : "#303030"
 
             Tooltip {
-                text: SettingsTranslator.translateToolTip(model.toolTip)
+                text: SettingsTranslator.translateToolTip(root.toolTip)
             }
 
             ColorDialog {
                 id: colorDialog
 
                 title: qsTr("Please choose a color")
-                color: model.qtObject.value
-                onColorChanged: model.qtObject.value = color
+                color: root.qtObject.value
+                onColorChanged: root.qtObject.value = color
             }
         }
     }

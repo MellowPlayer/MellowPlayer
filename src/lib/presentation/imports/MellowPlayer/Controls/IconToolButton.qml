@@ -16,6 +16,7 @@ ToolButton {
     text: iconChar
     font { family: MaterialIcons.family; pixelSize: iconSize }
     hoverEnabled: true
+    padding: 0
 
     onClicked: if (!checkable) triggered()
 

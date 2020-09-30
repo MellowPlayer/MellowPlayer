@@ -26,7 +26,7 @@ Pane {
         Label {
             text: qsTr("Custom url required")
             font.bold: true
-            font.pixelSize: 16
+            font.pixelSize: 14
 
             Layout.alignment: Qt.AlignCenter
         }
@@ -38,11 +38,11 @@ Pane {
                 id: textField
 
                 selectByMouse: true
-                text: customUrl
+                text: root.customUrl
                 onEditingFinished: save()
 
                 function save() {
-                    customUrl = text;
+                    root.customUrl = text;
                     root.state = "hidden";
                 }
 

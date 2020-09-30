@@ -11,10 +11,10 @@ Popup {
 
     padding: 20
     modal: true
-    height: 490
+    height: 426
     width: Math.max(labelBuildInfo.implicitWidth + 64, height)
-    x: parent.width / 2 - width / 2
-    y: parent.height / 2 - height / 2
+    x: (ApplicationWindow.window.width - width) / 2
+    y: (ApplicationWindow.window.height - height) / 2 - ApplicationWindow.window.header.height
 
     onVisibleChanged: if (!visible) btCredits.checked = false
 
@@ -37,14 +37,16 @@ Popup {
                 Image {
                     source: "qrc:/MellowPlayer/Presentation/icons/mellowplayer.png"
                     fillMode: Image.PreserveAspectFit
+                    smooth: true
+                    antialiasing: true
 
                     Layout.alignment: Qt.AlignCenter
-                    Layout.preferredHeight: 128
+                    Layout.preferredHeight: 64
                 }
 
                 Label {
                     font.bold: true
-                    font.pixelSize: 32
+                    font.pixelSize: 24
                     text: "MellowPlayer"
 
                     Layout.alignment: Qt.AlignCenter
@@ -117,7 +119,6 @@ Popup {
 
                 Label {
                     id: labelBuildInfo
-                    font.pixelSize: 10
                     font.italic: true
                     text: App.buildInfo
 
