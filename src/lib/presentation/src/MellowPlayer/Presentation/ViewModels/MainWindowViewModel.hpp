@@ -21,10 +21,6 @@ namespace MellowPlayer::Presentation
         Q_OBJECT
         Q_PROPERTY(bool visible READ isVisible WRITE setVisible NOTIFY visibleChanged)
         Q_PROPERTY(ZoomViewModel* zoom READ zoom CONSTANT)
-        Q_PROPERTY(QString currentPage READ currentPage WRITE setCurrentPage NOTIFY currentPageChanged)
-        Q_PROPERTY(QString selectServicePage READ selectServicePage CONSTANT)
-        Q_PROPERTY(QString runningServicesPage READ runningServicesPage CONSTANT)
-        Q_PROPERTY(bool isOnRunningServicesPage READ isOnRunningServicesPage NOTIFY currentPageChanged)
         Q_PROPERTY(bool fullScreen READ isFullScreen WRITE setFullScreen NOTIFY fullScreenChanged)
         Q_PROPERTY(RunningServicesViewModel* runningServices READ runningServices CONSTANT)
     public:
@@ -40,14 +36,6 @@ namespace MellowPlayer::Presentation
         bool isVisible() const;
         ZoomViewModel* zoom();
 
-        QString currentPage() const;
-        void setCurrentPage(const QString& pageName);
-
-        QString selectServicePage() const;
-        QString runningServicesPage() const;
-        bool isOnRunningServicesPage() const;
-
-        Q_INVOKABLE void toggleActivePage();
         Q_INVOKABLE void requestQuit() override;
 
         RunningServicesViewModel* runningServices();
@@ -55,7 +43,6 @@ namespace MellowPlayer::Presentation
 
     signals:
         void quitRequest();
-        void currentPageChanged();
         void visibleChanged();
         void raiseRequested();
         void fullScreenChanged();
@@ -69,7 +56,6 @@ namespace MellowPlayer::Presentation
         Domain::ILogger& _logger;
         ZoomViewModel _zoom;
         RunningServicesViewModel& _runningServices;
-        QString _currentPage{selectServicePage()};
         bool _fullScreen = false;
     };
 }

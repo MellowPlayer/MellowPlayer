@@ -7,7 +7,7 @@
 
 namespace MellowPlayer::Domain
 {
-    class Player;
+    class IPlayerBase;
     class StreamingService;
     class StreamingServices;
 

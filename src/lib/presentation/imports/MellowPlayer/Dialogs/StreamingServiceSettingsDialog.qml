@@ -70,6 +70,7 @@ Dialog {
             id: tabBar
             Layout.fillWidth: true
             Layout.preferredHeight: tabBar.implicitHeight
+            Material.elevation: 4
 
             TabButton {
                 text: "General"
@@ -103,13 +104,13 @@ Dialog {
                 Layout.fillWidth: true
 
                 Pane {
-                    anchors.centerIn: parent
+                    anchors.fill: parent
                     padding: 0
                     width: parent.width / 2
                     height: parent.height * 0.75
 
-                    Material.background: ActiveTheme.isDark(ActiveTheme.background) ? Qt.lighter(ActiveTheme.background, 1.05) : Qt.darker(ActiveTheme.background, 1.05)
-                    Material.elevation: 2
+                    Material.background: "transparent"
+
 
                     ColumnLayout {
                         spacing: 0
@@ -207,12 +208,12 @@ Dialog {
                         id: userScriptListPane
 
                         padding: 0
-                        anchors.centerIn: parent
+                        anchors.fill: parent
                         width: parent.width / 2
                         height: parent.height * 0.75
 
-                        Material.background: ActiveTheme.isDark(ActiveTheme.background) ? Qt.lighter(ActiveTheme.background, 1.05) : Qt.darker(ActiveTheme.background, 1.05)
-                        Material.elevation: 2
+                        Material.background: "transparent"
+
 
                         ScrollView {
                             id: scrollView
@@ -332,12 +333,12 @@ Dialog {
                     id: networkProxyPane
 
                     padding: 0
-                    anchors.centerIn: parent
+                    anchors.fill: parent
                     width: parent.width / 2
                     height: parent.height * 0.75
 
-                    Material.background: ActiveTheme.isDark(ActiveTheme.background) ? Qt.lighter(ActiveTheme.background, 1.05) : Qt.darker(ActiveTheme.background, 1.05)
-                    Material.elevation: 2
+                    Material.background: "transparent"
+
 
                     ColumnLayout {
                         anchors.fill: parent
@@ -421,12 +422,12 @@ Dialog {
                     id: otherOptions
 
                     padding: 0
-                    anchors.centerIn: parent
+                    anchors.fill: parent
                     width: parent.width / 2
                     height: parent.height * 0.75
 
-                    Material.background: ActiveTheme.isDark(ActiveTheme.background) ? Qt.lighter(ActiveTheme.background, 1.05) : Qt.darker(ActiveTheme.background, 1.05)
-                    Material.elevation: 2
+                    Material.background: "transparent"
+
 
                     ListView {
                         id: optionsListView
@@ -434,15 +435,36 @@ Dialog {
                         anchors.fill: parent
                         clip: true
                         delegate: ColumnLayout {
+                            required property string qmlComponent
+                            required property bool isEnabled
+                            required property string name
+                            required property string toolTip
+                            required property string type
+                            required property var model
+                            required property int index
+
                             width: ListView.view.width
                             spacing: 0
 
                             Loader {
                                 id: loader
-                                source: Qt.resolvedUrl("../" + model.qmlComponent)
 
                                 Layout.fillWidth: true
                                 Layout.preferredHeight: 56
+                            }
+
+                            Component.onCompleted: {
+                                var url = Qt.resolvedUrl("../" + qmlComponent)
+                                var properties = {
+                                    "isEnabled": isEnabled,
+                                    "name": name,
+                                    "toolTip": toolTip,
+                                    "type": type,
+                                    "qmlComponent": qmlComponent,
+                                    "qtObject": model.qtObject
+                                }
+
+                                loader.setSource(url, properties)
                             }
 
                             Rectangle {

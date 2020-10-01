@@ -8,8 +8,8 @@ QtObject {
     id: actions
 
     // MainWindow actions
-    property Action toggleCurrentPage
-    property Action openListeningHistory
+    property Action toggleSelectServiceDrawer
+    property Action toggleListeningHistory
     property Action openSettings
     property Action createNewPlugin
     property Action reportIssue

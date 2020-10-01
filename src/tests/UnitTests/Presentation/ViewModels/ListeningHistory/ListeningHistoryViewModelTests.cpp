@@ -33,7 +33,7 @@ TEST_CASE("ListeningHistoryViewModelTests")
     streamingServices.setCurrent(streamingServices.toList()[0].get());
 
     Players& players = pool.getPlayers();
-    Player& currentPlayer = *players.get(streamingServices.toList()[0]->name());
+    IPlayerBase& currentPlayer = *players.get(streamingServices.toList()[0]->name());
 
     Settings& settings = pool.getSettings();
     Setting& isEnabledSetting = settings.get(SettingKey::PRIVACY_ENABLE_LISTENING_HISTORY);

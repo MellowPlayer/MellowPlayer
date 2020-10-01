@@ -13,6 +13,8 @@ Page {
 
     signal closeRequested()
 
+    font.pixelSize: width < 800 ? 14 : 16
+
     Material.accent: ActiveTheme.accent === ActiveTheme.background ? ActiveTheme.foreground : ActiveTheme.accent
 
     header: ToolBar {
@@ -51,7 +53,7 @@ Page {
 
         Label {
             anchors.centerIn: parent
-            font.pixelSize: 14
+            font.pixelSize: settingsPage.width < 800 ? 16 : 18
             text: settingsPageList.currentCategory
         }
     }
@@ -63,9 +65,11 @@ Page {
         Rectangle {
             color: ActiveTheme.secondary
 
+            property real minimumWidth: Math.max(Math.min(settingsPage.width / 3, 324), 192)
+
             Layout.fillHeight: true
-            Layout.maximumWidth: 324
-            Layout.minimumWidth: 324
+            Layout.maximumWidth: minimumWidth
+            Layout.minimumWidth: minimumWidth
 
             Pane {
                 padding: 0
@@ -135,7 +139,7 @@ Page {
                                     Label {
                                         verticalAlignment: "AlignVCenter"
                                         text: delegate.category
-                                        font.pixelSize: 14
+                                        font.pixelSize: settingsPage.width < 800 ? 16 : 18
                                     }
 
                                     Item { Layout.fillWidth: true; }

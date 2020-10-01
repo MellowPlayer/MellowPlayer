@@ -48,18 +48,13 @@ ToolBar {
 
             font { family: MaterialIcons.family; pixelSize: 22 }
             hoverEnabled: true
-            onClicked: quitRequested()
+            action: Actions.toggleListeningHistory
             text: MaterialIcons.icon_keyboard_arrow_right
 
             Layout.fillHeight: true
 
             Tooltip {
                 text: qsTr("Back")
-            }
-
-            Shortcut {
-                sequence: App.settings.get(SettingKey.SHORTCUTS_LISTENING_HISTORY)
-                onActivated: quitRequested()
             }
         }
     }

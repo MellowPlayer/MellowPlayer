@@ -21,7 +21,7 @@ TEST_CASE("ListeningHistoryTests")
     Players& players = pool.getPlayers();
     Settings& settings = pool.getSettings();
     ListeningHistory& listeningHistoryService = pool.getListeningHistory();
-    Player& currentPlayer = *players.get(streamingServices.toList()[0]->name());
+    IPlayerBase& currentPlayer = *players.get(streamingServices.toList()[0]->name());
     streamingServices.setCurrent(streamingServices.toList()[0].get());
     Setting& isEnabledSetting = settings.get(SettingKey::PRIVACY_ENABLE_LISTENING_HISTORY);
     isEnabledSetting.setValue(true);
@@ -77,7 +77,7 @@ TEST_CASE("ListeningHistoryTests")
         REQUIRE(listeningHistoryService.count() == 0);
         currentPlayer.setUpdateResults(getSongVariantMap("Song1", "Id1"));
         currentPlayer.setUpdateResults(getSongVariantMap("Song2", "Id2"));
-        Player& player2 = *players.get(streamingServices.toList()[1]->name());
+        IPlayerBase& player2 = *players.get(streamingServices.toList()[1]->name());
         streamingServices.setCurrent(streamingServices.toList()[1].get());
         player2.setUpdateResults(getSongVariantMap("Song3", "Id3"));
         REQUIRE(listeningHistoryService.count() == 3);

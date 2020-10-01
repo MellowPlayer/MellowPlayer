@@ -22,8 +22,7 @@ Page {
     property alias url: webView.url
 
     function updateImage() {
-        if (!MainWindow.visible)
-            return;
+        console.debug("grabbing image")
         webView.grabToImage(function(result) {
             var path = root.service.getPreviewImageUrlForSave();
             if (result.saveToFile(path)) {
@@ -172,13 +171,7 @@ Page {
             }
         }
         onLoadingChanged: (loadRequest) => {
-            if (loadRequest.status === 1) {
-                webView.loaded = true;
-                root.updateImage();
-            }
-            else {
-                webView.loaded = false;
-            }
+            webView.loaded = loadRequest.status === WebEngineLoadRequest.LoadSucceededStatus;
         }
         onFullScreenRequested: (request) => {
             MainWindow.fullScreen = request.toggleOn

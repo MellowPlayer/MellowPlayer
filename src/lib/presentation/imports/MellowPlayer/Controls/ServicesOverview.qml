@@ -11,50 +11,30 @@ import MellowPlayer 3.0
 Item {
     id: root
 
+    signal serviceActivated()
+
+    property alias searchTextFieldVisible: searchTextField.visible
+
     ColumnLayout {
         anchors.fill: parent
         spacing: 0
 
-        Item {
-            Layout.fillWidth: true
-            Layout.preferredHeight: filtersLayout.implicitHeight
-            Layout.topMargin: 24
+        TextField {
+            id: searchTextField
 
-            RowLayout {
-                id: filtersLayout
-                spacing: 0
+            placeholderText: qsTr("Search within available services")
+            selectByMouse: true
 
-                anchors.centerIn: parent
-                implicitWidth: gridView.width
+            onTextChanged: StreamingServices.filteredServices.setSearchText(text)
 
-                Switch {
-                    property Setting setting: App.settings.get(SettingKey.PRIVATE_SHOW_FAVORITE_SERVICES)
-
-                    text: qsTr("Show only favorite services")
-                    font.bold: true
-                    checked: setting.value
-                    onCheckedChanged: setting.value = checked
-
-                }
-
-                Item { Layout.fillWidth: true }
-
-
-                TextField {
-                    id: searchTextField
-
-                    placeholderText: qsTr("Search within available services")
-                    selectByMouse: true
-
-                    onTextChanged: StreamingServices.filteredServices.setSearchText(text)
-
-                    Component.onCompleted: {
-                        StreamingServices.filteredServices.setSearchText(text)
-                        forceActiveFocus()
-                    }
-                    Layout.preferredWidth: 340
-                }
+            onVisibleChanged: {
+                text= "";
+                if (visible)
+                    forceActiveFocus()
             }
+
+            Layout.fillWidth: true
+            Layout.margins: 16
         }
 
         Item {
@@ -62,14 +42,13 @@ Item {
 
             Layout.fillHeight: true
             Layout.fillWidth: true
-            Layout.topMargin: 32
-            Layout.bottomMargin: 32
+            Layout.bottomMargin: 16
+
 
             Item {
                 anchors.fill: parent
-                anchors.leftMargin: 96
-                anchors.rightMargin: 96
-                anchors.topMargin: 12
+                anchors.topMargin: 16
+                anchors.leftMargin: 16
 
                 GridView {
                     id: gridView
@@ -81,9 +60,8 @@ Item {
 
                     anchors.centerIn: parent
                     focus: true
-                    cellWidth: 340; cellHeight: 192
-                    height: parent.height
-                    width: Math.floor(parent.width / cellWidth) * cellWidth
+                    cellWidth: width / 2; cellHeight: cellWidth * (9/16) + 32
+                    anchors.fill: parent
 
                     model: DelegateModel {
                         id: visualModel
@@ -111,6 +89,8 @@ Item {
                                 anchors { horizontalCenter: parent.horizontalCenter; verticalCenter: parent.verticalCenter }
                                 height: gridView.cellHeight - 4; width: gridView.cellWidth - 4
                                 service: delegateRoot.qtObject
+
+                                onActivated: root.serviceActivated()
 
                                 Drag.source: delegateRoot
                                 Drag.hotSpot.x: gridView.cellWidth / 2
@@ -162,7 +142,11 @@ Item {
                         NumberAnimation { properties: "x,y"; easing.type: Easing.OutQuad }
                     }
 
-                    ScrollBar.vertical: ScrollBar { hoverEnabled: true }
+                    ScrollBar.vertical: ScrollBar {
+                        id: scrollBar
+
+                        hoverEnabled: true
+                    }
                 }
             }
         }

@@ -7,7 +7,7 @@ using namespace MellowPlayer::Presentation;
 SettingViewModel::SettingViewModel(Setting& setting, QObject* parent) : QObject(parent), _setting(setting)
 {
     connect(&setting, &Setting::valueChanged, this, &SettingViewModel::valueChanged);
-    connect(&setting, &Setting::isEnabledChanged, this, &SettingViewModel::enabledChanged);
+    connect(&setting, &Setting::isEnabledChanged, this, &SettingViewModel::isEnabledChanged);
 }
 
 QString SettingViewModel::name() const
@@ -25,7 +25,7 @@ QString SettingViewModel::type() const
     return _setting.type();
 }
 
-bool SettingViewModel::enabled() const
+bool SettingViewModel::isEnabled() const
 {
     return _setting.isEnabled();
 }

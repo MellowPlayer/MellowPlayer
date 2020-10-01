@@ -55,7 +55,7 @@ NewPluginWizard 3.0 NewPluginWizard/NewPluginWizard.qml
 StartPage 3.0 NewPluginWizard/StartPage.qml
 WizardPage 3.0 NewPluginWizard/WizardPage.qml
 RunningServicesPage 3.0 Pages/RunningServicesPage.qml
-SelectServicePage 3.0 Pages/SelectServicePage.qml
+SelectServiceDrawer 3.0 Controls/SelectServiceDrawer.qml
 SettingsPage 3.0 Pages/SettingsPage.qml
 AutomaticSettingsPage 3.0 SettingsPages/AutomaticSettingsPage.qml
 CacheSettingsPage 3.0 SettingsPages/CacheSettingsPage.qml

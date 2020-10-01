@@ -22,6 +22,7 @@ namespace MellowPlayer::Domain
 
         virtual void suspend() = 0;
         virtual void resume() = 0;
+        virtual void setPlaybackStatus(PlaybackStatus value) = 0;
 
     signals:
         void play() override;
@@ -69,7 +70,7 @@ namespace MellowPlayer::Domain
         bool operator==(const Player& other) const;
         bool operator!=(const Player& other) const;
 
-        void setPlaybackStatus(PlaybackStatus value);
+        void setPlaybackStatus(PlaybackStatus value) override;
 
     private:
         void setCurrentSong(std::unique_ptr<Domain::Song>& song);

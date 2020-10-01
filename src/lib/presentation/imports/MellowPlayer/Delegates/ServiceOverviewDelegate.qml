@@ -16,9 +16,16 @@ Item {
     property string backgroundColor: Material.background
     property bool hovered: mouseArea.containsMouse
 
-    onIndexChanged: service.sortIndex = root.index
-    Drag.active: mouseArea.drag.active
+    function activate() {
+        root.activated()
+        StreamingServices.currentService = root.service
+    }
 
+    signal activated()
+
+   onIndexChanged: service.sortIndex = root.index
+
+    Drag.active: mouseArea.drag.active
     Component.onCompleted: service.sortIndex = root.index
 
     Item {
@@ -45,7 +52,6 @@ Item {
                 id: preview
 
                 property bool rounded: true
-                property bool adapt: true
 
                 anchors.fill: parent
                 source: root.service.previewImageUrl
@@ -117,6 +123,7 @@ Item {
             font.bold: true
             font.pixelSize: 16
             tooltip: qsTr("Stop")
+            focusPolicy: Qt.NoFocus
 
             onClicked: MainWindow.runningServices.remove(root.service)
 
@@ -129,9 +136,9 @@ Item {
                 left: parent.left
                 right: parent.right
             }
-            color: "#404040"
+            color: "#80404040"
             opacity: 0.9
-            implicitHeight: layout.implicitHeight
+            implicitHeight: layout.implicitHeight * 0.9
 
             Material.theme: Material.Dark
             Material.foreground: "white"
@@ -151,13 +158,23 @@ Item {
                     checkable: true
                     checked: root.service.favorite
                     tooltip: checked ? qsTr("Remove root.service from favorites") : qsTr("Add root.service to favorites")
+                    focusPolicy: Qt.NoFocus
 
                     onCheckedChanged: root.service.favorite = checked
 
                     Material.accent: Material.color(Material.Amber, Material.Shade600)
                 }
 
-                Item { Layout.fillWidth: true }
+                Text {
+                    id: lblName
+
+                    Layout.fillWidth: true
+
+                    color: "white"
+                    text: root.service.name
+                    font.bold: true
+                    horizontalAlignment: Qt.AlignHCenter
+                }
 
                 IconToolButton {
                     id: settingsButton
@@ -165,6 +182,7 @@ Item {
                     padding: 0
                     iconChar: MaterialIcons.icon_settings
                     font.pixelSize: 16
+                    focusPolicy: Qt.NoFocus
 
                     tooltip: qsTr("Settings")
 
@@ -174,20 +192,14 @@ Item {
                     }
                 }
             }
-
-            Text {
-                id: lblName
-
-                anchors.centerIn: parent
-                color: "white"
-                text: root.service.name
-                font.bold: true
-            }
         }
-    }
 
-    function activate() {
-        StreamingServices.currentService = root.service;
-        MainWindow.currentPage = MainWindow.runningServicesPage;
+        Rectangle {
+            anchors.fill: parent
+            color: "transparent"
+            border.color:root.service === StreamingServices.currentService ? Material.accent : "transparent"
+            border.width: 3
+            radius: 6
+        }
     }
 }

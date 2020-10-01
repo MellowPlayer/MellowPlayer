@@ -43,8 +43,6 @@ ItemDelegate {
             currentIndex: root.values.indexOf(root.qtObject.value)
             onCurrentTextChanged: qtObject.value = currentText
 
-            Layout.preferredWidth: 250
-
             Tooltip {
                 text: SettingsTranslator.translateToolTip(root.toolTip)
             }

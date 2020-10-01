@@ -21,7 +21,7 @@ TEST_CASE("SettingViewModelTests")
     {
         REQUIRE(model.type() == "bool");
         REQUIRE(!model.name().isEmpty());
-        REQUIRE(model.enabled());
+        REQUIRE(model.isEnabled());
         REQUIRE(!model.toolTip().isEmpty());
     }
 
@@ -29,15 +29,15 @@ TEST_CASE("SettingViewModelTests")
     {
         Setting& dependantSetting = settings.get(SettingKey::NOTIFICATIONS_PAUSED);
         BoolSettingViewModel dependantModel(dependantSetting, nullptr);
-        QSignalSpy enabledSpy(&dependantModel, SIGNAL(enabledChanged()));
+        QSignalSpy enabledSpy(&dependantModel, &BoolSettingViewModel::isEnabledChanged);
 
         REQUIRE(enabledSpy.count() == 0);
-        REQUIRE(dependantModel.enabled());
+        REQUIRE(dependantModel.isEnabled());
 
         model.setValue(false);
 
         REQUIRE(enabledSpy.count() == 1);
-        REQUIRE(!dependantModel.enabled());
+        REQUIRE(!dependantModel.isEnabled());
 
         model.setValue(true);
     }

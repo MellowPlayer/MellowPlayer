@@ -11,7 +11,7 @@ Item {
 
     clip: true
     implicitWidth: layout.implicitWidth
-    visible: MainWindow.isOnRunningServicesPage && App.settings.get(SettingKey.APPEARANCE_WEBPAGE_CONTROLS_VISIBLE).value
+    visible: MainWindow.runningServices.model.count > 0 && App.settings.get(SettingKey.APPEARANCE_WEBPAGE_CONTROLS_VISIBLE).value
 
     property bool clipped: x < 0
 

@@ -12,7 +12,7 @@ namespace MellowPlayer::Presentation
         Q_PROPERTY(int currentIndex READ currentIndex NOTIFY currentIndexChanged)
         Q_PROPERTY(StreamingServiceListModel* model READ model CONSTANT)
     public:
-        explicit RunningServicesViewModel(StreamingServicesViewModel& streamingServicesViewModel);
+        explicit RunningServicesViewModel(IStreamingServicesViewModel& streamingServicesViewModel);
 
         Q_INVOKABLE void remove(StreamingServiceViewModel* item);
 
@@ -28,7 +28,7 @@ namespace MellowPlayer::Presentation
         void onCurrentServiceChanged();
 
         int _currentIndex = -1;
-        StreamingServicesViewModel& _streamingServicesViewModel;
+        IStreamingServicesViewModel& _streamingServicesViewModel;
         StreamingServiceListModel _model;
         Domain::ILogger& _logger;
     };

@@ -25,7 +25,7 @@ TEST_CASE("Mpris2PlayerTests", "[IntegrationTest]")
     streamingServices.setCurrent(streamingServices.toList()[0].get());
     Players players(streamingServices);
     CurrentPlayer player(players, streamingServices);
-    Player& currentPlayer = *players.get(streamingServices.current()->name());
+    IPlayerBase& currentPlayer = *players.get(streamingServices.current()->name());
     FakeAlbumArtDownloader albumArtDownloader;
     LocalAlbumArt localAlbumArt(player, albumArtDownloader);
     Mpris2Player mpris2Player(player, localAlbumArt, nullptr);

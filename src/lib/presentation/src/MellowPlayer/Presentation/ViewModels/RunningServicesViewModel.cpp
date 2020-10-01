@@ -4,7 +4,7 @@
 using namespace MellowPlayer::Domain;
 using namespace MellowPlayer::Presentation;
 
-RunningServicesViewModel::RunningServicesViewModel(StreamingServicesViewModel& streamingServicesViewModel)
+RunningServicesViewModel::RunningServicesViewModel(IStreamingServicesViewModel& streamingServicesViewModel)
         : _streamingServicesViewModel(streamingServicesViewModel), _logger(Loggers::logger("RunningServices"))
 {
     connect(&_streamingServicesViewModel, &IStreamingServicesViewModel::currentServiceChanged, this, &RunningServicesViewModel::onCurrentServiceChanged);
@@ -19,6 +19,7 @@ int RunningServicesViewModel::currentIndex() const
 {
     return _currentIndex;
 }
+
 StreamingServiceListModel* RunningServicesViewModel::model()
 {
     return &_model;
@@ -42,12 +43,6 @@ void RunningServicesViewModel::onCurrentServiceChanged()
     else
     {
         LOG_DEBUG(_logger, "Adding service:" << item->name());
-
-        if (_model.isEmpty())
-        {
-            setCurrentIndex(-1);
-        }
-
         item->setActive(true);
         _model.append(item);
         setCurrentIndex(_model.count() - 1);
@@ -58,6 +53,8 @@ void RunningServicesViewModel::remove(StreamingServiceViewModel* item)
 {
     item->setActive(false);
     _model.remove(item);
+    setCurrentIndex(_model.count() - 1);
+    _streamingServicesViewModel.setCurrentService(_currentIndex == -1 ? nullptr : _model.at(_currentIndex));
 }
 
 void RunningServicesViewModel::setCurrentIndex(int index)
@@ -66,6 +63,7 @@ void RunningServicesViewModel::setCurrentIndex(int index)
     {
         _currentIndex = index;
         emit currentIndexChanged();
+
         LOG_DEBUG(_logger, "Current index changed:" << index);
     }
 }

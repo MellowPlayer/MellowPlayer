@@ -38,8 +38,8 @@ TEST_CASE("CurrentPlayerTests", "[UnitTest]")
         REQUIRE(!currentPlayer.currentSong()->isFavorite());
     }
 
-    Player& player1 = *players.get(streamingServices.toList()[0]->name());
-    Player& player2 = *players.get(streamingServices.toList()[1]->name());
+    IPlayerBase& player1 = *players.get(streamingServices.toList()[0]->name());
+    IPlayerBase& player2 = *players.get(streamingServices.toList()[1]->name());
     streamingServices.setCurrent(streamingServices.toList()[0].get());
 
     QSignalSpy currentSongChanged(&currentPlayer, &CurrentPlayer::currentSongChanged);

@@ -3,8 +3,10 @@
 #include <Fakes/FakeSettingsStore.hpp>
 #include <MellowPlayer/Presentation/ViewModels/MainWindowViewModel.hpp>
 #include <QtTest/QSignalSpy>
+#include <Utils/DependencyPool.hpp>
 #include <catch2/catch.hpp>
 
+using namespace MellowPlayer::Tests;
 using namespace MellowPlayer::Domain::Tests;
 using namespace MellowPlayer::Presentation;
 using namespace MellowPlayer::Presentation::Tests;
@@ -13,8 +15,9 @@ SCENARIO("MainWindowViewModelTests")
 {
     GIVEN("A main window instance")
     {
-        FakeSettingsStore settingsStore;
-        MainWindowViewModel mainWindow(settingsStore);
+        DependencyPool pool;
+        RunningServicesViewModel runningServicesViewModel(pool.getStreamingServicesViewModel());
+        MainWindowViewModel mainWindow(pool.getSettingsStore(), runningServicesViewModel);
 
         WHEN("Creating main window")
         {

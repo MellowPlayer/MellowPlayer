@@ -12,7 +12,7 @@ Popup {
     padding: 20
     modal: true
     height: 426
-    width: Math.max(labelBuildInfo.implicitWidth + 64, height)
+    width: Math.max(labelBuildInfo.implicitWidth + 32, height)
     x: (ApplicationWindow.window.width - width) / 2
     y: (ApplicationWindow.window.height - height) / 2 - ApplicationWindow.window.header.height
 

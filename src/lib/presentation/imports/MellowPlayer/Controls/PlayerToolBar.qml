@@ -17,10 +17,9 @@ Item {
         id: layout
 
         anchors.fill: parent
-        spacing: root.width / (sliderLayout.visible ? 8 : 16)
+        spacing: root.width / 8
         layoutDirection: Qt.RightToLeft
-        visible: CurrentPlayer.active &&
-                 MainWindow.isOnRunningServicesPage &&
+        visible: MainWindow.runningServices.model.count > 0 && CurrentPlayer.active &&
                  App.settings.get(SettingKey.APPEARANCE_PLAYER_CONTROLS_VISIBLE).value &&
                  !root.clipped
 
@@ -63,9 +62,7 @@ Item {
 
                 anchors.left: parent.left
                 anchors.right: parent.right
-                y: (root.height - implicitHeight) / 2 - (lineCount > 1 ? 0 : 6)
-                wrapMode: sliderLayout.visible ? "NoWrap" : "WrapAtWordBoundaryOrAnywhere"
-                maximumLineCount: sliderLayout.visible ? 1 : 2
+                y: (root.height - implicitHeight) / 2 - (sliderLayout.visible ? 6 : 0)
 
                 function getText() {
                     var currentSong = CurrentPlayer.currentSong;
@@ -84,7 +81,9 @@ Item {
                 anchors.right: parent.right
                 y: root.height / 4
 
-                visible: (CurrentPlayer.canSeek || CurrentPlayer.currentSong.duration !== 0) && slider.width > 64
+                visible: {
+                    CurrentPlayer.canSeek && CurrentPlayer.currentSong.duration > 0
+                }
 
                 Label {
                     text: {
@@ -149,7 +148,7 @@ Item {
                 action: Actions.toggleFavoriteSong
                 iconChar: CurrentPlayer.currentSong.isFavorite ? MaterialIcons.icon_favorite : MaterialIcons.icon_favorite_border
                 tooltip: CurrentPlayer.currentSong.isFavorite ? qsTr("Remove current song from your favorites") : qsTr("Add current song to your favorites")
-                visible: MainWindow.isOnRunningServicesPage && App.settings.get(SettingKey.APPEARANCE_PLAYER_CONTROLS_VISIBLE).value
+                visible: App.settings.get(SettingKey.APPEARANCE_PLAYER_CONTROLS_VISIBLE).value
 
                 Material.foreground: CurrentPlayer.currentSong.isFavorite ? ActiveTheme.accent : "white"
             }

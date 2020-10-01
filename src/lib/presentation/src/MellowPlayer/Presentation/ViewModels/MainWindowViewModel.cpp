@@ -13,9 +13,6 @@ MainWindowViewModel::MainWindowViewModel(ISettingsStore& settingsStore, RunningS
           _zoom(settingsStore),
           _runningServices(runningServicesViewModel)
 {
-    connect(&_runningServices, &RunningServicesViewModel::currentIndexChanged, [=](){
-        setCurrentPage(_runningServices.currentIndex() != -1 ? runningServicesPage() : selectServicePage());
-    });
 }
 
 void MainWindowViewModel::show()
@@ -64,41 +61,6 @@ ZoomViewModel* MainWindowViewModel::zoom()
 {
     return &_zoom;
 }
-
-QString MainWindowViewModel::currentPage() const
-{
-    return _currentPage;
-}
-
-void MainWindowViewModel::setCurrentPage(const QString& value)
-{
-    if (_currentPage != value)
-    {
-        _currentPage = value;
-        emit currentPageChanged();
-    }
-}
-
-QString MainWindowViewModel::selectServicePage() const
-{
-    return "select";
-}
-
-QString MainWindowViewModel::runningServicesPage() const
-{
-    return "running";
-}
-
-bool MainWindowViewModel::isOnRunningServicesPage() const
-{
-    return currentPage() == runningServicesPage();
-}
-
-void MainWindowViewModel::toggleActivePage()
-{
-    setCurrentPage(currentPage() == selectServicePage() ? runningServicesPage(): selectServicePage());
-}
-
 RunningServicesViewModel* MainWindowViewModel::runningServices()
 {
     return &_runningServices;

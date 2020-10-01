@@ -23,15 +23,10 @@ ToolBar {
         spacing: 0
 
         IconToolButton {
-            action: Actions.toggleCurrentPage
-            iconChar: MainWindow.isOnRunningServicesPage ? MaterialIcons.icon_apps : MaterialIcons.icon_keyboard_arrow_left
+            action: Actions.toggleSelectServiceDrawer
+            iconChar: MaterialIcons.icon_apps
             iconSize: 24
-            tooltip: MainWindow.isOnRunningServicesPage
-                    ? qsTr("Select another service")
-                    : root.atLeastOneServiceRunning
-                        ? qsTr("Go back to ") + StreamingServices.currentServiceName
-                        : ""
-            visible: MainWindow.runningServices.model.count > 0
+            tooltip: qsTr("Select another service")
         }
 
         Item {
@@ -45,10 +40,9 @@ ToolBar {
                 spacing: 0
 
                 IconToolButton {
-                    action: Actions.openListeningHistory
+                    action: Actions.toggleListeningHistory
                     iconChar: MaterialIcons.icon_history
                     tooltip: qsTr("Open listening history")
-                    shortcut: App.settings.get(SettingKey.SHORTCUTS_LISTENING_HISTORY).value
                 }
 
                 IconToolButton {
@@ -81,12 +75,5 @@ ToolBar {
 
         y: parent.height + 3
         x: parent.width - implicitWidth - 3
-    }
-
-    Label {
-        anchors.centerIn: parent
-        text: qsTr("Which streaming service would you like to use?")
-        font.pixelSize: 14
-        visible: !MainWindow.isOnRunningServicesPage
     }
 }

@@ -54,7 +54,7 @@
         <file>MellowPlayer/NewPluginWizard/StartPage.qml</file>
         <file>MellowPlayer/NewPluginWizard/WizardPage.qml</file>
         <file>MellowPlayer/Pages/RunningServicesPage.qml</file>
-        <file>MellowPlayer/Pages/SelectServicePage.qml</file>
+        <file>MellowPlayer/Controls/SelectServiceDrawer.qml</file>
         <file>MellowPlayer/Pages/SettingsPage.qml</file>
         <file>MellowPlayer/SettingsPages/AutomaticSettingsPage.qml</file>
         <file>MellowPlayer/SettingsPages/CacheSettingsPage.qml</file>

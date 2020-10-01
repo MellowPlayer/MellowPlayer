@@ -9,6 +9,7 @@ Dialog {
     x: (ApplicationWindow.window.width - width) / 2
     y: (ApplicationWindow.window.height - height) / 2 - ApplicationWindow.window.header.height
     modal: true
+    padding: 16
 
     onVisibleChanged: stackLayout.currentIndex = 0
 
@@ -21,6 +22,7 @@ Dialog {
             spacing: 24
 
             RowLayout {
+                spacing: 0
                 Layout.fillHeight: true
                 Layout.fillWidth: true
 
@@ -31,7 +33,7 @@ Dialog {
                     padding: 16
 
                     ColumnLayout {
-                        anchors.fill: parent
+                        anchors.centerIn: parent
                         spacing: 24
 
                         ColumnLayout {
@@ -57,8 +59,8 @@ Dialog {
                         }
 
                         Image {
-                            sourceSize.height: 48
-                            sourceSize.width: 48
+                            sourceSize.height: 38
+                            sourceSize.width: 38
                             source: "qrc:/MellowPlayer/Presentation/icons/gitlab.svg"
 
                             Layout.alignment: Qt.AlignHCenter
@@ -83,13 +85,15 @@ Dialog {
                 }
 
                 Pane {
+                    id: mailPane
+
                     Layout.fillWidth: true
                     Layout.fillHeight: true
 
                     padding: 16
 
                     ColumnLayout {
-                        anchors.fill: parent
+                        anchors.centerIn: parent
                         spacing: 24
 
                         ColumnLayout {
@@ -100,14 +104,17 @@ Dialog {
                                 horizontalAlignment: "AlignHCenter"
                                 font.bold: true
 
-                                Layout.minimumWidth: longestLabel.implicitWidth
+                                Layout.fillWidth: true
                             }
 
                             Label {
                                 id: longestLabel
 
                                 text: "incoming+ColinDuquesnoy/MellowPlayer@incoming.gitlab.com"
-                                font { italic: true; pixelSize: 10 }
+                                font { italic: true; pixelSize: 8 }
+                                wrapMode: "WordWrap"
+
+                                Layout.fillWidth: true
                             }
 
 
@@ -117,7 +124,7 @@ Dialog {
                             text: MaterialIcons.icon_email
                             font {
                                 family: MaterialIcons.family
-                                pixelSize: 64
+                                pixelSize: 48
                             }
 
                             Layout.alignment: Qt.AlignHCenter
@@ -147,6 +154,8 @@ Dialog {
         }
 
         Pane {
+            padding: 16
+
             ColumnLayout {
                 anchors.fill: parent
 

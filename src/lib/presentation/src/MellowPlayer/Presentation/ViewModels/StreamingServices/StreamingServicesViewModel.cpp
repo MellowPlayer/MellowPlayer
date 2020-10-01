@@ -83,12 +83,11 @@ void StreamingServicesViewModel::setCurrentService(StreamingServiceViewModel* va
     _currentService = value;
     if (_currentService == nullptr)
     {
-        _currentServiceSetting.setValue("");
+
         _streamingServices.setCurrent(nullptr);
     }
     else
     {
-        _currentServiceSetting.setValue(_currentService->name());
         _streamingServices.setCurrent(_currentService->streamingService());
     }
 }
@@ -208,14 +207,25 @@ void StreamingServicesViewModel::registerTo(IQmlApplicationEngine& qmlApplicatio
 
 void StreamingServicesViewModel::onCurrentServiceChanged(Domain::StreamingService* value)
 {
-    for (auto* service: *_services)
+    if (value == nullptr)
     {
-        if (service->streamingService() == value)
+        _currentService = nullptr;
+        emit currentServiceChanged();
+        emit currentServiceNameChanged();
+        _currentServiceSetting.setValue("");
+    }
+    else
+    {
+        for (auto* service : *_services)
         {
-            _currentService = service;
-            emit currentServiceChanged();
-            emit currentServiceNameChanged();
-            return;
+            if (service->streamingService() == value)
+            {
+                _currentService = service;
+                _currentServiceSetting.setValue(_currentService->name());
+                emit currentServiceChanged();
+                emit currentServiceNameChanged();
+                return;
+            }
         }
     }
 }

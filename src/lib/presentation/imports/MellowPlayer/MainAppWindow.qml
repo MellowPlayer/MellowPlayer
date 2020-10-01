@@ -9,14 +9,12 @@ import MellowPlayer 3.0
 ApplicationWindow {
     id: mainWindow
 
-    property var runningServices: null
-    property bool hasRunningServices: runningServices !== null && runningServices.currentIndex !== -1
 
-//    minimumWidth: 800; minimumHeight: 480
+    minimumWidth: 450
+    minimumHeight: 450
     width: App.settings.get(SettingKey.PRIVATE_WINDOW_WIDTH).value;
     height: App.settings.get(SettingKey.PRIVATE_WINDOW_HEIGHT).value;
     title: StreamingServices.currentService !== null ? StreamingServices.currentServiceName : ""
-    font.pixelSize: width < 960 ? 12 : 14
 
     onClosing: d.handleCloseEvent(close);
 
@@ -35,13 +33,15 @@ ApplicationWindow {
 
     footer: UpdateToolBar { }
 
-    StackView {
-        id: stack
-
+    RunningServicesPage {
+        id: runningServicesPage
         anchors.fill: parent
+    }
 
-        Component { id: selectServicePageComponent; SelectServicePage {} }
-        Component { id: runningServicesPageComponent;  RunningServicesPage {} }
+    SelectServiceDrawer {
+        id: selectServiceDrawer
+
+        height: mainWindow.height; width: 450
     }
 
     SettingsDrawer {
@@ -101,7 +101,7 @@ ApplicationWindow {
         property real scaleFactor: 0.9
 
         modal: true
-        width: 600; height: 440
+        width: 450; height: 450
         x: mainWindow.width / 2 - width / 2;
         y: mainWindow.height / 2 - height / 2 - 48;
     }
@@ -118,8 +118,9 @@ ApplicationWindow {
     StreamingServiceSettingsDialog {
         id: settingsDialog
 
-        height: 540; width: 960
-        x: parent.width / 2 - width / 2; y: parent.height / 2 - height / 2
+        height: 420; width: 600
+        x: (ApplicationWindow.window.width - width) / 2
+        y: (ApplicationWindow.window.height - height) / 2 - ApplicationWindow.window.header.height
     }
 
     Connections {
@@ -136,17 +137,34 @@ ApplicationWindow {
     }
 
     Action {
-        id: toggleCurrentPageAction
+        id: toggleSelectServiceDrawerAction
         shortcut: App.settings.get(SettingKey.SHORTCUTS_SELECT_SERVICE).value
-        onTriggered: MainWindow.toggleActivePage()
-        Component.onCompleted: Actions.toggleCurrentPage = toggleCurrentPageAction
+        onTriggered: {
+            if (selectServiceDrawer.visible) {
+                console.log("Closing service selection drawer")
+                selectServiceDrawer.close()
+            } else {
+                console.log("Opening service selection drawer")
+                runningServicesPage.updateImages();
+                selectServiceDrawer.open();
+            }
+        }
+        Component.onCompleted: Actions.toggleSelectServiceDrawer = toggleSelectServiceDrawerAction
     }
 
     Action {
-        id: openListeningHistoryAction
+        id: toggleListeningHistoryAction
         shortcut: App.settings.get(SettingKey.SHORTCUTS_LISTENING_HISTORY).value
-        onTriggered:  listeningHistoryDrawer.open()
-        Component.onCompleted: Actions.openListeningHistory = openListeningHistoryAction
+        onTriggered: {
+            if (listeningHistoryDrawer.visible) {
+                console.log("Closing listening history drawer")
+                listeningHistoryDrawer.close()
+            } else {
+                console.log("Opening listening history drawer")
+                listeningHistoryDrawer.open()
+            }
+        }
+        Component.onCompleted: Actions.toggleListeningHistory = toggleListeningHistoryAction
     }
 
     Action {
@@ -212,9 +230,8 @@ ApplicationWindow {
 
         property int previousVisibility: ApplicationWindow.Windowed
         property bool forceQuit: false;
-        property string page: MainWindow.currentPage
-
         property bool fullScreen: MainWindow.fullScreen
+
         onFullScreenChanged: {
             if (fullScreen) {
                 d.previousVisibility = mainWindow.visibility
@@ -226,25 +243,6 @@ ApplicationWindow {
                 mainWindow.showNormal()
                 if (d.previousVisibility === ApplicationWindow.Maximized)
                     mainWindow.showMaximized()
-            }
-        }
-
-        onPageChanged: {
-            if (MainWindow.currentPage === MainWindow.selectServicePage) {
-                if (runningServices !== null && runningServices.currentWebView !== null)
-                    runningServices.currentWebView.updateImage();
-                var selectServices = stack.push(selectServicePageComponent);
-                selectServices.quitRequested.connect(function() {
-                    MainWindow.toggleActivePage()
-                });
-            }
-            else if (MainWindow.currentPage === MainWindow.runningServicesPage) {
-                if (stack.depth <= 1) {
-                    runningServices = stack.push(runningServicesPageComponent)
-                }
-                else {
-                    stack.pop();
-                }
             }
         }
 
