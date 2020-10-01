@@ -9,64 +9,13 @@ GNU/Linux
 
 We provide several ways to install a pre-compiled version of MellowPlayer on GNU/Linux:
 
-1. Native package
-2. Flatpak
-3. AppImage
+1. Flatpak
+2. Native packages
 
-To choose which kind of installer you should use, follow those simple rules:
+**Flatpak is the recommended solution** as it is what the developers use and test against. It contains a recent version
+of QtWebEngine/Chromium which is essential for MellowPlayer to work correctly.
 
-- Always prefer the native package to any other format if that is available for your distribution. Native package will always integrate better with your desktop and, in most cases, it will pick up proprietary codecs (ffmpeg) from your system if installed.
-- Prefer flatpak over AppImage, especially if the service you want to use require proprietary audio codecs.
-- Use the AppImage if flatpak is not available on your distribution (very unlikely) and you don't need proprietary codecs.
-
-Fedora
-++++++
-
-Starting from Fedora 27, MellowPlayer is available from the official stable repositories:
-
-.. code-block:: bash
-
-    sudo dnf install mellowplayer
-
-Proprietary codecs
-******************
-
-Most services require proprietary audio codecs to work. You can install them from the `RPMFusion repositories`_:
-
-.. code-block:: bash
-
-    sudo dnf install qt5-qtwebengine-freeworld
-
-ArchLinux
-+++++++++
-
-MellowPlayer is available from the `AUR`_, install it with your favorite AUR tool (e.g. yaourt).
-
-
-.. code-block:: bash
-
-    yaourt -S mellowplayer
-
-.. _AUR: https://aur.archlinux.org/packages/mellowplayer
-
-KaOS
-++++
-
-MellowPlayer is available from `KaOSx/apps`_ repository, just run:
-
-.. code-block:: bash
-
-    $ sudo pacman -S mellowplayer
-
-
-.. _KaOSx/apps: https://kaosx.us/packages/packages.php?sortby=name&sortdir=&flagged=&page=&repo=apps&exact=&search=mellowplayer
-
-Other distributions
-++++++++++++++++++++
-
-Pre-compiled packages for other distributions (Ubuntu, openSUSE,...) can be found on our `OBS Download Page`_
-
-.. _OBS Download Page: https://software.opensuse.org//download.html?project=home%3AColinDuquesnoy&package=mellowplayer
+Native packages (especially on old/LTS distributions) may cause problems as they don't provide a recent version of QtWebEngine/Chromium
 
 Flatpak
 +++++++
@@ -80,15 +29,54 @@ MellowPlayer is available on `flathub`_:
 
 .. _flathub: https://flathub.org/apps/details/com.gitlab.ColinDuquesnoy.MellowPlayer
 
+Native Packages
++++++++++++++++
 
-AppImage
-++++++++
+Fedora
+~~~~~~
 
-1. Download the AppImage from our `bintray repository`_
-2. Make it executable: ``chmod +x ./MellowPlayer.AppImage``
-3. Run it: ``./MellowPlayer.AppImage``
+Starting from Fedora 27, MellowPlayer is available from the official stable repositories:
 
-.. _bintray repository: https://bintray.com/colinduquesnoy/MellowPlayer/Stable
+.. code-block:: bash
+
+    sudo dnf install mellowplayer
+
+Most services require proprietary audio codecs to work. You can install them from the `RPMFusion repositories`_:
+
+.. code-block:: bash
+
+    sudo dnf install qt5-qtwebengine-freeworld
+
+ArchLinux
+~~~~~~~~~
+
+MellowPlayer is available from the `AUR`_, install it with your favorite AUR tool (e.g. yaourt).
+
+
+.. code-block:: bash
+
+    yaourt -S mellowplayer
+
+.. _AUR: https://aur.archlinux.org/packages/mellowplayer
+
+KaOS
+~~~~
+
+MellowPlayer is available from `KaOSx/apps`_ repository, just run:
+
+.. code-block:: bash
+
+    $ sudo pacman -S mellowplayer
+
+
+.. _KaOSx/apps: https://kaosx.us/packages/packages.php?sortby=name&sortdir=&flagged=&page=&repo=apps&exact=&search=mellowplayer
+
+Other distributions
+~~~~~~~~~~~~~~~~~~~
+
+Pre-compiled packages for other distributions (Ubuntu, openSUSE,...) can be found on our `OBS Download Page`_
+
+.. _OBS Download Page: https://software.opensuse.org//download.html?project=home%3AColinDuquesnoy&package=mellowplayer
 
 Compiling from source
 +++++++++++++++++++++
@@ -97,12 +85,12 @@ See the `README`_ for build instructions.
 
 .. _README: https://gitlab.com/ColinDuquesnoy/MellowPlayer/blob/master/README.md#compilation
 
-Widevine Support
-++++++++++++++++
+Widevine DRM Plugin
++++++++++++++++++++
 
-Many services like Spotify, Tidal and Amazon Music requires the widevine DRM plugin to work.
+Many services like Spotify, Tidal and Amazon Music require the widevine DRM plugin to work.
 
-You can install it on GNU/Linux by running the below script:
+You can install it on GNU/Linux by running the below script (tested with native packages and flatpak; make sure the `binutils` package is installed on Debian/Ubuntu provididing the `ar` command)
 
 .. code-block:: bash
 
@@ -119,7 +107,6 @@ If your favorite service require proprietary codecs to work, you'll need to buil
 
 
 .. _official website: https://colinduquesnoy.gitlab.io/MellowPlayer
-.. _openSUSE build service: https://software.opensuse.org//download.html?project=home%3AColinDuquesnoy&package=MellowPlayer
 .. _RPMFusion repositories: https://rpmfusion.org/Configuration
 
 OS X
