@@ -7,7 +7,7 @@
         "key": "muteAds"
     },
     {
-        "name": "Automatically skip adds",
+        "name": "Automatically skip ads",
         "tooltip": "Automatically skip ads after 5 seconds",
         "type": "bool",
         "default": false,

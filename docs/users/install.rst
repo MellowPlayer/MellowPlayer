@@ -88,9 +88,9 @@ See the `README`_ for build instructions.
 Widevine DRM Plugin
 +++++++++++++++++++
 
-Many services like Spotify, Tidal and Amazon Music requires the widevine DRM plugin to work.
+Many services like Spotify, Tidal and Amazon Music require the widevine DRM plugin to work.
 
-You can install it on GNU/Linux by running the below script (tested with native packages and flatpak)
+You can install it on GNU/Linux by running the below script (tested with native packages and flatpak; make sure the `binutils` package is installed on Debian/Ubuntu provididing the `ar` command)
 
 .. code-block:: bash
 
