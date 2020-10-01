@@ -3,8 +3,6 @@ import QtWebEngine 1.10
 
 import MellowPlayer 3.0
 
-// TODO QMLLINT
-
 MessageBoxDialog {
     id: dialog
 
@@ -12,7 +10,7 @@ MessageBoxDialog {
 
     title: request.title
     message: request.message;
-    // standardButtons: MessageBoxDialog.Ok
+    standardButtons: MessageBoxDialog.Ok
 
     onAccepted: request.dialogAccept()
     onRejected: request.dialogReject()

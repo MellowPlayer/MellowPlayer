@@ -42,7 +42,7 @@ build:release:no-gold-linker:
     script:
         - ./scripts/ci/linux/build-release-no-gold-linker.sh
 
-tests:
+test:
     extends: .linux
     stage: tests
     needs: ["build:release"]
@@ -50,6 +50,14 @@ tests:
         - build:release
     script:
         - ./scripts/ci/linux/tests.sh
+
+lint:
+    extends: .linux
+    stage: tests
+    needs: []
+    allow_failure: true
+    script:
+        - ./scripts/ci/linux/lint.sh
 
 coverage:
     extends: .linux

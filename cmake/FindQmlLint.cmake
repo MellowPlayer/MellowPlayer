@@ -62,6 +62,8 @@ endmacro()
 
 qml_find_plugin_dir()
 
+add_custom_target(qmllint COMMAND echo "qmllint" )
+
 # validate a list of qml files
 function(qml_lint)
     if (NOT QMLLINT_EXECUTABLE OR NOT QmlLint_FOUND)
@@ -73,10 +75,12 @@ function(qml_lint)
         get_filename_component(_file_name ${_file} NAME)
         add_custom_command(
                 OUTPUT ${CMAKE_CURRENT_BINARY_DIR}/${_file_name}.qmllint
+#                COMMAND ${QMLLINT_EXECUTABLE} ${_file_abs}
                 COMMAND ${QMLLINT_EXECUTABLE} ${_file_abs} -U -i ${QML_IMPORT_PATH}/MellowPlayer/cpp.qmltypes -I ${QML_IMPORT_PATH} -I ${QML_PLUGIN_INSTALL_DIR}
                 COMMAND ${CMAKE_COMMAND} -E touch ${CMAKE_CURRENT_BINARY_DIR}/${_file_name}.qmllint
                 MAIN_DEPENDENCY ${_file_abs}
         )
-        add_custom_target(${_file_name}_qmllint ALL DEPENDS ${CMAKE_CURRENT_BINARY_DIR}/${_file_name}.qmllint)
+        add_custom_target(qmllint-${_file_name} DEPENDS ${CMAKE_CURRENT_BINARY_DIR}/${_file_name}.qmllint)
+        add_dependencies(qmllint qmllint-${_file_name})
     endforeach()
 endfunction()

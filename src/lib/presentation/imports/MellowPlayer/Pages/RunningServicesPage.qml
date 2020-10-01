@@ -101,6 +101,8 @@ StackLayout {
             }
 
             Image {
+                id: image
+
                 source: "qrc:/MellowPlayer/Presentation/icons/mellowplayer.png"
                 fillMode: Image.PreserveAspectFit
                 smooth: true
@@ -108,7 +110,7 @@ StackLayout {
 
                 Layout.alignment: Qt.AlignHCenter
                 Layout.fillWidth: true
-                Layout.preferredHeight: ApplicationWindow.window.width < 800 ? 96: 128
+                Layout.preferredHeight: root.width < 800 ? 96: 128
             }
 
             Label {

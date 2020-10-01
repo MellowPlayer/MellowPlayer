@@ -4,8 +4,6 @@ import QtQuick.Controls 2.15
 import QtQuick.Controls.Material 2.15
 import QtWebEngine 1.10
 
-// TODO QMLLINT
-
 Dialog {
     id: root
 
@@ -26,13 +24,13 @@ Dialog {
         selectByMouse: true
     }
 
-//    Shortcut {
-//        sequence: "Return"
-//        onActivated: root.accept()
-//    }
-//
-//    Shortcut {
-//        sequence: "Enter"
-//        onActivated: root.accept()
-//    }
+    Shortcut {
+        sequence: "Return"
+        onActivated: root.accept()
+    }
+
+    Shortcut {
+        sequence: "Enter"
+        onActivated: root.accept()
+    }
 }

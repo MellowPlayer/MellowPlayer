@@ -52,7 +52,7 @@ QtObject {
 
     // Other actions
     property Action toggleNotifications: Action {
-        property var setting: App.settings.get(SettingKey.NOTIFICATIONS_ENABLED)
+        property Setting setting: App.settings.get(SettingKey.NOTIFICATIONS_ENABLED)
 
         checkable: true
         checked: setting.value

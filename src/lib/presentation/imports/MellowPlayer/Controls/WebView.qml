@@ -10,8 +10,6 @@ import MellowPlayer 3.0
 
 import "../Dialogs.js" as Dialogs
 
-// TODO QMLLINT
-
 Page {
     id: root
 
@@ -240,7 +238,7 @@ Page {
             customUrl: root.service.url
             x: root.width / 2 - width / 2; y: -2; z: 1
             width: 500
-            // state: root.service.url.match("(@.*@)") !== null ? "visible" : "hidden"
+            state: root.service.url.match("(@.*@)") !== null ? "visible" : "hidden"
 
             onReloadRequested: root.reload()
             onCustomUrlChanged: {

@@ -45,18 +45,6 @@ ItemDelegate {
             textFromValue: root.textFromValue
 
             onValueChanged: root.value = value;
-
-            Component.onCompleted: {
-                contentItem.selectByMouse = true;
-                contentItem.selectionColor = ActiveTheme.accent;
-                contentItem.selectedTextColor = Material.primaryHighlightedTextColor;
-            }
-
-            Connections {
-                target: ActiveTheme
-
-                function onAccentChanged() { spinBox.contentItem.selectionColor = ActiveTheme.accent }
-            }
         }
     }
 }

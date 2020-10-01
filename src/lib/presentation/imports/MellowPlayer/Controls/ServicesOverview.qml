@@ -6,8 +6,6 @@ import QtQml.Models 2.15
 
 import MellowPlayer 3.0
 
-// TODO QMLLINT
-
 Item {
     id: root
 
@@ -76,7 +74,7 @@ Item {
 
                             required property StreamingService qtObject
 
-                            property int visualIndex // : delegateRoot.DelegateModel.itemsIndex
+                            property int visualIndex: delegateRoot.DelegateModel.itemsIndex
 
                             width: gridView.cellWidth - gridView.itemSpacing / 2;
                             height: gridView.cellHeight - gridView.itemSpacing / 2
@@ -131,9 +129,7 @@ Item {
                             DropArea {
                                 anchors { fill: parent; margins: 15 }
 
-                                onEntered: {
-                                    // visualModel.items.move(drag.source.visualIndex, delegateRoot.visualIndex)
-                                }
+                                onEntered: visualModel.items.move(drag.source.visualIndex, delegateRoot.visualIndex)
                             }
                         }
                     }
