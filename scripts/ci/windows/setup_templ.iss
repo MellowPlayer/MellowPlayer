@@ -62,3 +62,6 @@ Name: "{userappdata}\Microsoft\Internet Explorer\Quick Launch\{#MyAppName}"; Fil
 [Run]
 Filename: "{tmp}\vc_redist.x64.exe"; Components: vcredist;
 Filename: "{app}\{#MyAppExeName}"; Description: "{cm:LaunchProgram,{#StringChange(MyAppName, '&', '&&')}}"; Flags: nowait postinstall skipifsilent; Components: app;
+
+[InstallDelete]
+Type: filesandordirs; Name: {app}\*;
