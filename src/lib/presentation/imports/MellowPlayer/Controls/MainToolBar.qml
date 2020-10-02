@@ -66,7 +66,12 @@ ToolBar {
             iconSize: 24
             tooltip:  qsTr("Main menu")
 
-            onTriggered: menu.open()
+            onTriggered: {
+                if (menu.visible)
+                    menu.close()
+                else
+                    menu.open()
+            }
         }
     }
 
