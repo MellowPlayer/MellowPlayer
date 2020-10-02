@@ -2,6 +2,7 @@ import QtQuick 2.15
 import QtQuick.Controls 2.15
 
 import MellowPlayer 3.0
+import "../SettingsTranslator.js" as SettingsTranslator
 
 SwitchDelegate {
     id: root
@@ -11,7 +12,7 @@ SwitchDelegate {
     required property string toolTip
     required property string type
     required property string qmlComponent
-    required property Setting qtObject
+    required property SettingViewModel qtObject
 
     bottomPadding: 3; topPadding: 3
     anchors.fill: parent

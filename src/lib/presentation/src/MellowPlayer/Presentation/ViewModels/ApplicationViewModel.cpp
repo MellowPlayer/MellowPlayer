@@ -3,8 +3,8 @@
 
 #include <MellowPlayer/Infrastructure/BuildConfig.hpp>
 #include <MellowPlayer/Infrastructure/Helpers/FileHelper.hpp>
-#include <MellowPlayer/Presentation/IMainWindow.hpp>
 #include <MellowPlayer/Presentation/ViewModels/ApplicationViewModel.hpp>
+#include <MellowPlayer/Presentation/ViewModels/MainWindowViewModel.hpp>
 
 #include <QDesktopServices>
 #include <QDebug>
@@ -20,7 +20,7 @@ using namespace MellowPlayer::Infrastructure;
 
 ApplicationViewModel::ApplicationViewModel(IApplication& application,
                                            IQtApplication& qtApplication,
-                                           IMainWindow& mainWindow,
+                                           MainWindowViewModel& mainWindow,
                                            SettingsViewModel& settingsViewModel)
         : QmlSingleton("App", this),
           _application(application),
@@ -31,12 +31,13 @@ ApplicationViewModel::ApplicationViewModel(IApplication& application,
 {
     _qtApplication.setWindowIcon(IconProvider::windowIcon());
 
-    connect(&_application, &IApplication::commitDataRequest, &mainWindow, &IMainWindow::forceQuitRequest);
-    connect(&_application, &IApplication::restoreWindowRequest, &mainWindow, &IMainWindow::raise);
+    connect(&_application, &IApplication::commitDataRequest, &mainWindow, &MainWindowViewModel::forceQuitRequest);
+    connect(&_application, &IApplication::restoreWindowRequest, &mainWindow, &MainWindowViewModel::raise);
 }
 
 void ApplicationViewModel::quit()
 {
+    _mainWindow.runningServices()->clear();
     _application.quit();
 }
 

@@ -3,6 +3,7 @@ import QtQuick.Layouts 1.15
 import QtQuick.Controls 2.15
 
 import MellowPlayer 3.0
+import "../SettingsTranslator.js" as SettingsTranslator
 
 ItemDelegate {
     id: root
@@ -16,7 +17,7 @@ ItemDelegate {
     required property string toolTip
     required property string type
     required property string qmlComponent
-    required property Setting qtObject
+    required property SettingViewModel qtObject
     
 
     onClicked: textField.forceActiveFocus()

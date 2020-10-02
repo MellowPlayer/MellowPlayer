@@ -59,7 +59,7 @@ TEST_CASE("StreamingServiceModelTests", "[UnitTest]")
 
     SECTION("setSortOrder sortOrderChanged signal is emitted")
     {
-        QSignalSpy spy(&viewModel, &StreamingServiceViewModel::sortIndexChanged);
+        QSignalSpy spy(&viewModel, &IStreamingServiceViewModel::sortIndexChanged);
         viewModel.setSortIndex(2);
         REQUIRE(viewModel.sortIndex() == 2);
         REQUIRE(spy.count() == 1);
@@ -67,7 +67,7 @@ TEST_CASE("StreamingServiceModelTests", "[UnitTest]")
 
     SECTION("setNotificationsEnabled to false")
     {
-        QSignalSpy spy(&viewModel, &StreamingServiceViewModel::notificationsEnabledChanged);
+        QSignalSpy spy(&viewModel, &IStreamingServiceViewModel::notificationsEnabledChanged);
         viewModel.setNotificationsEnabled(false);
         REQUIRE(!viewModel.notificationsEnabled());
         REQUIRE(spy.count() == 1);
@@ -75,7 +75,7 @@ TEST_CASE("StreamingServiceModelTests", "[UnitTest]")
 
     SECTION("reload plugin when streaming service script has changed")
     {
-        QSignalSpy spy(&viewModel, &StreamingServiceViewModel::sourceCodeChanged);
+        QSignalSpy spy(&viewModel, &IStreamingServiceViewModel::sourceCodeChanged);
 
         REQUIRE(!viewModel.sourceCode().isEmpty());
 

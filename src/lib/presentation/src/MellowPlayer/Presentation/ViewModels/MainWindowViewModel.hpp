@@ -46,6 +46,7 @@ namespace MellowPlayer::Presentation
         void visibleChanged();
         void raiseRequested();
         void fullScreenChanged();
+        void forceQuitRequest();
 
     public slots:
         void setVisible(bool visible);

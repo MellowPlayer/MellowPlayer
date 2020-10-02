@@ -8,7 +8,7 @@
 
 namespace MellowPlayer::Presentation
 {
-    class IMainWindow;
+    class MainWindowViewModel;
     class SettingsViewModel;
 
     class ApplicationViewModel : public QmlSingleton
@@ -19,7 +19,7 @@ namespace MellowPlayer::Presentation
     public:
         ApplicationViewModel(Infrastructure::IApplication& application,
                              Infrastructure::IQtApplication& qtApplication,
-                             IMainWindow& mainWindow,
+                             MainWindowViewModel& mainWindow,
                              SettingsViewModel& settingsViewModel);
 
         Q_INVOKABLE void quit();
@@ -36,7 +36,7 @@ namespace MellowPlayer::Presentation
     private:
         Infrastructure::IApplication& _application;
         Infrastructure::IQtApplication& _qtApplication;
-        IMainWindow& _mainWindow;
+        MainWindowViewModel& _mainWindow;
         SettingsViewModel& _settingsViewModel;
         QTranslator _translator;
         bool _restartRequested;

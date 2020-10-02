@@ -13,11 +13,11 @@ Item {
 
     clip: true
 
-    property RemoteControlError error: RemoteControl.error
+    property RemoteControlErrorViewModel error: RemoteControl.error
 
     onErrorChanged: {
         if (error) {
-            Dialogs.showError(root.error.title, root.error.message)
+            Dialogs.showMessage(root.error.title, root.error.message)
         }
     }
 

@@ -74,7 +74,7 @@ Drawer {
                 IconToolButton {
                     id: filterByFavorites
 
-                    property Setting setting: App.settings.get(SettingKey.PRIVATE_SHOW_FAVORITE_SERVICES)
+                    property SettingViewModel setting: App.settings.get(SettingKey.PRIVATE_SHOW_FAVORITE_SERVICES)
 
                     iconChar: MaterialIcons.icon_star
                     iconSize: 22

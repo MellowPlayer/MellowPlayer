@@ -159,6 +159,17 @@ Module {
         Method { name: "isValid"; type: "bool" }
     }
     Component {
+        name: "MellowPlayer::Infrastructure::NetworkProxy"
+        prototype: "QObject"
+        exports: ["NetworkProxy 3.0"]
+        isCreatable: false
+        exportMetaObjectRevisions: [0]
+        Property { name: "enabled"; type: "bool" }
+        Property { name: "hostName"; type: "string" }
+        Property { name: "port"; type: "int" }
+        Signal { name: "changed" }
+    }
+    Component {
         name: "MellowPlayer::Presentation::ActiveThemeViewModel"
         prototype: "MellowPlayer::Presentation::QmlSingleton"
         exports: ["ActiveTheme 3.0"]
@@ -214,7 +225,7 @@ Module {
     Component {
         name: "MellowPlayer::Presentation::ColorSettingViewModel"
         prototype: "MellowPlayer::Presentation::SettingViewModel"
-        exports: ["ColorSetting 3.0"]
+        exports: ["ColorSettingViewModel 3.0"]
         isCreatable: false
         exportMetaObjectRevisions: [0]
     }
@@ -229,15 +240,76 @@ Module {
     Component {
         name: "MellowPlayer::Presentation::EnumSettingViewModel"
         prototype: "MellowPlayer::Presentation::SettingViewModel"
-        exports: ["EnumSetting 3.0"]
+        exports: ["EnumSettingViewModel 3.0"]
         isCreatable: false
         exportMetaObjectRevisions: [0]
         Property { name: "values"; type: "QStringList"; isReadonly: true }
+        Method {
+            name: "indexOf"
+            type: "int"
+            Parameter { name: "value"; type: "string" }
+        }
     }
     Component {
         name: "MellowPlayer::Presentation::IMainWindow"
         prototype: "MellowPlayer::Presentation::QmlSingleton"
+        exports: ["IMainWindow 3.0"]
+        isCreatable: false
+        exportMetaObjectRevisions: [0]
         Signal { name: "forceQuitRequest" }
+    }
+    Component {
+        name: "MellowPlayer::Presentation::IStreamingServiceViewModel"
+        prototype: "QObject"
+        exports: ["StreamingServiceViewModel 3.0"]
+        isCreatable: false
+        exportMetaObjectRevisions: [0]
+        Property { name: "logo"; type: "string"; isReadonly: true }
+        Property { name: "name"; type: "string"; isReadonly: true }
+        Property { name: "player"; type: "IPlayerBase"; isReadonly: true; isPointer: true }
+        Property { name: "url"; type: "string" }
+        Property { name: "version"; type: "string"; isReadonly: true }
+        Property { name: "authorName"; type: "string"; isReadonly: true }
+        Property { name: "authorWebsite"; type: "string"; isReadonly: true }
+        Property { name: "sortIndex"; type: "int" }
+        Property { name: "userScripts"; type: "IUserScriptsViewModel"; isReadonly: true; isPointer: true }
+        Property { name: "zoomFactor"; type: "int" }
+        Property { name: "notificationsEnabled"; type: "bool" }
+        Property { name: "isActive"; type: "bool" }
+        Property { name: "previewImageUrl"; type: "string" }
+        Property { name: "sourceCode"; type: "string"; isReadonly: true }
+        Property {
+            name: "settings"
+            type: "SettingsCategoryViewModel"
+            isReadonly: true
+            isPointer: true
+        }
+        Property { name: "broken"; type: "bool" }
+        Property { name: "hasKnownIssues"; type: "bool"; isReadonly: true }
+        Property { name: "favorite"; type: "bool" }
+        Property { name: "networkProxy"; type: "NetworkProxy"; isReadonly: true; isPointer: true }
+        Signal {
+            name: "urlChanged"
+            Parameter { type: "string" }
+        }
+        Method {
+            name: "setUrl"
+            Parameter { name: "newUrl"; type: "string" }
+        }
+        Method {
+            name: "setActive"
+            Parameter { name: "isActive"; type: "bool" }
+        }
+        Method {
+            name: "setBroken"
+            Parameter { name: "value"; type: "bool" }
+        }
+        Method {
+            name: "setPreviewImageUrl"
+            Parameter { name: "previewImageUrl"; type: "string" }
+        }
+        Method { name: "getPreviewImageUrlForSave"; type: "string" }
+        Method { name: "openKnownIssue" }
     }
     Component {
         name: "MellowPlayer::Presentation::IStreamingServicesViewModel"
@@ -248,7 +320,7 @@ Module {
             isReadonly: true
             isPointer: true
         }
-        Property { name: "currentService"; type: "StreamingServiceViewModel"; isPointer: true }
+        Property { name: "currentService"; type: "IStreamingServiceViewModel"; isPointer: true }
         Property { name: "currentServiceName"; type: "string"; isReadonly: true }
         Signal {
             name: "serviceCreated"
@@ -259,7 +331,7 @@ Module {
         Method { name: "previous" }
         Method {
             name: "setCurrentService"
-            Parameter { name: "value"; type: "StreamingServiceViewModel"; isPointer: true }
+            Parameter { name: "value"; type: "IStreamingServiceViewModel"; isPointer: true }
         }
         Method {
             name: "createService"
@@ -272,6 +344,35 @@ Module {
             Parameter { name: "appImagePlatform"; type: "bool" }
             Parameter { name: "osxPlatform"; type: "bool" }
             Parameter { name: "windowsPlatform"; type: "bool" }
+        }
+    }
+    Component {
+        name: "MellowPlayer::Presentation::IUserScriptsViewModel"
+        prototype: "QObject"
+        exports: ["IUserScriptsViewModel 3.0"]
+        isCreatable: false
+        exportMetaObjectRevisions: [0]
+        Property { name: "hasScripts"; type: "bool"; isReadonly: true }
+        Property { name: "model"; type: "QQmlObjectListModelBase"; isReadonly: true; isPointer: true }
+        Method {
+            name: "generateUniqueName"
+            type: "string"
+            Parameter { name: "path"; type: "string" }
+        }
+        Method {
+            name: "isValidName"
+            type: "bool"
+            Parameter { name: "name"; type: "string" }
+        }
+        Method {
+            name: "add"
+            type: "bool"
+            Parameter { name: "name"; type: "string" }
+            Parameter { name: "sourcePath"; type: "string" }
+        }
+        Method {
+            name: "remove"
+            Parameter { name: "name"; type: "string" }
         }
     }
     Component {
@@ -307,10 +408,6 @@ Module {
         exportMetaObjectRevisions: [0]
         Property { name: "visible"; type: "bool" }
         Property { name: "zoom"; type: "ZoomViewModel"; isReadonly: true; isPointer: true }
-        Property { name: "currentPage"; type: "string" }
-        Property { name: "selectServicePage"; type: "string"; isReadonly: true }
-        Property { name: "runningServicesPage"; type: "string"; isReadonly: true }
-        Property { name: "isOnRunningServicesPage"; type: "bool"; isReadonly: true }
         Property { name: "fullScreen"; type: "bool" }
         Property {
             name: "runningServices"
@@ -320,6 +417,7 @@ Module {
         }
         Signal { name: "quitRequest" }
         Signal { name: "raiseRequested" }
+        Signal { name: "forceQuitRequest" }
         Method {
             name: "setVisible"
             Parameter { name: "visible"; type: "bool" }
@@ -328,8 +426,17 @@ Module {
             name: "setFullScreen"
             Parameter { name: "value"; type: "bool" }
         }
-        Method { name: "toggleActivePage" }
         Method { name: "requestQuit" }
+    }
+    Component {
+        name: "MellowPlayer::Presentation::NullStreamingServiceViewModel"
+        prototype: "MellowPlayer::Presentation::IStreamingServiceViewModel"
+        exports: ["NullStreamingServiceViewModel 3.0"]
+        exportMetaObjectRevisions: [0]
+    }
+    Component {
+        name: "MellowPlayer::Presentation::NullUserScriptsViewModel"
+        prototype: "MellowPlayer::Presentation::IUserScriptsViewModel"
     }
     Component {
         name: "MellowPlayer::Presentation::QmlSingleton"
@@ -352,7 +459,7 @@ Module {
     Component {
         name: "MellowPlayer::Presentation::RemoteControlErrorViewModel"
         prototype: "QObject"
-        exports: ["RemoteControlError 3.0"]
+        exports: ["RemoteControlErrorViewModel 3.0"]
         isCreatable: false
         exportMetaObjectRevisions: [0]
         Property { name: "title"; type: "string"; isReadonly: true }
@@ -390,13 +497,13 @@ Module {
         Property { name: "model"; type: "StreamingServiceListModel"; isReadonly: true; isPointer: true }
         Method {
             name: "remove"
-            Parameter { name: "item"; type: "StreamingServiceViewModel"; isPointer: true }
+            Parameter { name: "item"; type: "IStreamingServiceViewModel"; isPointer: true }
         }
     }
     Component {
         name: "MellowPlayer::Presentation::ScalingFactorSettingViewModel"
         prototype: "MellowPlayer::Presentation::SettingViewModel"
-        exports: ["ScalingFactorSetting 3.0"]
+        exports: ["ScalingFactorSettingViewModel 3.0"]
         isCreatable: false
         exportMetaObjectRevisions: [0]
         Property { name: "minValue"; type: "int"; isReadonly: true }
@@ -407,7 +514,7 @@ Module {
     Component {
         name: "MellowPlayer::Presentation::SettingViewModel"
         prototype: "QObject"
-        exports: ["Setting 3.0"]
+        exports: ["SettingViewModel 3.0"]
         isCreatable: false
         exportMetaObjectRevisions: [0]
         Property { name: "name"; type: "string"; isReadonly: true }
@@ -415,8 +522,8 @@ Module {
         Property { name: "type"; type: "string"; isReadonly: true }
         Property { name: "qmlComponent"; type: "string"; isReadonly: true }
         Property { name: "isEnabled"; type: "bool"; isReadonly: true }
+        Property { name: "instance"; type: "SettingViewModel"; isReadonly: true; isPointer: true }
         Property { name: "value"; type: "QVariant" }
-        Signal { name: "enabledChanged" }
         Method {
             name: "setValue"
             Parameter { name: "value"; type: "QVariant" }
@@ -425,7 +532,7 @@ Module {
     Component {
         name: "MellowPlayer::Presentation::SettingsCategoryViewModel"
         prototype: "QObject"
-        exports: ["SettingsCategory 3.0"]
+        exports: ["SettingsCategoryViewModel 3.0"]
         isCreatable: false
         exportMetaObjectRevisions: [0]
         Property { name: "name"; type: "string"; isReadonly: true }
@@ -453,6 +560,25 @@ Module {
         }
     }
     Component {
+        name: "MellowPlayer::Presentation::ShortcutSettingViewModel"
+        prototype: "MellowPlayer::Presentation::SettingViewModel"
+        exports: ["ShortcutSettingViewModel 3.0"]
+        isCreatable: false
+        exportMetaObjectRevisions: [0]
+        Method {
+            name: "keySequenceToString"
+            type: "string"
+            Parameter { name: "key"; type: "int" }
+            Parameter { name: "modifiers"; type: "int" }
+        }
+        Method {
+            name: "isValidKeySequence"
+            type: "bool"
+            Parameter { name: "key"; type: "int" }
+            Parameter { name: "modifiers"; type: "int" }
+        }
+    }
+    Component {
         name: "MellowPlayer::Presentation::StreamingServiceProxyListModel"
         prototype: "QSortFilterProxyModel"
         exports: ["StreamingServiceProxyListModel 3.0"]
@@ -463,64 +589,6 @@ Module {
             name: "setSearchText"
             Parameter { name: "searchText"; type: "string" }
         }
-    }
-    Component {
-        name: "MellowPlayer::Presentation::StreamingServiceViewModel"
-        prototype: "QObject"
-        exports: ["StreamingService 3.0"]
-        isCreatable: false
-        exportMetaObjectRevisions: [0]
-        Property { name: "logo"; type: "string"; isReadonly: true }
-        Property { name: "name"; type: "string"; isReadonly: true }
-        Property { name: "player"; type: "IPlayerBase"; isReadonly: true; isPointer: true }
-        Property { name: "url"; type: "string" }
-        Property { name: "version"; type: "string"; isReadonly: true }
-        Property { name: "authorName"; type: "string"; isReadonly: true }
-        Property { name: "authorWebsite"; type: "string"; isReadonly: true }
-        Property { name: "sortIndex"; type: "int" }
-        Property { name: "userScripts"; type: "UserScriptsViewModel"; isReadonly: true; isPointer: true }
-        Property { name: "zoomFactor"; type: "int" }
-        Property { name: "notificationsEnabled"; type: "bool" }
-        Property { name: "isActive"; type: "bool" }
-        Property { name: "previewImageUrl"; type: "string" }
-        Property { name: "sourceCode"; type: "string"; isReadonly: true }
-        Property {
-            name: "settings"
-            type: "SettingsCategoryViewModel"
-            isReadonly: true
-            isPointer: true
-        }
-        Property { name: "broken"; type: "bool" }
-        Property { name: "hasKnownIssues"; type: "bool"; isReadonly: true }
-        Property { name: "favorite"; type: "bool" }
-        Property {
-            name: "networkProxy"
-            type: "Infrastructure::NetworkProxy"
-            isReadonly: true
-            isPointer: true
-        }
-        Signal {
-            name: "urlChanged"
-            Parameter { type: "string" }
-        }
-        Method {
-            name: "setUrl"
-            Parameter { name: "newUrl"; type: "string" }
-        }
-        Method {
-            name: "setActive"
-            Parameter { name: "isActive"; type: "bool" }
-        }
-        Method {
-            name: "setBroken"
-            Parameter { name: "value"; type: "bool" }
-        }
-        Method {
-            name: "setPreviewImageUrl"
-            Parameter { name: "previewImageUrl"; type: "string" }
-        }
-        Method { name: "getPreviewImageUrlForSave"; type: "string" }
-        Method { name: "openKnownIssue" }
     }
     Component {
         name: "MellowPlayer::Presentation::StreamingServicesViewModel"
@@ -537,7 +605,7 @@ Module {
         Method { name: "previous" }
         Method {
             name: "setCurrentService"
-            Parameter { name: "value"; type: "StreamingServiceViewModel"; isPointer: true }
+            Parameter { name: "value"; type: "IStreamingServiceViewModel"; isPointer: true }
         }
         Method {
             name: "createService"
@@ -555,7 +623,7 @@ Module {
     Component {
         name: "MellowPlayer::Presentation::TimeLimitSettingViewModel"
         prototype: "MellowPlayer::Presentation::EnumSettingViewModel"
-        exports: ["TimeLimitSetting 3.0"]
+        exports: ["TimeLimitSettingViewModel 3.0"]
         isCreatable: false
         exportMetaObjectRevisions: [0]
         Property { name: "values"; type: "QStringList"; isReadonly: true }
@@ -568,7 +636,7 @@ Module {
     Component {
         name: "MellowPlayer::Presentation::UpdateChannelSettingViewModel"
         prototype: "MellowPlayer::Presentation::EnumSettingViewModel"
-        exports: ["UpdateChannelSetting 3.0"]
+        exports: ["UpdateChannelSettingViewModel 3.0"]
         isCreatable: false
         exportMetaObjectRevisions: [0]
         Property { name: "values"; type: "QStringList"; isReadonly: true }
@@ -594,35 +662,6 @@ Module {
         Method { name: "check" }
         Method { name: "install" }
         Method { name: "restart" }
-    }
-    Component {
-        name: "MellowPlayer::Presentation::UserScriptsViewModel"
-        prototype: "QObject"
-        exports: ["UserScriptsViewModel 3.0"]
-        isCreatable: false
-        exportMetaObjectRevisions: [0]
-        Property { name: "hasScripts"; type: "bool"; isReadonly: true }
-        Property { name: "model"; type: "QQmlObjectListModelBase"; isReadonly: true; isPointer: true }
-        Method {
-            name: "generateUniqueName"
-            type: "string"
-            Parameter { name: "path"; type: "string" }
-        }
-        Method {
-            name: "isValidName"
-            type: "bool"
-            Parameter { name: "name"; type: "string" }
-        }
-        Method {
-            name: "add"
-            type: "bool"
-            Parameter { name: "name"; type: "string" }
-            Parameter { name: "sourcePath"; type: "string" }
-        }
-        Method {
-            name: "remove"
-            Parameter { name: "name"; type: "string" }
-        }
     }
     Component {
         name: "MellowPlayer::Presentation::ZoomViewModel"

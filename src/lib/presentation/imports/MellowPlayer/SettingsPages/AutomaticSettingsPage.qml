@@ -4,6 +4,8 @@ import QtQuick.Controls 2.15
 import QtQuick.Controls.Material 2.15
 
 import MellowPlayer 3.0
+import "../Dialogs.js" as Dialogs
+import "../Helpers/ModelHelpers.js" as ModelHelpers
 
 ColumnLayout {
     id: root
@@ -13,13 +15,10 @@ ColumnLayout {
 
     ScrollView {
         contentHeight: listView.contentHeight
-        contentWidth: width
         clip: true
 
         Layout.fillHeight: true
         Layout.fillWidth: true
-        ScrollBar.horizontal.policy: ScrollBar.AlwaysOff
-        ScrollBar.vertical.policy: ScrollBar.vertical.size !== 1 ? ScrollBar.AlwaysOn : ScrollBar.AsNeeded
 
         ListView {
             id: listView
@@ -33,7 +32,7 @@ ColumnLayout {
             delegate: ColumnLayout {
                 id: delegateRoot
 
-                width: ListView.view.width
+                width: listView.width
                 spacing: 0
 
                 required property string qmlComponent
@@ -41,8 +40,9 @@ ColumnLayout {
                 required property string name
                 required property string toolTip
                 required property string type
-                required property var model
+                required property var value
                 required property int index
+                required property var model
 
                 Loader {
                     id: loader
@@ -67,7 +67,7 @@ ColumnLayout {
                         "toolTip": toolTip,
                         "type": type,
                         "qmlComponent": qmlComponent,
-                        "qtObject": model.qtObject
+                        "qtObject": ModelHelpers.getQtObject(model)
                     }
 
                     loader.setSource(url, properties)
@@ -97,7 +97,7 @@ ColumnLayout {
                 onClicked: {
                     Dialogs.askConfirmation(
                         qsTr("Confirm restore defaults"),
-                        qsTr("Are you sure you want to restore all %1 settings to their default values?").arg(root.categoryName.toLowerCase()),
+                        qsTr("Are you sure you want to restore all %1 settings to their default values?").arg(root.categoryName),
                         (confirmed) => {
                             if (confirmed) {
                                 App.settings.restoreCategoryDefaults(root.categoryName);
@@ -107,7 +107,7 @@ ColumnLayout {
                 }
 
                 Tooltip {
-                    text: qsTr('Restore <b>%1</b> settings to their <b>default values</b>.').arg(root.categoryName.toLowerCase())
+                    text: qsTr('Restore <b>%1</b> settings to their <b>default values</b>.').arg(root.categoryName)
                 }
             }
         }

@@ -6,11 +6,12 @@ import QtWebEngine 1.10
 import QtGraphicalEffects 1.0
 
 import MellowPlayer 3.0
+import "../Dialogs.js" as Dialogs
 
 Item {
     id: root
 
-    required property StreamingService service
+    required property StreamingServiceViewModel service
 
     property int index: service.sortIndex
     property string backgroundColor: Material.background
@@ -101,7 +102,7 @@ Item {
             id: mouseArea
 
             anchors.fill: parent
-            drag.target: item
+            drag.target: root
             hoverEnabled: true
             propagateComposedEvents: true
 
@@ -174,6 +175,7 @@ Item {
                     text: root.service.name
                     font.bold: true
                     horizontalAlignment: Qt.AlignHCenter
+                    font.pixelSize: 12
                 }
 
                 IconToolButton {
@@ -186,10 +188,7 @@ Item {
 
                     tooltip: qsTr("Settings")
 
-                    onClicked: {
-                        settingsDialog.service = root.service;
-                        settingsDialog.open()
-                    }
+                    onClicked: Dialogs.openServiceSettings(root.service)
                 }
             }
         }

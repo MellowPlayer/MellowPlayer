@@ -19,3 +19,8 @@ QStringList EnumSettingViewModel::values() const
     list = list.replace("enum[", "").replace("]", "").replace("'", "").replace("\"", "").replace(" ", "");
     return list.split(",");
 }
+
+int EnumSettingViewModel::indexOf(const QString& value)
+{
+    return values().indexOf(value);
+}

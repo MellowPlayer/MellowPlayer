@@ -14,7 +14,9 @@ namespace MellowPlayer::Presentation
     public:
         explicit RunningServicesViewModel(IStreamingServicesViewModel& streamingServicesViewModel);
 
-        Q_INVOKABLE void remove(StreamingServiceViewModel* item);
+        Q_INVOKABLE void remove(IStreamingServiceViewModel* item);
+
+        void clear();
 
         int count() const;
         int currentIndex() const;

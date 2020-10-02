@@ -17,9 +17,9 @@ ItemDelegate {
     required property string toolTip
     required property string type
     required property string qmlComponent
-    required property Setting qtObject
+    required property SettingViewModel qtObject
 
-    property ScalingFactorSetting intSetting: qtObject
+    property ScalingFactorSettingViewModel scalingFactorSetting: qtObject
 
     RowLayout {
         anchors.fill: parent
@@ -36,12 +36,12 @@ ItemDelegate {
 
         SpinBox {
             value: root.qtObject.value
-            from: root.intSetting.minValue
-            to: root.intSetting.maxValue
-            stepSize: root.qtObject.step
+            from: root.scalingFactorSetting.minValue
+            to: root.scalingFactorSetting.maxValue
+            stepSize: root.scalingFactorSetting.step
 
             textFromValue:  function(value, locale) {
-                return Number(value).toLocaleString(locale, 'f', 0) + root.qtObject.suffix;
+                return Number(value).toLocaleString(locale, 'f', 0) + root.scalingFactorSetting.suffix;
             }
 
             onValueChanged: root.qtObject.value = value

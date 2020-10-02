@@ -18,10 +18,10 @@ StreamingServiceProxyListModel::StreamingServiceProxyListModel(StreamingServiceL
 
 bool StreamingServiceProxyListModel::filterAcceptsRow(int sourceRow, const QModelIndex&) const
 {
-    StreamingServiceViewModel* viewModel = _sourceListModel->at(sourceRow);
+    IStreamingServiceViewModel* viewModel = _sourceListModel->at(sourceRow);
 
-    connect(viewModel, &StreamingServiceViewModel::favoriteChanged, this, &StreamingServiceProxyListModel::onFavoriteChanged, Qt::UniqueConnection);
-    connect(viewModel, &StreamingServiceViewModel::isActiveChanged, this, &StreamingServiceProxyListModel::onActiveChanged, Qt::UniqueConnection);
+    connect(viewModel, &IStreamingServiceViewModel::favoriteChanged, this, &StreamingServiceProxyListModel::onFavoriteChanged, Qt::UniqueConnection);
+    connect(viewModel, &IStreamingServiceViewModel::isActiveChanged, this, &StreamingServiceProxyListModel::onActiveChanged, Qt::UniqueConnection);
 
     if (viewModel->sortIndex() == -1 && _searchText.isEmpty())
         viewModel->setSortIndex(sourceRow);
@@ -40,8 +40,8 @@ bool StreamingServiceProxyListModel::filterAcceptsRow(int sourceRow, const QMode
 
 bool MellowPlayer::Presentation::StreamingServiceProxyListModel::lessThan(const QModelIndex& sourceLeft, const QModelIndex& sourceRight) const
 {
-    StreamingServiceViewModel* left = _sourceListModel->at(sourceLeft.row());
-    StreamingServiceViewModel* right = _sourceListModel->at(sourceRight.row());
+    IStreamingServiceViewModel* left = _sourceListModel->at(sourceLeft.row());
+    IStreamingServiceViewModel* right = _sourceListModel->at(sourceRight.row());
 
     return left->sortIndex() < right->sortIndex();
 }

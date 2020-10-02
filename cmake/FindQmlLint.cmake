@@ -66,6 +66,7 @@ add_custom_target(qmllint COMMAND echo "qmllint" )
 
 # validate a list of qml files
 function(qml_lint)
+    set(BLACKLIST Tooltip.qml Authentication.qml MessageBoxDialog.qml Prompt.qml Alert.qml Reload.qml Confirmation.qml)
     if (NOT QMLLINT_EXECUTABLE OR NOT QmlLint_FOUND)
         return()
     endif()
@@ -73,14 +74,17 @@ function(qml_lint)
     foreach(_file ${ARGN})
         get_filename_component(_file_abs ${_file} ABSOLUTE)
         get_filename_component(_file_name ${_file} NAME)
-        add_custom_command(
-                OUTPUT ${CMAKE_CURRENT_BINARY_DIR}/${_file_name}.qmllint
-#                COMMAND ${QMLLINT_EXECUTABLE} ${_file_abs}
-                COMMAND ${QMLLINT_EXECUTABLE} ${_file_abs} -U -i ${QML_IMPORT_PATH}/MellowPlayer/cpp.qmltypes -I ${QML_IMPORT_PATH} -I ${QML_PLUGIN_INSTALL_DIR}
-                COMMAND ${CMAKE_COMMAND} -E touch ${CMAKE_CURRENT_BINARY_DIR}/${_file_name}.qmllint
-                MAIN_DEPENDENCY ${_file_abs}
-        )
-        add_custom_target(qmllint-${_file_name} DEPENDS ${CMAKE_CURRENT_BINARY_DIR}/${_file_name}.qmllint)
-        add_dependencies(qmllint qmllint-${_file_name})
+
+        if (NOT ${_file_name} IN_LIST BLACKLIST)
+            add_custom_command(
+                    OUTPUT ${CMAKE_CURRENT_BINARY_DIR}/${_file_name}.qmllint
+    #                COMMAND ${QMLLINT_EXECUTABLE} ${_file_abs}
+                    COMMAND ${QMLLINT_EXECUTABLE} ${_file_abs} -U -i ${QML_IMPORT_PATH}/MellowPlayer/cpp.qmltypes -I ${QML_IMPORT_PATH} -I ${QML_PLUGIN_INSTALL_DIR}
+                    COMMAND ${CMAKE_COMMAND} -E touch ${CMAKE_CURRENT_BINARY_DIR}/${_file_name}.qmllint
+                    MAIN_DEPENDENCY ${_file_abs}
+            )
+            add_custom_target(qmllint-${_file_name} DEPENDS ${CMAKE_CURRENT_BINARY_DIR}/${_file_name}.qmllint)
+            add_dependencies(qmllint qmllint-${_file_name})
+        endif()
     endforeach()
 endfunction()

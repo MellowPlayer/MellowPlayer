@@ -3,6 +3,13 @@ module MellowPlayer
 singleton MaterialIcons 3.0 MaterialIcons.qml
 singleton Actions 3.0 Actions.qml
 
+DateCategoryTranslator 3.0 DateCategoryTranslator.js
+Dialogs 3.0 Dialogs.js
+StringHelpers 3.0 Helpers/StringHelpers.js
+WebViewHelpers 3.0 Helpers/WebViewHelpers.js
+ModelHelpers 3.0 Helpers/ModelHelpers.js
+ModelHelpers 3.0 Helpers/TabBarHelpers.js
+
 BrowserDialog 3.0 Dialogs/BrowserDialog.qml
 CustomUrlPane 3.0 Controls/CustomUrlPane.qml
 FullScreenNotification 3.0 Controls/FullScreenNotification.qml
@@ -25,7 +32,6 @@ UpdateToolBar 3.0 Controls/UpdateToolBar.qml
 ValidationMessage 3.0 Controls/ValidationMessage.qml
 WebView 3.0 Controls/WebView.qml
 WebViewContextMenu 3.0 Controls/WebViewContextMenu.qml
-DateCategoryTranslator 3.0 DateCategoryTranslator.js
 BoolSettingDelegate 3.0 Delegates/BoolSettingDelegate.qml
 ScalingFactorSettingDelegate 3.0 Delegates/ScalingFactorSettingDelegate.qml
 ColorSettingDelegate 3.0 Delegates/ColorSettingDelegate.qml
@@ -38,7 +44,6 @@ ShortcutSettingDelegate 3.0 Delegates/ShortcutSettingDelegate.qml
 SpinBoxDelegate 3.0 Delegates/SpinBoxDelegate.qml
 StringSettingDelegate 3.0 Delegates/StringSettingDelegate.qml
 TextFieldDelegate 3.0 Delegates/TextFieldDelegate.qml
-Dialogs 3.0 Dialogs.js
 AboutDialog 3.0 Dialogs/AboutDialog.qml
 Alert 3.0 Dialogs/Alert.qml
 Authentication 3.0 Dialogs/Authentication.qml

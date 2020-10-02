@@ -4,14 +4,16 @@ import QtQuick.Layouts 1.15
 import QtQuick.Controls.Material 2.15
 
 import MellowPlayer 3.0
+import "../Dialogs.js" as Dialogs
 
 Dialog {
-    x: (ApplicationWindow.window.width - width) / 2
-    y: (ApplicationWindow.window.height - height) / 2 - ApplicationWindow.window.header.height
+    id: root
+
     modal: true
     padding: 16
 
     onVisibleChanged: stackLayout.currentIndex = 0
+    Component.onCompleted: Dialogs.keepCenteredOnMainWindow(root)
 
     StackLayout {
         id: stackLayout
@@ -190,7 +192,7 @@ Dialog {
                     text: qsTr("Close")
                     highlighted: true
 
-                    onClicked: close()
+                    onClicked: root.close()
 
                     Layout.alignment: Qt.AlignHCenter
                 }

@@ -6,7 +6,7 @@ using namespace MellowPlayer::Domain;
 using namespace MellowPlayer::Presentation;
 
 UserScriptsViewModel::UserScriptsViewModel(const QString& serviceName, IUserScriptFactory& userScriptFactory, ISettingsStore& settingsStore, QObject* parent)
-        : QObject(parent), _userScripts(serviceName, userScriptFactory, settingsStore)
+        : IUserScriptsViewModel(parent), _userScripts(serviceName, userScriptFactory, settingsStore)
 {
     for (auto* userScriptModel : _userScripts)
     {

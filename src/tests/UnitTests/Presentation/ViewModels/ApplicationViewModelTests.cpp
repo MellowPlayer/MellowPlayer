@@ -1,5 +1,7 @@
 #include <Fakes/FakeQmlSingletons.hpp>
 #include <MellowPlayer/Presentation/ViewModels/ApplicationViewModel.hpp>
+#include <MellowPlayer/Presentation/ViewModels/MainWindowViewModel.hpp>
+#include <MellowPlayer/Presentation/ViewModels/RunningServicesViewModel.hpp>
 #include <MellowPlayer/Presentation/ViewModels/Settings/SettingsViewModel.hpp>
 #include <QtTest/QSignalSpy>
 #include <UnitTests/Infrastructure/Application/FakeApplication.hpp>
@@ -21,8 +23,9 @@ SCENARIO("ApplicationViewModelTests")
     {
         FakeQtApplication qtApplication;
         FakeApplication application;
-        FakeMainWindow mainWindow;
         DependencyPool pool;
+        RunningServicesViewModel runningServicesViewModel(pool.getStreamingServicesViewModel());
+        MainWindowViewModel mainWindow(pool.getSettingsStore(), runningServicesViewModel);
         SettingsViewModel settingsViewModel(pool.getSettings(), pool.getThemeViewModel());
         ApplicationViewModel applicationViewModel(application, qtApplication, mainWindow, settingsViewModel);
 
@@ -36,7 +39,7 @@ SCENARIO("ApplicationViewModelTests")
 
         WHEN("commitDataRequest is emitted")
         {
-            QSignalSpy spy(&mainWindow, &IMainWindow::forceQuitRequest);
+            QSignalSpy spy(&mainWindow, &MainWindowViewModel::forceQuitRequest);
 
             emit application.commitDataRequest();
 
@@ -48,11 +51,13 @@ SCENARIO("ApplicationViewModelTests")
 
         WHEN("restoreWindow is called")
         {
+            QSignalSpy spy(&mainWindow, &MainWindowViewModel::raiseRequested);
+
             application.restoreWindow();
 
-            THEN("mainWindow is shown")
+            THEN("mainWindow raise requested is emitted")
             {
-                REQUIRE(mainWindow.isShown);
+                REQUIRE(spy.count() == 1);
             }
         }
 

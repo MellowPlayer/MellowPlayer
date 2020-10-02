@@ -8,22 +8,21 @@ import QtQuick.Controls 1.2 as QuickControls1
 
 import MellowPlayer 3.0
 import "../SettingsPages"
+import "../Dialogs.js" as Dialogs
+import "../Helpers/ModelHelpers.js" as ModelHelpers
+import "../Helpers/TabBarHelpers.js" as TabBarHelpers
 
 Dialog {
     id: root
 
-    property var service: nullService
+    property NullStreamingServiceViewModel nullService: NullStreamingServiceViewModel { }
+    property StreamingServiceViewModel service: nullService
 
     clip: true
     modal: true
-    title: service.name
+    title: root.service.name
     padding: 0; spacing: 0
-    onVisibleChanged: {
-        if (!visible) {
-            tabBar.currentIndex = 0
-            service = nullService
-        }
-    }
+    height: 420; width: 600
 
     footer: RowLayout {
         Item {
@@ -38,23 +37,26 @@ Dialog {
 
             Label {
                 font.italic: true
-                text: qsTr("Version ") + service.version + qsTr(" by ")
+                text: qsTr("Version ") + root.service.version + qsTr(" by ")
             }
 
             Link {
                 font.italic: true
-                name: service.authorName
-                url: service.authorWebsite
+                name: root.service.authorName
+                url: root.service.authorWebsite
             }
         }
 
-        DialogButtonBox {
-            standardButtons: Dialog.Close
+        Item { Layout.fillWidth: true }
 
-            onAccepted: root.accept()
-            onRejected: root.reject()
+        Button {
+            text: qsTr("Close")
+            flat: true
+            highlighted: true
 
-            Layout.fillWidth: true
+            onClicked: root.close()
+
+            Layout.rightMargin: 6
         }
     }
 
@@ -68,6 +70,7 @@ Dialog {
 
         TabBar {
             id: tabBar
+
             Layout.fillWidth: true
             Layout.preferredHeight: tabBar.implicitHeight
             Material.elevation: 4
@@ -92,7 +95,7 @@ Dialog {
         }
 
         StackLayout {
-            currentIndex: tabBar.currentIndex
+            currentIndex: TabBarHelpers.getCurrentIndex(tabBar)
 
             Layout.fillWidth: true
             Layout.fillHeight: true
@@ -117,12 +120,12 @@ Dialog {
                         anchors.fill: parent
 
                         SwitchDelegate {
-                            checked: service.notificationsEnabled
+                            checked: root.service.notificationsEnabled
                             hoverEnabled: true
                             text: "Notifications"
 
                             onCheckedChanged: {
-                                service.notificationsEnabled = checked
+                                root.service.notificationsEnabled = checked
                             }
 
                             Layout.fillWidth: true
@@ -133,8 +136,8 @@ Dialog {
                         TextFieldDelegate {
                             Layout.fillWidth: true
                             label: qsTr("URL: ")
-                            value: service.url
-                            onValueChanged: service.url = value
+                            value: root.service.url
+                            onValueChanged: root.service.url = value
                         }
 
                         Item {
@@ -146,7 +149,7 @@ Dialog {
 
             StackLayout {
                 id: userScripts
-                currentIndex: service !== null && service.userScripts.hasScripts ? 1 : 0
+                currentIndex: root.service !== null && root.service.userScripts.hasScripts ? 1 : 0
 
                 Layout.fillHeight: true
                 Layout.fillWidth: true
@@ -186,7 +189,7 @@ Dialog {
                         text: qsTr("Add user script")
                         highlighted: true
                         hoverEnabled: true
-                        onClicked: fileDialog.open()
+                        onClicked: root.showFileDialog()
 
                         Tooltip {
                             text: qsTr("Click to add a user script")
@@ -204,123 +207,130 @@ Dialog {
                     Layout.fillHeight: true
                     Layout.fillWidth: true
 
-                    Pane {
-                        id: userScriptListPane
-
-                        padding: 0
+                    ColumnLayout {
                         anchors.fill: parent
-                        width: parent.width / 2
-                        height: parent.height * 0.75
 
-                        Material.background: "transparent"
+                        Pane {
+                            id: userScriptListPane
 
+                            padding: 0
 
-                        ScrollView {
-                            id: scrollView
+                            Layout.fillHeight: true
+                            Layout.fillWidth: true
+                            Material.background: "transparent"
 
-                            anchors.fill: parent
+                            ScrollView {
+                                id: scrollView
 
-                            ScrollBar.horizontal.policy: ScrollBar.AlwaysOff
+                                anchors.fill: parent
 
-                            ListView {
-                                id: listView
+                                ListView {
+                                    id: listView
 
-                                anchors { fill: parent; rightMargin: parent.ScrollBar.vertical.size != 1 ? 16 : 0 }
-                                model: service !== null ? service.userScripts.model : null
-                                spacing: 0
-                                clip: true
+                                    anchors { fill: parent }
+                                    model: root.service !== null ? root.service.userScripts.model : null
+                                    spacing: 0
+                                    clip: true
 
-                                remove: Transition {
-                                    NumberAnimation { property: "x"; to: root.width; duration: 1 ; easing.type: Easing.InOutQuad }
-                                }
-                                removeDisplaced: Transition {
-                                    NumberAnimation { properties: "x,y"; duration: 200; easing.type: Easing.InOutQuad }
-                                }
-
-                                delegate: ItemDelegate {
-                                    id: delegate
-
-                                    onClicked: deleteToolButton.onClicked()
-                                    width: listView.width; height: 72
-                                    hoverEnabled: true
-
-                                    ListView.onRemove: SequentialAnimation {
-                                        PropertyAction { target: delegate; property: "ListView.delayRemove"; value: true }
-                                        NumberAnimation { target: delegate; property: "x"; to: root.width; duration: 200 ; easing.type: Easing.InOutQuad }
-                                        PropertyAction { target: delegate; property: "ListView.delayRemove"; value: false }
+                                    remove: Transition {
+                                        NumberAnimation { property: "x"; to: root.width; duration: 1 ; easing.type: Easing.InOutQuad }
+                                    }
+                                    removeDisplaced: Transition {
+                                        NumberAnimation { properties: "x,y"; duration: 200; easing.type: Easing.InOutQuad }
                                     }
 
-                                    RowLayout {
-                                        id: contentLayout
+                                    delegate: ItemDelegate {
+                                        id: userScriptDelegate
 
-                                        anchors {
-                                            left: parent.left
-                                            right: parent.right
-                                            verticalCenter: parent.verticalCenter
-                                            leftMargin: parent.leftPadding
-                                            rightMargin: parent.rightPadding
-                                            topMargin: parent.topPadding
-                                            bottomMargin: parent.bottomPadding
-                                        }
-                                        spacing: 16
+                                        required property int index
+                                        required property string name
 
-                                        Label {
-                                            text: MaterialIcons.icon_code
-                                            font.pixelSize: 22
-                                            font.family: MaterialIcons.family
+                                        onClicked: deleteToolButton.clicked()
+                                        width: listView.width; height: 72
+                                        hoverEnabled: true
 
-                                            Material.foreground: ActiveTheme.accent
+                                        ListView.onRemove: SequentialAnimation {
+                                            PropertyAction { target: userScriptDelegate; property: "ListView.delayRemove"; value: true }
+                                            NumberAnimation { target: userScriptDelegate; property: "x"; to: root.width; duration: 200 ; easing.type: Easing.InOutQuad }
+                                            PropertyAction { target: userScriptDelegate; property: "ListView.delayRemove"; value: false }
                                         }
 
-                                        Label {
-                                            text: model.name
-                                            font.bold: true
-                                        }
+                                        RowLayout {
+                                            id: contentLayout
 
-                                        Item {
-                                            Layout.fillWidth: true
-                                            Layout.fillHeight: true
-                                        }
+                                            anchors {
+                                                left: parent.left
+                                                right: parent.right
+                                                verticalCenter: parent.verticalCenter
+                                                leftMargin: parent.leftPadding
+                                                rightMargin: parent.rightPadding
+                                                topMargin: parent.topPadding
+                                                bottomMargin: parent.bottomPadding
+                                            }
+                                            spacing: 16
 
-                                        IconToolButton {
-                                            id: deleteToolButton
+                                            Label {
+                                                text: MaterialIcons.icon_code
+                                                font.pixelSize: 22
+                                                font.family: MaterialIcons.family
 
-                                            iconChar: MaterialIcons.icon_delete
-                                            iconSize: 22
-                                            tooltip: qsTr("Remove script")
-
-                                            onClicked: {
-                                                messageBoxConfirmDelete.message = qsTr('Are you sure you want to remove user script ') + model.name + '?'
-                                                messageBoxConfirmDelete.closed.connect(onActivated);
-                                                messageBoxConfirmDelete.open()
+                                                Material.foreground: ActiveTheme.accent
                                             }
 
-                                            function onActivated() {
-                                                messageBoxConfirmDelete.closed.disconnect(onActivated);
-                                                if (messageBoxConfirmDelete.dialogResult === messageBoxConfirmDelete.dialogAccepted)
-                                                    service.userScripts.remove(model.name)
+                                            Label {
+                                                text: userScriptDelegate.name
+                                                font.bold: true
+                                            }
+
+                                            Item {
+                                                Layout.fillWidth: true
+                                                Layout.fillHeight: true
+                                            }
+
+                                            IconToolButton {
+                                                id: deleteToolButton
+
+                                                iconChar: MaterialIcons.icon_delete
+                                                iconSize: 22
+                                                tooltip: qsTr("Remove script")
+
+                                                onClicked: {
+                                                    Dialogs.askConfirmation(
+                                                         qsTr("Confirm remove user script"),
+                                                         qsTr('Are you sure you want to remove user script ') + userScriptDelegate.name + '?',
+                                                         (confirmed) => {
+                                                             if (confirmed)
+                                                                 root.service.userScripts.remove(userScriptDelegate.name)
+                                                         }
+                                                    );
+                                                }
                                             }
                                         }
-                                    }
 
-                                    ItemDelegateSeparator {
-                                        anchors { bottom: parent.bottom; left: parent.left; right: parent.right }
-                                        visible: model.index !== (delegate.ListView.view.count - 1)
+                                        ItemDelegateSeparator {
+                                            anchors { bottom: parent.bottom; left: parent.left; right: parent.right }
+                                            visible: userScriptDelegate.index !== (listView.count - 1)
+                                        }
                                     }
                                 }
                             }
                         }
-                    }
 
-                    ToolButton {
-                        anchors { top: userScriptListPane.bottom; horizontalCenter: userScriptListPane.horizontalCenter }
-                        font { family: MaterialIcons.family; pixelSize: 24 }
-                        flat: true
-                        highlighted: true
-                        hoverEnabled: true
-                        text: MaterialIcons.icon_add
+                        Pane {
+                            padding: 0
+                            Layout.fillWidth: true
 
-                        onClicked: fileDialog.open()
+                            ToolButton {
+                                anchors.centerIn: parent
+                                font { family: MaterialIcons.family; pixelSize: 24 }
+                                flat: true
+                                highlighted: true
+                                hoverEnabled: true
+                                text: MaterialIcons.icon_add
+
+                                onClicked: root.showFileDialog()
+                            }
+                        }
                     }
                 }
             }
@@ -435,6 +445,8 @@ Dialog {
                         anchors.fill: parent
                         clip: true
                         delegate: ColumnLayout {
+                            id: optionDelegate
+
                             required property string qmlComponent
                             required property bool isEnabled
                             required property string name
@@ -443,7 +455,7 @@ Dialog {
                             required property var model
                             required property int index
 
-                            width: ListView.view.width
+                            width: root.width
                             spacing: 0
 
                             Loader {
@@ -461,7 +473,7 @@ Dialog {
                                     "toolTip": toolTip,
                                     "type": type,
                                     "qmlComponent": qmlComponent,
-                                    "qtObject": model.qtObject
+                                    "qtObject": ModelHelpers.getQtObject(model)
                                 }
 
                                 loader.setSource(url, properties)
@@ -469,13 +481,13 @@ Dialog {
 
                             Rectangle {
                                 color: ActiveTheme.isDark(ActiveTheme.background) ? Qt.lighter(ActiveTheme.background) : Qt.darker(ActiveTheme.background, 1.1)
-                                visible: model.index !== parent.ListView.view.count - 1
+                                visible: optionDelegate.index !== optionsListView.count - 1
 
                                 Layout.preferredHeight: 1
                                 Layout.fillWidth: true
                             }
                         }
-                        model: root.service.settings !== undefined ? root.service.settings.settings : undefined
+                        model: root.service.settings ? root.service.settings.settings : null
                         spacing: 0
                     }
                 }
@@ -490,41 +502,15 @@ Dialog {
         }
     }
 
-    MessageBoxDialog {
-        id: messageBoxConfirmDelete
-
-        title: qsTr("Confirm remove user script")
-
-        standardButtons: Dialog.Yes | Dialog.No
-        x: parent.width / 2 - width / 2
-        y: parent.height / 2 - height / 2
-    }
-
-    NativeFileDialog {
-        id: fileDialog
-
-        nameFilters: [ qsTr("Javascript files") + " (*.js)" ]
-        title: qsTr("Choose a user script")
-
-        onAccepted: {
-            service.userScripts.add(service.userScripts.generateUniqueName(fileUrl), fileUrl)
-        }
-    }
-
-    QtObject {
-        id: nullService
-
-        property string name: ""
-        property string url: ""
-        property string authorName: ""
-        property string authorWebsite: ""
-        property bool notificationsEnabled: true
-        property var settings: undefined
-        property QtObject userScripts: QtObject { }
-        property QtObject networkProxy: QtObject {
-            property bool enabled: false
-            property string hostName: ""
-            property int port: 0
-        }
+    function showFileDialog() {
+        Dialogs.showFileDialog(
+            [qsTr("Javascript files") + " (*.js)"],
+            qsTr("Choose a user script"),
+            (confirmed, fileUrl) => {
+                if (confirmed) {
+                    root.service.userScripts.add(root.service.userScripts.generateUniqueName(fileUrl), fileUrl)
+                }
+            }
+        );
     }
 }

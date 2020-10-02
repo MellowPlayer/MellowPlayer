@@ -27,7 +27,7 @@ StreamingServiceListModel* RunningServicesViewModel::model()
 
 void RunningServicesViewModel::onCurrentServiceChanged()
 {
-    StreamingServiceViewModel* item = _streamingServicesViewModel.currentService();
+    IStreamingServiceViewModel* item = _streamingServicesViewModel.currentService();
     if (item == nullptr)
     {
         return;
@@ -49,7 +49,7 @@ void RunningServicesViewModel::onCurrentServiceChanged()
     }
 }
 
-void RunningServicesViewModel::remove(StreamingServiceViewModel* item)
+void RunningServicesViewModel::remove(IStreamingServiceViewModel* item)
 {
     item->setActive(false);
     _model.remove(item);
@@ -66,4 +66,14 @@ void RunningServicesViewModel::setCurrentIndex(int index)
 
         LOG_DEBUG(_logger, "Current index changed:" << index);
     }
+}
+
+void RunningServicesViewModel::clear()
+{
+    for (auto* service : _model)
+    {
+        service->setActive(false);
+    }
+    _model.clear();
+    setCurrentIndex(-1);
 }

@@ -33,8 +33,9 @@ ScrollView {
         }
         section.criteria: ViewSection.FullString
         section.delegate: ListeningHistorySectionDelegate {
-            required property string section
+            width: listView.width
             expanded: listView.isSectionExpanded(section)
+            onToggleRequested: listView.toggleSection(section)
         }
         section.property: "dateCategory"
         add: Transition {

@@ -34,21 +34,21 @@ namespace MellowPlayer::Presentation
     {
         Q_OBJECT
         Q_PROPERTY(StreamingServiceProxyListModel* filteredServices READ filteredServices CONSTANT)
-        Q_PROPERTY(StreamingServiceViewModel* currentService READ currentService WRITE setCurrentService NOTIFY currentServiceChanged)
+        Q_PROPERTY(IStreamingServiceViewModel* currentService READ currentService WRITE setCurrentService NOTIFY currentServiceChanged)
         Q_PROPERTY(QString currentServiceName READ currentServiceName NOTIFY currentServiceNameChanged)
     public:
         using QmlSingleton::QmlSingleton;
 
         virtual void initialize() = 0;
-        virtual QList<StreamingServiceViewModel*> services() const = 0;
+        virtual QList<IStreamingServiceViewModel*> services() const = 0;
         virtual StreamingServiceProxyListModel* filteredServices() = 0;
-        virtual StreamingServiceViewModel* currentService() const = 0;
+        virtual IStreamingServiceViewModel* currentService() const = 0;
 
         virtual QString currentServiceName() const = 0;
         virtual Q_INVOKABLE void reload() = 0;
         virtual Q_INVOKABLE void next() = 0;
         virtual Q_INVOKABLE void previous() = 0;
-        virtual Q_INVOKABLE void setCurrentService(StreamingServiceViewModel* value) = 0;
+        virtual Q_INVOKABLE void setCurrentService(IStreamingServiceViewModel* value) = 0;
         virtual Q_INVOKABLE void createService(const QString& serviceName,
                                                const QString& serviceUrl,
                                                const QString& authorName,
@@ -78,16 +78,16 @@ namespace MellowPlayer::Presentation
 
         void initialize() override;
 
-        QList<StreamingServiceViewModel*> services() const override;
+        QList<IStreamingServiceViewModel*> services() const override;
         StreamingServiceProxyListModel* filteredServices() override;
-        StreamingServiceViewModel* currentService() const override;
+        IStreamingServiceViewModel* currentService() const override;
 
         QString currentServiceName() const override;
 
         Q_INVOKABLE void reload() override;
         Q_INVOKABLE void next() override;
         Q_INVOKABLE void previous() override;
-        Q_INVOKABLE void setCurrentService(StreamingServiceViewModel* value) override;
+        Q_INVOKABLE void setCurrentService(IStreamingServiceViewModel* value) override;
         Q_INVOKABLE void createService(const QString& serviceName,
                                        const QString& serviceUrl,
                                        const QString& authorName,
@@ -120,7 +120,7 @@ namespace MellowPlayer::Presentation
         IStreamingServiceViewModelFactory& _streamingServiceViewModelFactory;
         StreamingServiceListModel* _services;
         StreamingServiceProxyListModel _filteredServices;
-        StreamingServiceViewModel* _currentService = nullptr;
+        IStreamingServiceViewModel* _currentService = nullptr;
         void initializeCurrent();
         void load();
     };

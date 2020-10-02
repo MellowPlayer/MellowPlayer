@@ -6,7 +6,7 @@ ToolTip {
 
     property string shortcut: ""
 
-    visible: parent !== undefined ? root.parent.hovered : false
+    visible: parent !== undefined ? parent.hovered : false
     delay: 1000
     timeout: 5000
     y: parent.implicitHeight

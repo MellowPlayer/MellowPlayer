@@ -15,7 +15,7 @@ ItemDelegate {
     required property string toolTip
     required property string type
     required property string qmlComponent
-    required property Setting qtObject
+    required property SettingViewModel qtObject
 
     bottomPadding: 3; topPadding: 3
     enabled: isEnabled

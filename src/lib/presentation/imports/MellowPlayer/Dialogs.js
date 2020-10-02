@@ -5,6 +5,15 @@
 
 var mainWindow;
 
+function initialize(mainWindowInstance) {
+    mainWindow = mainWindowInstance;
+}
+
+function keepCenteredOnMainWindow(dialog) {
+    dialog.x = Qt.binding(() => (mainWindow.width - dialog.width) / 2);
+    dialog.y = Qt.binding(() => (mainWindow.height - dialog.height) / 2);
+}
+
 function create(qmlComponent, properties) {
     // load component
     var component = Qt.createComponent(Qt.resolvedUrl("Dialogs/" + qmlComponent));
@@ -16,8 +25,7 @@ function create(qmlComponent, properties) {
     if (dialog == null)
         throw "Error creating dialog object";
 
-    dialog.x = Qt.binding(() => (mainWindow.width - dialog.width) / 2);
-    dialog.y = Qt.binding(() => (mainWindow.height - dialog.height) / 2);
+    keepCenteredOnMainWindow(dialog);
 
     return dialog;
 }
@@ -28,12 +36,17 @@ function open(qmlComponent, properties) {
     return dialog;
 }
 
-function showError(title, message) {
-    return open("MessageBoxDialog.qml", {
+function showMessage(title, message, callback=undefined) {
+    var dialog = open("MessageBoxDialog.qml", {
         "title": title,
         "message": message,
         "standardButtons": QtQuickControls.Dialog.Ok
     });
+    if (callback) {
+        dialog.accepted.connect(() => callback(true));
+        dialog.rejected.connect(() => callback(false));
+    }
+    return dialog;
 }
 
 function askConfirmation(title, message, callback) {
@@ -56,4 +69,19 @@ function openWebPopup(request, profile) {
     let popup = create("BrowserDialog.qml", {});
     popup.open(request, profile);
     return popup;
+}
+
+function openServiceSettings(service) {
+    return open("StreamingServiceSettingsDialog.qml", {"service": service})
+}
+
+function showAbout() {
+    return open("AboutDialog.qml", {})
+}
+
+function showFileDialog(title, nameFilters, callback) {
+    var dialog = open("NativeFileDialog.qml", {"nameFilters": nameFilters, "title": title});
+    dialog.accepted.connect(() => callback(true, dialog.fileUrl));
+    dialog.rejected.connect(() => callback(false, ""));
+    return dialog;
 }

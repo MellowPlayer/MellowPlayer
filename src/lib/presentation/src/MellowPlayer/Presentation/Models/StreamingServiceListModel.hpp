@@ -5,5 +5,5 @@
 
 namespace MellowPlayer::Presentation
 {
-    using StreamingServiceListModel = QQmlObjectListModel<StreamingServiceViewModel>;
+    using StreamingServiceListModel = QQmlObjectListModel<IStreamingServiceViewModel>;
 }

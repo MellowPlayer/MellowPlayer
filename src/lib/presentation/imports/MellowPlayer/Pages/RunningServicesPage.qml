@@ -73,14 +73,14 @@ StackLayout {
     }
 
     Shortcut {
-        property Setting setting: App.settings.get(SettingKey.SHORTCUTS_SELECT_NEXT_SERVICE)
+        property SettingViewModel setting: App.settings.get(SettingKey.SHORTCUTS_SELECT_NEXT_SERVICE)
 
         sequence: setting.value
         onActivated: StreamingServices.next()
     }
 
     Shortcut {
-        property Setting setting: App.settings.get(SettingKey.SHORTCUTS_SELECT_PREVIOUS_SERVICE)
+        property SettingViewModel setting: App.settings.get(SettingKey.SHORTCUTS_SELECT_PREVIOUS_SERVICE)
 
         sequence: setting.value
         onActivated: StreamingServices.previous()
@@ -221,7 +221,7 @@ StackLayout {
             id: webView
 
             required property int index
-            required property StreamingService qtObject
+            required property StreamingServiceViewModel qtObject
             property bool isCurrent: webView.index === root.currentIndex - 1
 
             service: qtObject

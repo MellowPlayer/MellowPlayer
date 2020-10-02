@@ -13,8 +13,6 @@ Popup {
     modal: true
     height: 426
     width: Math.max(labelBuildInfo.implicitWidth + 32, height)
-    x: (ApplicationWindow.window.width - width) / 2
-    y: (ApplicationWindow.window.height - height) / 2 - ApplicationWindow.window.header.height
 
     onVisibleChanged: if (!visible) btCredits.checked = false
 
@@ -93,7 +91,7 @@ Popup {
 
                     Label {
                         font.pixelSize: 12
-                        onLinkActivated: Qt.openUrlExternally(link)
+                        onLinkActivated: (link) => Qt.openUrlExternally(link)
                         text: qsTr('See the <a href="https://www.gnu.org/licenses/old-licenses/lgpl-2.15">GNU Lesser General Public License</a>,')
 
                         MouseArea {

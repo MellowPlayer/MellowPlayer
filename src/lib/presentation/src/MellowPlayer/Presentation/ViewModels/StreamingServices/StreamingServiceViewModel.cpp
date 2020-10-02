@@ -11,14 +11,14 @@
 #include <MellowPlayer/Infrastructure/Network/NetworkProxies.hpp>
 #include <MellowPlayer/Infrastructure/Network/NetworkProxy.hpp>
 #include <MellowPlayer/Presentation/ViewModels/StreamingServices/StreamingServiceViewModel.hpp>
-#include <QUrlQuery>
-#include <QDir>
-#include <QStandardPaths>
-#include <QFile>
-#include <QJsonDocument>
-#include <QJsonArray>
-#include <QJsonObject>
 #include <QDesktopServices>
+#include <QDir>
+#include <QFile>
+#include <QJsonArray>
+#include <QJsonDocument>
+#include <QJsonObject>
+#include <QStandardPaths>
+#include <QUrlQuery>
 
 using namespace std;
 using namespace MellowPlayer::Domain;
@@ -36,8 +36,7 @@ StreamingServiceViewModel::StreamingServiceViewModel(StreamingService& streaming
                                                      ActiveThemeViewModel& themeViewModel,
                                                      std::unique_ptr<IHttpClient> httpClient,
                                                      QObject* parent)
-        : QObject(parent),
-          networkProxy_(networkProxies.get(streamingService.name())),
+        : IStreamingServiceViewModel(parent),
           _streamingService(streamingService),
           _settingsStore(settingsStore),
           _player(players.get(streamingService.name())),
@@ -49,6 +48,8 @@ StreamingServiceViewModel::StreamingServiceViewModel(StreamingService& streaming
           _logger(Loggers::logger("StreamingServiceViewModel-" + name().toStdString())),
           _httpClient(std::move(httpClient))
 {
+    networkProxy_ = networkProxies.get(streamingService.name());
+
     connect(&_streamingService, &StreamingService::scriptChanged, this, &StreamingServiceViewModel::sourceCodeChanged);
     Q_ASSERT(networkProxy_ != nullptr);
 
@@ -91,12 +92,12 @@ QString StreamingServiceViewModel::authorWebsite() const
     return _streamingService.authorWebsite();
 }
 
-bool StreamingServiceViewModel::operator==(const StreamingServiceViewModel& rhs) const
+bool StreamingServiceViewModel::operator==(const IStreamingServiceViewModel& rhs) const
 {
-    return _streamingService == rhs._streamingService;
+    return _streamingService == *rhs.streamingService();
 }
 
-bool StreamingServiceViewModel::operator!=(const StreamingServiceViewModel& rhs) const
+bool StreamingServiceViewModel::operator!=(const IStreamingServiceViewModel& rhs) const
 {
     return !operator==(rhs);
 }
@@ -165,7 +166,7 @@ QString StreamingServiceViewModel::favoriteSettingKey() const
     return _streamingService.name() + "/favorite";
 }
 
-UserScriptsViewModel* StreamingServiceViewModel::userScripts()
+IUserScriptsViewModel* StreamingServiceViewModel::userScripts()
 {
     return &_userScriptsViewModel;
 }
@@ -314,4 +315,150 @@ void StreamingServiceViewModel::setFavorite(bool value)
         LOG_DEBUG(_logger, "favorite changed: " << isFavorite());
         emit favoriteChanged();
     }
+}
+
+void NullStreamingServiceViewModel::checkForKnownIssues()
+{
+}
+QString NullStreamingServiceViewModel::logo() const
+{
+    return QString();
+}
+QString NullStreamingServiceViewModel::name() const
+{
+    return QString();
+}
+IPlayerBase* NullStreamingServiceViewModel::player()
+{
+    return nullptr;
+}
+QString NullStreamingServiceViewModel::url() const
+{
+    return QString();
+}
+QString NullStreamingServiceViewModel::version() const
+{
+    return QString();
+}
+QString NullStreamingServiceViewModel::authorName() const
+{
+    return QString();
+}
+QString NullStreamingServiceViewModel::authorWebsite() const
+{
+    return QString();
+}
+
+bool NullStreamingServiceViewModel::operator==(const IStreamingServiceViewModel& rhs) const
+{
+    return streamingService() == rhs.streamingService();
+}
+
+bool NullStreamingServiceViewModel::operator!=(const IStreamingServiceViewModel& rhs) const
+{
+    return !operator==(rhs);
+}
+
+StreamingService* NullStreamingServiceViewModel::streamingService() const
+{
+    return nullptr;
+}
+
+int NullStreamingServiceViewModel::sortIndex() const
+{
+    return 0;
+}
+
+void NullStreamingServiceViewModel::setSortIndex(int)
+{
+}
+
+IUserScriptsViewModel* NullStreamingServiceViewModel::userScripts()
+{
+    return new NullUserScriptsViewModel(this);
+}
+
+int NullStreamingServiceViewModel::zoomFactor() const
+{
+    return 0;
+}
+
+void NullStreamingServiceViewModel::setZoomFactor(int)
+{
+}
+
+bool NullStreamingServiceViewModel::notificationsEnabled() const
+{
+    return false;
+}
+
+void NullStreamingServiceViewModel::setNotificationsEnabled(bool)
+{
+}
+
+bool NullStreamingServiceViewModel::isActive() const
+{
+    return false;
+}
+
+QString NullStreamingServiceViewModel::previewImageUrl() const
+{
+    return "";
+}
+
+QString NullStreamingServiceViewModel::sourceCode() const
+{
+    return "";
+}
+bool NullStreamingServiceViewModel::isBroken() const
+{
+    return false;
+}
+
+bool NullStreamingServiceViewModel::hasKnownIssues() const
+{
+    return false;
+}
+
+bool NullStreamingServiceViewModel::isFavorite() const
+{
+    return false;
+}
+
+void NullStreamingServiceViewModel::setFavorite(bool)
+{
+}
+SettingsCategoryViewModel* NullStreamingServiceViewModel::settings()
+{
+    return nullptr;
+}
+
+void NullStreamingServiceViewModel::setUrl(const QString&)
+{
+}
+
+void NullStreamingServiceViewModel::setActive(bool)
+{
+}
+
+void NullStreamingServiceViewModel::setBroken(bool)
+{
+}
+
+void NullStreamingServiceViewModel::setPreviewImageUrl(QString)
+{
+}
+
+QString NullStreamingServiceViewModel::getPreviewImageUrlForSave()
+{
+    return "";
+}
+
+void NullStreamingServiceViewModel::openKnownIssue()
+{
+}
+
+NullStreamingServiceViewModel::NullStreamingServiceViewModel(QObject* parent) : IStreamingServiceViewModel(parent)
+{
+    networkProxy_ = std::make_shared<NetworkProxy>();
 }

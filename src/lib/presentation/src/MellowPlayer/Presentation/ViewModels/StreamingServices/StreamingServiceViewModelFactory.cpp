@@ -21,7 +21,7 @@ StreamingServiceViewModelFactory::StreamingServiceViewModelFactory(ISettingsStor
 {
 }
 
-StreamingServiceViewModel* StreamingServiceViewModelFactory::create(StreamingService& streamingService, QObject* parent)
+IStreamingServiceViewModel* StreamingServiceViewModelFactory::create(StreamingService& streamingService, QObject* parent)
 {
     return new StreamingServiceViewModel(
             streamingService, _settingsStore, _userScriptFactory, _players, _networkProxies, _themeViewModel, _httpClientFactory.create(), parent);

@@ -4,14 +4,18 @@ import QtQuick.Controls 2.15
 import QtQuick.Controls.Material 2.15
 
 import MellowPlayer 3.0
+import "../Dialogs.js" as Dialogs
+import "../DateCategoryTranslator.js" as DateCategoryTranslator
 
 Pane {
     id: root
 
+    required property string section
     property bool expanded: false
 
+    signal toggleRequested
+
     height: 64
-    width: ListView.view.width
     padding: 0
 
     Material.elevation: 2
@@ -53,7 +57,7 @@ Pane {
                        }
 
                        Label {
-                           text: DateCategoryTranslator.translate(section)
+                           text: DateCategoryTranslator.translate(root.section)
                            font.weight: Font.Bold
                            verticalAlignment: "AlignVCenter"
 
@@ -74,16 +78,14 @@ Pane {
                    hoverEnabled: true
 
                    onClicked: {
-                       messageBoxConfirmDelete.message = qsTr('Are you sure you want to remote history of ' + section + '?')
-                       messageBoxConfirmDelete.title = qsTr("Confirm remove")
-                       messageBoxConfirmDelete.closed.connect(onActivated);
-                       messageBoxConfirmDelete.open()
-                   }
-
-                   function onActivated() {
-                       messageBoxConfirmDelete.closed.disconnect(onActivated);
-                       if (messageBoxConfirmDelete.dialogResult === messageBoxConfirmDelete.dialogAccepted)
-                           ListeningHistory.removeByDateCategory(section)
+                       Dialogs.askConfirmation(
+                             qsTr("Confirm remove"),
+                             qsTr('Are you sure you want to remote history of ' + root.section + '?'),
+                             (confirmed) => {
+                                 if (confirmed)
+                                     ListeningHistory.removeByDateCategory(root.section)
+                             }
+                       );
                    }
 
                    Layout.fillHeight: true
@@ -99,6 +101,6 @@ Pane {
            }
        }
 
-       onClicked: root.ListView.view.toggleSection(section)
+       onClicked: root.toggleRequested
     }
 }

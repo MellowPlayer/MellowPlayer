@@ -9,7 +9,7 @@ StackLayout {
     id: root
 
     required property Drawer drawer
-    property bool searching: toolBar.searchChecked
+    required property bool searching
 
     currentIndex: {
         if (d.historyEnabledSetting && !d.historyEnabledSetting.value)
@@ -183,6 +183,6 @@ StackLayout {
         readonly property int pageDisabled: 3
 
         property bool listIsEmpty: listView.count == 0
-        property var historyEnabledSetting: App.settings.get(SettingKey.PRIVACY_ENABLE_LISTENING_HISTORY)
+        property SettingViewModel historyEnabledSetting: App.settings.get(SettingKey.PRIVACY_ENABLE_LISTENING_HISTORY)
     }
 }

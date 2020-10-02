@@ -5,6 +5,7 @@ import QtQuick.Controls.Material 2.15
 import QtQml.Models 2.15
 
 import MellowPlayer 3.0
+import "../Helpers/ModelHelpers.js" as ModelHelpers
 
 Item {
     id: root
@@ -72,9 +73,9 @@ Item {
                         delegate: Item {
                             id: delegateRoot
 
-                            required property StreamingService qtObject
+                            required property StreamingServiceViewModel qtObject
 
-                            property int visualIndex: delegateRoot.DelegateModel.itemsIndex
+                            property int visualIndex: ModelHelpers.getItemsIndex(delegateRoot.DelegateModel)
 
                             width: gridView.cellWidth - gridView.itemSpacing / 2;
                             height: gridView.cellHeight - gridView.itemSpacing / 2
@@ -129,7 +130,7 @@ Item {
                             DropArea {
                                 anchors { fill: parent; margins: 15 }
 
-                                onEntered: visualModel.items.move(drag.source.visualIndex, delegateRoot.visualIndex)
+                                onEntered: ModelHelpers.moveItem(visualModel, delegateRoot, drag)
                             }
                         }
                     }

@@ -4,10 +4,10 @@ import QtQuick.Controls 2.15
 import QtQuick.Controls.Material 2.15
 
 import MellowPlayer 3.0
-
+import "Dialogs.js" as Dialogs
 
 ApplicationWindow {
-    id: mainWindow
+    id: root
 
 
     minimumWidth: 450
@@ -18,17 +18,22 @@ ApplicationWindow {
 
     onClosing: d.handleCloseEvent(close);
 
-    Component.onCompleted: { Dialogs.mainWindow = mainWindow }
+    Component.onCompleted: {
+        Dialogs.initialize(root);
+        MainWindow.quitRequest.connect(() => { d.quit(); });
+        MainWindow.forceQuitRequest.connect(() => { d.forceQuit = true; App.quit(); });
+        MainWindow.raiseRequested.connect(() => { d.restoreWindow(); });
+    }
     Material.accent: ActiveTheme.accent
     Material.background: ActiveTheme.background
     Material.foreground: ActiveTheme.foreground
-    Material.primary: ActiveTheme.primaryI
+    Material.primary: ActiveTheme.primary
     Material.theme: ActiveTheme.dark ? Material.Dark : Material.Light
 
     header: MainToolBar {
         id: mainToolBar
 
-        visible: App.settings.get(SettingKey.APPEARANCE_TOOLBAR_VISIBLE).value && mainWindow.visibility !== ApplicationWindow.FullScreen
+        visible: App.settings.get(SettingKey.APPEARANCE_TOOLBAR_VISIBLE).value && !MainWindow.fullScreen
     }
 
     footer: UpdateToolBar { }
@@ -41,58 +46,19 @@ ApplicationWindow {
     SelectServiceDrawer {
         id: selectServiceDrawer
 
-        height: mainWindow.height; width: 450
+        height: root.height; width: 450
     }
 
     SettingsDrawer {
         id: settingsDrawer;
 
-        width: mainWindow.width; height: mainWindow.height
+        width: root.width; height: root.height
     }
 
     ListeningHistoryDrawer {
         id: listeningHistoryDrawer;
 
-        height: mainWindow.height; width: 450
-    }
-
-    AboutDialog {
-        id: aboutDialog
-    }
-
-    MessageBoxDialog {
-        id: confirmQuitMsgBox
-
-        standardButtons: Dialog.Ok | Dialog.Cancel
-        message: qsTr("Are you sure you want to quit MellowPlayer?")
-        title: qsTr("Confirm quit")
-
-        onAccepted: {
-            console.log("quit")
-            Qt.quit()
-        }
-    }
-
-    MessageBoxDialog {
-        id: errorDialog
-
-        standardButtons: MessageBoxDialog.Close
-
-        onAccepted: close()
-    }
-
-    MessageBoxDialog {
-        id: exitToTrayMsgBox
-
-        title: qsTr("Closing to system tray")
-        message: qsTr("<p>MellowPlayer will continue to run in background.<br>" +
-                      "You can quit the application or restore the main window via the system tray icon menu.</p>")
-        standardButtons: Dialog.Ok
-
-        onAccepted: {
-            MainWindow.visible = false;
-            mainWindow.visible = false;
-        }
+        height: root.height; width: 450
     }
 
     NewPluginWizard {
@@ -102,38 +68,16 @@ ApplicationWindow {
 
         modal: true
         width: 450; height: 450
-        x: mainWindow.width / 2 - width / 2;
-        y: mainWindow.height / 2 - height / 2 - 48;
+        x: root.width / 2 - width / 2;
+        y: root.height / 2 - height / 2 - 48;
     }
 
     FullScreenNotification {
         id: fullScreenNotification
 
-        anchors.top: parent.top
-        anchors.horizontalCenter: parent.horizontalCenter
-        anchors.topMargin: 12
+        x: (root.width - width) / 2
+        y: 12
         visible: false
-    }
-
-    StreamingServiceSettingsDialog {
-        id: settingsDialog
-
-        height: 420; width: 600
-        x: (ApplicationWindow.window.width - width) / 2
-        y: (ApplicationWindow.window.height - height) / 2 - ApplicationWindow.window.header.height
-    }
-
-    Connections {
-        target: MainWindow
-
-        function onVisibleChanged() {
-            MainWindow.visible ? d.restoreWindow() : d.hideWindow()
-        }
-        function onQuitRequest() { d.quit() }
-        function onForceQuitRequest() { d.forceQuit = true; App.quit() }
-        function onRaiseRequested() {
-            d.restoreWindow()
-        }
     }
 
     Action {
@@ -212,7 +156,7 @@ ApplicationWindow {
         id: showAboutAction
         shortcut: App.settings.get(SettingKey.SHORTCUTS_ABOUT).value
         text: qsTr("About")
-        onTriggered: aboutDialog.open()
+        onTriggered: Dialogs.showAbout()
         Component.onCompleted: Actions.showAbout = showAboutAction
     }
 
@@ -228,37 +172,41 @@ ApplicationWindow {
     QtObject {
         id: d
 
-        property int previousVisibility: ApplicationWindow.Windowed
         property bool forceQuit: false;
         property bool fullScreen: MainWindow.fullScreen
+        property bool visible: MainWindow.visible
+
+        onVisibleChanged: {
+            if (visible) {
+                d.restoreWindow();
+            } else {
+                d.hideWindow()
+            }
+        }
 
         onFullScreenChanged: {
             if (fullScreen) {
-                d.previousVisibility = mainWindow.visibility
-                mainWindow.showFullScreen();
+                root.showFullScreen();
                 fullScreenNotification.visible = true;
             }
             else {
-                mainWindow.visibility = d.previousVisibility
-                mainWindow.showNormal()
-                if (d.previousVisibility === ApplicationWindow.Maximized)
-                    mainWindow.showMaximized()
+                root.showNormal();
             }
         }
 
         function hideWindow() {
-            mainWindow.hide();
+            root.hide();
         }
 
         function restoreWindow() {
-            mainWindow.visible = true;
-            mainWindow.raise();
-            mainWindow.requestActivate();
+            root.visible = true;
+            root.raise();
+            root.requestActivate();
         }
 
         function saveGeometry() {
-            App.settings.get(SettingKey.PRIVATE_WINDOW_WIDTH).value = mainWindow.width;
-            App.settings.get(SettingKey.PRIVATE_WINDOW_HEIGHT).value = mainWindow.height;
+            App.settings.get(SettingKey.PRIVATE_WINDOW_WIDTH).value = root.width;
+            App.settings.get(SettingKey.PRIVATE_WINDOW_HEIGHT).value = root.height;
         }
 
         function handleCloseEvent(close) {
@@ -268,7 +216,15 @@ ApplicationWindow {
                 var showMessageSetting = App.settings.get(SettingKey.PRIVATE_SHOW_CLOSE_TO_TRAY_MESSAGE)
                 if (showMessageSetting.value) {
                     showMessageSetting.value = false;
-                    exitToTrayMsgBox.open();
+                    Dialogs.showMessage(
+                        qsTr("Closing to system tray"),
+                        qsTr("<p>MellowPlayer will continue to run in background.<br>You can quit the application or restore the main window via the system tray icon menu.</p>"),
+                        (confirmed) => {
+                            if (confirmed) {
+                                MainWindow.visible = false;
+                            }
+                        }
+                    );
                 }
                 else {
                     MainWindow.visible = false;
@@ -282,8 +238,16 @@ ApplicationWindow {
             var confirmExit = App.settings.get(SettingKey.MAIN_CONFIRM_EXIT).value;
             if (confirmExit) {
                 d.restoreWindow();
-                confirmQuitMsgBox.open();
-                confirmQuitMsgBox.forceActiveFocus();
+                Dialogs.askConfirmation(
+                    qsTr("Confirm quit"),
+                    qsTr("Are you sure you want to quit MellowPlayer?"),
+                    (confirmed) => {
+                        if (confirmed) {
+                            console.log("quit")
+                            App.quit()
+                        }
+                    }
+                )
             }
             else {
                 App.quit();

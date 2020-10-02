@@ -5,7 +5,6 @@ import QtQuick.Controls.Material 2.15
 Pane {
     id: notif
 
-    x: parent.width / 2 - width / 2; y: 12
     visible: false
     onVisibleChanged: if (visible) disappearTimer.running = true
 

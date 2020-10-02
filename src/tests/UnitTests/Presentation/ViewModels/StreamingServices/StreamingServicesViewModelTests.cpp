@@ -45,9 +45,9 @@ TEST_CASE("StreamingServicesControllerViewModel", "[UnitTest]")
     viewModel.initialize();
     viewModel.reload();
 
-    StreamingServiceViewModel* service1 = viewModel.services().at(0);
-    StreamingServiceViewModel* service2 = viewModel.services().at(1);
-    StreamingServiceViewModel* service3 = viewModel.services().at(2);
+    IStreamingServiceViewModel* service1 = viewModel.services().at(0);
+    IStreamingServiceViewModel* service2 = viewModel.services().at(1);
+    IStreamingServiceViewModel* service3 = viewModel.services().at(2);
 
     SECTION("setCurrentService changes current streaming service")
     {

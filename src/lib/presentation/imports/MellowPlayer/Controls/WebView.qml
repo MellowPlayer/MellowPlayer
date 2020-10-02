@@ -9,11 +9,13 @@ import QtWebChannel 1.15
 import MellowPlayer 3.0
 
 import "../Dialogs.js" as Dialogs
+import "../Helpers/StringHelpers.js" as StringHelpers
+import "../Helpers/WebViewHelpers.js" as WebViewHelpers
 
 Page {
     id: root
 
-    required property StreamingService service
+    required property StreamingServiceViewModel service
 
     property bool hasProprietaryCodecs: true
     property var userAgentSetting: App.settings.get(SettingKey.PRIVACY_USER_AGENT)
@@ -74,7 +76,7 @@ Page {
         enabled: MainWindow.fullScreen
         sequence: "Escape"
 
-        onActivated: webView.fullScreenCancelled()
+        onActivated: root.exitFullScreen()
     }
 
     WebEngineView {
@@ -169,7 +171,7 @@ Page {
             }
         }
         onLoadingChanged: (loadRequest) => {
-            webView.loaded = loadRequest.status === WebEngineLoadRequest.LoadSucceededStatus;
+            webView.loaded = WebViewHelpers.isLoaded(loadRequest);
         }
         onFullScreenRequested: (request) => {
             MainWindow.fullScreen = request.toggleOn
@@ -238,7 +240,7 @@ Page {
             customUrl: root.service.url
             x: root.width / 2 - width / 2; y: -2; z: 1
             width: 500
-            state: root.service.url.match("(@.*@)") !== null ? "visible" : "hidden"
+            state: StringHelpers.match(root.service.url, "(@.*@)") ? "visible" : "hidden"
 
             onReloadRequested: root.reload()
             onCustomUrlChanged: {

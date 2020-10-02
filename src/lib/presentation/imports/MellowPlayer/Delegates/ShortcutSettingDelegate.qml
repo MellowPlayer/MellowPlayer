@@ -3,6 +3,7 @@ import QtQuick.Layouts 1.15
 import QtQuick.Controls 2.15
 
 import MellowPlayer 3.0
+import "../SettingsTranslator.js" as SettingsTranslator
 
 ItemDelegate {
     id: root
@@ -16,7 +17,9 @@ ItemDelegate {
     required property string toolTip
     required property string type
     required property string qmlComponent
-    required property Setting qtObject
+    required property SettingViewModel qtObject
+
+    property ShortcutSettingViewModel shortcutSetting: qtObject
 
     onClicked: keySequenceEdit.forceActiveFocus()
 
@@ -45,7 +48,7 @@ ItemDelegate {
             onTextChanged: root.qtObject.value = text
             text: root.qtObject.value
 
-            Keys.onPressed: {
+            Keys.onPressed: (event) => {
                 if (event.key === Qt.Key_Backspace|| event.key === Qt.Key_Delete) {
                     timerRecording.stop();
                     placeholderText = ""
@@ -62,13 +65,13 @@ ItemDelegate {
                 if( nbKeyPressed == 1) {
                     startRecording()
                 }
-                placeholderText = root.qtObject.keySequenceToString(event.key, event.modifiers);
+                placeholderText = root.shortcutSetting.keySequenceToString(event.key, event.modifiers);
                 newKey = event.key;
                 newMofifiers = event.modifiers
                 event.accepted = true;
                 timerRecording.restart();
             }
-            Keys.onReleased: {
+            Keys.onReleased: (event) => {
                 nbKeyPressed -= 1;
                 if (event.key === Qt.Key_Escape)
                     cancelRecording();
@@ -91,7 +94,7 @@ ItemDelegate {
             }
 
             function finishRecording() {
-                if (root.qtObject.isValidKeySequence(newKey, newMofifiers))
+                if (root.shortcutSetting.isValidKeySequence(newKey, newMofifiers))
                     text = placeholderText
                 else
                     text = memText;

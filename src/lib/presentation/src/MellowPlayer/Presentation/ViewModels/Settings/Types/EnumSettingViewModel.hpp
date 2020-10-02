@@ -11,6 +11,7 @@ namespace MellowPlayer::Presentation
     public:
         EnumSettingViewModel(Domain::Setting& setting, QObject* parent = nullptr);
 
+        Q_INVOKABLE int indexOf(const QString& value);
         virtual QStringList values() const;
 
         QString qmlComponent() override;

@@ -70,12 +70,12 @@ void StreamingServicesViewModel::initializeCurrent()
     }
 }
 
-StreamingServiceViewModel* StreamingServicesViewModel::currentService() const
+IStreamingServiceViewModel* StreamingServicesViewModel::currentService() const
 {
     return _currentService;
 }
 
-void StreamingServicesViewModel::setCurrentService(StreamingServiceViewModel* value)
+void StreamingServicesViewModel::setCurrentService(IStreamingServiceViewModel* value)
 {
     if (_currentService == value)
         return;
@@ -189,7 +189,7 @@ int StreamingServicesViewModel::previousIndex(int index) const
     return previousIndex;
 }
 
-QList<StreamingServiceViewModel*> StreamingServicesViewModel::services() const
+QList<IStreamingServiceViewModel*> StreamingServicesViewModel::services() const
 {
     return _services->toList();
 }

@@ -38,7 +38,7 @@ void SystemTrayIcon::setupFavoritesMenu()
 
     for (auto* service : _streamingServices.services())
     {
-        connect(service, &StreamingServiceViewModel::favoriteChanged, this, &SystemTrayIcon::setupFavoritesMenu, Qt::UniqueConnection);
+        connect(service, &IStreamingServiceViewModel::favoriteChanged, this, &SystemTrayIcon::setupFavoritesMenu, Qt::UniqueConnection);
 
         if (service->isFavorite())
         {
