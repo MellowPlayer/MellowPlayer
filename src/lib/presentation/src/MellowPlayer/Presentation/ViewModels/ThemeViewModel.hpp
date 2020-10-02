@@ -16,7 +16,7 @@ namespace MellowPlayer::Domain
 
 namespace MellowPlayer::Presentation
 {
-    class ActiveThemeViewModel : public QmlSingleton
+    class ThemeViewModel : public QmlSingleton
     {
         Q_OBJECT
         Q_PROPERTY(bool dark READ isDark NOTIFY isDarkChanged)
@@ -28,7 +28,7 @@ namespace MellowPlayer::Presentation
         Q_PROPERTY(QString secondary READ secondary NOTIFY secondaryChanged)
         Q_PROPERTY(QString secondaryForeground READ secondaryForeground NOTIFY secondaryForegroundChanged)
     public:
-        ActiveThemeViewModel(Domain::StreamingServices& streamingServices,
+        ThemeViewModel(Domain::StreamingServices& streamingServices,
                              Domain::Settings& settings,
                              Domain::IThemeLoader& themeLoader);
 

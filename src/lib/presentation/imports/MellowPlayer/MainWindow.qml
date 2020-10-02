@@ -12,28 +12,28 @@ ApplicationWindow {
 
     minimumWidth: 450
     minimumHeight: 450
-    width: App.settings.get(SettingKey.PRIVATE_WINDOW_WIDTH).value;
-    height: App.settings.get(SettingKey.PRIVATE_WINDOW_HEIGHT).value;
-    title: StreamingServices.currentService !== null ? StreamingServices.currentServiceName : ""
+    width: SettingsViewModel.get(SettingKey.PRIVATE_WINDOW_WIDTH).value;
+    height: SettingsViewModel.get(SettingKey.PRIVATE_WINDOW_HEIGHT).value;
+    title: StreamingServicesViewModel.currentService !== null ? StreamingServicesViewModel.currentServiceName : ""
 
     onClosing: d.handleCloseEvent(close);
 
     Component.onCompleted: {
         Dialogs.initialize(root);
-        MainWindow.quitRequest.connect(() => { d.quit(); });
-        MainWindow.forceQuitRequest.connect(() => { d.forceQuit = true; App.quit(); });
-        MainWindow.raiseRequested.connect(() => { d.restoreWindow(); });
+        MainWindowViewModel.quitRequest.connect(() => { d.quit(); });
+        MainWindowViewModel.forceQuitRequest.connect(() => { d.forceQuit = true; ApplicationViewModel.quit(); });
+        MainWindowViewModel.raiseRequested.connect(() => { d.restoreWindow(); });
     }
-    Material.accent: ActiveTheme.accent
-    Material.background: ActiveTheme.background
-    Material.foreground: ActiveTheme.foreground
-    Material.primary: ActiveTheme.primary
-    Material.theme: ActiveTheme.dark ? Material.Dark : Material.Light
+    Material.accent: ThemeViewModel.accent
+    Material.background: ThemeViewModel.background
+    Material.foreground: ThemeViewModel.foreground
+    Material.primary: ThemeViewModel.primary
+    Material.theme: ThemeViewModel.dark ? Material.Dark : Material.Light
 
     header: MainToolBar {
         id: mainToolBar
 
-        visible: App.settings.get(SettingKey.APPEARANCE_TOOLBAR_VISIBLE).value && !MainWindow.fullScreen
+        visible: SettingsViewModel.get(SettingKey.APPEARANCE_TOOLBAR_VISIBLE).value && !MainWindowViewModel.fullScreen
     }
 
     footer: UpdateToolBar { }
@@ -82,7 +82,7 @@ ApplicationWindow {
 
     Action {
         id: toggleSelectServiceDrawerAction
-        shortcut: App.settings.get(SettingKey.SHORTCUTS_SELECT_SERVICE).value
+        shortcut: SettingsViewModel.get(SettingKey.SHORTCUTS_SELECT_SERVICE).value
         onTriggered: {
             if (selectServiceDrawer.visible) {
                 console.log("Closing service selection drawer")
@@ -98,7 +98,7 @@ ApplicationWindow {
 
     Action {
         id: toggleListeningHistoryAction
-        shortcut: App.settings.get(SettingKey.SHORTCUTS_LISTENING_HISTORY).value
+        shortcut: SettingsViewModel.get(SettingKey.SHORTCUTS_LISTENING_HISTORY).value
         onTriggered: {
             if (listeningHistoryDrawer.visible) {
                 console.log("Closing listening history drawer")
@@ -113,7 +113,7 @@ ApplicationWindow {
 
     Action {
         id: openSettingsAction
-        shortcut: App.settings.get(SettingKey.SHORTCUTS_SETTINGS).value
+        shortcut: SettingsViewModel.get(SettingKey.SHORTCUTS_SETTINGS).value
         text: qsTr("Settings")
         onTriggered: settingsDrawer.open()
         Component.onCompleted: Actions.openSettings = openSettingsAction
@@ -121,7 +121,7 @@ ApplicationWindow {
 
     Action {
         id: createNewPluginAction
-        shortcut: App.settings.get(SettingKey.SHORTCUTS_CREATE_PLUGIN).value
+        shortcut: SettingsViewModel.get(SettingKey.SHORTCUTS_CREATE_PLUGIN).value
         text: qsTr("Create plugin")
         onTriggered: newPluginWizard.open()
         Component.onCompleted: Actions.createNewPlugin = createNewPluginAction
@@ -129,7 +129,7 @@ ApplicationWindow {
 
     Action {
         id: reportIssueAction
-        shortcut: App.settings.get(SettingKey.SHORTCUTS_REPORT_ISSUE).value
+        shortcut: SettingsViewModel.get(SettingKey.SHORTCUTS_REPORT_ISSUE).value
         text: qsTr("Report issue")
         onTriggered: Dialogs.reportIssue()
         Component.onCompleted: Actions.reportIssue = reportIssueAction
@@ -137,24 +137,24 @@ ApplicationWindow {
 
     Action {
         id: toggleToolBarAction
-        shortcut: App.settings.get(SettingKey.SHORTCUTS_SHOW_TOOLBAR).value
+        shortcut: SettingsViewModel.get(SettingKey.SHORTCUTS_SHOW_TOOLBAR).value
         text: qsTr("Toggle main toolbar")
-        onTriggered: App.settings.get(SettingKey.APPEARANCE_TOOLBAR_VISIBLE).value = !App.settings.get(SettingKey.APPEARANCE_TOOLBAR_VISIBLE).value
+        onTriggered: SettingsViewModel.get(SettingKey.APPEARANCE_TOOLBAR_VISIBLE).value = !SettingsViewModel.get(SettingKey.APPEARANCE_TOOLBAR_VISIBLE).value
         Component.onCompleted: Actions.toggleToolBar = toggleToolBarAction
     }
 
     Action {
         id: checkForUpdatesAction
-        enabled: !Updater.busy
-        shortcut: App.settings.get(SettingKey.SHORTCUTS_CHECK_FOR_UPDATE).valu
+        enabled: !UpdaterViewModel.busy
+        shortcut: SettingsViewModel.get(SettingKey.SHORTCUTS_CHECK_FOR_UPDATE).valu
         text: qsTr("Check for update")
-        onTriggered: Updater.check()
+        onTriggered: UpdaterViewModel.check()
         Component.onCompleted: Actions.checkForUpdates = checkForUpdatesAction
     }
 
     Action {
         id: showAboutAction
-        shortcut: App.settings.get(SettingKey.SHORTCUTS_ABOUT).value
+        shortcut: SettingsViewModel.get(SettingKey.SHORTCUTS_ABOUT).value
         text: qsTr("About")
         onTriggered: Dialogs.showAbout()
         Component.onCompleted: Actions.showAbout = showAboutAction
@@ -162,9 +162,9 @@ ApplicationWindow {
 
     Action {
         id: quitAction
-        shortcut: App.settings.get(SettingKey.SHORTCUTS_QUIT).value
+        shortcut: SettingsViewModel.get(SettingKey.SHORTCUTS_QUIT).value
         text: qsTr("Quit")
-        onTriggered: MainWindow.requestQuit()
+        onTriggered: MainWindowViewModel.requestQuit()
         Component.onCompleted: Actions.quit = quitAction
     }
 
@@ -173,8 +173,8 @@ ApplicationWindow {
         id: d
 
         property bool forceQuit: false;
-        property bool fullScreen: MainWindow.fullScreen
-        property bool visible: MainWindow.visible
+        property bool fullScreen: MainWindowViewModel.fullScreen
+        property bool visible: MainWindowViewModel.visible
 
         onVisibleChanged: {
             if (visible) {
@@ -205,15 +205,15 @@ ApplicationWindow {
         }
 
         function saveGeometry() {
-            App.settings.get(SettingKey.PRIVATE_WINDOW_WIDTH).value = root.width;
-            App.settings.get(SettingKey.PRIVATE_WINDOW_HEIGHT).value = root.height;
+            SettingsViewModel.get(SettingKey.PRIVATE_WINDOW_WIDTH).value = root.width;
+            SettingsViewModel.get(SettingKey.PRIVATE_WINDOW_HEIGHT).value = root.height;
         }
 
         function handleCloseEvent(close) {
             saveGeometry();
-            var closeToTray = App.settings.get(SettingKey.MAIN_CLOSE_TO_TRAY).value
+            var closeToTray = SettingsViewModel.get(SettingKey.MAIN_CLOSE_TO_TRAY).value
             if (closeToTray && !forceQuit) {
-                var showMessageSetting = App.settings.get(SettingKey.PRIVATE_SHOW_CLOSE_TO_TRAY_MESSAGE)
+                var showMessageSetting = SettingsViewModel.get(SettingKey.PRIVATE_SHOW_CLOSE_TO_TRAY_MESSAGE)
                 if (showMessageSetting.value) {
                     showMessageSetting.value = false;
                     Dialogs.showMessage(
@@ -221,13 +221,13 @@ ApplicationWindow {
                         qsTr("<p>MellowPlayer will continue to run in background.<br>You can quit the application or restore the main window via the system tray icon menu.</p>"),
                         (confirmed) => {
                             if (confirmed) {
-                                MainWindow.visible = false;
+                                MainWindowViewModel.visible = false;
                             }
                         }
                     );
                 }
                 else {
-                    MainWindow.visible = false;
+                    MainWindowViewModel.visible = false;
                 }
                 close.accepted = false;
             }
@@ -235,7 +235,7 @@ ApplicationWindow {
 
         function quit() {
             saveGeometry();
-            var confirmExit = App.settings.get(SettingKey.MAIN_CONFIRM_EXIT).value;
+            var confirmExit = SettingsViewModel.get(SettingKey.MAIN_CONFIRM_EXIT).value;
             if (confirmExit) {
                 d.restoreWindow();
                 Dialogs.askConfirmation(
@@ -244,13 +244,13 @@ ApplicationWindow {
                     (confirmed) => {
                         if (confirmed) {
                             console.log("quit")
-                            App.quit()
+                            ApplicationViewModel.quit()
                         }
                     }
                 )
             }
             else {
-                App.quit();
+                ApplicationViewModel.quit();
             }
         }
     }

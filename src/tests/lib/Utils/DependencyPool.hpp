@@ -40,7 +40,7 @@ namespace MellowPlayer::Presentation
 {
     class ListeningHistoryViewModel;
     class IStreamingServicesViewModel;
-    class ActiveThemeViewModel;
+    class ThemeViewModel;
     class UpdaterViewModel;
     class IPlayerNotifications;
     class INotificationPresenter;
@@ -77,7 +77,7 @@ namespace MellowPlayer::Tests
         Presentation::IStreamingServiceViewModelFactory& getStreamingServiceViewModelFactory();
         Presentation::IStreamingServicesViewModel& getStreamingServicesViewModel();
         Presentation::ListeningHistoryViewModel& getListeningHistoryViewModel();
-        Presentation::ActiveThemeViewModel& getThemeViewModel();
+        Presentation::ThemeViewModel& getThemeViewModel();
         Presentation::UpdaterViewModel& getUpdaterViewModel();
         Presentation::INotificationPresenter& getNotificationPresenter();
         Presentation::FakeNotificationPresenter& getFakeNotificationPresenter();
@@ -106,7 +106,7 @@ namespace MellowPlayer::Tests
         FakeHttpClientFactory _httpClientFactory;
         std::unique_ptr<Presentation::StreamingServiceViewModelFactory> _streamingServiceViewModelFactory;
         std::unique_ptr<Presentation::IStreamingServicesViewModel> _streamingServicesViewModel;
-        std::unique_ptr<Presentation::ActiveThemeViewModel> _themeViewModel;
+        std::unique_ptr<Presentation::ThemeViewModel> _themeViewModel;
         std::unique_ptr<Presentation::UpdaterViewModel> _updaterViewModel;
         std::unique_ptr<Presentation::IPlayerNotifications> _notifications;
 

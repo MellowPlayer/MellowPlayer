@@ -27,7 +27,7 @@ StreamingServicesViewModel::StreamingServicesViewModel(StreamingServices& stream
                                                        IStreamingServiceCreator& streamingServiceCreator,
                                                        ICommandLineArguments& commandLineArguments,
                                                        IStreamingServiceViewModelFactory& streamingServiceViewModelFactory)
-        : IStreamingServicesViewModel("StreamingServices", this),
+        : IStreamingServicesViewModel("StreamingServicesViewModel", this),
           _streamingServices(streamingServices),
           _settings(settings),
           _currentServiceSetting(settings.get(SettingKey::PRIVATE_CURRENT_SERVICE)),

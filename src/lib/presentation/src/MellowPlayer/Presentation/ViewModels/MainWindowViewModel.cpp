@@ -7,7 +7,7 @@ using namespace MellowPlayer::Infrastructure;
 using namespace MellowPlayer::Presentation;
 
 MainWindowViewModel::MainWindowViewModel(ISettingsStore& settingsStore, RunningServicesViewModel& runningServicesViewModel)
-        : IMainWindow("MainWindow", this),
+        : IMainWindow("MainWindowViewModel", this),
           _visible(false),
           _logger(Loggers::logger("MainWindow")),
           _zoom(settingsStore),

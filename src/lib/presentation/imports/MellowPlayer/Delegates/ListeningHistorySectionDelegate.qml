@@ -13,14 +13,14 @@ Pane {
     required property string section
     property bool expanded: false
 
-    signal toggleRequested
+    signal toggleRequested()
 
     height: 64
     padding: 0
 
     Material.elevation: 2
-    Material.background: ActiveTheme.background
-    Material.theme: ActiveTheme.isDark(ActiveTheme.background) ? Material.Dark : Material.Light
+    Material.background: ThemeViewModel.background
+    Material.theme: ThemeViewModel.isDark(ThemeViewModel.background) ? Material.Dark : Material.Light
 
     ItemDelegate {
        anchors.fill: parent
@@ -62,7 +62,7 @@ Pane {
                            verticalAlignment: "AlignVCenter"
 
                            Layout.fillHeight: true
-                           Material.foreground: ActiveTheme.accent
+                           Material.foreground: ThemeViewModel.accent
                        }
 
                        Item {
@@ -83,7 +83,7 @@ Pane {
                              qsTr('Are you sure you want to remote history of ' + root.section + '?'),
                              (confirmed) => {
                                  if (confirmed)
-                                     ListeningHistory.removeByDateCategory(root.section)
+                                     ListeningHistoryViewModel.removeByDateCategory(root.section)
                              }
                        );
                    }
@@ -93,7 +93,7 @@ Pane {
            }
 
            Rectangle {
-               color: ActiveTheme.accent
+               color: ThemeViewModel.accent
                width: parent.width
                height: 3
 
@@ -101,6 +101,6 @@ Pane {
            }
        }
 
-       onClicked: root.toggleRequested
+       onClicked: root.toggleRequested()
     }
 }

@@ -22,10 +22,10 @@ Drawer {
         padding: 0
 
         header: ToolBar {
-            Material.primary: ActiveTheme.primary
-            Material.foreground: ActiveTheme.primaryForeground
+            Material.primary: ThemeViewModel.primary
+            Material.foreground: ThemeViewModel.primaryForeground
             Material.elevation: 4
-            Material.theme: ActiveTheme.isDark(ActiveTheme.primary) ? Material.Dark : Material.Light
+            Material.theme: ThemeViewModel.isDark(ThemeViewModel.primary) ? Material.Dark : Material.Light
 
             RowLayout {
                 anchors.fill: parent
@@ -74,7 +74,7 @@ Drawer {
                 IconToolButton {
                     id: filterByFavorites
 
-                    property SettingViewModel setting: App.settings.get(SettingKey.PRIVATE_SHOW_FAVORITE_SERVICES)
+                    property SettingViewModel setting: SettingsViewModel.get(SettingKey.PRIVATE_SHOW_FAVORITE_SERVICES)
 
                     iconChar: MaterialIcons.icon_star
                     iconSize: 22

@@ -10,7 +10,7 @@ namespace MellowPlayer::Domain
 
 namespace MellowPlayer::Presentation
 {
-    class ActiveThemeViewModel;
+    class ThemeViewModel;
 
     class SettingsCategoryViewModel : public QObject
     {
@@ -20,7 +20,7 @@ namespace MellowPlayer::Presentation
         Q_PROPERTY(QString qmlComponent READ qmlComponent CONSTANT)
         Q_PROPERTY(QAbstractItemModel* settings READ settingsModel CONSTANT)
     public:
-        SettingsCategoryViewModel(ActiveThemeViewModel& themeViewModel, Domain::SettingsCategory* settingsCategory = nullptr, QObject* parent = nullptr);
+        SettingsCategoryViewModel(ThemeViewModel& themeViewModel, Domain::SettingsCategory* settingsCategory = nullptr, QObject* parent = nullptr);
 
         virtual QString name() const;
         virtual QString icon() const;
@@ -43,7 +43,7 @@ namespace MellowPlayer::Presentation
         CustomSettingsCategoryViewModel(const QString& name,
                                         const QString& icon,
                                         const QString& qmlComponent,
-                                        ActiveThemeViewModel& themeViewModel,
+                                        ThemeViewModel& themeViewModel,
                                         QObject* parent = nullptr);
 
         QString name() const override;

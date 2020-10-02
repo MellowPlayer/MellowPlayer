@@ -4,7 +4,7 @@
 #include <MellowPlayer/Domain/StreamingServices/StreamingServices.hpp>
 #include <MellowPlayer/Domain/Theme/IThemeLoader.hpp>
 #include <MellowPlayer/Infrastructure/BuildConfig.hpp>
-#include <MellowPlayer/Presentation/ViewModels/ActiveThemeViewModel.hpp>
+#include <MellowPlayer/Presentation/ViewModels/ThemeViewModel.hpp>
 
 #include <QDebug>
 
@@ -13,10 +13,10 @@ using namespace MellowPlayer::Domain;
 using namespace MellowPlayer::Infrastructure;
 using namespace MellowPlayer::Presentation;
 
-ActiveThemeViewModel::ActiveThemeViewModel(StreamingServices& streamingServices,
+ThemeViewModel::ThemeViewModel(StreamingServices& streamingServices,
                                            Settings& settings,
                                            IThemeLoader& themeLoader)
-        : QmlSingleton("ActiveTheme", this),
+        : QmlSingleton("ThemeViewModel", this),
           _streamingServices(streamingServices),
           _loader(themeLoader),
           _accentColorSetting(settings.get(SettingKey::APPEARANCE_ACCENT)),
@@ -30,61 +30,61 @@ ActiveThemeViewModel::ActiveThemeViewModel(StreamingServices& streamingServices,
           _currentTheme(customTheme())
 {
     _themeSetting.setDefaultValue(BuildConfig::getDefaultTheme());
-    connect(&streamingServices, &StreamingServices::currentChanged, this, &ActiveThemeViewModel::onCurrentServiceChanged);
-    connect(&_accentColorSetting, &Setting::valueChanged, this, &ActiveThemeViewModel::update);
-    connect(&_themeSetting, &Setting::valueChanged, this, &ActiveThemeViewModel::update);
-    connect(&_backgroundSetting, &Setting::valueChanged, this, &ActiveThemeViewModel::update);
-    connect(&_foregroundSetting, &Setting::valueChanged, this, &ActiveThemeViewModel::update);
-    connect(&_primaryBackgroundSetting, &Setting::valueChanged, this, &ActiveThemeViewModel::update);
-    connect(&_primaryForegroundSetting, &Setting::valueChanged, this, &ActiveThemeViewModel::update);
-    connect(&_secondaryBackgroundSetting, &Setting::valueChanged, this, &ActiveThemeViewModel::update);
-    connect(&_secondaryForegroundSetting, &Setting::valueChanged, this, &ActiveThemeViewModel::update);
+    connect(&streamingServices, &StreamingServices::currentChanged, this, &ThemeViewModel::onCurrentServiceChanged);
+    connect(&_accentColorSetting, &Setting::valueChanged, this, &ThemeViewModel::update);
+    connect(&_themeSetting, &Setting::valueChanged, this, &ThemeViewModel::update);
+    connect(&_backgroundSetting, &Setting::valueChanged, this, &ThemeViewModel::update);
+    connect(&_foregroundSetting, &Setting::valueChanged, this, &ThemeViewModel::update);
+    connect(&_primaryBackgroundSetting, &Setting::valueChanged, this, &ThemeViewModel::update);
+    connect(&_primaryForegroundSetting, &Setting::valueChanged, this, &ThemeViewModel::update);
+    connect(&_secondaryBackgroundSetting, &Setting::valueChanged, this, &ThemeViewModel::update);
+    connect(&_secondaryForegroundSetting, &Setting::valueChanged, this, &ThemeViewModel::update);
 
     collectThemes();
     update();
 }
 
-bool ActiveThemeViewModel::isDark() const
+bool ThemeViewModel::isDark() const
 {
     return isDark(_currentTheme.background);
 }
 
-QString ActiveThemeViewModel::accent() const
+QString ThemeViewModel::accent() const
 {
     return _currentTheme.accent;
 }
 
-QString ActiveThemeViewModel::background() const
+QString ThemeViewModel::background() const
 {
     return _currentTheme.background;
 }
 
-QString ActiveThemeViewModel::foreground() const
+QString ThemeViewModel::foreground() const
 {
     return _currentTheme.foreground;
 }
 
-QString ActiveThemeViewModel::primary() const
+QString ThemeViewModel::primary() const
 {
     return _currentTheme.primary;
 }
 
-QString ActiveThemeViewModel::primaryForeground() const
+QString ThemeViewModel::primaryForeground() const
 {
     return _currentTheme.primaryForeground;
 }
 
-QString ActiveThemeViewModel::secondary() const
+QString ThemeViewModel::secondary() const
 {
     return _currentTheme.secondary;
 }
 
-QString ActiveThemeViewModel::secondaryForeground() const
+QString ThemeViewModel::secondaryForeground() const
 {
     return _currentTheme.secondaryForeground;
 }
 
-void ActiveThemeViewModel::update()
+void ThemeViewModel::update()
 {
     StreamingService* currentService = _streamingServices.current();
     QString current = _themeSetting.value().toString();
@@ -102,21 +102,21 @@ void ActiveThemeViewModel::update()
         fromTheme(_availableThemes[current]);
 }
 
-bool ActiveThemeViewModel::isAdaptiveTheme() const
+bool ThemeViewModel::isAdaptiveTheme() const
 {
     return _themeSetting.value().toString() == "Adaptive";
 }
 
-void ActiveThemeViewModel::onCurrentServiceChanged(StreamingService* streamingService)
+void ThemeViewModel::onCurrentServiceChanged(StreamingService* streamingService)
 {
     if (streamingService != nullptr)
     {
-        connect(streamingService, &StreamingService::themeChanged, this, &ActiveThemeViewModel::update, Qt::UniqueConnection);
+        connect(streamingService, &StreamingService::themeChanged, this, &ThemeViewModel::update, Qt::UniqueConnection);
         update();
     }
 }
 
-void ActiveThemeViewModel::setAccent(const QString& value)
+void ThemeViewModel::setAccent(const QString& value)
 {
     if (value == _currentTheme.accent)
         return;
@@ -125,7 +125,7 @@ void ActiveThemeViewModel::setAccent(const QString& value)
     emit accentChanged();
 }
 
-void ActiveThemeViewModel::setBackground(const QString& value)
+void ThemeViewModel::setBackground(const QString& value)
 {
     if (value == _currentTheme.background)
         return;
@@ -135,7 +135,7 @@ void ActiveThemeViewModel::setBackground(const QString& value)
     emit isDarkChanged();
 }
 
-void ActiveThemeViewModel::setForeground(const QString& value)
+void ThemeViewModel::setForeground(const QString& value)
 {
     if (value == _currentTheme.foreground)
         return;
@@ -144,7 +144,7 @@ void ActiveThemeViewModel::setForeground(const QString& value)
     emit foregroundChanged();
 }
 
-void ActiveThemeViewModel::setPrimary(const QString& value)
+void ThemeViewModel::setPrimary(const QString& value)
 {
     if (value == _currentTheme.primary)
         return;
@@ -153,7 +153,7 @@ void ActiveThemeViewModel::setPrimary(const QString& value)
     emit primaryChanged();
 }
 
-void ActiveThemeViewModel::setPrimaryForeground(const QString& value)
+void ThemeViewModel::setPrimaryForeground(const QString& value)
 {
     if (value == _currentTheme.primaryForeground)
         return;
@@ -162,7 +162,7 @@ void ActiveThemeViewModel::setPrimaryForeground(const QString& value)
     emit primaryForegroundChanged();
 }
 
-void ActiveThemeViewModel::setSecondary(const QString& value)
+void ThemeViewModel::setSecondary(const QString& value)
 {
     if (value == _currentTheme.secondary)
         return;
@@ -171,7 +171,7 @@ void ActiveThemeViewModel::setSecondary(const QString& value)
     emit secondaryChanged();
 }
 
-void ActiveThemeViewModel::setSecondaryForeground(const QString& value)
+void ThemeViewModel::setSecondaryForeground(const QString& value)
 {
     if (value == _currentTheme.secondaryForeground)
         return;
@@ -180,7 +180,7 @@ void ActiveThemeViewModel::setSecondaryForeground(const QString& value)
     emit secondaryForegroundChanged();
 }
 
-void ActiveThemeViewModel::fromTheme(const Theme& newTheme)
+void ThemeViewModel::fromTheme(const Theme& newTheme)
 {
     setAccent(newTheme.accent);
     setBackground(newTheme.background);
@@ -191,7 +191,7 @@ void ActiveThemeViewModel::fromTheme(const Theme& newTheme)
     setSecondaryForeground(newTheme.secondaryForeground);
 }
 
-double ActiveThemeViewModel::colorScaleFactor(const QString& color) const
+double ThemeViewModel::colorScaleFactor(const QString& color) const
 {
     const int lightnessMax = 164;
     const float darkerFactor = 1.05f;
@@ -202,7 +202,7 @@ double ActiveThemeViewModel::colorScaleFactor(const QString& color) const
     return lighterFactor;
 }
 
-bool ActiveThemeViewModel::isDark(const QString& color) const
+bool ThemeViewModel::isDark(const QString& color) const
 {
     QColor c(color);
     int lightness = c.lightness();
@@ -216,7 +216,7 @@ bool ActiveThemeViewModel::isDark(const QString& color) const
     return lightness < 164 && ffCount < 2;
 }
 
-Theme ActiveThemeViewModel::customTheme() const
+Theme ThemeViewModel::customTheme() const
 {
     return Theme{_accentColorSetting.value().toString(),
                  _backgroundSetting.value().toString(),
@@ -227,7 +227,7 @@ Theme ActiveThemeViewModel::customTheme() const
                  _secondaryForegroundSetting.value().toString()};
 }
 
-void ActiveThemeViewModel::collectThemes()
+void ThemeViewModel::collectThemes()
 {
     _availableThemes["Adaptive"] = _currentTheme;
     _availableThemes["Ubuntu"] = _loader.load(":/MellowPlayer/Presentation/themes/Ubuntu.json");
@@ -239,14 +239,14 @@ void ActiveThemeViewModel::collectThemes()
     _availableThemes["Default"] = _loader.load(":/MellowPlayer/Presentation/themes/Default.json");
 }
 
-QStringList ActiveThemeViewModel::availableThemes() const
+QStringList ThemeViewModel::availableThemes() const
 {
     QStringList themes = _availableThemes.keys();
     themes.sort();
     return themes;
 }
 
-Theme ActiveThemeViewModel::theme(const QString& themeName) const
+Theme ThemeViewModel::theme(const QString& themeName) const
 {
     return _availableThemes[themeName];
 }

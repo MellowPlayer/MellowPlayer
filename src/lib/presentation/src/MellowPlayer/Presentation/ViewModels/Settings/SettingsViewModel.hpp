@@ -3,6 +3,7 @@
 #include "SettingsCategoryViewModel.hpp"
 #include <MellowPlayer/Presentation/Factories/SettingViewModelFactory.hpp>
 #include <MellowPlayer/Presentation/Models/SettingsCategoryListModel.hpp>
+#include <MellowPlayer/Presentation/Qml/QmlSingleton.hpp>
 #include <QObject>
 
 namespace MellowPlayer::Domain
@@ -13,14 +14,14 @@ namespace MellowPlayer::Domain
 namespace MellowPlayer::Presentation
 {
     class SettingViewModel;
-    class ActiveThemeViewModel;
+    class ThemeViewModel;
 
-    class SettingsViewModel : public QObject
+    class SettingsViewModel : public QmlSingleton
     {
         Q_OBJECT
         Q_PROPERTY(QAbstractItemModel* categories READ categories CONSTANT)
     public:
-        SettingsViewModel(Domain::Settings& settings, ActiveThemeViewModel& themeViewModel);
+        SettingsViewModel(Domain::Settings& settings, ThemeViewModel& themeViewModel);
 
         SettingsCategoryListModel* categories() const;
 

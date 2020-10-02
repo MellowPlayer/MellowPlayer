@@ -9,11 +9,11 @@ RemoteControlState {
     id: root
 
     title: qsTr("Remote Control Application Running")
-    message:  qsTr("<b>%1</b> is listening on <a href=\"%2\">%2</a>").arg(RemoteControl.appInfo.name).arg(RemoteControl.appInfo.url)
+    message:  qsTr("<b>%1</b> is listening on <a href=\"%2\">%2</a>").arg(RemoteControlViewModel.appInfo.name).arg(RemoteControlViewModel.appInfo.url)
     icon: MaterialIcons.icon_phonelink
-    buttonText: qsTr("Stop ") + RemoteControl.appInfo.name
-    buttonColor: Material.color(Material.Red, ActiveTheme.isDark(ActiveTheme.primary) ? Material.Shade600 : Material.Shade300)
+    buttonText: qsTr("Stop ") + RemoteControlViewModel.appInfo.name
+    buttonColor: Material.color(Material.Red, ThemeViewModel.isDark(ThemeViewModel.primary) ? Material.Shade600 : Material.Shade300)
     autoStartCheckBoxVisible: true
 
-    onButtonClicked: RemoteControl.stop()
+    onButtonClicked: RemoteControlViewModel.stop()
 }

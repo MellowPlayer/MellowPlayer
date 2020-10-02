@@ -18,10 +18,10 @@ ToolBar {
         yScale: 0
     }
 
-    Material.background: ActiveTheme.secondary
-    Material.foreground: ActiveTheme.secondaryForeground
-    Material.accent: ActiveTheme.accent
-    Material.theme: ActiveTheme.isDark(ActiveTheme.secondary) ?  Material.Dark : Material.Light
+    Material.background: ThemeViewModel.secondary
+    Material.foreground: ThemeViewModel.secondaryForeground
+    Material.accent: ThemeViewModel.accent
+    Material.theme: ThemeViewModel.isDark(ThemeViewModel.secondary) ?  Material.Dark : Material.Light
 
     ColumnLayout {
         anchors.fill: parent
@@ -43,7 +43,7 @@ ToolBar {
             }
 
             Label {
-                text: Updater.status
+                text: UpdaterViewModel.status
                 font.pixelSize: 14
             }
 
@@ -54,22 +54,22 @@ ToolBar {
             ToolButton {
                 highlighted: true
                 text: qsTr("See release notes")
-                onClicked: Qt.openUrlExternally(Updater.url + "/view/release#release")
+                onClicked: Qt.openUrlExternally(UpdaterViewModel.url + "/view/release#release")
             }
 
             ToolButton {
                 highlighted: true
                 text: qsTr("Install")
-                enabled: !Updater.busy
-                onClicked: Updater.install()
-                visible: Updater.installEnabled
+                enabled: !UpdaterViewModel.busy
+                onClicked: UpdaterViewModel.install()
+                visible: UpdaterViewModel.installEnabled
             }
 
             ToolButton {
                 highlighted: true
                 text: qsTr("Restart")
-                onClicked: Updater.restart()
-                visible: Updater.restartEnabled
+                onClicked: UpdaterViewModel.restart()
+                visible: UpdaterViewModel.restartEnabled
             }
 
             ToolButton {
@@ -79,15 +79,15 @@ ToolBar {
                     family: MaterialIcons.family
                     pixelSize: 24
                 }
-                onClicked: Updater.close()
+                onClicked: UpdaterViewModel.close()
             }
         }
 
         ProgressBar {
-            indeterminate: Updater.progress === -1
+            indeterminate: UpdaterViewModel.progress === -1
             from: 0; to: 100
-            value: Updater.progress
-            visible: Updater.busy
+            value: UpdaterViewModel.progress
+            visible: UpdaterViewModel.busy
 
             Layout.fillWidth: true
         }
@@ -95,7 +95,7 @@ ToolBar {
 
     states: [
         State {
-            when: Updater.visible
+            when: UpdaterViewModel.visible
 
             PropertyChanges {
                 target: updateToolBar
@@ -108,7 +108,7 @@ ToolBar {
             }
         },
         State {
-            when: !Updater.visible
+            when: !UpdaterViewModel.visible
 
             PropertyChanges {
                 target: updateToolBar

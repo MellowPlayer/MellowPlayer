@@ -33,7 +33,7 @@ Dialog {
             spacing: 0
 
             Layout.alignment: Qt.AlignCenter
-            Material.accent: ActiveTheme.accent === "#ffc107" ? ActiveTheme.primary : ActiveTheme.accent
+            Material.accent: ThemeViewModel.accent === "#ffc107" ? ThemeViewModel.primary : ThemeViewModel.accent
 
             Label {
                 font.italic: true
@@ -274,7 +274,7 @@ Dialog {
                                                 font.pixelSize: 22
                                                 font.family: MaterialIcons.family
 
-                                                Material.foreground: ActiveTheme.accent
+                                                Material.foreground: ThemeViewModel.accent
                                             }
 
                                             Label {
@@ -480,7 +480,7 @@ Dialog {
                             }
 
                             Rectangle {
-                                color: ActiveTheme.isDark(ActiveTheme.background) ? Qt.lighter(ActiveTheme.background) : Qt.darker(ActiveTheme.background, 1.1)
+                                color: ThemeViewModel.isDark(ThemeViewModel.background) ? Qt.lighter(ThemeViewModel.background) : Qt.darker(ThemeViewModel.background, 1.1)
                                 visible: optionDelegate.index !== optionsListView.count - 1
 
                                 Layout.preferredHeight: 1
@@ -495,7 +495,7 @@ Dialog {
         }
 
         Rectangle {
-            color: ActiveTheme.isDark(ActiveTheme.background) ? Qt.lighter(ActiveTheme.background) : Qt.darker(ActiveTheme.background, 1.1)
+            color: ThemeViewModel.isDark(ThemeViewModel.background) ? Qt.lighter(ThemeViewModel.background) : Qt.darker(ThemeViewModel.background, 1.1)
             Layout.alignment: Qt.AlignCenter
             Layout.preferredHeight: 1
             Layout.fillWidth: true

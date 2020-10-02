@@ -19,8 +19,8 @@ Item {
         anchors.fill: parent
         spacing: root.width / 8
         layoutDirection: Qt.RightToLeft
-        visible: MainWindow.runningServices.model.count > 0 && CurrentPlayer.active &&
-                 App.settings.get(SettingKey.APPEARANCE_PLAYER_CONTROLS_VISIBLE).value &&
+        visible: MainWindowViewModel.runningServices.model.count > 0 && CurrentPlayer.active &&
+                 SettingsViewModel.get(SettingKey.APPEARANCE_PLAYER_CONTROLS_VISIBLE).value &&
                  !root.clipped
 
         RowLayout {
@@ -117,7 +117,7 @@ Item {
 
                     Component.onCompleted: handle.visible = Qt.binding(() => CurrentPlayer.canSeek);
                     Layout.fillWidth: true
-                    Material.accent: ActiveTheme.accent === ActiveTheme.primary ? ActiveTheme.primaryForeground : ActiveTheme.accent
+                    Material.accent: ThemeViewModel.accent === ThemeViewModel.primary ? ThemeViewModel.primaryForeground : ThemeViewModel.accent
                 }
 
                 Label {
@@ -148,9 +148,9 @@ Item {
                 action: Actions.toggleFavoriteSong
                 iconChar: CurrentPlayer.currentSong.isFavorite ? MaterialIcons.icon_favorite : MaterialIcons.icon_favorite_border
                 tooltip: CurrentPlayer.currentSong.isFavorite ? qsTr("Remove current song from your favorites") : qsTr("Add current song to your favorites")
-                visible: App.settings.get(SettingKey.APPEARANCE_PLAYER_CONTROLS_VISIBLE).value
+                visible: SettingsViewModel.get(SettingKey.APPEARANCE_PLAYER_CONTROLS_VISIBLE).value
 
-                Material.foreground: CurrentPlayer.currentSong.isFavorite ? ActiveTheme.accent : "white"
+                Material.foreground: CurrentPlayer.currentSong.isFavorite ? ThemeViewModel.accent : "white"
             }
         }
     }

@@ -7,8 +7,9 @@
 using namespace MellowPlayer::Domain;
 using namespace MellowPlayer::Presentation;
 
-SettingsViewModel::SettingsViewModel(Settings& settings, ActiveThemeViewModel& themeViewModel)
-        : _settings(settings),
+SettingsViewModel::SettingsViewModel(Settings& settings, ThemeViewModel& themeViewModel)
+        : QmlSingleton("SettingsViewModel", this),
+          _settings(settings),
           _factory(themeViewModel),
           _categories(new SettingsCategoryListModel(this, "name"))
 {

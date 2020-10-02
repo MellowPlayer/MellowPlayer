@@ -29,11 +29,11 @@ WizardPage {
     goNextEnabled: !busyIndicator.running
 
     Component.onCompleted: {
-        StreamingServices.serviceCreated.connect((directory) => {
+        StreamingServicesViewModel.serviceCreated.connect((directory) => {
             root.directory = directory;
             root.goNextRequested();
         })
-        StreamingServices.createService(svName, svUrl, authorName, authorUrl, allPlatforms, linuxPlatform, appImagePlatform, osxPlatform, windowsPlatform)
+        StreamingServicesViewModel.createService(svName, svUrl, authorName, authorUrl, allPlatforms, linuxPlatform, appImagePlatform, osxPlatform, windowsPlatform)
     }
 
     BusyIndicator {

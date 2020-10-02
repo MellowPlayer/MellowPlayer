@@ -6,7 +6,7 @@ using namespace MellowPlayer::Domain;
 using namespace MellowPlayer::Presentation;
 
 ListeningHistoryViewModel::ListeningHistoryViewModel(IListeningHistory& listeningHistory)
-        : QmlSingleton("ListeningHistory", this),
+        : QmlSingleton("ListeningHistoryViewModel", this),
           _listeningHistoryService(listeningHistory),
           _sourceModel(new ListeningHistoryListModel(this, "title", "entryId")),
           _proxyModel(_sourceModel)

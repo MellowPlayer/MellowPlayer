@@ -16,7 +16,7 @@ Popup {
 
     onVisibleChanged: if (!visible) btCredits.checked = false
 
-    Material.accent: ActiveTheme.accent === "#ffc107" ? ActiveTheme.primary : ActiveTheme.accent === ActiveTheme.background ? ActiveTheme.foreground : ActiveTheme.accent
+    Material.accent: ThemeViewModel.accent === "#ffc107" ? ThemeViewModel.primary : ThemeViewModel.accent === ThemeViewModel.background ? ThemeViewModel.foreground : ThemeViewModel.accent
 
     ColumnLayout {
         anchors.fill: parent
@@ -118,7 +118,7 @@ Popup {
                 Label {
                     id: labelBuildInfo
                     font.italic: true
-                    text: App.buildInfo
+                    text: ApplicationViewModel.buildInfo
 
                     Layout.alignment: Qt.AlignCenter
                     Layout.bottomMargin: 12
@@ -315,7 +315,7 @@ Popup {
             Button {
                 flat: true
                 highlighted: true
-                onClicked: App.showLogs()
+                onClicked: ApplicationViewModel.showLogs()
                 text: qsTr("Show logs")
             }
 

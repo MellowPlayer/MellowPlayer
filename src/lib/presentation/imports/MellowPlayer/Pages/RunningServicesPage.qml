@@ -12,7 +12,7 @@ StackLayout {
         console.debug("Current WebView: ", currentWebView ? currentWebView.service.name : "null")
     }
 
-    currentIndex: MainWindow.runningServices.currentIndex + 1
+    currentIndex: MainWindowViewModel.runningServices.currentIndex + 1
     onCurrentIndexChanged: {
         if (currentIndex === 0)
             currentWebView = null;
@@ -51,7 +51,7 @@ StackLayout {
     Action {
         id: reload
 
-        shortcut: App.settings.get(SettingKey.SHORTCUTS_RELOAD).value
+        shortcut: SettingsViewModel.get(SettingKey.SHORTCUTS_RELOAD).value
 
         onTriggered: root.currentWebView.reload()
         Component.onCompleted: Actions.reload = reload
@@ -73,17 +73,17 @@ StackLayout {
     }
 
     Shortcut {
-        property SettingViewModel setting: App.settings.get(SettingKey.SHORTCUTS_SELECT_NEXT_SERVICE)
+        property SettingViewModel setting: SettingsViewModel.get(SettingKey.SHORTCUTS_SELECT_NEXT_SERVICE)
 
         sequence: setting.value
-        onActivated: StreamingServices.next()
+        onActivated: StreamingServicesViewModel.next()
     }
 
     Shortcut {
-        property SettingViewModel setting: App.settings.get(SettingKey.SHORTCUTS_SELECT_PREVIOUS_SERVICE)
+        property SettingViewModel setting: SettingsViewModel.get(SettingKey.SHORTCUTS_SELECT_PREVIOUS_SERVICE)
 
         sequence: setting.value
-        onActivated: StreamingServices.previous()
+        onActivated: StreamingServicesViewModel.previous()
     }
 
     Item {
@@ -216,7 +216,7 @@ StackLayout {
     }
 
     Repeater {
-        model: MainWindow.runningServices.model
+        model: MainWindowViewModel.runningServices.model
         delegate: WebView {
             id: webView
 

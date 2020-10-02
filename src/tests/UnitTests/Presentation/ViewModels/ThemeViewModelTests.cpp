@@ -2,7 +2,7 @@
 #include <MellowPlayer/Domain/Settings/Setting.hpp>
 #include <MellowPlayer/Domain/Settings/Settings.hpp>
 #include <MellowPlayer/Domain/StreamingServices/StreamingServices.hpp>
-#include <MellowPlayer/Presentation/ViewModels/ActiveThemeViewModel.hpp>
+#include <MellowPlayer/Presentation/ViewModels/ThemeViewModel.hpp>
 #include <Utils/DependencyPool.hpp>
 #include <catch2/catch.hpp>
 
@@ -11,7 +11,7 @@ using namespace MellowPlayer::Domain::Tests;
 using namespace MellowPlayer::Presentation;
 using namespace MellowPlayer::Tests;
 
-void requireMatchTheme(ActiveThemeViewModel& themeViewModel, const Theme& theme)
+void requireMatchTheme(ThemeViewModel& themeViewModel, const Theme& theme)
 {
     if (themeViewModel.isDark(themeViewModel.background()))
         REQUIRE(themeViewModel.isDark());
@@ -31,7 +31,7 @@ TEST_CASE("ThemeViewModelTests", "[UnitTest]")
     DependencyPool pool;
     Settings& settings = pool.getSettings();
     StreamingServices& streamingServices = pool.getStreamingServices();
-    ActiveThemeViewModel& themeViewModel = pool.getThemeViewModel();
+    ThemeViewModel& themeViewModel = pool.getThemeViewModel();
 
     streamingServices.load();
     settings.get(SettingKey::APPEARANCE_THEME).setValue("Adaptive");

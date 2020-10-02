@@ -10,7 +10,7 @@ StreamingServiceViewModelFactory::StreamingServiceViewModelFactory(ISettingsStor
                                                                    IUserScriptFactory& userScriptFactory,
                                                                    Players& players,
                                                                    INetworkProxies& networkProxies,
-                                                                   ActiveThemeViewModel& themeViewModel,
+                                                                   ThemeViewModel& themeViewModel,
                                                                    IHttpClientFactory& httpClientFactory)
         : _settingsStore(settingsStore),
           _userScriptFactory(userScriptFactory),

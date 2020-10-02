@@ -112,7 +112,7 @@ Dialog {
         }
 
         Rectangle {
-            color: ActiveTheme.foreground
+            color: ThemeViewModel.foreground
             opacity: 0.5
 
             Layout.fillWidth: true

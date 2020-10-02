@@ -7,7 +7,7 @@ import MellowPlayer 3.0
 QtObject {
     id: actions
 
-    // MainWindow actions
+    // MainWindowViewModel actions
     property Action toggleSelectServiceDrawer
     property Action toggleListeningHistory
     property Action openSettings
@@ -26,25 +26,25 @@ QtObject {
 
     // Player actions
     property Action toggleFavoriteSong: Action {
-        shortcut: App.settings.get(SettingKey.SHORTCUTS_FAVORITE).value
+        shortcut: SettingsViewModel.get(SettingKey.SHORTCUTS_FAVORITE).value
         enabled: CurrentPlayer.canAddToFavorites
 
         onTriggered: CurrentPlayer.toggleFavoriteSong()
     }
     property Action skipToPreviousSong: Action {
-        shortcut: App.settings.get(SettingKey.SHORTCUTS_PREVIOUS).value
+        shortcut: SettingsViewModel.get(SettingKey.SHORTCUTS_PREVIOUS).value
         enabled: CurrentPlayer.canGoPrevious && CurrentPlayer.active
 
         onTriggered: CurrentPlayer.previous()
     }
     property Action playPause: Action {
-        shortcut: App.settings.get(SettingKey.SHORTCUTS_PLAY).value
+        shortcut: SettingsViewModel.get(SettingKey.SHORTCUTS_PLAY).value
         enabled: !CurrentPlayer.isStopped || CurrentPlayer.active
 
         onTriggered: CurrentPlayer.togglePlayPause()
     }
     property Action skipToNextSong: Action {
-        shortcut: App.settings.get(SettingKey.SHORTCUTS_NEXT).value
+        shortcut: SettingsViewModel.get(SettingKey.SHORTCUTS_NEXT).value
         enabled: CurrentPlayer.canGoNext && CurrentPlayer.active
 
         onTriggered: CurrentPlayer.next()
@@ -52,11 +52,11 @@ QtObject {
 
     // Other actions
     property Action toggleNotifications: Action {
-        property SettingViewModel setting: App.settings.get(SettingKey.NOTIFICATIONS_ENABLED)
+        property SettingViewModel setting: SettingsViewModel.get(SettingKey.NOTIFICATIONS_ENABLED)
 
         checkable: true
         checked: setting.value
-        shortcut: App.settings.get(SettingKey.SHORTCUTS_NOTIFICATIONS).value
+        shortcut: SettingsViewModel.get(SettingKey.SHORTCUTS_NOTIFICATIONS).value
 
         onToggled: setting.value = checked
     }

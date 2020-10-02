@@ -9,10 +9,10 @@ RemoteControlState {
     id: root
 
     title: qsTr("Start Remote Control Application")
-    message:  qsTr("Start <b>%1</b> to be able to control MellowPlayer playback<br> from any device in your LAN!").arg(RemoteControl.appInfo.name)
+    message:  qsTr("Start <b>%1</b> to be able to control MellowPlayer playback<br> from any device in your LAN!").arg(RemoteControlViewModel.appInfo.name)
     icon: MaterialIcons.icon_launch
-    buttonText: qsTr("Start ") + RemoteControl.appInfo.name
+    buttonText: qsTr("Start ") + RemoteControlViewModel.appInfo.name
     autoStartCheckBoxVisible: true
 
-    onButtonClicked: RemoteControl.start()
+    onButtonClicked: RemoteControlViewModel.start()
 }

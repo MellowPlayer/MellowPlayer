@@ -15,20 +15,16 @@ namespace MellowPlayer::Presentation
     {
         Q_OBJECT
         Q_PROPERTY(QString buildInfo READ buildInfo CONSTANT)
-        Q_PROPERTY(SettingsViewModel* settings READ settings CONSTANT)
     public:
         ApplicationViewModel(Infrastructure::IApplication& application,
                              Infrastructure::IQtApplication& qtApplication,
-                             MainWindowViewModel& mainWindow,
-                             SettingsViewModel& settingsViewModel);
+                             MainWindowViewModel& mainWindow);
 
         Q_INVOKABLE void quit();
         Q_INVOKABLE void restart();
         Q_INVOKABLE void showLogs();
         Q_INVOKABLE void clearCache();
         Q_INVOKABLE void clearCookies();
-
-        SettingsViewModel* settings();
 
         // TODO should move into AboutWindowViewModel
         QString buildInfo() const;
@@ -37,7 +33,6 @@ namespace MellowPlayer::Presentation
         Infrastructure::IApplication& _application;
         Infrastructure::IQtApplication& _qtApplication;
         MainWindowViewModel& _mainWindow;
-        SettingsViewModel& _settingsViewModel;
         QTranslator _translator;
         bool _restartRequested;
     };

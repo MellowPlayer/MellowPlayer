@@ -52,7 +52,7 @@ ColumnLayout {
                 }
 
                 Rectangle {
-                    color: ActiveTheme.isDark(ActiveTheme.background) ? Qt.lighter(ActiveTheme.background) : Qt.darker(ActiveTheme.background, 1.1)
+                    color: ThemeViewModel.isDark(ThemeViewModel.background) ? Qt.lighter(ThemeViewModel.background) : Qt.darker(ThemeViewModel.background, 1.1)
                     visible: delegateRoot.index !== parent.ListView.view.count - 1
 
                     Layout.preferredHeight: 1
@@ -85,7 +85,7 @@ ColumnLayout {
         RowLayout {
             anchors.fill: parent
 
-            Material.foreground: ActiveTheme.isDark(ActiveTheme.accent) ? "white" : "#303030"
+            Material.foreground: ThemeViewModel.isDark(ThemeViewModel.accent) ? "white" : "#303030"
 
             Item { Layout.fillWidth: true }
 
@@ -100,7 +100,7 @@ ColumnLayout {
                         qsTr("Are you sure you want to restore all %1 settings to their default values?").arg(root.categoryName),
                         (confirmed) => {
                             if (confirmed) {
-                                App.settings.restoreCategoryDefaults(root.categoryName);
+                                SettingsViewModel.restoreCategoryDefaults(root.categoryName);
                             }
                         }
                     )

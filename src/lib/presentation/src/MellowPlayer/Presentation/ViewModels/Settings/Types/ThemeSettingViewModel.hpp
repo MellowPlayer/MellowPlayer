@@ -4,16 +4,16 @@
 
 namespace MellowPlayer::Presentation
 {
-    class ActiveThemeViewModel;
+    class ThemeViewModel;
 
     class ThemeSettingViewModel : public EnumSettingViewModel
     {
         Q_OBJECT
     public:
-        ThemeSettingViewModel(Domain::Setting& setting, QObject* parent, ActiveThemeViewModel& themeViewModel);
+        ThemeSettingViewModel(Domain::Setting& setting, QObject* parent, ThemeViewModel& themeViewModel);
         QStringList values() const override;
 
     private:
-        ActiveThemeViewModel& _themeViewModel;
+        ThemeViewModel& _themeViewModel;
     };
 }

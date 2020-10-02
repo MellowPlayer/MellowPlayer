@@ -2,6 +2,6 @@
 
 using namespace MellowPlayer::Presentation;
 
-DevToolsWindowViewModel::DevToolsWindowViewModel() : QmlSingleton("DevToolsWindow", this)
+DevToolsWindowViewModel::DevToolsWindowViewModel() : QmlSingleton("DevToolsWindowViewModel", this)
 {
 }

@@ -8,7 +8,6 @@
 #include <MellowPlayer/Presentation/Qml/IQmlApplicationEngine.hpp>
 #include <MellowPlayer/Presentation/Qml/IQmlSingletons.hpp>
 #include <MellowPlayer/Presentation/Qml/MellowPlayerQmlPlugin.hpp>
-#include <MellowPlayer/Presentation/ViewModels/ActiveThemeViewModel.hpp>
 #include <MellowPlayer/Presentation/ViewModels/ApplicationViewModel.hpp>
 #include <MellowPlayer/Presentation/ViewModels/ClipBoardViewModel.hpp>
 #include <MellowPlayer/Presentation/ViewModels/DevToolsWindowViewModel.hpp>
@@ -16,6 +15,7 @@
 #include <MellowPlayer/Presentation/ViewModels/MainWindowViewModel.hpp>
 #include <MellowPlayer/Presentation/ViewModels/RemoteControlViewModel.hpp>
 #include <MellowPlayer/Presentation/ViewModels/Settings/SettingsViewModel.hpp>
+#include <MellowPlayer/Presentation/ViewModels/ThemeViewModel.hpp>
 #include <MellowPlayer/Presentation/ViewModels/UpdaterViewModel.hpp>
 #include <MellowPlayer/Presentation/ViewModels/ZoomViewModel.hpp>
 

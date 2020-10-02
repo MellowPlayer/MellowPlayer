@@ -159,7 +159,7 @@ StackLayout {
                 text: qsTr("Enable listening history")
                 highlighted: true
                 hoverEnabled: true
-                onClicked: App.settings.get(SettingKey.PRIVACY_ENABLE_LISTENING_HISTORY).value = true
+                onClicked: SettingsViewModel.get(SettingKey.PRIVACY_ENABLE_LISTENING_HISTORY).value = true
 
                 Tooltip {
                     text: qsTr("Click to enable listening history")
@@ -183,6 +183,6 @@ StackLayout {
         readonly property int pageDisabled: 3
 
         property bool listIsEmpty: listView.count == 0
-        property SettingViewModel historyEnabledSetting: App.settings.get(SettingKey.PRIVACY_ENABLE_LISTENING_HISTORY)
+        property SettingViewModel historyEnabledSetting: SettingsViewModel.get(SettingKey.PRIVACY_ENABLE_LISTENING_HISTORY)
     }
 }

@@ -112,6 +112,6 @@ Menu {
 
     MenuItem {
         text: qsTr("Open web developer tools")
-        onClicked: DevToolsWindow.show()
+        onClicked: DevToolsWindowViewModel.show()
     }
 }

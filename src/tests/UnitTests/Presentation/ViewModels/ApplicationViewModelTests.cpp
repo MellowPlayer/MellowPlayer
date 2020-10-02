@@ -26,8 +26,7 @@ SCENARIO("ApplicationViewModelTests")
         DependencyPool pool;
         RunningServicesViewModel runningServicesViewModel(pool.getStreamingServicesViewModel());
         MainWindowViewModel mainWindow(pool.getSettingsStore(), runningServicesViewModel);
-        SettingsViewModel settingsViewModel(pool.getSettings(), pool.getThemeViewModel());
-        ApplicationViewModel applicationViewModel(application, qtApplication, mainWindow, settingsViewModel);
+        ApplicationViewModel applicationViewModel(application, qtApplication, mainWindow);
 
         WHEN("Application is created")
         {

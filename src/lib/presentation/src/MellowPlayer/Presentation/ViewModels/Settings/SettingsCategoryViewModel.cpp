@@ -4,7 +4,7 @@
 using namespace MellowPlayer::Domain;
 using namespace MellowPlayer::Presentation;
 
-SettingsCategoryViewModel::SettingsCategoryViewModel(ActiveThemeViewModel& themeViewModel, SettingsCategory* settingsCategory, QObject* parent)
+SettingsCategoryViewModel::SettingsCategoryViewModel(ThemeViewModel& themeViewModel, SettingsCategory* settingsCategory, QObject* parent)
         : QObject(parent), _settingsCategory(settingsCategory), _settingsListModel(new SettingListModel(this, "name")), _settingViewModelFactory(themeViewModel)
 {
     if (settingsCategory != nullptr)
@@ -40,7 +40,7 @@ void SettingsCategoryViewModel::restoreDefaults()
 CustomSettingsCategoryViewModel::CustomSettingsCategoryViewModel(const QString& name,
                                                                  const QString& icon,
                                                                  const QString& qmlComponent,
-                                                                 ActiveThemeViewModel& themeViewModel,
+                                                                 ThemeViewModel& themeViewModel,
                                                                  QObject* parent)
         : SettingsCategoryViewModel(themeViewModel, nullptr, parent), _name(name), _icon(icon), _qmlComponent(qmlComponent)
 {

@@ -41,7 +41,7 @@ ItemDelegate {
             onClicked: colorDialog.open()
 
             Material.background: root.qtObject.value
-            Material.foreground: ActiveTheme.isDark(root.qtObject.value) ? "white" : "#303030"
+            Material.foreground: ThemeViewModel.isDark(root.qtObject.value) ? "white" : "#303030"
 
             Tooltip {
                 text: SettingsTranslator.translateToolTip(root.toolTip)

@@ -15,14 +15,14 @@ Page {
 
     font.pixelSize: width < 800 ? 14 : 16
 
-    Material.accent: ActiveTheme.accent === ActiveTheme.background ? ActiveTheme.foreground : ActiveTheme.accent
+    Material.accent: ThemeViewModel.accent === ThemeViewModel.background ? ThemeViewModel.foreground : ThemeViewModel.accent
 
     header: ToolBar {
         id: toolBar
 
-        Material.primary: ActiveTheme.primary
-        Material.foreground: ActiveTheme.primaryForeground
-        Material.theme: ActiveTheme.isDark(ActiveTheme.primary) ? Material.Dark : Material.Light
+        Material.primary: ThemeViewModel.primary
+        Material.foreground: ThemeViewModel.primaryForeground
+        Material.theme: ThemeViewModel.isDark(ThemeViewModel.primary) ? Material.Dark : Material.Light
 
         RowLayout {
             anchors.fill: parent
@@ -45,7 +45,7 @@ Page {
                 }
 
                 Shortcut {
-                    sequence: App.settings.get(SettingKey.SHORTCUTS_SETTINGS)
+                    sequence: SettingsViewModel.get(SettingKey.SHORTCUTS_SETTINGS)
                     onActivated: settingsPage.closeRequested()
                 }
             }
@@ -63,7 +63,7 @@ Page {
         spacing: 0
 
         Rectangle {
-            color: ActiveTheme.secondary
+            color: ThemeViewModel.secondary
 
             property real minimumWidth: Math.max(Math.min(settingsPage.width / 3, 324), 192)
 
@@ -75,11 +75,11 @@ Page {
                 padding: 0
                 anchors.fill: parent
 
-                Material.background: ActiveTheme.secondary
-                Material.foreground: ActiveTheme.secondaryForeground
+                Material.background: ThemeViewModel.secondary
+                Material.foreground: ThemeViewModel.secondaryForeground
                 Material.elevation: 4
-                Material.accent: ActiveTheme.accent
-                Material.theme: ActiveTheme.isDark(ActiveTheme.secondary) ? Material.Dark : Material.Light
+                Material.accent: ThemeViewModel.accent
+                Material.theme: ThemeViewModel.isDark(ThemeViewModel.secondary) ? Material.Dark : Material.Light
 
                 ColumnLayout {
                     anchors.fill: parent
@@ -94,7 +94,7 @@ Page {
                             property string currentCategory
 
                             highlight: Rectangle {
-                                color: ActiveTheme.isDark(ActiveTheme.secondary) ? "#10ffffff" : "#10000000"
+                                color: ThemeViewModel.isDark(ThemeViewModel.secondary) ? "#10ffffff" : "#10000000"
 
                                 Rectangle {
                                     anchors.top: parent.top
@@ -102,11 +102,11 @@ Page {
                                     anchors.bottom: parent.bottom
 
                                     width: 4
-                                    color: ActiveTheme.accent
+                                    color: ThemeViewModel.accent
                                 }
                             }
                             highlightMoveDuration: 200
-                            model: App.settings.categories
+                            model: SettingsViewModel.categories
                             delegate: ItemDelegate {
                                 id: delegate
 
@@ -168,7 +168,7 @@ Page {
                                     qsTr("Are you sure you want to restore all settings to their default values?"),
                                     (confirmed) => {
                                         if (confirmed) {
-                                            App.settings.restoreDefaults();
+                                            SettingsViewModel.restoreDefaults();
                                         }
                                     }
                                 )
@@ -195,7 +195,7 @@ Page {
             Layout.fillWidth: true
 
             Repeater {
-                model: App.settings.categories
+                model: SettingsViewModel.categories
 
                 Loader {
                     id: settingsPageLoader

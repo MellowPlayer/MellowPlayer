@@ -62,7 +62,7 @@ QString RemoteControlApplicationInfoViewModel::version() const
 }
 
 RemoteControlViewModel::RemoteControlViewModel(IRemoteControl& remoteControl)
-        : QmlSingleton("RemoteControl", this),
+        : QmlSingleton("RemoteControlViewModel", this),
           _remoteControl(remoteControl),
           _remoteControlApplication(remoteControl.application()),
           _appInfo(remoteControl.application())

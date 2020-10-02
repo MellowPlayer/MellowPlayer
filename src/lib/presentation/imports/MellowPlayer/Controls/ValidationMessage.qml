@@ -10,8 +10,8 @@ Pane {
     visible: false
     z: 1
 
-    Material.background: ActiveTheme.primary
-    Material.foreground: ActiveTheme.primaryForeground
+    Material.background: ThemeViewModel.primary
+    Material.foreground: ThemeViewModel.primaryForeground
     Material.elevation: 4
 
     Label {

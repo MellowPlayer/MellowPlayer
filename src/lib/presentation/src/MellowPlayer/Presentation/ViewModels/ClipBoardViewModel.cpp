@@ -4,7 +4,7 @@
 
 using namespace MellowPlayer::Presentation;
 
-ClipBoardViewModel::ClipBoardViewModel() : QmlSingleton("ClipBoard", this)
+ClipBoardViewModel::ClipBoardViewModel() : QmlSingleton("ClipBoardViewModel", this)
 {
 
 }

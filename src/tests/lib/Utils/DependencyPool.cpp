@@ -18,9 +18,9 @@
 #include <MellowPlayer/Infrastructure/Updater/BinTray/LatestBinTrayRelease.hpp>
 
 #include <MellowPlayer/Presentation/Notifications/PlayerNotifications.hpp>
-#include <MellowPlayer/Presentation/ViewModels/ActiveThemeViewModel.hpp>
 #include <MellowPlayer/Presentation/ViewModels/ListeningHistory/ListeningHistoryViewModel.hpp>
 #include <MellowPlayer/Presentation/ViewModels/StreamingServices/StreamingServicesViewModel.hpp>
+#include <MellowPlayer/Presentation/ViewModels/ThemeViewModel.hpp>
 #include <MellowPlayer/Presentation/ViewModels/UpdaterViewModel.hpp>
 
 #include <Fakes/FakeAlbumArtDownloader.hpp>
@@ -136,11 +136,11 @@ IPlayer& DependencyPool::getCurrentPlayer()
     return *_currentPlayer;
 }
 
-ActiveThemeViewModel& DependencyPool::getThemeViewModel()
+ThemeViewModel& DependencyPool::getThemeViewModel()
 {
     static auto themeLoader = FakeThemeLoader();
     if (_themeViewModel == nullptr)
-        _themeViewModel = make_unique<ActiveThemeViewModel>(getStreamingServices(), getSettings(), themeLoader);
+        _themeViewModel = make_unique<ThemeViewModel>(getStreamingServices(), getSettings(), themeLoader);
     return *_themeViewModel;
 }
 

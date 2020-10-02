@@ -8,7 +8,7 @@ import MellowPlayer 3.0
 Pane {
     id: root
 
-    property string text: ClipBoard.copiedText
+    property string text: ClipBoardViewModel.copiedText
 
     anchors.right: parent.right
     anchors.bottom: parent.bottom
@@ -26,8 +26,8 @@ Pane {
             state = "hidden"
     }
 
-    Material.background: ActiveTheme.primary
-    Material.foreground: ActiveTheme.primaryForeground
+    Material.background: ThemeViewModel.primary
+    Material.foreground: ThemeViewModel.primaryForeground
     Material.elevation: 4
 
     Component.onCompleted: { background.opacity = 0.98 }

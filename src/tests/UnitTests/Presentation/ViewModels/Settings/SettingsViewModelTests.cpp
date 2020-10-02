@@ -17,7 +17,7 @@ TEST_CASE("SettingsViewModelTests")
 {
     DependencyPool pool;
     Settings& settings = pool.getSettings();
-    ActiveThemeViewModel& themeViewModel = pool.getThemeViewModel();
+    ThemeViewModel& themeViewModel = pool.getThemeViewModel();
     SettingsViewModel settingsViewModel(settings, themeViewModel);
 
     SECTION("get")

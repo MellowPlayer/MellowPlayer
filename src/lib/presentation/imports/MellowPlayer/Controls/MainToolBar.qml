@@ -10,13 +10,13 @@ import "../Dialogs.js" as Dialogs
 ToolBar {
     id: root
 
-    property bool atLeastOneServiceRunning: MainWindow.runningServices.model.count > 0
+    property bool atLeastOneServiceRunning: MainWindowViewModel.runningServices.model.count > 0
 
     spacing: 0
 
-    Material.primary: ActiveTheme.primary
-    Material.foreground: ActiveTheme.primaryForeground
-    Material.theme: ActiveTheme.isDark(ActiveTheme.primary) ? Material.Dark : Material.Light
+    Material.primary: ThemeViewModel.primary
+    Material.foreground: ThemeViewModel.primaryForeground
+    Material.theme: ThemeViewModel.isDark(ThemeViewModel.primary) ? Material.Dark : Material.Light
 
     RowLayout {
         anchors.fill: parent
@@ -49,7 +49,7 @@ ToolBar {
                     action: Actions.toggleNotifications
                     iconChar: checked ? MaterialIcons.icon_notifications_active : MaterialIcons.icon_notifications_off
                     tooltip: checked ? qsTr("Disable notifications") : qsTr("Enable notifications")
-                    Material.accent: ActiveTheme.accent === ActiveTheme.primary ? ActiveTheme.primaryForeground : ActiveTheme.accent
+                    Material.accent: ThemeViewModel.accent === ThemeViewModel.primary ? ThemeViewModel.primaryForeground : ThemeViewModel.accent
                 }
 
                 PlayerToolBar { Layout.fillWidth: true; Layout.fillHeight: true }

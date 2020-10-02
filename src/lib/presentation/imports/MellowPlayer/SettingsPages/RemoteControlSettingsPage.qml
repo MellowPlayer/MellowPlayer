@@ -13,7 +13,7 @@ Item {
 
     clip: true
 
-    property RemoteControlErrorViewModel error: RemoteControl.error
+    property RemoteControlErrorViewModel error: RemoteControlViewModel.error
 
     onErrorChanged: {
         if (error) {
@@ -21,14 +21,14 @@ Item {
         }
     }
 
-    Material.theme: ActiveTheme.isDark(ActiveTheme.primary) ? Material.Dark : Material.Light
+    Material.theme: ThemeViewModel.isDark(ThemeViewModel.primary) ? Material.Dark : Material.Light
 
     StackLayout {
         anchors.fill: parent
-        currentIndex: RemoteControl.currentStateIndex
+        currentIndex: RemoteControlViewModel.currentStateIndex
 
         Repeater {
-            model: RemoteControl.states
+            model: RemoteControlViewModel.states
 
             Loader {
                 id: loader

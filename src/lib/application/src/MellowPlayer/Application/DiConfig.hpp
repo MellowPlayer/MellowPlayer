@@ -96,13 +96,13 @@
 #include <MellowPlayer/Presentation/Qml/IQmlSingletons.hpp>
 #include <MellowPlayer/Presentation/Qml/QmlApplicationEngine.hpp>
 #include <MellowPlayer/Presentation/Qml/QmlSingletons.hpp>
-#include <MellowPlayer/Presentation/ViewModels/ActiveThemeViewModel.hpp>
 #include <MellowPlayer/Presentation/ViewModels/ApplicationViewModel.hpp>
 #include <MellowPlayer/Presentation/ViewModels/ListeningHistory/ListeningHistoryViewModel.hpp>
 #include <MellowPlayer/Presentation/ViewModels/MainWindowViewModel.hpp>
 #include <MellowPlayer/Presentation/ViewModels/Settings/SettingsViewModel.hpp>
 #include <MellowPlayer/Presentation/ViewModels/StreamingServices/StreamingServiceViewModelFactory.hpp>
 #include <MellowPlayer/Presentation/ViewModels/StreamingServices/StreamingServicesViewModel.hpp>
+#include <MellowPlayer/Presentation/ViewModels/ThemeViewModel.hpp>
 #include <MellowPlayer/Presentation/ViewModels/UpdaterViewModel.hpp>
 #include <QGuiApplication>
 #include <QQmlApplicationEngine>
@@ -176,7 +176,8 @@ auto defaultInjector = [](di::extension::detail::scoped& scope, QApplication& qA
         di::make_injector(di::bind<INotificationPresenter>().to<SystemTrayIconPresenter>()).in(di::singleton),
 #endif
         di::bind<IQmlSingleton* []>().to<
-                ActiveThemeViewModel,
+                SettingsViewModel,
+                ThemeViewModel,
                 ApplicationViewModel,
                 ClipBoardViewModel,
                 DevToolsWindowViewModel,

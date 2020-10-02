@@ -15,5 +15,5 @@ RemoteControlState {
     footerVisible: false
     buttonText: qsTr("Enable Remote Control")
 
-    onButtonClicked: RemoteControl.activate()
+    onButtonClicked: RemoteControlViewModel.activate()
 }

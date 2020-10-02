@@ -170,39 +170,12 @@ Module {
         Signal { name: "changed" }
     }
     Component {
-        name: "MellowPlayer::Presentation::ActiveThemeViewModel"
-        prototype: "MellowPlayer::Presentation::QmlSingleton"
-        exports: ["ActiveTheme 3.0"]
-        isCreatable: false
-        exportMetaObjectRevisions: [0]
-        Property { name: "dark"; type: "bool"; isReadonly: true }
-        Property { name: "accent"; type: "string"; isReadonly: true }
-        Property { name: "background"; type: "string"; isReadonly: true }
-        Property { name: "foreground"; type: "string"; isReadonly: true }
-        Property { name: "primary"; type: "string"; isReadonly: true }
-        Property { name: "primaryForeground"; type: "string"; isReadonly: true }
-        Property { name: "secondary"; type: "string"; isReadonly: true }
-        Property { name: "secondaryForeground"; type: "string"; isReadonly: true }
-        Signal { name: "isDarkChanged" }
-        Method {
-            name: "colorScaleFactor"
-            type: "double"
-            Parameter { name: "color"; type: "string" }
-        }
-        Method {
-            name: "isDark"
-            type: "bool"
-            Parameter { name: "color"; type: "string" }
-        }
-    }
-    Component {
         name: "MellowPlayer::Presentation::ApplicationViewModel"
         prototype: "MellowPlayer::Presentation::QmlSingleton"
-        exports: ["App 3.0"]
+        exports: ["ApplicationViewModel 3.0"]
         isCreatable: false
         exportMetaObjectRevisions: [0]
         Property { name: "buildInfo"; type: "string"; isReadonly: true }
-        Property { name: "settings"; type: "SettingsViewModel"; isReadonly: true; isPointer: true }
         Method { name: "quit" }
         Method { name: "restart" }
         Method { name: "showLogs" }
@@ -212,7 +185,7 @@ Module {
     Component {
         name: "MellowPlayer::Presentation::ClipBoardViewModel"
         prototype: "MellowPlayer::Presentation::QmlSingleton"
-        exports: ["ClipBoard 3.0"]
+        exports: ["ClipBoardViewModel 3.0"]
         isCreatable: false
         exportMetaObjectRevisions: [0]
         Property { name: "copiedText"; type: "string"; isReadonly: true }
@@ -232,7 +205,7 @@ Module {
     Component {
         name: "MellowPlayer::Presentation::DevToolsWindowViewModel"
         prototype: "MellowPlayer::Presentation::QmlSingleton"
-        exports: ["DevToolsWindow 3.0"]
+        exports: ["DevToolsWindowViewModel 3.0"]
         isCreatable: false
         exportMetaObjectRevisions: [0]
         Signal { name: "show" }
@@ -378,7 +351,7 @@ Module {
     Component {
         name: "MellowPlayer::Presentation::ListeningHistoryViewModel"
         prototype: "MellowPlayer::Presentation::QmlSingleton"
-        exports: ["ListeningHistory 3.0"]
+        exports: ["ListeningHistoryViewModel 3.0"]
         isCreatable: false
         exportMetaObjectRevisions: [0]
         Property { name: "model"; type: "QAbstractItemModel"; isReadonly: true; isPointer: true }
@@ -403,7 +376,7 @@ Module {
     Component {
         name: "MellowPlayer::Presentation::MainWindowViewModel"
         prototype: "MellowPlayer::Presentation::IMainWindow"
-        exports: ["MainWindow 3.0"]
+        exports: ["MainWindowViewModel 3.0"]
         isCreatable: false
         exportMetaObjectRevisions: [0]
         Property { name: "visible"; type: "bool" }
@@ -468,7 +441,7 @@ Module {
     Component {
         name: "MellowPlayer::Presentation::RemoteControlViewModel"
         prototype: "MellowPlayer::Presentation::QmlSingleton"
-        exports: ["RemoteControl 3.0"]
+        exports: ["RemoteControlViewModel 3.0"]
         isCreatable: false
         exportMetaObjectRevisions: [0]
         Property { name: "states"; type: "QAbstractListModel"; isReadonly: true; isPointer: true }
@@ -543,7 +516,7 @@ Module {
     }
     Component {
         name: "MellowPlayer::Presentation::SettingsViewModel"
-        prototype: "QObject"
+        prototype: "MellowPlayer::Presentation::QmlSingleton"
         exports: ["SettingsViewModel 3.0"]
         isCreatable: false
         exportMetaObjectRevisions: [0]
@@ -593,7 +566,7 @@ Module {
     Component {
         name: "MellowPlayer::Presentation::StreamingServicesViewModel"
         prototype: "MellowPlayer::Presentation::IStreamingServicesViewModel"
-        exports: ["StreamingServices 3.0"]
+        exports: ["StreamingServicesViewModel 3.0"]
         isCreatable: false
         exportMetaObjectRevisions: [0]
         Signal {
@@ -618,6 +591,32 @@ Module {
             Parameter { name: "appImagePlatform"; type: "bool" }
             Parameter { name: "osxPlatform"; type: "bool" }
             Parameter { name: "windowsPlatform"; type: "bool" }
+        }
+    }
+    Component {
+        name: "MellowPlayer::Presentation::ThemeViewModel"
+        prototype: "MellowPlayer::Presentation::QmlSingleton"
+        exports: ["ThemeViewModel 3.0"]
+        isCreatable: false
+        exportMetaObjectRevisions: [0]
+        Property { name: "dark"; type: "bool"; isReadonly: true }
+        Property { name: "accent"; type: "string"; isReadonly: true }
+        Property { name: "background"; type: "string"; isReadonly: true }
+        Property { name: "foreground"; type: "string"; isReadonly: true }
+        Property { name: "primary"; type: "string"; isReadonly: true }
+        Property { name: "primaryForeground"; type: "string"; isReadonly: true }
+        Property { name: "secondary"; type: "string"; isReadonly: true }
+        Property { name: "secondaryForeground"; type: "string"; isReadonly: true }
+        Signal { name: "isDarkChanged" }
+        Method {
+            name: "colorScaleFactor"
+            type: "double"
+            Parameter { name: "color"; type: "string" }
+        }
+        Method {
+            name: "isDark"
+            type: "bool"
+            Parameter { name: "color"; type: "string" }
         }
     }
     Component {
@@ -648,7 +647,7 @@ Module {
     Component {
         name: "MellowPlayer::Presentation::UpdaterViewModel"
         prototype: "MellowPlayer::Presentation::QmlSingleton"
-        exports: ["Updater 3.0"]
+        exports: ["UpdaterViewModel 3.0"]
         isCreatable: false
         exportMetaObjectRevisions: [0]
         Property { name: "url"; type: "string"; isReadonly: true }

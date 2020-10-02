@@ -19,7 +19,7 @@ Item {
 
     function activate() {
         root.activated()
-        StreamingServices.currentService = root.service
+        StreamingServicesViewModel.currentService = root.service
     }
 
     signal activated()
@@ -126,7 +126,7 @@ Item {
             tooltip: qsTr("Stop")
             focusPolicy: Qt.NoFocus
 
-            onClicked: MainWindow.runningServices.remove(root.service)
+            onClicked: MainWindowViewModel.runningServices.remove(root.service)
 
             Material.foreground: Material.Red
         }
@@ -196,7 +196,7 @@ Item {
         Rectangle {
             anchors.fill: parent
             color: "transparent"
-            border.color:root.service === StreamingServices.currentService ? Material.accent : "transparent"
+            border.color:root.service === StreamingServicesViewModel.currentService ? Material.accent : "transparent"
             border.width: 3
             radius: 6
         }

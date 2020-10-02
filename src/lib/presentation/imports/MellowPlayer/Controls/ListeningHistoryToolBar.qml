@@ -13,10 +13,10 @@ ToolBar {
 
     signal quitRequested()
 
-    Material.primary: ActiveTheme.primary
-    Material.foreground: ActiveTheme.primaryForeground
+    Material.primary: ThemeViewModel.primary
+    Material.foreground: ThemeViewModel.primaryForeground
     Material.elevation: 4
-    Material.theme: ActiveTheme.isDark(ActiveTheme.primary) ? Material.Dark : Material.Light
+    Material.theme: ThemeViewModel.isDark(ThemeViewModel.primary) ? Material.Dark : Material.Light
 
     RowLayout {
         anchors.fill: parent
@@ -32,7 +32,7 @@ ToolBar {
             hoverEnabled: true
             enabled: root.enabled
 
-            Material.accent: ActiveTheme.accent === ActiveTheme.primary ? ActiveTheme.primaryForeground : ActiveTheme.accent
+            Material.accent: ThemeViewModel.accent === ThemeViewModel.primary ? ThemeViewModel.primaryForeground : ThemeViewModel.accent
 
             Tooltip {
                 text: qsTr("Search/filter")

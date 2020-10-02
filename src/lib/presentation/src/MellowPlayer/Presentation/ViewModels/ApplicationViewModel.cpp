@@ -20,13 +20,11 @@ using namespace MellowPlayer::Infrastructure;
 
 ApplicationViewModel::ApplicationViewModel(IApplication& application,
                                            IQtApplication& qtApplication,
-                                           MainWindowViewModel& mainWindow,
-                                           SettingsViewModel& settingsViewModel)
-        : QmlSingleton("App", this),
+                                           MainWindowViewModel& mainWindow)
+        : QmlSingleton("ApplicationViewModel", this),
           _application(application),
           _qtApplication(qtApplication),
           _mainWindow(mainWindow),
-          _settingsViewModel(settingsViewModel),
           _restartRequested(false)
 {
     _qtApplication.setWindowIcon(IconProvider::windowIcon());
@@ -83,9 +81,4 @@ void ApplicationViewModel::clearCookies()
     QDir storageDir(profile.persistentStoragePath());
     qDebug() << "removing persistent storage directory: " << storageDir;
     storageDir.removeRecursively();
-}
-
-SettingsViewModel* ApplicationViewModel::settings()
-{
-    return &_settingsViewModel;
 }

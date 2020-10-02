@@ -18,7 +18,7 @@ Page {
     required property StreamingServiceViewModel service
 
     property bool hasProprietaryCodecs: true
-    property var userAgentSetting: App.settings.get(SettingKey.PRIVACY_USER_AGENT)
+    property var userAgentSetting: SettingsViewModel.get(SettingKey.PRIVACY_USER_AGENT)
     property alias url: webView.url
 
     function updateImage() {
@@ -37,15 +37,15 @@ Page {
     }
 
     function zoomIn() {
-        MainWindow.zoom.increment();
+        MainWindowViewModel.zoom.increment();
     }
 
     function zoomOut() {
-        MainWindow.zoom.decrement()
+        MainWindowViewModel.zoom.decrement()
     }
 
     function resetZoom() {
-        MainWindow.zoom.reset();
+        MainWindowViewModel.zoom.reset();
     }
     
     function goBack() {
@@ -73,7 +73,7 @@ Page {
     }
 
     Shortcut {
-        enabled: MainWindow.fullScreen
+        enabled: MainWindowViewModel.fullScreen
         sequence: "Escape"
 
         onActivated: root.exitFullScreen()
@@ -107,23 +107,23 @@ Page {
             javascriptCanPaste: true
             errorPageEnabled: true
             autoLoadIconsForPage: true
-            showScrollBars: App.settings.get(SettingKey.APPEARANCE_SHOW_SCROLLBARS).value
-            playbackRequiresUserGesture: App.settings.get(SettingKey.MAIN_PLAYBACK_REQUIRES_USER_GESTURE).value
+            showScrollBars: SettingsViewModel.get(SettingKey.APPEARANCE_SHOW_SCROLLBARS).value
+            playbackRequiresUserGesture: SettingsViewModel.get(SettingKey.MAIN_PLAYBACK_REQUIRES_USER_GESTURE).value
 
             onShowScrollBarsChanged: reload()
             onPlaybackRequiresUserGestureChanged: reload()
         }
         userScripts: allUserScripts
-        zoomFactor: MainWindow.zoom.value
+        zoomFactor: MainWindowViewModel.zoom.value
         webChannel: webChannel
-        audioMuted: StreamingServices.currentService !== root.service
+        audioMuted: StreamingServicesViewModel.currentService !== root.service
 
         onContextMenuRequested: (request) => {
             request.accepted = true;
             contextMenu.x = request.x;
             contextMenu.y = request.y;
             contextMenu.canCopy = request.selectedText !== "";
-            contextMenu.canPaste = request.isContentEditable && ClipBoard.canPaste();
+            contextMenu.canPaste = request.isContentEditable && ClipBoardViewModel.canPaste();
             contextMenu.canUnselect = request.selectedText !== "";
             contextMenu.canGoBack = webView.canGoBack;
             contextMenu.canGoForward = webView.canGoForward;
@@ -174,7 +174,7 @@ Page {
             webView.loaded = WebViewHelpers.isLoaded(loadRequest);
         }
         onFullScreenRequested: (request) => {
-            MainWindow.fullScreen = request.toggleOn
+            MainWindowViewModel.fullScreen = request.toggleOn
             request.accept()
 
         }

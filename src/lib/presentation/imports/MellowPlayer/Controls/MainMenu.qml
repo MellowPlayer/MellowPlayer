@@ -46,9 +46,9 @@ Menu {
                 from: 50
                 to: 300
                 stepSize: 25
-                value: MainWindow.zoom.value * 100
+                value: MainWindowViewModel.zoom.value * 100
 
-                onValueChanged: MainWindow.zoom.value = value / 100.0
+                onValueChanged: MainWindowViewModel.zoom.value = value / 100.0
 
                 textFromValue:  function(value, locale) {
                     return Number(value).toLocaleString(locale, 'f', 0) + "%";
@@ -66,7 +66,7 @@ Menu {
                 implicitWidth: 48
                 flat: true
 
-                onClicked: MainWindow.zoom.reset()
+                onClicked: MainWindowViewModel.zoom.reset()
 
                 Layout.rightMargin: 16
             }
@@ -89,10 +89,10 @@ Menu {
 
         ProgressBar {
             anchors{ bottom: parent.bottom; horizontalCenter: parent.left; right: parent.right }
-            indeterminate: Updater.progress === -1
+            indeterminate: UpdaterViewModel.progress === -1
             from: 0; to: 100
-            value: Updater.progress
-            visible: Updater.busy
+            value: UpdaterViewModel.progress
+            visible: UpdaterViewModel.busy
         }
     }
 

@@ -52,7 +52,7 @@ MessageBoxDialog 3.0 Dialogs/MessageBoxDialog.qml
 Prompt 3.0 Dialogs/Prompt.qml
 Reload 3.0 Dialogs/Reload.qml
 StreamingServiceSettingsDialog 3.0 Dialogs/StreamingServiceSettingsDialog.qml
-MainAppWindow 3.0 MainAppWindow.qml
+MainWindow 3.0 MainWindow.qml
 CreatingPage 3.0 NewPluginWizard/CreatingPage.qml
 DetailsPage 3.0 NewPluginWizard/DetailsPage.qml
 FinishPage 3.0 NewPluginWizard/FinishPage.qml

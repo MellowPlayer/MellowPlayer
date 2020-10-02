@@ -24,7 +24,7 @@ Item {
             placeholderText: qsTr("Search within available services")
             selectByMouse: true
 
-            onTextChanged: StreamingServices.filteredServices.setSearchText(text)
+            onTextChanged: StreamingServicesViewModel.filteredServices.setSearchText(text)
 
             onVisibleChanged: {
                 text= "";
@@ -66,8 +66,8 @@ Item {
                         id: visualModel
 
                         Component.onCompleted: {
-                            StreamingServices.filteredServices.update()
-                            model = StreamingServices.filteredServices
+                            StreamingServicesViewModel.filteredServices.update()
+                            model = StreamingServicesViewModel.filteredServices
                         }
 
                         delegate: Item {

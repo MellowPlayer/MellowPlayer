@@ -35,7 +35,7 @@ Frame {
             anchors.bottom: parent.bottom
             anchors.left: parent.left
             anchors.right: parent.right
-            color: ActiveTheme.isDark(ActiveTheme.background) ? Qt.lighter(ActiveTheme.background) : Qt.darker(ActiveTheme.background, 1.1)
+            color: ThemeViewModel.isDark(ThemeViewModel.background) ? Qt.lighter(ThemeViewModel.background) : Qt.darker(ThemeViewModel.background, 1.1)
             height: 1
             visible: root.expanded
         }
@@ -155,7 +155,7 @@ Frame {
                         qsTr('Are you sure you want to remove that song from the history?'),
                         (confirmed) => {
                             if (confirmed)
-                                ListeningHistory.removeById(root.entryId)
+                                ListeningHistoryViewModel.removeById(root.entryId)
                         }
                     )
                 }
@@ -168,7 +168,7 @@ Frame {
                 hoverEnabled: true
                 text: MaterialIcons.icon_content_copy
                 font { family: MaterialIcons.family; pixelSize: 16 }
-                onClicked: ClipBoard.setText(root.title)
+                onClicked: ClipBoardViewModel.setText(root.title)
 
                 Layout.fillHeight: true
             }

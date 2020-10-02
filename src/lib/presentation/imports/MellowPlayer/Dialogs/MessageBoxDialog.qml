@@ -22,7 +22,7 @@ Dialog {
     onAccepted: dialogResult = dialogAccepted
     onRejected: dialogResult = dialogRejected
 
-    Material.accent: ActiveTheme.accent === ActiveTheme.background ? ActiveTheme.foreground : ActiveTheme.accent
+    Material.accent: ThemeViewModel.accent === ThemeViewModel.background ? ThemeViewModel.foreground : ThemeViewModel.accent
 
     Label {
         text: root.message

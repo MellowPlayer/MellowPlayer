@@ -109,7 +109,7 @@ namespace MellowPlayer::Presentation
                                   Domain::IUserScriptFactory& userScriptFactory,
                                   Domain::Players& players,
                                   Infrastructure::INetworkProxies& networkProxies,
-                                  ActiveThemeViewModel& themeViewModel,
+                                  ThemeViewModel& themeViewModel,
                                   std::unique_ptr<Infrastructure::IHttpClient> httpClient,
                                   QObject* parent = nullptr);
 

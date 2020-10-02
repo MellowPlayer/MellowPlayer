@@ -4,11 +4,11 @@ import QtWebEngine 1.10
 
 import MellowPlayer 3.0
 
-MainAppWindow {
+MainWindow {
     id: root
 
     Connections {
-        target: DevToolsWindow
+        target: DevToolsWindowViewModel
 
         function onShow() {
             console.warn("Show dev tools window")
