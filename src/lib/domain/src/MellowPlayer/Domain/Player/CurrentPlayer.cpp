@@ -136,9 +136,7 @@ double CurrentPlayer::volume() const
 
 void CurrentPlayer::onCurrentServiceChanged(StreamingService* streamingService)
 {
-    if (streamingService == nullptr)
-        return;
-    auto player = _players.get(streamingService->name());
+    auto player = streamingService == nullptr ? nullptr : _players.get(streamingService->name());
     if (player != _currentPlayer)
     {
         if (_currentPlayer != nullptr)
@@ -159,21 +157,27 @@ void CurrentPlayer::onCurrentServiceChanged(StreamingService* streamingService)
 
         _currentPlayer = player;
 
-        connect(_currentPlayer.get(), &Player::currentSongChanged, this, &CurrentPlayer::activeChanged);
-        connect(_currentPlayer.get(), &Player::currentSongChanged, this, &CurrentPlayer::currentSongChanged);
-        connect(_currentPlayer.get(), &Player::positionChanged, this, &CurrentPlayer::positionChanged);
-        connect(_currentPlayer.get(), &Player::playbackStatusChanged, this, &CurrentPlayer::playbackStatusChanged);
-        connect(_currentPlayer.get(), &Player::canSeekChanged, this, &CurrentPlayer::canSeekChanged);
-        connect(_currentPlayer.get(), &Player::canGoNextChanged, this, &CurrentPlayer::canGoNextChanged);
-        connect(_currentPlayer.get(), &Player::canGoPreviousChanged, this, &CurrentPlayer::canGoPreviousChanged);
-        connect(_currentPlayer.get(), &Player::canAddToFavoritesChanged, this, &CurrentPlayer::canAddToFavoritesChanged);
-        connect(_currentPlayer.get(), &Player::volumeChanged, this, &CurrentPlayer::volumeChanged);
-        connect(_currentPlayer.get(), &Player::isPlayingChanged, this, &CurrentPlayer::isPlayingChanged);
-        connect(_currentPlayer.get(), &Player::isStoppedChanged, this, &CurrentPlayer::isStoppedChanged);
-        _currentPlayer->resume();
-
+        if (_currentPlayer)
+        {
+            connect(_currentPlayer.get(), &Player::currentSongChanged, this, &CurrentPlayer::activeChanged);
+            connect(_currentPlayer.get(), &Player::currentSongChanged, this, &CurrentPlayer::currentSongChanged);
+            connect(_currentPlayer.get(), &Player::positionChanged, this, &CurrentPlayer::positionChanged);
+            connect(_currentPlayer.get(), &Player::playbackStatusChanged, this, &CurrentPlayer::playbackStatusChanged);
+            connect(_currentPlayer.get(), &Player::canSeekChanged, this, &CurrentPlayer::canSeekChanged);
+            connect(_currentPlayer.get(), &Player::canGoNextChanged, this, &CurrentPlayer::canGoNextChanged);
+            connect(_currentPlayer.get(), &Player::canGoPreviousChanged, this, &CurrentPlayer::canGoPreviousChanged);
+            connect(_currentPlayer.get(), &Player::canAddToFavoritesChanged, this, &CurrentPlayer::canAddToFavoritesChanged);
+            connect(_currentPlayer.get(), &Player::volumeChanged, this, &CurrentPlayer::volumeChanged);
+            connect(_currentPlayer.get(), &Player::isPlayingChanged, this, &CurrentPlayer::isPlayingChanged);
+            connect(_currentPlayer.get(), &Player::isStoppedChanged, this, &CurrentPlayer::isStoppedChanged);
+            _currentPlayer->resume();
+            emit currentSongChanged(_currentPlayer->currentSong());
+        }
+        else
+        {
+            emit currentSongChanged(nullptr);
+        }
         emit activeChanged();
-        emit currentSongChanged(_currentPlayer->currentSong());
         emit positionChanged();
         emit playbackStatusChanged();
         emit canSeekChanged();
