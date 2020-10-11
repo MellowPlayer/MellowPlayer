@@ -6,49 +6,34 @@ import QtGraphicalEffects 1.0
 
 import MellowPlayer 3.0
 
-Item {
-    id: root
+RowLayout {
+    id: layout
 
-    clip: true
-    implicitWidth: layout.implicitWidth
-    visible: MainWindowViewModel.runningServices.model.count > 0 && SettingsViewModel.get(SettingKey.APPEARANCE_WEBPAGE_CONTROLS_VISIBLE).value
+    spacing: 0
 
-    property bool clipped: x < 0
+    ToolSeparator { }
 
+    IconToolButton {
+        action: Actions.goBack
+        iconChar: MaterialIcons.icon_chevron_left
+        tooltip: qsTr("Go back")
+    }
 
-    Material.background: "transparent"
+    IconToolButton {
+        action: Actions.goForward
+        iconChar: MaterialIcons.icon_chevron_right
+        tooltip: qsTr("Go forward")
+    }
 
-    RowLayout {
-        id: layout
+    IconToolButton {
+        action: Actions.reload
+        iconChar: MaterialIcons.icon_refresh
+        tooltip: qsTr("Reload page")
+    }
 
-        anchors.fill: parent
-        spacing: 0
-        visible: !root.clipped
-
-        ToolSeparator { }
-
-        IconToolButton {
-            action: Actions.goBack
-            iconChar: MaterialIcons.icon_chevron_left
-            tooltip: qsTr("Go back")
-        }
-
-        IconToolButton {
-            action: Actions.goForward
-            iconChar: MaterialIcons.icon_chevron_right
-            tooltip: qsTr("Go forward")
-        }
-
-        IconToolButton {
-            action: Actions.reload
-            iconChar: MaterialIcons.icon_refresh
-            tooltip: qsTr("Reload page")
-        }
-
-        IconToolButton {
-            action: Actions.goHome
-            iconChar: MaterialIcons.icon_home
-            tooltip: qsTr("Go to home page")
-        }
+    IconToolButton {
+        action: Actions.goHome
+        iconChar: MaterialIcons.icon_home
+        tooltip: qsTr("Go to home page")
     }
 }

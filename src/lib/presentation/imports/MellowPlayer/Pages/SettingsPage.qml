@@ -88,10 +88,13 @@ Page {
                         Layout.fillWidth: true
                         Layout.fillHeight: true
 
+                        ScrollBar.horizontal.policy: "AlwaysOff"
+
                         ListView {
                             id: settingsPageList
 
                             property string currentCategory
+                            anchors.fill: parent
 
                             highlight: Rectangle {
                                 color: ThemeViewModel.isDark(ThemeViewModel.secondary) ? "#10ffffff" : "#10000000"

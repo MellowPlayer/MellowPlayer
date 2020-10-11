@@ -14,6 +14,8 @@ ScrollView {
     contentHeight: listView.contentHeight
     contentWidth: listView.contentWidth
 
+    ScrollBar.horizontal.policy: "AlwaysOff"
+
     ListView {
         id: listView
 

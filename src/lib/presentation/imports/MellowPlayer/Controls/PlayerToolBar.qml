@@ -11,17 +11,13 @@ Item {
 
     clip: true
 
-    property bool clipped: width < layout.implicitWidth
-
     RowLayout {
         id: layout
 
         anchors.fill: parent
-        spacing: root.width / 8
         layoutDirection: Qt.RightToLeft
-        visible: MainWindowViewModel.runningServices.model.count > 0 && CurrentPlayer.active &&
-                 SettingsViewModel.get(SettingKey.APPEARANCE_PLAYER_CONTROLS_VISIBLE).value &&
-                 !root.clipped
+//        visible: MainWindowViewModel.runningServices.model.count > 0 && CurrentPlayer.active &&
+//                 SettingsViewModel.get(SettingKey.APPEARANCE_PLAYER_CONTROLS_VISIBLE).value &&
 
         RowLayout {
             spacing: 0
@@ -53,12 +49,13 @@ Item {
         Item {
             Layout.fillWidth: true
             Layout.fillHeight: true
-            Layout.minimumWidth: 96
+            Layout.minimumWidth: 128
 
             Label {
                 text: getText()
                 elide: "ElideRight"
                 horizontalAlignment: Qt.AlignHCenter
+                visible: width > 64
 
                 anchors.left: parent.left
                 anchors.right: parent.right
@@ -80,10 +77,7 @@ Item {
                 anchors.left: parent.left
                 anchors.right: parent.right
                 y: root.height / 4
-
-                visible: {
-                    CurrentPlayer.canSeek && CurrentPlayer.currentSong.duration > 0
-                }
+                visible: slider.width > 32 && ( CurrentPlayer.canSeek && CurrentPlayer.currentSong.duration > 0 )
 
                 Label {
                     text: {
@@ -142,6 +136,8 @@ Item {
         RowLayout {
             spacing: 0
 
+            WebViewToolBar { }
+
             ToolSeparator { }
 
             IconToolButton {
@@ -150,7 +146,7 @@ Item {
                 tooltip: CurrentPlayer.currentSong.isFavorite ? qsTr("Remove current song from your favorites") : qsTr("Add current song to your favorites")
                 visible: SettingsViewModel.get(SettingKey.APPEARANCE_PLAYER_CONTROLS_VISIBLE).value
 
-                Material.foreground: CurrentPlayer.currentSong.isFavorite ? ThemeViewModel.accent : "white"
+                Material.foreground: CurrentPlayer.currentSong.isFavorite ? ThemeViewModel.accent : ThemeViewModel.foreground
             }
         }
     }

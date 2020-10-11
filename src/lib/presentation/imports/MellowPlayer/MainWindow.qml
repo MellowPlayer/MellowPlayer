@@ -10,8 +10,7 @@ ApplicationWindow {
     id: root
 
 
-    minimumWidth: 450
-    minimumHeight: 450
+    minimumWidth: 560; minimumHeight: 450
     width: SettingsViewModel.get(SettingKey.PRIVATE_WINDOW_WIDTH).value;
     height: SettingsViewModel.get(SettingKey.PRIVATE_WINDOW_HEIGHT).value;
     title: {
@@ -24,7 +23,7 @@ ApplicationWindow {
     }
     visible: MainWindowViewModel.visible
 
-    onClosing: d.handleCloseEvent(close);
+    onClosing: d.handleCloseEvent(close)
 
     Component.onCompleted: {
         Dialogs.initialize(root);
@@ -207,7 +206,7 @@ ApplicationWindow {
         }
 
         function restoreWindow() {
-            root.visible = true;
+            MainWindowViewModel.visible = true;
             root.raise();
             root.requestActivate();
         }
@@ -235,6 +234,7 @@ ApplicationWindow {
                     );
                 }
                 else {
+                    console.error("Hiding window", MainWindowViewModel.visible)
                     MainWindowViewModel.visible = false;
                 }
                 close.accepted = false;

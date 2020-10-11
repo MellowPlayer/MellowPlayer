@@ -224,6 +224,8 @@ Dialog {
 
                                 anchors.fill: parent
 
+                                ScrollBar.horizontal.policy: "AlwaysOff"
+
                                 ListView {
                                     id: listView
 

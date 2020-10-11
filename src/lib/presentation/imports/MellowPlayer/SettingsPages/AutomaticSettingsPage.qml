@@ -14,11 +14,14 @@ ColumnLayout {
     required property string categoryName
 
     ScrollView {
+        id: scrollView
+
         contentHeight: listView.contentHeight
         clip: true
 
         Layout.fillHeight: true
         Layout.fillWidth: true
+        ScrollBar.horizontal.policy: "AlwaysOff"
 
         ListView {
             id: listView

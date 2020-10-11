@@ -111,17 +111,14 @@ Popup {
                     }
                 }
 
-                Item {
-                    Layout.fillHeight: true
-                }
-
                 Label {
                     id: labelBuildInfo
                     font.italic: true
                     text: ApplicationViewModel.buildInfo
+                    wrapMode: "Wrap"
+                    horizontalAlignment: Qt.AlignHCenter
 
-                    Layout.alignment: Qt.AlignCenter
-                    Layout.bottomMargin: 12
+                    Layout.fillWidth: true
                 }
             }
 

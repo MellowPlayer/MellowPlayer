@@ -53,7 +53,7 @@ ToolBar {
                 }
 
                 PlayerToolBar { Layout.fillWidth: true; Layout.fillHeight: true }
-                WebViewToolBar { Layout.fillHeight: true }
+//                WebViewToolBar { Layout.fillHeight: true }
             }
         }
 
