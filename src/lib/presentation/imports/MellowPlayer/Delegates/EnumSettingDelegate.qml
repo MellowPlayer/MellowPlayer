@@ -1,6 +1,7 @@
 import QtQuick 2.15
 import QtQuick.Layouts 1.15
 import QtQuick.Controls 2.15
+import QtQuick.Controls.Material 2.15
 
 import MellowPlayer 3.0
 import "../SettingsTranslator.js" as SettingsTranslator
@@ -44,6 +45,8 @@ ItemDelegate {
             model: root.values
             currentIndex: root.enumSetting.indexOf(root.qtObject.value)
             onCurrentTextChanged: root.qtObject.value = currentText
+
+            Material.foreground: ThemeViewModel.foreground
 
             Layout.fillWidth: true
 
