@@ -14,7 +14,15 @@ ApplicationWindow {
     minimumHeight: 450
     width: SettingsViewModel.get(SettingKey.PRIVATE_WINDOW_WIDTH).value;
     height: SettingsViewModel.get(SettingKey.PRIVATE_WINDOW_HEIGHT).value;
-    title: StreamingServicesViewModel.currentService !== null ? StreamingServicesViewModel.currentServiceName : ""
+    title: {
+        var currentSong = CurrentPlayer.currentSong;
+        if (currentSong.title && currentSong.artist)
+            return qsTr("%1 by %2").arg(currentSong.title).arg(currentSong.artist);
+        else if (currentSong.title)
+            return currentSong.title;
+        return StreamingServicesViewModel.currentService !== null ? StreamingServicesViewModel.currentServiceName : "";
+    }
+    visible: MainWindowViewModel.visible
 
     onClosing: d.handleCloseEvent(close);
 
