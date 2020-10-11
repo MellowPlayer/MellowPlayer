@@ -58,8 +58,10 @@ namespace MellowPlayer::Presentation
     private slots:
         void onShowTrayIconSettingValueChanged();
         void updateIcon();
+        void updateToolTip();
 
     private:
+        void setToolTip(const QString& value);
         void setUpMenu();
 
         Domain::ILogger& _logger;

@@ -2,6 +2,7 @@
 #include <MellowPlayer/Domain/Logging/Loggers.hpp>
 #include <MellowPlayer/Domain/Logging/LoggingMacros.hpp>
 #include <MellowPlayer/Domain/Player/IPlayer.hpp>
+#include <MellowPlayer/Domain/Player/Song.hpp>
 #include <MellowPlayer/Domain/Settings/Setting.hpp>
 #include <MellowPlayer/Domain/Settings/SettingKey.hpp>
 #include <MellowPlayer/Domain/Settings/Settings.hpp>
@@ -24,12 +25,14 @@ SystemTrayIcon::SystemTrayIcon(IPlayer& player, IMainWindow& mainWindow, Setting
           _streamingServices(streamingServices),
           _qSystemTrayIcon(IconProvider::trayIcon())
 {
+    connect(&_player, &IPlayer::currentSongChanged, this, &SystemTrayIcon::updateToolTip);
     connect(&_qSystemTrayIcon, &QSystemTrayIcon::activated, this, &SystemTrayIcon::onActivated);
     connect(&_showTrayIconSetting, &Setting::valueChanged, this, &SystemTrayIcon::onShowTrayIconSettingValueChanged);
     connect(&_customTrayIconSetting, &Setting::valueChanged, this, &SystemTrayIcon::updateIcon);
     connect(&_streamingServices, &IStreamingServicesViewModel::currentServiceChanged, this, &SystemTrayIcon::setupFavoritesMenu);
     setUpMenu();
     updateIcon();
+    updateToolTip();
 }
 
 void SystemTrayIcon::setupFavoritesMenu()
@@ -45,9 +48,7 @@ void SystemTrayIcon::setupFavoritesMenu()
             auto* action = _favoritesMenu->addAction(service->name());
             action->setCheckable(true);
             action->setChecked(_streamingServices.currentService() == service);
-            connect(action, &QAction::triggered, [=]() {
-                _streamingServices.setCurrentService(service);
-            });
+            connect(action, &QAction::triggered, [=]() { _streamingServices.setCurrentService(service); });
         }
     }
 }
@@ -152,7 +153,34 @@ void SystemTrayIcon::onShowTrayIconSettingValueChanged()
 
 void SystemTrayIcon::selectService()
 {
+}
 
+void SystemTrayIcon::updateToolTip()
+{
+    auto* song = _player.currentSong();
+    if (!song->title().isEmpty() && !song->artist().isEmpty())
+    {
+        setToolTip(QString("%1 by %2").arg(song->title()).arg(song->artist()));
+    }
+    else if (!song->title().isEmpty())
+    {
+        setToolTip(song->title());
+    }
+    else
+    {
+        auto currentServiceName = _streamingServices.currentServiceName();
+        setToolTip(currentServiceName.isEmpty() ? "MellowPlayer" : currentServiceName);
+    }
+}
+
+void SystemTrayIcon::setToolTip(const QString& value)
+{
+    auto fullToolTip = value == "MellowPlayer" ? value : QString("%1 - MellowPlayer").arg(value);
+    if (_qSystemTrayIcon.toolTip() != fullToolTip)
+    {
+        LOG_DEBUG(_logger, "tooltip: " << fullToolTip);
+        _qSystemTrayIcon.setToolTip(fullToolTip);
+    }
 }
 
 QString SystemTrayIconStrings::playPause() const
