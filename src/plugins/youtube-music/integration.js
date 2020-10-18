@@ -70,9 +70,13 @@ function update() {
     }
 
     // Play progress
-    const progressBar = document.querySelector('#progress-bar'); 
-    const currentPosition = parseInt(progressBar.getAttribute('aria-valuenow'), 10);
-    const totalDuration = parseInt(progressBar.getAttribute('aria-valuemax'), 10);
+    const progressBar = document.querySelector('#progress-bar');
+    let currentPosition;
+    let totalDuration;
+    if (progressBar) {
+      currentPosition = parseInt(progressBar.getAttribute('aria-valuenow'), 10) || undefined;
+      totalDuration = parseInt(progressBar.getAttribute('aria-valuemax'), 10) || undefined;
+    }
 
     // Playback status
     if (player.paused) {
