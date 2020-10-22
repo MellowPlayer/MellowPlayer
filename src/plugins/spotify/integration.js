@@ -35,7 +35,7 @@ function getButtons() {
     }
 
     function getAddRemoveToMusicButton() {
-        return document.querySelector('.Root__now-playing-bar button.spoticon-heart-16, .Root__now-playing-bar button.spoticon-heart-active-16');
+        return document.querySelector('.Root__now-playing-bar .spoticon-heart-16, .Root__now-playing-bar .spoticon-heart-active-16');
     }
 
     return {
