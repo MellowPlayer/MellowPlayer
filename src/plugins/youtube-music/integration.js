@@ -69,6 +69,15 @@ function update() {
             popupAdCloseButton.click();
     }
 
+    // Play progress
+    const progressBar = document.querySelector('#progress-bar');
+    let currentPosition;
+    let totalDuration;
+    if (progressBar) {
+      currentPosition = parseInt(progressBar.getAttribute('aria-valuenow'), 10) || undefined;
+      totalDuration = parseInt(progressBar.getAttribute('aria-valuemax'), 10) || undefined;
+    }
+
     // Playback status
     if (player.paused) {
         var playbackStatus = MellowPlayer.PlaybackStatus.PAUSED;
@@ -113,8 +122,8 @@ function update() {
     return {
         "playbackStatus": playbackStatus,
         "volume": player.volume,
-        "duration": Math.floor(player.getDuration()),
-        "position": Math.floor(player.getCurrentTime()),
+        "duration": totalDuration,
+        "position": currentPosition,
         "songId": getHashCode(songTitle),
         "songTitle": songTitle,
         "artistName": artistName,
