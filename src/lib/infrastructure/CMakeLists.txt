@@ -28,4 +28,4 @@ endif()
 
 target_precompile_headers(${LIB_NAME} REUSE_FROM ${PROJECT_NAME}.Domain)
 target_include_directories(${LIB_NAME} PUBLIC ${CMAKE_CURRENT_SOURCE_DIR}/src)
-target_link_libraries(${LIB_NAME} spdlog Qt5::Core Qt5::Gui Qt5::Concurrent Qt5::Network Qt5::Widgets Qt5::Sql ${PROJECT_NAME}.Domain)
+target_link_libraries(${LIB_NAME} spdlog::spdlog Qt5::Core Qt5::Gui Qt5::Concurrent Qt5::Network Qt5::Widgets Qt5::Sql ${PROJECT_NAME}.Domain)
