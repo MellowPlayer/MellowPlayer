@@ -330,6 +330,13 @@
           "key": "create-plugin"
         },
         {
+          "name": "Open web developer tools",
+          "tooltip": "Open web developer tools",
+          "type": "shortcut",
+          "default": "Ctrl+Shift+I",
+          "key": "show-devtools"
+        },
+        {
           "name": "Report Issue",
           "tooltip": "Report an issue",
           "type": "shortcut",

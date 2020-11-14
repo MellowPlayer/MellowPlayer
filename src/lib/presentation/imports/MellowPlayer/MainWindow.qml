@@ -151,6 +151,14 @@ ApplicationWindow {
     }
 
     Action {
+        id: showDevtoolsAction
+        shortcut: SettingsViewModel.get(SettingKey.SHORTCUTS_SHOW_DEVTOOLS).value
+        text: qsTr("Open web developer tools")
+        onTriggered: DevToolsWindowViewModel.show()
+        Component.onCompleted: Actions.showDevtools = showDevtoolsAction
+    }
+
+    Action {
         id: checkForUpdatesAction
         enabled: !UpdaterViewModel.busy
         shortcut: SettingsViewModel.get(SettingKey.SHORTCUTS_CHECK_FOR_UPDATE).valu
