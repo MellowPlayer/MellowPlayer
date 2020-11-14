@@ -125,7 +125,6 @@ function getArtUrl() {
     if (artUrlDiv === null) {
         return "";
     }
-    return ""
     return artUrlDiv.src
 }
 
