@@ -21,11 +21,6 @@ QString Asset::url() const
     return _url;
 }
 
-bool Asset::isAppImage() const
-{
-    return _name.toLower().endsWith(".appimage");
-}
-
 bool Asset::isWindowsInstaller() const
 {
     return _name.toLower().endsWith("_setup.exe");
@@ -38,5 +33,5 @@ bool Asset::isDmg() const
 
 bool Asset::isValid() const
 {
-    return QUrl(_url).isValid() && (isAppImage() || isWindowsInstaller() || isDmg());
+    return QUrl(_url).isValid() && (isWindowsInstaller() || isDmg());
 }

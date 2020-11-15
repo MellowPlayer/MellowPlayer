@@ -80,7 +80,6 @@ bool Release::isValid() const
 
     if (isValid && !_url.isEmpty())
     {
-        bool haveAppImage = false;
         bool haveWindowsInstaller = false;
         bool haveDmg = false;
 
@@ -88,13 +87,11 @@ bool Release::isValid() const
         {
             if (asset.isDmg())
                 haveDmg = true;
-            if (asset.isAppImage())
-                haveAppImage = true;
             if (asset.isWindowsInstaller())
                 haveWindowsInstaller = true;
         }
 
-        return haveAppImage && haveDmg && haveWindowsInstaller;
+        return haveDmg && haveWindowsInstaller;
     }
 
     return isValid;

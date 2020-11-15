@@ -13,7 +13,6 @@ namespace MellowPlayer::Infrastructure
         QString name() const;
         QString url() const;
 
-        bool isAppImage() const;
         bool isWindowsInstaller() const;
         bool isDmg() const;
 

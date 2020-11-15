@@ -55,7 +55,6 @@ namespace MellowPlayer::Presentation
                                                const QString& authorWebsite,
                                                bool allPlatforms,
                                                bool linuxPlatform,
-                                               bool appImagePlatform,
                                                bool osxPlatform,
                                                bool windowsPlatform) = 0;
 
@@ -94,7 +93,6 @@ namespace MellowPlayer::Presentation
                                        const QString& authorWebsite,
                                        bool allPlatforms,
                                        bool linuxPlatform,
-                                       bool appImagePlatform,
                                        bool osxPlatform,
                                        bool windowsPlatform) override;
 

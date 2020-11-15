@@ -112,7 +112,7 @@ TEST_CASE("StreamingServicesControllerViewModel", "[UnitTest]")
     SECTION("create service call creator and reload services")
     {
         QSignalSpy spy(&viewModel, &StreamingServicesViewModel::serviceCreated);
-        viewModel.createService("svName", "svUrl", "authorName", "authorUrl", true, false, false, false, false);
+        viewModel.createService("svName", "svUrl", "authorName", "authorUrl", true, false, false, false);
         REQUIRE(streamingServiceCreator.count() == 1);
         REQUIRE(spy.count() == 1);
     }

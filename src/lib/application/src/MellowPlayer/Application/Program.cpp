@@ -103,10 +103,6 @@ void logStart()
     LOG_INFO(logger, "Args: [" << qApp->arguments().join(", ") << "]");
     LOG_INFO(logger, "Working directory: " << qApp->applicationDirPath());
     LOG_INFO(logger, "Chromium flags: " << qgetenv("QTWEBENGINE_CHROMIUM_FLAGS").toStdString());
-
-    QString appImagePath = qgetenv("APPIMAGE");
-    if (!appImagePath.isEmpty())
-        LOG_DEBUG(logger, "Running from AppImage: " << appImagePath);
 }
 
 void logStop()

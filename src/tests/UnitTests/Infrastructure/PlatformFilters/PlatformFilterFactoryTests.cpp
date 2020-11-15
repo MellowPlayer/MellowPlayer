@@ -13,7 +13,7 @@ SCENARIO("PlatformFilterFactoryTests")
 
         WHEN("creating a valid filter")
         {
-            QList<Filter> filters = {Filter::All, Filter::Linux, Filter::Windows, Filter::AppImage, Filter::OSX};
+            QList<Filter> filters = {Filter::All, Filter::Linux, Filter::Windows, Filter::OSX};
 
             for (auto filter : filters)
             {

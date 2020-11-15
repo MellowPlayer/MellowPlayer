@@ -4,11 +4,11 @@ FAQ & Known issues
 Playback does not start on some services such as Soundcloud or Mixcloud... What can I do?
 -----------------------------------------------------------------------------------------
 
-Services that don't use flash often requires proprietary audio codecs to be installed on your system. Those codecs are not included in our official releases (AppImage and Windows Installer).
+Services that don't use flash often requires proprietary audio codecs to be installed on your system. Those codecs are not included in our official releases on Windows.
 
 To solve the problem, you need to build MellowPlayer and Qt from sources and make sure you enable propertietary codecs support, see https://doc.qt.io/qt-5.11/qtwebengine-features.html#audio-and-video-codecs
 
-If you're using GNU/Linux, check if a native package of MellowPlayer is available for your distribution and use it instead of AppImage. Native packages usually use system ffmpeg and it should be enought to install extra ffmpeg plugins for the missing proprietary codecs.
+If you're using GNU/Linux, we recommend to use the flatpak as it comes with all the codecs needed.
 
 
 .. note:: MP3 is still considered as a proprietary/patented codec prior to Qt 5.11.

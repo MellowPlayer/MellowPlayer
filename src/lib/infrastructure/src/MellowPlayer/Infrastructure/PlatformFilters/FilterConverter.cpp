@@ -2,7 +2,7 @@
 
 using namespace MellowPlayer::Infrastructure;
 
-FilterConverter::FilterConverter() : _linux("Linux"), _appImage("AppImage"), _windows("Windows"), _osx("OSX"), _all("All")
+FilterConverter::FilterConverter() : _linux("Linux"), _windows("Windows"), _osx("OSX"), _all("All")
 {
 }
 
@@ -14,9 +14,6 @@ QString FilterConverter::toString(Filter filter) const
     {
     case Filter::Linux:
         filterString = _linux;
-        break;
-    case Filter::AppImage:
-        filterString = _appImage;
         break;
     case Filter::OSX:
         filterString = _osx;
@@ -38,8 +35,6 @@ Filter FilterConverter::fromString(const QString& filterString) const
 
     if (lowerCaseFilter == _linux.toLower())
         return Filter::Linux;
-    else if (lowerCaseFilter == _appImage.toLower())
-        return Filter::AppImage;
     else if (lowerCaseFilter == _windows.toLower())
         return Filter::Windows;
     else if (lowerCaseFilter == _osx.toLower())

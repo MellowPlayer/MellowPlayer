@@ -15,7 +15,6 @@ namespace MellowPlayer::Infrastructure
 
     private:
         QString _linux;
-        QString _appImage;
         QString _windows;
         QString _osx;
         QString _all;

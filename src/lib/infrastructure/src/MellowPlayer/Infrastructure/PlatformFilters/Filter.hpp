@@ -6,7 +6,6 @@ namespace MellowPlayer::Infrastructure
     {
         All,
         Linux,
-        AppImage,
         OSX,
         Windows
     };

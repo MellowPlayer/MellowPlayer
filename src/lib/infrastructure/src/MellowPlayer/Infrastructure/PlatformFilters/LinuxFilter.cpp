@@ -5,7 +5,7 @@ using namespace MellowPlayer::Infrastructure;
 bool LinuxFilter::match() const
 {
 #if defined(Q_OS_LINUX) || defined(Q_OS_FREEBSD)
-    return !_isAppImage;
+    return true;
 #else
     return false;
 #endif

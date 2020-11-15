@@ -71,11 +71,10 @@ SCENARIO("releases validity can be tested")
           "assets")
     {
         AssetList assets;
-        assets << Asset("MellowPlayer.AppImage", "MellowPlayer.AppImage");
-        assets << Asset("MellowPlayer.dmg", "MellowPlayer.dmg");
+        assets << Asset("MellowPlayer_Setup.exe", "MellowPlayer_Setup.exe");
         // windows installer is missing.
         Release release("https://github.com/ColinDuquesnoy/MellowPlayer/releases/tag/2.95.0", "2.95.0", QDate::fromString("2117-07-15", Qt::ISODate), assets);
-        REQUIRE(release.assets().count() == 2);
+        REQUIRE(release.assets().count() == 1);
 
         WHEN("isValid is called")
         {
@@ -92,9 +91,6 @@ SCENARIO("releases validity can be tested")
           "required assets")
     {
         AssetList assets;
-        assets << Asset("MellowPlayer.AppImage",
-                        "https://github.com/ColinDuquesnoy/MellowPlayer/releases/"
-                        "tag/2.95.0/MellowPlayer.AppImage");
         assets << Asset("MellowPlayer.dmg",
                         "https://github.com/ColinDuquesnoy/"
                         "MellowPlayer/releases/tag/2.95.0/"

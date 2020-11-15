@@ -27,9 +27,8 @@ SCENARIO("Get latest release")
 
             AND_THEN("Latest stable release contains two assets")
             {
-                REQUIRE(latestRelease->assets().count() == 2);
+                REQUIRE(latestRelease->assets().count() == 1);
                 REQUIRE(latestRelease->assets()[0].isWindowsInstaller());
-                REQUIRE(latestRelease->assets()[1].isAppImage());
             }
         }
     }
@@ -46,9 +45,8 @@ SCENARIO("Get latest release")
 
             AND_THEN("Latest stable release contains two assets")
             {
-                REQUIRE(latestRelease->assets().count() == 2);
+                REQUIRE(latestRelease->assets().count() == 1);
                 REQUIRE(latestRelease->assets()[0].isWindowsInstaller());
-                REQUIRE(latestRelease->assets()[1].isAppImage());
             }
         }
     }

@@ -29,16 +29,6 @@ SCENARIO("FilterConverter can convert strings to Filter enums")
             }
         }
 
-        WHEN("filter string is 'AppImage'")
-        {
-            QString filter = "AppImage";
-
-            THEN("converter return Filter::AppImage")
-            {
-                REQUIRE(converter.fromString(filter) == Filter::AppImage);
-            }
-        }
-
         WHEN("filter string is 'OSX'")
         {
             QString filter = "OSX";
@@ -104,16 +94,6 @@ SCENARIO("FilterConverter can convert Filter enums to strings")
             THEN("converter return 'Linux'")
             {
                 REQUIRE(converter.toString(filter) == "Linux");
-            }
-        }
-
-        WHEN("filter is Filter::AppImage")
-        {
-            Filter filter = Filter::AppImage;
-
-            THEN("converter return 'AppImage'")
-            {
-                REQUIRE(converter.toString(filter) == "AppImage");
             }
         }
 

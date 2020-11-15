@@ -9,7 +9,6 @@ WizardPage {
     property alias authorUrl: fieldAuthorWebsite.text
     property alias allPlatforms: cbAllPlatforms.checked
     property alias linuxPlatform: cbLinuxPlatform.checked
-    property bool appImagePlatform: false
     property bool osxPlatform: false
     property alias windowsPlatform: cbWindowsPlatform.checked
 

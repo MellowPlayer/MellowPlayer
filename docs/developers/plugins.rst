@@ -52,11 +52,7 @@ Specify the supported platforms
 -------------------------------
 
 When you create the plugin, you need to specify the list of supported platforms. Services that require proprietary
-codecs to work are not supported on AppImage, Windows and OSX.
-
-If you are developing on GNU/Linux and want to know if you plugin will work everywhere, try it from an official
-AppImage release. If it works, you can safely check All platforms, otherwise it might only work as a native package
-from a GNU/Linux distribution.
+codecs to work are not supported on Windows and OSX.
 
 
 Functions to implement

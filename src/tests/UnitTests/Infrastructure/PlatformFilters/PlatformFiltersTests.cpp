@@ -26,80 +26,9 @@ SCENARIO("PlatformFiltersTests")
         {
             QString filter = "Linux";
 
-            AND_WHEN("not in an AppImage")
+            THEN("match returns true")
             {
-                qputenv("APPIMAGE", "");
-
-                THEN("match returns true")
-                {
-                    REQUIRE(filters.match(filter));
-                }
-            }
-
-            AND_WHEN("in an AppImage")
-            {
-                qputenv("APPIMAGE", "/path/to/appimage");
-
-                THEN("match returns false")
-                {
-                    REQUIRE(!filters.match(filter));
-                }
-
-                qputenv("APPIMAGE", "");
-            }
-        }
-
-        WHEN("filter is 'AppImage'")
-        {
-            QString filter = "AppImage";
-
-            AND_WHEN("not in an AppImage")
-            {
-                qputenv("APPIMAGE", "");
-
-                THEN("match returns false")
-                {
-                    REQUIRE(!filters.match(filter));
-                }
-            }
-
-            AND_WHEN("in an AppImage")
-            {
-                qputenv("APPIMAGE", "/path/to/appimage");
-
-                THEN("match returns true")
-                {
-                    REQUIRE(filters.match(filter));
-                }
-
-                qputenv("APPIMAGE", "");
-            }
-        }
-
-        WHEN("filter is 'Linux-AppImage'")
-        {
-            QString filter = "Linux-AppImage";
-
-            AND_WHEN("not in an AppImage")
-            {
-                qputenv("APPIMAGE", "");
-
-                THEN("match returns true")
-                {
-                    REQUIRE(filters.match(filter));
-                }
-            }
-
-            AND_WHEN("in an AppImage")
-            {
-                qputenv("APPIMAGE", "/path/to/appimage");
-
-                THEN("match returns true")
-                {
-                    REQUIRE(filters.match(filter));
-                }
-
-                qputenv("APPIMAGE", "");
+                REQUIRE(filters.match(filter));
             }
         }
 
@@ -175,16 +104,6 @@ SCENARIO("PlatformFiltersTests")
             }
         }
 
-        WHEN("filter is 'AppImage'")
-        {
-            QString filter = "AppImage";
-
-            THEN("match returns false")
-            {
-                REQUIRE(!filters.match(filter));
-            }
-        }
-
         WHEN("filter is 'OSX'")
         {
             QString filter = "OSX";
@@ -250,16 +169,6 @@ SCENARIO("PlatformFiltersTests")
         WHEN("filter is 'Linux'")
         {
             QString filter = "Linux";
-
-            THEN("match returns false")
-            {
-                REQUIRE(!filters.match(filter));
-            }
-        }
-
-        WHEN("filter is 'AppImage'")
-        {
-            QString filter = "AppImage";
 
             THEN("match returns false")
             {

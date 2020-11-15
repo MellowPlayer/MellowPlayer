@@ -8,27 +8,11 @@ SCENARIO("LinuxFilterTests")
 #if defined(Q_OS_LINUX) || defined(Q_OS_FREEBSD)
     GIVEN("the test runs on GNU/Linux")
     {
-        WHEN("not in an AppImage")
+        LinuxFilter filter;
+
+        THEN("match returns true")
         {
-            qputenv("APPIMAGE", "");
-            LinuxFilter filter;
-
-            THEN("match returns true")
-            {
-                REQUIRE(filter.match());
-            }
-        }
-
-        AND_WHEN("in an AppImage")
-        {
-            qputenv("APPIMAGE", "/path/to/appimage");
-            LinuxFilter filter;
-
-            THEN("match returns false")
-            {
-                REQUIRE(!filter.match());
-            }
-            qputenv("APPIMAGE", "");
+            REQUIRE(filter.match());
         }
     }
 #else

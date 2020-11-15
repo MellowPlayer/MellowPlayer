@@ -10,7 +10,6 @@ package MellowPlayer::Infrastructure {
     enum Filters {
         All,
         Linux,
-        AppImage,
         OSX,
         Windows
     }
@@ -19,7 +18,6 @@ package MellowPlayer::Infrastructure {
         + QString toString(Filter);
         + Filter fromString(filter);
         - linux_ : QString
-        - appImage_ : QString
         - windows_ : QString
         - osx_ : QString
         - all_ : QString
@@ -60,21 +58,10 @@ package MellowPlayer::Infrastructure {
     Always returns true
     end note
 
-    class LinuxFilterBase {
-        # isAppImage_
-        + {abstract} match(): bool
-    }
-    IPlatformFilter <|-- LinuxFilterBase
-
     class LinuxFilter {
         + match(): bool
     }
-    LinuxFilterBase <|-- LinuxFilter
-
-    class AppImageFilter {
-        + match(): bool
-    }
-    LinuxFilterBase <|-- AppImageFilter
+    IPlatformFilter <|-- LinuxFilter
 
     class OsxFilter {
         + match(): bool

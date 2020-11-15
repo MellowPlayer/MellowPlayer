@@ -13,7 +13,6 @@ WizardPage {
     property string authorUrl
     property bool allPlatforms
     property bool linuxPlatform
-    property bool appImagePlatform
     property bool osxPlatform
     property bool windowsPlatform
 
@@ -33,7 +32,7 @@ WizardPage {
             root.directory = directory;
             root.goNextRequested();
         })
-        StreamingServicesViewModel.createService(svName, svUrl, authorName, authorUrl, allPlatforms, linuxPlatform, appImagePlatform, osxPlatform, windowsPlatform)
+        StreamingServicesViewModel.createService(svName, svUrl, authorName, authorUrl, allPlatforms, linuxPlatform, osxPlatform, windowsPlatform)
     }
 
     BusyIndicator {

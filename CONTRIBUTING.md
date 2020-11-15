@@ -10,7 +10,7 @@ If you're reporting a bug, make sure that the bug has not already been reported 
 
 If you haven't found an answer to your issue, feel free to report the bug on our issue tracker. If you do so, make sure to include the following information:
 
-- Information about your **Operating system**. If you're on Linux, you'll need to specify the name of the distribution and the desktop environment you're using and whether you're using a native package or the AppImage.
+- Information about your **Operating system**. If you're on Linux, you'll need to specify the name of the distribution and the desktop environment you're using and whether you're using a native package or flatpak.
 - The **music streaming service** that you were using when you encountered the bug if it is related to a specific streaming service.
 - A **clear description** of the bug with **steps to reproduce**.
 - You should use **English** to describe your issue.

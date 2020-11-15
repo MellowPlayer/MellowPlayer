@@ -17,7 +17,6 @@ Dialog {
     property string directory
     property bool allPlatforms
     property bool linuxPlatform
-    property bool appImagePlatform
     property bool osxPlatform
     property bool windowsPlatform
 
@@ -59,7 +58,6 @@ Dialog {
             onAuthorUrlChanged: wizard.authorUrl = authorUrl
             onAllPlatformsChanged: wizard.allPlatforms = allPlatforms
             onLinuxPlatformChanged: wizard.linuxPlatform = linuxPlatform
-            onAppImagePlatformChanged: wizard.appImagePlatform = appImagePlatform
             onOsxPlatformChanged: wizard.osxPlatform = osxPlatform
             onWindowsPlatformChanged: wizard.windowsPlatform = windowsPlatform
         }
@@ -77,7 +75,6 @@ Dialog {
             authorUrl: wizard.authorUrl
             allPlatforms: wizard.allPlatforms
             linuxPlatform: wizard.linuxPlatform
-            appImagePlatform: wizard.appImagePlatform
             osxPlatform: wizard.osxPlatform
             windowsPlatform: wizard.windowsPlatform
 

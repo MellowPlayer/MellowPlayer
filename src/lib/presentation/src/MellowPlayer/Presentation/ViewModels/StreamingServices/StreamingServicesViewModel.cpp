@@ -144,7 +144,6 @@ void StreamingServicesViewModel::createService(const QString& serviceName,
                                                const QString& authorWebsite,
                                                bool allPlatforms,
                                                bool linuxPlatform,
-                                               bool appImagePlatform,
                                                bool osxPlatform,
                                                bool windowsPlatform)
 {
@@ -155,9 +154,6 @@ void StreamingServicesViewModel::createService(const QString& serviceName,
     {
         if (linuxPlatform)
             filters.append(Filter::Linux);
-
-        if (appImagePlatform)
-            filters.append(Filter::AppImage);
 
         if (osxPlatform)
             filters.append(Filter::OSX);
