@@ -8,116 +8,121 @@ import QtGraphicalEffects 1.0
 import MellowPlayer 3.0
 import "../Dialogs.js" as Dialogs
 
-Item {
+ItemDelegate {
     id: root
 
     required property StreamingServiceViewModel service
 
     property int index: service.sortIndex
     property string backgroundColor: Material.background
-    property bool hovered: mouseArea.containsMouse
 
     function activate() {
         root.activated()
         StreamingServicesViewModel.currentService = root.service
     }
-
     signal activated()
 
-   onIndexChanged: service.sortIndex = root.index
+    hoverEnabled: true
+    padding: 3
+    highlighted: root.service === StreamingServicesViewModel.currentService
 
-    Drag.active: mouseArea.drag.active
+    onIndexChanged: service.sortIndex = root.index
+    onClicked: activate()
+
     Component.onCompleted: service.sortIndex = root.index
+    Drag.active: dragArea.drag.active
+    Material.elevation: 4
+    Layout.fillWidth: true
+    Layout.fillHeight: true
 
-    Item {
-        id: pane
-
+    RowLayout {
         anchors.fill: parent
-        anchors.margins: parent.width / 50
-
-        layer.enabled: true
-        layer.effect: OpacityMask {
-            maskSource: Rectangle {
-                width: root.width
-                height: root.height
-                radius: 6
-            }
-        }
-
-        Material.elevation: state == "hover" ? 8 : 4
+        anchors.margins: 6
 
         Item {
-            anchors.fill: parent
+            Layout.preferredWidth: 24
+            Layout.preferredHeight: 24
+            Layout.alignment: Qt.AlignVCenter
 
-            Image {
-                id: preview
+            Label {
+                anchors.centerIn: parent
+                font.family: MaterialIcons.family
+                font.pixelSize: 20
+                font.bold: false
+                text: MaterialIcons.icon_drag_handle
+                opacity: root.Drag.active ? 0.88 : 0.48
+            }
 
-                property bool rounded: true
+            MouseArea {
+                id: dragArea
 
                 anchors.fill: parent
-                source: root.service.previewImageUrl
-            }
+                drag.target: root
+                hoverEnabled: true
+                propagateComposedEvents: true
 
-            FastBlur {
-                anchors.fill: preview
-                source: preview
-                radius: 32
-            }
-
-            ColorOverlay {
-                id: overlay
-                anchors.fill: preview
-                source: preview
-                color: "black"
-                opacity: 0.3
-            }
-
-            state: root.hovered || starButton.hovered || stopButton.hovered ? "hover" : ""
-            states: State {
-                name: "hover"
-
-                PropertyChanges {
-                    target: overlay
-                    opacity: 0.0
-
+                onReleased: {
+                    console.error("released")
+                    item.Drag.drop();
                 }
-            }
-            transitions: [
-                Transition {
-                    PropertyAnimation { properties: "opacity" }
-                }
-            ]
-
-            Image {
-                anchors.horizontalCenter: parent.horizontalCenter
-                y: parent.height / 5
-                antialiasing: true
-                height: 64; width: 64
-                mipmap: true
-                source: root.service.logo
             }
         }
 
-        MouseArea {
-            id: mouseArea
+        IconToolButton {
+            id: starButton
+            padding: 0
+            iconChar: checked ? MaterialIcons.icon_star : MaterialIcons.icon_star_border
+            font.bold: true
+            font.pixelSize: 16
+            checkable: true
+            checked: root.service.favorite
+            tooltip: checked ? qsTr("Remove root.service from favorites") : qsTr("Add root.service to favorites")
+            focusPolicy: Qt.NoFocus
 
-            anchors.fill: parent
-            drag.target: root
-            hoverEnabled: true
-            propagateComposedEvents: true
+            onCheckedChanged: root.service.favorite = checked
 
-            onClicked: root.activate();
-            onReleased: root.Drag.drop();
-            onWheel: wheel.accepted = false
+            Material.accent: Material.color(Material.Amber, Material.Shade600)
+        }
+
+        Image {
+            antialiasing: true
+            height: 48; width: 48
+            mipmap: true
+            source: root.service.logo
+            smooth: true
+
+            Layout.preferredWidth: width
+            Layout.preferredHeight: height
+            Layout.alignment: Qt.AlignVCenter | Qt.AlignHCenter
+        }
+
+        Label {
+            id: lblName
+
+            text: root.service.name
+            font.bold: true
+            elide: "ElideRight"
+
+            Layout.fillWidth: true
+            Layout.leftMargin: 16
+        }
+
+        IconToolButton {
+            id: settingsButton
+
+            padding: 0
+            iconChar: MaterialIcons.icon_settings
+            font.pixelSize: 16
+            focusPolicy: Qt.NoFocus
+
+            tooltip: qsTr("Settings")
+
+            onClicked: Dialogs.openServiceSettings(root.service)
         }
 
         IconToolButton {
             id: stopButton
 
-            anchors {
-                top: parent.top
-                right: parent.right
-            }
             visible: root.service.isActive
             padding: 0
             iconChar: MaterialIcons.icon_power_settings_new
@@ -130,75 +135,13 @@ Item {
 
             Material.foreground: Material.Red
         }
+    }
 
-        Rectangle {
-            anchors {
-                bottom: parent.bottom
-                left: parent.left
-                right: parent.right
-            }
-            color: "#80404040"
-            opacity: 0.9
-            implicitHeight: layout.implicitHeight * 0.9
-
-            Material.theme: Material.Dark
-            Material.foreground: "white"
-
-            RowLayout {
-                id: layout
-
-                anchors.fill: parent
-                spacing: 0
-
-                IconToolButton {
-                    id: starButton
-                    padding: 0
-                    iconChar: checked ? MaterialIcons.icon_star : MaterialIcons.icon_star_border
-                    font.bold: true
-                    font.pixelSize: 16
-                    checkable: true
-                    checked: root.service.favorite
-                    tooltip: checked ? qsTr("Remove root.service from favorites") : qsTr("Add root.service to favorites")
-                    focusPolicy: Qt.NoFocus
-
-                    onCheckedChanged: root.service.favorite = checked
-
-                    Material.accent: Material.color(Material.Amber, Material.Shade600)
-                }
-
-                Text {
-                    id: lblName
-
-                    Layout.fillWidth: true
-
-                    color: "white"
-                    text: root.service.name
-                    font.bold: true
-                    horizontalAlignment: Qt.AlignHCenter
-                    font.pixelSize: 12
-                }
-
-                IconToolButton {
-                    id: settingsButton
-
-                    padding: 0
-                    iconChar: MaterialIcons.icon_settings
-                    font.pixelSize: 16
-                    focusPolicy: Qt.NoFocus
-
-                    tooltip: qsTr("Settings")
-
-                    onClicked: Dialogs.openServiceSettings(root.service)
-                }
-            }
-        }
-
-        Rectangle {
-            anchors.fill: parent
-            color: "transparent"
-            border.color:root.service === StreamingServicesViewModel.currentService ? Material.accent : "transparent"
-            border.width: 3
-            radius: 6
-        }
+    Rectangle {
+        anchors.bottom: parent.bottom
+        anchors.left: parent.left
+        anchors.right: parent.right
+        height: 1
+        color: ThemeViewModel.isDark(ThemeViewModel.background) ? Qt.lighter(ThemeViewModel.background) : Qt.darker(ThemeViewModel.background, 1.1)
     }
 }

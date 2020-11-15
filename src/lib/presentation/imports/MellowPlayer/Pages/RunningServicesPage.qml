@@ -18,11 +18,6 @@ StackLayout {
             currentWebView = null;
     }
 
-    function updateImages() {
-        if (root.currentWebView)
-            root.currentWebView.updateImage()
-    }
-
     Action {
         id: goBack
 
@@ -172,7 +167,7 @@ StackLayout {
             }
 
             Pane {
-                padding: 0
+                padding: 4
                 Layout.fillWidth: true
 
                 IconToolButton {
@@ -180,7 +175,7 @@ StackLayout {
 
                     action: Actions.toggleSelectServiceDrawer
                     anchors.centerIn: parent
-                    iconChar: MaterialIcons.icon_apps
+                    iconChar: MaterialIcons.icon_queue_music
                     iconSize: 24
                     tooltip: qsTr("Select another service")
                     scale: 1.5

@@ -41,25 +41,18 @@ Item {
 
             Layout.fillHeight: true
             Layout.fillWidth: true
-            Layout.bottomMargin: 16
-
 
             Item {
                 anchors.fill: parent
-                anchors.topMargin: 16
-                anchors.leftMargin: 16
+                anchors.leftMargin: 4
 
-                GridView {
-                    id: gridView
+                ListView {
+                    id: listView
 
                     property bool dragActive: false
-                    property int itemSpacing: 48
-
                     signal dropped()
 
-                    anchors.centerIn: parent
                     focus: true
-                    cellWidth: width / 2; cellHeight: cellWidth * (9/16) + 32
                     anchors.fill: parent
 
                     model: DelegateModel {
@@ -77,31 +70,31 @@ Item {
 
                             property int visualIndex: ModelHelpers.getItemsIndex(delegateRoot.DelegateModel)
 
-                            width: gridView.cellWidth - gridView.itemSpacing / 2;
-                            height: gridView.cellHeight - gridView.itemSpacing / 2
+                            width: listView.width
+                            height: item.height
 
                             ServiceOverviewDelegate {
                                 id: item
 
                                 function updateIndex() { index = delegateRoot.visualIndex }
 
-                                anchors { horizontalCenter: parent.horizontalCenter; verticalCenter: parent.verticalCenter }
-                                height: gridView.cellHeight - 4; width: gridView.cellWidth - 4
+                                width: listView.width - (scrollBar.size !== 1 ? 18 : 0)
+                                height: 96
                                 service: delegateRoot.qtObject
+
+                                Drag.source: delegateRoot
+                                Drag.hotSpot.x: width / 2
+                                Drag.hotSpot.y: height / 2
+                                Drag.onActiveChanged: {
+                                    listView.dragActive = Drag.active
+                                    if (!Drag.active)
+                                        listView.dropped()
+                                }
 
                                 onActivated: root.serviceActivated()
 
-                                Drag.source: delegateRoot
-                                Drag.hotSpot.x: gridView.cellWidth / 2
-                                Drag.hotSpot.y: gridView.cellHeight / 2
-                                Drag.onActiveChanged: {
-                                    gridView.dragActive = Drag.active
-                                    if (!Drag.active)
-                                        gridView.dropped()
-                                }
-
                                 Connections {
-                                    target: gridView
+                                    target: listView
 
                                     function onDropped () { item.index = delegateRoot.visualIndex }
                                 }
@@ -128,9 +121,11 @@ Item {
                             }
 
                             DropArea {
-                                anchors { fill: parent; margins: 15 }
+                                anchors.fill: parent
 
-                                onEntered: ModelHelpers.moveItem(visualModel, delegateRoot, drag)
+                                onEntered: {
+                                    ModelHelpers.moveItem(visualModel, delegateRoot, drag)
+                                }
                             }
                         }
                     }

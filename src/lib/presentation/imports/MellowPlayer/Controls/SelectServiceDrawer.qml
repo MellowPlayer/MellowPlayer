@@ -13,7 +13,6 @@ Drawer {
     edge: Qt.LeftEdge
     dragMargin: 0
     modal: true
-    width: 400
 
     onVisibleChanged: searchToolButton.checked = false
 
@@ -42,7 +41,13 @@ Drawer {
                     }
                 }
 
-                Item { Layout.fillWidth: true }
+                Label {
+                    text: qsTr("Select Streaming Service")
+                    horizontalAlignment: Qt.AlignHCenter
+
+                    Layout.fillWidth: true
+
+                }
 
                 IconToolButton {
                     id: searchToolButton
@@ -90,11 +95,6 @@ Drawer {
                         text: qsTr("Show only favorite services")
                     }
                 }
-            }
-
-            Label {
-                anchors.centerIn: parent
-                text: qsTr("Select Streaming Service")
             }
         }
 

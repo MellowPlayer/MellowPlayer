@@ -24,7 +24,7 @@ ToolBar {
 
         IconToolButton {
             action: Actions.toggleSelectServiceDrawer
-            iconChar: MaterialIcons.icon_apps
+            iconChar: MaterialIcons.icon_queue_music
             iconSize: 24
             tooltip: qsTr("Select another service")
         }

@@ -21,17 +21,6 @@ Page {
     property var userAgentSetting: SettingsViewModel.get(SettingKey.PRIVACY_USER_AGENT)
     property alias url: webView.url
 
-    function updateImage() {
-        console.debug("grabbing image")
-        webView.grabToImage(function(result) {
-            var path = root.service.getPreviewImageUrlForSave();
-            if (result.saveToFile(path)) {
-                console.debug("image grabbed: ", path)
-                root.service.previewImageUrl = "file://" + path;
-            }
-        }, Qt.size(root.width, root.height));
-    }
-
     function exitFullScreen() {
         webView.triggerWebAction(WebEngineView.ExitFullScreen);
     }

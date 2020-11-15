@@ -10,9 +10,12 @@ ApplicationWindow {
     id: root
 
 
-    minimumWidth: 560; minimumHeight: 450
+    minimumWidth: 360; minimumHeight: 450
     width: SettingsViewModel.get(SettingKey.PRIVATE_WINDOW_WIDTH).value;
     height: SettingsViewModel.get(SettingKey.PRIVATE_WINDOW_HEIGHT).value;
+
+    onWidthChanged: console.warn(width)
+
     title: {
         var currentSong = CurrentPlayer.currentSong;
         if (currentSong.title && currentSong.artist)
@@ -53,7 +56,7 @@ ApplicationWindow {
     SelectServiceDrawer {
         id: selectServiceDrawer
 
-        height: root.height; width: 450
+        height: root.height; width: root.width >= 450 ? 450 : root.width
     }
 
     SettingsDrawer {
@@ -96,7 +99,6 @@ ApplicationWindow {
                 selectServiceDrawer.close()
             } else {
                 console.log("Opening service selection drawer")
-                runningServicesPage.updateImages();
                 selectServiceDrawer.open();
             }
         }
