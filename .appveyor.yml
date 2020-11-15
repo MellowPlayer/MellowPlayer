@@ -6,7 +6,7 @@ platform:
     - x64
 
 environment:
-    QTDIR: C:\Qt\5.15.0\msvc2019_64
+    QTDIR: C:\Qt\5.15.1\msvc2019_64
     APP_VERSION: 3.7.0
     BINTRAY_API_KEY:
         secure: 5JxFMiIEPLEzENmBD2AV6eOfA7+9kTfh276P91CoijHfboWrdgvpvci9vuiOxXRa
