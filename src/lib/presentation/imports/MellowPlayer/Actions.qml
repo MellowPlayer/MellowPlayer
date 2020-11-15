@@ -14,6 +14,7 @@ QtObject {
     property Action createNewPlugin
     property Action reportIssue
     property Action toggleToolBar
+    property Action showDevtools
     property Action checkForUpdates
     property Action showAbout
     property Action quit

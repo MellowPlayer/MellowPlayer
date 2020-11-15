@@ -35,7 +35,7 @@ function getButtons() {
     }
 
     function getAddRemoveToMusicButton() {
-        return document.querySelector('.Root__now-playing-bar .spoticon-heart-16, .Root__now-playing-bar .spoticon-heart-active-16');
+        return document.querySelector('.Root__now-playing-bar .control-button-heart button');
     }
 
     return {
@@ -125,8 +125,7 @@ function getArtUrl() {
     if (artUrlDiv === null) {
         return "";
     }
-    var artUrl = artUrlDiv.style.backgroundImage;
-    return artUrl.replace('url("', '').replace('")', '');
+    return artUrlDiv.src
 }
 
 function isFavorite() {
@@ -134,7 +133,7 @@ function isFavorite() {
     if (addRemoveToMusic === null) {
         return false;
     }
-    return addRemoveToMusic.classList.contains("spoticon-heart-active-16")
+    return addRemoveToMusic.classList.length > 1
 }
 
 function update() {
