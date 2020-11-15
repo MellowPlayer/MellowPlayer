@@ -48,12 +48,16 @@ MellowPlayer is licensed under the GPL license.
 
 - [Boost.DI](https://github.com/boost-ext/di)
 - [spdlog](https://github.com/gabime/spdlog)
-- [libqxt](https://bitbucket.org/libqxt/libqxt/wiki/Home) *(QxtGlobalShortcut)*
+- [QHotkey](https://github.com/Skycoder42/QHotkey)
+
+*These libraries will be fetched using CMake FetchContent if they are not available system wide*
 
 ### Testing
 
-- [catch](https://github.com/catchorg/Catch2)
 - [lcov](https://github.com/linux-test-project/lcov)
+- [catch](https://github.com/catchorg/Catch2)
+
+*Catch will always be fetched using Cmake FetchContent* 
 
 # Compilation
 

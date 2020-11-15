@@ -32,7 +32,6 @@ target_link_libraries(${PROJECT_NAME}
         MellowPlayer.Application
         Qt5::Concurrent Qt5::Core Qt5::Gui Qt5::Network Qt5::Qml Qt5::Quick Qt5::QuickControls2
         Qt5::Sql Qt5::Svg Qt5::WebEngine Qt5::WebEngineWidgets Qt5::Widgets Qt5::WebChannel qhotkey)
-target_compile_definitions(${PROJECT_NAME} PRIVATE -DBUILD_QXT_CORE -DBUILD_QXT_GUI -DQXT_STATIC)
 
 if (SYSTEM_BOOST_DI_FOUND)
     target_include_directories(${PROJECT_NAME} SYSTEM PRIVATE ${BOOST_DI_INCLUDEDIR})
@@ -69,7 +68,6 @@ if (WIN32)
             Boost.DI
             Qt5::Concurrent Qt5::Core Qt5::Gui Qt5::Network Qt5::Qml Qt5::Quick Qt5::QuickControls2
             Qt5::Sql Qt5::Svg Qt5::WebEngine Qt5::WebEngineWidgets Qt5::Widgets qhotkey)
-    target_compile_definitions(MellowPlayer.Console PRIVATE -DBUILD_QXT_CORE -DBUILD_QXT_GUI -DQXT_STATIC)
 endif()
 
 install(TARGETS ${PROJECT_NAME}
