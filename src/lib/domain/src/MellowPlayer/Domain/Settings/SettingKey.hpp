@@ -63,6 +63,7 @@ namespace MellowPlayer::Domain
             SHORTCUTS_SELECT_PREVIOUS_SERVICE,
             SHORTCUTS_SELECT_SERVICE,
             SHORTCUTS_SETTINGS,
+            SHORTCUTS_SHOW_DEVTOOLS,
             SHORTCUTS_SHOW_TOOLBAR
         };
         Q_ENUM(Keys)
@@ -124,6 +125,7 @@ namespace MellowPlayer::Domain
             enumToString << "shortcuts/select-previous-service";
             enumToString << "shortcuts/select-service";
             enumToString << "shortcuts/settings";
+            enumToString << "shortcuts/show-devtools";
             enumToString << "shortcuts/show-toolbar";
 
             return enumToString[static_cast<int>(key)];
