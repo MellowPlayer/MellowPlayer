@@ -1,20 +1,31 @@
 FAQ & Known issues
 ==================
 
-Playback does not start on some services such as Soundcloud or Mixcloud... What can I do?
------------------------------------------------------------------------------------------
+Playback does not start on some services... What can I do?
+----------------------------------------------------------
 
-Services that don't use flash often requires proprietary audio codecs to be installed on your system. Those codecs are not included in our official releases on Windows.
+For many services to work, QtWebEngine/chromium needs to be **compiled** with `support for proprietary Audio/Video codecs`_ support (off by default in official pre-compiled Qt binaries)
+If you have playback issues on GNU/Linux, we recommend to use `our flatpak`_ (which comes with all necessary codecs) instead of the native package or the AppImage.
 
-To solve the problem, you need to build MellowPlayer and Qt from sources and make sure you enable propertietary codecs support, see https://doc.qt.io/qt-5.11/qtwebengine-features.html#audio-and-video-codecs
+Additionally, many services (Spotify, Tidal, Netflix, Amazon Music,...) use DRM and you **MUST** `install the widevine DRM plugin`_.
 
-If you're using GNU/Linux, we recommend to use the flatpak as it comes with all the codecs needed.
+.. _support for proprietary Audio/Video codecs: https://doc.qt.io/qt-5/qtwebengine-features.html#audio-and-video-codecs
+.. _install the widevine DRM plugin: https://mellowplayer.readthedocs.io/en/latest/users/install.html#widevine-drm-plugin
 
+Some services are not listed on Windows, is that normal?
+--------------------------------------------------------
 
-.. note:: MP3 is still considered as a proprietary/patented codec prior to Qt 5.11.
+Yes. The windows version of MellowPlayer is built with the official pre-compiled Qt binaries wich is built without proprietary codecs. Services that requires proprietary
+codecs are blacklisted on Windows becauouse they wouldn't work with our binary distribution anyway.
 
-.. note:: Services that require proprietary codecs are included in our official releases but won't appear in the application.
+To workaround the isseu, try the following steps:
 
+1. Edit the plugin metadata file ($INSTALL_DIR/plugins/PLUGIN_NAME/metadata.ini) and change the ``support_platform`` value to ``All`` instead of ``Linux``
+2. Recompile QtWebEngine from source and make sure to enable proprietary codecs support
+3. Replace the QtWebEngine dll supplied by the MellowPlayer installer by the one you just built (or recompile MellowPlayer from source using your own version of Qt)
+4. If the service require DRM, try to find the widevinecdm dll in your google chrom installation and copy it next to the MellowPlayer executable.
+
+.. note:: We never tried the above mentioned steps as most of us are not Windows users. Your contribution is welcome!
 
 The application crashes at startup on GNU/Linux with open source NVIDIA drivers. What can I do?
 -----------------------------------------------------------------------------------------------
@@ -26,28 +37,8 @@ The application crashes at startup on GNU/Linux with proprietary NVIDIA drivers.
 
 Make sure you rebooted after your last NVIDIA driver update and make sure to run ``sudo nvidia-xconfig`` before reporting the issue.
 
-
-There is no music playback on Spotify. What can I do?
------------------------------------------------------
-
-Make sure you have installed both the proprietary audio codecs (ffmpeg with extra codecs) and the widevine DRM plugin. The DRM plugin can be extracted from chromium binary archive:
-
-.. code-block:: bash
-
-    wget https://archive.archlinux.org/packages/c/chromium/chromium-61.0.3163.100-1-x86_64.pkg.tar.xz
-    wget https://dl.google.com/widevine-cdm/1.4.8.1008-linux-x64.zip
-    tar -xvf chromium-61.0.3163.100-1-x86_64.pkg.tar.xz
-    unzip 1.4.8.1008-linux-x64.zip
-
-    sudo mkdir /usr/lib/chromium
-    sudo cp libwidevinecdm.so /usr/lib/chromium
-    sudo cp ./usr/lib/chromium/libwidevinecdmadapter.so /usr/lib/chromium
-    sudo chmod 644 /usr/lib/chromium/libwidevinecdm.so
-    sudo chmod 644 /usr/lib/chromium/libwidevinecdmadapter.so
-
-
 There is a message saying that the browser is not supported or outdated. What can I do?
-----------------------------------------------------------------------------
+---------------------------------------------------------------------------------------
 
 If you get the following (or similar) error message::
 
@@ -62,6 +53,14 @@ To change the user agent in MellowPlayer: **Settings -> Privacy -> User Agent**.
 
 .. _spoof your user agent: https://help.vivaldi.com/article/user-agent-spoofing/
 
+
+My login credentials are lost or refused. What can I do?
+--------------------------------------------------------
+
+If you're using a native version of MellowPlayer on an old distribution or our AppImage chances are the Qt (especially QtWebEngine/chromium) version is too
+old is not supported by the service you try to log in.
+
+Use our flatpak instead.
 
 I have a warning about broken integration plugin. What can I do?
 ----------------------------------------------------------------
