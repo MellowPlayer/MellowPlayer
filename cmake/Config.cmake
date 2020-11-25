@@ -40,7 +40,7 @@ if(MSVC_COMPILER)
     add_compile_options("/std:c++17")
     add_definitions(-D_SILENCE_CXX17_OLD_ALLOCATOR_MEMBERS_DEPRECATION_WARNING)
 endif()
-set(CMAKE_POSITION_INDEPENDENT_CODE ON)
+
 # find common packages
 find_package(Threads)
 
