@@ -6,6 +6,7 @@ import QtQml.Models 2.15
 
 import MellowPlayer 3.0
 import "../Helpers/ModelHelpers.js" as ModelHelpers
+import "../Helpers/ScrollBarHelpers.js" as ScrollBarHelpers
 
 Item {
     id: root
@@ -78,7 +79,7 @@ Item {
 
                                 function updateIndex() { index = delegateRoot.visualIndex }
 
-                                width: listView.width - (scrollBar.size !== 1 ? 18 : 0)
+                                width: listView.width - (ScrollBarHelpers.isActive(scrollBar) ? 18 : 0)
                                 height: 96
                                 service: delegateRoot.qtObject
 

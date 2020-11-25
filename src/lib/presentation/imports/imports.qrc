@@ -71,6 +71,7 @@
         <file>MellowPlayer/Helpers/WebViewHelpers.js</file>
         <file>MellowPlayer/Helpers/ModelHelpers.js</file>
         <file>MellowPlayer/Helpers/TabBarHelpers.js</file>
+        <file>MellowPlayer/Helpers/ScrollBarHelpers.js</file>
         <file>MellowPlayer/SettingsTranslator.js</file>
         <file>MellowPlayer/Dialogs/ReportIssueDialog.qml</file>
         <file>MellowPlayer/Controls/WebViewToolBar.qml</file>

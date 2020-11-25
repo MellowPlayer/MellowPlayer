@@ -61,10 +61,7 @@ ItemDelegate {
                 hoverEnabled: true
                 propagateComposedEvents: true
 
-                onReleased: {
-                    console.error("released")
-                    item.Drag.drop();
-                }
+                onReleased: root.Drag.drop();
             }
         }
 

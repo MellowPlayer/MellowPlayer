@@ -9,6 +9,7 @@ StringHelpers 3.0 Helpers/StringHelpers.js
 WebViewHelpers 3.0 Helpers/WebViewHelpers.js
 ModelHelpers 3.0 Helpers/ModelHelpers.js
 ModelHelpers 3.0 Helpers/TabBarHelpers.js
+ScrollBarHelpers 3.0 Helpers/ScrollBarHelpers.js
 
 BrowserDialog 3.0 Dialogs/BrowserDialog.qml
 CustomUrlPane 3.0 Controls/CustomUrlPane.qml
