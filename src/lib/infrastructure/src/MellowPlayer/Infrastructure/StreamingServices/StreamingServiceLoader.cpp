@@ -167,6 +167,7 @@ QStringList StreamingServiceLoader::searchPaths() const
     QStringList paths;
 
     paths.append(BuildConfig::getSourceDir() + QDir::separator() + "src/plugins");
+    paths.append(QFileInfo(qApp->applicationDirPath(), "../share/mellowplayer/plugins").absoluteFilePath()); // for flatpak
     paths.append(QFileInfo(QDir::currentPath(), "plugins").absoluteFilePath());
     paths.append(QFileInfo(qApp->applicationDirPath(), "plugins").absoluteFilePath());
     paths.append(userDirectory());
