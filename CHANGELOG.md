@@ -1,5 +1,21 @@
 # Change log
 
+## [3.6.7](https://gitlab.com/ColinDuquesnoy/MellowPlayer/tree/3.6.7) (2020-11-29)
+[Full Changelog](https://gitlab.com/ColinDuquesnoy/MellowPlayer/compare/3.6.6...3.6.7)
+
+**Merged merge requests:**
+
+- Fix Spotify selectors [\#342](https://gitlab.com/ColinDuquesnoy/MellowPlayer/merge_requests/342) ([b0o](https://gitlab.com/b0o))
+- Spotify: Update favorite button selector [\#340](https://gitlab.com/ColinDuquesnoy/MellowPlayer/merge_requests/340) ([b0o](https://gitlab.com/b0o))
+- Workaround for wrong youtube music timestamps [\#339](https://gitlab.com/ColinDuquesnoy/MellowPlayer/merge_requests/339) ([gaganpreet](https://gitlab.com/gaganpreet))
+- Update RadioTunes.com integration.js [\#338](https://gitlab.com/ColinDuquesnoy/MellowPlayer/merge_requests/338) ([andyrtr](https://gitlab.com/andyrtr))
+- Fix (my own) typo 🙈 [\#337](https://gitlab.com/ColinDuquesnoy/MellowPlayer/merge_requests/337) ([salim-b](https://gitlab.com/salim-b))
+- Mention `binutils` Debian package required for widevine install script to work [\#336](https://gitlab.com/ColinDuquesnoy/MellowPlayer/merge_requests/336) ([salim-b](https://gitlab.com/salim-b))
+- [Youbube] Fix typo: 'adds' -> 'ads' [\#335](https://gitlab.com/ColinDuquesnoy/MellowPlayer/merge_requests/335) ([tuxiqae](https://gitlab.com/tuxiqae))
+- [Youbube Music] Fix typo: 'adds' -> 'ads' [\#334](https://gitlab.com/ColinDuquesnoy/MellowPlayer/merge_requests/334) ([tuxiqae](https://gitlab.com/tuxiqae))
+- [Di.FM Radio Network] fix broken plugins [\#333](https://gitlab.com/ColinDuquesnoy/MellowPlayer/merge_requests/333) ([andyrtr](https://gitlab.com/andyrtr))
+- [Di.FM Radio Network] fix Album cover - ArtUrl [\#332](https://gitlab.com/ColinDuquesnoy/MellowPlayer/merge_requests/332) ([andyrtr](https://gitlab.com/andyrtr))
+
 ## [3.6.6](https://gitlab.com/ColinDuquesnoy/MellowPlayer/tree/3.6.6) (2020-9-13)
 [Full Changelog](https://gitlab.com/ColinDuquesnoy/MellowPlayer/compare/3.6.5...3.6.6)
 
