@@ -16,7 +16,7 @@ function getSongId() {
 
 function getArtist() {
     try {
-        return document.querySelector("div[class*='mediaArtists--3UIy']" ).innerText;
+        return document.querySelector("div[class*='mediaArtists--2pRii']" ).innerText;
     } catch(e) {
         return "";
     }
