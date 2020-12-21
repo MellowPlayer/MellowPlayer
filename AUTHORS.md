@@ -14,7 +14,7 @@ Contributors
 - [Terin Stock](https://github.com/terinjokes)
 - [Rasmus Thomsen](https://github.com/Cogitri)
 - [DmMlhch](https://github.com/DmMlhch)
-- [Rustam Zhumagambetov](https://github.com/rustamzh)
+- [Rustam Zhumagambetov](https://gitlab.com/rustamzh)
 - [Nagy Tamás (T-bond)](https://github.com/T-bond)
 - [Eric Le Lay](https://gitlab.com/elelay)
 - [cautionoid](https://gitlab.com/cautionoid)
