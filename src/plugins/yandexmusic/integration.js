@@ -16,18 +16,52 @@ function appendProtocol(url) {
 
 function update() {
     var playbackStatus;
-    if (externalAPI.isPlaying())
-        playbackStatus = MellowPlayer.PlaybackStatus.PLAYING;
-    else
-        playbackStatus = MellowPlayer.PlaybackStatus.PAUSED;
-
-
-    var track = externalAPI.getCurrentTrack();
-    var progress = externalAPI.getProgress();
-    var controls = externalAPI.getControls();
-    if (!track) {
+    try {
+        if (externalAPI.isPlaying()) {
+            playbackStatus = MellowPlayer.PlaybackStatus.PLAYING;
+        }             
+        else {
+            playbackStatus = MellowPlayer.PlaybackStatus.PAUSED;
+        }
+        
+        var track = externalAPI.getCurrentTrack();
+        var progress = externalAPI.getProgress();
+        var controls = externalAPI.getControls();
+        if (!track) {
+            return {
+                "playbackStatus": playbackStatus,
+                "canSeek": false,
+                "canGoNext": false,
+                "canGoPrevious": false,
+                "canAddToFavorites": false,
+                "volume": 1,
+                "songId": '',
+                "songTitle": '',
+                "artistName": '',
+                "albumTitle": '',
+                "artUrl": '',
+                "isFavorite": ''
+            };
+        }
         return {
             "playbackStatus": playbackStatus,
+            "canSeek": true,
+            "canGoNext": controls.next,
+            "canGoPrevious": controls.prev,
+            "canAddToFavorites": controls.like,
+            "volume": externalAPI.getVolume(),
+            "duration": Math.floor(progress.duration),
+            "position": Math.floor(progress.position),
+            "songId": getHashCode(track.title + getArtist()),
+            "songTitle": track.title,
+            "artistName": getArtist(),
+            "albumTitle": track.album.title,
+            "artUrl": appendProtocol(track.cover.slice(0, -2) + "200x200"),
+            "isFavorite": track.liked
+        };
+    } catch (error) {
+        return {
+            "playbackStatus": MellowPlayer.PlaybackStatus.STOPPED,
             "canSeek": false,
             "canGoNext": false,
             "canGoPrevious": false,
@@ -41,22 +75,7 @@ function update() {
             "isFavorite": ''
         };
     }
-    return {
-        "playbackStatus": playbackStatus,
-        "canSeek": true,
-        "canGoNext": controls.next,
-        "canGoPrevious": controls.prev,
-        "canAddToFavorites": controls.like,
-        "volume": externalAPI.getVolume(),
-        "duration": Math.floor(progress.duration),
-        "position": Math.floor(progress.position),
-        "songId": getHashCode(track.title + getArtist()),
-        "songTitle": track.title,
-        "artistName": getArtist(),
-        "albumTitle": track.album.title,
-        "artUrl": appendProtocol(track.cover.slice(0, -2) + "200x200"),
-        "isFavorite": track.liked
-    };
+    
 }
 
 function play() {
