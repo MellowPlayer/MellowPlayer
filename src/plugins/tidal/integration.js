@@ -56,10 +56,9 @@ function getDuration() {
     return toSeconds(time)
 }
 
-// either "button--3UBtc gray--3WmQU" (no Fav) or "button--3UBtc favorite--2mE-8" (isFav)
 function isFavorite() {
     try {
-        return document.querySelector('[data-test="footer-player"]').children[2].children[0].children[1].children[1].className === "button--3UBtc favorite--2mE-8";
+        return document.querySelector('[data-test="footer-player"]').children[2].children[0].children[1].children[1].attributes[6].value === "true";
     } catch (e) {
         return false;
     }
