@@ -22,8 +22,20 @@ function isOnLoginPage() {
 }
 
 function getButtons() {
+    function getPlayButton() {
+        return document.querySelector('button[data-testid=control-button-play]');
+    }
+
+    function getPauseButton() {
+        return document.querySelector('button[data-testid=control-button-pause]');
+    }
+
     function getPlayPauseButton() {
-        return document.querySelector('.Root__now-playing-bar button.spoticon-pause-16, .Root__now-playing-bar button.spoticon-play-16');
+        let playButton = getPlayButton();
+        if (playButton)
+            return playButton;
+        else
+            return getPauseButton();
     }
 
     function getSkipPreviousSongButton() {
@@ -40,6 +52,8 @@ function getButtons() {
 
     return {
         "playPause": getPlayPauseButton(),
+        "play": getPlayButton(),
+        "pause": getPauseButton(),
         "next": getSkipNextSongButton(),
         "previous": getSkipPreviousSongButton(),
         "addRemoveToMusic": getAddRemoveToMusicButton()
@@ -47,31 +61,21 @@ function getButtons() {
 }
 
 function getPlaybackStatus() {
-    var button = getButtons().playPause;
-    if (button === null)
-        return MellowPlayer.PlaybackStatus.STOPPED;
-    else if (button.classList.contains("spoticon-play-16"))
+    if (getButtons().pause)
+        return MellowPlayer.PlaybackStatus.PLAYING;
+
+    if (getButtons().play)
         return MellowPlayer.PlaybackStatus.PAUSED;
-    return MellowPlayer.PlaybackStatus.PLAYING;
+
+    return MellowPlayer.PlaybackStatus.STOPPED;
 }
 
 function getArtist() {
-    try {
-        return Array.from(document.querySelectorAll('.Root__now-playing-bar .now-playing a[href^="/artist/"]'))
-          .map(e => e.innerText)
-          .filter(e => e !== "")
-          .join(", ");
-    } catch (e) {
-        return "";
-    }
+    return navigator.mediaSession.metadata.artist;
 }
 
 function getSongTitle() {
-    try {
-        return document.querySelector('.Root__now-playing-bar .now-playing > div:nth-of-type(2) a[href^="/album/"]').innerText;
-    } catch (e) {
-        return "";
-    }
+    return navigator.mediaSession.metadata.title;
 }
 
 function readTime(timeString) {
@@ -121,11 +125,10 @@ function getVolume() {
 }
 
 function getArtUrl() {
-    var artUrlDiv = document.querySelector('.now-playing .cover-art-image.cover-art-image');
-    if (artUrlDiv === null) {
-        return "";
-    }
-    return artUrlDiv.src
+    let artworks = navigator.mediaSession.metadata.artwork;
+    if (artworks.length > 0)
+        return artworks[0].src;
+    return "";
 }
 
 function isFavorite() {
