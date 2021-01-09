@@ -62,15 +62,15 @@ Item {
                 y: (root.height - implicitHeight) / 2 - (sliderLayout.visible ? 6 : 0)
 
                 function getText() {
-                    var currentSong = _player.currentSong;
+                    var currentSong = CurrentPlayer.currentSong;
                     if (currentSong.title && currentSong.artist)
                         return "<b>" + currentSong.title.replace("&", "&amp;") + qsTr("</b><i> by ") + currentSong.artist.replace("&", "&amp;") + "</i>";
                     else if (currentSong.title)
                         return "<b>" + currentSong.title.replace("&", "&amp;") + "</b>";
-                    else if (_streamingServices.currentService !== null)
-                        return _streamingServices.currentService.name;
                     return "";
                 }
+
+
             }
 
             RowLayout {
