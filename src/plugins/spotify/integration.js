@@ -78,52 +78,6 @@ function getSongTitle() {
     return navigator.mediaSession.metadata.title;
 }
 
-function readTime(timeString) {
-    var hours = 0;
-    var minutes = 0;
-    var seconds = 0;
-    var m = timeString.match("\\d+:\\d+:\\d+");
-    if (m !== null) {
-        var data = timeString.split(':');
-        hours = parseInt(data[0]);
-        minutes = parseInt(data[1]);
-        seconds = parseInt(data[2]);
-    } else {
-        var m = timeString.match("\\d+:\\d+");
-        if (m !== null) {
-            var data = timeString.split(':');
-            minutes = parseInt(data[0]);
-            seconds = parseInt(data[1]);
-        }
-    }
-    return hours * 3600 + minutes * 60 + seconds;
-}
-
-function getPosition() {
-    try {
-        return readTime(document.querySelector('.playback-bar__progress-time:first-child').innerText);
-    } catch (e) {
-        return 0;
-    }
-}
-
-function getDuration() {
-    try {
-        return readTime(document.querySelector('.playback-bar__progress-time:last-child').innerText);
-    } catch (e) {
-        return 0;
-    }
-}
-
-function getVolume() {
-    try {
-        var value = parseFloat(document.querySelector('.volume-bar .progress-bar__fg').style.transform.replace("translateX(", "").replace("%)", ""))
-        return (100.0 + value) / 100.0;
-    } catch (e) {
-        return 1;
-    }
-}
-
 function getArtUrl() {
     let artworks = navigator.mediaSession.metadata.artwork;
     if (artworks.length > 0)
@@ -147,14 +101,14 @@ function update() {
         "albumTitle": "",
         "artUrl": getArtUrl(),
         "isFavorite": isFavorite(),
-        "duration": getDuration(),
-        "position": getPosition(),
+        "duration": 0,
+        "position": 0,
         "playbackStatus": getPlaybackStatus(),
         "canSeek": false,
-        "canGoNext": true,
+        "canGoNext": false,
         "canGoPrevious": true,
         "canAddToFavorites": true,
-        "volume": getVolume()
+        "volume": 1
     };
 }
 
@@ -183,7 +137,6 @@ function goPrevious() {
 }
 
 function setVolume(volume) {
-    // not supported
 }
 
 function addToFavorites() {
@@ -199,6 +152,5 @@ function removeFromFavorites() {
 }
 
 function seekToPosition(position) {
-    if (isOnLoginPage())
-        return;
+
 }
