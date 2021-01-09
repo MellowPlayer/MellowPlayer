@@ -71,15 +71,15 @@ function getPlaybackStatus() {
 }
 
 function getArtist() {
-    return navigator.mediaSession.metadata.artist;
+    return navigator.mediaSession.metadata ? navigator.mediaSession.metadata.artist : "";
 }
 
 function getSongTitle() {
-    return navigator.mediaSession.metadata.title;
+    return navigator.mediaSession.metadata ? navigator.mediaSession.metadata.title : "";
 }
 
 function getArtUrl() {
-    let artworks = navigator.mediaSession.metadata.artwork;
+    let artworks = navigator.mediaSession.metadata ? navigator.mediaSession.metadata.artwork : [];
     if (artworks.length > 0)
         return artworks[0].src;
     return "";
