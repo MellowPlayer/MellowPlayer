@@ -16,9 +16,10 @@ Pane {
     anchors.rightMargin: 8
     anchors.leftMargin: 8
     anchors.bottomMargin: 4
-    visible: state == "visible"
+    visible: state === "visible"
 
     onTextChanged: {
+        console.warn("txt changed", text)
         if (text !== "") {
             state = "visible";
             disappearTimer.restart();
@@ -86,11 +87,5 @@ Pane {
         PropertyAnimation {
             properties: "opacity"
         }
-
-        onRunningChanged: {
-            if (root.state === "hidden" && running == false)
-                root.text = "";
-        }
-
     }
 }

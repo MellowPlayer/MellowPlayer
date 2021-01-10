@@ -217,6 +217,7 @@ SwipeDelegate {
         }
 
         function copy() {
+            console.warn("copy")
             ClipBoardViewModel.setText(root.title)
         }
     }
