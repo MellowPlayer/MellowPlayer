@@ -10,7 +10,8 @@ Drawer {
 
     clip: true
     edge: Qt.RightEdge
-    dragMargin: 0
+    interactive: ApplicationViewModel.hasTouchScreen && position !== 1
+    dragMargin: ApplicationViewModel.hasTouchScreen ? Qt.styleHints.startDragDistance : 0
 
     onPositionChanged: if (position == 0) toolBar.searchChecked = false
 

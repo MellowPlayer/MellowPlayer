@@ -94,7 +94,7 @@ ColumnLayout {
 
             ToolButton {
                 highlighted: true
-                hoverEnabled: true
+                hoverEnabled: !ApplicationViewModel.hasTouchScreen
                 text: qsTr("Restore defaults")
 
                 onClicked: {

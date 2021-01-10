@@ -18,6 +18,7 @@ QtObject {
     property Action checkForUpdates
     property Action showAbout
     property Action quit
+    property Action zenMode
 
     // Current web view actions
     property Action goBack
@@ -28,22 +29,25 @@ QtObject {
     // Player actions
     property Action toggleFavoriteSong: Action {
         shortcut: SettingsViewModel.get(SettingKey.SHORTCUTS_FAVORITE).value
-        enabled: CurrentPlayer.canAddToFavorites
+        enabled: CurrentPlayer.canAddToFavorites && CurrentPlayer.active
 
         onTriggered: CurrentPlayer.toggleFavoriteSong()
     }
+
     property Action skipToPreviousSong: Action {
         shortcut: SettingsViewModel.get(SettingKey.SHORTCUTS_PREVIOUS).value
         enabled: CurrentPlayer.canGoPrevious && CurrentPlayer.active
 
         onTriggered: CurrentPlayer.previous()
     }
+
     property Action playPause: Action {
         shortcut: SettingsViewModel.get(SettingKey.SHORTCUTS_PLAY).value
-        enabled: !CurrentPlayer.isStopped || CurrentPlayer.active
+        enabled: CurrentPlayer.active
 
         onTriggered: CurrentPlayer.togglePlayPause()
     }
+
     property Action skipToNextSong: Action {
         shortcut: SettingsViewModel.get(SettingKey.SHORTCUTS_NEXT).value
         enabled: CurrentPlayer.canGoNext && CurrentPlayer.active

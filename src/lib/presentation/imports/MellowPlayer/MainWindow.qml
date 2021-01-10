@@ -10,11 +10,9 @@ ApplicationWindow {
     id: root
 
 
-    minimumWidth: 360; minimumHeight: 450
+    minimumWidth: 360; minimumHeight: 360
     width: SettingsViewModel.get(SettingKey.PRIVATE_WINDOW_WIDTH).value;
     height: SettingsViewModel.get(SettingKey.PRIVATE_WINDOW_HEIGHT).value;
-
-    onWidthChanged: console.warn(width)
 
     title: {
         var currentSong = CurrentPlayer.currentSong;
@@ -46,7 +44,26 @@ ApplicationWindow {
         visible: SettingsViewModel.get(SettingKey.APPEARANCE_TOOLBAR_VISIBLE).value && !MainWindowViewModel.fullScreen
     }
 
-    footer: UpdateToolBar { }
+    footer: ColumnLayout {
+        spacing: 0
+
+        PlayerFooter {
+            id: playerFooter
+
+            drawer: playerDrawer
+            visible: MainWindowViewModel.runningServices.model.count > 0 &&
+                     SettingsViewModel.get(SettingKey.APPEARANCE_PLAYER_CONTROLS_VISIBLE).value &&
+                     ApplicationWindow.window.width <= 767
+
+            Layout.fillWidth: true
+            Layout.preferredHeight: height
+        }
+
+        UpdateToolBar {
+            Layout.fillWidth: true
+            Layout.preferredHeight: height
+        }
+    }
 
     RunningServicesPage {
         id: runningServicesPage
@@ -56,7 +73,8 @@ ApplicationWindow {
     SelectServiceDrawer {
         id: selectServiceDrawer
 
-        height: root.height; width: root.width >= 450 ? 450 : root.width
+        height: root.height
+        width: root.width >= 450 ? 450 : root.width
     }
 
     SettingsDrawer {
@@ -68,7 +86,12 @@ ApplicationWindow {
     ListeningHistoryDrawer {
         id: listeningHistoryDrawer;
 
-        height: root.height; width: 450
+        height: root.height
+        width: root.width >= 450 ? 450 : root.width
+    }
+
+    PlayerDrawer {
+        id: playerDrawer
     }
 
     NewPluginWizard {
@@ -185,6 +208,14 @@ ApplicationWindow {
         Component.onCompleted: Actions.quit = quitAction
     }
 
+    Action {
+        id: zenModeAction
+        enabled: StreamingServicesViewModel.currentService !== null
+        text: qsTr("Zen Mode")
+        onTriggered: playerDrawer.open()
+
+        Component.onCompleted: Actions.zenMode = zenModeAction
+    }
 
     QtObject {
         id: d

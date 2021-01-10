@@ -35,7 +35,7 @@ Page {
                 id: btBack
 
                 font { family: MaterialIcons.family; pixelSize: 24 }
-                hoverEnabled: true
+                hoverEnabled: !ApplicationViewModel.hasTouchScreen
                 text: MaterialIcons.icon_keyboard_arrow_right
                 onClicked: settingsPage.closeRequested()
 
@@ -121,7 +121,7 @@ Page {
                                 property bool isCurrentItem: index === settingsPageList.currentIndex
 
                                 height: 60; width: parent.width
-                                hoverEnabled: true
+                                hoverEnabled: !ApplicationViewModel.hasTouchScreen
 
                                 onClicked: settingsPageList.currentIndex = index
                                 onIsCurrentItemChanged: if (isCurrentItem) settingsPageList.currentCategory = category
@@ -163,7 +163,7 @@ Page {
                             anchors.fill: parent
                             flat: true
                             highlighted: true
-                            hoverEnabled: true
+                            hoverEnabled: !ApplicationViewModel.hasTouchScreen
                             text: qsTr("Restore all to defaults")
                             onClicked: {
                                 Dialogs.askConfirmation(

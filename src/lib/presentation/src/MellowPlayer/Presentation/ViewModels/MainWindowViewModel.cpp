@@ -61,6 +61,7 @@ ZoomViewModel* MainWindowViewModel::zoom()
 {
     return &_zoom;
 }
+
 RunningServicesViewModel* MainWindowViewModel::runningServices()
 {
     return &_runningServices;

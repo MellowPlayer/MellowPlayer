@@ -11,8 +11,8 @@ Popup {
 
     padding: 20
     modal: true
-    height: 426
-    width: Math.max(labelBuildInfo.implicitWidth + 32, height)
+    height: 340
+    width: 340
 
     onVisibleChanged: if (!visible) btCredits.checked = false
 
@@ -44,21 +44,19 @@ Popup {
 
                 Label {
                     font.bold: true
-                    font.pixelSize: 24
+                    font.pixelSize: 18
                     text: "MellowPlayer"
 
                     Layout.alignment: Qt.AlignCenter
                 }
 
                 Label {
-                    font.pixelSize: 16
                     text: Qt.application.version
 
                     Layout.alignment: Qt.AlignCenter
                 }
 
                 Label {
-                    font.pixelSize: 16
                     text: qsTr("Cloud music integration for your desktop")
 
                     Layout.alignment: Qt.AlignCenter
@@ -77,43 +75,10 @@ Popup {
                     Layout.alignment: Qt.AlignCenter
                 }
 
-                ColumnLayout {
-                    spacing: 0
-
-                    Layout.alignment: Qt.AlignCenter
-
-                    Label {
-                        font.pixelSize: 12
-                        text: qsTr('This program comes with absolutely no warranty.')
-
-                        Layout.alignment: Qt.AlignCenter
-                    }
-
-                    Label {
-                        font.pixelSize: 12
-                        onLinkActivated: (link) => Qt.openUrlExternally(link)
-                        text: qsTr('See the <a href="https://www.gnu.org/licenses/old-licenses/lgpl-2.15">GNU Lesser General Public License</a>,')
-
-                        MouseArea {
-                            anchors.fill: parent
-                            acceptedButtons: Qt.NoButton
-                            cursorShape: parent.hoveredLink ? Qt.PointingHandCursor : Qt.ArrowCursor
-                        }
-
-                        Layout.alignment: Qt.AlignCenter
-                    }
-
-                    Label {
-                        font.pixelSize: 12
-                        text: qsTr('version 2.15 or later for details.')
-
-                        Layout.alignment: Qt.AlignCenter
-                    }
-                }
-
                 Label {
                     id: labelBuildInfo
                     font.italic: true
+                    font.pixelSize: 10
                     text: ApplicationViewModel.buildInfo
                     wrapMode: "Wrap"
                     horizontalAlignment: Qt.AlignHCenter

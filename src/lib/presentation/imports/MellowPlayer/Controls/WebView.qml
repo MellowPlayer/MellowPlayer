@@ -103,7 +103,6 @@ Page {
             onPlaybackRequiresUserGestureChanged: reload()
         }
         userScripts: allUserScripts
-        zoomFactor: MainWindowViewModel.zoom.value
         webChannel: webChannel
         audioMuted: StreamingServicesViewModel.currentService !== root.service
 
@@ -177,14 +176,20 @@ Page {
         onAllUserScriptsChanged: reload()
 
         Component.onCompleted: {
-           root.service.player.play.connect(() => { playerBridge.play() });
-           root.service.player.pause.connect(() => { playerBridge.pause() });
-           root.service.player.next.connect(() => { playerBridge.next() });
-           root.service.player.previous.connect(() => { playerBridge.previous() });
-           root.service.player.addToFavorites.connect(() => { playerBridge.addToFavorites() });
-           root.service.player.removeFromFavorites.connect(() => { playerBridge.removeFromFavorites() });
-           root.service.player.seekToPositionRequest.connect((newPosition) => { playerBridge.seekToPosition(newPosition) });
-           root.service.player.changeVolumeRequest.connect((newVolume) => { playerBridge.changeVolume(newVolume) });
+            webView.zoomFactor = MainWindowViewModel.zoom.value;
+            MainWindowViewModel.zoom.valueChanged.connect(() => {
+                // /!\ Need to set it twice the first time for the change to be taken into account !
+                webView.zoomFactor = MainWindowViewModel.zoom.value;
+                webView.zoomFactor = MainWindowViewModel.zoom.value;
+            });
+            root.service.player.play.connect(() => { playerBridge.play() });
+            root.service.player.pause.connect(() => { playerBridge.pause() });
+            root.service.player.next.connect(() => { playerBridge.next() });
+            root.service.player.previous.connect(() => { playerBridge.previous() });
+            root.service.player.addToFavorites.connect(() => { playerBridge.addToFavorites() });
+            root.service.player.removeFromFavorites.connect(() => { playerBridge.removeFromFavorites() });
+            root.service.player.seekToPositionRequest.connect((newPosition) => { playerBridge.seekToPosition(newPosition) });
+            root.service.player.changeVolumeRequest.connect((newVolume) => { playerBridge.changeVolume(newVolume) });
         }
 
         ValidationMessage {

@@ -17,7 +17,7 @@ ItemDelegate {
     property var valueFromText: function(text, locale) { return Number.fromLocaleString(locale, text); }
     property var textFromValue: function(value, locale) { return Number(value).toLocaleString(locale, 'f', 0); }
 
-    hoverEnabled: true
+    hoverEnabled: !ApplicationViewModel.hasTouchScreen
 
     RowLayout {
         anchors.fill: parent

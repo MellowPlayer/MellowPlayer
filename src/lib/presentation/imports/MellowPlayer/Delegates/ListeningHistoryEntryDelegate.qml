@@ -8,7 +8,7 @@ import MellowPlayer 3.0
 import "../Dialogs.js" as Dialogs
 import "../DateCategoryTranslator.js" as DateCategoryTranslator
 
-Frame {
+SwipeDelegate {
     id: root
 
     required property ListView view
@@ -26,23 +26,9 @@ Frame {
     property bool expanded: false
 
     height: expanded ? 72 : 0; width: view.width
-
-    background: Rectangle {
-        color: "transparent"
-        visible: root.index != root.view.count - 1
-
-        Rectangle {
-            anchors.bottom: parent.bottom
-            anchors.left: parent.left
-            anchors.right: parent.right
-            color: ThemeViewModel.isDark(ThemeViewModel.background) ? Qt.lighter(ThemeViewModel.background) : Qt.darker(ThemeViewModel.background, 1.1)
-            height: 1
-            visible: root.expanded
-        }
-    }
+    hoverEnabled: !ApplicationViewModel.hasTouchScreen
     clip: true
     padding: 1
-    hoverEnabled: true
     onHoveredChanged: {
         if (hovered) {
             delayTimer.start();
@@ -57,6 +43,59 @@ Frame {
         NumberAnimation { duration:  100 }
     }
 
+    swipe.enabled: ApplicationViewModel.hasTouchScreen
+    swipe.left: Label {
+        id: deleteLabel
+        text: MaterialIcons.icon_delete
+        font { family: MaterialIcons.family; pixelSize: 16 }
+        color: "white"
+        verticalAlignment: Label.AlignVCenter
+        horizontalAlignment: Label.AlignHCenter
+        padding: 12
+        height: parent.height
+        width: 64
+        anchors.left: parent.left
+
+        SwipeDelegate.onClicked: { d.remove(); }
+
+        background: Rectangle {
+            color: Material.color(Material.Red)
+
+            Rectangle {
+                anchors.fill: parent
+                color: Material.foreground
+                opacity: 0.24
+                visible: deleteLabel.SwipeDelegate.pressed
+            }
+        }
+    }
+
+    swipe.right: Label {
+        id: copyLabel
+        text: MaterialIcons.icon_content_copy
+        font { family: MaterialIcons.family; pixelSize: 16 }
+        color: "white"
+        verticalAlignment: Label.AlignVCenter
+        horizontalAlignment: Label.AlignHCenter
+        padding: 12
+        height: parent.height
+        width: 64
+        anchors.right: parent.right
+
+        SwipeDelegate.onClicked: { d.copy(); }
+
+        background: Rectangle {
+            color: Material.accent
+
+            Rectangle {
+                anchors.fill: parent
+                color: Material.foreground
+                opacity: 0.24
+                visible: copyLabel.SwipeDelegate.pressed
+            }
+        }
+    }
+
     ListView.onRemove: SequentialAnimation {
         PropertyAction { target: root; property: "ListView.delayRemove"; value: true }
         NumberAnimation { target: root; property: "x"; to: 950; duration: 200 ; easing.type: Easing.InOutQuad }
@@ -69,14 +108,11 @@ Frame {
         onTriggered: controlPane.visible = true
     }
 
-    Pane {
-        anchors.fill: parent
-        padding: 0
-        leftPadding: 12
-        rightPadding: 12
-
+    contentItem: Item {
         RowLayout {
             anchors.fill: parent
+            anchors.leftMargin: 12
+            anchors.rightMargin: 12
             spacing: 8
 
             Image {
@@ -94,21 +130,21 @@ Frame {
                     text: root.title
                     elide: "ElideMiddle"
                     font.bold: true
-                    width: 250
+                    width: 140
                 }
 
                 Label {
                     text: qsTr("by") + " " + root.artist
                     font.italic: true
                     elide: "ElideMiddle"
-                    width: 250
+                    width: 140
                 }
 
                 Label {
                     text: qsTr("on") + " " + root.service
                     font.italic: true
                     elide: "ElideMiddle"
-                    width: 250
+                    width: 140
                 }
             }
 
@@ -117,6 +153,7 @@ Frame {
             }
 
             Label {
+                visible: !controlPane.visible
                 text: {
                     if (root.dateCategory === "Today" || root.dateCategory === "Yesterday")
                         return DateCategoryTranslator.translate(root.dateCategory) + "\n" + root.time
@@ -127,51 +164,60 @@ Frame {
                 horizontalAlignment:"AlignRight"
             }
         }
-    }
 
-    Pane {
-        id: controlPane
+        Item {
+            id: controlPane
 
-        anchors.top: parent.top
-        anchors.right: parent.right
-        anchors.bottom: parent.bottom
-        opacity: 0.9
-        visible: false
-        padding: 0
-
-        RowLayout {
             anchors.top: parent.top
-            anchors.bottom: parent.bottom
             anchors.right: parent.right
+            anchors.bottom: parent.bottom
+            anchors.margins: 12
+            visible: false
 
-            ToolButton {
-                id: btDelete
-                hoverEnabled: true
-                text: MaterialIcons.icon_delete
-                font { family: MaterialIcons.family; pixelSize: 16 }
-                onClicked: {
-                    Dialogs.askConfirmation(
-                        qsTr("Confirm remove"),
-                        qsTr('Are you sure you want to remove that song from the history?'),
-                        (confirmed) => {
-                            if (confirmed)
-                                ListeningHistoryViewModel.removeById(root.entryId)
-                        }
-                    )
+            RowLayout {
+                anchors.top: parent.top
+                anchors.bottom: parent.bottom
+                anchors.right: parent.right
+
+                ToolButton {
+                    id: btDelete
+                    hoverEnabled: !ApplicationViewModel.hasTouchScreen
+                    text: MaterialIcons.icon_delete
+                    font { family: MaterialIcons.family; pixelSize: 16 }
+                    onClicked: { d.remove(); }
+
+                    Layout.fillHeight: true
                 }
 
-                Layout.fillHeight: true
-            }
+                ToolButton {
+                    id: btCopy
+                    hoverEnabled: !ApplicationViewModel.hasTouchScreen
+                    text: MaterialIcons.icon_content_copy
+                    font { family: MaterialIcons.family; pixelSize: 16 }
+                    onClicked: { d.copy() }
 
-            ToolButton {
-                id: btCopy
-                hoverEnabled: true
-                text: MaterialIcons.icon_content_copy
-                font { family: MaterialIcons.family; pixelSize: 16 }
-                onClicked: ClipBoardViewModel.setText(root.title)
-
-                Layout.fillHeight: true
+                    Layout.fillHeight: true
+                }
             }
+        }
+    }
+
+    QtObject {
+        id: d
+
+        function remove() {
+            Dialogs.askConfirmation(
+                qsTr("Confirm remove"),
+                qsTr('Are you sure you want to remove that song from the history?'),
+                (confirmed) => {
+                    if (confirmed)
+                        ListeningHistoryViewModel.removeById(root.entryId)
+                }
+            )
+        }
+
+        function copy() {
+            ClipBoardViewModel.setText(root.title)
         }
     }
 }

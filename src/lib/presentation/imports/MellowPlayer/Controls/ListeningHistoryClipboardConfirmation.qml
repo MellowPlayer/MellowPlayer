@@ -16,6 +16,7 @@ Pane {
     anchors.rightMargin: 8
     anchors.leftMargin: 8
     anchors.bottomMargin: 4
+    visible: state == "visible"
 
     onTextChanged: {
         if (text !== "") {

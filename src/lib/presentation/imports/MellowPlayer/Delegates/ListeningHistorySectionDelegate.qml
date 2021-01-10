@@ -24,7 +24,7 @@ Pane {
 
     ItemDelegate {
        anchors.fill: parent
-       hoverEnabled: true
+       hoverEnabled: !ApplicationViewModel.hasTouchScreen
        padding: 0
 
        ColumnLayout {
@@ -75,7 +75,7 @@ Pane {
                    text: MaterialIcons.icon_delete
                    font.pixelSize: 16
                    font.family: MaterialIcons.family
-                   hoverEnabled: true
+                   hoverEnabled: !ApplicationViewModel.hasTouchScreen
 
                    onClicked: {
                        Dialogs.askConfirmation(

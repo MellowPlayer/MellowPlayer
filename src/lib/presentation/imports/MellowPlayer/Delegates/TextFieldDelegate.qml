@@ -9,7 +9,7 @@ ItemDelegate {
     property alias value: textField.text
     property int textFieldPreferredWidth: 320
 
-    hoverEnabled: true
+    hoverEnabled: !ApplicationViewModel.hasTouchScreen
 
     RowLayout {
         anchors.fill: parent

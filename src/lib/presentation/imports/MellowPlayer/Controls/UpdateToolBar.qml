@@ -73,7 +73,7 @@ ToolBar {
             }
 
             ToolButton {
-                hoverEnabled: true
+                hoverEnabled: !ApplicationViewModel.hasTouchScreen
                 text: MaterialIcons.icon_close
                 font {
                     family: MaterialIcons.family

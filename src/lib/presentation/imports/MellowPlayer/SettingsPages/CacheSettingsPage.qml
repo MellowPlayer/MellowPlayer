@@ -15,7 +15,7 @@ Item {
 
         ToolButton{
             highlighted: true
-            hoverEnabled: true
+            hoverEnabled: !ApplicationViewModel.hasTouchScreen
             text: qsTr("Clear cookies")
             onClicked: {
                 paneRestart.state = "visible"
@@ -33,7 +33,7 @@ Item {
 
         ToolButton {
             highlighted: true
-            hoverEnabled: true
+            hoverEnabled: !ApplicationViewModel.hasTouchScreen
             text: qsTr("Clear cache")
             onClicked: {
                 paneRestart.state = "visible"

@@ -15,6 +15,7 @@ namespace MellowPlayer::Presentation
     {
         Q_OBJECT
         Q_PROPERTY(QString buildInfo READ buildInfo CONSTANT)
+        Q_PROPERTY(bool hasTouchScreen READ HasTouchScreen CONSTANT)
     public:
         ApplicationViewModel(Infrastructure::IApplication& application,
                              Infrastructure::IQtApplication& qtApplication,
@@ -25,6 +26,9 @@ namespace MellowPlayer::Presentation
         Q_INVOKABLE void showLogs();
         Q_INVOKABLE void clearCache();
         Q_INVOKABLE void clearCookies();
+
+        bool HasTouchScreen() const;
+
 
         // TODO should move into AboutWindowViewModel
         QString buildInfo() const;

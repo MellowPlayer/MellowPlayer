@@ -29,7 +29,7 @@ ToolBar {
             font { family: MaterialIcons.family; pixelSize: 22 }
             text: MaterialIcons.icon_search
 
-            hoverEnabled: true
+            hoverEnabled: !ApplicationViewModel.hasTouchScreen
             enabled: root.enabled
 
             Material.accent: ThemeViewModel.accent === ThemeViewModel.primary ? ThemeViewModel.primaryForeground : ThemeViewModel.accent
@@ -47,7 +47,7 @@ ToolBar {
             id: btBackFromListeningHistory
 
             font { family: MaterialIcons.family; pixelSize: 22 }
-            hoverEnabled: true
+            hoverEnabled: !ApplicationViewModel.hasTouchScreen
             action: Actions.toggleListeningHistory
             text: MaterialIcons.icon_keyboard_arrow_right
 

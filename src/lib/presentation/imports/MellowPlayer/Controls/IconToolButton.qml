@@ -15,8 +15,9 @@ ToolButton {
 
     text: iconChar
     font { family: MaterialIcons.family; pixelSize: iconSize }
-    hoverEnabled: true
+    hoverEnabled: !ApplicationViewModel.hasTouchScreen
     padding: 0
+    spacing: 0
 
     onClicked: if (!checkable) triggered()
 

@@ -14,7 +14,8 @@ ItemDelegate {
     required property StreamingServiceViewModel service
 
     property int index: service.sortIndex
-    property string backgroundColor: Material.background
+    property bool last: false
+    property color backgroundColor: Material.background
 
     function activate() {
         root.activated()
@@ -22,8 +23,8 @@ ItemDelegate {
     }
     signal activated()
 
-    hoverEnabled: true
-    padding: 3
+    hoverEnabled: !ApplicationViewModel.hasTouchScreen
+    padding: 0
     highlighted: root.service === StreamingServicesViewModel.currentService
 
     onIndexChanged: service.sortIndex = root.index
@@ -37,12 +38,13 @@ ItemDelegate {
 
     RowLayout {
         anchors.fill: parent
-        anchors.margins: 6
+        anchors.margins: 0
 
         Item {
             Layout.preferredWidth: 24
             Layout.preferredHeight: 24
             Layout.alignment: Qt.AlignVCenter
+            Layout.leftMargin: 6
 
             Label {
                 anchors.centerIn: parent
@@ -58,7 +60,7 @@ ItemDelegate {
 
                 anchors.fill: parent
                 drag.target: root
-                hoverEnabled: true
+                hoverEnabled: !ApplicationViewModel.hasTouchScreen
                 propagateComposedEvents: true
 
                 onReleased: root.Drag.drop();
@@ -135,10 +137,21 @@ ItemDelegate {
     }
 
     Rectangle {
+        anchors.left: parent.left
+        anchors.top: parent.top
+        anchors.bottom: parent.bottom
+        width: 6
+        visible: root.service.isActive
+        color: root.highlighted ? Material.accent : ThemeViewModel.foreground
+        opacity: root.highlighted ? 0.64 : 0.24
+    }
+
+    Rectangle {
         anchors.bottom: parent.bottom
         anchors.left: parent.left
         anchors.right: parent.right
         height: 1
         color: ThemeViewModel.isDark(ThemeViewModel.background) ? Qt.lighter(ThemeViewModel.background) : Qt.darker(ThemeViewModel.background, 1.1)
+        visible: !root.Drag.active && !root.last
     }
 }

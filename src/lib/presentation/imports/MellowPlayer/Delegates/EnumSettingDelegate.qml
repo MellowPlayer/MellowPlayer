@@ -21,7 +21,7 @@ ItemDelegate {
     property var values: enumSetting.values
 
     bottomPadding: 3; topPadding: 3
-    hoverEnabled: true
+    hoverEnabled: !ApplicationViewModel.hasTouchScreen
     enabled: root.enabled
     onClicked: comboBox.popup.open()
 
@@ -41,7 +41,7 @@ ItemDelegate {
         ComboBox {
             id: comboBox
 
-            hoverEnabled: true
+            hoverEnabled: !ApplicationViewModel.hasTouchScreen
             model: root.values
             currentIndex: root.enumSetting.indexOf(root.qtObject.value)
             onCurrentTextChanged: root.qtObject.value = currentText

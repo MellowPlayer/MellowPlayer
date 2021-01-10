@@ -11,8 +11,9 @@ Drawer {
 
     clip: true
     edge: Qt.LeftEdge
-    dragMargin: 0
     modal: true
+    dragMargin: ApplicationViewModel.hasTouchScreen ? Qt.styleHints.startDragDistance : 0
+    interactive: ApplicationViewModel.hasTouchScreen
 
     onVisibleChanged: searchToolButton.checked = false
 

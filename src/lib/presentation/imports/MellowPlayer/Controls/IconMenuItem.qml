@@ -10,7 +10,7 @@ MenuItem {
     property string iconChar
     property string shortcut
 
-    hoverEnabled: true
+    hoverEnabled: !ApplicationViewModel.hasTouchScreen
     contentItem: RowLayout {
         spacing: 8
 

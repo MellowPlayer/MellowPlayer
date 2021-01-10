@@ -10,7 +10,7 @@ ItemDelegate {
 
     bottomPadding: 3; topPadding: 3
     enabled: root.enabled
-    hoverEnabled: true
+    hoverEnabled: !ApplicationViewModel.hasTouchScreen
     
     required property bool isEnabled
     required property string name

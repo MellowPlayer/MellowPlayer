@@ -6,21 +6,20 @@
 #include <MellowPlayer/Presentation/ViewModels/ApplicationViewModel.hpp>
 #include <MellowPlayer/Presentation/ViewModels/MainWindowViewModel.hpp>
 
-#include <QDesktopServices>
 #include <QDebug>
+#include <QDesktopServices>
+#include <QDir>
 #include <QFontDatabase>
 #include <QProcess>
-#include <QDir>
 #include <QStandardPaths>
+#include <QTouchDevice>
 #include <QWebEngineProfile>
 
 using namespace MellowPlayer::Domain;
 using namespace MellowPlayer::Presentation;
 using namespace MellowPlayer::Infrastructure;
 
-ApplicationViewModel::ApplicationViewModel(IApplication& application,
-                                           IQtApplication& qtApplication,
-                                           MainWindowViewModel& mainWindow)
+ApplicationViewModel::ApplicationViewModel(IApplication& application, IQtApplication& qtApplication, MainWindowViewModel& mainWindow)
         : QmlSingleton("ApplicationViewModel", this),
           _application(application),
           _qtApplication(qtApplication),
@@ -81,4 +80,22 @@ void ApplicationViewModel::clearCookies()
     QDir storageDir(profile.persistentStoragePath());
     qDebug() << "removing persistent storage directory: " << storageDir;
     storageDir.removeRecursively();
+}
+
+bool ApplicationViewModel::HasTouchScreen() const
+{
+    auto touchScreenMode = qgetenv("MELLOWPLAYER_TOUCHSCREEN_MODE");
+    if (!touchScreenMode.isEmpty() && touchScreenMode == "1")
+    {
+        return true;
+    }
+
+    for (const auto& touchDevice : QTouchDevice::devices())
+    {
+        if (touchDevice->type() == QTouchDevice::TouchScreen)
+        {
+            return true;
+        }
+    }
+    return false;
 }

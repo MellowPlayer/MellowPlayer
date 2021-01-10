@@ -17,7 +17,7 @@ Menu {
     MenuItem {
         id: zoomMenuItem
 
-        hoverEnabled: true
+        hoverEnabled: !ApplicationViewModel.hasTouchScreen
         padding: 0
         spacing: 0
 
@@ -43,8 +43,8 @@ Menu {
 
                 padding: 0
 
-                from: 50
-                to: 300
+                from: 25
+                to: 500
                 stepSize: 25
                 value: MainWindowViewModel.zoom.value * 100
 
@@ -76,6 +76,8 @@ Menu {
     IconMenuItem {
         action: Actions.createNewPlugin
         iconChar: MaterialIcons.icon_extension
+        visible: !ApplicationViewModel.hasTouchScreen
+        height:  visible ? implicitHeight : 0
     }
 
     IconMenuItem {
@@ -94,6 +96,18 @@ Menu {
             value: UpdaterViewModel.progress
             visible: UpdaterViewModel.busy
         }
+    }
+
+    MenuSeparator {
+        visible: !ApplicationViewModel.hasTouchScreen
+        height:  visible ? implicitHeight : 0
+    }
+
+    IconMenuItem {
+        action: Actions.zenMode
+        iconChar: MaterialIcons.icon_open_in_browser
+        visible: !ApplicationViewModel.hasTouchScreen
+        height:  visible ? implicitHeight : 0
     }
 
     MenuSeparator { }

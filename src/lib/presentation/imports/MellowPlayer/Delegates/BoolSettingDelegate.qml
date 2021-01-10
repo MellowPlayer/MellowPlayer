@@ -19,7 +19,7 @@ SwitchDelegate {
     enabled: root.enabled
     checkable: true
     checked: root.qtObject.value
-    hoverEnabled: true
+    hoverEnabled: !ApplicationViewModel.hasTouchScreen
     text: SettingsTranslator.translateName(root.name)
 
     onToggled: {
@@ -27,8 +27,7 @@ SwitchDelegate {
         root.qtObject.value = checked
     }
 
-    Tooltip
-    {
+    Tooltip {
         text: SettingsTranslator.translateToolTip(root.toolTip)
     }
 }

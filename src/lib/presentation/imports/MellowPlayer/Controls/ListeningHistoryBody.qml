@@ -158,7 +158,7 @@ StackLayout {
             Button {
                 text: qsTr("Enable listening history")
                 highlighted: true
-                hoverEnabled: true
+                hoverEnabled: !ApplicationViewModel.hasTouchScreen
                 onClicked: SettingsViewModel.get(SettingKey.PRIVACY_ENABLE_LISTENING_HISTORY).value = true
 
                 Tooltip {

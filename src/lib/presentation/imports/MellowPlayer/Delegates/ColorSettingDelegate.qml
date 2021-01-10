@@ -19,7 +19,7 @@ ItemDelegate {
 
     bottomPadding: 3; topPadding: 3
     enabled: isEnabled
-    hoverEnabled: true
+    hoverEnabled: !ApplicationViewModel.hasTouchScreen
     onClicked: colorDialog.open()
 
     RowLayout {
@@ -35,7 +35,7 @@ ItemDelegate {
         }
 
         Button {
-            hoverEnabled: true
+            hoverEnabled: !ApplicationViewModel.hasTouchScreen
             text: root.qtObject.value
             onTextChanged: root.qtObject.value = text
             onClicked: colorDialog.open()

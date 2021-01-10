@@ -1,5 +1,6 @@
 #pragma once
 
+#include <MellowPlayer/Domain/Logging/ILogger.hpp>
 #include <QObject>
 
 namespace MellowPlayer::Domain
@@ -29,5 +30,6 @@ namespace MellowPlayer::Presentation
     private:
         Domain::ISettingsStore& _settingsStore;
         double _value;
+        Domain::ILogger& _logger;
     };
 }

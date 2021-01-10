@@ -76,5 +76,7 @@
         <file>MellowPlayer/Dialogs/ReportIssueDialog.qml</file>
         <file>MellowPlayer/Controls/WebViewToolBar.qml</file>
         <file>MellowPlayer/Controls/PlayerToolBar.qml</file>
+        <file>MellowPlayer/Controls/PlayerFooter.qml</file>
+        <file>MellowPlayer/Controls/PlayerDrawer.qml</file>
     </qresource>
 </RCC>

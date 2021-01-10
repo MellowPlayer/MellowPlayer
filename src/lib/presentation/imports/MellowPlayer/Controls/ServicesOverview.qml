@@ -45,7 +45,6 @@ Item {
 
             Item {
                 anchors.fill: parent
-                anchors.leftMargin: 4
 
                 ListView {
                     id: listView
@@ -68,6 +67,7 @@ Item {
                             id: delegateRoot
 
                             required property StreamingServiceViewModel qtObject
+                            required property int index
 
                             property int visualIndex: ModelHelpers.getItemsIndex(delegateRoot.DelegateModel)
 
@@ -82,6 +82,7 @@ Item {
                                 width: listView.width - (ScrollBarHelpers.isActive(scrollBar) ? 18 : 0)
                                 height: 96
                                 service: delegateRoot.qtObject
+                                last: delegateRoot.index === listView.count - 1
 
                                 Drag.source: delegateRoot
                                 Drag.hotSpot.x: width / 2
@@ -138,7 +139,12 @@ Item {
                     ScrollBar.vertical: ScrollBar {
                         id: scrollBar
 
-                        hoverEnabled: true
+                        hoverEnabled: !ApplicationViewModel.hasTouchScreen
+                        visible: !ApplicationViewModel.hasTouchScreen && size !== 1
+                    }
+
+                    ScrollIndicator.vertical: ScrollIndicator {
+                        visible: ApplicationViewModel.hasTouchScreen
                     }
                 }
             }

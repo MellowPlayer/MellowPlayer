@@ -16,60 +16,26 @@ Pane {
 
     Material.elevation: 2
 
-    ColumnLayout {
+    TextField {
+        id: searchField
         anchors.fill: parent
 
-        TextField {
-            id: searchField
-
-            focus: true
-            placeholderText: qsTr("Search by title or by artist")
-            onEnabledChanged: {
-                if (enabled) {
-                    focus = true;
-                    forceActiveFocus();
-                }
-            }
-            selectByMouse: true
-            onTextChanged: ListeningHistoryViewModel.setSearchFilter(text)
-
-            Tooltip {
-                text: qsTr("Filter song by title or by artist")
-            }
-
-            Layout.fillWidth: true
-        }
-
-        Flow {
-            id: filters
-            spacing: 3
-
-            width: parent.width
-
-            Repeater {
-                z: 1
-                model: StreamingServicesViewModel.filteredServices
-
-                Button {
-                    id: filter
-
-                    required property string name
-
-                    flat: true
-                    checkable: true; checked: true
-                    hoverEnabled: true
-                    text: filter.name
-
-                    onCheckedChanged: {
-                        ListeningHistoryViewModel.disableService(filter.name, !checked)
-                    }
-
-                    Tooltip {
-                        text: filter.checked ? qsTr("Click to remove songs from")  + filter.name : qsTr("Click to add songs from ") + filter.name
-                    }
-                }
+        focus: true
+        placeholderText: qsTr("Search by title or by artist")
+        onEnabledChanged: {
+            if (enabled) {
+                focus = true;
+                forceActiveFocus();
             }
         }
+        selectByMouse: true
+        onTextChanged: ListeningHistoryViewModel.setSearchFilter(text)
+
+        Tooltip {
+            text: qsTr("Filter song by title or by artist")
+        }
+
+        Layout.fillWidth: true
     }
 
     state: "closed"
@@ -87,11 +53,6 @@ Pane {
                 target: searchField
                 enabled: false
             }
-
-            PropertyChanges {
-                target: filters
-                enabled: false
-            }
         },
         State {
             name: "open"
@@ -106,11 +67,6 @@ Pane {
                 target: searchField
                 enabled: true
 
-            }
-
-            PropertyChanges {
-                target: filters
-                enabled: true
             }
         }
     ]

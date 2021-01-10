@@ -64,7 +64,7 @@ Item {
                 visible: root.buttonVisible
                 text: root.buttonText
                 highlighted: true
-                hoverEnabled: true
+                hoverEnabled: !ApplicationViewModel.hasTouchScreen
                 onClicked: root.buttonClicked()
 
                 Material.accent: root.buttonColor
@@ -119,7 +119,7 @@ Item {
                     MouseArea {
                         anchors.fill: parent
                         cursorShape: containsMouse ? Qt.PointingHandCursor : Qt.ArrowCursor
-                        hoverEnabled: true
+                        hoverEnabled: !ApplicationViewModel.hasTouchScreen
 
                         onClicked: Qt.openUrlExternally(RemoteControlViewModel.appInfo.homePage)
                     }

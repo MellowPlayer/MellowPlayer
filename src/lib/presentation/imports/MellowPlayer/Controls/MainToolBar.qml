@@ -53,7 +53,6 @@ ToolBar {
                 }
 
                 PlayerToolBar { Layout.fillWidth: true; Layout.fillHeight: true }
-//                WebViewToolBar { Layout.fillHeight: true }
             }
         }
 
@@ -78,7 +77,7 @@ ToolBar {
     MainMenu {
         id: menu
 
-        y: parent.height + 3
+        y: implicitHeight > ApplicationWindow.window.contentItem.height ? 0 : parent.height + 3
         x: parent.width - implicitWidth - 3
     }
 }

@@ -78,3 +78,5 @@ NativeFileDialog 3.0 Dialogs/NativeFileDialog.qml
 
 WebViewToolBar 3.0 Controls/WebViewToolBar.qml
 PlayerToolBar 3.0 Controls/PlayerToolBar.qml
+PlayerFooter 3.0 Controls/PlayerFooter.qml
+PlayerDrawer 3.0 Controls/PlayerDrawer.qml

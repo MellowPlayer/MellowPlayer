@@ -22,7 +22,13 @@ Dialog {
     modal: true
     title: root.service.name
     padding: 0; spacing: 0
-    height: 420; width: 600
+    height: 460
+    width: ApplicationWindow.window.width >= 490 ? 490 : ApplicationWindow.window.width
+
+    Component.onCompleted: {
+        tabBar.currentIndex = -1;
+        tabBar.currentIndex = 0;
+    }
 
     footer: RowLayout {
         Item {
@@ -77,20 +83,23 @@ Dialog {
 
             TabButton {
                 text: "General"
+                width: implicitWidth
             }
 
             TabButton {
                 text: "User scripts"
+                width: implicitWidth
             }
 
             TabButton {
                 text: "Network Proxy"
+                width: implicitWidth
             }
 
             TabButton {
                 text: "Other options"
                 visible: optionsListView.count > 0
-                width: visible ? tabBar.width / 4 : 0
+                width: implicitWidth
             }
         }
 
@@ -121,7 +130,7 @@ Dialog {
 
                         SwitchDelegate {
                             checked: root.service.notificationsEnabled
-                            hoverEnabled: true
+                            hoverEnabled: !ApplicationViewModel.hasTouchScreen
                             text: "Notifications"
 
                             onCheckedChanged: {
@@ -188,7 +197,7 @@ Dialog {
                     Button {
                         text: qsTr("Add user script")
                         highlighted: true
-                        hoverEnabled: true
+                        hoverEnabled: !ApplicationViewModel.hasTouchScreen
                         onClicked: root.showFileDialog()
 
                         Tooltip {
@@ -249,7 +258,7 @@ Dialog {
 
                                         onClicked: deleteToolButton.clicked()
                                         width: listView.width; height: 72
-                                        hoverEnabled: true
+                                        hoverEnabled: !ApplicationViewModel.hasTouchScreen
 
                                         ListView.onRemove: SequentialAnimation {
                                             PropertyAction { target: userScriptDelegate; property: "ListView.delayRemove"; value: true }
@@ -327,7 +336,7 @@ Dialog {
                                 font { family: MaterialIcons.family; pixelSize: 24 }
                                 flat: true
                                 highlighted: true
-                                hoverEnabled: true
+                                hoverEnabled: !ApplicationViewModel.hasTouchScreen
                                 text: MaterialIcons.icon_add
 
                                 onClicked: root.showFileDialog()

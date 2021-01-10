@@ -16,8 +16,10 @@ Item {
 
         anchors.fill: parent
         layoutDirection: Qt.RightToLeft
-//        visible: MainWindowViewModel.runningServices.model.count > 0 && CurrentPlayer.active &&
-//                 SettingsViewModel.get(SettingKey.APPEARANCE_PLAYER_CONTROLS_VISIBLE).value &&
+        visible: MainWindowViewModel.runningServices.model.count > 0 &&
+                 SettingsViewModel.get(SettingKey.APPEARANCE_PLAYER_CONTROLS_VISIBLE).value &&
+                 ApplicationWindow.window.width > 767
+
 
         RowLayout {
             spacing: 0
@@ -69,8 +71,6 @@ Item {
                         return "<b>" + currentSong.title.replace("&", "&amp;") + "</b>";
                     return "";
                 }
-
-
             }
 
             RowLayout {
@@ -102,7 +102,7 @@ Item {
                     id: slider
 
                     padding: 0
-                    hoverEnabled: true
+                    hoverEnabled: !ApplicationViewModel.hasTouchScreen
                     from: 0; to: CurrentPlayer.currentSong.duration
                     value: CurrentPlayer.position
 

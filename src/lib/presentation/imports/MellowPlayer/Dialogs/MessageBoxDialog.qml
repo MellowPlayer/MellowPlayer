@@ -17,6 +17,7 @@ Dialog {
     x: parent.width / 2 - width / 2
     y: parent.height / 2 - height / 2
     modal: true
+    width: 340
 
     onAccepted: dialogResult = dialogAccepted
     onRejected: dialogResult = dialogRejected
@@ -24,7 +25,9 @@ Dialog {
     Material.accent: ThemeViewModel.accent === ThemeViewModel.background ? ThemeViewModel.foreground : ThemeViewModel.accent
 
     Label {
+        anchors.fill: parent
         text: root.message
+        wrapMode: "WordWrap"
     }
 
     Shortcut {
