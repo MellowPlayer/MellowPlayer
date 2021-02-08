@@ -44,4 +44,4 @@ packages=(
   # libnotify
   libnotify-dev
 )
-sudo apt -y install ${packages[@]}
+sudo apt install -y ${packages[@]}
