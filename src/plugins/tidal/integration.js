@@ -1,6 +1,6 @@
 function getTitle() {
     try {
-        return document.querySelector('[data-test="footer-track-title"]').children[0].innerHTML;
+        return document.querySelector('[data-test="footer-track-title"]').children[0].children[0].innerText;
     } catch(e) {
         return "";
     }
@@ -16,7 +16,7 @@ function getSongId() {
 
 function getArtist() {
     try {
-        return document.querySelector("div[class*='mediaArtists--2pRii']" ).innerText;
+        return document.querySelector("#footerPlayer [data-test='grid-item-detail-text-title-artist']" ).innerText;
     } catch(e) {
         return "";
     }
@@ -24,7 +24,7 @@ function getArtist() {
 
 function getAlbumTitle() {
     try {
-        return document.querySelector("div[class*='container--UiaTi playingFrom--3x_p7']" ).children[1].children[0].innerHTML;
+        return document.querySelector('[data-test="left-column-footer-player"] [class*="container"] a').innerText;
     } catch(e) {
         return "";
     }
@@ -32,7 +32,7 @@ function getAlbumTitle() {
 
 function getArtUrl() {
 	try {
-        return document.querySelector('[data-test="current-media-imagery"]').children[0].children[0].children[0].children[0].src;
+        return document.querySelector('[data-test="current-media-imagery"] img').src;
     } catch(e) {
         return "";
     }
@@ -58,7 +58,7 @@ function getDuration() {
 
 function isFavorite() {
     try {
-        return document.querySelector('[data-test="footer-player"]').children[2].children[0].children[1].children[1].attributes[6].value === "true";
+        return document.querySelector('[data-test="footer-favorite-button"]').attributes['aria-checked'].value === "true";
     } catch (e) {
         return false;
     }
@@ -115,11 +115,11 @@ function setVolume(volume) {
 }
 
 function addToFavorites() {
-  document.querySelector('[data-test="footer-player"]').children[2].children[0].children[1].children[1].click();
+  document.querySelector('[data-test="footer-favorite-button"]').click();
 }
 
 function removeFromFavorites() {
-  document.querySelector('[data-test="footer-player"]').children[2].children[0].children[1].children[1].click();
+  document.querySelector('[data-test="footer-favorite-button"]').click();
 }
 
 function seekToPosition(position) {
