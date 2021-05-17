@@ -1,3 +1,5 @@
+**This software is not maintained anymore**
+
 ![MellowPlayer banner](docs/_static/banner.png)
 
 [![Flathub](https://img.shields.io/flathub/v/com.gitlab.ColinDuquesnoy.MellowPlayer)](https://flathub.org/apps/details/com.gitlab.ColinDuquesnoy.MellowPlayer)
