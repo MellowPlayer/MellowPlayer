@@ -1,13 +1,9 @@
 function getTitle() {
-    try {
-        return document.querySelector('[data-test="footer-track-title"]').children[0].children[0].innerText;
-    } catch (e) {
-        return '';
-    }
+    return navigator.mediaSession.metadata ? navigator.mediaSession.metadata.title : "";
 }
 
 function getSongId() {
-    var songName = getTitle();
+    let songName = getTitle();
     if (songName != '') {
         return getHashCode(songName);
     }
@@ -15,27 +11,18 @@ function getSongId() {
 }
 
 function getArtist() {
-    try {
-        return document.querySelector('#footerPlayer [data-test="grid-item-detail-text-title-artist"]').innerText;
-    } catch (e) {
-        return '';
-    }
+    return navigator.mediaSession.metadata ? navigator.mediaSession.metadata.artist : "";
 }
 
 function getAlbumTitle() {
-    try {
-        return document.querySelector('[data-test="left-column-footer-player"] [class*="container"] a').innerText;
-    } catch (e) {
-        return '';
-    }
+    return navigator.mediaSession.metadata ? navigator.mediaSession.metadata.album : "";
 }
 
 function getArtUrl() {
-    try {
-        return document.querySelector('[data-test="current-media-imagery"] img').src;
-    } catch (e) {
-        return '';
-    }
+    let artworks = navigator.mediaSession.metadata ? navigator.mediaSession.metadata.artwork : [];
+    if (artworks.length > 0)
+        return artworks[0].src;
+    return '';
 }
 
 function getPosition() {
@@ -65,14 +52,12 @@ function isFavorite() {
 }
 
 function getPlaybackStatus() {
-    if (document.querySelector('[data-test="pause"]')) {
+    if (navigator.mediaSession.playbackState === 'playing') {
         return MellowPlayer.PlaybackStatus.PLAYING;
-    } else if (document.querySelector('[data-test="play"]')) {
+    } else if (navigator.mediaSession.playbackState === 'paused') {
         return MellowPlayer.PlaybackStatus.PAUSED;
-//    } else if (document.querySelector('[data-test="connecting"]')) {
-//      return MellowPlayer.PlaybackStatus.BUFFERING;
     } else {
-      return MellowPlayer.PlaybackStatus.STOPPED;
+        return MellowPlayer.PlaybackStatus.STOPPED;
     }
 }
 
