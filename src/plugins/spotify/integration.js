@@ -39,15 +39,15 @@ function getButtons() {
     }
 
     function getSkipPreviousSongButton() {
-        return document.querySelector('.Root__now-playing-bar button.spoticon-skip-back-16');
+        return document.querySelector('.player-controls__left button:last-child');
     }
 
     function getSkipNextSongButton() {
-        return document.querySelector('.Root__now-playing-bar button.spoticon-skip-forward-16');
+        return document.querySelector('button[data-testid=control-button-skip-forward]');
     }
 
     function getAddRemoveToMusicButton() {
-        return document.querySelector('.Root__now-playing-bar .control-button-heart button');
+        return document.querySelector('button[data-testid=add-button]');
     }
 
     return {
@@ -105,9 +105,9 @@ function update() {
         "position": 0,
         "playbackStatus": getPlaybackStatus(),
         "canSeek": false,
-        "canGoNext": false,
-        "canGoPrevious": true,
-        "canAddToFavorites": true,
+        "canGoNext": getPlaybackStatus(),
+        "canGoPrevious": getPlaybackStatus(),
+        "canAddToFavorites": getPlaybackStatus(),
         "volume": 1
     };
 }
