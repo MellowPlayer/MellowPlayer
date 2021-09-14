@@ -1,78 +1,64 @@
 function getTitle() {
-    try {
-        return document.querySelector('[data-test="footer-track-title"]').children[0].innerHTML;
-    } catch(e) {
-        return "";
-    }
+    return navigator.mediaSession.metadata ? navigator.mediaSession.metadata.title : "";
 }
 
 function getSongId() {
-	var songName = getTitle();
-	if (songName != "") {
-		return getHashCode(songName);
-	}
-	return ""
+    let songName = getTitle();
+    if (songName != '') {
+        return getHashCode(songName);
+    }
+    return '';
 }
 
 function getArtist() {
-    try {
-        return document.querySelector("div[class*='mediaArtists--2pRii']" ).innerText;
-    } catch(e) {
-        return "";
-    }
+    return navigator.mediaSession.metadata ? navigator.mediaSession.metadata.artist : "";
 }
 
 function getAlbumTitle() {
-    try {
-        return document.querySelector("div[class*='container--UiaTi playingFrom--3x_p7']" ).children[1].children[0].innerHTML;
-    } catch(e) {
-        return "";
-    }
+    return navigator.mediaSession.metadata ? navigator.mediaSession.metadata.album : "";
 }
 
 function getArtUrl() {
-	try {
-        return document.querySelector('[data-test="current-media-imagery"]').children[0].children[0].children[0].children[0].src;
-    } catch(e) {
-        return "";
-    }
+    let artworks = navigator.mediaSession.metadata ? navigator.mediaSession.metadata.artwork : [];
+    if (artworks.length > 0)
+        return artworks[0].src;
+    return '';
 }
 
 function getPosition() {
     try {
         position = document.querySelector('[data-test="current-time"]').innerText;
-    } catch(e) {
-        return 0
+    } catch (e) {
+        return 0;
     }
-    return toSeconds(position)
+    return toSeconds(position);
 }
 
 function getDuration() {
     try {
         var time = document.querySelector('[data-test="duration-time"]').innerText;
-    } catch(e) {
-        return 0
+    } catch (e) {
+        return 0;
     }
-    return toSeconds(time)
+    return toSeconds(time);
 }
 
 function isFavorite() {
     try {
-        return document.querySelector('[data-test="footer-player"]').children[2].children[0].children[1].children[1].attributes[6].value === "true";
+        return document.querySelector('[data-test="footer-favorite-button"]').attributes['aria-checked'].value === 'true';
     } catch (e) {
         return false;
     }
 }
 
 function getPlaybackStatus() {
-    if (document.querySelector('[data-test="pause"]'))
-      return MellowPlayer.PlaybackStatus.PLAYING;
-    else if (document.querySelector('[data-test="play"]'))
-      return MellowPlayer.PlaybackStatus.PAUSED;
-//    else if (document.querySelector('[data-test="connecting"]'))
-//      return MellowPlayer.PlaybackStatus.BUFFERING;
-    else
-      return MellowPlayer.PlaybackStatus.STOPPED;
+    if (navigator.mediaSession.playbackState === 'playing') {
+        return MellowPlayer.PlaybackStatus.PLAYING;
+    } else if (navigator.mediaSession.playbackState === 'paused') {
+        return MellowPlayer.PlaybackStatus.PAUSED;
+    } else {
+        return MellowPlayer.PlaybackStatus.STOPPED;
+    }
 }
 
 function update() {
@@ -90,24 +76,24 @@ function update() {
         "artistName": getArtist(),
         "albumTitle": getAlbumTitle(),
         "artUrl": getArtUrl(),
-        "isFavorite": isFavorite()
+        "isFavorite": isFavorite(),
     };
 }
 
 function play() {
-	document.querySelector('[data-test="play"]').click();
+    document.querySelector('[data-test="play"]').click();
 }
 
 function pause() {
-	document.querySelector('[data-test="pause"]').click();
+    document.querySelector('[data-test="pause"]').click();
 }
 
 function goNext() {
-	document.querySelector('[data-test="next"]').click();
+    document.querySelector('[data-test="next"]').click();
 }
 
 function goPrevious() {
-	document.querySelector('[data-test="previous"]').click();
+    document.querySelector('[data-test="previous"]').click();
 }
 
 function setVolume(volume) {
@@ -115,11 +101,11 @@ function setVolume(volume) {
 }
 
 function addToFavorites() {
-  document.querySelector('[data-test="footer-player"]').children[2].children[0].children[1].children[1].click();
+    document.querySelector('[data-test="footer-favorite-button"]').click();
 }
 
 function removeFromFavorites() {
-  document.querySelector('[data-test="footer-player"]').children[2].children[0].children[1].children[1].click();
+    document.querySelector('[data-test="footer-favorite-button"]').click();
 }
 
 function seekToPosition(position) {
