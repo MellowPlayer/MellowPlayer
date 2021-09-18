@@ -85,6 +85,14 @@ function getArtUrl() {
     return "";
 }
 
+function getPlaybackPosition() {
+  return toSeconds(document.querySelector('[data-testid=playback-position]').innerText);
+}
+
+function getPlaybackDuration() {
+  return toSeconds(document.querySelector('[data-testid=playback-duration]').innerText);
+}
+
 function isFavorite() {
     var addRemoveToMusic = getButtons().addRemoveToMusic;
     if (addRemoveToMusic === null) {
@@ -101,8 +109,8 @@ function update() {
         "albumTitle": "",
         "artUrl": getArtUrl(),
         "isFavorite": isFavorite(),
-        "duration": 0,
-        "position": 0,
+        "duration": getPlaybackDuration(),
+        "position": getPlaybackPosition(),
         "playbackStatus": getPlaybackStatus(),
         "canSeek": false,
         "canGoNext": getPlaybackStatus(),
