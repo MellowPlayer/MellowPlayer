@@ -71,3 +71,9 @@ languages.qrc
 *.flatpak
 
 cmake-build-*
+
+/.ccls-cache/
+/develop/
+/qml/
+/release/
+/tags
