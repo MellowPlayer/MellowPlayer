@@ -90,7 +90,7 @@ function isFavorite() {
     if (addRemoveToMusic === null) {
         return false;
     }
-    return addRemoveToMusic.classList.length > 1
+    return addRemoveToMusic.getAttribute('aria-checked')
 }
 
 function update() {
