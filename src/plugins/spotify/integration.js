@@ -22,20 +22,8 @@ function isOnLoginPage() {
 }
 
 function getButtons() {
-    function getPlayButton() {
-        return document.querySelector('button[data-testid=control-button-play]');
-    }
-
-    function getPauseButton() {
-        return document.querySelector('button[data-testid=control-button-pause]');
-    }
-
     function getPlayPauseButton() {
-        let playButton = getPlayButton();
-        if (playButton)
-            return playButton;
-        else
-            return getPauseButton();
+        return document.querySelector('button[data-testid=control-button-playpause]');
     }
 
     function getSkipPreviousSongButton() {
@@ -52,8 +40,8 @@ function getButtons() {
 
     return {
         "playPause": getPlayPauseButton(),
-        "play": getPlayButton(),
-        "pause": getPauseButton(),
+        "play": getPlayPauseButton(),
+        "pause": getPlayPauseButton(),
         "next": getSkipNextSongButton(),
         "previous": getSkipPreviousSongButton(),
         "addRemoveToMusic": getAddRemoveToMusicButton()
@@ -144,8 +132,7 @@ function goPrevious() {
     getButtons().previous.click();
 }
 
-function setVolume(volume) {
-}
+function setVolume(volume) {}
 
 function addToFavorites() {
     if (isOnLoginPage())
@@ -159,6 +146,4 @@ function removeFromFavorites() {
     getButtons().addRemoveToMusic.click();
 }
 
-function seekToPosition(position) {
-
-}
+function seekToPosition(position) {}
