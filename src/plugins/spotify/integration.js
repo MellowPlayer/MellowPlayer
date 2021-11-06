@@ -49,13 +49,12 @@ function getButtons() {
 }
 
 function getPlaybackStatus() {
-    if (getButtons().pause)
-        return MellowPlayer.PlaybackStatus.PLAYING;
+    if (!getButtons().playPause)
+      return MellowPlayer.PlaybackStatus.STOPPED;
 
-    if (getButtons().play)
-        return MellowPlayer.PlaybackStatus.PAUSED;
-
-    return MellowPlayer.PlaybackStatus.STOPPED;
+    // When not playing, the title of the page always begins with "Spotify".
+    // When playing, the title is the name of the song
+    return  MellowPlayer.PlaybackStatus[/^Spotify/.test(document.title) ? "PAUSED" : "PLAYING"];
 }
 
 function getArtist() {
